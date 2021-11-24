@@ -11,15 +11,14 @@ import {
 import {
   Layout, 
   Row, 
-  Col, 
-  Divider, 
+  Col,
   Space,
   Typography,
   Menu,
-  Image,
-  Breadcrumb,
   Input,
-  Button
+  Button,
+  Dropdown,
+  Avatar,
 } from 'antd'
 
 const {Title, Text} = Typography
@@ -27,36 +26,49 @@ const {SubMenu} = Menu
 const { 
   Header, 
   Content,
-  Sider, 
-  Footer, 
+  Footer
 } = Layout;
 
 function App() {
+
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <a href="https://www.antgroup.com">Home</a>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <a href="https://www.aliyun.com">Configurações</a>
+      </Menu.Item>
+    </Menu>
+  )
+
   return (
     <Layout style={{minHeight:'100vh'}}>
-      <header className="header-gov" style={{padding: '0 100px'}}>
-        <Row align='top'>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
-            <a href='https://www.gov.br/pt-br'>
-            <img
-            style={{ width: 32, height: 24, padding: 2}}
-            src={brasil}
-            alt="Brasil"
-            />
-            <Text style={{fontSize: '80%', fontWeight: '10px'}}>BRASIL</Text>
-            </a>
+      <Header>
+        <Row align='top' style={{padding: '0px 100px', backgroundColor:'#ccc'}}>
+          <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+            <Space>
+              <a href='https://www.gov.br/pt-br'>
+              <img
+              style={{ width: 32, height: 24, padding: 2}}
+              src={brasil}
+              alt="Brasil"
+              />
+              <Text style={{fontSize: '80%', fontWeight: '10px'}}>BRASIL</Text>
+              </a>
+            </Space>
           </Col>
-          <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
-              <a>Simplifique!</a>
-              <a>Participe</a>
-              <a>Acesso à informação</a>
-              <a>Legislação</a>
-              <a>Canais</a>
+          <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+              <Space>
+                <a href='https://www.gov.br/pt-br'><Text>Simplifique!</Text></a>
+                <a href='https://www.gov.br/pt-br'><Text>Participe</Text></a>
+                <a href='https://www.gov.br/pt-br'><Text>Acesso à informação</Text></a>
+                <a href='https://www.gov.br/pt-br'><Text>Legislação</Text></a>
+                <a href='https://www.gov.br/pt-br'><Text>Canais</Text></a>
+              </Space>
           </Col>
         </Row>
-      </header>
-      <Header>
-        <Row align='middle'>
+        <Row align='middle' style={{padding: '0px 50px'}} gutter={[50, 0]}>
           <Col span={4}>
             <Title
             level={4}
@@ -67,7 +79,7 @@ function App() {
             </Title>
           </Col>
           <Col
-            span={6}
+            span={8}
             style={{ paddingTop: '0px' }}
           >
             <Input
@@ -97,32 +109,37 @@ function App() {
               }
             />
           </Col>
-          <Col span={6}>
+          <Col span={12} style={{display:'flex', justifyContent: 'space-around', alignItems:'center'}}>
             <Menu mode='horizontal'>
-              <Menu.Item>Nav1</Menu.Item>
-              <Menu.Item>Nav2</Menu.Item>
-              <Menu.Item>Nav3</Menu.Item>
+              <Menu.Item key={1}>Home</Menu.Item>
+              <SubMenu key={2} title='Sobre' >
+                <Menu.Item key={21}>Sobre</Menu.Item>
+                <Menu.Item key={22}>Termos e Licensas</Menu.Item>
+                <Menu.Item key={23}>Manuais e Guias</Menu.Item>
+                <Menu.Item key={24}>Orientações</Menu.Item>
+              </SubMenu>
+              <SubMenu key={3} title='Recursos' >
+                <Menu.Item key={31}>Aqui</Menu.Item>
+                <Menu.Item key={32}>Vai</Menu.Item>
+                <Menu.Item key={33}>Ficar</Menu.Item>
+                <Menu.Item key={34}>Todos</Menu.Item>
+                <Menu.Item key={35}>Os</Menu.Item>
+                <Menu.Item key={36}>Intinerários</Menu.Item>
+              </SubMenu>
             </Menu>
+            <Dropdown overlay={menu} trigger={['click']} >
+              <Avatar style={{backgroundColor: '#ccc'}} src="https://joeschmoe.io/api/v1/random" />
+            </Dropdown>
           </Col>
         </Row>
       </Header>
       <Layout>
-        <Sider>
-          <Menu mode='inline'>
-            <SubMenu key="sub1" title="subnav 1">
-              <Menu.Item>Item 1</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" title="subnav 2">
-              <Menu.Item>Item 1</Menu.Item>
-              <Menu.Item>Item 2</Menu.Item>
-            </SubMenu>
-          </Menu>
-        </Sider>
         <Content>
           <Home/>
         </Content>
       </Layout>
-      <Footer>
+      <Footer style={{height: 30}}>
+        PlaforEDU footer
       </Footer>
     </Layout>
   );

@@ -9,7 +9,9 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.13",
     "craco-less": "^1.20.0",
+    "cytoscape": "^3.20.0",
     "react": "^17.0.2",
+    "react-cytoscapejs": "^1.2.1",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"

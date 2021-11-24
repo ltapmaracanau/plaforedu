@@ -2,14 +2,14 @@
 @import '~antd/dist/antd.less';
 
 @body-background: #f2f2f2;
-@layout-body-background: #ffffff;
+@layout-body-background: #eeeeee;
 @layout-header-background: #f8f8f8;
 @layout-sider-background: @body-background;
 @menu-light-background: @body-background;
 
 // Default ant design variales ->>> https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 // -------- Colors -----------
-@primary-color: #c70000;
+@primary-color: #1890FF;
 @info-color: #1890ff;
 @success-color: #52c41a;
 @processing-color: #1890ff;
@@ -38,12 +38,13 @@
 @code-family: 'Anonymous Pro', 'SFMono-Regular', Consolas, 'Liberation Mono',
     Menlo, Courier, monospace;
 
-
-
 // -------- Header -----------
 //@layout-header-background: #ffffff;
 @layout-header-height: auto;
-@layout-header-padding: 0 50px;
+@layout-header-padding: 0px 0px;
+
+// -------- Footer -----------
+@layout-footer-padding: 5px 50px;
 
 @menu-dark-bg: #9fa09f;
 @menu-dark-submenu-bg: #9fa0a0;
@@ -58,23 +59,4 @@
 
 .ant-menu-submenu>.ant-menu {
     background-color: @layout-header-background;
-}
-
-.ant-col {
-    display: flex;
-    align-items: center;
-}
-
-.header-gov {
-    height: 42px;
-    padding: 0 50px;
-    background-color: @layout-header-background;
-    border-bottom: solid 1px #ededed;
-}
-
-.header-gov a {
-    color: @text-color;
-    padding: 5px;
-    border-right: #E7E7E7 solid 1px;
-    border-left: #E7E7E7 solid 1px;
 }
