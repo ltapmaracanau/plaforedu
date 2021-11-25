@@ -46,7 +46,7 @@ function App() {
     <Layout style={{minHeight:'100vh'}}>
       <Header>
         <Row align='top' style={{padding: '0px 100px', backgroundColor:'#ccc'}}>
-          <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+          <Col span={12}>
             <Space>
               <a href='https://www.gov.br/pt-br'>
               <img
@@ -58,7 +58,7 @@ function App() {
               </a>
             </Space>
           </Col>
-          <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+          <Col span={12} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
               <Space>
                 <a href='https://www.gov.br/pt-br'><Text>Simplifique!</Text></a>
                 <a href='https://www.gov.br/pt-br'><Text>Participe</Text></a>
@@ -68,18 +68,20 @@ function App() {
               </Space>
           </Col>
         </Row>
-        <Row align='middle' style={{padding: '0px 50px'}} gutter={[50, 0]}>
-          <Col span={4}>
+        <Row wrap={false} align='middle'>
+          <Col flex='300px'>
             <Title
             level={4}
             style={{
               color: '#7a7a7a',
+              display: 'flex',
+              justifyContent: 'space-around',
             }}>
               PlaforEDU
             </Title>
           </Col>
           <Col
-            span={8}
+            flex='350px'
             style={{ paddingTop: '0px' }}
           >
             <Input
@@ -109,7 +111,7 @@ function App() {
               }
             />
           </Col>
-          <Col span={12} style={{display:'flex', justifyContent: 'space-around', alignItems:'center'}}>
+          <Col flex='auto' style={{display:'flex', justifyContent: 'space-around', alignItems:'center'}}>
             <Menu mode='horizontal'>
               <Menu.Item key={1}>Home</Menu.Item>
               <SubMenu key={2} title='Sobre' >

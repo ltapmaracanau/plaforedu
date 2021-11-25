@@ -294,13 +294,12 @@ export default function Home() {
 
     return (
         
-        <Row>
-            <Col span={8} style={{padding: '5px'}}>
+        <Row wrap={false}>
+            <Col flex='300px' style={{padding: '5px'}}>
                 {elementoAtual}
             </Col>
-            <Col span={16}>
-                <div style={{padding: 0, minHeight:'100%'}}>
-                    <Row gutter={[3, 0]} style={{backgroundColor: 'white', borderBottom: 'solid #E7E7E7 1px', padding: 3}}>
+            <Col flex='auto'>
+                    <Row gutter={[3, 0]} style={{margin: '0 0' ,backgroundColor: 'white', borderBottom: 'solid #E7E7E7 1px', padding: 3}}>
                         <Col>
                             <Button type='default' onClick={addNo}><PlusCircleTwoTone /> Etapa </Button>
                         </Col>
@@ -314,25 +313,26 @@ export default function Home() {
                             <Button type='default' onClick={() => {console.log(' TODO Redo')}}><RedoOutlined /> Refazer</Button>
                         </Col>
                     </Row>
-                    <CytoscapeComponent
-                        elements={elements}
-                        minZoom={0.5}
-                        maxZoom={2}
-                        cy={(cy) => { cyRef.current = cy}}
-                        style={cytoscapeStyle}
-                        layout={{
-                            name: 'breadthfirst',
-                            fit: true,
-                            directed: true,
-                            padding: 50,
-                            animate: true,
-                            animationDuration: 1000,
-                            avoidOverlap: true,
-                            nodeDimensionsIncludeLabels: false
-                        }}
-                        stylesheet = {style}
-                    />
-                </div>
+                    <Row>
+                        <CytoscapeComponent
+                            elements={elements}
+                            minZoom={0.5}
+                            maxZoom={2}
+                            cy={(cy) => { cyRef.current = cy}}
+                            style={cytoscapeStyle}
+                            layout={{
+                                name: 'breadthfirst',
+                                fit: true,
+                                directed: true,
+                                padding: 50,
+                                animate: true,
+                                animationDuration: 1000,
+                                avoidOverlap: true,
+                                nodeDimensionsIncludeLabels: false
+                            }}
+                            stylesheet = {style}
+                        />
+                    </Row>
             </Col>
         </Row>
     )
