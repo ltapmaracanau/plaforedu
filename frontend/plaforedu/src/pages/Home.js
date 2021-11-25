@@ -32,8 +32,8 @@ export default function Home() {
     const [fields, setFields] = useState([])
 
     const [elements, setElements] = useState([
-        { data: { id: 1, label: 'Node 1', descricao: 'descrição do node 1', link: '', tipo: '', objetivos: '' }, position: { x: 0, y: 0 } },
-        { data: { id: 2, label: 'Node 2', descricao: 'descrição do node 2', link: '', tipo: '', objetivos: '' }, position: { x: 100, y: 0 } },
+        { data: { id: 1, label: 'Node 1', descricao: 'descrição do node 1', link: 'https://www.gov.br/pt-br', tipo: 'Video', objetivos: 'Objetivo 1' }, position: { x: 0, y: 0 } },
+        { data: { id: 2, label: 'Node 2', descricao: 'descrição do node 2', link: 'https://www.gov.br/pt-br', tipo: 'Video', objetivos: 'Objetivo 1' }, position: { x: 100, y: 0 } },
         { data: { id: 3, source: 1, target: 2, label: 'Edge 1', tipo: 'linha'} }
     ])
 
@@ -117,6 +117,33 @@ export default function Home() {
                                         <Input.TextArea placeholder={'Descrição'} />
                                     </Form.Item>
                                 </Col>
+                                <Col span={24}>
+                                    <Form.Item 
+                                        name={'link'} // mesmo nome no objeto de elementos
+                                        label={'Link'}
+                                        initialValue={e.data.link}
+                                        >
+                                        <Input.TextArea placeholder={'Link'} />
+                                    </Form.Item>
+                                </Col>
+                                <Col span={24}>
+                                    <Form.Item 
+                                        name={'tipo'} // mesmo nome no objeto de elementos
+                                        label={'Tipo'}
+                                        initialValue={e.data.tipo}
+                                        >
+                                        <Input.TextArea placeholder={'Tipo'} />
+                                    </Form.Item>
+                                </Col>
+                                <Col span={24}>
+                                    <Form.Item 
+                                        name={'objetivos'} // mesmo nome no objeto de elementos
+                                        label={'Objetivos'}
+                                        initialValue={e.data.objetivos}
+                                        >
+                                        <Input.TextArea placeholder={'Objetivos'} />
+                                    </Form.Item>
+                                </Col>
                             </Row>
                         </Form>
                     </Card>
@@ -187,14 +214,22 @@ export default function Home() {
                     fields={fields}
                     onFieldsChange={( _ , allFields) => {
                         setFields(allFields)
-
                         let newGerais = {}
                         allFields.forEach((field) => {
-                            newGerais[field.name] = field.value
+                            newGerais[field.name[0]] = field.value
                         })
-                        setItinerario({
-                            gerais: newGerais
-                        })
+                        console.log(newGerais);
+                        setItinerario({gerais : {
+                            nome: newGerais.nome,
+                            descricao: newGerais.descricao,
+                            propretarios: newGerais.propretarios,
+                            autores: newGerais.autores,
+                            objetivos: newGerais.objetivos,
+                            tema: newGerais.tema,
+                            area: newGerais.area,
+                            eixo: newGerais.eixo,
+                            instCertificadora: newGerais.instCertificadora,
+                        }})
                     }}
                 >
                     <Row gutter={[5, 5]}>
@@ -214,6 +249,69 @@ export default function Home() {
                                 initialValue={itinerario.gerais.descricao}
                                 >
                                 <Input.TextArea  placeholder={'Descrição'} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item 
+                                name={'propretarios'} // mesmo nome no objeto de elementos
+                                label={'Proprietários'} 
+                                initialValue={itinerario.gerais.propretarios}
+                                >
+                                <Input.TextArea  placeholder={'Proprietários'} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item 
+                                name={'autores'} // mesmo nome no objeto de elementos
+                                label={'Autores'} 
+                                initialValue={itinerario.gerais.autores}
+                                >
+                                <Input.TextArea  placeholder={'Autores'} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item 
+                                name={'objetivos'} // mesmo nome no objeto de elementos
+                                label={'Objetivos'} 
+                                initialValue={itinerario.gerais.objetivos}
+                                >
+                                <Input.TextArea  placeholder={'Objetivos'} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item 
+                                name={'tema'} // mesmo nome no objeto de elementos
+                                label={'Tema'} 
+                                initialValue={itinerario.gerais.tema}
+                                >
+                                <Input.TextArea  placeholder={'Tema'} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item 
+                                name={'area'} // mesmo nome no objeto de elementos
+                                label={'Área'} 
+                                initialValue={itinerario.gerais.area}
+                                >
+                                <Input.TextArea  placeholder={'Área'} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item 
+                                name={'eixo'} // mesmo nome no objeto de elementos
+                                label={'Eixo'} 
+                                initialValue={itinerario.gerais.eixo}
+                                >
+                                <Input.TextArea  placeholder={'Eixo'} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item 
+                                name={'instCertificadora'} // mesmo nome no objeto de elementos
+                                label={'Instituição Certificadora'} 
+                                initialValue={itinerario.gerais.instCertificadora}
+                                >
+                                <Input.TextArea  placeholder={'Instituição Certificadora'} />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -294,8 +392,8 @@ export default function Home() {
 
     return (
         
-        <Row wrap={false}>
-            <Col flex='300px' style={{padding: '5px'}}>
+        <Row wrap={false} >
+            <Col flex='300px' style={{padding: '5px', height: '540px', overflowY: 'scroll'}}>
                 {elementoAtual}
             </Col>
             <Col flex='auto'>
@@ -304,7 +402,7 @@ export default function Home() {
                             <Button type='default' onClick={addNo}><PlusCircleTwoTone /> Etapa </Button>
                         </Col>
                         <Col>
-                            <Button type='default' onClick={() => {console.log(' TODO Deletar algum node')}}><DeleteOutlined /> Etapa</Button>
+                            <Button type='default' onClick={() => {console.log(' TODO Deletar algum node')}}><DeleteOutlined /></Button>
                         </Col>
                         <Col>
                             <Button type='default' onClick={() => {console.log(' TODO Undo')}}><UndoOutlined /> Desfazer</Button>

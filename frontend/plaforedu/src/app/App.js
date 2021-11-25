@@ -13,6 +13,7 @@ import {
   Row, 
   Col,
   Space,
+  Image,
   Typography,
   Menu,
   Input,
@@ -46,26 +47,22 @@ function App() {
     <Layout style={{minHeight:'100vh'}}>
       <Header>
         <Row align='top' style={{padding: '0px 100px', backgroundColor:'#ccc'}}>
-          <Col span={12}>
-            <Space>
-              <a href='https://www.gov.br/pt-br'>
-              <img
-              style={{ width: 32, height: 24, padding: 2}}
+          <Col span={12} style={{height: '40px', display: 'flex', alignItems: 'center'}}>
+              <Image
+              height='24px'
+              style={{padding: 2}}
               src={brasil}
               alt="Brasil"
+              preview={false}
               />
               <Text style={{fontSize: '80%', fontWeight: '10px'}}>BRASIL</Text>
-              </a>
-            </Space>
           </Col>
-          <Col span={12} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
-              <Space>
-                <a href='https://www.gov.br/pt-br'><Text>Simplifique!</Text></a>
-                <a href='https://www.gov.br/pt-br'><Text>Participe</Text></a>
-                <a href='https://www.gov.br/pt-br'><Text>Acesso à informação</Text></a>
-                <a href='https://www.gov.br/pt-br'><Text>Legislação</Text></a>
-                <a href='https://www.gov.br/pt-br'><Text>Canais</Text></a>
-              </Space>
+          <Col span={12} style={{height: '35px',display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <a className='linkHeader' href='https://www.gov.br/pt-br'><Text>Simplifique!</Text></a>
+            <a className='linkHeader' href='https://www.gov.br/pt-br'><Text>Participe</Text></a>
+            <a className='linkHeader' href='https://www.gov.br/pt-br'><Text>Acesso à informação</Text></a>
+            <a className='linkHeader' href='https://www.gov.br/pt-br'><Text>Legislação</Text></a>
+            <a className='linkHeader' href='https://www.gov.br/pt-br'><Text>Canais</Text></a>
           </Col>
         </Row>
         <Row wrap={false} align='middle'>
@@ -76,6 +73,7 @@ function App() {
               color: '#7a7a7a',
               display: 'flex',
               justifyContent: 'space-around',
+              alignItems:'center',
             }}>
               PlaforEDU
             </Title>
