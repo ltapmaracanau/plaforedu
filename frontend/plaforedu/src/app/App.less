@@ -2,8 +2,8 @@
 @import '~antd/dist/antd.less';
 
 @body-background: #f2f2f2;
-@layout-body-background: #eeeeee;
-@layout-header-background: #f8f8f8;
+@layout-body-background: #f8f8f8;
+@layout-header-background: #eeeeee;
 @layout-sider-background: @body-background;
 @menu-light-background: @body-background;
 
@@ -21,6 +21,12 @@
 @dark-color: rgb(51, 51, 51);
 @text-color: rgba(0, 0, 0, 0.65);
 @text-color-secondary: rgba(0, 0, 0, 0.45);
+
+
+// --------     Form      -----------
+
+@input-height-lg: 80px;
+@font-size-lg: 24px;
 
 // -------- Border radius -----------
 @border-radius-base: 4px;
@@ -50,7 +56,7 @@
 @menu-dark-submenu-bg: #9fa0a0;
 
 .ant-menu-light {
-    background-color: @layout-header-background;
+    background-color: @layout-body-background;
 }
 
 .ant-menu-submenu-selected {
@@ -64,4 +70,9 @@
 
 .linkHeader {
     padding: 0px 5px;
+}
+
+h4.ant-typography,
+.ant-typography h4 {
+    margin-bottom: 0;
 }
