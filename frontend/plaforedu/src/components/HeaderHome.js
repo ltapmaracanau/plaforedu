@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Link } from "react-router-dom";
 
+import LogoPlafor from '../assets/PLAFORLOGO.png'
+
 import {
     CloseCircleFilled,
     SearchOutlined,
@@ -13,6 +15,7 @@ import {
     Typography,
     Menu,
     Input,
+    Image,
     Button,
     Dropdown,
     Avatar,
@@ -34,42 +37,40 @@ export default function HeaderHome() {
     </Menu>
   )
 
-    return (
-        <Row wrap={false} align='middle' style={{height: '70px'}}>
-          <Col flex='300px'>
-            <Title
-            level={4}
-            style={{
-              color: '#7a7a7a',
-              display: 'flex',
-              justifyContent: 'space-around',
-              alignItems:'center',
-            }}>
-              PlaforEDU
-            </Title>
-          </Col>
-          <Col offset={6} flex='auto' style={{display:'flex', justifyContent: 'space-around', alignItems:'center'}}>
-            <Menu mode='horizontal'>
-              <Menu.Item key={1}>Home</Menu.Item>
-              <SubMenu key={2} title='Sobre' >
-                <Menu.Item key={21}>Sobre</Menu.Item>
-                <Menu.Item key={22}>Termos e Licensas</Menu.Item>
-                <Menu.Item key={23}>Manuais e Guias</Menu.Item>
-                <Menu.Item key={24}>Orientações</Menu.Item>
-              </SubMenu>
-              <SubMenu key={3} title='Recursos' >
-                <Menu.Item key={31}>Aqui</Menu.Item>
-                <Menu.Item key={32}>Vai</Menu.Item>
-                <Menu.Item key={33}>Ficar</Menu.Item>
-                <Menu.Item key={34}>Todos</Menu.Item>
-                <Menu.Item key={35}>Os</Menu.Item>
-                <Menu.Item key={36}>Intinerários</Menu.Item>
-              </SubMenu>
-            </Menu>
-            <Dropdown overlay={menu} trigger={['click']} >
-              <Avatar style={{backgroundColor: '#ccc'}} src="https://joeschmoe.io/api/v1/random" />
-            </Dropdown>
-          </Col>
-        </Row>
-    )
+  return (
+    <Row wrap={false} align='middle' style={{height: '70px', backgroundImage: 'linear-gradient(to right, #2c56a1, #35a7df)'}}>
+      <Col flex='300px' style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+          preview={false}
+          height='70px'
+          style={{padding: '5px'}}
+          src={LogoPlafor}
+        />
+      </Col>
+      <Col offset={6} flex='auto' style={{padding: '0px 100px',display:'flex', justifyContent: 'right', alignItems:'center'}}>
+        <Menu mode='horizontal' selectable={false}>
+          <Menu.Item key={1}>Home</Menu.Item>
+          <SubMenu key={2} title='Sobre' >
+            <Menu.Item key={21}>Sobre</Menu.Item>
+            <Menu.Item key={22}>Termos e Licensas</Menu.Item>
+            <Menu.Item key={23}>Manuais e Guias</Menu.Item>
+            <Menu.Item key={24}>Orientações</Menu.Item>
+          </SubMenu>
+          <SubMenu key={3} title='Recursos' >
+            <Menu.Item key={31}>Aqui</Menu.Item>
+            <Menu.Item key={32}>Vai</Menu.Item>
+            <Menu.Item key={33}>Ficar</Menu.Item>
+            <Menu.Item key={34}>Todos</Menu.Item>
+            <Menu.Item key={35}>Os</Menu.Item>
+            <Menu.Item key={36}>Intinerários</Menu.Item>
+          </SubMenu>
+        </Menu>
+      </Col>
+      <Col flex='auto' style={{padding: '0px 100px',display:'flex', justifyContent: 'right', alignItems:'center'}}>
+        <Dropdown overlay={menu} trigger={['click']} >
+          <Avatar style={{backgroundColor: '#ccc'}} src="https://joeschmoe.io/api/v1/random" />
+        </Dropdown>
+      </Col>
+    </Row>
+  )
 }

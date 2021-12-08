@@ -28,6 +28,10 @@
 @input-height-lg: 80px;
 @font-size-lg: 24px;
 
+.ant-input-affix-wrapper {
+    border-radius: 30px;
+}
+
 // -------- Border radius -----------
 @border-radius-base: 4px;
 @border-radius-sm: 4px;
@@ -55,18 +59,46 @@
 @menu-dark-bg: #9fa09f;
 @menu-dark-submenu-bg: #9fa0a0;
 
-.ant-menu-light {
-    background-color: @layout-body-background;
-}
 
-.ant-menu-submenu-selected {
-    color: @primary-color;
-}
+// -------- Menu -------------
 
-.ant-menu-submenu>.ant-menu {
-    background-color: @layout-header-background;
-}
+@menu-inline-toplevel-item-height: 40px;
+@menu-item-height: 40px;
+@menu-item-group-height: @line-height-base;
+@menu-collapsed-width: 80px;
+@menu-bg: transparent;
+@menu-popup-bg: #35a7df;
+@menu-item-color: white;
+@menu-inline-submenu-bg: @background-color-light;
+@menu-highlight-color: white;
+@menu-highlight-danger-color: @error-color;
+@menu-item-active-bg: #2c56a1;
+@menu-item-active-danger-bg: @red-1;
+@menu-item-active-border-width: 3px;
+@menu-item-group-title-color: @text-color-secondary;
+@menu-item-vertical-margin: 4px;
+@menu-item-font-size: @font-size-base;
+@menu-item-boundary-margin: 8px;
+@menu-item-padding-horizontal: 20px;
+@menu-item-padding: 0 @menu-item-padding-horizontal;
+@menu-horizontal-line-height: 46px;
+@menu-icon-margin-right: 10px;
+@menu-icon-size: @menu-item-font-size;
+@menu-icon-size-lg: @font-size-lg;
+@menu-item-group-title-font-size: @menu-item-font-size;
 
+// dark theme
+@menu-dark-color: black;
+@menu-dark-danger-color: @error-color;
+@menu-dark-bg: @layout-header-background;
+@menu-dark-arrow-color: black;
+@menu-dark-inline-submenu-bg: white;
+@menu-dark-highlight-color: black;
+@menu-dark-item-active-bg: #ccc;
+@menu-dark-item-active-danger-bg: @error-color;
+@menu-dark-selected-item-icon-color: @white;
+@menu-dark-selected-item-text-color: @white;
+@menu-dark-item-hover-bg: transparent;
 
 .linkHeader {
     padding: 0px 5px;
