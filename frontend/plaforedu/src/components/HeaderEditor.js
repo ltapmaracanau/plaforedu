@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Link } from "react-router-dom";
-
+import LogoPlafor from '../assets/PLAFORLOGO.png'
 import {
     Row, 
     Col,
@@ -9,6 +9,7 @@ import {
     Menu,
     Input,
     Button,
+    Image,
     Dropdown,
     Avatar,
 } from 'antd'
@@ -30,20 +31,16 @@ export default function HeaderEditor() {
   )
 
   return (
-    <Row wrap={false} align='middle' style={{height: '50px'}}>
-      <Col flex='300px'>
-        <Title
-        level={4}
-        style={{
-          color: '#7a7a7a',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems:'center',
-        }}>
-          PlaforEDU
-        </Title>
+    <Row wrap={false} align='middle' style={{height: '70px', backgroundImage: 'linear-gradient(to right, #2c56a1, #35a7df)'}}>
+      <Col flex='300px' style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+          preview={false}
+          height='70px'
+          style={{padding: '5px'}}
+          src={LogoPlafor}
+        />
       </Col>
-      <Col flex='auto' style={{display: 'flex', justifyContent:'right', padding: '0px 50px'}}>
+      <Col flex='auto' style={{display: 'flex', justifyContent:'right', padding: '0px 100px'}}>
         <Dropdown overlay={menu} trigger={['click']} >
           <Avatar style={{backgroundColor: '#ccc'}} src="https://joeschmoe.io/api/v1/random" />
         </Dropdown>
