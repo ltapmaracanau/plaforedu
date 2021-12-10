@@ -1,5 +1,5 @@
 import React from 'react'
-import brasil from '../assets/br.svg'
+import brasil from '../../assets/br.svg'
 
 import {
     Row,

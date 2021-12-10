@@ -1,6 +1,5 @@
 import React from 'react'
-import HeaderHome from '../components/HeaderHome';
-import Background from '../assets/fundo.png'
+import HeaderHome from '../components/header/HeaderHome';
 
 import {
     CloseCircleFilled,
@@ -42,7 +41,7 @@ export default function HomePage() {
                             />
                         </Col>
                     </Row>
-                    <Divider orientation='left'>Mais acessados</Divider>
+                    <Divider orientation='left'>Itinerarios Formativos</Divider>
                     <Row gutter={[20, 20]} style={{padding: '20px 40px'}}>
                         <Col flex='auto'>
                             <Card style={{width: '200px', height: '250px', backgroundColor: '#ccc'}}>
@@ -70,7 +69,7 @@ export default function HomePage() {
                             </Card>
                         </Col>
                     </Row>
-                    <Divider orientation='left'>Recentes</Divider>
+                    <Divider orientation='left'>Mais Acessados</Divider>
                     <Row gutter={[20, 20]} style={{padding: '20px 40px'}}>
                         <Col flex='auto'>
                             <Card style={{width: '200px', height: '250px', backgroundColor: '#ccc'}}>

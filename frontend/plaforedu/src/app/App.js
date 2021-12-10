@@ -6,10 +6,9 @@ import store from '../store';
 import { Routes, Route, Link } from "react-router-dom";
 
 import EditPage from '../pages/EditPage'
-import HeaderGov from '../components/HeaderGov';
-import HeaderUser from '../components/HeaderUser';
+import HeaderGov from '../components/header/HeaderGov';
 import HomePage from '../pages/HomePage';
-import FooterGov from '../components/FooterGov';
+import FooterGov from '../components/footer/FooterGov';
 
 import {
   Layout

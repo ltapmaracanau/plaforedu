@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 
 import CytoscapeComponent from 'react-cytoscapejs'
 
-import HeaderEditor from '../components/HeaderEditor';
+import HeaderEditor from '../components/header/HeaderEditor';
 import { 
     PlusCircleTwoTone,
     DeleteOutlined,
@@ -27,8 +27,8 @@ import {
     Menu,
     Avatar
 } from 'antd'
-import SideEditComponent from '../components/SideEditComponent';
-import EditComponent from '../components/EditComponent';
+import SideEditComponent from '../components/edicao-cytoscape/SideEditComponent';
+import EditComponent from '../components/edicao-cytoscape/EditComponent';
 
 const {SubMenu} = Menu
 const {

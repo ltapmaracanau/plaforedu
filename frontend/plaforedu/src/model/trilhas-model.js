@@ -1,99 +1,70 @@
 import { action } from "easy-peasy"
 
-/*
-
-+++++++++++++++++   MODELO DE DADOS (TRILHAS)
-
-{
-    dados_gerais: {
-        titulo: '',
-        descricao: '',
-        competencias: [''],
-        habilidades: [''],
-        proprietario: '',
-        autores: [''],
-        publico: ''
-    },
-    itinerarios: [''],
-    dados_arquivo: {
-        data de criação: '',
-        última modificação: '',
-        última publicação: '',
-        visibilidade: '',
-        versão: '',
-        download: '',
-        visualizações: '',
-        compartilhamentos: ''
-    },
-    grafo_publicado: {
-        nodes: [],
-        arcos: []
-    },
-    grafo_edicao: {
-        nodes: [],
-        arcos: []
-    }
-}
-
-++++++++++++++++++ MODELO DE NODES (ESSES NO CASO SÃO OS TRILHOS COM OS CURSOS)
-
-{
-    data: {
-        AQUI SÃO AS INFORMAÇÕES GERAIS DE CADA TRILHO DA TRILHA KKKKKK 
-    },
-    position: { x: 0, y: 0 }
-}
-
-++++++++++++++++++ MODELO DE ARCOS
-
-{ 
-    data: { 
-        id: 3, 
-        source: 1,
-        target: 2, 
-        label: 'Edge 1', 
-        tipo: 'linha' 
-    }
-}
-
-*/
-
 const trilhasModel = {
+
+    idCount: 0,
 
     trilhas: [],
 
-    modelDefault: {
+    model_default: {
         dados_gerais: {
             titulo: '',
             descricao: '',
-            competencias: [''],
-            habilidades: [''],
+            competencias: '',
+            habilidades: '',
             proprietario: '',
-            autores: [''],
-            publico: ''
+            autores: [],
+            publico: ['Gestor', 'Docente', 'TAE']
         },
     
-        itinerarios: [''],
+        itinerarios: [],
     
         dados_arquivo: {
-            dataDeCriação: '',
-            últimaModificação: '',
-            últimaPublicação: '',
+            data_de_criação: '',
+            última_modificação: '',
             visibilidade: '',
-            versão: '',
-            download: '',
-            visualizações: '',
-            compartilhamentos: ''
+            versão: 23,
+            visualizações: 23,
         },
     
         grafo_publicado: {
-            nodes: [], // aqui vai ficar os ids dos trilhos
-            arcos: []
+            trilhos: [1, 2], // aqui vai ficar os ids dos trilhos
+            elementos: [
+                { 
+                    data: { 
+                        id: 1,
+                        label: '1',
+                        descricao: 'descrição do node 1',
+                        link: 'https://www.gov.br/pt-br',
+                        tipo: 'Video',
+                    },
+                    position: { x: 0, y: -100 }
+                },
+                { 
+                    data: { 
+                        id: 2, 
+                        label: '2',
+                        descricao: 'descrição do node 2', 
+                        link: 'https://www.gov.br/pt-br', 
+                        tipo: 'Video', 
+                    }, 
+                    position: { x: 0, y: 100 } 
+                },
+                { 
+                    data: { 
+                        id: 3, 
+                        source: 1,
+                        target: 2, 
+                        label: 'Edge 1', 
+                        tipo: 'linha' 
+                    }
+                }
+            ]
         },
     
         grafo_edicao: {
-            nodes: [],
-            arcos: []
+            trilhos: [],
+            elementos: []
         },
     }, 
 

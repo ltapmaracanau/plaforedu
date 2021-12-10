@@ -16,17 +16,25 @@ import {
     Row,
     Menu,
     Card,
+    Empty,
     Button,
 } from 'antd';
 
+const EmptyCard = () => (
+    <Col flex='auto' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+    </Col>
+)
+
 export default function EditComponent() {
 
-    const cyRef = useRef(null)
 
+    const cyRef = useRef(null)
+    /* 
     const addNodeToGraph = useStoreActions(
         actions => actions.itinerarios.addNode
     )
-
+    */
     const cytoscapeStyle = useStoreState(state => state.itinerarios.edicao.cytoscapeStyle);
     const componentStyle = useStoreState(state => state.itinerarios.edicao.componentStyle);
     const elements = useStoreState(state => state.itinerarios.edicao.elements);
@@ -55,8 +63,8 @@ export default function EditComponent() {
             },
             position: { x: 1, y: 1 }
         }
-        addNodeToGraph(nodeDefault)
     }
+
 
     return (
         <Col flex='auto'>
