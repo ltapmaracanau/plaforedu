@@ -1,5 +1,3 @@
-import { action } from "easy-peasy"
-
 
 const itinerariosModel = {
 
@@ -29,8 +27,8 @@ const itinerariosModel = {
             },
 
             grafo_publicado: {
-                trilhas: [], // ids das trilhas
-                elementos: [],    
+                trilhas: [1, 2], // ids das trilhas
+                elementos: [],
             },
         },
         {

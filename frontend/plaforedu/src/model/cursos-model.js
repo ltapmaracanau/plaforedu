@@ -1,4 +1,3 @@
-import { action } from "easy-peasy";
 
 const trilhosModel = {
 

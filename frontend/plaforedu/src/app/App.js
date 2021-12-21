@@ -3,12 +3,12 @@ import './App.less';
 import { StoreProvider } from 'easy-peasy';
 import store from '../store';
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import EditPage from '../pages/EditPage'
-import HeaderGov from '../components/header/HeaderGov';
-import HomePage from '../pages/HomePage';
-import FooterGov from '../components/footer/FooterGov';
+import CoursesPage from '../pages/CoursesPage'
+import HeaderGov from '../components/header/HeaderGov.jsx';
+import HomePage from '../pages/HomePage.jsx';
+import FooterGov from '../components/footer/FooterGov.jsx';
 
 import {
   Layout
@@ -22,7 +22,7 @@ function App() {
         <HeaderGov/>
         <Routes>
           <Route path='/' element={<HomePage/>} />
-          <Route path='/editor' element={<EditPage/>}/>
+          <Route path='/editor' element={<CoursesPage/>}/>
         </Routes>
         <FooterGov/>
       </Layout>

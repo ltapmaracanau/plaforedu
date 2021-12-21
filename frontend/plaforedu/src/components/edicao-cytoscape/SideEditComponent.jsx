@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStoreState } from 'easy-peasy';
 
 import {
-    Col,
     Card,
+    Col,
     Menu
 } from 'antd'
 
@@ -79,7 +79,9 @@ const ElementoExemplo = () => (
     </Col>
 )
 
-
+const Filtros = () => {
+    return(<Card>Aqui vão ficar os filtros</Card>)
+}
 
 export default function SideEditComponent() {
 
@@ -87,17 +89,8 @@ export default function SideEditComponent() {
     const todas_trilhas = useStoreState(state => state.trilhas);
     const todos_trilhos = useStoreState(state => state.trilhos);
 
-
     // Esse cara pega todos os itinerarios/trilhas/trilhas e transforma nos itens do menu lateral
-    const [menuElements, setMenuElements] = useState(
-        todos_itinerarios.itinerarios.map(itinerario => {
-            const ids_trilhas_relacionadas = itinerario.grafo_publicado.trilhas
-            const trilhas_relacionadas = todas_trilhas.trilhas.filter(trilha => ids_trilhas_relacionadas.includes(trilha.dados_gerais.id))
-            return(itinerario)
-        })
-    )
-
-    console.log(menuElements);
+    const [menuElements, setMenuElements] = useState(null)
 
     return (
         <ElementoExemplo/>
