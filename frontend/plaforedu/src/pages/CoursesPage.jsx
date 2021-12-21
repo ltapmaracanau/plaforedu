@@ -6,6 +6,8 @@ import Finder from '../components/Finder'
 import {
     Row,
     Layout,
+    Col,
+    Divider,
 } from 'antd'
 
 import CytoscapeVisualization from '../components/visualization-cytoscape/CytoscapeVisualization'
@@ -27,6 +29,7 @@ export default function CytocscapePage() {
             <Finder />
             <Layout>
                 <Content>
+                    <Divider orientation='left'>Iniciação ao Serviço Público</Divider>
                     <Row wrap={false}>
                         <SideFilter />
                         {visualizationType === false ?
