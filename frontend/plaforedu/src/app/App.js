@@ -2,7 +2,7 @@ import 'antd/dist/antd.css'
 import './App.less';
 import { StoreProvider } from 'easy-peasy';
 import store from '../store';
-
+import VLibras from '@djpfs/react-vlibras'
 import { Routes, Route } from "react-router-dom";
 
 import CoursesPage from '../pages/CoursesPage'
@@ -16,6 +16,11 @@ import {
 
 function App() {
 
+  var s = document.createElement("script");
+  s.setAttribute("data-account","yPtwRHQcX8");
+  s.setAttribute("src","https://cdn.userway.org/widget.js");
+  document.body.appendChild(s);
+
   return (
     <StoreProvider store={store}>
       <Layout style={{minHeight:'100vh'}}>
@@ -24,10 +29,13 @@ function App() {
           <Route path='/' element={<HomePage/>} />
           <Route path='/editor' element={<CoursesPage/>}/>
         </Routes>
+        <VLibras/>
         <FooterGov/>
       </Layout>
     </StoreProvider>
   );
 }
+
+
 
 export default App;
