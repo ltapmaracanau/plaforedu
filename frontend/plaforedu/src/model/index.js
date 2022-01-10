@@ -1,15 +1,13 @@
 
 import admModel from "./adm-model"
-import trilhasModel from "./trilhas-model"
-import trilhosModel from "./trilhos-model"
+import cursosModel from "./cursos-model"
 import itinerariosModel from "./itinerarios-model"
 
 
 const storeModel = {
     adm: admModel,
-    trilhas: trilhasModel,
-    trilhos: trilhosModel,
-    itinerarios: itinerariosModel
+    itinerarios: itinerariosModel,
+    cursos: cursosModel,
 }
 
 export default storeModel

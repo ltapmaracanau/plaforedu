@@ -1,8 +1,8 @@
 import React from 'react'
 
-import secretaria from '../assets/secretaria.png'
-import ministerio from '../assets/ministerio.png'
-import brasil from '../assets/brasil.png'
+import secretaria from '../../assets/secretaria.png'
+import ministerio from '../../assets/ministerio.png'
+import brasil from '../../assets/brasil.png'
 
 
 import {

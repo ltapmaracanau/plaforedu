@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from 'react'
-import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useStoreState } from 'easy-peasy';
 
 import { 
     PlusCircleTwoTone,
@@ -12,21 +12,26 @@ import CytoscapeComponent from 'react-cytoscapejs'
 
 import {
     Col,
-    Layout, 
     Row,
-    Menu,
-    Card,
+    Empty,
     Button,
 } from 'antd';
 
+const EmptyCard = () => (
+    <Col flex='auto' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+    </Col>
+)
+
 export default function EditComponent() {
 
-    const cyRef = useRef(null)
 
+    const cyRef = useRef(null)
+    /* 
     const addNodeToGraph = useStoreActions(
         actions => actions.itinerarios.addNode
     )
-
+    */
     const cytoscapeStyle = useStoreState(state => state.itinerarios.edicao.cytoscapeStyle);
     const componentStyle = useStoreState(state => state.itinerarios.edicao.componentStyle);
     const elements = useStoreState(state => state.itinerarios.edicao.elements);
@@ -47,16 +52,8 @@ export default function EditComponent() {
 
     const addNo = () => {
         console.log('adicionar nó');
-        let nodeDefault = { 
-            data: {
-                label: 'Node Gerado',
-                descricao: 'descrição do node 1',
-                tipo: 'Trilho'
-            },
-            position: { x: 1, y: 1 }
-        }
-        addNodeToGraph(nodeDefault)
     }
+
 
     return (
         <Col flex='auto'>
