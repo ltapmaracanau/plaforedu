@@ -27,7 +27,13 @@ function App() {
         <HeaderGov/>
         <Routes>
           <Route path='/' element={<HomePage/>} />
-          <Route path='/editor' element={<CoursesPage/>}/>
+          <Route path='/cursos' element={<CoursesPage itinerario={0}/>}/>
+          <Route path='/docente' element={<CoursesPage itinerario={1} />}/>
+          <Route path='/educacaoempreendedora' element={<CoursesPage itinerario={2} />}/>
+          <Route path='/iniciacaoaoservicopublico' element={<CoursesPage itinerario={3} />}/>
+          <Route path='/lideranca' element={<CoursesPage itinerario={4} />}/>
+          <Route path='/preparacaoparaaposentadoria' element={<CoursesPage itinerario={5} />}/>
+          <Route path='/tecnicoadministrativoeducacao' element={<CoursesPage itinerario={6} />}/>
         </Routes>
         <VLibras/>
         <FooterGov/>

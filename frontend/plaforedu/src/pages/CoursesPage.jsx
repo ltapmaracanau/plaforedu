@@ -14,27 +14,31 @@ import CytoscapeVisualization from '../components/visualization-cytoscape/Cytosc
 import CoursesListVisualization from '../components/visualization-cytoscape/CoursesListVisualization'
 import SideFilter from '../components/visualization-cytoscape/SideFilter';
 import { useStoreState } from 'easy-peasy';
+import RowItinerario from '../components/visualization-cytoscape/RowItinerario'
 
 const {
     Content,
 } = Layout;
 
-export default function CytocscapePage() {
+export default function CoursesPage(props) {
 
-    const visualizationType = useStoreState(state => state.adm.visualizationType)
+
+    const { itinerario } = props
+
+    const tipoVisualizacao = useStoreState(state => state.adm.tipoVisualizacao)
 
     return (
         <>
             <HeaderHome />
             <Finder />
+            <RowItinerario itinerario={itinerario} />
             <Layout>
                 <Content>
-                    <Divider orientation='left'>Iniciação ao Serviço Público</Divider>
                     <Row wrap={false}>
                         <SideFilter />
-                        {visualizationType === false ?
-                            <CoursesListVisualization /> :
-                            <CytoscapeVisualization />
+                        {tipoVisualizacao === false ?
+                            <CytoscapeVisualization /> :
+                            <CoursesListVisualization />
                         }
                     </Row>
                 </Content>

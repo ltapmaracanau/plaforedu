@@ -11,6 +11,7 @@ import {
     Modal,
     Descriptions
 } from 'antd'
+import { useStoreState } from 'easy-peasy'
 
 const {
     Text
@@ -18,29 +19,7 @@ const {
 
 export default function CoursesListVisualization() {
 
-    const listData = [
-        {
-            id: 1,
-            title: 'Título do Curso',
-            descricao: 'Descricao do curso',
-            cargaHoraria: '30h',
-            instCert: 'IFCE',
-            possuiAcessibilidade: 'Sim',
-            link: 'https://www.udemy.com/course/curso-web/',
-            obs: '',
-        },
-        {
-            id: 2,
-            title: 'Título do Curso',
-            descricao: 'Descricao do curso',
-            cargaHoraria: '30h',
-            instCert: 'IFCE',
-            possuiAcessibilidade: 'Sim',
-            link: 'https://www.udemy.com/course/curso-web/',
-            obs: '',
-        },
-    ]
-
+    const listData = useStoreState(state => state.cursos.cursosFiltrados)
     const [courseOnModal, setCourseOnModal] = useState({})
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -49,8 +28,8 @@ export default function CoursesListVisualization() {
     };
 
     return (
-        <Col flex={'auto'} style={{ height: '600px' }}>
-            <Card style={{ padding: '10px', minHeight: '600px' }}>
+        <Col flex={'auto'} style={{ height: '600px', overflow: 'scroll' }}>
+            <Card style={{ padding: '10px', minHeight: '600px', background: 'linear-gradient(to right, #5f2c82, #35a7df)' }}>
                 <List
                     grid={{
                         gutter: 40,
@@ -68,7 +47,6 @@ export default function CoursesListVisualization() {
                                 key={item.id}
                                 hoverable
                                 onClick={() => {
-                                    console.log(item);
                                     setCourseOnModal(item)
                                     setModalVisible(true)
                                 }}

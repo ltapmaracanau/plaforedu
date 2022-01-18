@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Fundo from '../assets/fundo01.png'
 import {
     SearchOutlined
 } from '@ant-design/icons';
@@ -11,21 +11,27 @@ import {
     Button
 } from 'antd'
 
+const { Search } = Input;
+
 export default function Finder() {
+
+    const onSearch = (value) => {
+        console.log('Buscando globalmente: ', value);
+    }
+
     return (
-        <Row style={{ height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Row
+            style={{
+                height: '300px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundPosition: 'center bottom',
+                backgroundImage: `url(${Fundo})`
+            }}
+        >
             <Col>
-                <Input
-                    size='large'
-                    placeholder='Buscar'
-                    prefix={
-                        <Button
-                            style={{ borderStyle: 'none' }}
-                            shape="circle"
-                            icon={<SearchOutlined />}
-                        />
-                    }
-                />
+                <Search size='large' placeholder="Buscar" onSearch={onSearch} enterButton />
             </Col>
         </Row>
     )
