@@ -3,7 +3,7 @@ import React from 'react'
 import { Card, Col, Row, Typography } from 'antd'
 const { Text } = Typography
 
-export default function ItemSideFilter({ label, element }) {
+export default function ItemSideFilter({ label, children }) {
 
     return (
         <Card>
@@ -14,7 +14,7 @@ export default function ItemSideFilter({ label, element }) {
             </Row>
             <Row>
                 <Col span={24}>
-                    {element}
+                    {children}
                 </Col>
             </Row>
         </Card>

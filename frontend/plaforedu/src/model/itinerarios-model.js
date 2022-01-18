@@ -3,40 +3,39 @@ const itinerariosModel = {
 
     idCount: 6,
 
-    modelDefault: {
-        dados_gerais: {
-            id: null,
-            titulo: '',  // NOME DO ITINERARIO
-            publico: '',
-            descricao: '',
-        },
-    
-        grafo_publicado: {
-            trilhas: [], // Aqui vai ficar os ids da trilhas do intinerario
-            elementos: [],
-        },
-    }, 
-
     itinerarios: [
         {
             dados_gerais: {
-                id: 1,
-                titulo: 'Iniciação ao serviço público',  // NOME DO ITINERARIO
+                id: 0,
+                titulo: 'Itinerarios Formativos',  // NOME DO ITINERARIO
                 publico: '',
-                descricao: '',
+                descricao: 'Descrição dos Itinerarios',
             },
 
             grafo_publicado: {
-                trilhas: [1, 2], // ids das trilhas
+                trilhas: [], // ids das trilhas
+                elementos: [],
+            },
+        },
+        {
+            dados_gerais: {
+                id: 1,
+                titulo: 'Docente',  // NOME DO ITINERARIO
+                publico: '',
+                descricao: 'Descrição do Itinerário Docente',
+            },
+
+            grafo_publicado: {
+                trilhas: [], // ids das trilhas
                 elementos: [],
             },
         },
         {
             dados_gerais: {
                 id: 2,
-                titulo: 'Técnico administrativo em educação',
+                titulo: 'Educação empreendedora',
                 publico: '',
-                descricao: '',
+                descricao: 'Descrição do Itinerário Educação empreendedora',
             },
 
             grafo_publicado: {
@@ -47,9 +46,9 @@ const itinerariosModel = {
         {
             dados_gerais: {
                 id: 3,
-                titulo: 'Docente',
+                titulo: 'Iniciação ao Serviço Público',
                 publico: '',
-                descricao: '',
+                descricao: 'Descrição do Itinerário Iniciação ao Serviço Público',
             },
 
             grafo_publicado: {
@@ -62,7 +61,7 @@ const itinerariosModel = {
                 id: 4,
                 titulo: 'Gerencial (Liderança)',
                 publico: '',
-                descricao: '',
+                descricao: 'Descrição do Itinerário Gerencial (Liderança)',
             },
 
             grafo_publicado: {
@@ -75,7 +74,7 @@ const itinerariosModel = {
                 id: 5,
                 titulo: 'Preparação para a aposentadoria',
                 publico: '',
-                descricao: '',
+                descricao: 'Descrição do Itinerário Preparação para a aposentadoria',
             },
 
             grafo_publicado: {
@@ -86,9 +85,9 @@ const itinerariosModel = {
         {
             dados_gerais: {
                 id: 6,
-                titulo: 'Educação empreendedora e ACT SEBRAE', 
+                titulo: 'Técnico Administrativo em Educação', 
                 publico: '',
-                descricao: '',
+                descricao: 'Descrição do Itinerário Técnico Administrativo em Educação',
             },
 
             grafo_publicado: {
