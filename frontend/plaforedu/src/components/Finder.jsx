@@ -1,15 +1,7 @@
-import React from 'react'
-import Fundo from '../assets/fundo01.png'
-import {
-    SearchOutlined
-} from '@ant-design/icons';
+import React from 'react';
+import { Row, Input } from 'antd';
 
-import {
-    Row,
-    Col,
-    Input,
-    Button
-} from 'antd'
+import Fundo from '../assets/fundo01.png';
 
 const { Search } = Input;
 
@@ -30,9 +22,13 @@ export default function Finder() {
                 backgroundImage: `url(${Fundo})`
             }}
         >
-            <Col>
-                <Search size='large' placeholder="Buscar" onSearch={onSearch} enterButton />
-            </Col>
+            <Search 
+                size='middle'
+                style={{ maxWidth: '30%' }} 
+                placeholder="Buscar" 
+                onSearch={onSearch} 
+                enterButton 
+            />
         </Row>
     )
 }
