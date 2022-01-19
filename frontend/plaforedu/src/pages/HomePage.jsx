@@ -14,8 +14,6 @@ import {
     Layout,
     Row,
     Col,
-    Input,
-    Button,
     Card,
     Divider,
 } from 'antd'
@@ -30,9 +28,17 @@ export default function HomePage() {
             <Layout>
                 <Content style={{ backgroundColor: 'white' }}>
                     <Finder />
-                    <Divider orientation='left'>Itinerarios Formativos</Divider>
-                    <Row style={{ padding: '20px 40px' }}>
-                        <Col flex='auto'>
+                    
+                    <Divider orientation='left'>Itinerários Formativos</Divider>
+                    
+                    <Row 
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-around',
+                            margin: '32px 0'
+                        }}>
+                        <Col>
                             <Link to='/docente'>
                                 <Card
                                     style={{ width: '150px', height: '220.91px', backgroundColor: '#ccc' }}
@@ -41,7 +47,7 @@ export default function HomePage() {
                                 />
                             </Link>
                         </Col>
-                        <Col flex='auto'>
+                        <Col>
                             <Link to='/educacaoempreendedora'>
                                 <Card
                                     style={{ width: '150px', height: '220.91px', backgroundColor: '#ccc' }}
@@ -50,7 +56,7 @@ export default function HomePage() {
                                 />
                             </Link>
                         </Col>
-                        <Col flex='auto'>
+                        <Col>
                             <Link to='/iniciacaoaoservicopublico'>
                                 <Card
                                     style={{ width: '150px', height: '220.91px', backgroundColor: '#ccc' }}
@@ -59,7 +65,7 @@ export default function HomePage() {
                                 />
                             </Link>
                         </Col>
-                        <Col flex='auto'>
+                        <Col>
                             <Link to='/lideranca'>
                                 <Card
                                     style={{ width: '150px', height: '220.91px', backgroundColor: '#ccc' }}
@@ -68,7 +74,7 @@ export default function HomePage() {
                                 />
                             </Link>
                         </Col>
-                        <Col flex='auto'>
+                        <Col>
                             <Link to='/preparacaoparaaposentadoria'>
                                 <Card
                                     style={{ width: '150px', height: '220.91px', backgroundColor: '#ccc' }}
@@ -77,7 +83,7 @@ export default function HomePage() {
                                 />
                             </Link>
                         </Col>
-                        <Col flex='auto'>
+                        <Col>
                             <Link to='/tecnicoadministrativoeducacao'>
                                 <Card
                                     style={{ width: '150px', height: '220.91px', backgroundColor: '#ccc' }}

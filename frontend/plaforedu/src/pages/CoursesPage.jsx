@@ -1,24 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react';
 
-import HeaderHome from '../components/header/HeaderHome'
-import Finder from '../components/Finder'
+import HeaderHome from '../components/header/HeaderHome';
 
-import {
-    Row,
-    Layout,
-    Col,
-    Divider,
-} from 'antd'
+import { Row, Layout } from 'antd';
 
-import CytoscapeVisualization from '../components/visualization-cytoscape/CytoscapeVisualization'
-import CoursesListVisualization from '../components/visualization-cytoscape/CoursesListVisualization'
+import CytoscapeVisualization from '../components/visualization-cytoscape/CytoscapeVisualization';
+import CoursesListVisualization from '../components/visualization-cytoscape/CoursesListVisualization';
 import SideFilter from '../components/visualization-cytoscape/SideFilter';
 import { useStoreState } from 'easy-peasy';
-import RowItinerario from '../components/visualization-cytoscape/RowItinerario'
+import RowItinerario from '../components/visualization-cytoscape/RowItinerario';
 
-const {
-    Content,
-} = Layout;
+const { Content } = Layout;
 
 export default function CoursesPage(props) {
 
@@ -30,7 +22,7 @@ export default function CoursesPage(props) {
     return (
         <>
             <HeaderHome />
-            <Finder />
+
             <RowItinerario itinerario={itinerario} />
             <Layout>
                 <Content>

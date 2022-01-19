@@ -29,7 +29,7 @@ export default function CoursesListVisualization() {
 
     return (
         <Col flex={'auto'} style={{ height: '600px', overflow: 'scroll' }}>
-            <Card style={{ padding: '10px', minHeight: '600px', background: 'linear-gradient(to right, #5f2c82, #35a7df)' }}>
+            <Card style={{ padding: '10px', minHeight: '600px', background: '#eee' }}>
                 <List
                     grid={{
                         gutter: 40,

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 import { Link } from "react-router-dom";
 
-import LogoPlafor from '../../assets/PLAFORLOGO.png'
+import LogoPlafor from '../../assets/PLAFORLOGO.png';
 
 import {
   DownOutlined,
@@ -13,11 +13,9 @@ import {
   Col,
   Menu,
   Image,
-  Dropdown,
-  Avatar,
-} from 'antd'
+} from 'antd';
 
-const { SubMenu } = Menu
+const { SubMenu } = Menu;
 
 export default function HeaderHome() {
 
@@ -38,12 +36,12 @@ export default function HeaderHome() {
           <Menu.Item key={1}><Link to={'/'}>HOME</Link></Menu.Item>
           <SubMenu icon={<DownOutlined />} key={2} title='SOBRE' >
             <Menu.Item key={21}>Sobre</Menu.Item>
-            <Menu.Item key={22}>Termos e Licensas</Menu.Item>
+            <Menu.Item key={22}>Termos e Licenças</Menu.Item>
             <Menu.Item key={23}>Manuais e Guias</Menu.Item>
             <Menu.Item key={24}>Orientações</Menu.Item>
           </SubMenu>
           <SubMenu icon={<DownOutlined />} key={3} title='RECURSOS' >
-            <Menu.Item key={31}><Link to={'/cursos'}>Itinerarios</Link></Menu.Item>
+            <Menu.Item key={31}><Link to={'/cursos'}>Itinerários</Link></Menu.Item>
           </SubMenu>
         </Menu>
       </Col>
