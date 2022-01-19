@@ -101,9 +101,15 @@
 @menu-dark-item-hover-bg: transparent;
 
 .linkHeader {
-    padding: 0px 5px;
-    border-left: 1px solid #e7e7e7;
-    border-right: 1px solid #e7e7e7;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 8px;
+    border-left: 2px solid #e7e7e7;
+
+    :hover {
+        color: rgba(0, 0, 0, 0.9);
+    }
 }
 
 h4.ant-typography,
