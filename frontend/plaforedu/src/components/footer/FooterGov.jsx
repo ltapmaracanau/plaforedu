@@ -23,7 +23,7 @@ const {
 export default function FooterGov() {
     return (
         <Footer style={{height: 60, backgroundColor: '#404040', color: 'white', display: 'flex', alignItems:'center', justifyContent:'space-around'}}>
-            <Text style={{color: 'white', fontSize:'16px'}} >Copyright © 2021 PlaforEDU. Todos os direitos reservados.</Text>
+            <Text style={{color: 'white', fontSize:'16px'}} >Copyright © 2022 PlaforEDU. Todos os direitos reservados.</Text>
             <Image
               height='40px'
               src={secretaria}
