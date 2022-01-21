@@ -19,7 +19,7 @@ import {
     Typography
 } from 'antd'
 
-const { Text, Title } = Typography
+const { Title } = Typography
 
 const { Content } = Layout
 

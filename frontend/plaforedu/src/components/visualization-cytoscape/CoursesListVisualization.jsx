@@ -4,18 +4,12 @@ import {
     List,
     Card,
     Col,
-    Row,
     Button,
-    Typography,
-    Divider,
     Modal,
     Descriptions
 } from 'antd'
-import { useStoreState } from 'easy-peasy'
 
-const {
-    Text
-} = Typography
+import { useStoreState } from 'easy-peasy'
 
 export default function CoursesListVisualization() {
 
@@ -84,7 +78,7 @@ export default function CoursesListVisualization() {
                         {courseOnModal.possuiAcessibilidade}
                     </Descriptions.Item>
                     <Descriptions.Item label='Link'>
-                        <a target="_blank" href={courseOnModal.link}>{courseOnModal.link}</a>
+                        <a target="_blank" rel="noreferrer" href={courseOnModal.link}>{courseOnModal.link}</a>
                     </Descriptions.Item>
                     <Descriptions.Item label='Obsevações'>
                         {courseOnModal.obs}

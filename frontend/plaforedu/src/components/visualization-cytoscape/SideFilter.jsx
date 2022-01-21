@@ -7,7 +7,6 @@ import { useForm, FormProvider, Controller } from 'react-hook-form'
 import {
     Col,
     Switch,
-    Typography,
     Select,
     Button,
     Slider,
@@ -67,18 +66,21 @@ export default function SideFilter() {
                     <Card>
                         <Controller
                             control={register.control}
+                            defaultValue={true}
                             name='tipoVisualizacao'
-                            render={({ field }) => (
-                                <Form.Item label={'Tipo de Visualização:'}>
-                                    <Switch
-                                        {...field}
-                                        defaultChecked={true}
-                                        checkedChildren="Lista"
-                                        unCheckedChildren="Grafo"
-                                        onChange={(value) => { onChangeTipoVisualizacao(value) }}
-                                    />
-                                </Form.Item>
-                            )}
+                            render={() => {
+                                return (
+                                    <Form.Item label={'Tipo de Visualização:'}>
+                                        <Switch
+                                            defaultChecked={true}
+                                            checkedChildren="Lista"
+                                            unCheckedChildren="Grafo"
+                                            onChange={(value) => { onChangeTipoVisualizacao(value) }}
+                                        />
+                                    </Form.Item>
+                                )
+                            }
+                            }
                         />
                     </Card>
                     <Card>

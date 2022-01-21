@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { useStore, useStoreState } from 'easy-peasy';
+import { useStoreState } from 'easy-peasy';
 
 import CytoscapeComponent from 'react-cytoscapejs'
 
