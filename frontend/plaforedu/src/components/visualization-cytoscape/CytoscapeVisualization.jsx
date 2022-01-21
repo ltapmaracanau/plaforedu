@@ -1,19 +1,10 @@
 import React, { useRef, useEffect } from 'react'
-import { useStoreState } from 'easy-peasy';
-
-import {
-    PlusCircleTwoTone,
-    DeleteOutlined,
-    UndoOutlined,
-    RedoOutlined,
-} from '@ant-design/icons';
+import { useStore, useStoreState } from 'easy-peasy';
 
 import CytoscapeComponent from 'react-cytoscapejs'
 
 import {
-    Row,
     Col,
-    Button,
 } from 'antd'
 
 export default function CytoscapeVisualization() {
@@ -23,6 +14,9 @@ export default function CytoscapeVisualization() {
     const cytoscapeStyle = useStoreState(state => state.itinerarios.edicao.cytoscapeStyle);
     const componentStyle = useStoreState(state => state.itinerarios.edicao.componentStyle);
     const elements = useStoreState(state => state.itinerarios.edicao.elements);
+
+    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados)
+    console.log(cursosFiltrados);
 
     useEffect(() => {
         const cy = cyRef.current;
@@ -38,10 +32,6 @@ export default function CytoscapeVisualization() {
 
     }, []);
 
-    const addNo = () => {
-        console.log('adicionar nó');
-    }
-
     return (
         <Col flex='auto' style={{ height: '600px' }}>
             <CytoscapeComponent
@@ -51,7 +41,7 @@ export default function CytoscapeVisualization() {
                 cy={(cy) => { cyRef.current = cy }}
                 style={componentStyle}
                 layout={{
-                    name: 'breadthfirst',
+                    name: 'random',
                     fit: true,
                     directed: true,
                     padding: 50,

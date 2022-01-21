@@ -20,13 +20,16 @@ const { Search } = Input;
 
 export default function SideFilter() {
 
-    const filterDefault = useStoreState(state => state.adm.filter)
-    const changeFilter = useStoreActions(actions => actions.adm.changeFilter)
+    const filterDefault = useStoreState(state => state.cursos.filter)
+    const changeFilter = useStoreActions(actions => actions.cursos.changeFilter)
     const onChangeTipoVisualizacao = useStoreActions(actions => actions.adm.onChangeTipoVisualizacao)
 
     const onSubmit = (values) => {
-        console.log(values);
         changeFilter(values)
+    }
+
+    const onSearch = () => {
+        changeFilter(register.getValues())
     }
 
     const register = useForm({
@@ -46,7 +49,7 @@ export default function SideFilter() {
             <FormProvider {...register}>
                 <Form
                     layout='vertical'
-                    onChange={register.handleSubmit(onSubmit)}
+                    onFinish={register.handleSubmit(onSubmit)}
                 >
                     <Card>
                         <Controller
@@ -55,7 +58,7 @@ export default function SideFilter() {
                             render={({ field }) => {
                                 return (
                                     <Form.Item>
-                                        <Search placeholder="Buscar" {...field} enterButton />
+                                        <Search placeholder="Buscar" {...field} enterButton onSearch={onSearch} />
                                     </Form.Item>
                                 )
                             }}
@@ -69,6 +72,7 @@ export default function SideFilter() {
                                 <Form.Item label={'Tipo de Visualização:'}>
                                     <Switch
                                         {...field}
+                                        defaultChecked={true}
                                         checkedChildren="Lista"
                                         unCheckedChildren="Grafo"
                                         onChange={(value) => { onChangeTipoVisualizacao(value) }}
@@ -80,16 +84,39 @@ export default function SideFilter() {
                     <Card>
                         <Controller
                             control={register.control}
-                            name='categorias'
+                            name='categoriasDeCompetencias'
                             render={({ field }) => (
-                                <Form.Item label={'Categorias:'}>
+                                <Form.Item label={'Categorias de Competências:'}>
                                     <Select
                                         {...field}
                                         mode='multiple'
+                                        placeholder={'Todas as categorias'}
                                         showArrow
                                         style={{ width: '100%' }}
                                     >
-                                        <Select.Option value={0}>Todas as Categorias</Select.Option>
+                                        <Select.Option value={1}>Gestão de Resultados</Select.Option>
+                                        <Select.Option value={2}>Gestão de Relacionamentos</Select.Option>
+                                        <Select.Option value={3}>Gestão de Mudanças</Select.Option>
+                                        <Select.Option value={4}>Orientação a Resultados</Select.Option>
+                                        <Select.Option value={5}>Processos de Melhoria</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                            )}
+                        />
+                    </Card>
+                    <Card>
+                        <Controller
+                            control={register.control}
+                            name='competencias'
+                            render={({ field }) => (
+                                <Form.Item label={'Competências:'}>
+                                    <Select
+                                        {...field}
+                                        mode='multiple'
+                                        placeholder={'Todas as competências'}
+                                        showArrow
+                                        style={{ width: '100%' }}
+                                    >
                                         <Select.Option value={1}>Gestão de Resultados</Select.Option>
                                         <Select.Option value={2}>Gestão de Relacionamentos</Select.Option>
                                         <Select.Option value={3}>Gestão de Mudanças</Select.Option>
@@ -109,6 +136,7 @@ export default function SideFilter() {
                                     <Select
                                         {...field}
                                         mode='multiple'
+                                        placeholder={'Todos os temas'}
                                         showArrow
                                         filterOption={(input, option) => {
                                             console.log(option)
@@ -116,8 +144,6 @@ export default function SideFilter() {
                                         }}
                                         style={{ width: '100%' }}
                                     >
-
-                                        <Select.Option value={0}>Todos os Temas</Select.Option>
                                         <Select.Option value={1}>Matemática</Select.Option>
                                         <Select.Option value={2}>Probabilidade e Estatística</Select.Option>
                                         <Select.Option value={3}>Ciência da Computação</Select.Option>
@@ -182,6 +208,7 @@ export default function SideFilter() {
                                 <Form.Item label={'Subtemas:'}>
                                     <Select
                                         {...field}
+                                        placeholder={'Todos os Subtemas'}
                                         mode='multiple'
                                         showSearch
                                         filterOption={(input, option) => {
@@ -190,7 +217,6 @@ export default function SideFilter() {
                                         }}
                                         style={{ width: '100%' }}
                                     >
-                                        <Select.Option value={0}>Todos os Subtemas</Select.Option>
                                         <Select.Option value={1}>Álgebra</Select.Option>
                                         <Select.Option value={2}>Análise</Select.Option>
                                         <Select.Option value={3}>Geometria e Topologia</Select.Option>
@@ -616,11 +642,11 @@ export default function SideFilter() {
                                 <Form.Item label={'Instituição Certificadora:'}>
                                     < Select
                                         {...field}
+                                        placeholder={'Todas as Instituições'}
                                         mode='multiple'
                                         showArrow
                                         style={{ width: '100%' }}
                                     >
-                                        <Select.Option value={0}>Todos as Instituições</Select.Option>
                                         <Select.Option value={1}>IFCE</Select.Option>
                                         <Select.Option value={2}>UFC</Select.Option>
                                         <Select.Option value={3}>UFRN</Select.Option>

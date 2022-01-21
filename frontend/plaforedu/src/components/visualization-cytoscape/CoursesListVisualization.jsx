@@ -19,8 +19,10 @@ const {
 
 export default function CoursesListVisualization() {
 
-    const listData = useStoreState(state => state.cursos.cursosFiltrados)
-    const [courseOnModal, setCourseOnModal] = useState({})
+    const listData = useStoreState(state => state.cursos.cursos)
+    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados)
+    const listInst = useStoreState(state => state.cursos.instituicoes)
+    const [courseOnModal, setCourseOnModal] = useState(listData[0])
     const [modalVisible, setModalVisible] = useState(false)
 
     const handleOk = () => {
@@ -40,7 +42,7 @@ export default function CoursesListVisualization() {
                         xl: 3,
                         xxl: 3,
                     }}
-                    dataSource={listData}
+                    dataSource={listData.filter(curso => cursosFiltrados.includes(curso.id))}
                     renderItem={item => (
                         <List.Item key={item.id}>
                             <Card
@@ -62,14 +64,13 @@ export default function CoursesListVisualization() {
                 visible={modalVisible}
                 onOk={handleOk}
                 onCancel={handleOk}
+                title={courseOnModal.title}
+                centered={true}
                 footer={[
                     <Button type='primary' onClick={handleOk}>Ok</Button>
                 ]}
             >
                 <Descriptions column={1} bordered>
-                    <Descriptions.Item label='Título'>
-                        {courseOnModal.title}
-                    </Descriptions.Item>
                     <Descriptions.Item label='Descrição'>
                         {courseOnModal.descricao}
                     </Descriptions.Item>
@@ -77,7 +78,7 @@ export default function CoursesListVisualization() {
                         {courseOnModal.cargaHoraria}
                     </Descriptions.Item>
                     <Descriptions.Item label='Instituição Certificadora'>
-                        {courseOnModal.instCert}
+                        {listInst.filter(instituicao => courseOnModal.instCert.includes(instituicao.id)).map(instituicao => instituicao.titulo).join(', ')}
                     </Descriptions.Item>
                     <Descriptions.Item label='Possui Acessibilidade'>
                         {courseOnModal.possuiAcessibilidade}
