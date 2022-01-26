@@ -24,7 +24,7 @@ export default function RowItinerario(props) {
 
     const { itinerario } = props
 
-    const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.filter((obj) => obj.dados_gerais.id === itinerario)[0])
+    const itinerarioData = useStoreState((state) => state.cytoscape.itinerarios.filter((obj) => obj.dados_gerais.id === itinerario)[0])
 
     const linha = (itinerario) => {
         let retorno = null

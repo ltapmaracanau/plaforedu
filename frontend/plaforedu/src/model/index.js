@@ -1,12 +1,12 @@
 
 import admModel from "./adm-model"
 import cursosModel from "./cursos-model"
-import itinerariosModel from "./itinerarios-model"
+import cytoscapeModel from "./cytoscape-model"
 
 
 const storeModel = {
     adm: admModel,
-    itinerarios: itinerariosModel,
+    cytoscape: cytoscapeModel,
     cursos: cursosModel,
 }
 
