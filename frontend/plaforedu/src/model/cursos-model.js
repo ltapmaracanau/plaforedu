@@ -3,16 +3,15 @@ import { action, actionOn } from "easy-peasy"
 const cursosDefault =  [
     {
         id: 1,
-        title: 'Título do Curso',
-        descricao: 'Tema: matemática; Subtema: álgebra',
+        title: 'Título do Curso 1',
+        descricao: 'Descrição do curso',
         cargaHoraria: 20,
         instCert: [1],
         possuiAcessibilidade: 'Sim',
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [1],
-            competencias: [],
+            competencias: [1],
             temas: [1],
             subtemas: [1],
         }
@@ -20,15 +19,14 @@ const cursosDefault =  [
     {
         id: 2,
         title: 'Título do Curso',
-        descricao: 'Tema : matemática; Subtema: Análise',
+        descricao: 'Descrição do curso',
         cargaHoraria: 130,
         instCert: [1, 2],
         possuiAcessibilidade: 'Sim',
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [1],
-            competencias: [],
+            competencias: [1],
             temas: [1],
             subtemas: [2],
         }
@@ -36,15 +34,14 @@ const cursosDefault =  [
     {
         id: 3,
         title: 'Título do Curso',
-        descricao: 'Tema : Probabilidade e estatística; Subtema: Geometria e Topologia',
+        descricao: 'Descrição do curso',
         cargaHoraria: 30,
         instCert: [2],
         possuiAcessibilidade: 'Sim',
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [2],
-            competencias: [],
+            competencias: [6],
             temas: [2],
             subtemas: [3],
         }
@@ -59,8 +56,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [3],
-            competencias: [],
+            competencias: [6],
             temas: [1, 2],
             subtemas: [1, 2, 3],
         }
@@ -75,8 +71,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [2],
-            competencias: [],
+            competencias: [6],
             temas: [],
             subtemas: [],
         }
@@ -91,8 +86,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [3],
-            competencias: [],
+            competencias: [8],
             temas: [],
             subtemas: [],
         }
@@ -107,8 +101,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [2],
-            competencias: [],
+            competencias: [8],
             temas: [],
             subtemas: [],
         }
@@ -123,8 +116,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [3],
-            competencias: [],
+            competencias: [8],
             temas: [],
             subtemas: [],
         }
@@ -139,8 +131,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [4],
-            competencias: [],
+            competencias: [29],
             temas: [],
             subtemas: [],
         }
@@ -155,8 +146,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [4],
-            competencias: [],
+            competencias: [29],
             temas: [],
             subtemas: [],
         }
@@ -171,8 +161,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [4],
-            competencias: [],
+            competencias: [29],
             temas: [],
             subtemas: [],
         }
@@ -187,8 +176,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [4],
-            competencias: [],
+            competencias: [30],
             temas: [],
             subtemas: [],
         }
@@ -203,8 +191,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [1],
-            competencias: [],
+            competencias: [30],
             temas: [],
             subtemas: [],
         }
@@ -219,8 +206,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [1],
-            competencias: [],
+            competencias: [30],
             temas: [],
             subtemas: [],
         }
@@ -235,8 +221,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            categoriasDeCompetencias: [1],
-            competencias: [],
+            competencias: [30],
             temas: [],
             subtemas: [],
         }
@@ -2285,14 +2270,47 @@ const reformuladorDeElementosCytoscape = (novosCursos) => {
             classes: ['curso']
         })
     })
-    // todas as categorias
-    let idsTodasCategorias = []
+    // todas as ccompetencias
+    let idsTodasCompetencias = []
     cursos.forEach((curso) => {
-        curso.data.categoriasDeCompetencias.forEach(categoria => {
-            if (!idsTodasCategorias.includes(categoria)) {
-                idsTodasCategorias.push(categoria)
+        curso.data.competencias.forEach(competencia => {
+            if (!idsTodasCompetencias.includes(competencia)) {
+                idsTodasCompetencias.push(competencia)
             }
         });
+    })
+    let competencias = idsTodasCompetencias.map((idCompetencia) => {
+        const competenciaData = competenciasDefault.find(competencia => competencia.id === idCompetencia)
+        return({
+            group: 'nodes',
+            data: {
+                id: 'competencia'+competenciaData.id,
+                label: competenciaData.titulo,
+            },
+            grabbable: true,
+            classes: ['competencia']
+        })
+    })
+    // Edges de competências
+    let edgesCompetencias = []
+    cursos.forEach(curso => {
+        curso.data.competencias.forEach((idCompetencia) => {
+            edgesCompetencias.push({
+                group: 'edges',
+                data: {
+                    id: 'edge'+curso.data.id+'competencia'+idCompetencia,
+                    source: curso.data.id,
+                    target: 'competencia'+idCompetencia
+                }
+            })
+        })
+    })
+    // todas as Categorias
+    let idsTodasCategorias = []
+    categoriasDeCompetenciasDefault.forEach((categoria) => {
+        if (categoria.competencias.some(competencia => idsTodasCompetencias.includes(competencia))) {
+            idsTodasCategorias.push(categoria.id)
+        }
     })
     let categorias = idsTodasCategorias.map((idCategoria) => {
         const categoriaData = categoriasDeCompetenciasDefault.find(categoria => categoria.id === idCategoria)
@@ -2301,27 +2319,30 @@ const reformuladorDeElementosCytoscape = (novosCursos) => {
             data: {
                 id: 'categoria'+categoriaData.id,
                 label: categoriaData.nome,
+                competencias: categoriaData.competencias
             },
-            grabbable: false,
+            grabbable: true,
             classes: ['categoria']
         })
     })
-    // Edges categorias de competências
+    // Edges de categorias
     let edgesCategorias = []
-    cursos.forEach(curso => {
-        curso.data.categoriasDeCompetencias.forEach((idCategoria) => {
-            edgesCategorias.push({
-                group: 'edges',
-                data: {
-                    id: 'edge'+curso.data.id+idCategoria,
-                    source: curso.data.id,
-                    target: 'categoria'+idCategoria
-                }
-            })
+    categorias.forEach(categoria => {
+        categoria.data.competencias.forEach((idCompetencia) => {
+            if (idsTodasCompetencias.includes(idCompetencia)) {
+                edgesCategorias.push({
+                    group: 'edges',
+                    data: {
+                        id: 'edge'+categoria.data.id+'competencia'+idCompetencia,
+                        source: categoria.data.id,
+                        target: 'competencia'+idCompetencia
+                    }
+                })
+            }
         })
     })
 
-    return(cursos.concat(categorias).concat(edgesCategorias))
+    return(cursos.concat(competencias).concat(edgesCompetencias).concat(categorias).concat(edgesCategorias))
 }
 
 const trilhosModel = {
@@ -2377,6 +2398,7 @@ const trilhosModel = {
         (state, target) => {
             let filtro = target.payload
             let novosCursos = []
+            console.log(filtro);
             state.cursos.forEach(curso => {
                 let contemTema = curso.filter.temas.some(idTema => filtro.temas.includes(idTema))
                 let temasVazio = filtro.temas.length === 0
@@ -2384,10 +2406,11 @@ const trilhosModel = {
                 let contemSubtema = curso.filter.subtemas.some(idSubtema => filtro.subtemas.includes(idSubtema))
                 let subtemasVazio = filtro.subtemas.length === 0
 
-                let contemCategoria = curso.filter.categoriasDeCompetencias.some(idCategoria => filtro.categoriasDeCompetencias.includes(idCategoria))
+                let categoriasDoCurso = categoriasDeCompetenciasDefault.filter(categoria => categoria.competencias.some(competencia => curso.filter.competencias.includes(competencia)))
+                let contemCategoria = categoriasDoCurso.some(categoria => filtro.categoriasDeCompetencias.includes(categoria.id))
                 let categoriasVazio = filtro.categoriasDeCompetencias.length === 0
 
-                let contemCompetencia = curso.filter.subtemas.some(idCompetencia => filtro.competencias.includes(idCompetencia))
+                let contemCompetencia = curso.filter.competencias.some(idCompetencia => filtro.competencias.includes(idCompetencia))
                 let competenciasVazio = filtro.competencias.length === 0
                 
                 let contemInstituicao = curso.instCert.some(idInst => filtro.instCertificadora.includes(idInst))

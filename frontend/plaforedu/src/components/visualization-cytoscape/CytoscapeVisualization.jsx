@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import fundoCurso from '../../assets/icones/PLAFOREDU_Site_Icones_Docente_Curso.png'
-import fundoCategoria from '../../assets/icones/PLAFOREDU_Site_Icones_Docente_Categoria.png'
+import fundoCategoria from '../../assets/icones/PLAFOREDU_Site_Icones_EduEmpreend_Categoria.png'
+import fundoCompetencia from '../../assets/icones/PLAFOREDU_Site_Icones_InicServPublico_Competencia.png'
 
 import CytoscapeComponent from 'react-cytoscapejs'
 
@@ -51,7 +52,6 @@ export default function CytoscapeVisualization() {
 
     /* const teste = () => {
         console.log(cyRef.current);
-        cyRef.current.forceRender()
     } */
 
 
@@ -65,14 +65,14 @@ export default function CytoscapeVisualization() {
                         icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                     />
                 </Col>
-                <Col>
-                    {/* <Button
+                {/* <Col>
+                    <Button
                         style={{ margin: '5px 10px' }}
                         onClick={() => { teste() }}
                     >
                         teste
-                    </Button> */}
-                </Col>
+                    </Button>
+                </Col> */}
                 <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
                     <MinusOutlined />
                     <Slider
@@ -112,7 +112,7 @@ export default function CytoscapeVisualization() {
                     // true : Animate continuously as the layout is running
                     // false : Just show the end result
                     // 'end' : Animate with the end result, from the initial positions to the end positions
-                    animate: true,
+                    animate: false,
 
                     // Easing of the animation for animate:'end'
                     animationEasing: undefined,
@@ -211,8 +211,31 @@ export default function CytoscapeVisualization() {
                         style: {
                             'background-image': fundoCategoria,
                             'label': 'data(label)',
-                            'width': '100px',
-                            'height': '100px',
+                            'width': '150px',
+                            'height': '150px',
+                            'padding': '20px',
+                            'border-width': '0px',
+                            'border-color': '#0081b3',
+                            'color': '#000',
+                            'background-fit': 'contain',
+                            'background-clip': 'none',
+                            'background-color': '#0081b3',
+                            'text-halign': 'right',
+                            'text-valign': 'center',
+                            'text-margin-x': '10px',
+                            'text-transform': 'uppercase',
+                            'text-wrap': 'wrap',
+                            'text-max-width': '80px',
+                            'font-weight': 'bold'
+                        }
+                    },
+                    {
+                        selector: '.competencia',
+                        style: {
+                            'background-image': fundoCompetencia,
+                            'label': 'data(label)',
+                            'width': '120px',
+                            'height': '120px',
                             'padding': '20px',
                             'border-width': '0px',
                             'border-color': '#0081b3',
