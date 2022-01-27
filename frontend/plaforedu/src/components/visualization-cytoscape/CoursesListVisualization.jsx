@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import {
     List,
@@ -6,13 +7,20 @@ import {
     Col,
     Button,
     Modal,
+    Row,
     Descriptions
 } from 'antd'
 
-import { useStoreState } from 'easy-peasy'
+import {
+    MenuUnfoldOutlined,
+    MenuFoldOutlined
+} from '@ant-design/icons';
+
 
 export default function CoursesListVisualization() {
 
+    const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
+    const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed)
     const listData = useStoreState(state => state.cursos.cursos)
     const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados)
     const listInst = useStoreState(state => state.cursos.instituicoes)
@@ -24,7 +32,16 @@ export default function CoursesListVisualization() {
     };
 
     return (
-        <Col flex={'auto'} style={{ height: '600px', overflow: 'scroll' }}>
+        <Col flex={'auto'} style={{ height: '600px', overflowY: 'scroll' }}>
+            <Row>
+                <Col>
+                    <Button
+                        style={{ margin: '5px 10px' }}
+                        onClick={() => { setFilterCollapsed() }}
+                        icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                    />
+                </Col>
+            </Row>
             <Card style={{ padding: '10px', minHeight: '600px', background: '#eee' }}>
                 <List
                     grid={{
@@ -61,7 +78,7 @@ export default function CoursesListVisualization() {
                 title={courseOnModal.title}
                 centered={true}
                 footer={[
-                    <Button type='primary' onClick={handleOk}>Ok</Button>
+                    <Button type='primary' key={courseOnModal.id} onClick={handleOk}>Ok</Button>
                 ]}
             >
                 <Descriptions column={1} bordered>

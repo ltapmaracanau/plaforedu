@@ -32,7 +32,7 @@ export default function Finder() {
                 level={3}
                 style={{
                     textAlign: 'center',
-                    color: 'white',
+                    color: '#0059b3',
                     fontFamily: 'montserrat',
                     display: 'flex',
                     justifyContent: 'center',

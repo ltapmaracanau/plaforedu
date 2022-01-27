@@ -1,4 +1,3 @@
-import { action } from "easy-peasy"
 
 const itinerariosModel = {
 
@@ -94,50 +93,7 @@ const itinerariosModel = {
                 elementos: [],    
             },
         },
-    ],
-
-    cytoscapeStyle: [
-        {
-            selector: 'node',
-            style: {
-                'label': 'data(label)',
-                'width': '120px',
-                'height': '120px',
-                'padding': '20px',
-                'border-width' : '0px',
-                'border-color' : '#0081b3',
-                'color': '#fff',
-                'background-fit': 'contain',
-                'background-clip': 'none',
-                'background-color': '#0081b3',
-                'text-halign': 'center',
-                'text-valign':'center',
-                'text-margin-x': '0px',
-                'text-transform': 'uppercase',
-                'text-wrap': 'wrap',
-                'text-max-width': '80px',
-                'font-weight': 'bold'
-
-            }
-        }, 
-        {
-            selector: 'edge',
-            style: {
-                'background-color': '#ffb600',
-                'width': '3px',
-                'target-arrow-shape': 'triangle',
-                'control-point-step-size': '140px'
-            }
-        }
-    ],
-
-    componentStyle : {
-        width: '100%',
-        height: '500px',
-        backgroundColor:'#fff'
-    },
-    
-    
+    ], 
 
 }
 
