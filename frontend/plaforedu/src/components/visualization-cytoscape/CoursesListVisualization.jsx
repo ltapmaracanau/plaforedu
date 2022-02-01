@@ -1,26 +1,30 @@
 import React, { useState } from 'react'
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import {
     List,
     Card,
     Col,
-    Row,
     Button,
-    Typography,
-    Divider,
     Modal,
+    Row,
     Descriptions
 } from 'antd'
-import { useStoreState } from 'easy-peasy'
 
-const {
-    Text
-} = Typography
+import {
+    MenuUnfoldOutlined,
+    MenuFoldOutlined
+} from '@ant-design/icons';
+
 
 export default function CoursesListVisualization() {
 
-    const listData = useStoreState(state => state.cursos.cursosFiltrados)
-    const [courseOnModal, setCourseOnModal] = useState({})
+    const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
+    const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed)
+    const listData = useStoreState(state => state.cursos.cursos)
+    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados)
+    const listInst = useStoreState(state => state.cursos.instituicoes)
+    const [courseOnModal, setCourseOnModal] = useState(listData[0])
     const [modalVisible, setModalVisible] = useState(false)
 
     const handleOk = () => {
@@ -28,7 +32,16 @@ export default function CoursesListVisualization() {
     };
 
     return (
-        <Col flex={'auto'} style={{ height: '600px', overflow: 'scroll' }}>
+        <Col flex={'auto'} style={{ height: '600px', overflowY: 'scroll' }}>
+            <Row>
+                <Col>
+                    <Button
+                        style={{ margin: '5px 10px' }}
+                        onClick={() => { setFilterCollapsed() }}
+                        icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                    />
+                </Col>
+            </Row>
             <Card style={{ padding: '10px', minHeight: '600px', background: '#eee' }}>
                 <List
                     grid={{
@@ -40,7 +53,7 @@ export default function CoursesListVisualization() {
                         xl: 3,
                         xxl: 3,
                     }}
-                    dataSource={listData}
+                    dataSource={listData.filter(curso => cursosFiltrados.includes(curso.id))}
                     renderItem={item => (
                         <List.Item key={item.id}>
                             <Card
@@ -62,14 +75,13 @@ export default function CoursesListVisualization() {
                 visible={modalVisible}
                 onOk={handleOk}
                 onCancel={handleOk}
+                title={courseOnModal.title}
+                centered={true}
                 footer={[
-                    <Button type='primary' onClick={handleOk}>Ok</Button>
+                    <Button type='primary' key={courseOnModal.id} onClick={handleOk}>Ok</Button>
                 ]}
             >
                 <Descriptions column={1} bordered>
-                    <Descriptions.Item label='Título'>
-                        {courseOnModal.title}
-                    </Descriptions.Item>
                     <Descriptions.Item label='Descrição'>
                         {courseOnModal.descricao}
                     </Descriptions.Item>
@@ -77,13 +89,13 @@ export default function CoursesListVisualization() {
                         {courseOnModal.cargaHoraria}
                     </Descriptions.Item>
                     <Descriptions.Item label='Instituição Certificadora'>
-                        {courseOnModal.instCert}
+                        {listInst.filter(instituicao => courseOnModal.instCert.includes(instituicao.id)).map(instituicao => instituicao.titulo).join(', ')}
                     </Descriptions.Item>
                     <Descriptions.Item label='Possui Acessibilidade'>
                         {courseOnModal.possuiAcessibilidade}
                     </Descriptions.Item>
                     <Descriptions.Item label='Link'>
-                        <a target="_blank" href={courseOnModal.link}>{courseOnModal.link}</a>
+                        <a target="_blank" rel="noreferrer" href={courseOnModal.link}>{courseOnModal.link}</a>
                     </Descriptions.Item>
                     <Descriptions.Item label='Obsevações'>
                         {courseOnModal.obs}

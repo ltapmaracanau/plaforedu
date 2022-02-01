@@ -17,6 +17,7 @@ export default function CoursesPage(props) {
 
     const { itinerario } = props
 
+    const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
     const tipoVisualizacao = useStoreState(state => state.adm.tipoVisualizacao)
 
     return (
@@ -27,7 +28,9 @@ export default function CoursesPage(props) {
             <Layout>
                 <Content>
                     <Row wrap={false}>
-                        <SideFilter />
+                        <Layout.Sider collapsedWidth={0} trigger={null} collapsed={filterCollapsed} collapsible width={300} >
+                            <SideFilter />
+                        </Layout.Sider>
                         {tipoVisualizacao === false ?
                             <CytoscapeVisualization /> :
                             <CoursesListVisualization />

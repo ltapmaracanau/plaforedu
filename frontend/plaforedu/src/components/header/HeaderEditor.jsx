@@ -5,10 +5,7 @@ import LogoPlafor from '../../assets/PLAFORLOGO.png'
 import {
   Row,
   Col,
-  Menu,
   Image,
-  Dropdown,
-  Avatar,
 } from 'antd'
 
 export default function HeaderEditor() {

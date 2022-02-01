@@ -14,11 +14,10 @@ import {
     Col,
     Typography,
     Image,
-    Divider,
     Card,
 } from 'antd'
 
-const { Text, Title } = Typography
+const { Text } = Typography
 
 
 export default function RowItinerario(props) {
