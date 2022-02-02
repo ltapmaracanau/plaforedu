@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import cytoscape from 'cytoscape'
 import fundoCurso from '../../assets/icones/PLAFOREDU_Site_Icones_Docente_Curso.png'
 import fundoCategoria from '../../assets/icones/PLAFOREDU_Site_Icones_EduEmpreend_Categoria.png'
 import fundoCompetencia from '../../assets/icones/PLAFOREDU_Site_Icones_InicServPublico_Competencia.png'
 
 import CytoscapeComponent from 'react-cytoscapejs'
+import expandCollapse from 'cytoscape-expand-collapse'
 
 import {
     MenuUnfoldOutlined,
@@ -22,6 +24,28 @@ import {
     Slider,
 } from 'antd'
 
+var options = {
+    layoutBy: null, // to rearrange after expand/collapse. It's just layout options or whole layout function. Choose your side!
+    // recommended usage: use cose-bilkent layout with randomize: false to preserve mental map upon expand/collapse
+    fisheye: true, // whether to perform fisheye view after expand/collapse you can specify a function too
+    animate: true, // whether to animate on drawing changes you can specify a function too
+    animationDuration: 1000, // when animate is true, the duration in milliseconds of the animation
+    ready: function () { }, // callback when expand/collapse initialized
+    undoable: true, // and if undoRedoExtension exists,
+
+    cueEnabled: true, // Whether cues are enabled
+    expandCollapseCuePosition: 'top-left', // default cue position is top left you can specify a function per node too
+    expandCollapseCueSize: 12, // size of expand-collapse cue
+    expandCollapseCueLineSize: 8, // size of lines used for drawing plus-minus icons
+    expandCueImage: undefined, // image of expand icon if undefined draw regular expand cue
+    collapseCueImage: undefined, // image of collapse icon if undefined draw regular collapse cue
+    expandCollapseCueSensitivity: 1, // sensitivity of expand-collapse cues
+    edgeTypeInfo: "edgeType", // the name of the field that has the edge type, retrieved from edge.data(), can be a function, if reading the field returns undefined the collapsed edge type will be "unknown"
+    groupEdgesOfSameTypeOnCollapse: false, // if true, the edges to be collapsed will be grouped according to their types, and the created collapsed edges will have same type as their group. if false the collapased edge will have "unknown" type.
+    allowNestedEdgeCollapse: true, // when you want to collapse a compound edge (edge which contains other edges) and normal edge, should it collapse without expanding the compound first
+    zIndex: 999 // z-index value of the canvas in which cue ımages are drawn
+};
+
 export default function CytoscapeVisualization() {
 
     const cyRef = useRef(null)
@@ -36,6 +60,7 @@ export default function CytoscapeVisualization() {
 
     useEffect(() => {
         const cy = cyRef.current;
+        console.log(cy);
         cy.on("click", 'node', function (event) {
             const element = event.target._private.data
             if (element.id.includes('curso')) {
@@ -80,7 +105,7 @@ export default function CytoscapeVisualization() {
                         min={0.1}
                         max={2}
                         tooltipVisible={false}
-                        style={{ width: '80px', margin: '0 5px' }}
+                        style={{ width: '80px', margin: '0 15px' }}
                         onChange={(value) => cyRef.current.zoom(value)}
                     />
                     <PlusOutlined />

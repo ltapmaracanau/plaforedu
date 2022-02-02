@@ -11,6 +11,7 @@
     "antd": "^4.16.13",
     "craco-less": "^1.20.0",
     "cytoscape": "^3.20.0",
+    "cytoscape-expand-collapse": "^4.1.0",
     "cytoscape-node-html-label": "^1.2.2",
     "easy-peasy": "^5.0.4",
     "react": "^17.0.2",
