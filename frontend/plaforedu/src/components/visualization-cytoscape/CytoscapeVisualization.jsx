@@ -46,14 +46,19 @@ export default function CytoscapeVisualization() {
 
     }, [cursos]);
 
+    const getInstituicao = (id_instituicao) => {
+        const instituicao = listInst.find(({ id }) => id === id_instituicao);
+
+        if (instituicao) {
+            return instituicao.titulo;
+        }
+
+        return 'Instituição não encontrada';
+    };
+
     const handleOk = () => {
         setModalVisible(false)
     }
-
-    /* const teste = () => {
-        console.log(cyRef.current);
-    } */
-
 
     return (
         <Col flex='auto' style={{ height: '600px' }}>
@@ -280,7 +285,7 @@ export default function CytoscapeVisualization() {
                         {courseOnModal.cargaHoraria}
                     </Descriptions.Item>
                     <Descriptions.Item label='Instituição Certificadora'>
-                        {listInst.filter(instituicao => courseOnModal.instCert.includes(instituicao.id)).map(instituicao => instituicao.titulo).join(', ')}
+                        {getInstituicao(courseOnModal.instCert)}
                     </Descriptions.Item>
                     <Descriptions.Item label='Possui Acessibilidade'>
                         {courseOnModal.possuiAcessibilidade}
