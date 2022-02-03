@@ -8,7 +8,8 @@ import {
     Button,
     Modal,
     Row,
-    Descriptions
+    Descriptions,
+    Typography
 } from 'antd'
 
 import {
@@ -16,16 +17,44 @@ import {
     MenuFoldOutlined
 } from '@ant-design/icons';
 
+const { Text, Title } = Typography;
 
 export default function CoursesListVisualization() {
-
     const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
     const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed)
     const listData = useStoreState(state => state.cursos.cursos)
     const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados)
     const listInst = useStoreState(state => state.cursos.instituicoes)
+    const listCategoriasCompetencia = useStoreState(state => state.cursos.categoriasDeCompetencias)
+    const listCompetencias = useStoreState(state => state.cursos.competencias)
+
     const [courseOnModal, setCourseOnModal] = useState(listData[0])
     const [modalVisible, setModalVisible] = useState(false)
+
+    const getInstituicao = (id_instituicao) => {
+        const instituicao = listInst.find(({ id }) => id === id_instituicao);
+
+        if (instituicao) {
+            return instituicao.titulo;
+        }
+
+        return 'Instituição não encontrada';
+    };
+
+    const getCategoriasCompetencia = (ids_competencias) => {
+        const nomes_categorias = ids_competencias.map(id_competencia =>
+            listCategoriasCompetencia.find(categoria => categoria.competencias.includes(id_competencia)))
+            .map(categoria => categoria.nome);
+
+        return nomes_categorias.join(' | '); 
+    };
+
+    const getCompetencias = (ids_competencias) => {
+        const nomes_competencias = listCompetencias.filter(({ id }) => ids_competencias.includes(id))
+            .map(competencia => competencia.titulo);
+            
+        return nomes_competencias.join(' | ');
+    };
 
     const handleOk = () => {
         setModalVisible(false);
@@ -42,35 +71,64 @@ export default function CoursesListVisualization() {
                     />
                 </Col>
             </Row>
-            <Card style={{ padding: '10px', minHeight: '600px', background: '#eee' }}>
+
+            <Card bordered={false} style={{ minHeight: '600px', background: '#eee' }}>
                 <List
-                    grid={{
-                        gutter: 40,
-                        xs: 1,
-                        sm: 1,
-                        md: 2,
-                        lg: 3,
-                        xl: 3,
-                        xxl: 3,
-                    }}
+                    itemLayout="vertical"
                     dataSource={listData.filter(curso => cursosFiltrados.includes(curso.id))}
                     renderItem={item => (
-                        <List.Item key={item.id}>
+                        <List.Item 
+                            key={item.id} 
+                            style={{ backgroundColor: '#fff' }}
+                        >
                             <Card
-                                key={item.id}
                                 hoverable
+                                bordered={false}
                                 onClick={() => {
                                     setCourseOnModal(item)
                                     setModalVisible(true)
                                 }}
-                                title={item.title}
                             >
-                                {item.descricao}
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center'
+                                }}>
+                                    <Title level={3} >{item.title}</Title>
+
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                    }}>
+                                        <Text>Instituição: {' '}
+                                            <Text strong>{getInstituicao(item.instCert)}</Text>
+                                        </Text>
+                                        
+                                        <Text>Carga horária: 
+                                            <Text strong>{` ${item.cargaHoraria}H`}</Text>
+                                        </Text>
+                                    </div>
+
+                                    <div style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                    }}>
+                                        <Text>Categorias de competência: {' '}
+                                            <Text strong>{getCategoriasCompetencia(item.filter.competencias)}</Text>
+                                        </Text>
+                                        
+                                        <Text>Competências: {' '}
+                                            <Text strong>{getCompetencias(item.filter.competencias)}</Text>
+                                        </Text>
+                                    </div>
+                                </div>
                             </Card>
                         </List.Item>
                     )}
                 />
             </Card>
+
             <Modal
                 visible={modalVisible}
                 onOk={handleOk}
@@ -89,7 +147,7 @@ export default function CoursesListVisualization() {
                         {courseOnModal.cargaHoraria}
                     </Descriptions.Item>
                     <Descriptions.Item label='Instituição Certificadora'>
-                        {listInst.filter(instituicao => courseOnModal.instCert.includes(instituicao.id)).map(instituicao => instituicao.titulo).join(', ')}
+                        {getInstituicao(courseOnModal.instCert)}
                     </Descriptions.Item>
                     <Descriptions.Item label='Possui Acessibilidade'>
                         {courseOnModal.possuiAcessibilidade}
