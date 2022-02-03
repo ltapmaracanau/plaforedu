@@ -20,9 +20,11 @@ import {
     Modal,
     Descriptions,
     Button,
+    Card,
     Row,
     Slider,
     Select,
+    Form,
 } from 'antd'
 
 export default function CytoscapeVisualization() {
@@ -38,6 +40,7 @@ export default function CytoscapeVisualization() {
     const [modalVisible, setModalVisible] = useState(false)
     const layouts = useStoreState(state => state.itinerarios.layouts)
     const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
+    const [zoom, setZoom] = useState(0.2);
 
     useEffect(() => {
         const cy = cyRef.current;
@@ -63,59 +66,114 @@ export default function CytoscapeVisualization() {
 
     return (
         <Col flex='auto' style={{ height: '600px' }}>
-            <Row style={{ maxHeight: '42px' }}>
-                <Col>
-                    <Button
-                        style={{ margin: '5px 10px' }}
-                        onClick={() => { setFilterCollapsed() }}
-                        icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                    />
-                </Col>
-                {/* <Col>
-                    <Button
-                        style={{ margin: '5px 10px' }}
-                        onClick={() => { teste() }}
-                    >
-                        teste
-                    </Button>
-                </Col> */}
-                <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                    <MinusOutlined />
-                    <Slider
-                        step={0.1}
-                        min={0.1}
-                        max={2}
-                        tooltipVisible={false}
-                        style={{ width: '80px', margin: '0 15px' }}
-                        onChange={(value) => cyRef.current.zoom(value)}
-                    />
-                    <PlusOutlined />
-                </Col>
-                <Col span={5} style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                    <Select
-                        onChange={(value) => {
-                            setLayoutAtual(layouts[value])
-                        }}
-                        defaultValue={'layoutCose'}
-                        style={{ width: '100%', margin: '0 15px' }}
-                    >
-                        <Select.Option value={'layoutCose'}>COSE</Select.Option>
-                        <Select.Option value={'layoutBreadthFirst'}>Dendograma</Select.Option>
-                        <Select.Option value={'layoutBreadthFirstCircle'}>Dendograma Circular</Select.Option>
-                    </Select>
-                </Col>
-            </Row>
+            <Form
+                size='small'
+                layout='horizontal'
+            >
+                <Row
+                    align='middle'
+                >
+                    <Col>
+                        <Button
+                            style={{ margin: '5px 10px', height: '35px', width: '35px' }}
+                            onClick={() => { setFilterCollapsed() }}
+                            icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                        />
+                    </Col>
+                    {/* <Col>
+                        <Button
+                            style={{ margin: '5px 10px' }}
+                            onClick={() => { teste() }}
+                        >
+                            teste
+                        </Button>
+                    </Col> */}
+                    <Col>
+                        <Card>
+                            <Form.Item
+                                label={'Zoom'}
+                                style={{ marginBottom: '0' }}
+                            >
+                                <div
+                                    style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}
+                                >
+                                    <Button
+                                        shape='circle'
+                                        onClick={() => {
+                                            setZoom((zoomAtual) => {
+                                                return (
+                                                    zoomAtual > 0.2 ?
+                                                        zoomAtual - 0.05 :
+                                                        zoomAtual
+                                                )
+                                            })
+                                        }}
+                                        icon={<MinusOutlined />}
+                                    />
+                                    <Slider
+                                        step={0.1}
+                                        min={0.1}
+                                        max={2}
+                                        value={zoom}
+                                        tooltipVisible={false}
+                                        style={{ width: '80px', margin: '0 15px' }}
+                                        onChange={(value) => {
+                                            setZoom(value)/* 
+                                            cyRef.current.zoom(value) */
+                                        }}
+                                    />
+                                    <Button
+                                        icon={<PlusOutlined />}
+                                        shape='circle'
+                                        onClick={() => {
+                                            setZoom((zoomAtual) => {
+                                                return (
+                                                    zoomAtual < 2 ?
+                                                        zoomAtual + 0.05 :
+                                                        zoomAtual
+                                                )
+                                            })
+                                        }}
+                                    />
+                                </div>
+                            </Form.Item>
+                        </Card>
+                    </Col>
+                    <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
+                        <Card style={{ width: '100%' }}>
+                            <Form.Item
+                                label={'Visualização'}
+                                style={{ marginBottom: '0' }}
+                            >
+                                <Select
+                                    onChange={(value) => {
+                                        setLayoutAtual(layouts[value])
+                                    }}
+                                    defaultValue={'layoutCose'}
+                                    style={{ width: '100%' }}
+                                >
+                                    <Select.Option value={'layoutCose'}>COSE</Select.Option>
+                                    <Select.Option value={'layoutBreadthFirst'}>Dendograma</Select.Option>
+                                    <Select.Option value={'layoutBreadthFirstCircle'}>Dendograma Circular</Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Card>
+                    </Col>
+                </Row>
+            </Form>
             <CytoscapeComponent
                 elements={elements}
                 minZoom={0.1}
                 maxZoom={2}
-                zoom={0.1}
+                zoom={zoom}
                 zoomingEnabled={true}
                 userZoomingEnabled={false}
-                cy={(cy) => { cyRef.current = cy }}
+                cy={(cy) => {
+                    cyRef.current = cy
+                }}
                 style={{
                     width: '100%',
-                    height: '558px',
+                    height: '555px',
                     backgroundColor: '#fff'
                 }}
                 layout={layoutAtual}
