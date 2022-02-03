@@ -2299,8 +2299,8 @@ const reformuladorDeElementosCytoscape = (novosCursos) => {
                 group: 'edges',
                 data: {
                     id: 'edge'+curso.data.id+'competencia'+idCompetencia,
-                    source: curso.data.id,
-                    target: 'competencia'+idCompetencia
+                    source: 'competencia'+idCompetencia,
+                    target: curso.data.id
                 }
             })
         })

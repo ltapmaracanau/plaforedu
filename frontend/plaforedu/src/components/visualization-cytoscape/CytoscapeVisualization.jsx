@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import cytoscape from 'cytoscape'
 import fundoCurso from '../../assets/icones/PLAFOREDU_Site_Icones_Docente_Curso.png'
 import fundoCategoria from '../../assets/icones/PLAFOREDU_Site_Icones_EduEmpreend_Categoria.png'
 import fundoCompetencia from '../../assets/icones/PLAFOREDU_Site_Icones_InicServPublico_Competencia.png'
 
 import CytoscapeComponent from 'react-cytoscapejs'
+import expandCollapse from 'cytoscape-expand-collapse'
 
 import {
     MenuUnfoldOutlined,
@@ -18,8 +20,11 @@ import {
     Modal,
     Descriptions,
     Button,
+    Card,
     Row,
     Slider,
+    Select,
+    Form,
 } from 'antd'
 
 export default function CytoscapeVisualization() {
@@ -33,9 +38,13 @@ export default function CytoscapeVisualization() {
     const listInst = useStoreState(state => state.cursos.instituicoes)
     const [courseOnModal, setCourseOnModal] = useState(cursos[0])
     const [modalVisible, setModalVisible] = useState(false)
+    const layouts = useStoreState(state => state.itinerarios.layouts)
+    const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
+    const [zoom, setZoom] = useState(0.2);
 
     useEffect(() => {
         const cy = cyRef.current;
+        console.log(cy);
         cy.on("click", 'node', function (event) {
             const element = event.target._private.data
             if (element.id.includes('curso')) {
@@ -44,7 +53,7 @@ export default function CytoscapeVisualization() {
             }
         });
 
-    }, [cursos]);
+    }, [elements]);
 
     const getInstituicao = (id_instituicao) => {
         const instituicao = listInst.find(({ id }) => id === id_instituicao);
@@ -62,130 +71,117 @@ export default function CytoscapeVisualization() {
 
     return (
         <Col flex='auto' style={{ height: '600px' }}>
-            <Row style={{ maxHeight: '42px' }}>
-                <Col>
-                    <Button
-                        style={{ margin: '5px 10px' }}
-                        onClick={() => { setFilterCollapsed() }}
-                        icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                    />
-                </Col>
-                {/* <Col>
-                    <Button
-                        style={{ margin: '5px 10px' }}
-                        onClick={() => { teste() }}
-                    >
-                        teste
-                    </Button>
-                </Col> */}
-                <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                    <MinusOutlined />
-                    <Slider
-                        step={0.1}
-                        min={0.1}
-                        max={2}
-                        tooltipVisible={false}
-                        style={{ width: '80px', margin: '0 5px' }}
-                        onChange={(value) => cyRef.current.zoom(value)}
-                    />
-                    <PlusOutlined />
-                </Col>
-            </Row>
+            <Form
+                size='small'
+                layout='horizontal'
+            >
+                <Row
+                    align='middle'
+                >
+                    <Col>
+                        <Button
+                            style={{ margin: '5px 10px', height: '35px', width: '35px' }}
+                            onClick={() => { setFilterCollapsed() }}
+                            icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                        />
+                    </Col>
+                    {/* <Col>
+                        <Button
+                            style={{ margin: '5px 10px' }}
+                            onClick={() => { teste() }}
+                        >
+                            teste
+                        </Button>
+                    </Col> */}
+                    <Col>
+                        <Card>
+                            <Form.Item
+                                label={'Zoom'}
+                                style={{ marginBottom: '0' }}
+                            >
+                                <div
+                                    style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}
+                                >
+                                    <Button
+                                        shape='circle'
+                                        onClick={() => {
+                                            setZoom((zoomAtual) => {
+                                                return (
+                                                    zoomAtual > 0.2 ?
+                                                        zoomAtual - 0.05 :
+                                                        zoomAtual
+                                                )
+                                            })
+                                        }}
+                                        icon={<MinusOutlined />}
+                                    />
+                                    <Slider
+                                        step={0.1}
+                                        min={0.1}
+                                        max={2}
+                                        value={zoom}
+                                        tooltipVisible={false}
+                                        style={{ width: '80px', margin: '0 15px' }}
+                                        onChange={(value) => {
+                                            setZoom(value)/* 
+                                            cyRef.current.zoom(value) */
+                                        }}
+                                    />
+                                    <Button
+                                        icon={<PlusOutlined />}
+                                        shape='circle'
+                                        onClick={() => {
+                                            setZoom((zoomAtual) => {
+                                                return (
+                                                    zoomAtual < 2 ?
+                                                        zoomAtual + 0.05 :
+                                                        zoomAtual
+                                                )
+                                            })
+                                        }}
+                                    />
+                                </div>
+                            </Form.Item>
+                        </Card>
+                    </Col>
+                    <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
+                        <Card style={{ width: '100%' }}>
+                            <Form.Item
+                                label={'Visualização'}
+                                style={{ marginBottom: '0' }}
+                            >
+                                <Select
+                                    onChange={(value) => {
+                                        setLayoutAtual(layouts[value])
+                                    }}
+                                    defaultValue={'layoutCose'}
+                                    style={{ width: '100%' }}
+                                >
+                                    <Select.Option value={'layoutCose'}>COSE</Select.Option>
+                                    <Select.Option value={'layoutBreadthFirst'}>Dendograma</Select.Option>
+                                    <Select.Option value={'layoutBreadthFirstCircle'}>Dendograma Circular</Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Card>
+                    </Col>
+                </Row>
+            </Form>
             <CytoscapeComponent
                 elements={elements}
                 minZoom={0.1}
                 maxZoom={2}
-                zoom={0.1}
+                zoom={zoom}
                 zoomingEnabled={true}
                 userZoomingEnabled={false}
-                cy={(cy) => { cyRef.current = cy }}
+                cy={(cy) => {
+                    cyRef.current = cy
+                }}
                 style={{
                     width: '100%',
-                    height: '558px',
+                    height: '555px',
                     backgroundColor: '#fff'
                 }}
-                layout={{
-                    name: 'cose',
-
-                    // Called on `layoutready`
-                    ready: function () { },
-
-                    // Called on `layoutstop`
-                    stop: function () { },
-
-                    // Whether to animate while running the layout
-                    // true : Animate continuously as the layout is running
-                    // false : Just show the end result
-                    // 'end' : Animate with the end result, from the initial positions to the end positions
-                    animate: false,
-
-                    // Easing of the animation for animate:'end'
-                    animationEasing: undefined,
-
-                    // The duration of the animation for animate:'end'
-                    animationDuration: undefined,
-
-                    // A function that determines whether the node should be animated
-                    // All nodes animated by default on animate enabled
-                    // Non-animated nodes are positioned immediately when the layout starts
-                    animateFilter: function (node, i) { return true; },
-
-
-                    // The layout animates only after this many milliseconds for animate:true
-                    // (prevents flashing on fast runs)
-                    animationThreshold: 250,
-
-                    // Number of iterations between consecutive screen positions update
-                    refresh: 20,
-
-                    // Whether to fit the network view after when done
-                    fit: true,
-
-                    // Padding on fit
-                    padding: 80,
-
-                    // Constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-                    boundingBox: undefined,
-
-                    // Excludes the label when calculating node bounding boxes for the layout algorithm
-                    nodeDimensionsIncludeLabels: false,
-
-                    // Randomize the initial positions of the nodes (true) or use existing positions (false)
-                    randomize: false,
-
-                    // Extra spacing between components in non-compound graphs
-                    componentSpacing: 40,
-
-                    // Node repulsion (non overlapping) multiplier
-                    nodeRepulsion: function (node) { return 2048; },
-
-                    // Node repulsion (overlapping) multiplier
-                    nodeOverlap: 4,
-
-                    // Ideal edge (non nested) length
-                    idealEdgeLength: function (edge) { return 32; },
-
-                    // Divisor to compute edge forces
-                    edgeElasticity: function (edge) { return 32; },
-
-                    // Nesting factor (multiplier) to compute ideal edge length for nested edges
-                    nestingFactor: 1.2,
-
-                    // Gravity force (constant)
-                    gravity: 1,
-
-                    // Maximum number of iterations to perform
-                    numIter: 1000,
-
-                    // Initial temperature (maximum node displacement)
-                    initialTemp: 1000,
-
-                    // Cooling factor (how the temperature is reduced between consecutive iterations
-                    coolingFactor: 0.99,
-
-                    // Lower temperature threshold (below this point the layout will end)
-                    minTemp: 1.0
-                }}
+                layout={layoutAtual}
                 stylesheet={[
                     {
                         selector: '.curso',
