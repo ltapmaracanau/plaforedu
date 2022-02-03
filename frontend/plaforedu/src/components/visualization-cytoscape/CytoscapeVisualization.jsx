@@ -42,19 +42,6 @@ export default function CytoscapeVisualization() {
     const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
     const [zoom, setZoom] = useState(0.2);
 
-    useEffect(() => {
-        const cy = cyRef.current;
-        console.log(cy);
-        cy.on("click", 'node', function (event) {
-            const element = event.target._private.data
-            if (element.id.includes('curso')) {
-                setCourseOnModal(cursos.find((curso) => curso.id.toString() === element.id.replace(/curso/gi, '')))
-                setModalVisible(true)
-            }
-        });
-
-    }, [elements]);
-
     const getInstituicao = (id_instituicao) => {
         const instituicao = listInst.find(({ id }) => id === id_instituicao);
 
@@ -85,14 +72,6 @@ export default function CytoscapeVisualization() {
                             icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                         />
                     </Col>
-                    {/* <Col>
-                        <Button
-                            style={{ margin: '5px 10px' }}
-                            onClick={() => { teste() }}
-                        >
-                            teste
-                        </Button>
-                    </Col> */}
                     <Col>
                         <Card>
                             <Form.Item
@@ -175,6 +154,13 @@ export default function CytoscapeVisualization() {
                 userZoomingEnabled={false}
                 cy={(cy) => {
                     cyRef.current = cy
+                    cy.on("click", 'node', function (event) {
+                        const element = event.target._private.data
+                        if (element.id.includes('curso')) {
+                            setCourseOnModal(cursos.find((curso) => curso.id.toString() === element.id.replace(/curso/gi, '')))
+                            setModalVisible(true)
+                        }
+                    });
                 }}
                 style={{
                     width: '100%',

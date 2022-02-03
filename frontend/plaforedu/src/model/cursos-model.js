@@ -2413,7 +2413,7 @@ const trilhosModel = {
                 let contemCompetencia = curso.filter.competencias.some(idCompetencia => filtro.competencias.includes(idCompetencia))
                 let competenciasVazio = filtro.competencias.length === 0
                 
-                let contemInstituicao = curso.instCert.some(idInst => filtro.instCertificadora.includes(idInst))
+                let contemInstituicao = filtro.instCertificadora.some(inst => curso.instCert === inst)
                 let instituicoesVazio = filtro.instCertificadora.length === 0
                 
                 let buscaInterna = curso.title.toLowerCase().startsWith(filtro.buscaInterna.toLowerCase())
