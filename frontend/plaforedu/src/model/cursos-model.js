@@ -11,7 +11,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [1, 10],
+            competencias: [1],
             temas: [1],
             subtemas: [1],
         }
@@ -26,7 +26,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [1],
+            competencias: [2],
             temas: [1],
             subtemas: [2],
         }
@@ -41,7 +41,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [6],
+            competencias: [3],
             temas: [2],
             subtemas: [3],
         }
@@ -56,7 +56,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [6],
+            competencias: [4],
             temas: [1, 2],
             subtemas: [1, 2, 3],
         }
@@ -71,7 +71,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [6],
+            competencias: [5],
             temas: [],
             subtemas: [],
         }
@@ -86,7 +86,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [8],
+            competencias: [6],
             temas: [],
             subtemas: [],
         }
@@ -101,7 +101,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [8],
+            competencias: [7],
             temas: [],
             subtemas: [],
         }
@@ -131,7 +131,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [29],
+            competencias: [9],
             temas: [],
             subtemas: [],
         }
@@ -146,7 +146,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [29],
+            competencias: [10],
             temas: [],
             subtemas: [],
         }
@@ -161,7 +161,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [29],
+            competencias: [11],
             temas: [],
             subtemas: [],
         }
@@ -176,7 +176,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [30],
+            competencias: [12],
             temas: [],
             subtemas: [],
         }
@@ -191,7 +191,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [30],
+            competencias: [13],
             temas: [],
             subtemas: [],
         }
@@ -206,7 +206,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [30],
+            competencias: [14],
             temas: [],
             subtemas: [],
         }
@@ -221,7 +221,262 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
+            competencias: [15],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 16,
+        title: 'Título do curso 16',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 2,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [16],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 17,
+        title: 'Título do curso 17',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 3,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [17],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 18,
+        title: 'Título do curso 18',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 4,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [18],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 19,
+        title: 'Título do curso 19',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 5,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [19],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 20,
+        title: 'Título do curso 20',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 6,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [20],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 21,
+        title: 'Título do curso 21',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [21],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 22,
+        title: 'Título do curso 22',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [22],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 23,
+        title: 'Título do curso 23',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [23],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 24,
+        title: 'Título do curso 24',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [24],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 25,
+        title: 'Título do curso 25',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [25],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 26,
+        title: 'Título do curso 26',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [26],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 27,
+        title: 'Título do curso 27',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [27],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 28,
+        title: 'Título do curso 28',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [28],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 29,
+        title: 'Título do curso 29',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [29],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 30,
+        title: 'Título do curso 30',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
             competencias: [30],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 31,
+        title: 'Título do curso 31',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [31],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 32,
+        title: 'Título do curso 32',
+        descricao: 'Descrição do curso',
+        cargaHoraria: 80,
+        instCert: 1,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://www.udemy.com/course/curso-web/',
+        obs: '',
+        filter: {
+            competencias: [32],
             temas: [],
             subtemas: [],
         }
@@ -2247,7 +2502,7 @@ const subtemasDefault = [
     },
 ]
 
-const cursosFiltradosDefault = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+const cursosFiltradosDefault = cursosDefault.map(curso => curso.id)
 
 const reformuladorDeElementosCytoscape = (novosCursos) => {
     // todos os cursos
@@ -2359,7 +2614,7 @@ const trilhosModel = {
 
     subtemas: subtemasDefault,
     
-    cursosFiltrados: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+    cursosFiltrados: cursosFiltradosDefault,
 
     filterDefault: {
         buscaInterna: '',
@@ -2398,7 +2653,6 @@ const trilhosModel = {
         (state, target) => {
             let filtro = target.payload
             let novosCursos = []
-            console.log(filtro);
             state.cursos.forEach(curso => {
                 let contemTema = curso.filter.temas.some(idTema => filtro.temas.includes(idTema))
                 let temasVazio = filtro.temas.length === 0

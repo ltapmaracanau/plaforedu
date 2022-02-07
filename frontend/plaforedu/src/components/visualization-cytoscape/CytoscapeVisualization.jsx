@@ -1,12 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import cytoscape from 'cytoscape'
 import fundoCurso from '../../assets/icones/PLAFOREDU_Site_Icones_Docente_Curso.png'
 import fundoCategoria from '../../assets/icones/PLAFOREDU_Site_Icones_EduEmpreend_Categoria.png'
 import fundoCompetencia from '../../assets/icones/PLAFOREDU_Site_Icones_InicServPublico_Competencia.png'
 
 import CytoscapeComponent from 'react-cytoscapejs'
-import expandCollapse from 'cytoscape-expand-collapse'
 
 import {
     MenuUnfoldOutlined,
@@ -26,6 +24,7 @@ import {
     Select,
     Form,
 } from 'antd'
+
 
 export default function CytoscapeVisualization() {
 
@@ -55,6 +54,11 @@ export default function CytoscapeVisualization() {
     const handleOk = () => {
         setModalVisible(false)
     }
+
+    useEffect(() => {
+        cyRef.current.layout(layoutAtual).run()
+    }, [elements, layoutAtual]);
+
 
     return (
         <Col flex='auto' style={{ height: '600px' }}>
@@ -86,8 +90,8 @@ export default function CytoscapeVisualization() {
                                         onClick={() => {
                                             setZoom((zoomAtual) => {
                                                 return (
-                                                    zoomAtual > 0.2 ?
-                                                        zoomAtual - 0.05 :
+                                                    zoomAtual > 0.01 ?
+                                                        zoomAtual - 0.01 :
                                                         zoomAtual
                                                 )
                                             })
@@ -96,7 +100,7 @@ export default function CytoscapeVisualization() {
                                     />
                                     <Slider
                                         step={0.1}
-                                        min={0.1}
+                                        min={0.0}
                                         max={2}
                                         value={zoom}
                                         tooltipVisible={false}
@@ -136,9 +140,12 @@ export default function CytoscapeVisualization() {
                                     defaultValue={'layoutCose'}
                                     style={{ width: '100%' }}
                                 >
-                                    <Select.Option value={'layoutCose'}>COSE</Select.Option>
+                                    <Select.Option value={'layoutCose'}>Padrão</Select.Option>
                                     <Select.Option value={'layoutBreadthFirst'}>Dendograma</Select.Option>
                                     <Select.Option value={'layoutBreadthFirstCircle'}>Dendograma Circular</Select.Option>
+                                    <Select.Option value={'layoutGrid'}>Grade</Select.Option>
+                                    <Select.Option value={'layoutCircular'}>Circular</Select.Option>
+                                    <Select.Option value={'layoutConcentric'}>Concentric</Select.Option>
                                 </Select>
                             </Form.Item>
                         </Card>
@@ -161,13 +168,16 @@ export default function CytoscapeVisualization() {
                             setModalVisible(true)
                         }
                     });
+                    cy.on("data", function (event) {
+                        console.log('mudou');
+                    })
                 }}
                 style={{
                     width: '100%',
                     height: '555px',
                     backgroundColor: '#fff'
                 }}
-                layout={layoutAtual}
+                layout={layouts.layoutCose}
                 stylesheet={[
                     {
                         selector: '.curso',
