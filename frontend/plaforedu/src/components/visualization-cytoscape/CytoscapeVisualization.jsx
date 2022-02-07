@@ -39,7 +39,7 @@ export default function CytoscapeVisualization() {
     const [modalVisible, setModalVisible] = useState(false)
     const layouts = useStoreState(state => state.itinerarios.layouts)
     const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
-    const [zoom, setZoom] = useState(0.2);
+    const [zoom, setZoom] = useState(0);
 
     const getInstituicao = (id_instituicao) => {
         const instituicao = listInst.find(({ id }) => id === id_instituicao);
@@ -68,6 +68,7 @@ export default function CytoscapeVisualization() {
             >
                 <Row
                     align='middle'
+                    style={{ backgroundColor: '#EBEBEB' }}
                 >
                     <Col>
                         <Button
@@ -99,9 +100,9 @@ export default function CytoscapeVisualization() {
                                         icon={<MinusOutlined />}
                                     />
                                     <Slider
-                                        step={0.1}
-                                        min={0.0}
-                                        max={2}
+                                        step={0.01}
+                                        min={0.01}
+                                        max={1.00}
                                         value={zoom}
                                         tooltipVisible={false}
                                         style={{ width: '80px', margin: '0 15px' }}
@@ -116,8 +117,8 @@ export default function CytoscapeVisualization() {
                                         onClick={() => {
                                             setZoom((zoomAtual) => {
                                                 return (
-                                                    zoomAtual < 2 ?
-                                                        zoomAtual + 0.05 :
+                                                    zoomAtual < 1 ?
+                                                        zoomAtual + 0.01 :
                                                         zoomAtual
                                                 )
                                             })
@@ -154,8 +155,8 @@ export default function CytoscapeVisualization() {
             </Form>
             <CytoscapeComponent
                 elements={elements}
-                minZoom={0.1}
-                maxZoom={2}
+                minZoom={0.01}
+                maxZoom={1.00}
                 zoom={zoom}
                 zoomingEnabled={true}
                 userZoomingEnabled={false}
@@ -168,9 +169,6 @@ export default function CytoscapeVisualization() {
                             setModalVisible(true)
                         }
                     });
-                    cy.on("data", function (event) {
-                        console.log('mudou');
-                    })
                 }}
                 style={{
                     width: '100%',

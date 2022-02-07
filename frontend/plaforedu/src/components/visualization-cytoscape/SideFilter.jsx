@@ -4,6 +4,10 @@ import { useStoreActions, useStoreState } from 'easy-peasy'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
 
 import {
+    SearchOutlined,
+} from '@ant-design/icons';
+
+import {
     Col,
     Switch,
     Select,
@@ -13,8 +17,6 @@ import {
     Form,
     Card
 } from 'antd'
-
-const { Search } = Input;
 
 export default function SideFilter() {
 
@@ -55,27 +57,27 @@ export default function SideFilter() {
                     layout='vertical'
                     onFinish={register.handleSubmit(onSubmit)}
                 >
-                    <Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.control}
                             name='buscaInterna'
                             render={({ field }) => {
                                 return (
-                                    <Form.Item>
-                                        <Search allowClear={true} placeholder="Buscar" {...field} enterButton onSearch={onSearch} />
+                                    <Form.Item style={{ marginBottom: '0' }} >
+                                        <Input allowClear={true} prefix={<SearchOutlined />} placeholder="Buscar" {...field} onPressEnter={onSearch} />
                                     </Form.Item>
                                 )
                             }}
                         />
                     </Card>
-                    <Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.control}
                             defaultValue={true}
                             name='tipoVisualizacao'
                             render={() => {
                                 return (
-                                    <Form.Item label={'Tipo de Visualização:'}>
+                                    <Form.Item style={{ marginBottom: '0' }} label={'Tipo de Visualização:'}>
                                         <Switch
                                             defaultChecked={false}
                                             checkedChildren="Lista"
@@ -88,12 +90,12 @@ export default function SideFilter() {
                             }
                         />
                     </Card>
-                    <Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.control}
                             name='categoriasDeCompetencias'
                             render={({ field }) => (
-                                <Form.Item label={'Categorias de Competências:'}>
+                                <Form.Item style={{ marginBottom: '0' }} label={'Categorias de Competências:'}>
                                     <Select
                                         {...field}
                                         mode='multiple'
@@ -109,12 +111,12 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.control}
                             name='competencias'
                             render={({ field }) => (
-                                <Form.Item label={'Competências:'}>
+                                <Form.Item style={{ marginBottom: '0' }} label={'Competências:'}>
                                     <Select
                                         {...field}
                                         mode='multiple'
@@ -130,12 +132,12 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.control}
                             name='temas'
                             render={({ field }) => (
-                                <Form.Item label={'Temas:'}>
+                                <Form.Item style={{ marginBottom: '0' }} label={'Temas:'}>
                                     <Select
                                         {...field}
                                         mode='multiple'
@@ -155,12 +157,12 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.control}
                             name='subtemas'
                             render={({ field }) => (
-                                <Form.Item label={'Subtemas:'}>
+                                <Form.Item style={{ marginBottom: '0' }} label={'Subtemas:'}>
                                     <Select
                                         {...field}
                                         placeholder={'Todos os Subtemas'}
@@ -180,12 +182,12 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.control}
                             name='cargaHoraria'
                             render={({ field }) => (
-                                <Form.Item label={'Carga Horária:'}>
+                                <Form.Item style={{ marginBottom: '0' }} label={'Carga Horária:'}>
                                     <Slider
                                         {...field}
                                         range
@@ -200,12 +202,12 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.control}
                             name='instCertificadora'
                             render={({ field }) => (
-                                <Form.Item label={'Instituição Certificadora:'}>
+                                <Form.Item style={{ marginBottom: '0' }} label={'Instituição Certificadora:'}>
                                     < Select
                                         {...field}
                                         placeholder={'Todas as Instituições'}
@@ -221,7 +223,7 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <Button
                             style={{ margin: '0 5px' }}
                             type='primary'

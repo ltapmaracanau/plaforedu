@@ -45,14 +45,14 @@ export default function CoursesListVisualization() {
         const nomes_categorias = ids_competencias.map(id_competencia =>
             listCategoriasCompetencia.find(categoria => categoria.competencias.includes(id_competencia)))
             .map(categoria => categoria.nome);
-
-        return nomes_categorias.join(' | '); 
+        const nomes_categorias_sem_repeticao = [...new Set(nomes_categorias)]
+        return nomes_categorias_sem_repeticao.join(' | ');
     };
 
     const getCompetencias = (ids_competencias) => {
         const nomes_competencias = listCompetencias.filter(({ id }) => ids_competencias.includes(id))
             .map(competencia => competencia.titulo);
-            
+
         return nomes_competencias.join(' | ');
     };
 
@@ -61,8 +61,12 @@ export default function CoursesListVisualization() {
     };
 
     return (
-        <Col flex={'auto'} style={{ height: '600px', overflowY: 'scroll' }}>
-            <Row>
+        <Col flex={'auto'}>
+            <Row
+                style={{
+                    backgroundColor: '#EBEBEB'
+                }}
+            >
                 <Col>
                     <Button
                         style={{ margin: '5px 10px' }}
@@ -71,95 +75,98 @@ export default function CoursesListVisualization() {
                     />
                 </Col>
             </Row>
+            <Row>
+                <Col flex={'auto'} style={{ height: '600px', overflowY: 'scroll' }}>
+                    <Card bordered={false} style={{ minHeight: '600px', background: '#eee' }}>
+                        <List
+                            itemLayout="vertical"
+                            dataSource={listData.filter(curso => cursosFiltrados.includes(curso.id))}
+                            renderItem={item => (
+                                <List.Item
+                                    key={item.id}
+                                    style={{ backgroundColor: '#fff' }}
+                                >
+                                    <Card
+                                        hoverable
+                                        bordered={false}
+                                        onClick={() => {
+                                            setCourseOnModal(item)
+                                            setModalVisible(true)
+                                        }}
+                                    >
+                                        <div style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            justifyContent: 'center'
+                                        }}>
+                                            <Title level={3} style={{ color: '#2C55A1' }} >{item.title}</Title>
 
-            <Card bordered={false} style={{ minHeight: '600px', background: '#eee' }}>
-                <List
-                    itemLayout="vertical"
-                    dataSource={listData.filter(curso => cursosFiltrados.includes(curso.id))}
-                    renderItem={item => (
-                        <List.Item 
-                            key={item.id} 
-                            style={{ backgroundColor: '#fff' }}
-                        >
-                            <Card
-                                hoverable
-                                bordered={false}
-                                onClick={() => {
-                                    setCourseOnModal(item)
-                                    setModalVisible(true)
-                                }}
-                            >
-                                <div style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'center'
-                                }}>
-                                    <Title level={3} >{item.title}</Title>
+                                            <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Text>Instituição: {' '}
+                                                    <Text strong>{getInstituicao(item.instCert)}</Text>
+                                                </Text>
 
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'space-between',
-                                    }}>
-                                        <Text>Instituição: {' '}
-                                            <Text strong>{getInstituicao(item.instCert)}</Text>
-                                        </Text>
-                                        
-                                        <Text>Carga horária: 
-                                            <Text strong>{` ${item.cargaHoraria}H`}</Text>
-                                        </Text>
-                                    </div>
+                                                <Text>Carga horária:
+                                                    <Text strong>{` ${item.cargaHoraria}H`}</Text>
+                                                </Text>
+                                            </div>
 
-                                    <div style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                    }}>
-                                        <Text>Categorias de competência: {' '}
-                                            <Text strong>{getCategoriasCompetencia(item.filter.competencias)}</Text>
-                                        </Text>
-                                        
-                                        <Text>Competências: {' '}
-                                            <Text strong>{getCompetencias(item.filter.competencias)}</Text>
-                                        </Text>
-                                    </div>
-                                </div>
-                            </Card>
-                        </List.Item>
-                    )}
-                />
-            </Card>
+                                            <div style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                            }}>
+                                                <Text>Categorias de competência: {' '}
+                                                    <Text strong>{getCategoriasCompetencia(item.filter.competencias)}</Text>
+                                                </Text>
 
-            <Modal
-                visible={modalVisible}
-                onOk={handleOk}
-                onCancel={handleOk}
-                title={courseOnModal.title}
-                centered={true}
-                footer={[
-                    <Button type='primary' key={courseOnModal.id} onClick={handleOk}>Ok</Button>
-                ]}
-            >
-                <Descriptions column={1} bordered>
-                    <Descriptions.Item label='Descrição'>
-                        {courseOnModal.descricao}
-                    </Descriptions.Item>
-                    <Descriptions.Item label='Carga Horária'>
-                        {courseOnModal.cargaHoraria}
-                    </Descriptions.Item>
-                    <Descriptions.Item label='Instituição Certificadora'>
-                        {getInstituicao(courseOnModal.instCert)}
-                    </Descriptions.Item>
-                    <Descriptions.Item label='Possui Acessibilidade'>
-                        {courseOnModal.possuiAcessibilidade}
-                    </Descriptions.Item>
-                    <Descriptions.Item label='Link'>
-                        <a target="_blank" rel="noreferrer" href={courseOnModal.link}>{courseOnModal.link}</a>
-                    </Descriptions.Item>
-                    <Descriptions.Item label='Obsevações'>
-                        {courseOnModal.obs}
-                    </Descriptions.Item>
-                </Descriptions>
-            </Modal>
+                                                <Text>Competências: {' '}
+                                                    <Text strong>{getCompetencias(item.filter.competencias)}</Text>
+                                                </Text>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </List.Item>
+                            )}
+                        />
+                    </Card>
+
+                    <Modal
+                        visible={modalVisible}
+                        onOk={handleOk}
+                        onCancel={handleOk}
+                        title={courseOnModal.title}
+                        centered={true}
+                        footer={[
+                            <Button type='primary' key={courseOnModal.id} onClick={handleOk}>Ok</Button>
+                        ]}
+                    >
+                        <Descriptions column={1} bordered>
+                            <Descriptions.Item label='Descrição'>
+                                {courseOnModal.descricao}
+                            </Descriptions.Item>
+                            <Descriptions.Item label='Carga Horária'>
+                                {courseOnModal.cargaHoraria}
+                            </Descriptions.Item>
+                            <Descriptions.Item label='Instituição Certificadora'>
+                                {getInstituicao(courseOnModal.instCert)}
+                            </Descriptions.Item>
+                            <Descriptions.Item label='Possui Acessibilidade'>
+                                {courseOnModal.possuiAcessibilidade}
+                            </Descriptions.Item>
+                            <Descriptions.Item label='Link'>
+                                <a target="_blank" rel="noreferrer" href={courseOnModal.link}>{courseOnModal.link}</a>
+                            </Descriptions.Item>
+                            <Descriptions.Item label='Obsevações'>
+                                {courseOnModal.obs}
+                            </Descriptions.Item>
+                        </Descriptions>
+                    </Modal>
+                </Col>
+            </Row>
         </Col>
     )
 }
