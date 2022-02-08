@@ -295,7 +295,7 @@ export default function CytoscapeVisualization() {
                     }}
                 >
                     <img src={fundoCompetencia} height={'25px'} style={{ marginRight: '10px' }} />
-                    <Text>Competência</Text>
+                    <Text style={{ fontFamily: 'Roboto' }}>Competência</Text>
                 </div>
                 <div
                     style={{
@@ -303,7 +303,7 @@ export default function CytoscapeVisualization() {
                     }}
                 >
                     <img src={fundoCategoria} height={'25px'} style={{ marginRight: '10px' }} />
-                    <Text>Categoria de Competências</Text>
+                    <Text style={{ fontFamily: 'Roboto' }}>Categoria de Competências</Text>
                 </div>
             </div>
             <Modal
