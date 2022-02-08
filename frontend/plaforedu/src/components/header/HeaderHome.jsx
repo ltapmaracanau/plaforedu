@@ -35,7 +35,7 @@ export default function HeaderHome() {
         <Menu disabledOverflow={true} mode='horizontal' selectable={false}>
           <Menu.Item key={1}><Link to={'/'}>HOME</Link></Menu.Item>
           <SubMenu icon={<DownOutlined />} key={2} title='SOBRE' >
-            <Menu.Item key={21}>Sobre</Menu.Item>
+            <Menu.Item key={21}><Link to={'/about'}>Sobre</Link></Menu.Item>
             <Menu.Item key={22}>Termos e Licenças</Menu.Item>
             <Menu.Item key={23}>Manuais e Guias</Menu.Item>
             <Menu.Item key={24}>Orientações</Menu.Item>

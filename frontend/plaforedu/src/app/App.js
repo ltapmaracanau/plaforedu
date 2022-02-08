@@ -5,7 +5,8 @@ import store from '../store';
 import VLibras from '@djpfs/react-vlibras'
 import { Routes, Route } from "react-router-dom";
 
-import CoursesPage from '../pages/CoursesPage'
+import AboutPage from '../pages/AboutPage.jsx'
+import CoursesPage from '../pages/CoursesPage.jsx'
 import HeaderGov from '../components/header/HeaderGov.jsx';
 import HomePage from '../pages/HomePage.jsx';
 import FooterGov from '../components/footer/FooterGov.jsx';
@@ -33,6 +34,7 @@ function App() {
           <Route path='/lideranca' element={<CoursesPage itinerario={3} />}/>
           <Route path='/preparacaoparaaposentadoria' element={<CoursesPage itinerario={4} />}/>
           <Route path='/tecnicoadministrativoeducacao' element={<CoursesPage itinerario={5} />}/>
+          <Route path='/about' element={<AboutPage />}/>
         </Routes>
         <VLibras/>
         <FooterGov/>

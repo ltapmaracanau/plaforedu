@@ -146,7 +146,7 @@ export default function CytoscapeVisualization() {
                                     <Select.Option value={'layoutBreadthFirstCircle'}>Dendograma Circular</Select.Option>
                                     <Select.Option value={'layoutGrid'}>Grade</Select.Option>
                                     <Select.Option value={'layoutCircular'}>Circular</Select.Option>
-                                    <Select.Option value={'layoutConcentric'}>Concentric</Select.Option>
+                                    <Select.Option value={'layoutConcentric'}>Concêntrico</Select.Option>
                                 </Select>
                             </Form.Item>
                         </Card>
