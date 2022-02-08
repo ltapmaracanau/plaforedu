@@ -34,12 +34,13 @@ export default function HeaderHome() {
       <Col offset={6} flex='auto' style={{ padding: '0px 100px', display: 'flex', fontFamily: 'Roboto', justifyContent: 'right', alignItems: 'center' }}>
         <Menu disabledOverflow={true} mode='horizontal' selectable={false}>
           <Menu.Item key={1}><Link to={'/'}>HOME</Link></Menu.Item>
-          <SubMenu icon={<DownOutlined />} key={2} title='SOBRE' >
+          <Menu.Item key={2}><Link to={'/about'}>SOBRE</Link></Menu.Item>
+          {/* <SubMenu icon={<DownOutlined />} key={2} title='SOBRE' >
             <Menu.Item key={21}><Link to={'/about'}>Sobre</Link></Menu.Item>
             <Menu.Item key={22}>Termos e Licenças</Menu.Item>
             <Menu.Item key={23}>Manuais e Guias</Menu.Item>
             <Menu.Item key={24}>Orientações</Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
           <SubMenu icon={<DownOutlined />} key={3} title='RECURSOS' >
             <Menu.Item key={31}><Link to={'/cursos'}>Itinerários</Link></Menu.Item>
           </SubMenu>

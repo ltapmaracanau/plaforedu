@@ -39,7 +39,7 @@ export default function CytoscapeVisualization() {
     const [modalVisible, setModalVisible] = useState(false)
     const layouts = useStoreState(state => state.itinerarios.layouts)
     const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
-    const [zoom, setZoom] = useState(0);
+    const [zoom, setZoom] = useState(1);
 
     const getInstituicao = (id_instituicao) => {
         const instituicao = listInst.find(({ id }) => id === id_instituicao);
@@ -89,6 +89,7 @@ export default function CytoscapeVisualization() {
                                     <Button
                                         shape='circle'
                                         onClick={() => {
+                                            console.log(cyRef.current);
                                             setZoom((zoomAtual) => {
                                                 return (
                                                     zoomAtual > 0.01 ?
@@ -100,15 +101,14 @@ export default function CytoscapeVisualization() {
                                         icon={<MinusOutlined />}
                                     />
                                     <Slider
-                                        step={0.01}
+                                        step={0.0001}
                                         min={0.01}
                                         max={1.00}
                                         value={zoom}
                                         tooltipVisible={false}
                                         style={{ width: '80px', margin: '0 15px' }}
                                         onChange={(value) => {
-                                            setZoom(value)/* 
-                                            cyRef.current.zoom(value) */
+                                            setZoom(value)
                                         }}
                                     />
                                     <Button
@@ -168,6 +168,10 @@ export default function CytoscapeVisualization() {
                             setCourseOnModal(cursos.find((curso) => curso.id.toString() === element.id.replace(/curso/gi, '')))
                             setModalVisible(true)
                         }
+                    });
+                    cy.one("layoutready", function (event) {
+                        console.log('mudou');
+                        setZoom(cy._private.zoom)
                     });
                 }}
                 style={{
