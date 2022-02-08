@@ -16,6 +16,7 @@ import {
 import {
     Col,
     Modal,
+    Typography,
     Descriptions,
     Button,
     Card,
@@ -25,6 +26,7 @@ import {
     Form,
 } from 'antd'
 
+const { Text } = Typography
 
 export default function CytoscapeVisualization() {
 
@@ -175,6 +177,7 @@ export default function CytoscapeVisualization() {
                     });
                 }}
                 style={{
+                    position: 'relative',
                     width: '100%',
                     height: '555px',
                     backgroundColor: '#fff'
@@ -259,8 +262,50 @@ export default function CytoscapeVisualization() {
                             'target-arrow-shape': 'triangle',
                             'control-point-step-size': '140px'
                         }
-                    }]}
-            />
+                    }
+                ]}
+            >
+            </CytoscapeComponent>
+            <div
+                style={{
+                    backgroundColor: '#f2f2f2',
+                    position: 'absolute',
+                    top: '400px',
+                    right: '50px',
+                    width: '180px',
+                    padding: '10px',
+                    alignItems: 'center',
+                    borderRadius: '30px',
+                    boxShadow: '0px 11px 15px 0px rgba(0,0,0,0.38)',
+                }}
+            >
+                <div
+                    style={{
+                        display: 'flex',
+                        marginBottom: '10px',
+                    }}
+                >
+                    <img src={fundoCurso} height={'25px'} style={{ marginRight: '10px' }} />
+                    <Text style={{ fontFamily: 'Roboto' }}>Curso</Text>
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        marginBottom: '10px',
+                    }}
+                >
+                    <img src={fundoCompetencia} height={'25px'} style={{ marginRight: '10px' }} />
+                    <Text>Competência</Text>
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                    }}
+                >
+                    <img src={fundoCategoria} height={'25px'} style={{ marginRight: '10px' }} />
+                    <Text>Categoria de Competências</Text>
+                </div>
+            </div>
             <Modal
                 visible={modalVisible}
                 onOk={handleOk}
