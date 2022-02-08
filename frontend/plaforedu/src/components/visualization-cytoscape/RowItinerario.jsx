@@ -1,12 +1,12 @@
 import React from 'react'
 import { useStoreState } from 'easy-peasy'
 
-import Img0 from '../../assets/itinerarios/PLAFOREDU_Mandala-Itinerarios_CompletaTXT.png'
-import Img1 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_Docente.png'
-import Img2 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_InicServPublico.png'
-import Img3 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_Lideranca.png'
-import Img4 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_PrepAposenta.png'
-import Img5 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_TecAdmEdu.png'
+import Img0 from '../../assets/itinerarios/PLAFOREDU_Mandala-Itinerarios_v3_Completa.png'
+import Img1 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_Docente.png'
+import Img2 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_InicServPublico.png'
+import Img3 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_Gerencial.png'
+import Img4 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_PrepAposenta.png'
+import Img5 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_TecAdmEdu.png'
 
 import {
     Row,
@@ -58,7 +58,7 @@ export default function RowItinerario(props) {
                 {linha(itinerario)}
             </Col>
             <Col flex={'auto'} style={{ display: 'flex', alignItems: 'center' }}>
-                <Card title={itinerarioData.dados_gerais.titulo}>
+                <Card style={{ fontFamily: 'Roboto', color: '#444343' }} headStyle={{ fontFamily: 'Roboto', fontWeight: '700', color: '#2C55A1' }} title={itinerarioData.dados_gerais.titulo}>
                     <Text>{itinerarioData.dados_gerais.descricao}</Text>
                 </Card>
             </Col>

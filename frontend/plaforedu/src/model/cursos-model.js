@@ -11,7 +11,7 @@ const cursosDefault =  [
         link: 'https://www.udemy.com/course/curso-web/',
         obs: '',
         filter: {
-            competencias: [1],
+            competencias: [1, 2],
             temas: [1],
             subtemas: [1],
         }

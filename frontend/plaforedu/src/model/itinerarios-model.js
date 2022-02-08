@@ -44,7 +44,7 @@ const itinerariosModel = {
         {
             dados_gerais: {
                 id: 3,
-                titulo: 'Gerencial (Liderança)',
+                titulo: 'Gerencial',
                 publico: '',
                 descricao: 'Descrição do Itinerário Gerencial (Liderança)',
             },
