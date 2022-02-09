@@ -172,7 +172,6 @@ export default function CytoscapeVisualization() {
                         }
                     });
                     cy.one("layoutready", function (event) {
-                        console.log('mudou');
                         setZoom(cy._private.zoom)
                     });
                 }}
@@ -285,7 +284,7 @@ export default function CytoscapeVisualization() {
                         marginBottom: '10px',
                     }}
                 >
-                    <img src={fundoCurso} height={'25px'} style={{ marginRight: '10px' }} />
+                    <img alt='Curso' src={fundoCurso} height={'25px'} style={{ marginRight: '10px' }} />
                     <Text style={{ fontFamily: 'Roboto' }}>Curso</Text>
                 </div>
                 <div
@@ -294,7 +293,7 @@ export default function CytoscapeVisualization() {
                         marginBottom: '10px',
                     }}
                 >
-                    <img src={fundoCompetencia} height={'25px'} style={{ marginRight: '10px' }} />
+                    <img alt='Competência' src={fundoCompetencia} height={'25px'} style={{ marginRight: '10px' }} />
                     <Text style={{ fontFamily: 'Roboto' }}>Competência</Text>
                 </div>
                 <div
@@ -302,7 +301,7 @@ export default function CytoscapeVisualization() {
                         display: 'flex',
                     }}
                 >
-                    <img src={fundoCategoria} height={'25px'} style={{ marginRight: '10px' }} />
+                    <img alt='Categoria' src={fundoCategoria} height={'25px'} style={{ marginRight: '10px' }} />
                     <Text style={{ fontFamily: 'Roboto' }}>Categoria de Competências</Text>
                 </div>
             </div>
