@@ -61,7 +61,7 @@ export default function CoursesListVisualization() {
     };
 
     return (
-        <Col flex={'auto'}>
+        <Col flex={1}>
             <Row
                 style={{
                     backgroundColor: '#EBEBEB'
@@ -76,8 +76,8 @@ export default function CoursesListVisualization() {
                 </Col>
             </Row>
             <Row>
-                <Col flex={'auto'} style={{ height: '600px', overflowY: 'scroll' }}>
-                    <Card bordered={false} style={{ minHeight: '600px', background: '#eee' }}>
+                <Col flex={'auto'}>
+                    <Card bordered={false} style={{ background: '#eee' }}>
                         <List
                             itemLayout="vertical"
                             dataSource={listData.filter(curso => cursosFiltrados.includes(curso.id))}
@@ -99,18 +99,18 @@ export default function CoursesListVisualization() {
                                             flexDirection: 'column',
                                             justifyContent: 'center'
                                         }}>
-                                            <Title level={3} style={{ color: '#2C55A1' }} >{item.title}</Title>
+                                            <Title level={4} style={{ color: '#2C55A1', fontFamily: 'Poppins' }} >{item.title}</Title>
 
                                             <div style={{
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'space-between',
                                             }}>
-                                                <Text>Instituição: {' '}
+                                                <Text style={{ fontFamily:'Roboto' }}>Instituição: {' '}
                                                     <Text strong>{getInstituicao(item.instCert)}</Text>
                                                 </Text>
 
-                                                <Text>Carga horária:
+                                                <Text style={{ fontFamily:'Roboto' }}>Carga horária:
                                                     <Text strong>{` ${item.cargaHoraria}H`}</Text>
                                                 </Text>
                                             </div>
@@ -119,11 +119,11 @@ export default function CoursesListVisualization() {
                                                 display: 'flex',
                                                 flexDirection: 'column',
                                             }}>
-                                                <Text>Categorias de competência: {' '}
+                                                <Text style={{ fontFamily:'Roboto' }}>Categorias de competência: {' '}
                                                     <Text strong>{getCategoriasCompetencia(item.filter.competencias)}</Text>
                                                 </Text>
 
-                                                <Text>Competências: {' '}
+                                                <Text style={{ fontFamily:'Roboto' }}>Competências: {' '}
                                                     <Text strong>{getCompetencias(item.filter.competencias)}</Text>
                                                 </Text>
                                             </div>

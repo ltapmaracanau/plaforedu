@@ -10,27 +10,35 @@ import SideFilter from '../components/visualization-cytoscape/SideFilter';
 import { useStoreState } from 'easy-peasy';
 import RowItinerario from '../components/visualization-cytoscape/RowItinerario';
 
-const { Content } = Layout;
+const { Sider, Content } = Layout;
 
 export default function CoursesPage(props) {
-
-
     const { itinerario } = props
 
     const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
     const tipoVisualizacao = useStoreState(state => state.adm.tipoVisualizacao)
 
     return (
-        <>
+        <Layout>
             <HeaderHome />
 
-            <RowItinerario itinerario={itinerario} />
             <Layout>
-                <Content>
-                    <Row wrap={false}>
-                        <Layout.Sider collapsedWidth={0} trigger={null} collapsed={filterCollapsed} collapsible width={300} >
-                            <SideFilter />
-                        </Layout.Sider>
+                <Sider
+                    width={300}
+                    collapsedWidth={0} 
+                    trigger={null} 
+                    collapsible
+                    collapsed={filterCollapsed}
+                >
+                    <SideFilter />
+                </Sider>
+
+                <Content style={{ backgroundColor: '#fff' }} >
+                    <Row>
+                        <RowItinerario itinerario={itinerario} />
+                    </Row>
+                    
+                    <Row style={{ maxHeight: 700, overflowY: 'scroll' }}>
                         {tipoVisualizacao === false ?
                             <CytoscapeVisualization /> :
                             <CoursesListVisualization />
@@ -38,6 +46,6 @@ export default function CoursesPage(props) {
                     </Row>
                 </Content>
             </Layout>
-        </>
+        </Layout>
     )
 }

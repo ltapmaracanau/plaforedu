@@ -86,9 +86,9 @@ export default function Finder() {
                         color: '#AAA4A4',
                         boxShadow: '0px 11px 15px 0px rgba(0,0,0,0.38)'
                     }}
-                    prefix={<SearchOutlined />}
+                    prefix={<SearchOutlined style={{ margin: '0 16px' }} />}
                     bordered={false}
-                    placeholder={"Busque aqui!"}
+                    placeholder={"Busque aqui"}
                     onPressEnter={(value) => { onSearch(value) }}
                 />
             </Row>

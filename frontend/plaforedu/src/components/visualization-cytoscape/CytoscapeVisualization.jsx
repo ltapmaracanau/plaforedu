@@ -61,7 +61,7 @@ export default function CytoscapeVisualization() {
 
 
     return (
-        <Col flex='auto' style={{ height: '600px' }}>
+        <Col flex='auto'>
             <Form
                 size='small'
                 layout='horizontal'
