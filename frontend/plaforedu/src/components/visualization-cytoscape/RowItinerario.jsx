@@ -36,7 +36,7 @@ export default function RowItinerario(props) {
             {
                 name: 'docente',
                 shape: 'circle',
-                coords: [350, 380, 25],
+                coords: [125, 135, 30],
                 href: ''
             },
             {
