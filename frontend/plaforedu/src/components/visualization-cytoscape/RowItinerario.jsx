@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { useStoreState } from 'easy-peasy'
+
+import { useNavigate } from 'react-router-dom';
 
 import Img0 from '../../assets/itinerarios/PLAFOREDU_Mandala-Itinerarios_v3_Completa.png'
 import Img1 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_Docente.png'
@@ -7,6 +9,8 @@ import Img2 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_InicS
 import Img3 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_Gerencial.png'
 import Img4 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_PrepAposenta.png'
 import Img5 from '../../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_TecAdmEdu.png'
+
+import ImageMapper from 'react-image-mapper';
 
 import {
     Row,
@@ -22,11 +26,31 @@ const { Text } = Typography
 
 export default function RowItinerario(props) {
     const { itinerario } = props;
-    
+
     const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.filter((obj) => obj.dados_gerais.id === itinerario)[0]);
 
+    const navigate = useNavigate();
+    const handleOnClick = useCallback(() => navigate('/docente', { replace: true }), [navigate]);
+
+    const map = {
+        name: 'mandalamap',
+        areas: [
+            {
+                name: '1',
+                shape: 'poly',
+                coords: [125, 100, 173, 115, 145, 157, 90, 179, 90, 125],
+                href: ''
+            }
+        ]
+    };
+
+    const onClick = (area, index, event) => {
+        console.log(area);
+        handleOnClick()
+    }
+
     const linha = {
-        0: <Image preview={false} src={Img0} width={180} />,
+        0: <ImageMapper src={Img0} width={180} map={map} onClick={onClick} strokeColor='rgba(0, 0, 0, 0)' fillColor='rgba(0,0,0,0)' />,
         1: <Image preview={false} src={Img1} width={90} />,
         2: <Image preview={false} src={Img2} width={90} />,
         3: <Image preview={false} src={Img3} width={90} />,
@@ -51,7 +75,7 @@ export default function RowItinerario(props) {
             <Col>
                 <Card bordered={false}>
                     <Title level={4} style={{ fontFamily: 'Roboto', fontWeight: '700', color: '#2C55A1' }}>{itinerarioData.dados_gerais.titulo}</Title>
-                    <Text style={{ fontFamily: 'Roboto',color: '#444343' }}>{itinerarioData.dados_gerais.descricao}</Text>
+                    <Text style={{ fontFamily: 'Roboto', color: '#444343' }}>{itinerarioData.dados_gerais.descricao}</Text>
                 </Card>
             </Col>
         </Row>
