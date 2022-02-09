@@ -51,7 +51,7 @@ export default function SideFilter() {
     });
 
     return (
-        <Col style={{ padding: '5px', height: '600px', overflowY: 'scroll' }}>
+        <Col style={{ padding: '8px 16px', overflowY: 'scroll' }}>
             <FormProvider {...register}>
                 <Form
                     layout='vertical'
@@ -223,16 +223,15 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Card style={{ borderColor: 'transparent', backgroundColor: 'transparent'}} bodyStyle={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <Button
-                            style={{ margin: '0 5px' }}
+                            style={{ marginRight: 8 }}
                             type='primary'
                             htmlType='submit'
                         >
                             Aplicar Filtro
                         </Button>
                         <Button
-                            style={{ margin: '0 5px' }}
                             type='primary'
                             onClick={() => {
                                 register.reset()

@@ -15,51 +15,43 @@ import {
     Image,
     Card,
 } from 'antd'
+import Title from 'antd/lib/typography/Title'
 
 const { Text } = Typography
 
 
 export default function RowItinerario(props) {
+    const { itinerario } = props;
+    
+    const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.filter((obj) => obj.dados_gerais.id === itinerario)[0]);
 
-    const { itinerario } = props
+    const linha = {
+        0: <Image preview={false} src={Img0} width={180} />,
+        1: <Image preview={false} src={Img1} width={90} />,
+        2: <Image preview={false} src={Img2} width={90} />,
+        3: <Image preview={false} src={Img3} width={90} />,
+        4: <Image preview={false} src={Img4} width={90} />,
+        5: <Image preview={false} src={Img5} width={90} />,
+    };
 
-    const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.filter((obj) => obj.dados_gerais.id === itinerario)[0])
-
-    const linha = (itinerario) => {
-        let retorno = null
-        switch (itinerario) {
-            case 1:
-                retorno = (<Image preview={false} src={Img1} width={90} />)
-                break;
-            case 2:
-                retorno = (<Image preview={false} src={Img2} width={90} />)
-                break;
-            case 3:
-                retorno = (<Image preview={false} src={Img3} width={90} />)
-                break;
-            case 4:
-                retorno = (<Image preview={false} src={Img4} width={90} />)
-                break;
-            case 5:
-                retorno = (<Image preview={false} src={Img5} width={90} />)
-                break;
-            default:
-                retorno = (<Image preview={false} src={Img0} width={200} />)
-                break;
-        }
-        return (retorno)
-    }
-
-    const rowHeight = itinerario === 0 ? '220px' : '140px'
+    const rowHeight = itinerario === 0 ? '220px' : '140px';
 
     return (
-        <Row style={{ height: rowHeight }}>
-            <Col flex={'300px'} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                {linha(itinerario)}
+        <Row style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: rowHeight,
+            padding: '20px 60px',
+        }}>
+            <Col style={{ marginRight: 24 }}>
+                {linha[itinerario]}
             </Col>
-            <Col flex={'auto'} style={{ display: 'flex', alignItems: 'center' }}>
-                <Card style={{ fontFamily: 'Roboto', color: '#444343' }} headStyle={{ fontFamily: 'Roboto', fontWeight: '700', color: '#2C55A1' }} title={itinerarioData.dados_gerais.titulo}>
-                    <Text>{itinerarioData.dados_gerais.descricao}</Text>
+            <Col>
+                <Card bordered={false}>
+                    <Title level={4} style={{ fontFamily: 'Roboto', fontWeight: '700', color: '#2C55A1' }}>{itinerarioData.dados_gerais.titulo}</Title>
+                    <Text style={{ fontFamily: 'Roboto',color: '#444343' }}>{itinerarioData.dados_gerais.descricao}</Text>
                 </Card>
             </Col>
         </Row>
