@@ -16,6 +16,7 @@ import {
 import {
     Col,
     Modal,
+    Typography,
     Descriptions,
     Button,
     Card,
@@ -25,6 +26,7 @@ import {
     Form,
 } from 'antd'
 
+const { Text } = Typography
 
 export default function CytoscapeVisualization() {
 
@@ -39,7 +41,7 @@ export default function CytoscapeVisualization() {
     const [modalVisible, setModalVisible] = useState(false)
     const layouts = useStoreState(state => state.itinerarios.layouts)
     const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
-    const [zoom, setZoom] = useState(0);
+    const [zoom, setZoom] = useState(1);
 
     const getInstituicao = (id_instituicao) => {
         const instituicao = listInst.find(({ id }) => id === id_instituicao);
@@ -89,6 +91,7 @@ export default function CytoscapeVisualization() {
                                     <Button
                                         shape='circle'
                                         onClick={() => {
+                                            console.log(cyRef.current);
                                             setZoom((zoomAtual) => {
                                                 return (
                                                     zoomAtual > 0.01 ?
@@ -100,15 +103,14 @@ export default function CytoscapeVisualization() {
                                         icon={<MinusOutlined />}
                                     />
                                     <Slider
-                                        step={0.01}
+                                        step={0.0001}
                                         min={0.01}
                                         max={1.00}
                                         value={zoom}
                                         tooltipVisible={false}
                                         style={{ width: '80px', margin: '0 15px' }}
                                         onChange={(value) => {
-                                            setZoom(value)/* 
-                                            cyRef.current.zoom(value) */
+                                            setZoom(value)
                                         }}
                                     />
                                     <Button
@@ -146,7 +148,7 @@ export default function CytoscapeVisualization() {
                                     <Select.Option value={'layoutBreadthFirstCircle'}>Dendograma Circular</Select.Option>
                                     <Select.Option value={'layoutGrid'}>Grade</Select.Option>
                                     <Select.Option value={'layoutCircular'}>Circular</Select.Option>
-                                    <Select.Option value={'layoutConcentric'}>Concentric</Select.Option>
+                                    <Select.Option value={'layoutConcentric'}>Concêntrico</Select.Option>
                                 </Select>
                             </Form.Item>
                         </Card>
@@ -169,8 +171,13 @@ export default function CytoscapeVisualization() {
                             setModalVisible(true)
                         }
                     });
+                    cy.one("layoutready", function (event) {
+                        console.log('mudou');
+                        setZoom(cy._private.zoom)
+                    });
                 }}
                 style={{
+                    position: 'relative',
                     width: '100%',
                     height: '555px',
                     backgroundColor: '#fff'
@@ -255,8 +262,50 @@ export default function CytoscapeVisualization() {
                             'target-arrow-shape': 'triangle',
                             'control-point-step-size': '140px'
                         }
-                    }]}
-            />
+                    }
+                ]}
+            >
+            </CytoscapeComponent>
+            <div
+                style={{
+                    backgroundColor: '#f2f2f2',
+                    position: 'absolute',
+                    top: '400px',
+                    right: '50px',
+                    width: '180px',
+                    padding: '10px',
+                    alignItems: 'center',
+                    borderRadius: '30px',
+                    boxShadow: '0px 11px 15px 0px rgba(0,0,0,0.38)',
+                }}
+            >
+                <div
+                    style={{
+                        display: 'flex',
+                        marginBottom: '10px',
+                    }}
+                >
+                    <img src={fundoCurso} height={'25px'} style={{ marginRight: '10px' }} />
+                    <Text style={{ fontFamily: 'Roboto' }}>Curso</Text>
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        marginBottom: '10px',
+                    }}
+                >
+                    <img src={fundoCompetencia} height={'25px'} style={{ marginRight: '10px' }} />
+                    <Text style={{ fontFamily: 'Roboto' }}>Competência</Text>
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                    }}
+                >
+                    <img src={fundoCategoria} height={'25px'} style={{ marginRight: '10px' }} />
+                    <Text style={{ fontFamily: 'Roboto' }}>Categoria de Competências</Text>
+                </div>
+            </div>
             <Modal
                 visible={modalVisible}
                 onOk={handleOk}
