@@ -44,7 +44,7 @@ export default function HomePage() {
                         <Col>
                             <Link to='/iniciacaoaoservicopublico'>
                                 <Card
-                                    style={{ width: '150px', backgroundColor: '#fff', height: '252px' }}
+                                    style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int2} />}
                                     hoverable
                                 >
@@ -55,7 +55,7 @@ export default function HomePage() {
                         <Col>
                             <Link to='/tecnicoadministrativoeducacao'>
                                 <Card
-                                    style={{ width: '150px', backgroundColor: '#fff', height: '252px' }}
+                                    style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int5} />}
                                     hoverable
                                 >
@@ -66,7 +66,7 @@ export default function HomePage() {
                         <Col>
                             <Link to='/docente'>
                                 <Card
-                                    style={{ width: '150px', backgroundColor: '#fff', height: '252px' }}
+                                    style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int1} />}
                                     hoverable
                                 >
@@ -77,7 +77,7 @@ export default function HomePage() {
                         <Col>
                             <Link to='/lideranca'>
                                 <Card
-                                    style={{ width: '150px', backgroundColor: '#fff', height: '252px' }}
+                                    style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int3} />}
                                     hoverable
                                 >
@@ -88,7 +88,7 @@ export default function HomePage() {
                         <Col>
                             <Link to='/preparacaoparaaposentadoria'>
                                 <Card
-                                    style={{ width: '150px', backgroundColor: '#fff', height: '252px' }}
+                                    style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int4} />}
                                     hoverable
                                 >
