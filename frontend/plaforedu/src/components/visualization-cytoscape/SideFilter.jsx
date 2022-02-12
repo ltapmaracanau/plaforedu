@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
@@ -29,6 +29,7 @@ export default function SideFilter() {
     const filterDefault = useStoreState(state => state.cursos.filterDefault)
     const changeFilter = useStoreActions(actions => actions.cursos.changeFilter)
     const onChangeTipoVisualizacao = useStoreActions(actions => actions.adm.onChangeTipoVisualizacao)
+    const filter = useStoreState(state => state.cursos.filter)
 
     const onSubmit = (values) => {
         changeFilter(values)
@@ -49,6 +50,10 @@ export default function SideFilter() {
         shouldUseNativeValidation: false,
         delayError: undefined
     });
+
+    useEffect(() => {
+        register.reset()
+    }, [filter.itinerario])
 
     return (
         <Col style={{ padding: '8px 16px', overflowY: 'scroll' }}>
@@ -223,7 +228,7 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card style={{ borderColor: 'transparent', backgroundColor: 'transparent'}} bodyStyle={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Card style={{ borderColor: 'transparent', backgroundColor: 'transparent' }} bodyStyle={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <Button
                             style={{ marginRight: 8 }}
                             type='primary'

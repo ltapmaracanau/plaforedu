@@ -108,7 +108,7 @@ export default function AboutPage() {
                                         fontSize: '24px',
                                     }}
                                 >
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis vel ab officiis expedita alias modi optio, consectetur voluptatibus adipisci reiciendis omnis natus rem illum similique obcaecati reprehenderit exercitationem molestiae nam.
+                                    O PlaforEdu reúne diversos cursos online abertos (Cursos Mooc) ofertados por diversas instituições de ensino da RFEPCT, que dão suporte ao desenvolvimento das competências recomendadas para um setor público de alto desempenho através de Itinerários Formativos. No PlaforEdu você pode buscar as competências associadas ao seu perfil profissional, a partir de uma busca simples, e ter acesso a todos os cursos relacionados àquelas competências.
                                 </Text>
                             </Col>
                             <Col

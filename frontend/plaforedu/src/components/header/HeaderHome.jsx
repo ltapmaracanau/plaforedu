@@ -14,10 +14,13 @@ import {
   Menu,
   Image,
 } from 'antd';
+import { useStoreActions } from 'easy-peasy';
 
 const { SubMenu } = Menu;
 
 export default function HeaderHome() {
+
+  const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
 
   return (
     <Row wrap={false} align='middle' style={{ height: '70px', backgroundImage: 'linear-gradient(to right, #2C55A1, #35A8E0)' }}>
@@ -42,7 +45,7 @@ export default function HeaderHome() {
             <Menu.Item key={24}>Orientações</Menu.Item>
           </SubMenu> */}
           <SubMenu icon={<DownOutlined />} key={3} title='RECURSOS' >
-            <Menu.Item key={31}><Link to={'/cursos'}>Itinerários</Link></Menu.Item>
+            <Menu.Item key={31} onClick={() => { setItinerario(0) }}><Link to={'/cursos'}>Itinerários</Link></Menu.Item>
           </SubMenu>
         </Menu>
       </Col>
