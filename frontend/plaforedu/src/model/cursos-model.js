@@ -321,6 +321,134 @@ const cursosDefault =  [
             subtemas: [],
         }
     },
+    {
+        id: 21,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 22,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 2,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [8],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 23,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 3,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [10],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 24,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [15],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 25,
+        itinerario: 6,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [20],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 26,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [25],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 27,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 4,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [28],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 28,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 2,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [18],
+            temas: [],
+            subtemas: [],
+        }
+    },
 ]
 
 const instituicoesDefault = [
@@ -358,7 +486,7 @@ const competenciasDefault = [
     {
         id: 0,
         titulo: 'Não especificado',
-        descricao: ''
+        descricao: 'Não especificado'
     },
     {
         id: 1,
