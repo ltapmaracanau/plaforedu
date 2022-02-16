@@ -1279,8 +1279,8 @@ export default function CytoscapeVisualization() {
                     <Button type='primary' key={courseOnModal.id} onClick={handleOk}>Ok</Button>
                 ]}
             >
-                <Descriptions column={1} bordered>
-                    <Descriptions.Item label='Descrição'>
+                <Descriptions column={1} bordered style={{ fontFamily: 'Roboto' }}>
+                    <Descriptions.Item label='Descrição' style={{ fontFamily: 'Roboto' }}>
                         {courseOnModal.descricao}
                     </Descriptions.Item>
                 </Descriptions>
