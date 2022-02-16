@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import LogoPlafor from '../../assets/PLAFORLOGO.png';
 
+import { useStoreActions } from 'easy-peasy'
 import {
   DownOutlined,
 } from '@ant-design/icons';
@@ -14,13 +15,18 @@ import {
   Menu,
   Image,
 } from 'antd';
-import { useStoreActions } from 'easy-peasy';
 
 const { SubMenu } = Menu;
 
 export default function HeaderHome() {
 
   const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
+  const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema)
+
+  const onClickItinerario = (itinerario) => {
+    setItinerario(itinerario)
+    setColorSchema('categoria')
+  }
 
   return (
     <Row wrap={false} align='middle' style={{ height: '70px', backgroundImage: 'linear-gradient(to right, #2C55A1, #35A8E0)' }}>
@@ -45,7 +51,11 @@ export default function HeaderHome() {
             <Menu.Item key={24}>Orientações</Menu.Item>
           </SubMenu> */}
           <SubMenu icon={<DownOutlined />} key={3} title='RECURSOS' >
-            <Menu.Item key={31} onClick={() => { setItinerario(0) }}><Link to={'/cursos'}>Itinerários</Link></Menu.Item>
+            <Menu.Item key={31} onClick={() => onClickItinerario(1)} ><Link to={'/cursos'}>Docente</Link></Menu.Item>
+            <Menu.Item key={32} onClick={() => onClickItinerario(2)} ><Link to={'/cursos'}>Iniciação ao Serviço Público</Link></Menu.Item>
+            <Menu.Item key={33} onClick={() => onClickItinerario(3)} ><Link to={'/cursos'}>Gerencial</Link></Menu.Item>
+            <Menu.Item key={34} onClick={() => onClickItinerario(4)} ><Link to={'/cursos'}>Preparação para a aposentadoria</Link></Menu.Item>
+            <Menu.Item key={35} onClick={() => onClickItinerario(5)} ><Link to={'/cursos'}>Técnico Administrativo em Educação</Link></Menu.Item>
           </SubMenu>
         </Menu>
       </Col>

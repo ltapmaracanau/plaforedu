@@ -4,19 +4,6 @@ const itinerariosModel = {
     itinerarios: [
         {
             dados_gerais: {
-                id: 0,
-                titulo: 'Itinerarios Formativos',  // NOME DO ITINERARIO
-                publico: '',
-                descricao: 'Descrição dos Itinerarios',
-            },
-
-            grafo_publicado: {
-                trilhas: [], // ids das trilhas
-                elementos: [],
-            },
-        },
-        {
-            dados_gerais: {
                 id: 1,
                 titulo: 'Docente',  // NOME DO ITINERARIO
                 publico: '',
