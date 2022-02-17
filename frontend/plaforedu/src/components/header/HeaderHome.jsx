@@ -55,7 +55,7 @@ export default function HeaderHome() {
             <Menu.Item key={32} onClick={() => onClickItinerario(2)} ><Link to={'/cursos'}>Iniciação ao Serviço Público</Link></Menu.Item>
             <Menu.Item key={33} onClick={() => onClickItinerario(3)} ><Link to={'/cursos'}>Gerencial</Link></Menu.Item>
             <Menu.Item key={34} onClick={() => onClickItinerario(4)} ><Link to={'/cursos'}>Preparação para a aposentadoria</Link></Menu.Item>
-            <Menu.Item key={35} onClick={() => onClickItinerario(5)} ><Link to={'/cursos'}>Técnico Administrativo em Educação</Link></Menu.Item>
+            <Menu.Item key={35} onClick={() => onClickItinerario(5)} ><Link to={'/cursos'}>Técnico-Administrativo em Educação</Link></Menu.Item>
           </SubMenu>
         </Menu>
       </Col>

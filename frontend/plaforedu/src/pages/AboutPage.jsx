@@ -72,7 +72,7 @@ export default function AboutPage() {
                                         fontSize: '24px',
                                     }}
                                 >
-                                    O PlaforEdu é a plataforma utilizada pelo Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional e Tecnológica (<a href='http://portal.mec.gov.br/apresentacao-plafor' style={{ textDecoration: 'none' }}>PLAFOR</a>). A plataforma tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
+                                    O PlaforEdu é a plataforma utilizada pelo Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional, Científica e Tecnológica (<a href='http://portal.mec.gov.br/apresentacao-plafor' style={{ textDecoration: 'none' }}>PLAFOR</a>). A plataforma tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
                                 </Text>
                             </Col>
                         </Row>
