@@ -56,7 +56,7 @@ export default function Finder() {
                             width: '70%',
                         }}
                     >
-                        Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional e Tecnológica
+                        Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional, Científica e Tecnológica
                     </Title>
                 </div>
 

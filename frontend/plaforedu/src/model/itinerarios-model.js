@@ -57,7 +57,7 @@ const itinerariosModel = {
         {
             dados_gerais: {
                 id: 5,
-                titulo: 'Técnico Administrativo em Educação', 
+                titulo: 'Técnico-Administrativo em Educação', 
                 publico: '',
                 descricao: 'Descrição do Itinerário Técnico Administrativo em Educação',
             },

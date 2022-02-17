@@ -68,7 +68,7 @@ export default function HomePage() {
                                     cover={<img alt="example" src={Int5} />}
                                     hoverable
                                 >
-                                    <Title style={{ color: '#0059b3', fontFamily: 'Poppins', fontWeight: 'bold', textAlign: 'center' }} level={5}>Técnico Administrativo em Educação</Title>
+                                    <Title style={{ color: '#0059b3', fontFamily: 'Poppins', fontWeight: 'bold', textAlign: 'center' }} level={5}>Técnico-Administrativo em Educação</Title>
                                 </Card>
                             </Link>
                         </Col>
