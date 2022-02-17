@@ -6,7 +6,7 @@ import Int2 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_InicServ
 import Int3 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_Gerencial.png'
 import Int4 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_PrepAposenta.png'
 import Int5 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_TecAdmEdu.png'
-
+import { useStoreActions } from 'easy-peasy'
 import { Link } from "react-router-dom";
 
 import {
@@ -24,6 +24,15 @@ const { Content } = Layout
 
 
 export default function HomePage() {
+
+    const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
+    const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema)
+
+    const onClickItinerario = (itinerario) => {
+        setItinerario(itinerario)
+        setColorSchema('categoria')
+    }
+
     return (
         <>
             <HeaderHome />
@@ -42,7 +51,7 @@ export default function HomePage() {
                         }}
                     >
                         <Col>
-                            <Link to='/iniciacaoaoservicopublico'>
+                            <Link onClick={() => { onClickItinerario(2) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int2} />}
@@ -53,7 +62,7 @@ export default function HomePage() {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to='/tecnicoadministrativoeducacao'>
+                            <Link onClick={() => { onClickItinerario(5) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int5} />}
@@ -64,7 +73,7 @@ export default function HomePage() {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to='/docente'>
+                            <Link onClick={() => { onClickItinerario(1) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int1} />}
@@ -75,7 +84,7 @@ export default function HomePage() {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to='/lideranca'>
+                            <Link onClick={() => { onClickItinerario(3) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int3} />}
@@ -86,7 +95,7 @@ export default function HomePage() {
                             </Link>
                         </Col>
                         <Col>
-                            <Link to='/preparacaoparaaposentadoria'>
+                            <Link onClick={() => { onClickItinerario(4) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int4} />}

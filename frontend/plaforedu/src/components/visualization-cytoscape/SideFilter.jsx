@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
@@ -26,9 +26,10 @@ export default function SideFilter() {
     const categoriasDeCompetencias = useStoreState(state => state.cursos.categoriasDeCompetencias)
     const instituicoes = useStoreState(state => state.cursos.instituicoes)
 
-    const filterDefault = useStoreState(state => state.cursos.filterDefault)
+    const filterDefault = useStoreState(state => state.cursos.filterDefault.sideFilter)
     const changeFilter = useStoreActions(actions => actions.cursos.changeFilter)
     const onChangeTipoVisualizacao = useStoreActions(actions => actions.adm.onChangeTipoVisualizacao)
+    const filter = useStoreState(state => state.cursos.filter)
 
     const onSubmit = (values) => {
         changeFilter(values)
@@ -38,7 +39,7 @@ export default function SideFilter() {
         changeFilter(register.getValues())
     }
 
-    const register = useForm({
+    const register = useRef(useForm({
         mode: 'onBlur',
         reValidateMode: 'onChange',
         defaultValues: filterDefault,
@@ -48,18 +49,22 @@ export default function SideFilter() {
         shouldUnregister: false,
         shouldUseNativeValidation: false,
         delayError: undefined
-    });
+    }));
+
+    useEffect(() => {
+        register.current.reset()
+    }, [filter.visualization.itinerario])
 
     return (
         <Col style={{ padding: '8px 16px', overflowY: 'scroll' }}>
-            <FormProvider {...register}>
+            <FormProvider {...register.current}>
                 <Form
                     layout='vertical'
-                    onFinish={register.handleSubmit(onSubmit)}
+                    onFinish={register.current.handleSubmit(onSubmit)}
                 >
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
-                            control={register.control}
+                            control={register.current.control}
                             name='buscaInterna'
                             render={({ field }) => {
                                 return (
@@ -72,7 +77,7 @@ export default function SideFilter() {
                     </Card>
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
-                            control={register.control}
+                            control={register.current.control}
                             defaultValue={true}
                             name='tipoVisualizacao'
                             render={() => {
@@ -92,7 +97,7 @@ export default function SideFilter() {
                     </Card>
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
-                            control={register.control}
+                            control={register.current.control}
                             name='categoriasDeCompetencias'
                             render={({ field }) => (
                                 <Form.Item style={{ marginBottom: '0' }} label={'Categorias de Competências:'}>
@@ -113,7 +118,7 @@ export default function SideFilter() {
                     </Card>
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
-                            control={register.control}
+                            control={register.current.control}
                             name='competencias'
                             render={({ field }) => (
                                 <Form.Item style={{ marginBottom: '0' }} label={'Competências:'}>
@@ -134,7 +139,7 @@ export default function SideFilter() {
                     </Card>
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
-                            control={register.control}
+                            control={register.current.control}
                             name='temas'
                             render={({ field }) => (
                                 <Form.Item style={{ marginBottom: '0' }} label={'Temas:'}>
@@ -159,7 +164,7 @@ export default function SideFilter() {
                     </Card>
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
-                            control={register.control}
+                            control={register.current.control}
                             name='subtemas'
                             render={({ field }) => (
                                 <Form.Item style={{ marginBottom: '0' }} label={'Subtemas:'}>
@@ -184,7 +189,7 @@ export default function SideFilter() {
                     </Card>
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
-                            control={register.control}
+                            control={register.current.control}
                             name='cargaHoraria'
                             render={({ field }) => (
                                 <Form.Item style={{ marginBottom: '0' }} label={'Carga Horária:'}>
@@ -204,7 +209,7 @@ export default function SideFilter() {
                     </Card>
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
-                            control={register.control}
+                            control={register.current.control}
                             name='instCertificadora'
                             render={({ field }) => (
                                 <Form.Item style={{ marginBottom: '0' }} label={'Instituição Certificadora:'}>
@@ -223,7 +228,7 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card style={{ borderColor: 'transparent', backgroundColor: 'transparent'}} bodyStyle={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Card style={{ borderColor: 'transparent', backgroundColor: 'transparent' }} bodyStyle={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <Button
                             style={{ marginRight: 8 }}
                             type='primary'
@@ -234,7 +239,7 @@ export default function SideFilter() {
                         <Button
                             type='primary'
                             onClick={() => {
-                                register.reset()
+                                register.current.reset()
                                 onSubmit(filterDefault)
                             }}
                         >

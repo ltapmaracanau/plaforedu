@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import fundoCurso from '../../assets/icones/PLAFOREDU_Site_Icones_Docente_Curso.png'
-import fundoCategoria from '../../assets/icones/PLAFOREDU_Site_Icones_EduEmpreend_Categoria.png'
-import fundoCompetencia from '../../assets/icones/PLAFOREDU_Site_Icones_InicServPublico_Competencia.png'
+// Import dos fundos dos cursos
+import fundoCurso1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 01.png'
+import fundoCategoria1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 01.png'
+import fundoCompetencia1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 01.png'
+
 
 import CytoscapeComponent from 'react-cytoscapejs'
 
@@ -34,11 +36,15 @@ export default function CytoscapeVisualization() {
 
     const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
     const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed)
+    const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema)
+    const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.visualization.esquemaDeCores)
     const elements = useStoreState(state => state.cursos.elements);
     const cursos = useStoreState(state => state.cursos.cursos)
+    const competencias = useStoreState(state => state.cursos.competencias)
     const listInst = useStoreState(state => state.cursos.instituicoes)
     const [courseOnModal, setCourseOnModal] = useState(cursos[0])
-    const [modalVisible, setModalVisible] = useState(false)
+    const [modalCourseVisible, setModalCourseVisible] = useState(false)
+    const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false)
     const layouts = useStoreState(state => state.itinerarios.layouts)
     const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
     const [zoom, setZoom] = useState(1);
@@ -54,7 +60,8 @@ export default function CytoscapeVisualization() {
     };
 
     const handleOk = () => {
-        setModalVisible(false)
+        setModalCourseVisible(false)
+        setModalCompetenciaVisible(false)
     }
 
     useEffect(() => {
@@ -153,6 +160,25 @@ export default function CytoscapeVisualization() {
                             </Form.Item>
                         </Card>
                     </Col>
+                    <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
+                        <Card style={{ width: '100%' }}>
+                            <Form.Item
+                                label={'Esquema de cores'}
+                                style={{ marginBottom: '0' }}
+                            >
+                                <Select
+                                    onChange={(value) => {
+                                        setColorSchema(value)
+                                    }}
+                                    defaultValue={colorSchemaDefault}
+                                    style={{ width: '100%' }}
+                                >
+                                    <Select.Option value={'categoria'}>Categoria</Select.Option>
+                                    <Select.Option value={'itinerario'}>Itinerário</Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Card>
+                    </Col>
                 </Row>
             </Form>
             <CytoscapeComponent
@@ -168,7 +194,11 @@ export default function CytoscapeVisualization() {
                         const element = event.target._private.data
                         if (element.id.includes('curso')) {
                             setCourseOnModal(cursos.find((curso) => curso.id.toString() === element.id.replace(/curso/gi, '')))
-                            setModalVisible(true)
+                            setModalCourseVisible(true)
+                        }
+                        if (element.id.includes('competencia')) {
+                            setCourseOnModal(competencias.find((competencia) => competencia.id.toString() === element.id.replace(/competencia/gi, '')))
+                            setModalCompetenciaVisible(true)
                         }
                     });
                     cy.one("layoutready", function (event) {
@@ -186,14 +216,15 @@ export default function CytoscapeVisualization() {
                     {
                         selector: '.curso',
                         style: {
-                            'background-image': fundoCurso,
+                            'background-image': 'data(image)',
                             'label': 'data(label)',
                             'width': '100px',
                             'height': '100px',
                             'padding': '20px',
                             'border-width': '0px',
+                            'font-family': 'Roboto',
                             'border-color': '#0081b3',
-                            'color': '#000',
+                            'color': 'data(color)',
                             'background-fit': 'contain',
                             'background-clip': 'none',
                             'background-color': '#0081b3',
@@ -210,14 +241,15 @@ export default function CytoscapeVisualization() {
                     {
                         selector: '.categoria',
                         style: {
-                            'background-image': fundoCategoria,
+                            'background-image': 'data(image)',
                             'label': 'data(label)',
                             'width': '150px',
                             'height': '150px',
                             'padding': '20px',
                             'border-width': '0px',
+                            'font-family': 'Roboto',
                             'border-color': '#0081b3',
-                            'color': '#000',
+                            'color': 'data(color)',
                             'background-fit': 'contain',
                             'background-clip': 'none',
                             'background-color': '#0081b3',
@@ -233,14 +265,15 @@ export default function CytoscapeVisualization() {
                     {
                         selector: '.competencia',
                         style: {
-                            'background-image': fundoCompetencia,
+                            'background-image': 'data(image)',
                             'label': 'data(label)',
                             'width': '120px',
                             'height': '120px',
                             'padding': '20px',
                             'border-width': '0px',
+                            'font-family': 'Roboto',
                             'border-color': '#0081b3',
-                            'color': '#000',
+                            'color': 'data(color)',
                             'background-fit': 'contain',
                             'background-clip': 'none',
                             'background-color': '#0081b3',
@@ -284,7 +317,7 @@ export default function CytoscapeVisualization() {
                         marginBottom: '10px',
                     }}
                 >
-                    <img alt='Curso' src={fundoCurso} height={'25px'} style={{ marginRight: '10px' }} />
+                    <img alt='Curso' src={fundoCurso1} height={'25px'} style={{ marginRight: '10px' }} />
                     <Text style={{ fontFamily: 'Roboto' }}>Curso</Text>
                 </div>
                 <div
@@ -293,7 +326,7 @@ export default function CytoscapeVisualization() {
                         marginBottom: '10px',
                     }}
                 >
-                    <img alt='Competência' src={fundoCompetencia} height={'25px'} style={{ marginRight: '10px' }} />
+                    <img alt='Competência' src={fundoCompetencia1} height={'25px'} style={{ marginRight: '10px' }} />
                     <Text style={{ fontFamily: 'Roboto' }}>Competência</Text>
                 </div>
                 <div
@@ -301,12 +334,12 @@ export default function CytoscapeVisualization() {
                         display: 'flex',
                     }}
                 >
-                    <img alt='Categoria' src={fundoCategoria} height={'25px'} style={{ marginRight: '10px' }} />
+                    <img alt='Categoria' src={fundoCategoria1} height={'25px'} style={{ marginRight: '10px' }} />
                     <Text style={{ fontFamily: 'Roboto' }}>Categoria de Competências</Text>
                 </div>
             </div>
-            <Modal
-                visible={modalVisible}
+            <Modal // Modal de Curso
+                visible={modalCourseVisible}
                 onOk={handleOk}
                 onCancel={handleOk}
                 title={courseOnModal.title}
@@ -333,6 +366,22 @@ export default function CytoscapeVisualization() {
                     </Descriptions.Item>
                     <Descriptions.Item label='Obsevações'>
                         {courseOnModal.obs}
+                    </Descriptions.Item>
+                </Descriptions>
+            </Modal>
+            <Modal // Modal de Categoria
+                visible={modalCompetenciaVisible}
+                onOk={handleOk}
+                onCancel={handleOk}
+                title={courseOnModal.titulo}
+                centered={true}
+                footer={[
+                    <Button type='primary' key={courseOnModal.id} onClick={handleOk}>Ok</Button>
+                ]}
+            >
+                <Descriptions column={1} bordered style={{ fontFamily: 'Roboto' }}>
+                    <Descriptions.Item label='Descrição' style={{ fontFamily: 'Roboto' }}>
+                        {courseOnModal.descricao}
                     </Descriptions.Item>
                 </Descriptions>
             </Modal>

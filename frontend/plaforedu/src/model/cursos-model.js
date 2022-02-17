@@ -1,179 +1,164 @@
-import { action, actionOn } from "easy-peasy"
+import { action, unstable_effectOn } from "easy-peasy"
+
+import fundoCurso1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 01.png'
+import fundoCategoria1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 01.png'
+import fundoCompetencia1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 01.png'
+
+import fundoCurso2 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 02.png'
+import fundoCategoria2 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 02.png'
+import fundoCompetencia2 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 02.png'
+
+import fundoCurso3 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 03.png'
+import fundoCategoria3 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 03.png'
+import fundoCompetencia3 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 03.png'
+
+import fundoCurso4 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 04.png'
+import fundoCategoria4 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 04.png'
+import fundoCompetencia4 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 04.png'
+
+import fundoCurso5 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 05.png'
+import fundoCategoria5 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 05.png'
+import fundoCompetencia5 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 05.png'
+
+import fundoCurso6 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 06.png'
+import fundoCategoria6 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 06.png'
+import fundoCompetencia6 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 06.png'
+
+import fundoCurso7 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 07.png'
+import fundoCategoria7 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 07.png'
+import fundoCompetencia7 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 07.png'
+
+import fundoCurso8 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 08.png'
+import fundoCategoria8 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 08.png'
+import fundoCompetencia8 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 08.png'
+
+import fundoCurso9 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 09.png'
+import fundoCategoria9 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 09.png'
+import fundoCompetencia9 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 09.png'
+
+import fundoCurso10 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 10.png'
+import fundoCategoria10 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 10.png'
+import fundoCompetencia10 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 10.png'
+
+import fundoCurso11 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 11.png'
+import fundoCategoria11 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 11.png'
+import fundoCompetencia11 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 11.png'
+
+import fundoCurso12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 12.png'
+import fundoCategoria12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 12.png'
+import fundoCompetencia12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 12.png'
+
+const fundosCategoria = {
+    categoria: {
+        0: fundoCategoria1,
+        1: fundoCategoria1,
+        2: fundoCategoria2,
+        3: fundoCategoria3,
+        4: fundoCategoria4,
+        5: fundoCategoria5,
+        6: fundoCategoria6,
+        7: fundoCategoria7,
+        8: fundoCategoria8,
+        9: fundoCategoria9,
+        10: fundoCategoria10,
+        11: fundoCategoria11,
+        12: fundoCategoria12,
+    },
+    curso: {
+        0: fundoCurso1,
+        1: fundoCurso1,
+        2: fundoCurso2,
+        3: fundoCurso3,
+        4: fundoCurso4,
+        5: fundoCurso5,
+        6: fundoCurso6,
+        7: fundoCurso7,
+        8: fundoCurso8,
+        9: fundoCurso9,
+        10: fundoCurso10,
+        11: fundoCurso11,
+        12: fundoCurso12,
+    },
+    competencia: {
+        0: fundoCompetencia1,
+        1: fundoCompetencia1,
+        2: fundoCompetencia2,
+        3: fundoCompetencia3,
+        4: fundoCompetencia4,
+        5: fundoCompetencia5,
+        6: fundoCompetencia6,
+        7: fundoCompetencia7,
+        8: fundoCompetencia8,
+        9: fundoCompetencia9,
+        10: fundoCompetencia10,
+        11: fundoCompetencia11,
+        12: fundoCompetencia12,
+    },
+}
+
+const fundosItinerario = {
+    categoria: {
+        0: fundoCategoria1,
+        1: fundoCategoria1,
+        2: fundoCategoria2,
+        3: fundoCategoria3,
+        4: fundoCategoria4,
+        5: fundoCategoria5,
+    },
+    curso: {
+        0: fundoCurso1,
+        1: fundoCurso1,
+        2: fundoCurso2,
+        3: fundoCurso3,
+        4: fundoCurso4,
+        5: fundoCurso5,
+    },
+    competencia: {
+        0: fundoCompetencia1,
+        1: fundoCompetencia1,
+        2: fundoCompetencia2,
+        3: fundoCompetencia3,
+        4: fundoCompetencia4,
+        5: fundoCompetencia5,
+    },
+}
+
+const colorsCategorias = {
+    0:  '#ea190f',
+    1:  '#ea190f',
+    2:  '#f98506',
+    3:  '#ffbe00',
+    4:  '#9dc63d',
+    5:  '#00ba00',
+    6:  '#009688',
+    7:  '#1c67b0',
+    8:  '#5b0fa0',
+    9:  '#a52099',
+    10: '#f154ca',
+    11: '#997ff7',
+    12: '#1db7ed',
+}
+
+const colorsItinerarios = {
+    0:  '#ea190f',
+    1:  '#ea190f',
+    2:  '#f98506',
+    3:  '#ffbe00',
+    4:  '#9dc63d',
+    5:  '#00ba00',
+}
+
 
 const cursosDefault =  [
     {
         id: 1,
-        title: 'Título do Curso 1',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 20,
-        instCert: 1,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [1, 2],
-            temas: [1],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 2,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 130,
-        instCert: 2,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [2],
-            temas: [1],
-            subtemas: [2],
-        }
-    },
-    {
-        id: 3,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 30,
-        instCert: 3,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [3],
-            temas: [2],
-            subtemas: [3],
-        }
-    },
-    {
-        id: 4,
-        title: 'Curso Tal',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 50,
-        instCert: 4,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [4],
-            temas: [1, 2],
-            subtemas: [1, 2, 3],
-        }
-    },
-    {
-        id: 5,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 60,
-        instCert: 5,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [5],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 6,
-        title: 'Curso gerencial',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 10,
-        instCert: 6,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [6],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 7,
-        title: 'Javascript do básico ao Avançado',
-        descricao: 'Descrição do curso',
+        itinerario: 4,
+        title: 'Legislação para aposentadoria',
+        descricao: 'Neste MOOC serão apresetados as temáticas relacionadas aos aspectos gerais da legislação, os tipos de aposentadoria e os requisitos para se aposentar',
         cargaHoraria: 20,
         instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [7],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 8,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 30,
-        instCert: 1,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [8],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 9,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 40,
-        instCert: 2,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [9],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 10,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 180,
-        instCert: 3,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [10],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 11,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 120,
-        instCert: 4,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [11],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 12,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 90,
-        instCert: 5,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'http://www.ifsul.edu.br/',
         obs: '',
         filter: {
             competencias: [12],
@@ -182,223 +167,110 @@ const cursosDefault =  [
         }
     },
     {
-        id: 13,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 60,
-        instCert: 6,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [13],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 14,
-        title: 'Título do Curso',
-        descricao: 'Descrição do curso',
+        id: 2,
+        itinerario: 4,
+        title: 'Planejamento Financeiro',
+        descricao: 'Neste MOOC serão apresentadas as temáticas relacionadas ao planejamento e organização dos gastos pessoais; planejamento dos investimentos pessoais; alternativas de investimentos no mercado financeiro e; complementando a renda',
         cargaHoraria: 20,
         instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'http://www.ifsul.edu.br/',
         obs: '',
         filter: {
-            competencias: [14],
+            competencias: [12],
             temas: [],
             subtemas: [],
         }
     },
     {
-        id: 15,
-        title: 'Título do Curso 15',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [15],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 16,
-        title: 'Título do curso 16',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 2,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [16],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 17,
-        title: 'Título do curso 17',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 3,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [17],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 18,
-        title: 'Título do curso 18',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 4,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [18],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 19,
-        title: 'Título do curso 19',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 5,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [19],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 20,
-        title: 'Título do curso 20',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 6,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [20],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 21,
-        title: 'Título do curso 21',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
+        id: 3,
+        itinerario: 4,
+        title: 'Aspectos socioemocionais',
+        descricao: 'Neste MOOC serãoapresentadas as temáticas relacionadas ao conhecimento a si mesmo, relações pessoais e familares bem como os aspectos da aposentadoria como o começo de uma nova etapa',
+        cargaHoraria: 20,
         instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'http://www.ifsul.edu.br/',
         obs: '',
         filter: {
-            competencias: [21],
+            competencias: [12],
             temas: [],
             subtemas: [],
         }
     },
     {
-        id: 22,
-        title: 'Título do curso 22',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        id: 4,
+        itinerario: 4,
+        title: 'Empreendedorismo',
+        descricao: 'Neste MOOC serão apresentadas as temáticas sobre a opção do empreendedorismo e motivos para empreender na aposentadoria',
+        cargaHoraria: 20,
+        instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'http://www.ifsul.edu.br/',
         obs: '',
         filter: {
-            competencias: [22],
+            competencias: [12],
             temas: [],
             subtemas: [],
         }
     },
     {
-        id: 23,
-        title: 'Título do curso 23',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        id: 5,
+        itinerario: 4,
+        title: 'Inserção Digital',
+        descricao: 'Neste MOOC serão apresentadas as temáticas relacionadas aos principais aspecros da Informática básica e noções básica de uso da Internet',
+        cargaHoraria: 20,
+        instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'http://www.ifsul.edu.br/',
         obs: '',
         filter: {
-            competencias: [23],
+            competencias: [12],
             temas: [],
             subtemas: [],
         }
     },
     {
-        id: 24,
-        title: 'Título do curso 24',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        id: 6,
+        itinerario: 4,
+        title: 'Promoção a saúde',
+        descricao: 'Neste MOOC serão apresentadas as temáticas decomo enfrentar a aposentadoria de maneira saudável, ter uma alimentação saudável e os exercícios físico e qualidade de vida para aposentadoria',
+        cargaHoraria: 20,
+        instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'http://www.ifsul.edu.br/',
         obs: '',
         filter: {
-            competencias: [24],
+            competencias: [12],
             temas: [],
             subtemas: [],
         }
     },
     {
-        id: 25,
-        title: 'Título do curso 25',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        id: 7,
+        itinerario: 4,
+        title: 'Projeto de vida ',
+        descricao: 'Neste MOOC serão apresentadas as temáticasde transição para a aposentadoria; visões do futuro e novos hábitos; o tempo livre e a liberdade de escolha; perseguir sempre a felicidade',
+        cargaHoraria: 20,
+        instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'http://www.ifsul.edu.br/',
         obs: '',
         filter: {
-            competencias: [25],
+            competencias: [12],
             temas: [],
             subtemas: [],
         }
     },
     {
-        id: 26,
-        title: 'Título do curso 26',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        id: 8,
+        itinerario: 1,
+        title: 'Software de Apresentação',
+        descricao: 'O curso irá introduzir os conceitos de softwares de apresentação, assim como mostrar exemplos de softwares que podem ser utilizados para criação de apresentações. Serão mostrados recursos básicos e avançados no software PowerPoint para que se possa criar uma apresentação usando os recursos desse software. Além disso, será explorado o uso do software de apresentação online Prezi, que se constitui em uma ótima opção para se desenvolver apresentações dinâmicas e diferentes.',
+        cargaHoraria: 40,
+        instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
-        obs: '',
-        filter: {
-            competencias: [26],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 27,
-        title: 'Título do curso 27',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
-        possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'https://mundi.ifsul.edu.br/portal/software-de-apresentacao.php',
         obs: '',
         filter: {
             competencias: [27],
@@ -407,76 +279,577 @@ const cursosDefault =  [
         }
     },
     {
-        id: 28,
-        title: 'Título do curso 28',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        id: 9,
+        itinerario: 1,
+        title: 'Educação Especial e Inclusão ',
+        descricao: 'Este curso apresenta as principais leis sobre inclusão de alunos com deficiência no ensino regular. Aponta a definição de integração, inclusão, síndrome, doenças, distúrbios e transtornos. Demonstra o conceito de deficiência intelectual, síndrome de Down, autismo, surdez, cegueira, deficiência física ou motora e a paralisia cerebral. Considera escola para todos, princípios da cultura inclusiva, formação do professor, sala de aula inclusiva, família na educação escolar dos alunos com deficiência e educação inclusiva na educação infantil.',
+        cargaHoraria: 40,
+        instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'https://mundi.ifsul.edu.br/portal/educacao-especial-e-inclusao.php',
         obs: '',
         filter: {
-            competencias: [28],
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 10,
+        itinerario: 1,
+        title: 'Educação Inclusiva: Introdução ao Transtorno do Espectro Autista (TEA)',
+        descricao: 'Conhecer aspectos introdutórios sobre o Transtorno do espectro autista (TEA), assim como um pouco da sua história. Pontuar conceitos para a inclusão de estudantes com TEA e o papel do professor nesse processo. Identificar alguns dos materiais didáticos e metodologias de ensino e mais conhecidas para estudantes com TEA.',
+        cargaHoraria: 20,
+        instCert: 6,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=36',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 11,
+        itinerario: 1,
+        title: 'Ensino e Aprendizagem: Teorias, Métodos e Avaliação ',
+        descricao: 'Introdução sobre aspectos inerentes ao Ensino e Aprendizagem; Teorias de Ensino/Aprendizagem; Estratégias e Métodos de Ensino; Metodologias Ativas de Ensino; Tecnologias na Educação; Avaliação nos processos de Ensino/Aprendizagem.',
+        cargaHoraria: 30,
+        instCert: 6,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://mais.ifmg.edu.br/login/index.php',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 12,
+        itinerario: 1,
+        title: 'Boas Práticas de Segurança do Trabalho em Laboratórios',
+        descricao: 'Introdução a Segurança do Trabalho: Conceitos básicos de Segurança do Trabalho. Equipamentos de Proteção Coletiva e Equipamentos de Proteção Individual e Coletiva. Produtos Químicos. Equipamentos, vidrarias e  utensílios de laboratório. Mapa de Riscos. Manual de Segurança para Laboratórios. Situações de Emergência.',
+        cargaHoraria: 40,
+        instCert: 6,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=17',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 13,
+        itinerario: 1,
+        title: 'Introdução a Gestão de Projetos',
+        descricao: 'Este curso foi feito com o objetivo de apresentar os conceitos fundamentais referentes ao tema gestão de projetos, com destaque para a definição e caracterização do termo “projeto” e da apresentação do ciclo de vida dos projetos e das dez áreas do conhecimento, definidas pelo Project Management Institute (PMI), instituição internacional que se dedica ao estudo e à disseminação dos melhores métodos e técnicas de gerenciamento de projetos.',
+        cargaHoraria: 30,
+        instCert: 6,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://mais.ifmg.edu.br/login/index.php',
+        obs: '',
+        filter: {
+            competencias: [5],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 14,
+        itinerario: 1,
+        title: 'Ergonomia Aplicada aos Postos de Trabalho',
+        descricao: 'Introdução à Ergonomia: breve histórico; origem e evolução da ergonomia; conceitos, definições e objetivos da ergonomia; tipos de ergonomia; Norma Regulamentadora nº 17 do MTE: conhecer os parâmetros legais que permitem a adaptação das condições de trabalho às características psicofisiológicas dos trabalhadores, de modo a proporcionar um máximo de conforto, segurança e desempenho eficiente. Análise Ergonômica do Trabalho (AET): conceito de AET, aprender as definições básicas de demanda, tarefa e atividade nos postos de trabalho para identificar inadequações e fatores de risco existentes. Ergonomia nos Postos de trabalho: Conceitos básicos da Ergonomia aplicado aos postos de trabalho',
+        cargaHoraria: 20,
+        instCert: 6,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://mais.ifmg.edu.br/login/index.php',
+        obs: '',
+        filter: {
+            competencias: [0],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 15,
+        itinerario: 1,
+        title: 'Cultura Surda',
+        descricao: 'História da comunidade surda, cultura surda, identidades surdas e a língua de sinais.',
+        cargaHoraria: 20,
+        instCert: 7,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Cultura+Surda+&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [9],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 16,
+        itinerario: 1,
+        title: 'Aprendizagem Significativa',
+        descricao: 'Conceitos iniciais sobre Aprendizagem Significativa, Abordagens Teóricas e Tipos de Aprendizagem, Ensino Significativo.',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Aprendizagem+Significativa&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 17,
+        itinerario: 1,
+        title: 'Qualidade de Cursos em Educação a Distância',
+        descricao: 'Não basta ter conteúdo, tem que conversar; Organizando o Curso; Produzindo o Conteúdo do Curso; Equívocos Gerais',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Aprendizagem+Significativa&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 18,
+        itinerario: 1,
+        title: 'Didática',
+        descricao: 'O que é Didática?; Perfil do Professor; Planejamento;  Técnicas e Métodos; Avaliação',
+        cargaHoraria: 60,
+        instCert: 7,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Did%C3%A1tica+&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 19,
+        itinerario: 1,
+        title: 'Pesquisa em Sala de Aula na Educação Básica',
+        descricao: 'Por que pesquisa na educação básica? Projeto de Pesquisa; Problema de pesquisa, objetivos e hipóteses; Abordagem quantitativa; Abordagem qualitativa; Elaboração de perguntas; Análise e apresentação dos dados',
+        cargaHoraria: 40,
+        instCert: 7,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Pesquisa+em+Sala+de+Aula+na+Educa%C3%A7%C3%A3o+B%C3%A1sica+&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 20,
+        itinerario: 1,
+        title: 'Planejamento Docente',
+        descricao: 'O curso tem por objetivo compreender e identificar as possibilidades pedagógicas do espaço pedagógico voltado aos processos formativos formais ou informais, a fim de subsidiar o planejamento de ações que desenvolvam respostas a problemas específicos, definindo os fins e os meios que direcionam para soluções.',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Não Verificado',
+        link: 'https://moodle.ifrj.edu.br/login/index.php',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 21,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 22,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 2,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 23,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 3,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [2],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 24,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [2],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 25,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 26,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 27,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 4,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 28,
+        itinerario: 2,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 2,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
             temas: [],
             subtemas: [],
         }
     },
     {
         id: 29,
-        title: 'Título do curso 29',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'https://moodle.ifrj.edu.br/',
         obs: '',
         filter: {
-            competencias: [29],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
     },
     {
         id: 30,
-        title: 'Título do curso 30',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 2,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'https://moodle.ifrj.edu.br/',
         obs: '',
         filter: {
-            competencias: [30],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
     },
     {
         id: 31,
-        title: 'Título do curso 31',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 3,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'https://moodle.ifrj.edu.br/',
         obs: '',
         filter: {
-            competencias: [31],
+            competencias: [2],
             temas: [],
             subtemas: [],
         }
     },
     {
         id: 32,
-        title: 'Título do curso 32',
-        descricao: 'Descrição do curso',
-        cargaHoraria: 80,
-        instCert: 1,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 5,
         possuiAcessibilidade: 'Sim',
-        link: 'https://www.udemy.com/course/curso-web/',
+        link: 'https://moodle.ifrj.edu.br/',
         obs: '',
         filter: {
-            competencias: [32],
+            competencias: [2],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 33,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 34,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 35,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 4,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 36,
+        itinerario: 3,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 2,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 37,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 38,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 2,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [1],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 39,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 3,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [2],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 40,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [2],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 41,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 42,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 7,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 43,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 4,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
+            temas: [],
+            subtemas: [],
+        }
+    },
+    {
+        id: 44,
+        itinerario: 5,
+        title: 'Curso Exemplo',
+        descricao: 'Exemplo de Curso',
+        cargaHoraria: 30,
+        instCert: 2,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://moodle.ifrj.edu.br/',
+        obs: '',
+        filter: {
+            competencias: [3],
             temas: [],
             subtemas: [],
         }
@@ -502,172 +875,214 @@ const instituicoesDefault = [
     },
     {
         id: 5,
-        titulo: 'UECE'
+        titulo: 'IFRJ'
     },
     {
         id: 6,
-        titulo: 'UFRJ'
+        titulo: 'IFMG'
     },
     {
         id: 7,
-        titulo: 'USP'
+        titulo: 'IFSul'
     },
 ]
 
 const competenciasDefault = [
     {
+        id: 0,
+        titulo: 'Não especificado',
+        descricao: 'Não especificado'
+    },
+    {
         id: 1,
-        titulo: 'Gestão do desenvolvimento de pessoas'
+        titulo: 'Gestão do desenvolvimento de pessoas',
+        descricao: 'Forjar um ambiente de trabalho em que os interesses de equipes e indivíduos se harmonizem com os objetivos e resultados da organização, gerando oportunidades de aprendizado e desenvolvimento, bem como incentivos para reforçar o desempenho excepcional.'
     },
     {
         id: 2,
-        titulo: 'Gestão da qualidade'
+        titulo: 'Gestão da qualidade',
+        descricao: 'Conduzir a área de gestão encarregada de padronizar boas práticas processuais, no âmbito do paradigma da qualidade; gerando serviços internos ou externos seguros e confiáveis, de acordo com indicadores pré-estabelecidos em termos de legislação vigente e padrões de qualidade aplicáveis.'
     },
     {
         id: 3,
-        titulo: 'Liderança eficaz'
+        titulo: 'Liderança eficaz',
+        descricao: 'Dirigir equipes, otimizando a aplicação de talentos disponíveis e criando um ambiente positivo e comprometido para a obtenção de resultados.'
     },
     {
         id: 4,
-        titulo: 'Gerenciamento de recursos'
+        titulo: 'Gerenciamento de recursos',
+        descricao: 'Preservar critérios de eficácia e eficiência na administração de recursos materiais, das competências das pessoas e dos ativos de uso da organização.'
     },
     {
         id: 5,
-        titulo: 'Planejamento'
+        titulo: 'Planejamento',
+        descricao: 'Identificar problemas prioritários e oportunidades de sua unidade para projetar planos, programas ou projetos que prefixam objetivos, atividades, recursos, custos, cronogramas, responsáveis e indicadores de progresso, resultados e impacto.'
     },
     {
         id: 6,
-        titulo: 'Relacionamento com dirigentes'
+        titulo: 'Relacionamento com dirigentes',
+        descricao: 'Participar, manter e facilitar de áreas de intercâmbio com o corpo diretivo de sua organização e outras organizações, a fim de compartilhar experiências, soluções e propostas, para articular estrategicamente os objetivos convergentes.'
     },
     {
         id: 7,
-        titulo: 'Resolução de problemas'
+        titulo: 'Resolução de problemas',
+        descricao: 'Reconhecer as relações de causa e efeito no campo dos problemas identificados que a sua área e organização enfrentam, para focar nas questões centrais para as quais concentrar as soluções estratégicas. Projetar soluções alternativas calculando os benefícios em relação aos custos de sua implementação, riscos correlatos e impactos associados.'
     },
     {
         id: 8,
-        titulo: 'Tomada de decisão para gestores'
+        titulo: 'Tomada de decisão para gestores',
+        descricao: 'Adotar e informar decisões prévias, explorando alternativas para minimizar custos e aumentar as vantagens para a organização na questão que for decidida.'
     },
     {
         id: 9,
-        titulo: 'Comunicação interpessoal'
+        titulo: 'Comunicação interpessoal',
+        descricao: 'Iniciar e manter comunicações respeitosas e cordiais; transmitir de forma transparente e comportamento estável, informações e gestos, mensagens orais e de texto claros, concisos, fiáveis e apropriados para o destinatário. Atender ativamente informações, consultas, divergências e mensagens de terceiros com uma atitude construtiva e empática.'
     },
     {
         id: 10,
-        titulo: 'Gestão da participação cidadã'
+        titulo: 'Gestão da participação cidadã',
+        descricao: 'Ativar a participação cidadã vinculada aos assuntos da área responsável; considerar expectativas, propostas e reclamações para adaptar cada vez mais os serviços, conscientizando os colaboradores sobre o direito à participação e as vantagens que ela viabiliza.'
     },
     {
         id: 11,
-        titulo: 'Negociação'
+        titulo: 'Negociação',
+        descricao: 'Cooperar para construir o melhor acordo possível para as partes diante de posições divergentes, sem prejudicar a continuidade do vínculo e a aderência aos regulamentos vigentes.'
     },
     {
         id: 12,
-        titulo: 'Orientação ao cidadão'
+        titulo: 'Orientação ao cidadão',
+        descricao: 'Conduzir e organizar o atendimento aos cidadãos, com mecanismos acessíveis, linguagem inteligível e procedimentos ágeis voltados à satisfação de procedimentos, reclamações, dúvidas e propostas. Quantificar, através de indicadores pré-estabelecidos, o grau de satisfação com os resultados gerenciais e a qualidade da resolução de conflitos e reclamações.'
     },
     {
         id: 13,
-        titulo: 'Relações institucionais'
+        titulo: 'Relações institucionais',
+        descricao: 'Promover a qualidade dos relacionamentos regulares e criar novos relacionamentos necessários para a consecução dos interesses da sua organização. Fortalecer a imagem corporativa, fazendo apresentações em público, planejando a mensagem a ser transmitida e seu objetivo de acordo com o tipo de público.'
     },
     {
         id: 14,
-        titulo: 'Trabalho em equipe'
+        titulo: 'Trabalho em equipe',
+        descricao: 'Criar e participar de equipes de trabalho para promover um ambiente produtivo e aprimorar habilidades diferenciadas entre as pessoas; compartilhando recursos e informações para alcançar melhores resultados'
     },
     {
         id: 15,
-        titulo: 'Gerenciamento de políticas'
+        titulo: 'Gerenciamento de políticas',
+        descricao: 'Contribuir para a coerência estratégica da gestão de políticas, articulando e complementando os objetivos e resultados das organizações; desempenhar o papel de liderança no âmbito das políticas públicas promovidas pelo Alto Governo.'
     },
     {
         id: 16,
-        titulo: 'Construção de redes'
+        titulo: 'Construção de redes',
+        descricao: 'Promover o autodesenvolvimento e o desenvolvimento profissional de suas equipes de colaboradores, integrando, criando ou incentivando a participação em redes e fóruns para troca de experiências, novidades, documentos, cases, soluções criativas e problemas compartilhados.'
     },
     {
         id: 17,
-        titulo: 'Gerenciamento de mudança'
+        titulo: 'Gerenciamento de mudança',
+        descricao: 'Antecipar e promover mudanças estratégicas/operacionais para responder às mudanças do contexto. Redesenhar/modernizar abordagens, processos, tarefas e competências requeridos pelo novo contexto, distribuindo responsabilidades e perseguindo resultados.'
     },
     {
         id: 18,
-        titulo: 'Gerenciamento digital'
+        titulo: 'Gerenciamento digital',
+        descricao: 'Reconhecer efetivamente o direito dos cidadãos à informação pública e à interação com serviços no ambiente digital, garantindo canais efetivos para requisição de serviços, pedidos, consultas, procedimentos, acompanhamento e resolução remotos.'
     },
     {
         id: 19,
-        titulo: 'Inovação'
+        titulo: 'Inovação',
+        descricao: 'Forjar um clima de interesse para soluções inovadoras que melhorem a eficiência das respostas aos cidadãos em termos de informações, processos, tecnologias, resultados e impactos da gestão pública.'
     },
     {
         id: 20,
-        titulo: 'Proatividade'
+        titulo: 'Proatividade',
+        descricao: 'Atuar com iniciativa e instruir os colaboradores a antecipar eventos previsíveis que envolvam a execução de tarefas para atendimento de demandas internas e externas (dos cidadãos), fortalecendo a percepção dos usuários sobre o comprometimento da unidade na oferta de serviços e produtos.'
     },
     {
         id: 21,
-        titulo: 'Trabalho sob pressão'
+        titulo: 'Trabalho sob pressão',
+        descricao: 'Gerenciar emoções em busca da qualidade das ações gerenciais, evitando reações impulsivas/temperamentais em situações de pressão. Objetivar e enfocar os problemas a resolver, dissociando-os das pessoas envolvidas neles. Utilizar dificuldades, erros detectados ou planos fracassados como objetos de aprendizagem coletiva para capitalizar construtivamente a situação e evitar sua repetição.'
     },
     {
         id: 22,
-        titulo: 'Visão estratégica'
+        titulo: 'Visão estratégica',
+        descricao: 'Compreender o ambiente político e a as tendências que interferem no estado de coisas; antecipar problemas e oportunidades a médio e longo prazo para a área responsável a fim de que a gestão identifique a alternativa mais adequada a cada situação presente ou eventual, comunicando à equipe a lógica das decisões diretivas.'
     },
     {
         id: 23,
-        titulo: 'Contribuição técnico-profissional'
+        titulo: 'Contribuição técnico-profissional',
+        descricao: 'Disponibilizar à Administração seu conhecimento profissional específico e suas experiências anteriores, gerenciando a atualização de seus conhecimentos especializados.'
     },
     {
         id: 24,
-        titulo: 'Comunicação efetiva'
+        titulo: 'Comunicação efetiva',
+        descricao: 'Estabelecer comunicação efetiva e positiva com superiores hierárquicos, pares e cidadãos, tanto na expressão escrita e verbal quanto corporal.'
     },
     {
         id: 25,
-        titulo: 'Organização da rotina'
+        titulo: 'Organização da rotina',
+        descricao: 'Definir o programa semanal/mensal de atividades, no âmbito do plano institucional, determinando os resultados a serem alcançados, as tarefas a serem executadas, os procedimentos a serem resolvidos e os atrasos a serem corrigidos, bem como os custos e insumos necessários para alcançá-lo.'
     },
     {
         id: 26,
-        titulo: 'Resolutividade'
+        titulo: 'Resolutividade',
+        descricao: 'Manter interdependências positivas e produtivas com sua equipe e seus superiores para alcançar resultados.'
     },
     {
         id: 27,
-        titulo: 'Uso de TIC'
+        titulo: 'Uso de TIC',
+        descricao: 'Otimizar o uso das tecnologias de informação e comunicação disponíveis, em seu efetivo potencial, para melhorar seu desempenho.'
     },
     {
         id: 28,
-        titulo: 'Análise de problemas'
+        titulo: 'Análise de problemas',
+        descricao: 'Identificar tempestivamente os problemas a serem resolvidos, os recursos para enfrentá-los, as alternativas possíveis, seus custos e riscos, antes de tomar a decisão no nível que lhes corresponde.'
     },
     {
         id: 29,
-        titulo: 'Criatividade'
+        titulo: 'Criatividade',
+        descricao: 'Aplicar sua experiência e especialização em melhorar o uso de dados para refinar metodologias, processos, produtos e interações em equipe, orientadas para a satisfação do usuário externo/interno.'
     },
     {
         id: 30,
-        titulo: 'Melhoria contínua de processos'
+        titulo: 'Melhoria contínua de processos',
+        descricao: 'Propor e introduzir ações para acelerar a melhoria contínua e a produtividade das tarefas sob sua responsabilidade, em atenção aos requisitos de qualidade.'
     },
     {
         id: 31,
-        titulo: 'Tomada de decisão'
+        titulo: 'Tomada de decisão',
+        descricao: 'Decidir sobre as questões sob sua responsabilidade mobilizando critérios de economia, eficácia, eficiência e transparência.'
     },
     {
         id: 32,
-        titulo: 'Controle emocional'
+        titulo: 'Controle emocional',
+        descricao: 'Preservar o diálogo harmônico e respeitoso acerca das divergências, erros e conflitos do ambiente, sem afetar a dinâmica do trabalho sem razão justificável.'
     },
 ]
 
 const categoriasDeCompetenciasDefault = [
     {
-        id: 1,
+        id: 0,
+        nome: 'Não especificado',
+        competencias: [0]
+    },
+    {
+        id: 7,
         nome: 'Gestão de Resultados',
         competencias: [1,2,3,4,5,6,7,8]
     },
     {
-        id: 2,
+        id: 8,
         nome: 'Gestão de Relacionamentos',
         competencias: [9,10,11,12,13,14]
     },
     {
-        id: 3,
+        id: 9,
         nome: 'Gestão de Mudanças',
         competencias: [15,16,17,18,19,20,21,22]
     },
     {
-        id: 4,
+        id: 10,
         nome: 'Orientação a Resultados',
         competencias: [23,24,25,26,27]
     },
     {
-        id: 5,
+        id: 11,
         nome: 'Processos de Melhoria',
         competencias: [28,29,30,31,32]
     },
@@ -2502,21 +2917,86 @@ const subtemasDefault = [
     },
 ]
 
-const cursosFiltradosDefault = cursosDefault.map(curso => curso.id)
+const initialFilterDefault = {
+    sideFilter: {
+        buscaInterna: '',
+        cargaHoraria: [0, 200],
+        categoriasDeCompetencias: [],
+        competencias: [],
+        temas: [],
+        subtemas: [],
+        instCertificadora: [],
+    },
+    visualization: {
+        esquemaDeCores: 'categoria',
+        itinerario: 1,
+    }
+}
 
-const reformuladorDeElementosCytoscape = (novosCursos) => {
+const cursosFilterFuctionDefault = (filtro) => {
+    let novosCursos = []
+    cursosDefault.forEach(curso => {
+        let contemTema = curso.filter.temas.some(idTema => filtro.sideFilter.temas.includes(idTema))
+        let temasVazio = filtro.sideFilter.temas.length === 0
+        
+        let contemSubtema = curso.filter.subtemas.some(idSubtema => filtro.sideFilter.subtemas.includes(idSubtema))
+        let subtemasVazio = filtro.sideFilter.subtemas.length === 0
+
+        let categoriasDoCurso = categoriasDeCompetenciasDefault.filter(categoria => categoria.competencias.some(competencia => curso.filter.competencias.includes(competencia)))
+        let contemCategoria = categoriasDoCurso.some(categoria => filtro.sideFilter.categoriasDeCompetencias.includes(categoria.id))
+        let categoriasVazio = filtro.sideFilter.categoriasDeCompetencias.length === 0
+
+        let contemCompetencia = curso.filter.competencias.some(idCompetencia => filtro.sideFilter.competencias.includes(idCompetencia))
+        let competenciasVazio = filtro.sideFilter.competencias.length === 0
+        
+        let contemInstituicao = filtro.sideFilter.instCertificadora.some(inst => curso.instCert === inst)
+        let instituicoesVazio = filtro.sideFilter.instCertificadora.length === 0
+        
+        let buscaInterna = curso.title.toLowerCase().startsWith(filtro.sideFilter.buscaInterna.toLowerCase())
+        let buscaInternaVazia = filtro.sideFilter.buscaInterna === '' || filtro.sideFilter.buscaInterna === undefined
+        
+        let contemItinerario = curso.itinerario === filtro.visualization.itinerario
+        
+        let contemCargaHoraria = filtro.sideFilter.cargaHoraria[0] <= curso.cargaHoraria && curso.cargaHoraria <= filtro.sideFilter.cargaHoraria[1]
+
+        let temas = contemTema || temasVazio
+        let subtemas = contemSubtema || subtemasVazio 
+        let categorias = contemCategoria || categoriasVazio 
+        let competencias = contemCompetencia || competenciasVazio 
+        let instituicoes = contemInstituicao || instituicoesVazio 
+        let busca = buscaInterna || buscaInternaVazia 
+        let itinerario = contemItinerario
+
+        if ( temas && subtemas && categorias && competencias && instituicoes && busca && contemCargaHoraria && itinerario) {
+            novosCursos.push(curso.id)
+        }
+    })
+    return(novosCursos)
+}
+
+const cursosFiltradosDefault = cursosFilterFuctionDefault(initialFilterDefault)
+
+
+const reformuladorDeElementosCytoscape = (novosCursos, esqCores) => {
     // todos os cursos
-    const cursos = novosCursos.map((idCurso) => {
-        const curso = cursosDefault.filter((curso) => curso.id === idCurso)[0]
-        return({
+    let categoriasAdicionadas = []
+    let competenciasAdicionadas = []
+    let elementos = []
+    novosCursos.forEach((idCurso) => {
+        const curso = cursosDefault.find((curso) => curso.id === idCurso)
+        const competencias = curso.filter.competencias
+        const catData = categoriasDeCompetenciasDefault.filter(categoria => categoria.competencias.some(competencia => curso.filter.competencias.includes(competencia)))
+        elementos.push({
             group: 'nodes',
             data: {
                 id: 'curso'+curso.id,
                 label: curso.title,
+                image: esqCores === 'categoria' ? fundosCategoria.curso[catData[0].id] : fundosItinerario.curso[curso.itinerario],
+                itinerario: curso.itinerario,
+                color: esqCores === 'categoria' ? colorsCategorias[catData[0].id] : colorsItinerarios[curso.itinerario],
                 cargaHoraria: curso.cargaHoraria,
                 instCert: curso.instCert,
                 possuiAcessibilidade: curso.possuiAcessibilidade,
-                categoriasDeCompetencias: curso.filter.categoriasDeCompetencias,
                 competencias: curso.filter.competencias,
                 temas: curso.filter.temas,
                 subtemas: curso.filter.subtemas
@@ -2524,179 +3004,127 @@ const reformuladorDeElementosCytoscape = (novosCursos) => {
             grabbable: true,
             classes: ['curso']
         })
-    })
-    // todas as ccompetencias
-    let idsTodasCompetencias = []
-    cursos.forEach((curso) => {
-        curso.data.competencias.forEach(competencia => {
-            if (!idsTodasCompetencias.includes(competencia)) {
-                idsTodasCompetencias.push(competencia)
-            }
-        });
-    })
-    let competencias = idsTodasCompetencias.map((idCompetencia) => {
-        const competenciaData = competenciasDefault.find(competencia => competencia.id === idCompetencia)
-        return({
-            group: 'nodes',
-            data: {
-                id: 'competencia'+competenciaData.id,
-                label: competenciaData.titulo,
-            },
-            grabbable: true,
-            classes: ['competencia']
-        })
-    })
-    // Edges de competências
-    let edgesCompetencias = []
-    cursos.forEach(curso => {
-        curso.data.competencias.forEach((idCompetencia) => {
-            edgesCompetencias.push({
-                group: 'edges',
-                data: {
-                    id: 'edge'+curso.data.id+'competencia'+idCompetencia,
-                    source: 'competencia'+idCompetencia,
-                    target: curso.data.id
-                }
-            })
-        })
-    })
-    // todas as Categorias
-    let idsTodasCategorias = []
-    categoriasDeCompetenciasDefault.forEach((categoria) => {
-        if (categoria.competencias.some(competencia => idsTodasCompetencias.includes(competencia))) {
-            idsTodasCategorias.push(categoria.id)
-        }
-    })
-    let categorias = idsTodasCategorias.map((idCategoria) => {
-        const categoriaData = categoriasDeCompetenciasDefault.find(categoria => categoria.id === idCategoria)
-        return({
-            group: 'nodes',
-            data: {
-                id: 'categoria'+categoriaData.id,
-                label: categoriaData.nome,
-                competencias: categoriaData.competencias
-            },
-            grabbable: true,
-            classes: ['categoria']
-        })
-    })
-    // Edges de categorias
-    let edgesCategorias = []
-    categorias.forEach(categoria => {
-        categoria.data.competencias.forEach((idCompetencia) => {
-            if (idsTodasCompetencias.includes(idCompetencia)) {
-                edgesCategorias.push({
+        // Adicionando Competencia
+        competencias.forEach(idCompetencia => {
+            if (!competenciasAdicionadas.includes(idCompetencia)) {
+                let competencia = competenciasDefault.find(competencia => competencia.id === idCompetencia)
+                let categoriaPertencente = categoriasDeCompetenciasDefault.find(categoria => categoria.competencias.includes(idCompetencia))
+                elementos.push({
+                    group: 'nodes',
+                    data: {
+                        id: 'competencia'+competencia.id,
+                        label: competencia.titulo,
+                        color: esqCores === 'categoria' ? colorsCategorias[catData[0].id] : colorsItinerarios[curso.itinerario],
+                        image: esqCores === 'categoria' ? fundosCategoria.competencia[catData[0].id] : fundosItinerario.competencia[curso.itinerario],
+                    },
+                    grabbable: true,
+                    classes: ['competencia']
+                })
+                competenciasAdicionadas.push(competencia.id)
+                elementos.push({
                     group: 'edges',
                     data: {
-                        id: 'edge'+categoria.data.id+'competencia'+idCompetencia,
-                        source: categoria.data.id,
+                        id: 'edge'+categoriaPertencente.id+'competencia'+idCompetencia,
+                        source: 'categoria'+categoriaPertencente.id,
                         target: 'competencia'+idCompetencia
                     }
                 })
             }
         })
+        competencias.forEach((idCompetencia) => {
+            elementos.push({
+                group: 'edges',
+                data: {
+                    id: 'edge'+curso.id+'competencia'+idCompetencia,
+                    source: 'competencia'+idCompetencia,
+                    target: 'curso'+curso.id
+                }
+            })
+        })
+        // Adicionando Categoria
+        catData.forEach((categoria) => {
+            if (!categoriasAdicionadas.includes(categoria.id)) {
+                elementos.push({
+                    group: 'nodes',
+                    data: {
+                        id: 'categoria'+categoria.id,
+                        label: categoria.nome,
+                        color: esqCores === 'categoria' ? colorsCategorias[categoria.id] : colorsItinerarios[curso.itinerario],
+                        competencias: categoria.competencias,
+                        image: esqCores === 'categoria' ? fundosCategoria.categoria[categoria.id] : fundosItinerario.categoria[curso.itinerario],
+                    },
+                    grabbable: true,
+                    classes: ['categoria']
+                })
+            }
+        })
     })
 
-    return(cursos.concat(competencias).concat(edgesCompetencias).concat(categorias).concat(edgesCategorias))
+    return(elementos)
 }
 
 const trilhosModel = {
-    
+
     cursos:  cursosDefault,
     
     instituicoes: instituicoesDefault,
-
+    
     categoriasDeCompetencias: categoriasDeCompetenciasDefault,
-
+    
     competencias: competenciasDefault,
-
+    
     temas: temasDefault,
-
+    
     subtemas: subtemasDefault,
     
     cursosFiltrados: cursosFiltradosDefault,
+    
+    filterDefault: initialFilterDefault,
 
-    filterDefault: {
-        buscaInterna: '',
-        cargaHoraria: [0, 200],
-        categoriasDeCompetencias: [],
-        competencias: [],
-        temas: [],
-        subtemas: [],
-        instCertificadora: [],
-    },
-
-    filter: {
-        buscaInterna: '',
-        cargaHoraria: [0, 200],
-        categoriasDeCompetencias: [],
-        competencias: [],
-        temas: [],
-        subtemas: [],
-        instCertificadora: [],
-    },
-
+    filter: initialFilterDefault,
+    
     changeFilter: action((state, payload) => {
-        state.filter.buscaInterna = payload.buscaInterna
-        state.filter.categoriasDeCompetencias = payload.categoriasDeCompetencias
-        state.filter.competencias = payload.competencias
-        state.filter.temas = payload.temas
-        state.filter.cargaHoraria = payload.cargaHoraria
-        state.filter.instCertificadora = payload.instCertificadora
-        state.filter.subtemas = payload.subtemas
+        /* state.filter.buscaInterna = payload.buscaInterna ? payload.buscaInterna : ''
+        state.filter.categoriasDeCompetencias = payload.categoriasDeCompetencias ? payload.categoriasDeCompetencias : []
+        state.filter.competencias = payload.competencias ? payload.competencias : []
+        state.filter.temas = payload.temas ? payload.temas : []
+        state.filter.cargaHoraria = payload.cargaHoraria ? payload.cargaHoraria : [0, 200]
+        state.filter.instCertificadora = payload.instCertificadora ? payload.instCertificadora : []
+        state.filter.subtemas = payload.subtemas ? payload.subtemas : [] */
+        state.filter.sideFilter = payload
     }),
-
-    onChangeFilter: actionOn(
+    
+    filterFunction: action((state, payload) => {
+        let filtro = payload
+        let novosCursos = cursosFilterFuctionDefault(filtro)
+        state.cursosFiltrados = novosCursos
+        state.elements = reformuladorDeElementosCytoscape(novosCursos, state.filter.visualization.esquemaDeCores)
+    
+    }),
+    
+    onChangeFilter: unstable_effectOn(
         // targetResolver:
-        actions => actions.changeFilter,
+        [state => state.filter],
         // handler:
-        (state, target) => {
-            let filtro = target.payload
-            let novosCursos = []
-            state.cursos.forEach(curso => {
-                let contemTema = curso.filter.temas.some(idTema => filtro.temas.includes(idTema))
-                let temasVazio = filtro.temas.length === 0
-                
-                let contemSubtema = curso.filter.subtemas.some(idSubtema => filtro.subtemas.includes(idSubtema))
-                let subtemasVazio = filtro.subtemas.length === 0
-
-                let categoriasDoCurso = categoriasDeCompetenciasDefault.filter(categoria => categoria.competencias.some(competencia => curso.filter.competencias.includes(competencia)))
-                let contemCategoria = categoriasDoCurso.some(categoria => filtro.categoriasDeCompetencias.includes(categoria.id))
-                let categoriasVazio = filtro.categoriasDeCompetencias.length === 0
-
-                let contemCompetencia = curso.filter.competencias.some(idCompetencia => filtro.competencias.includes(idCompetencia))
-                let competenciasVazio = filtro.competencias.length === 0
-                
-                let contemInstituicao = filtro.instCertificadora.some(inst => curso.instCert === inst)
-                let instituicoesVazio = filtro.instCertificadora.length === 0
-                
-                let buscaInterna = curso.title.toLowerCase().startsWith(filtro.buscaInterna.toLowerCase())
-                let buscaInternaVazia = filtro.buscaInterna === '' || filtro.buscaInterna === undefined
-                
-                let contemCargaHoraria = filtro.cargaHoraria[0] <= curso.cargaHoraria && curso.cargaHoraria <= filtro.cargaHoraria[1]
-
-                let temas = contemTema || temasVazio
-                let subtemas = contemSubtema || subtemasVazio 
-                let categorias = contemCategoria || categoriasVazio 
-                let competencias = contemCompetencia || competenciasVazio 
-                let instituicoes = contemInstituicao || instituicoesVazio 
-                let busca = buscaInterna || buscaInternaVazia 
-
-                if ( temas && subtemas && categorias && competencias && instituicoes && busca && contemCargaHoraria) {
-                    novosCursos.push(curso.id)
-                }
-
-            })
-
-            state.cursosFiltrados = novosCursos
-
-            state.elements = reformuladorDeElementosCytoscape(novosCursos)
-
+        (actions, change) => {
+            actions.filterFunction(change.current[0])
         }
     ),
 
-    elements: reformuladorDeElementosCytoscape(cursosFiltradosDefault),
+    setCursosFiltrados: action((state, payload) => {
+        state.cursosFiltrados = payload
+    }),
 
+    setItinerario: action((state, payload) => {
+        state.filter.sideFilter = state.filterDefault.sideFilter
+        state.filter.visualization.itinerario = payload
+    }),
+
+    setColorSchema: action((state, payload) => {
+        state.filter.visualization.esquemaDeCores = payload
+    }),
+    
+    elements: reformuladorDeElementosCytoscape(cursosFiltradosDefault, initialFilterDefault.visualization.esquemaDeCores),
 }
-
-export default trilhosModel
+    
+    export default trilhosModel
