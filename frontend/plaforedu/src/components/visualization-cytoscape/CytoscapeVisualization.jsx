@@ -1,13 +1,15 @@
-import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react'
+import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import CytoscapeComponent from 'react-cytoscapejs';
 import { CSVLink } from "react-csv";
+import { PDFDownloadLink } from '@react-pdf/renderer';
+
 // Import dos fundos dos cursos
 import fundoCurso1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 01.png'
 import fundoCategoria1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 01.png'
 import fundoCompetencia1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 01.png'
 
-
-import CytoscapeComponent from 'react-cytoscapejs'
+import { Template } from '../pdf-document';
 
 import {
     MenuUnfoldOutlined,
@@ -15,7 +17,8 @@ import {
     PlusOutlined,
     MinusOutlined,
     FileExcelOutlined,
-    FilePdfOutlined
+    FilePdfOutlined,
+    LoadingOutlined
 } from '@ant-design/icons';
 
 import {
@@ -88,10 +91,6 @@ export default function CytoscapeVisualization() {
             }
         });
     }, [cursos, cursosFiltrados, getInstituicao]);
-
-    const handleExportDataInPdf = () => {
-        console.log('export data in .pdf');
-    };
 
     const handleOk = () => {
         setModalCourseVisible(false)
@@ -230,12 +229,17 @@ export default function CytoscapeVisualization() {
                         </Card>
 
                         <Card style={{ width: '100%' }}>
-                            <Button
-                                onClick={handleExportDataInPdf}
-                                icon={<FilePdfOutlined />}
-                            >
-                                <Text style={{ fontFamily: 'Roboto' }}>Exportar .pdf</Text>
-                            </Button>
+                            <PDFDownloadLink document={<Template sourceImage={() => cyRef?.current.jpg()}/>} fileName="plaforedu.pdf">
+                                {({ loading, error }) => loading ? (
+                                    <Button icon={<LoadingOutlined />}>
+                                        <Text>{error?.message}</Text>
+                                    </Button>
+                                ) : (
+                                    <Button icon={<FilePdfOutlined />}>
+                                        <Text style={{ fontFamily: 'Roboto' }}>Exportar .pdf</Text>
+                                    </Button>
+                                )}
+                            </PDFDownloadLink>
                         </Card>
                     </Col>
                 </Row>
