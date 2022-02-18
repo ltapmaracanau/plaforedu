@@ -1,5 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import { CSVLink } from "react-csv";
 // Import dos fundos dos cursos
 import fundoCurso1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 01.png'
 import fundoCategoria1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 01.png'
@@ -12,7 +13,9 @@ import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     PlusOutlined,
-    MinusOutlined
+    MinusOutlined,
+    FileExcelOutlined,
+    FilePdfOutlined
 } from '@ant-design/icons';
 
 import {
@@ -34,22 +37,23 @@ export default function CytoscapeVisualization() {
 
     const cyRef = useRef(null)
 
-    const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
-    const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed)
-    const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema)
-    const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.visualization.esquemaDeCores)
+    const filterCollapsed = useStoreState(state => state.adm.filterCollapsed);
+    const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed);
+    const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema);
+    const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.visualization.esquemaDeCores);
     const elements = useStoreState(state => state.cursos.elements);
-    const cursos = useStoreState(state => state.cursos.cursos)
-    const competencias = useStoreState(state => state.cursos.competencias)
-    const listInst = useStoreState(state => state.cursos.instituicoes)
-    const [courseOnModal, setCourseOnModal] = useState(cursos[0])
-    const [modalCourseVisible, setModalCourseVisible] = useState(false)
-    const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false)
-    const layouts = useStoreState(state => state.itinerarios.layouts)
+    const cursos = useStoreState(state => state.cursos.cursos);
+    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados);
+    const competencias = useStoreState(state => state.cursos.competencias);
+    const listInst = useStoreState(state => state.cursos.instituicoes);
+    const [courseOnModal, setCourseOnModal] = useState(cursos[0]);
+    const [modalCourseVisible, setModalCourseVisible] = useState(false);
+    const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
+    const layouts = useStoreState(state => state.itinerarios.layouts);
     const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
     const [zoom, setZoom] = useState(1);
 
-    const getInstituicao = (id_instituicao) => {
+    const getInstituicao = useCallback((id_instituicao) => {
         const instituicao = listInst.find(({ id }) => id === id_instituicao);
 
         if (instituicao) {
@@ -57,6 +61,36 @@ export default function CytoscapeVisualization() {
         }
 
         return 'Instituição não encontrada';
+    }, [listInst]);
+
+    const headers = [
+        { label: "Título", key: "title" },
+        { label: "Descrição", key: "descricao" },
+        { label: "Carga horária", key: "cargaHoraria" },
+        { label: "Instituição Certificadora", key: "instCert" },
+        { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
+        { label: "Link", key: "link" },
+        { label: "Observação", key: "obs" }
+    ];
+
+    const data = useMemo(() => {
+        const coursesData = cursos.filter(course => cursosFiltrados.includes(course.id))
+
+        return coursesData.map(course => {
+            return {
+                title: course.title,
+                descricao: course.descricao,
+                cargaHoraria: `${course.cargaHoraria}H`,
+                instCert: getInstituicao(course.instCert),
+                possuiAcessibilidade: course.possuiAcessibilidade,
+                link: course.link,
+                obs: course.obs,
+            }
+        });
+    }, [cursos, cursosFiltrados, getInstituicao]);
+
+    const handleExportDataInPdf = () => {
+        console.log('export data in .pdf');
     };
 
     const handleOk = () => {
@@ -67,7 +101,6 @@ export default function CytoscapeVisualization() {
     useEffect(() => {
         cyRef.current.layout(layoutAtual).run()
     }, [elements, layoutAtual]);
-
 
     return (
         <Col flex='auto'>
@@ -177,6 +210,32 @@ export default function CytoscapeVisualization() {
                                     <Select.Option value={'itinerario'}>Itinerário</Select.Option>
                                 </Select>
                             </Form.Item>
+                        </Card>
+                    </Col>
+                    <Col style={{ display: 'flex', flexDirection: 'row' }}>
+                        <Card style={{ width: '100%' }}>
+                            <CSVLink 
+                                filename="plaforedu"
+                                headers={headers}
+                                data={data}
+                                target="_blank"
+                            >
+                                <Button
+                                    onClick={() => {}}
+                                    icon={<FileExcelOutlined />}
+                                >
+                                    <Text style={{ fontFamily: 'Roboto' }}>Exportar .csv</Text>
+                                </Button>
+                            </CSVLink>
+                        </Card>
+
+                        <Card style={{ width: '100%' }}>
+                            <Button
+                                onClick={handleExportDataInPdf}
+                                icon={<FilePdfOutlined />}
+                            >
+                                <Text style={{ fontFamily: 'Roboto' }}>Exportar .pdf</Text>
+                            </Button>
                         </Card>
                     </Col>
                 </Row>
@@ -364,7 +423,7 @@ export default function CytoscapeVisualization() {
                     <Descriptions.Item label='Link'>
                         <a target="_blank" rel="noreferrer" href={courseOnModal.link}>{courseOnModal.link}</a>
                     </Descriptions.Item>
-                    <Descriptions.Item label='Obsevações'>
+                    <Descriptions.Item label='Observações'>
                         {courseOnModal.obs}
                     </Descriptions.Item>
                 </Descriptions>
