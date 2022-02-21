@@ -1,0 +1,210 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~antd/dist/antd.less';
+
+@body-background: #f2f2f2;
+@layout-body-background: #f8f8f8;
+@layout-header-background: #eeeeee;
+@layout-sider-background: @body-background;
+@menu-light-background: @body-background;
+
+// Default ant design variales ->>> https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+// -------- Colors -----------
+@primary-color: #1890FF;
+@info-color: #1890ff;
+@success-color: #52c41a;
+@processing-color: #1890ff;
+@error-color: #f5222d;
+@highlight-color: #f5222d;
+@warning-color: #faad14;
+@normal-color: #d9d9d9;
+@background-color: #f7f7f9;
+@dark-color: rgb(51, 51, 51);
+@text-color: rgba(0, 0, 0, 0.65);
+@text-color-secondary: rgba(0, 0, 0, 0.45);
+
+
+// --------     Form      -----------
+
+@input-height-lg: 80px;
+@font-size-lg: 24px;
+
+.ant-input-affix-wrapper {
+    border-radius: 30px;
+}
+
+// -------- Border radius -----------
+@border-radius-base: 4px;
+@border-radius-sm: 4px;
+
+// -------- Border color -----------
+@border-color-base: hsv(0, 0, 85%);
+@border-color-split: rgba(0, 0, 0, 0.05);
+
+// -------- Font family -----------
+@font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+@code-family: 'Anonymous Pro', 'SFMono-Regular', Consolas, 'Liberation Mono',
+    Menlo, Courier, monospace;
+
+// -------- Header -----------
+//@layout-header-background: #ffffff;
+@layout-header-height: auto;
+@layout-header-padding: 0px 0px;
+
+// -------- Footer -----------
+@layout-footer-padding: 5px 50px;
+
+@menu-dark-bg: #9fa09f;
+@menu-dark-submenu-bg: #9fa0a0;
+
+
+// -------- Menu -------------
+
+@menu-inline-toplevel-item-height: 40px;
+@menu-item-height: 40px;
+@menu-item-group-height: @line-height-base;
+@menu-collapsed-width: 80px;
+@menu-bg: transparent;
+@menu-popup-bg: #35a7df;
+@menu-item-color: white;
+@menu-inline-submenu-bg: @background-color-light;
+@menu-highlight-color: white;
+@menu-highlight-danger-color: @error-color;
+@menu-item-active-bg: #2c56a1;
+@menu-item-active-danger-bg: @red-1;
+@menu-item-active-border-width: 3px;
+@menu-item-group-title-color: @text-color-secondary;
+@menu-item-vertical-margin: 4px;
+@menu-item-font-size: @font-size-base;
+@menu-item-boundary-margin: 8px;
+@menu-item-padding-horizontal: 20px;
+@menu-item-padding: 0 @menu-item-padding-horizontal;
+@menu-horizontal-line-height: 46px;
+@menu-icon-margin-right: 10px;
+@menu-icon-size: @menu-item-font-size;
+@menu-icon-size-lg: @font-size-lg;
+@menu-item-group-title-font-size: @menu-item-font-size;
+
+// dark theme
+@menu-dark-color: black;
+@menu-dark-danger-color: @error-color;
+@menu-dark-bg: @layout-header-background;
+@menu-dark-arrow-color: black;
+@menu-dark-inline-submenu-bg: white;
+@menu-dark-highlight-color: black;
+@menu-dark-item-active-bg: #ccc;
+@menu-dark-item-active-danger-bg: @error-color;
+@menu-dark-selected-item-icon-color: @white;
+@menu-dark-selected-item-text-color: @white;
+@menu-dark-item-hover-bg: transparent;
+
+// Modal
+
+@modal-header-padding-vertical: @padding-md;
+@modal-header-padding-horizontal: @padding-lg;
+@modal-body-padding: @padding-lg;
+@modal-header-bg: linear-gradient(to right, #2c56a1, #35a7df);
+@modal-header-padding: @modal-header-padding-vertical @modal-header-padding-horizontal;
+@modal-header-border-width: @border-width-base;
+@modal-header-border-style: @border-style-base;
+@modal-header-title-line-height: 22px;
+@modal-header-title-font-size: @font-size-lg;
+@modal-header-border-color-split: @border-color-split;
+@modal-header-close-size: 56px;
+@modal-content-bg: #fff;
+@modal-heading-color: #fff;
+@modal-close-color: #fff;
+@modal-footer-bg: #e7e7e7;
+@modal-footer-border-color-split: @border-color-split;
+@modal-footer-border-style: @border-style-base;
+@modal-footer-padding-vertical: 10px;
+@modal-footer-padding-horizontal: 16px;
+@modal-footer-border-width: @border-width-base;
+@modal-mask-bg: fade(@black, 45%);
+@modal-confirm-body-padding: 32px 32px 24px;
+
+// Descriptions
+@descriptions-bg: #e7e7e7;
+@descriptions-title-margin-bottom: 20px;
+@descriptions-default-padding: @padding-md @padding-lg;
+@descriptions-middle-padding: @padding-sm @padding-lg;
+@descriptions-small-padding: @padding-xs @padding-md;
+@descriptions-item-padding-bottom: @padding-md;
+@descriptions-item-trailing-colon: true;
+@descriptions-item-label-colon-margin-right: 8px;
+@descriptions-item-label-colon-margin-left: 2px;
+@descriptions-extra-color: @text-color;
+
+
+.linkHeader {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 8px;
+    border-left: 2px solid #e7e7e7;
+
+    :hover {
+        color: rgba(0, 0, 0, 0.9);
+    }
+}
+
+h4.ant-typography,
+.ant-typography h4 {
+    margin-bottom: 0;
+}
+
+// Card
+// ---
+@card-head-color: @heading-color;
+@card-head-background: transparent;
+@card-head-font-size: @font-size-lg;
+@card-head-font-size-sm: @font-size-base;
+@card-head-padding: 16px;
+@card-head-padding-sm: (@card-head-padding / 2);
+@card-head-height: 48px;
+@card-head-height-sm: 36px;
+@card-inner-head-padding: 12px;
+@card-padding-base: 10px;
+@card-padding-base-sm: (@card-padding-base / 2);
+@card-actions-background: @component-background;
+@card-actions-li-margin: 12px 0;
+@card-skeleton-bg: #cfd8dc;
+@card-background: @component-background;
+@card-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
+    0 5px 12px 4px rgba(0, 0, 0, 0.09);
+@card-radius: @border-radius-base;
+@card-head-tabs-margin-bottom: -17px;
+@card-head-extra-color: @text-color;
+
+
+// Scroll bar
+
+::-webkit-scrollbar {
+    width: 15px;
+    /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+    /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(112, 112, 112);
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid rgb(255, 255, 255);
+    /* creates padding around scroll thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(70, 70, 70);
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid rgb(255, 255, 255);
+    /* creates padding around scroll thumb */
+}
