@@ -1,98 +1,70 @@
-<div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Plaforedu" />
+# Getting Started with Create React App
 
-  &#xa0;
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-  <!-- <a href="https://plaforedu.netlify.com">Demo</a> -->
-</div>
+## Available Scripts
 
-<h1 align="center">Plaforedu</h1>
+In the project directory, you can run:
 
-<p align="center">
-  <img alt="Principal linguagem do projeto" src="https://img.shields.io/github/languages/top/SteveNascimento/plaforedu?color=56BEB8">
+### `yarn start`
 
-  <img alt="Quantidade de linguagens utilizadas" src="https://img.shields.io/github/languages/count/SteveNascimento/plaforedu?color=56BEB8">
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-  <img alt="Tamanho do repositório" src="https://img.shields.io/github/repo-size/SteveNascimento/plaforedu?color=56BEB8">
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-  <img alt="Licença" src="https://img.shields.io/github/license/SteveNascimento/plaforedu?color=56BEB8">
+### `yarn test`
 
-  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/SteveNascimento/plaforedu?color=56BEB8" /> -->
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/SteveNascimento/plaforedu?color=56BEB8" /> -->
+### `yarn build`
 
-  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/SteveNascimento/plaforedu?color=56BEB8" /> -->
-</p>
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-<!-- Status -->
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-<!-- <h4 align="center"> 
-	🚧  Plaforedu 🚀 Em construção...  🚧
-</h4> 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-<hr> -->
+### `yarn eject`
 
-<p align="center">
-  <a href="#dart-sobre">Sobre</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-funcionalidades">Funcionalidades</a> &#xa0; | &#xa0;
-  <a href="#rocket-tecnologias">Tecnologias</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-pré-requesitos">Pré requisitos</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-começando">Começando</a> &#xa0; | &#xa0;
-  <a href="#memo-licença">Licença</a> &#xa0; | &#xa0;
-  <a href="https://github.com/SteveNascimento" target="_blank">Autor</a>
-</p>
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-<br>
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## :dart: Sobre ##
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-Sobre o seu projeto
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## :sparkles: Funcionalidades ##
+## Learn More
 
-:heavy_check_mark: Funcionalidade 1;\
-:heavy_check_mark: Funcionalidade 2;\
-:heavy_check_mark: Funcionalidade 3;
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-## :rocket: Tecnologias ##
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-As seguintes ferramentas foram usadas na construção do projeto:
+### Code Splitting
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-## :white_check_mark: Pré requisitos ##
+### Analyzing the Bundle Size
 
-Antes de começar :checkered_flag:, você precisa ter o [Git](https://git-scm.com) e o [Node](https://nodejs.org/en/) instalados em sua maquina.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-## :checkered_flag: Começando ##
+### Making a Progressive Web App
 
-```bash
-# Clone este repositório
-$ git clone https://github.com/SteveNascimento/plaforedu
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-# Entre na pasta
-$ cd plaforedu
+### Advanced Configuration
 
-# Instale as dependências
-$ yarn
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-# Para iniciar o projeto
-$ yarn start
+### Deployment
 
-# O app vai inicializar em <http://localhost:3000>
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-## :memo: Licença ##
+### `yarn build` fails to minify
 
-Este projeto está sob licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
-
-
-Feito com :heart: por <a href="https://github.com/SteveNascimento" target="_blank">Steve</a>
-
-&#xa0;
-
-<a href="#top">Voltar para o topo</a>
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
