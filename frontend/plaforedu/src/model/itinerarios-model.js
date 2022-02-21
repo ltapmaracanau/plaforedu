@@ -5,19 +5,6 @@ const itinerariosModel = {
         {
             dados_gerais: {
                 id: 1,
-                titulo: 'Docente',  // NOME DO ITINERARIO
-                publico: '',
-                descricao: 'Descrição do Itinerário Docente',
-            },
-
-            grafo_publicado: {
-                trilhas: [], // ids das trilhas
-                elementos: [],
-            },
-        },
-        {
-            dados_gerais: {
-                id: 2,
                 titulo: 'Iniciação ao Serviço Público',
                 publico: '',
                 descricao: 'Descrição do Itinerário Iniciação ao Serviço Público',
@@ -30,23 +17,36 @@ const itinerariosModel = {
         },
         {
             dados_gerais: {
-                id: 3,
-                titulo: 'Gerencial',
+                id: 2,
+                titulo: 'Técnico-Administrativo em Educação', 
                 publico: '',
-                descricao: 'Descrição do Itinerário Gerencial (Liderança)',
+                descricao: 'Descrição do Itinerário Técnico Administrativo em Educação',
             },
 
             grafo_publicado: {
-                trilhas: [], 
+                trilhas: [],
                 elementos: [],    
             },
         },
         {
             dados_gerais: {
-                id: 4,
-                titulo: 'Preparação para a aposentadoria',
+                id: 3,
+                titulo: 'Docente',  // NOME DO ITINERARIO
                 publico: '',
-                descricao: 'Descrição do Itinerário Preparação para a aposentadoria',
+                descricao: 'Descrição do Itinerário Docente',
+            },
+
+            grafo_publicado: {
+                trilhas: [], // ids das trilhas
+                elementos: [],
+            },
+        },
+        {
+            dados_gerais: {
+                id: 4,
+                titulo: 'Gerencial',
+                publico: '',
+                descricao: 'Descrição do Itinerário Gerencial',
             },
 
             grafo_publicado: {
@@ -57,13 +57,13 @@ const itinerariosModel = {
         {
             dados_gerais: {
                 id: 5,
-                titulo: 'Técnico-Administrativo em Educação', 
+                titulo: 'Preparação para a aposentadoria',
                 publico: '',
-                descricao: 'Descrição do Itinerário Técnico Administrativo em Educação',
+                descricao: 'Descrição do Itinerário Preparação para a aposentadoria',
             },
 
             grafo_publicado: {
-                trilhas: [],
+                trilhas: [], 
                 elementos: [],    
             },
         },

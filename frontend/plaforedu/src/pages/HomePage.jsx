@@ -51,7 +51,7 @@ export default function HomePage() {
                         }}
                     >
                         <Col>
-                            <Link onClick={() => { onClickItinerario(2) }} to='/cursos'>
+                            <Link onClick={() => { onClickItinerario(1) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int2} />}
@@ -62,7 +62,7 @@ export default function HomePage() {
                             </Link>
                         </Col>
                         <Col>
-                            <Link onClick={() => { onClickItinerario(5) }} to='/cursos'>
+                            <Link onClick={() => { onClickItinerario(2) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int5} />}
@@ -73,7 +73,7 @@ export default function HomePage() {
                             </Link>
                         </Col>
                         <Col>
-                            <Link onClick={() => { onClickItinerario(1) }} to='/cursos'>
+                            <Link onClick={() => { onClickItinerario(3) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int1} />}
@@ -84,7 +84,7 @@ export default function HomePage() {
                             </Link>
                         </Col>
                         <Col>
-                            <Link onClick={() => { onClickItinerario(3) }} to='/cursos'>
+                            <Link onClick={() => { onClickItinerario(4) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int3} />}
@@ -95,7 +95,7 @@ export default function HomePage() {
                             </Link>
                         </Col>
                         <Col>
-                            <Link onClick={() => { onClickItinerario(4) }} to='/cursos'>
+                            <Link onClick={() => { onClickItinerario(5) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
                                     cover={<img alt="example" src={Int4} />}
