@@ -3,6 +3,7 @@ import HeaderHome from '../components/header/HeaderHome';
 import video from '../assets/about/video.png'
 import mandala from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_Completa.png'
 import retangulo from '../assets/about/Rectangle.png'
+import infografico from '../assets/about/PLAFOR_Categorias-Competencias_Infografico_v4.png'
 
 import {
     Layout,
@@ -174,6 +175,46 @@ export default function AboutPage() {
                                 >
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis vel ab officiis expedita alias modi optio, consectetur voluptatibus adipisci reiciendis omnis natus rem illum similique obcaecati reprehenderit exercitationem molestiae nam.
                                 </Text>
+                            </Col>
+                        </Row>
+                    </Card>
+                    <Card
+                        style={{
+                            marginBottom: '5px'
+                        }}
+                    >
+                        <Row align='middle'>
+                            <Col
+                                span={24}
+                                style={{ padding: '40px' }}
+                            >
+                                <Title
+                                    style={{
+                                        fontFamily: 'Poppins',
+                                        fontSize: '30px',
+                                        color: '#2C55A1',
+                                    }}
+                                >
+                                    Categorias de Competências
+                                </Title>
+                                <Text
+                                    style={{
+                                        fontFamily: 'Roboto',
+                                        fontSize: '24px',
+                                    }}
+                                >
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis vel ab officiis expedita alias modi optio, consectetur voluptatibus adipisci reiciendis omnis natus rem illum similique obcaecati reprehenderit exercitationem molestiae nam.
+                                </Text>
+                            </Col>
+                            <Col
+                                span={24}
+                                style={{ padding: '40px' }}
+                            >
+                                <Image
+                                    preview={false}
+                                    src={infografico}
+                                    width={'100%'}
+                                />
                             </Col>
                         </Row>
                     </Card>
