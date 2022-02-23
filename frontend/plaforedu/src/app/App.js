@@ -10,6 +10,7 @@ import CoursesPage from '../pages/CoursesPage.jsx'
 import HeaderGov from '../components/header/HeaderGov.jsx';
 import HomePage from '../pages/HomePage.jsx';
 import FooterGov from '../components/footer/FooterGov.jsx';
+import FaleConosco from '../pages/FaleConosco';
 
 import {
   Layout
@@ -30,6 +31,7 @@ function App() {
           <Route path='/' element={<HomePage/>} />
           <Route path='/cursos' element={<CoursesPage />}/>
           <Route path='/about' element={<AboutPage />}/>
+          <Route path='/faleconosco' element={<FaleConosco />}/>
         </Routes>
         <VLibras/>
         <FooterGov/>

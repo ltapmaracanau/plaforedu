@@ -98,7 +98,9 @@ export default function CytoscapeVisualization() {
     }
 
     useEffect(() => {
+        cyRef.current.reset()
         cyRef.current.layout(layoutAtual).run()
+        setZoom(cyRef.current._private.zoom)
     }, [elements, layoutAtual]);
 
     return (
@@ -211,16 +213,21 @@ export default function CytoscapeVisualization() {
                             </Form.Item>
                         </Card>
                     </Col>
+                </Row>
+                <Row
+                    align='middle'
+                    style={{ backgroundColor: '#EBEBEB' }}
+                >
                     <Col style={{ display: 'flex', flexDirection: 'row' }}>
                         <Card style={{ width: '100%' }}>
-                            <CSVLink 
+                            <CSVLink
                                 filename="plaforedu"
                                 headers={headers}
                                 data={data}
                                 target="_blank"
                             >
                                 <Button
-                                    onClick={() => {}}
+                                    onClick={() => { }}
                                     icon={<FileExcelOutlined />}
                                 >
                                     <Text style={{ fontFamily: 'Roboto' }}>Exportar .csv</Text>
@@ -229,7 +236,7 @@ export default function CytoscapeVisualization() {
                         </Card>
 
                         <Card style={{ width: '100%' }}>
-                            <PDFDownloadLink document={<Template sourceImage={() => cyRef?.current.jpg()}/>} fileName="plaforedu.pdf">
+                            <PDFDownloadLink document={<Template sourceImage={() => cyRef?.current.jpg()} />} fileName="plaforedu.pdf">
                                 {({ loading, error }) => loading ? (
                                     <Button icon={<LoadingOutlined />}>
                                         <Text>{error?.message}</Text>
@@ -256,16 +263,15 @@ export default function CytoscapeVisualization() {
                     cy.on("click", 'node', function (event) {
                         const element = event.target._private.data
                         if (element.id.includes('curso')) {
+                            console.log(element.id);
                             setCourseOnModal(cursos.find((curso) => curso.id.toString() === element.id.replace(/curso/gi, '')))
                             setModalCourseVisible(true)
                         }
                         if (element.id.includes('competencia')) {
+                            console.log(element.id);
                             setCourseOnModal(competencias.find((competencia) => competencia.id.toString() === element.id.replace(/competencia/gi, '')))
                             setModalCompetenciaVisible(true)
                         }
-                    });
-                    cy.one("layoutready", function (event) {
-                        setZoom(cy._private.zoom)
                     });
                 }}
                 style={{
