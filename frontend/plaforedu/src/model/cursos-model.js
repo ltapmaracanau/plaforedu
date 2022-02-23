@@ -1,5 +1,7 @@
 import { action, unstable_effectOn } from "easy-peasy"
 
+
+// Fundos escala 2 classificação por categorias
 import fundoCurso1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 01.png'
 import fundoCategoria1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 01.png'
 import fundoCompetencia1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 01.png'
@@ -48,6 +50,27 @@ import fundoCurso12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 12.p
 import fundoCategoria12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 12.png'
 import fundoCompetencia12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 12.png'
 
+
+// Fundos escala 1 classificação por itinerarios
+import fundoEscala1Curso1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-01.png'
+import fundoEscala1Categoria1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-01.png'
+import fundoEscala1Competencia1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-01.png'
+
+import fundoEscala1Curso2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-02.png'
+import fundoEscala1Categoria2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-02.png'
+import fundoEscala1Competencia2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-02.png'
+
+import fundoEscala1Curso3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-03.png'
+import fundoEscala1Categoria3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-03.png'
+import fundoEscala1Competencia3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-03.png'
+
+import fundoEscala1Curso4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-04.png'
+import fundoEscala1Categoria4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-04.png'
+import fundoEscala1Competencia4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-04.png'
+
+import fundoEscala1Curso5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-05.png'
+import fundoEscala1Categoria5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-05.png'
+import fundoEscala1Competencia5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-05.png'
 
 import {cursosDefault, instituicoesDefault, competenciasDefault, categoriasDeCompetenciasDefault, temasDefault, subtemasDefault} from '../services/dataService.js'
 
@@ -101,25 +124,25 @@ const fundosCategoria = {
 
 const fundosItinerario = {
     categoria: {
-        1: fundoCategoria1,
-        2: fundoCategoria2,
-        3: fundoCategoria3,
-        4: fundoCategoria4,
-        5: fundoCategoria5,
+        1: fundoEscala1Categoria1,
+        2: fundoEscala1Categoria2,
+        3: fundoEscala1Categoria3,
+        4: fundoEscala1Categoria4,
+        5: fundoEscala1Categoria5,
     },
     curso: {
-        1: fundoCurso1,
-        2: fundoCurso2,
-        3: fundoCurso3,
-        4: fundoCurso4,
-        5: fundoCurso5,
+        1: fundoEscala1Curso1,
+        2: fundoEscala1Curso2,
+        3: fundoEscala1Curso3,
+        4: fundoEscala1Curso4,
+        5: fundoEscala1Curso5,
     },
     competencia: {
-        1: fundoCompetencia1,
-        2: fundoCompetencia2,
-        3: fundoCompetencia3,
-        4: fundoCompetencia4,
-        5: fundoCompetencia5,
+        1: fundoEscala1Competencia1,
+        2: fundoEscala1Competencia2,
+        3: fundoEscala1Competencia3,
+        4: fundoEscala1Competencia4,
+        5: fundoEscala1Competencia5,
     },
 }
 
@@ -133,18 +156,18 @@ const colorsCategorias = {
     7:  '#009688',
     8:  '#1c67b0',
     9:  '#5b0fa0',
-    10:  '#a52099',
+    10: '#a52099',
     11: '#f154ca',
     12: '#997ff7',
     13: '#1db7ed',
 }
 
 const colorsItinerarios = {
-    1:  '#ea190f',
-    2:  '#f98506',
-    3:  '#ffbe00',
-    4:  '#9dc63d',
-    5:  '#00ba00',
+    1:  '#39A8E0',
+    2:  '#F89406',
+    3:  '#E74C3C',
+    4:  '#009688',
+    5:  '#9966FF',
 }
 
 const initialFilterDefault = {

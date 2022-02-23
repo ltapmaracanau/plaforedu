@@ -180,7 +180,7 @@ export default function FaleConosco() {
                                                     validateStatus={error ? 'error' : ''}
                                                     help={error ? error.message : ''}
                                                     hasFeedback
-                                                    label={'Tipo de mensagem'}
+                                                    label={'A que se refere sua mensagem'}
                                                 >
                                                     <Select {...field} >
                                                         <Select.Option value={'Bug'}>Bug</Select.Option>

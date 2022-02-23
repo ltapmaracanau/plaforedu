@@ -1,11 +1,11 @@
 import React from 'react'
 import HeaderHome from '../components/header/HeaderHome';
 import Finder from '../components/Finder';
-import Int1 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_Docente.png'
-import Int2 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_InicServPublico.png'
-import Int3 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_Gerencial.png'
-import Int4 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_PrepAposenta.png'
-import Int5 from '../assets/itinerarios/PLAFOREDU_Icones-Itinerarios_v3_TecAdmEdu.png'
+import Int1 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_Docente.png'
+import Int2 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_InicServPublico.png'
+import Int3 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_Gerencial.png'
+import Int4 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_PrepAposenta.png'
+import Int5 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_TecAdmEdu.png'
 import { useStoreActions } from 'easy-peasy'
 import { Link } from "react-router-dom";
 
