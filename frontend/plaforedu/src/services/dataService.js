@@ -3612,7 +3612,7 @@ export const cursosDefault = [
         link: 'Não especificado',
         obs: 'Não há cursos relacionado no Padlet',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3628,7 +3628,7 @@ export const cursosDefault = [
         link: 'Não especificado',
         obs: 'Trilha do ACT Sebrae',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3644,7 +3644,7 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/107/',
         obs: '',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3676,7 +3676,7 @@ export const cursosDefault = [
         link: 'Não especificado',
         obs: 'A ser desenvolvido',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3692,7 +3692,7 @@ export const cursosDefault = [
         link: 'Não especificado',
         obs: 'A ser desenvolvido',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3708,7 +3708,7 @@ export const cursosDefault = [
         link: 'Não especificado',
         obs: 'A ser desenvolvido pelo ACT Sebrae',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3772,7 +3772,7 @@ export const cursosDefault = [
         link: 'Não especificado',
         obs: '',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3788,7 +3788,7 @@ export const cursosDefault = [
         link: 'Não especificado',
         obs: 'Não há cursos relacionado no Padlet',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3804,7 +3804,7 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/318/',
         obs: '',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3836,7 +3836,7 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/356/',
         obs: '',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3852,7 +3852,7 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/175/',
         obs: '',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3868,7 +3868,7 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/372/',
         obs: '',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3884,7 +3884,7 @@ export const cursosDefault = [
         link: 'Não especificado',
         obs: 'Não há cursos relacionado no Padlet',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3900,7 +3900,7 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/373/',
         obs: '',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3916,7 +3916,7 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/334/',
         obs: '',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }
@@ -3932,7 +3932,7 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/299/',
         obs: 'Conversar com a ENAP para revisitar o curso',
         filter: {
-            competencias: [0],
+            competencias: [1],
             temas: [],
             subtemas: [],
         }

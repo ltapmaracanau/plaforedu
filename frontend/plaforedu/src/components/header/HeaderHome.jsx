@@ -40,7 +40,7 @@ export default function HeaderHome() {
           />
         </Link>
       </Col>
-      <Col offset={6} flex='auto' style={{ padding: '0px 100px', display: 'flex', fontFamily: 'Roboto', justifyContent: 'right', alignItems: 'center' }}>
+      <Col offset={4} flex='auto' style={{ padding: '0px 100px', display: 'flex', fontFamily: 'Roboto', justifyContent: 'right', alignItems: 'center' }}>
         <Menu disabledOverflow={true} mode='horizontal' selectable={false}>
           <Menu.Item key={1}><Link to={'/'}>HOME</Link></Menu.Item>
           <Menu.Item key={2}><Link to={'/about'}>SOBRE</Link></Menu.Item>
@@ -57,6 +57,7 @@ export default function HeaderHome() {
             <Menu.Item key={34} onClick={() => onClickItinerario(4)} ><Link to={'/cursos'}>Gerencial</Link></Menu.Item>
             <Menu.Item key={35} onClick={() => onClickItinerario(5)} ><Link to={'/cursos'}>Preparação para a aposentadoria</Link></Menu.Item>
           </SubMenu>
+          <Menu.Item key={4}><Link to={'/faleconosco'}>FALE CONOSCO</Link></Menu.Item>
         </Menu>
       </Col>
     </Row>

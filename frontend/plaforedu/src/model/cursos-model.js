@@ -51,8 +51,6 @@ import fundoCompetencia12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Comp
 
 import {cursosDefault, instituicoesDefault, competenciasDefault, categoriasDeCompetenciasDefault, temasDefault, subtemasDefault} from '../services/dataService.js'
 
-console.log(categoriasDeCompetenciasDefault);
-
 const fundosCategoria = {
     categoria: {
         1: fundoCategoria1,
@@ -218,7 +216,13 @@ const reformuladorDeElementosCytoscape = (novosCursos, esqCores) => {
         const curso = cursosDefault.find((curso) => curso.id === idCurso)
         const competencias = curso.filter.competencias
         const catData = categoriasDeCompetenciasDefault.filter(categoria => categoria.competencias.some(competencia => curso.filter.competencias.includes(competencia)))
-        console.log(catData);
+        // console.log('Curso: ', curso.id);
+        // console.log(catData);
+        if (curso.id === 9) {
+            //console.log('Curso', curso.id)
+            //console.log(competencias);
+            //console.log(catData);
+        }
         elementos.push({
             group: 'nodes',
             data: {
@@ -257,7 +261,7 @@ const reformuladorDeElementosCytoscape = (novosCursos, esqCores) => {
                 elementos.push({
                     group: 'edges',
                     data: {
-                        id: 'edge'+categoriaPertencente.id+'competencia'+idCompetencia,
+                        id: 'edgecategoria'+categoriaPertencente.id+'competencia'+idCompetencia,
                         source: 'categoria'+categoriaPertencente.id,
                         target: 'competencia'+idCompetencia
                     }
@@ -268,7 +272,7 @@ const reformuladorDeElementosCytoscape = (novosCursos, esqCores) => {
             elementos.push({
                 group: 'edges',
                 data: {
-                    id: 'edge'+curso.id+'competencia'+idCompetencia,
+                    id: 'edgecurso'+curso.id+'competencia'+idCompetencia,
                     source: 'competencia'+idCompetencia,
                     target: 'curso'+curso.id
                 }
