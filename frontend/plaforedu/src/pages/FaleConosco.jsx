@@ -49,7 +49,7 @@ export default function FaleConosco() {
         reValidateMode: 'onChange',
         defaultValues: {
             from_name: '',
-            type_message: 'Bug',
+            type_message: 'Elogio',
             from_email: '',
             message: '',
         },
@@ -180,10 +180,9 @@ export default function FaleConosco() {
                                                     validateStatus={error ? 'error' : ''}
                                                     help={error ? error.message : ''}
                                                     hasFeedback
-                                                    label={'Tipo de mensagem'}
+                                                    label={'A que se refere sua mensagem'}
                                                 >
                                                     <Select {...field} >
-                                                        <Select.Option value={'Bug'}>Bug</Select.Option>
                                                         <Select.Option value={'Elogio'}>Elogio</Select.Option>
                                                         <Select.Option value={'Sugestão'}>Sugestão</Select.Option>
                                                         <Select.Option value={'Reclamação'}>Reclamação</Select.Option>

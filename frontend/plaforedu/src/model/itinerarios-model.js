@@ -7,7 +7,7 @@ const itinerariosModel = {
                 id: 1,
                 titulo: 'Iniciação ao Serviço Público',
                 publico: '',
-                descricao: 'Descrição do Itinerário Iniciação ao Serviço Público',
+                descricao: 'Este Itinerário Formativo pretende integrar o servidor recém-empossado ao ambiente institucional a qual terá exercício, preparando-o para o desempenho de atividades vinculadas ao ambiente organizacional em que atuará e ao cargo que ocupa na instituição.',
             },
 
             grafo_publicado: {
@@ -20,7 +20,7 @@ const itinerariosModel = {
                 id: 2,
                 titulo: 'Técnico-Administrativo em Educação', 
                 publico: '',
-                descricao: 'Descrição do Itinerário Técnico Administrativo em Educação',
+                descricao: 'Este Itinerário formativo visa formar profissionais alinhados com as políticas institucionais, neste sentido, a trilha apresentará  inicialmente aos Técnicos-Administrativos em Educação o Plano de Carreira, suas atribuições e responsabilidades para o desempenho do cargo a qual foi nomeado. Os outros cursos da trilha pretendem qualificar os servidores nas diversas áreas de atuação - educacional e administrativa.',
             },
 
             grafo_publicado: {
@@ -33,7 +33,7 @@ const itinerariosModel = {
                 id: 3,
                 titulo: 'Docente',  // NOME DO ITINERARIO
                 publico: '',
-                descricao: 'Descrição do Itinerário Docente',
+                descricao: 'Este itinerário é um processo formativo interativo e reflexivo, proporcionando ao docente a resolução dos problemas enfrentados nas práticas educativas em um contexto pedagógico. A metodologia adotada é dinâmica, proporcionando a construção de novos saberes através das trilhas vinculadas à teoria e às práticas docentes.',
             },
 
             grafo_publicado: {

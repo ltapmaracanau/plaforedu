@@ -5,9 +5,7 @@ import { CSVLink } from "react-csv";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
 // Import dos fundos dos cursos
-import fundoCurso1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 01.png'
-import fundoCategoria1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 01.png'
-import fundoCompetencia1 from '../../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 01.png'
+import fundoLegenda from '../../assets/icones/PLAFOREDU_Icones-Legenda.png'
 
 import { Template } from '../pdf-document';
 
@@ -367,46 +365,19 @@ export default function CytoscapeVisualization() {
                 ]}
             >
             </CytoscapeComponent>
-            <div
+            <img
+                src={fundoLegenda}
+                width={180}
                 style={{
-                    backgroundColor: '#f2f2f2',
                     position: 'absolute',
                     top: '400px',
                     right: '50px',
                     width: '180px',
-                    padding: '10px',
-                    alignItems: 'center',
                     borderRadius: '30px',
                     boxShadow: '0px 11px 15px 0px rgba(0,0,0,0.38)',
                 }}
-            >
-                <div
-                    style={{
-                        display: 'flex',
-                        marginBottom: '10px',
-                    }}
-                >
-                    <img alt='Curso' src={fundoCurso1} height={'25px'} style={{ marginRight: '10px' }} />
-                    <Text style={{ fontFamily: 'Roboto' }}>Curso</Text>
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        marginBottom: '10px',
-                    }}
-                >
-                    <img alt='Competência' src={fundoCompetencia1} height={'25px'} style={{ marginRight: '10px' }} />
-                    <Text style={{ fontFamily: 'Roboto' }}>Competência</Text>
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                    }}
-                >
-                    <img alt='Categoria' src={fundoCategoria1} height={'25px'} style={{ marginRight: '10px' }} />
-                    <Text style={{ fontFamily: 'Roboto' }}>Categoria de Competências</Text>
-                </div>
-            </div>
+                draggable={false}
+            />
             <Modal // Modal de Curso
                 visible={modalCourseVisible}
                 onOk={handleOk}
