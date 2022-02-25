@@ -4,6 +4,19 @@ const itinerariosModel = {
     itinerarios: [
         {
             dados_gerais: {
+                id: 0,
+                titulo: 'PlaforEDU',
+                publico: '',
+                descricao: 'O PlaforEdu é a plataforma utilizada pelo Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional e Tecnológica (PLAFOR). A plataforma tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).',
+            },
+
+            grafo_publicado: {
+                trilhas: [],
+                elementos: [],    
+            },
+        },
+        {
+            dados_gerais: {
                 id: 1,
                 titulo: 'Iniciação ao Serviço Público',
                 publico: '',

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Input, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom'
 
 import Fundo from '../assets/fundo02.png';
 import { useStoreActions, useStoreState } from 'easy-peasy';
@@ -12,13 +13,13 @@ const { Title } = Typography;
 
 export default function Finder() {
 
-    const filtro = useStoreState(state => state.cursos.filter)
-    const changeFiltro = useStoreActions(actions => actions.cursos.changeFilter)
+    let navigate = useNavigate();
+
+    const setFiltro = useStoreActions(actions => actions.cursos.setFilter)
 
     const onSearch = (value) => {
-        const newFilter = filtro
-        newFilter.buscaInterna = value
-        changeFiltro(newFilter)
+        setFiltro({ buscaInterna: value, itinerario: 0 })
+        navigate(`/cursos`)
     }
 
     return (
@@ -89,7 +90,7 @@ export default function Finder() {
                     prefix={<SearchOutlined style={{ margin: '0 16px' }} />}
                     bordered={false}
                     placeholder={"Busque aqui"}
-                    onPressEnter={(value) => { onSearch(value) }}
+                    onPressEnter={(e) => { onSearch(e.target.value) }}
                 />
             </Row>
         </>

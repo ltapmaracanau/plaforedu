@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy'
 
+import Img0 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_Completa.png'
 import Img1 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_InicServPublico_CLICADO.png'
 import Img2 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_TecAdmEdu_CLICADO.png'
 import Img3 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_Docente_CLICADO.png'
@@ -22,12 +23,47 @@ const { Text } = Typography
 
 export default function RowItinerario() {
 
-    const itinerario = useStoreState(state => state.cursos.filter.visualization.itinerario)
+    const itinerario = useStoreState(state => state.cursos.filter.itinerario)
     const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
 
     const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.find((obj) => obj.dados_gerais.id === itinerario));
 
     const maps = {
+        mapGeral: {
+            name: '0',
+            areas: [
+                {
+                    name: '1',
+                    shape: 'circle',
+                    coords: [125, 45, 40],
+                    href: ''
+                },
+                {
+                    name: '2',
+                    shape: 'circle',
+                    coords: [203, 100, 40],
+                    href: ''
+                },
+                {
+                    name: '3',
+                    shape: 'circle',
+                    coords: [170, 190, 40],
+                    href: ''
+                },
+                {
+                    name: '4',
+                    shape: 'circle',
+                    coords: [75, 190, 40],
+                    href: ''
+                },
+                {
+                    name: '5',
+                    shape: 'circle',
+                    coords: [45, 100, 40],
+                    href: ''
+                },
+            ]
+        },
         mapInicServPublico: {
             name: '1',
             areas: [
@@ -180,6 +216,7 @@ export default function RowItinerario() {
     }
 
     const linha = {
+        0: <ImageMapper src={Img0} width={220} map={maps.mapGeral} onClick={onClick} strokeColor='rgba(0, 0, 0, 0)' fillColor='rgba(0,0,0,0)' />,
         1: <ImageMapper src={Img1} width={220} map={maps.mapInicServPublico} onClick={onClick} strokeColor='rgba(0, 0, 0, 0)' fillColor='rgba(0,0,0,0)' />,
         2: <ImageMapper src={Img2} width={250} map={maps.mapTecAdmEduc} onClick={onClick} strokeColor='rgba(0, 0, 0, 0)' fillColor='rgba(0,0,0,0)' />,
         3: <ImageMapper src={Img3} width={250} map={maps.mapDocente} onClick={onClick} strokeColor='rgba(0, 0, 0, 0)' fillColor='rgba(0,0,0,0)' />,
