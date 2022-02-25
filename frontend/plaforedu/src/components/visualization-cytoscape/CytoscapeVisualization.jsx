@@ -39,9 +39,10 @@ export default function CytoscapeVisualization() {
     const cyRef = useRef(null)
 
     const filterCollapsed = useStoreState(state => state.adm.filterCollapsed);
+    const esqCoresAtual = useStoreState(state => state.cursos.filter.esquemaDeCores)
     const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed);
     const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema);
-    const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.visualization.esquemaDeCores);
+    const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.esquemaDeCores);
     const elements = useStoreState(state => state.cursos.elements);
     const cursos = useStoreState(state => state.cursos.cursos);
     const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados);
@@ -202,10 +203,11 @@ export default function CytoscapeVisualization() {
                                     onChange={(value) => {
                                         setColorSchema(value)
                                     }}
+                                    value={esqCoresAtual}
                                     defaultValue={colorSchemaDefault}
                                     style={{ width: '100%' }}
                                 >
-                                    <Select.Option value={'categoria'}>Categoria</Select.Option>
+                                    <Select.Option value={'categoria'}>Competência</Select.Option>
                                     <Select.Option value={'itinerario'}>Itinerário</Select.Option>
                                 </Select>
                             </Form.Item>
@@ -368,6 +370,7 @@ export default function CytoscapeVisualization() {
             <img
                 src={fundoLegenda}
                 width={180}
+                alt={'Legenda'}
                 style={{
                     position: 'absolute',
                     top: '400px',
@@ -398,15 +401,15 @@ export default function CytoscapeVisualization() {
                     <Descriptions.Item label='Instituição Certificadora'>
                         {getInstituicao(courseOnModal.instCert)}
                     </Descriptions.Item>
-                    <Descriptions.Item label='Possui Acessibilidade'>
+                    {/* <Descriptions.Item label='Possui Acessibilidade'>
                         {courseOnModal.possuiAcessibilidade}
-                    </Descriptions.Item>
+                    </Descriptions.Item> */}
                     <Descriptions.Item label='Link'>
                         <a target="_blank" rel="noreferrer" href={courseOnModal.link}>{courseOnModal.link}</a>
                     </Descriptions.Item>
-                    <Descriptions.Item label='Observações'>
+                    {/* <Descriptions.Item label='Observações'>
                         {courseOnModal.obs}
-                    </Descriptions.Item>
+                    </Descriptions.Item> */}
                 </Descriptions>
             </Modal>
             <Modal // Modal de Categoria

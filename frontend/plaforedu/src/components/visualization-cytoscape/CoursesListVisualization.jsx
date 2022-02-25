@@ -106,11 +106,11 @@ export default function CoursesListVisualization() {
                                                 alignItems: 'center',
                                                 justifyContent: 'space-between',
                                             }}>
-                                                <Text style={{ fontFamily:'Roboto' }}>Instituição: {' '}
+                                                <Text style={{ fontFamily: 'Roboto' }}>Instituição: {' '}
                                                     <Text strong>{getInstituicao(item.instCert)}</Text>
                                                 </Text>
 
-                                                <Text style={{ fontFamily:'Roboto' }}>Carga horária:
+                                                <Text style={{ fontFamily: 'Roboto' }}>Carga horária:
                                                     <Text strong>{` ${item.cargaHoraria}H`}</Text>
                                                 </Text>
                                             </div>
@@ -119,11 +119,11 @@ export default function CoursesListVisualization() {
                                                 display: 'flex',
                                                 flexDirection: 'column',
                                             }}>
-                                                <Text style={{ fontFamily:'Roboto' }}>Categorias de competência: {' '}
+                                                <Text style={{ fontFamily: 'Roboto' }}>Categorias de competência: {' '}
                                                     <Text strong>{getCategoriasCompetencia(item.filter.competencias)}</Text>
                                                 </Text>
 
-                                                <Text style={{ fontFamily:'Roboto' }}>Competências: {' '}
+                                                <Text style={{ fontFamily: 'Roboto' }}>Competências: {' '}
                                                     <Text strong>{getCompetencias(item.filter.competencias)}</Text>
                                                 </Text>
                                             </div>
@@ -154,15 +154,15 @@ export default function CoursesListVisualization() {
                             <Descriptions.Item label='Instituição Certificadora'>
                                 {getInstituicao(courseOnModal.instCert)}
                             </Descriptions.Item>
-                            <Descriptions.Item label='Possui Acessibilidade'>
+                            {/* <Descriptions.Item label='Possui Acessibilidade'>
                                 {courseOnModal.possuiAcessibilidade}
-                            </Descriptions.Item>
+                            </Descriptions.Item> */}
                             <Descriptions.Item label='Link'>
                                 <a target="_blank" rel="noreferrer" href={courseOnModal.link}>{courseOnModal.link}</a>
                             </Descriptions.Item>
-                            <Descriptions.Item label='Obsevações'>
+                            {/* <Descriptions.Item label='Obsevações'>
                                 {courseOnModal.obs}
-                            </Descriptions.Item>
+                            </Descriptions.Item> */}
                         </Descriptions>
                     </Modal>
                 </Col>

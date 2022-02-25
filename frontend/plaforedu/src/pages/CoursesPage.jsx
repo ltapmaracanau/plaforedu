@@ -1,14 +1,15 @@
 import React from 'react';
-
-import HeaderHome from '../components/header/HeaderHome';
-
+import { useStoreState } from 'easy-peasy';
 import { Row, Layout } from 'antd';
 
+
+
+
+import HeaderHome from '../components/header/HeaderHome';
+import SideFilter from '../components/visualization-cytoscape/SideFilter';
+import RowItinerario from '../components/visualization-cytoscape/RowItinerario';
 import CytoscapeVisualization from '../components/visualization-cytoscape/CytoscapeVisualization';
 import CoursesListVisualization from '../components/visualization-cytoscape/CoursesListVisualization';
-import SideFilter from '../components/visualization-cytoscape/SideFilter';
-import { useStoreState } from 'easy-peasy';
-import RowItinerario from '../components/visualization-cytoscape/RowItinerario';
 
 const { Sider, Content } = Layout;
 

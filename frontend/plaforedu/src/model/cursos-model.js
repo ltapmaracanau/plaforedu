@@ -171,46 +171,43 @@ const colorsItinerarios = {
 }
 
 const initialFilterDefault = {
-    sideFilter: {
-        buscaInterna: '',
-        cargaHoraria: [0, 200],
-        categoriasDeCompetencias: [],
-        competencias: [],
-        temas: [],
-        subtemas: [],
-        instCertificadora: [],
-    },
-    visualization: {
-        esquemaDeCores: 'categoria',
-        itinerario: 1,
-    }
+    buscaInterna: '',
+    cargaHoraria: [0, 200],
+    categoriasDeCompetencias: [],
+    competencias: [],
+    temas: [],
+    subtemas: [],
+    instCertificadora: [],
+    esquemaDeCores: 'categoria',
+    itinerario: 0,
 }
 
 const cursosFilterFuctionDefault = (filtro) => {
     let novosCursos = []
     cursosDefault.forEach(curso => {
-        let contemTema = curso.filter.temas.some(idTema => filtro.sideFilter.temas.includes(idTema))
-        let temasVazio = filtro.sideFilter.temas.length === 0
+        let contemTema = curso.filter.temas.some(idTema => filtro.temas.includes(idTema))
+        let temasVazio = filtro.temas.length === 0
         
-        let contemSubtema = curso.filter.subtemas.some(idSubtema => filtro.sideFilter.subtemas.includes(idSubtema))
-        let subtemasVazio = filtro.sideFilter.subtemas.length === 0
+        let contemSubtema = curso.filter.subtemas.some(idSubtema => filtro.subtemas.includes(idSubtema))
+        let subtemasVazio = filtro.subtemas.length === 0
 
         let categoriasDoCurso = categoriasDeCompetenciasDefault.filter(categoria => categoria.competencias.some(competencia => curso.filter.competencias.includes(competencia)))
-        let contemCategoria = categoriasDoCurso.some(categoria => filtro.sideFilter.categoriasDeCompetencias.includes(categoria.id))
-        let categoriasVazio = filtro.sideFilter.categoriasDeCompetencias.length === 0
+        let contemCategoria = categoriasDoCurso.some(categoria => filtro.categoriasDeCompetencias.includes(categoria.id))
+        let categoriasVazio = filtro.categoriasDeCompetencias.length === 0
 
-        let contemCompetencia = curso.filter.competencias.some(idCompetencia => filtro.sideFilter.competencias.includes(idCompetencia))
-        let competenciasVazio = filtro.sideFilter.competencias.length === 0
+        let contemCompetencia = curso.filter.competencias.some(idCompetencia => filtro.competencias.includes(idCompetencia))
+        let competenciasVazio = filtro.competencias.length === 0
         
-        let contemInstituicao = filtro.sideFilter.instCertificadora.some(inst => curso.instCert === inst)
-        let instituicoesVazio = filtro.sideFilter.instCertificadora.length === 0
+        let contemInstituicao = filtro.instCertificadora.some(inst => curso.instCert === inst)
+        let instituicoesVazio = filtro.instCertificadora.length === 0
         
-        let buscaInterna = curso.title.toLowerCase().startsWith(filtro.sideFilter.buscaInterna.toLowerCase())
-        let buscaInternaVazia = filtro.sideFilter.buscaInterna === '' || filtro.sideFilter.buscaInterna === undefined
+        let buscaInterna = curso.title.toLowerCase().startsWith(filtro.buscaInterna.toLowerCase())
+        let buscaInternaVazia = filtro.buscaInterna === '' || filtro.buscaInterna === undefined
         
-        let contemItinerario = curso.itinerario === filtro.visualization.itinerario
+        let contemItinerario = curso.itinerario === filtro.itinerario
+        let itinerarioGeral = filtro.itinerario === 0
         
-        let contemCargaHoraria = filtro.sideFilter.cargaHoraria[0] <= curso.cargaHoraria && curso.cargaHoraria <= filtro.sideFilter.cargaHoraria[1]
+        let contemCargaHoraria = filtro.cargaHoraria[0] <= curso.cargaHoraria && curso.cargaHoraria <= filtro.cargaHoraria[1]
 
         let temas = contemTema || temasVazio
         let subtemas = contemSubtema || subtemasVazio 
@@ -218,7 +215,7 @@ const cursosFilterFuctionDefault = (filtro) => {
         let competencias = contemCompetencia || competenciasVazio 
         let instituicoes = contemInstituicao || instituicoesVazio 
         let busca = buscaInterna || buscaInternaVazia 
-        let itinerario = contemItinerario
+        let itinerario = contemItinerario || itinerarioGeral
 
         if ( temas && subtemas && categorias && competencias && instituicoes && busca && contemCargaHoraria && itinerario) {
             novosCursos.push(curso.id)
@@ -343,22 +340,15 @@ const trilhosModel = {
 
     filter: initialFilterDefault,
     
-    changeFilter: action((state, payload) => {
-        /* state.filter.buscaInterna = payload.buscaInterna ? payload.buscaInterna : ''
-        state.filter.categoriasDeCompetencias = payload.categoriasDeCompetencias ? payload.categoriasDeCompetencias : []
-        state.filter.competencias = payload.competencias ? payload.competencias : []
-        state.filter.temas = payload.temas ? payload.temas : []
-        state.filter.cargaHoraria = payload.cargaHoraria ? payload.cargaHoraria : [0, 200]
-        state.filter.instCertificadora = payload.instCertificadora ? payload.instCertificadora : []
-        state.filter.subtemas = payload.subtemas ? payload.subtemas : [] */
-        state.filter.sideFilter = payload
+    setFilter: action((state, payload) => {
+        state.filter = {...state.filter, ...payload}
     }),
     
     filterFunction: action((state, payload) => {
         let filtro = payload
         let novosCursos = cursosFilterFuctionDefault(filtro)
         state.cursosFiltrados = novosCursos
-        state.elements = reformuladorDeElementosCytoscape(novosCursos, state.filter.visualization.esquemaDeCores)
+        state.elements = reformuladorDeElementosCytoscape(novosCursos, state.filter.esquemaDeCores)
     
     }),
     
@@ -376,15 +366,14 @@ const trilhosModel = {
     }),
 
     setItinerario: action((state, payload) => {
-        state.filter.sideFilter = state.filterDefault.sideFilter
-        state.filter.visualization.itinerario = payload
+        state.filter.itinerario = payload
     }),
 
     setColorSchema: action((state, payload) => {
-        state.filter.visualization.esquemaDeCores = payload
+        state.filter.esquemaDeCores = payload
     }),
     
-    elements: reformuladorDeElementosCytoscape(cursosFiltradosDefault, initialFilterDefault.visualization.esquemaDeCores),
+    elements: reformuladorDeElementosCytoscape(cursosFiltradosDefault, initialFilterDefault.esquemaDeCores),
 }
     
     export default trilhosModel

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
+import { useParams } from 'react-router-dom';
 
 import {
     SearchOutlined,
@@ -25,24 +26,17 @@ export default function SideFilter() {
     const competencias = useStoreState(state => state.cursos.competencias)
     const categoriasDeCompetencias = useStoreState(state => state.cursos.categoriasDeCompetencias)
     const instituicoes = useStoreState(state => state.cursos.instituicoes)
-
-    const filterDefault = useStoreState(state => state.cursos.filterDefault.sideFilter)
-    const changeFilter = useStoreActions(actions => actions.cursos.changeFilter)
-    const onChangeTipoVisualizacao = useStoreActions(actions => actions.adm.onChangeTipoVisualizacao)
+    const filterDefault = useStoreState(state => state.cursos.filterDefault)
     const filter = useStoreState(state => state.cursos.filter)
+    const itinerarios = useStoreState(state => state.itinerarios.itinerarios)
 
-    const onSubmit = (values) => {
-        changeFilter(values)
-    }
-
-    const onSearch = () => {
-        changeFilter(register.getValues())
-    }
+    const setFilter = useStoreActions(actions => actions.cursos.setFilter)
+    const onChangeTipoVisualizacao = useStoreActions(actions => actions.adm.onChangeTipoVisualizacao)
 
     const register = useRef(useForm({
         mode: 'onBlur',
         reValidateMode: 'onChange',
-        defaultValues: filterDefault,
+        defaultValues: filter,
         context: undefined,
         criteriaMode: 'firstError',
         shouldFocusError: true,
@@ -51,9 +45,21 @@ export default function SideFilter() {
         delayError: undefined
     }));
 
+    const onSubmit = () => {
+        let allValuesFields = register.current.getValues()
+        setFilter(allValuesFields)
+    }
+
+    const onReset = async () => {
+        register.current.reset(filterDefault)
+        await onSubmit(filterDefault)
+    }
+
     useEffect(() => {
-        register.current.reset()
-    }, [filter.visualization.itinerario])
+        register.current.setValue('itinerario', filter.itinerario)
+    }, [filter.itinerario])
+
+
 
     return (
         <Col style={{ padding: '8px 16px', overflowY: 'scroll' }}>
@@ -69,7 +75,7 @@ export default function SideFilter() {
                             render={({ field }) => {
                                 return (
                                     <Form.Item style={{ marginBottom: '0' }} >
-                                        <Input allowClear={true} prefix={<SearchOutlined />} placeholder="Buscar" {...field} onPressEnter={onSearch} />
+                                        <Input allowClear={true} prefix={<SearchOutlined />} placeholder="Buscar" {...field} onPressEnter={onSubmit} />
                                     </Form.Item>
                                 )
                             }}
@@ -93,6 +99,28 @@ export default function SideFilter() {
                                 )
                             }
                             }
+                        />
+                    </Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
+                        <Controller
+                            control={register.current.control}
+                            name='itinerario'
+                            render={({ field }) => (
+                                <Form.Item style={{ marginBottom: '0' }} label={'Itinerário:'}>
+                                    <Select
+                                        {...field}
+                                        placeholder={'Itinerário'}
+                                        showArrow
+                                        style={{ width: '100%' }}
+                                    >
+                                        {itinerarios.map((itinerario) => {
+                                            return itinerario.dados_gerais.id === 0 ?
+                                                <Select.Option key={itinerario.dados_gerais.id} value={itinerario.dados_gerais.id}>Todos os Itinerários</Select.Option>
+                                                : <Select.Option key={itinerario.dados_gerais.id} value={itinerario.dados_gerais.id}>{itinerario.dados_gerais.titulo}</Select.Option>
+                                        })}
+                                    </Select>
+                                </Form.Item>
+                            )}
                         />
                     </Card>
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
@@ -239,8 +267,7 @@ export default function SideFilter() {
                         <Button
                             type='primary'
                             onClick={() => {
-                                register.current.reset()
-                                onSubmit(filterDefault)
+                                onReset()
                             }}
                         >
                             Resetar Filtro
