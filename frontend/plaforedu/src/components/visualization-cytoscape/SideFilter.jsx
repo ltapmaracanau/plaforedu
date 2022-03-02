@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
-import { useParams } from 'react-router-dom';
 
 import {
     SearchOutlined,
@@ -30,8 +29,10 @@ export default function SideFilter() {
     const filter = useStoreState(state => state.cursos.filter)
     const itinerarios = useStoreState(state => state.itinerarios.itinerarios)
 
+    const [filtroCompleto, setFiltroCompleto] = useState(true)
+
     const setFilter = useStoreActions(actions => actions.cursos.setFilter)
-    const onChangeTipoVisualizacao = useStoreActions(actions => actions.adm.onChangeTipoVisualizacao)
+    const setTipoVisualizacao = useStoreActions(actions => actions.adm.setTipoVisualizacao)
 
     const register = useRef(useForm({
         mode: 'onBlur',
@@ -47,12 +48,14 @@ export default function SideFilter() {
 
     const onSubmit = () => {
         let allValuesFields = register.current.getValues()
+        delete allValuesFields.tipoVisualizacao
         setFilter(allValuesFields)
     }
 
-    const onReset = async () => {
+    const onReset = () => {
+        setFiltroCompleto(true)
         register.current.reset(filterDefault)
-        await onSubmit(filterDefault)
+        onSubmit(filterDefault)
     }
 
     useEffect(() => {
@@ -84,16 +87,38 @@ export default function SideFilter() {
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.current.control}
-                            defaultValue={true}
                             name='tipoVisualizacao'
                             render={() => {
                                 return (
-                                    <Form.Item style={{ marginBottom: '0' }} label={'Tipo de Visualização:'}>
+                                    <Form.Item style={{ marginBottom: '0' }} label={'Visualizar em:'}>
                                         <Switch
                                             defaultChecked={false}
                                             checkedChildren="Lista"
                                             unCheckedChildren="Grafo"
-                                            onChange={(value) => { onChangeTipoVisualizacao(value) }}
+                                            onChange={(value) => { setTipoVisualizacao(value) }}
+                                        />
+                                    </Form.Item>
+                                )
+                            }
+                            }
+                        />
+                    </Card>
+                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
+                        <Controller
+                            control={register.current.control}
+                            name='tipoClassificacao'
+                            render={({ field }) => {
+                                return (
+                                    <Form.Item style={{ marginBottom: '0' }} label={'Classificar por:'}>
+                                        <Switch
+                                            checkedChildren="Trilhas"
+                                            unCheckedChildren="Competências"
+                                            checked={field.value}
+                                            onChange={(value) => {
+                                                setFiltroCompleto(!value)
+                                                field.onChange(value)
+                                                onSubmit()
+                                            }}
                                         />
                                     </Form.Item>
                                 )
@@ -111,6 +136,10 @@ export default function SideFilter() {
                                         {...field}
                                         placeholder={'Itinerário'}
                                         showArrow
+                                        onChange={(value) => {
+                                            field.onChange(value)
+                                            onSubmit()
+                                        }}
                                         style={{ width: '100%' }}
                                     >
                                         {itinerarios.map((itinerario) => {
@@ -134,6 +163,10 @@ export default function SideFilter() {
                                         mode='multiple'
                                         placeholder={'Todas as categorias'}
                                         showArrow
+                                        onChange={(value) => {
+                                            field.onChange(value)
+                                            onSubmit()
+                                        }}
                                         style={{ width: '100%' }}
                                     >
                                         {categoriasDeCompetencias.map((categoria) => (
@@ -155,6 +188,10 @@ export default function SideFilter() {
                                         mode='multiple'
                                         placeholder={'Todas as competências'}
                                         showArrow
+                                        onChange={(value) => {
+                                            field.onChange(value)
+                                            onSubmit()
+                                        }}
                                         style={{ width: '100%' }}
                                     >
                                         {competencias.map((competencia) => (
@@ -165,105 +202,116 @@ export default function SideFilter() {
                             )}
                         />
                     </Card>
-                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <Controller
-                            control={register.current.control}
-                            name='temas'
-                            render={({ field }) => (
-                                <Form.Item style={{ marginBottom: '0' }} label={'Temas:'}>
-                                    <Select
-                                        {...field}
-                                        mode='multiple'
-                                        placeholder={'Todos os temas'}
-                                        showArrow
-                                        filterOption={(input, option) => {
-                                            console.log(option)
-                                            return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
-                                        }}
-                                        style={{ width: '100%' }}
-                                    >
-                                        {temas.map((tema) => (
-                                            <Select.Option key={tema.id} value={tema.id}>{tema.titulo}</Select.Option>
-                                        ))}
-                                    </Select>
-                                </Form.Item>
-                            )}
-                        />
-                    </Card>
-                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <Controller
-                            control={register.current.control}
-                            name='subtemas'
-                            render={({ field }) => (
-                                <Form.Item style={{ marginBottom: '0' }} label={'Subtemas:'}>
-                                    <Select
-                                        {...field}
-                                        placeholder={'Todos os Subtemas'}
-                                        mode='multiple'
-                                        showSearch
-                                        filterOption={(input, option) => {
-                                            console.log(option)
-                                            return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
-                                        }}
-                                        style={{ width: '100%' }}
-                                    >
-                                        {subtemas.map((subtema) => (
-                                            <Select.Option key={subtema.id} value={subtema.id}>{subtema.titulo}</Select.Option>
-                                        ))}
-                                    </Select>
-                                </Form.Item>
-                            )}
-                        />
-                    </Card>
-                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <Controller
-                            control={register.current.control}
-                            name='cargaHoraria'
-                            render={({ field }) => (
-                                <Form.Item style={{ marginBottom: '0' }} label={'Carga Horária:'}>
-                                    <Slider
-                                        {...field}
-                                        range
-                                        marks={{
-                                            0: '0h',
-                                            200: '200h',
-                                        }}
-                                        step={10}
-                                        max={200}
-                                    />
-                                </Form.Item>
-                            )}
-                        />
-                    </Card>
-                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <Controller
-                            control={register.current.control}
-                            name='instCertificadora'
-                            render={({ field }) => (
-                                <Form.Item style={{ marginBottom: '0' }} label={'Instituição Certificadora:'}>
-                                    < Select
-                                        {...field}
-                                        placeholder={'Todas as Instituições'}
-                                        mode='multiple'
-                                        showArrow
-                                        style={{ width: '100%' }}
-                                    >
-                                        {instituicoes.map((instituicao) => (
-                                            <Select.Option key={instituicao.id} value={instituicao.id}>{instituicao.titulo}</Select.Option>
-                                        ))}
-                                    </Select >
-                                </Form.Item>
-                            )}
-                        />
-                    </Card>
+                    {filtroCompleto &&
+                        <>
+                            <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
+                                <Controller
+                                    control={register.current.control}
+                                    name='temas'
+                                    render={({ field }) => (
+                                        <Form.Item style={{ marginBottom: '0' }} label={'Temas:'}>
+                                            <Select
+                                                {...field}
+                                                mode='multiple'
+                                                placeholder={'Todos os temas'}
+                                                showArrow
+                                                onChange={(value) => {
+                                                    field.onChange(value)
+                                                    onSubmit()
+                                                }}
+                                                filterOption={(input, option) => {
+                                                    return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+                                                }}
+                                                style={{ width: '100%' }}
+                                            >
+                                                {temas.map((tema) => (
+                                                    <Select.Option key={tema.id} value={tema.id}>{tema.titulo}</Select.Option>
+                                                ))}
+                                            </Select>
+                                        </Form.Item>
+                                    )}
+                                />
+                            </Card>
+                            <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
+                                <Controller
+                                    control={register.current.control}
+                                    name='subtemas'
+                                    render={({ field }) => (
+                                        <Form.Item style={{ marginBottom: '0' }} label={'Subtemas:'}>
+                                            <Select
+                                                {...field}
+                                                placeholder={'Todos os Subtemas'}
+                                                mode='multiple'
+                                                showSearch
+                                                onChange={(value) => {
+                                                    field.onChange(value)
+                                                    onSubmit()
+                                                }}
+                                                filterOption={(input, option) => {
+                                                    return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+                                                }}
+                                                style={{ width: '100%' }}
+                                            >
+                                                {subtemas.map((subtema) => (
+                                                    <Select.Option key={subtema.id} value={subtema.id}>{subtema.titulo}</Select.Option>
+                                                ))}
+                                            </Select>
+                                        </Form.Item>
+                                    )}
+                                />
+                            </Card>
+                            <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
+                                <Controller
+                                    control={register.current.control}
+                                    name='cargaHoraria'
+                                    render={({ field }) => (
+                                        <Form.Item style={{ marginBottom: '0' }} label={'Carga Horária:'}>
+                                            <Slider
+                                                {...field}
+                                                range
+                                                marks={{
+                                                    0: '0h',
+                                                    200: '200h',
+                                                }}
+                                                step={10}
+                                                max={200}
+                                                onChange={(value) => {
+                                                    field.onChange(value)
+                                                    onSubmit()
+                                                }}
+                                            />
+                                        </Form.Item>
+                                    )}
+                                />
+                            </Card>
+                            <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
+                                <Controller
+                                    control={register.current.control}
+                                    name='instCertificadora'
+                                    render={({ field }) => (
+                                        <Form.Item style={{ marginBottom: '0' }} label={'Instituição Certificadora:'}>
+                                            < Select
+                                                {...field}
+                                                placeholder={'Todas as Instituições'}
+                                                mode='multiple'
+                                                showArrow
+                                                onChange={(value) => {
+                                                    field.onChange(value)
+                                                    onSubmit()
+                                                }}
+                                                style={{ width: '100%' }}
+                                            >
+                                                {instituicoes.map((instituicao) => (
+                                                    <Select.Option key={instituicao.id} value={instituicao.id}>{instituicao.titulo}</Select.Option>
+                                                ))}
+                                            </Select >
+                                        </Form.Item>
+                                    )}
+                                />
+                            </Card>
+                        </>
+                    }
                     <Card style={{ borderColor: 'transparent', backgroundColor: 'transparent' }} bodyStyle={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                        <Button
-                            style={{ marginRight: 8 }}
-                            type='primary'
-                            htmlType='submit'
-                        >
-                            Aplicar Filtro
-                        </Button>
                         <Button
                             type='primary'
                             onClick={() => {

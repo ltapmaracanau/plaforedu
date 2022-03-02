@@ -24,8 +24,9 @@ const { Text } = Typography
 export default function RowItinerario() {
 
     const itinerario = useStoreState(state => state.cursos.filter.itinerario)
-    const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
 
+    const filter = useStoreState((state) => state.cursos.filter);
+    const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
     const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.find((obj) => obj.dados_gerais.id === itinerario));
 
     const maps = {
@@ -212,7 +213,7 @@ export default function RowItinerario() {
     }
 
     const onClick = (area) => {
-        setItinerario(Number(area.name))
+        setFilter({ ...filter, itinerario: Number(area.name) })
     }
 
     const linha = {

@@ -6,7 +6,7 @@ import Int2 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_InicServPu
 import Int3 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_Gerencial.png'
 import Int4 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_PrepAposenta.png'
 import Int5 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_TecAdmEdu.png'
-import { useStoreActions } from 'easy-peasy'
+import { useStoreActions, useStoreState } from 'easy-peasy'
 import { Link } from "react-router-dom";
 
 import {
@@ -25,12 +25,12 @@ const { Content } = Layout
 
 export default function HomePage() {
 
-    const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
-    const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema)
+    const setFilter = useStoreActions(actions => actions.cursos.setFilter)
+    const filterDefault = useStoreState(state => state.cursos.filterDefault)
+    const filter = useStoreState(state => state.cursos.filter)
 
     const onClickItinerario = (itinerario) => {
-        setItinerario(itinerario)
-        setColorSchema('categoria')
+        setFilter({ ...filterDefault, itinerario: itinerario, esquemaDeCores: 'categoria' })
     }
 
     return (

@@ -1,5 +1,12 @@
+import { action } from "easy-peasy";
 
 const itinerariosModel = {
+
+    layoutAtual: 'layoutCose',
+    
+    setLayoutAtual: action((state, payload) => {
+        state.layoutAtual = payload
+    }),
 
     itinerarios: [
         {

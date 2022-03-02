@@ -1,4 +1,4 @@
-import { action, unstable_effectOn } from "easy-peasy"
+import { action, actionOn, unstable_effectOn } from "easy-peasy"
 
 
 // Fundos escala 2 classificação por categorias
@@ -173,6 +173,7 @@ const colorsItinerarios = {
 const initialFilterDefault = {
     buscaInterna: '',
     cargaHoraria: [0, 200],
+    tipoClassificacao: false, // False: por competências   True: por trilhas
     categoriasDeCompetencias: [],
     competencias: [],
     temas: [],
@@ -227,11 +228,140 @@ const cursosFilterFuctionDefault = (filtro) => {
 const cursosFiltradosDefault = cursosFilterFuctionDefault(initialFilterDefault)
 
 
-const reformuladorDeElementosCytoscape = (novosCursos, esqCores) => {
+const reformuladorDeElementosCytoscape = (novosCursos, esqCores, tipoClassificacao) => {
     // todos os cursos
     let categoriasAdicionadas = []
     let competenciasAdicionadas = []
     let elementos = []
+    let contadorEdge = 1
+    tipoClassificacao ?
+    novosCursos.forEach(idCurso => {
+        const curso = cursosDefault.find((curso) => curso.id === idCurso)
+        const competencias = curso.filter.competencias
+        competencias.forEach(idCompetencia => {
+            const categoriaDaCompetencia = categoriasDeCompetenciasDefault.find(categoria => categoria.competencias.includes(idCompetencia))
+            const competenciaData = competenciasDefault.find(competencia => competencia.id === idCompetencia)
+            if (!competenciasAdicionadas.some(competencia => competencia.id === idCompetencia)) {
+                // Aqui eu adiciono a categoria da competência do curso caso a competência ainda não exista no grafo.
+                elementos.push({
+                    group: 'nodes',
+                    data: {
+                        id: 'categoria'+categoriaDaCompetencia.id+'competencia'+idCompetencia,
+                        label: categoriaDaCompetencia.nome,
+                        color: colorsCategorias[categoriaDaCompetencia.id],
+                        competencias: categoriaDaCompetencia.competencias,
+                        image: fundosCategoria.categoria[categoriaDaCompetencia.id],
+                    },
+                    grabbable: true,
+                    classes: ['categoria']
+                })
+                // Aqui eu adiciono a competência no grafo caso ela não exista.
+                elementos.push({
+                    group: 'nodes',
+                    data: {
+                        id: 'competencia'+idCompetencia,
+                        label: competenciaData.titulo,
+                        color: colorsCategorias[categoriaDaCompetencia.id],
+                        image: fundosCategoria.competencia[categoriaDaCompetencia.id],
+                    },
+                    grabbable: true,
+                    classes: ['competencia']
+                })
+                // Aqui eu coloco a Edge entre a competência recém adicionada e a categoria da mesma.
+                elementos.push({
+                    group: 'edges',
+                    data: {
+                        id: 'edge'+contadorEdge,
+                        source: 'categoria'+categoriaDaCompetencia.id+'competencia'+idCompetencia,
+                        target: 'competencia'+idCompetencia
+                    }
+                })
+                contadorEdge += 1
+                // Aqui eu adiciono o curso em questão.
+                elementos.push({
+                    group: 'nodes',
+                    data: {
+                        id: 'curso'+curso.id+'competencia'+idCompetencia,
+                        label: curso.title,
+                        image: fundosCategoria.curso[categoriaDaCompetencia.id],
+                        itinerario: curso.itinerario,
+                        color: colorsCategorias[categoriaDaCompetencia.id],
+                        cargaHoraria: curso.cargaHoraria,
+                        instCert: curso.instCert,
+                        possuiAcessibilidade: curso.possuiAcessibilidade,
+                        competencias: curso.filter.competencias,
+                        temas: curso.filter.temas,
+                        subtemas: curso.filter.subtemas
+                    },
+                    grabbable: true,
+                    classes: ['curso']
+                })
+                // Aqui estou adicionando a Edge do curso a competência,
+                // pois ela foi recém adicionada, e não tem último curso adicionado
+                // para ligar a ele.
+                elementos.push({
+                    group: 'edges',
+                    data: {
+                        id: 'edge'+contadorEdge,
+                        source: 'competencia'+idCompetencia,
+                        target: 'curso'+curso.id+'competencia'+idCompetencia,
+                    }
+                })
+                contadorEdge += 1
+                // Aqui eu aadiciono a competência a lista de competências que já foram adicionadas,
+                // para referenciá-la no futuro.
+                competenciasAdicionadas.push({
+                    id: idCompetencia,
+                    lastElement: 'curso'+curso.id+'competencia'+idCompetencia
+                })
+            } else {
+                const competenciaAdicionada = competenciasAdicionadas.find(competencia => competencia.id === idCompetencia)
+                // Aqui eu adiciono o curso em questão.
+                elementos.push({
+                    group: 'nodes',
+                    data: {
+                        id: 'curso'+curso.id+'competencia'+idCompetencia,
+                        label: curso.title,
+                        image: fundosCategoria.curso[categoriaDaCompetencia.id],
+                        itinerario: curso.itinerario,
+                        color: colorsCategorias[categoriaDaCompetencia.id],
+                        cargaHoraria: curso.cargaHoraria,
+                        instCert: curso.instCert,
+                        possuiAcessibilidade: curso.possuiAcessibilidade,
+                        competencias: curso.filter.competencias,
+                        temas: curso.filter.temas,
+                        subtemas: curso.filter.subtemas
+                    },
+                    grabbable: true,
+                    classes: ['curso']
+                })
+                // Aqui estou adicionando a Edge do curso a competência,
+                // pois ela foi recém adicionada, e não tem último curso adicionado
+                // para ligar a ele.
+                elementos.push({
+                    group: 'edges',
+                    data: {
+                        id: 'edge'+contadorEdge,
+                        source: competenciaAdicionada.lastElement,
+                        target: 'curso'+curso.id+'competencia'+idCompetencia,
+                    }
+                })
+                contadorEdge += 1
+                competenciasAdicionadas = competenciasAdicionadas.map(competencia => {
+                    if (competencia.id === idCompetencia) {
+                        return{
+                            id: idCompetencia,
+                            lastElement: 'curso'+curso.id+'competencia'+idCompetencia
+                        }
+                    } else {
+                        return competencia
+                    }
+                })
+            }
+
+        })
+    })
+    :
     novosCursos.forEach((idCurso) => {
         const curso = cursosDefault.find((curso) => curso.id === idCurso)
         const competencias = curso.filter.competencias
@@ -348,8 +478,7 @@ const trilhosModel = {
         let filtro = payload
         let novosCursos = cursosFilterFuctionDefault(filtro)
         state.cursosFiltrados = novosCursos
-        state.elements = reformuladorDeElementosCytoscape(novosCursos, state.filter.esquemaDeCores)
-    
+        state.elements = reformuladorDeElementosCytoscape(novosCursos, state.filter.esquemaDeCores, state.filter.tipoClassificacao)
     }),
     
     onChangeFilter: unstable_effectOn(
@@ -365,15 +494,11 @@ const trilhosModel = {
         state.cursosFiltrados = payload
     }),
 
-    setItinerario: action((state, payload) => {
-        state.filter.itinerario = payload
-    }),
-
     setColorSchema: action((state, payload) => {
         state.filter.esquemaDeCores = payload
     }),
     
-    elements: reformuladorDeElementosCytoscape(cursosFiltradosDefault, initialFilterDefault.esquemaDeCores),
+    elements: reformuladorDeElementosCytoscape(cursosFiltradosDefault, initialFilterDefault.esquemaDeCores, false),
 }
     
     export default trilhosModel
