@@ -4,7 +4,6 @@ import CytoscapeComponent from 'react-cytoscapejs';
 import { CSVLink } from "react-csv";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
-// Import dos fundos dos cursos
 import fundoLegenda from '../../assets/icones/PLAFOREDU_Icones-Legenda.png'
 
 import { Template } from '../pdf-document';

@@ -64,9 +64,9 @@ export default function FaleConosco() {
 
     const onSubmit = async (values) => {
         const valuesToSend = {
-            service_id: 'service_edhhocn',
-            template_id: 'template_p61p5xd',
-            user_id: 'user_SzHDcMIvIxZqgIRMp8kjM',
+            service_id: 'service_01wpixi',
+            template_id: 'template_2loc9ox',
+            user_id: '9EWYwR7xXVkTE8TPX',
             template_params: values
         }
         // Envio da requisição 
