@@ -168,6 +168,9 @@ export default function SideFilter() {
                                             onSubmit()
                                         }}
                                         style={{ width: '100%' }}
+                                        filterOption={(input, option) => {
+                                            return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+                                        }}
                                     >
                                         {categoriasDeCompetencias.map((categoria) => (
                                             <Select.Option key={categoria.id} value={categoria.id}>{categoria.nome}</Select.Option>
@@ -193,6 +196,9 @@ export default function SideFilter() {
                                             onSubmit()
                                         }}
                                         style={{ width: '100%' }}
+                                        filterOption={(input, option) => {
+                                            return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+                                        }}
                                     >
                                         {competencias.map((competencia) => (
                                             <Select.Option key={competencia.id} value={competencia.id}>{competencia.titulo}</Select.Option>
