@@ -66,7 +66,7 @@ const itinerariosModel = {
                 id: 4,
                 titulo: 'Gerencial',
                 publico: '',
-                descricao: 'Descrição do Itinerário Gerencial',
+                descricao: 'O itinerário formativo gerencial/liderança pode ser percorrido por servidores técnicos ou docentes que estejam em cargos/funções de gestão ou que desejem se capacitar para tal. Objetiva, através de trilhas, capacitar os servidores na área escolhida de atuação, planejados dentro das metodologias mais modernas abarcando temáticas tradicionais e contemporâneas, proporcionando uma formação completa dentro dos eixos de interesse.',
             },
 
             grafo_publicado: {
@@ -79,7 +79,7 @@ const itinerariosModel = {
                 id: 5,
                 titulo: 'Preparação para a aposentadoria',
                 publico: '',
-                descricao: 'Descrição do Itinerário Preparação para a aposentadoria',
+                descricao: 'A aposentadoria já é realidade na Rede Federal EPCT, o itinerário que se apresenta traz o enfoque para um novo encarreiramento. A preparação para aposentadoria é assunto significativo e se tratando de poder público cabe lembrar que é reconhecida e priorizada a partir da instituição da lei nº 10.741 de 2003, que dispõe sobre o Estatuto do Idoso. Elaborado a partir de  3 pilares: Formação no contexto  psicológico preparando-se para esta nova realidade, em que estas demandas de trabalho e rotina anteriores não existirão mais. Atividades futuras: o aposentado deve pensar no seu perfil de trabalho, fazer análise de suas características pessoais, habilidades, preferências, para descobrir o que irá fazer depois. Pode se associar a ONGs, empreender, etc. Financeiro: se este aspecto não estiver bem equacionado, dificilmente o aposentado conseguirá realizar as outras coisas. É fundamental o planejamento financeiro, saber o  quanto vai gastar do momento do desligamento para frente e fazer uma análise de expectativa de vida.',
             },
 
             grafo_publicado: {
