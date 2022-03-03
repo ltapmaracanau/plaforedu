@@ -24,8 +24,9 @@ const { Text } = Typography
 export default function RowItinerario() {
 
     const itinerario = useStoreState(state => state.cursos.filter.itinerario)
-    const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
 
+    const filter = useStoreState((state) => state.cursos.filter);
+    const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
     const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.find((obj) => obj.dados_gerais.id === itinerario));
 
     const maps = {
@@ -68,6 +69,12 @@ export default function RowItinerario() {
             name: '1',
             areas: [
                 {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [110, 110, 40],
+                    href: ''
+                },
+                {
                     name: '2',
                     shape: 'circle',
                     coords: [183, 122, 40],
@@ -96,6 +103,12 @@ export default function RowItinerario() {
         mapTecAdmEduc: {
             name: '2',
             areas: [
+                {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [125, 125, 40],
+                    href: ''
+                },
                 {
                     name: '3',
                     shape: 'circle',
@@ -126,6 +139,12 @@ export default function RowItinerario() {
             name: '3',
             areas: [
                 {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [125, 125, 40],
+                    href: ''
+                },
+                {
                     name: '1',
                     shape: 'circle',
                     coords: [110, 40, 40],
@@ -154,6 +173,12 @@ export default function RowItinerario() {
         mapLideranca: {
             name: '4',
             areas: [
+                {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [120, 120, 40],
+                    href: ''
+                },
                 {
                     name: '2',
                     shape: 'circle',
@@ -184,6 +209,12 @@ export default function RowItinerario() {
             name: '5',
             areas: [
                 {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [125, 125, 40],
+                    href: ''
+                },
+                {
                     name: '1',
                     shape: 'circle',
                     coords: [140, 45, 40],
@@ -212,7 +243,7 @@ export default function RowItinerario() {
     }
 
     const onClick = (area) => {
-        setItinerario(Number(area.name))
+        setFilter({ ...filter, itinerario: Number(area.name) })
     }
 
     const linha = {

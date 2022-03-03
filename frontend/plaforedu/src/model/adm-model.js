@@ -10,7 +10,7 @@ const admModel = {
         state.filterCollapsed = !state.filterCollapsed
     }),
 
-    onChangeTipoVisualizacao: action((state, payload) => {
+    setTipoVisualizacao: action((state, payload) => {
         state.tipoVisualizacao = payload
     }),
     

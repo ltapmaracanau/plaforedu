@@ -4,7 +4,6 @@ import CytoscapeComponent from 'react-cytoscapejs';
 import { CSVLink } from "react-csv";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
-// Import dos fundos dos cursos
 import fundoLegenda from '../../assets/icones/PLAFOREDU_Icones-Legenda.png'
 
 import { Template } from '../pdf-document';
@@ -39,21 +38,24 @@ export default function CytoscapeVisualization() {
     const cyRef = useRef(null)
 
     const filterCollapsed = useStoreState(state => state.adm.filterCollapsed);
-    const esqCoresAtual = useStoreState(state => state.cursos.filter.esquemaDeCores)
-    const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed);
-    const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema);
+    const layouts = useStoreState(state => state.itinerarios.layouts);
+    const layoutAtual = useStoreState(state => state.itinerarios.layoutAtual);
+    const filter = useStoreState(state => state.cursos.filter)
     const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.esquemaDeCores);
     const elements = useStoreState(state => state.cursos.elements);
     const cursos = useStoreState(state => state.cursos.cursos);
     const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados);
     const competencias = useStoreState(state => state.cursos.competencias);
     const listInst = useStoreState(state => state.cursos.instituicoes);
+
+    const setFilter = useStoreActions(actions => actions.cursos.setFilter)
+    const setLayoutAtual = useStoreActions(actions => actions.itinerarios.setLayoutAtual)
+    const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed);
+
+    const [zoom, setZoom] = useState(1);
     const [courseOnModal, setCourseOnModal] = useState(cursos[0]);
     const [modalCourseVisible, setModalCourseVisible] = useState(false);
     const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
-    const layouts = useStoreState(state => state.itinerarios.layouts);
-    const [layoutAtual, setLayoutAtual] = useState(layouts.layoutCose);
-    const [zoom, setZoom] = useState(1);
 
     const getInstituicao = useCallback((id_instituicao) => {
         const instituicao = listInst.find(({ id }) => id === id_instituicao);
@@ -98,7 +100,9 @@ export default function CytoscapeVisualization() {
 
     useEffect(() => {
         cyRef.current.reset()
-        cyRef.current.layout(layoutAtual).run()
+        filter.tipoClassificacao ?
+            cyRef.current.layout(layouts['layoutBreadthFirst']).run() :
+            cyRef.current.layout(layouts[layoutAtual]).run()
         setZoom(cyRef.current._private.zoom)
     }, [elements, layoutAtual]);
 
@@ -170,49 +174,56 @@ export default function CytoscapeVisualization() {
                             </Form.Item>
                         </Card>
                     </Col>
-                    <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
-                        <Card style={{ width: '100%' }}>
-                            <Form.Item
-                                label={'Visualização'}
-                                style={{ marginBottom: '0' }}
-                            >
-                                <Select
-                                    onChange={(value) => {
-                                        setLayoutAtual(layouts[value])
-                                    }}
-                                    defaultValue={'layoutCose'}
-                                    style={{ width: '100%' }}
-                                >
-                                    <Select.Option value={'layoutCose'}>Padrão</Select.Option>
-                                    <Select.Option value={'layoutBreadthFirst'}>Dendograma</Select.Option>
-                                    <Select.Option value={'layoutBreadthFirstCircle'}>Dendograma Circular</Select.Option>
-                                    <Select.Option value={'layoutGrid'}>Grade</Select.Option>
-                                    <Select.Option value={'layoutCircular'}>Circular</Select.Option>
-                                    <Select.Option value={'layoutConcentric'}>Concêntrico</Select.Option>
-                                </Select>
-                            </Form.Item>
-                        </Card>
-                    </Col>
-                    <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
-                        <Card style={{ width: '100%' }}>
-                            <Form.Item
-                                label={'Esquema de cores'}
-                                style={{ marginBottom: '0' }}
-                            >
-                                <Select
-                                    onChange={(value) => {
-                                        setColorSchema(value)
-                                    }}
-                                    value={esqCoresAtual}
-                                    defaultValue={colorSchemaDefault}
-                                    style={{ width: '100%' }}
-                                >
-                                    <Select.Option value={'categoria'}>Competência</Select.Option>
-                                    <Select.Option value={'itinerario'}>Itinerário</Select.Option>
-                                </Select>
-                            </Form.Item>
-                        </Card>
-                    </Col>
+                    {/* <Col>
+                        <Button onClick={() => { cyRef.current.layout(layouts[layoutAtual]).run() }}>Teste</Button>
+                    </Col> */}
+                    {!filter.tipoClassificacao &&
+                        <>
+                            <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
+                                <Card style={{ width: '100%' }}>
+                                    <Form.Item
+                                        label={'Visualização'}
+                                        style={{ marginBottom: '0' }}
+                                    >
+                                        <Select
+                                            onChange={(value) => {
+                                                setLayoutAtual(value)
+                                            }}
+                                            defaultValue={'layoutCose'}
+                                            style={{ width: '100%' }}
+                                        >
+                                            <Select.Option value={'layoutCose'}>Padrão</Select.Option>
+                                            <Select.Option value={'layoutBreadthFirst'}>Dendograma</Select.Option>
+                                            <Select.Option value={'layoutBreadthFirstCircle'}>Dendograma Circular</Select.Option>
+                                            <Select.Option value={'layoutGrid'}>Grade</Select.Option>
+                                            <Select.Option value={'layoutCircular'}>Circular</Select.Option>
+                                            <Select.Option value={'layoutConcentric'}>Concêntrico</Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                </Card>
+                            </Col>
+                            <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
+                                <Card style={{ width: '100%' }}>
+                                    <Form.Item
+                                        label={'Esquema de cores'}
+                                        style={{ marginBottom: '0' }}
+                                    >
+                                        <Select
+                                            onChange={(value) => {
+                                                setFilter({ ...filter, esquemaDeCores: value })
+                                            }}
+                                            value={filter.esquemaDeCores}
+                                            defaultValue={colorSchemaDefault}
+                                            style={{ width: '100%' }}
+                                        >
+                                            <Select.Option value={'categoria'}>Competência</Select.Option>
+                                            <Select.Option value={'itinerario'}>Itinerário</Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                </Card>
+                            </Col>
+                        </>
+                    }
                 </Row>
                 <Row
                     align='middle'
@@ -263,12 +274,12 @@ export default function CytoscapeVisualization() {
                     cy.on("click", 'node', function (event) {
                         const element = event.target._private.data
                         if (element.id.includes('curso')) {
-                            console.log(element.id);
-                            setCourseOnModal(cursos.find((curso) => curso.id.toString() === element.id.replace(/curso/gi, '')))
+                            console.log('cliquei no curso: ', element.id);
+                            setCourseOnModal(cursos.find((curso) => curso.id.toString() === element.id.replace(/competencia\d+$/gim, '').replace(/curso/gi, '')))
                             setModalCourseVisible(true)
                         }
-                        if (element.id.includes('competencia')) {
-                            console.log(element.id);
+                        if (element.id.includes('competencia') && !element.id.includes('categoria') && !element.id.includes('curso')) {
+                            console.log('cliquei na competencia: ', element.id);
                             setCourseOnModal(competencias.find((competencia) => competencia.id.toString() === element.id.replace(/competencia/gi, '')))
                             setModalCompetenciaVisible(true)
                         }
@@ -280,7 +291,7 @@ export default function CytoscapeVisualization() {
                     height: '555px',
                     backgroundColor: '#fff'
                 }}
-                layout={layouts.layoutCose}
+                layout={layouts[layoutAtual]}
                 stylesheet={[
                     {
                         selector: '.curso',
