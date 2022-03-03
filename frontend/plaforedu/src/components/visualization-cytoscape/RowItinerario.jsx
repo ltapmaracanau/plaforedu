@@ -69,6 +69,12 @@ export default function RowItinerario() {
             name: '1',
             areas: [
                 {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [110, 110, 40],
+                    href: ''
+                },
+                {
                     name: '2',
                     shape: 'circle',
                     coords: [183, 122, 40],
@@ -97,6 +103,12 @@ export default function RowItinerario() {
         mapTecAdmEduc: {
             name: '2',
             areas: [
+                {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [125, 125, 40],
+                    href: ''
+                },
                 {
                     name: '3',
                     shape: 'circle',
@@ -127,6 +139,12 @@ export default function RowItinerario() {
             name: '3',
             areas: [
                 {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [125, 125, 40],
+                    href: ''
+                },
+                {
                     name: '1',
                     shape: 'circle',
                     coords: [110, 40, 40],
@@ -156,6 +174,12 @@ export default function RowItinerario() {
             name: '4',
             areas: [
                 {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [120, 120, 40],
+                    href: ''
+                },
+                {
                     name: '2',
                     shape: 'circle',
                     coords: [211, 90, 40],
@@ -184,6 +208,12 @@ export default function RowItinerario() {
         mapAposentadoria: {
             name: '5',
             areas: [
+                {
+                    name: '0',
+                    shape: 'circle',
+                    coords: [125, 125, 40],
+                    href: ''
+                },
                 {
                     name: '1',
                     shape: 'circle',
