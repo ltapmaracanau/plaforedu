@@ -112,7 +112,7 @@ export default function SideFilter() {
                                     <Form.Item style={{ marginBottom: '0' }} label={'Classificar por:'}>
                                         <Switch
                                             checkedChildren="Trilhas"
-                                            unCheckedChildren="Competências"
+                                            unCheckedChildren="Cursos"
                                             checked={field.value}
                                             onChange={(value) => {
                                                 setFiltroCompleto(!value)
