@@ -73,8 +73,7 @@ export default function CytoscapeVisualization() {
         { label: "Carga horária", key: "cargaHoraria" },
         { label: "Instituição Certificadora", key: "instCert" },
         { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
-        { label: "Link", key: "link" },
-        { label: "Observação", key: "obs" }
+        { label: "Link", key: "link" }
     ];
 
     const data = useMemo(() => {
@@ -87,8 +86,7 @@ export default function CytoscapeVisualization() {
                 cargaHoraria: `${course.cargaHoraria}H`,
                 instCert: getInstituicao(course.instCert),
                 possuiAcessibilidade: course.possuiAcessibilidade,
-                link: course.link,
-                obs: course.obs,
+                link: course.link
             }
         });
     }, [cursos, cursosFiltrados, getInstituicao]);
@@ -104,7 +102,7 @@ export default function CytoscapeVisualization() {
             cyRef.current.layout(layouts['layoutBreadthFirst']).run() :
             cyRef.current.layout(layouts[layoutAtual]).run()
         setZoom(cyRef.current._private.zoom)
-    }, [elements, layoutAtual]);
+    }, [elements, layoutAtual, filter.tipoClassificacao, layouts]);
 
     return (
         <Col flex='auto'>
