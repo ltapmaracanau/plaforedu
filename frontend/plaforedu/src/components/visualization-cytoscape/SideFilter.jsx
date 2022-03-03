@@ -306,6 +306,9 @@ export default function SideFilter() {
                                                     onSubmit()
                                                 }}
                                                 style={{ width: '100%' }}
+                                                filterOption={(input, option) => {
+                                                    return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+                                                }}
                                             >
                                                 {instituicoes.map((instituicao) => (
                                                     <Select.Option key={instituicao.id} value={instituicao.id}>{instituicao.titulo}</Select.Option>
