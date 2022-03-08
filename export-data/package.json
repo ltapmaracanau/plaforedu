@@ -1,0 +1,9 @@
+{
+  "name": "export-data",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "objects-to-csv": "^1.3.6"
+  }
+}
