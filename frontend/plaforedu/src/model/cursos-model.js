@@ -89,6 +89,10 @@ const fundosCategoria = {
         11: fundoCategoria10,
         12: fundoCategoria11,
         13: fundoCategoria12,
+        14: fundoCategoria12,
+        15: fundoCategoria12,
+        16: fundoCategoria12,
+        17: fundoCategoria12,
     },
     curso: {
         1: fundoCurso1,
@@ -104,6 +108,10 @@ const fundosCategoria = {
         11: fundoCurso10,
         12: fundoCurso11,
         13: fundoCurso12,
+        14: fundoCurso12,
+        15: fundoCurso12,
+        16: fundoCurso12,
+        17: fundoCurso12,
     },
     competencia: {
         1: fundoCompetencia1,
@@ -119,6 +127,10 @@ const fundosCategoria = {
         11: fundoCompetencia10,
         12: fundoCompetencia11,
         13: fundoCompetencia12,
+        14: fundoCompetencia12,
+        15: fundoCompetencia12,
+        16: fundoCompetencia12,
+        17: fundoCompetencia12,
     },
 }
 
@@ -160,6 +172,10 @@ const colorsCategorias = {
     11: '#f154ca',
     12: '#997ff7',
     13: '#1db7ed',
+    14: '#1db7ed',
+    15: '#1db7ed',
+    16: '#1db7ed',
+    17: '#1db7ed',
 }
 
 const colorsItinerarios = {
@@ -186,7 +202,8 @@ const initialFilterDefault = {
 const cursosFilterFuctionDefault = (filtro) => {
     let novosCursos = []
     cursosDefault.forEach(curso => {
-        let contemTema = curso.filter.temas.some(idTema => filtro.temas.includes(idTema))
+        let temasDoCurso = temasDefault.filter(tema => tema.subtemas.some(subtema => curso.filter.subtemas.includes(subtema)))
+        let contemTema = temasDoCurso.some(tema => filtro.temas.includes(tema.id))
         let temasVazio = filtro.temas.length === 0
         
         let contemSubtema = curso.filter.subtemas.some(idSubtema => filtro.subtemas.includes(idSubtema))

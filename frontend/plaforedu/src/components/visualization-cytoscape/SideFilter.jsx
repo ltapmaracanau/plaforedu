@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-
+import React, { useEffect, useRef, useState, useMemo } from 'react'
+import { debounce } from 'lodash';
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
 
@@ -18,7 +18,7 @@ import {
     Card
 } from 'antd'
 
-export default function SideFilter() {
+export default function SideFilter({ debounceTimeout = 800 }) {
 
     const subtemas = useStoreState(state => state.cursos.subtemas)
     const temas = useStoreState(state => state.cursos.temas)
@@ -62,7 +62,15 @@ export default function SideFilter() {
         register.current.setValue('itinerario', filter.itinerario)
     }, [filter.itinerario])
 
+    const onSubmitDebounce = useMemo(() => {
+        const onSubmitDebounceFunction = () => {
+            let allValuesFields = register.current.getValues()
+            delete allValuesFields.tipoVisualizacao
+            setFilter(allValuesFields)
+        }
 
+        return debounce(onSubmitDebounceFunction, debounceTimeout)
+    }, [debounceTimeout])
 
     return (
         <Col style={{ padding: '8px 16px', overflowY: 'scroll' }}>
@@ -283,7 +291,7 @@ export default function SideFilter() {
                                                 max={200}
                                                 onChange={(value) => {
                                                     field.onChange(value)
-                                                    onSubmit()
+                                                    onSubmitDebounce()
                                                 }}
                                             />
                                         </Form.Item>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import LogoPlafor from '../../assets/PLAFORLOGO.png';
 
-import { useStoreActions } from 'easy-peasy'
+import { useStoreActions, useStoreState } from 'easy-peasy'
 import {
   DownOutlined,
 } from '@ant-design/icons';
@@ -20,12 +20,11 @@ const { SubMenu } = Menu;
 
 export default function HeaderHome() {
 
-  const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
-  const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema)
+  const setFilter = useStoreActions(actions => actions.cursos.setFilter)
+  const filterDefault = useStoreState(state => state.cursos.filterDefault)
 
   const onClickItinerario = (itinerario) => {
-    setItinerario(itinerario)
-    setColorSchema('categoria')
+    setFilter({ ...filterDefault, itinerario: itinerario, esquemaDeCores: 'categoria' })
   }
 
   return (
