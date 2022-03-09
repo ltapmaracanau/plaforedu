@@ -31,7 +31,7 @@ const getCompetencia = (id_competencia) => {
 }
 
 for (let indexItinerario = 1; indexItinerario <= 5; indexItinerario++) {
-  for (let indexCompetencia = 1; indexCompetencia <= 55; indexCompetencia++) {
+  for (let indexCompetencia = 1; indexCompetencia <= competencias.length; indexCompetencia++) {
     const cursosPorItinerario = cursos.filter(curso => curso.itinerario === indexItinerario)
       .filter(curso => curso.filter.competencias.includes(indexCompetencia));
 
