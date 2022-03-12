@@ -52,25 +52,25 @@ import fundoCompetencia12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Comp
 
 
 // Fundos escala 1 classificação por itinerarios
-import fundoEscala1Curso1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-01.png'
-import fundoEscala1Categoria1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-01.png'
-import fundoEscala1Competencia1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-01.png'
+import fundoEscala1Curso1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-01.png'
+import fundoEscala1Categoria1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-01.png'
+import fundoEscala1Competencia1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-01.png'
 
-import fundoEscala1Curso2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-02.png'
-import fundoEscala1Categoria2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-02.png'
-import fundoEscala1Competencia2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-02.png'
+import fundoEscala1Curso2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-02.png'
+import fundoEscala1Categoria2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-02.png'
+import fundoEscala1Competencia2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-02.png'
 
-import fundoEscala1Curso3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-03.png'
-import fundoEscala1Categoria3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-03.png'
-import fundoEscala1Competencia3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-03.png'
+import fundoEscala1Curso3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-03.png'
+import fundoEscala1Categoria3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-03.png'
+import fundoEscala1Competencia3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-03.png'
 
-import fundoEscala1Curso4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-04.png'
-import fundoEscala1Categoria4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-04.png'
-import fundoEscala1Competencia4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-04.png'
+import fundoEscala1Curso4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-04.png'
+import fundoEscala1Categoria4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-04.png'
+import fundoEscala1Competencia4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-04.png'
 
-import fundoEscala1Curso5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-05.png'
-import fundoEscala1Categoria5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-05.png'
-import fundoEscala1Competencia5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-05.png'
+import fundoEscala1Curso5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-05.png'
+import fundoEscala1Categoria5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-05.png'
+import fundoEscala1Competencia5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-05.png'
 
 import {cursosDefault, instituicoesDefault, competenciasDefault, categoriasDeCompetenciasDefault, temasDefault, subtemasDefault} from '../services/dataService.js'
 
@@ -179,11 +179,11 @@ const colorsCategorias = {
 }
 
 const colorsItinerarios = {
-    1:  '#39A8E0',
-    2:  '#F89406',
-    3:  '#E74C3C',
-    4:  '#009688',
-    5:  '#9966FF',
+    1:  '#0099CC',
+    2:  '#FF9900',
+    3:  '#990099',
+    4:  '#66CC33',
+    5:  '#9999FF',
 }
 
 const initialFilterDefault = {

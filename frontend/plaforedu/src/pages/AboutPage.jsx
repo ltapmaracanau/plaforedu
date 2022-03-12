@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderHome from '../components/header/HeaderHome';
-import video from '../assets/about/video.png'
-import mandala from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_Completa.png'
+import video from '../assets/about/video1.jpg'
+import mandala from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png'
 import retangulo from '../assets/about/Rectangle.png'
 import infografico from '../assets/about/PLAFOR_Categorias-Competencias_Infografico_v4.png'
 

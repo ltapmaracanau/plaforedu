@@ -40,7 +40,7 @@ const itinerariosModel = {
                 id: 2,
                 titulo: 'Técnico-Administrativo em Educação', 
                 publico: '',
-                descricao: 'Este Itinerário formativo visa formar profissionais alinhados com as políticas institucionais, neste sentido, a trilha apresentará  inicialmente aos Técnicos-Administrativos em Educação o Plano de Carreira, suas atribuições e responsabilidades para o desempenho do cargo a qual foi nomeado. Os outros cursos da trilha pretendem qualificar os servidores nas diversas áreas de atuação - educacional e administrativa.',
+                descricao: 'Este Itinerário formativo visa formar profissionais alinhados com as políticas institucionais, neste sentido, a trilha apresentará  inicialmente aos Técnicos Administrativos em Educação o Plano de Carreira, suas atribuições e responsabilidades para o desempenho do cargo a qual foi nomeado. Os outros cursos da trilha pretendem qualificar os servidores nas diversas áreas de atuação - educacional e administrativa.',
             },
 
             grafo_publicado: {
