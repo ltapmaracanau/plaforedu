@@ -86,7 +86,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [50],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -236,7 +236,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [32],
-            subtemas: [371],
+            subtemas: [377],
         }
     },
     {
@@ -311,7 +311,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -326,7 +326,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -341,7 +341,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -401,7 +401,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [53],
-            subtemas: [371],
+            subtemas: [377],
         }
     },
     {
@@ -416,7 +416,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [10, 30, 35, 55],
-            subtemas: [347],
+            subtemas: [353],
         }
     },
     {
@@ -431,7 +431,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [240, 313],
+            subtemas: [240, 319],
         }
     },
     {
@@ -446,7 +446,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [32],
-            subtemas: [371],
+            subtemas: [377],
         }
     },
     {
@@ -461,7 +461,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [347],
+            subtemas: [353],
         }
     },
     {
@@ -506,7 +506,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [347, 355],
+            subtemas: [353, 361],
         }
     },
     {
@@ -551,7 +551,7 @@ const cursos = [
         obs: 'Trata-se de cartilha informativa aos servidores',
         filter: {
             competencias: [24],
-            subtemas: [240, 313],
+            subtemas: [240, 319],
         }
     },
     {
@@ -566,7 +566,7 @@ const cursos = [
         obs: 'Trata-se de cartilha informativa aos servidores',
         filter: {
             competencias: [24],
-            subtemas: [240, 313],
+            subtemas: [240, 319],
         }
     },
     {
@@ -581,7 +581,7 @@ const cursos = [
         obs: 'Trata-se de cartilha informativa aos servidores',
         filter: {
             competencias: [24],
-            subtemas: [347],
+            subtemas: [353],
         }
     },
     {
@@ -626,7 +626,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [347, 355],
+            subtemas: [353, 361],
         }
     },
     {
@@ -686,7 +686,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [347],
+            subtemas: [353],
         }
     },
     {
@@ -701,7 +701,7 @@ const cursos = [
         obs: 'O curso fica disponível 30 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [5],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -716,7 +716,7 @@ const cursos = [
         obs: 'As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -731,7 +731,7 @@ const cursos = [
         obs: 'Todos os vídeos contam com a intérprete de Libras em ótimo tamanho de visualização. Contudo, as legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -746,7 +746,7 @@ const cursos = [
         obs: 'O curso fica disponível 20 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -761,7 +761,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -776,7 +776,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -791,7 +791,7 @@ const cursos = [
         obs: 'O curso só tem 8h, mas é objetivo e direto. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -806,7 +806,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -821,7 +821,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -836,7 +836,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -851,7 +851,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [2],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -866,7 +866,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [2],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -881,7 +881,7 @@ const cursos = [
         obs: 'Os vídeos disponíveis não contam com Libras, mas apresenta Legenda e Transcrição acessível por link próprio. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [5],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -896,7 +896,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -911,7 +911,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -926,7 +926,7 @@ const cursos = [
         obs: 'O curso tem diversas aulas em Libras e conta com Transcrição em Português. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -941,7 +941,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [5],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -956,7 +956,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [5],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -971,7 +971,7 @@ const cursos = [
         obs: 'Os vídeos possuem Libras ou Transcrição completa. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -986,7 +986,7 @@ const cursos = [
         obs: 'O curso possui 200h. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -1001,7 +1001,7 @@ const cursos = [
         obs: 'Todos os vídeos contam com a intérprete de Libras em ótimo tamanho de visualização. Contudo, as legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1016,7 +1016,7 @@ const cursos = [
         obs: 'O curso fica disponível 20 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [5],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -1031,7 +1031,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [6],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -1046,7 +1046,7 @@ const cursos = [
         obs: 'Apesar da carga horária baixa o curso atende muito bem a necessidade de se capacitar para curadoria de objetos de aprendizagem. Os cursos mudam anualmente o link',
         filter: {
             competencias: [6],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -1061,7 +1061,7 @@ const cursos = [
         obs: 'A plaforma possui software VLibras para auxiliar na acessibiliade',
         filter: {
             competencias: [7],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1076,7 +1076,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [7],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1091,7 +1091,7 @@ const cursos = [
         obs: 'A plaforma possui software VLibras para auxiliar na acessibiliade',
         filter: {
             competencias: [8],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1106,7 +1106,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [8],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1121,7 +1121,7 @@ const cursos = [
         obs: 'O curso muda o link anualmente de acordo com a criação da turma. Esta na seleção da Vanessa também',
         filter: {
             competencias: [7],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1136,7 +1136,7 @@ const cursos = [
         obs: 'Esta na seleção no Paulo Evaristo também',
         filter: {
             competencias: [8],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1151,7 +1151,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [7],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1166,7 +1166,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [7],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1181,7 +1181,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta uma abordagem mais teórica. Os conteúdos se mostraram relevantes para o contexto atual e de pós pandemia.',
         filter: {
             competencias: [10],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1196,7 +1196,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta um interessante enfoque em atividades para tornar as atividades mais dinâmicas com a utilização de metodologias gamificadas.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1211,7 +1211,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. ',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1226,7 +1226,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta um interessante enfoque em atividades para tornar as atividades mais dinâmicas com a utilização de metodologias gamificadas.',
         filter: {
             competencias: [12],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1241,7 +1241,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. Os conteúdos são voltados para a instrumentalização do educador. ',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1256,7 +1256,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1271,7 +1271,7 @@ const cursos = [
         obs: 'O link é para a página principal da Plataforma. O curso estará disponível a partir de março para o público em geral. A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise. Contato realizado com o Cláudio (21 987967329) Os conteúdos trazem uma interessante abordagem com metodologias de trabalho colaborativo.',
         filter: {
             competencias: [11],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1286,7 +1286,7 @@ const cursos = [
         obs: 'O link é para a página principal da Plataforma. O curso estará disponível a partir de março para o público em geral. A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise. Contato realizado com o Cláudio (21 987967329) .A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1301,7 +1301,7 @@ const cursos = [
         obs: 'O curso traz uma perspectiva mais reflexiva que ajudará no processo decisório para a escolha do ambiente virtual de aprendizagem para as práticas pedagógicas remotas.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1316,7 +1316,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral.  Os conteúdos trazem uma perspectiva de abordagem do pensamento computacional impostante para compreensão e desenvolvimento de atividades utilizando lógica computacional.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1331,7 +1331,7 @@ const cursos = [
         obs: 'O curso é trabalhado em perspectiva prática, com o uso de tecnologias e se mostra bastante aderente à trilha Avaliação, especificamente, aos trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1346,7 +1346,7 @@ const cursos = [
         obs: 'O curso é mais teórico e conceitual e não foca apenas no mundo educacional, tratando também do mundo corporativo. Entretanto, traz vídeos e tutoriais sobre uso de ferramentas e tecnologias de apoio. Cobre os três trilhos da trilha, ainda que não em profundidade e nem em atividades práticas o suficiente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 14, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1361,7 +1361,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo parcialmente os trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1376,7 +1376,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é tratada durante todo o curso, uma vez que a gamificação consiste em utilizar recursos de jogos que, no caso é no Moodle, ou seja, de forma tecnológica, permitindo ao professor criar atividades e formatos de avaliação alternativos. O curso é bem prático e aderente aos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1391,7 +1391,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é tratada durante todo o curso, uma vez que a gamificação consiste em utilizar recursos de jogos que, no caso é no Moodle, ou seja, de forma tecnológica, permitindo ao professor criar atividades e formatos de avaliação alternativos. O curso utiliza em sua maioria materiais textuais, mas aborda o uso de tecnologias de forma prática, no caso em como fazer isso na avaliação. Assim, está aderente aos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1406,7 +1406,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1421,7 +1421,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. Uma característica interessante é que é um curso sobre a plataforma Google Classroom, sendo que maioria dos cursos identificados é da plataforma Moodle. Ainda que o curso não trabalhe os itens em profundidade, é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1436,7 +1436,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas e trabalha o tema de forma prática, em particular os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1451,7 +1451,7 @@ const cursos = [
         obs: 'O curso é bastante teórico, focado em dois ebooks, mas em determinados momentos aborda sobre o uso de tecnologias como apoio aos processos avaliativos. Desta forma é parcialmente aderente à trilha, especialmente aos trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1466,7 +1466,7 @@ const cursos = [
         obs: 'O curso foca em um tipo específico de avaliação com a utilização de tecnologias, que no caso é o questionário. Trata especialmente dos trilhos 1 e 3, mas também cobre parte do trilho 2, no módulo Avaliação de questionários, ainda que todos trilhos sejam cobertos apenas parcialmente, especialmente o 2. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 14, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1481,7 +1481,7 @@ const cursos = [
         obs: 'O curso não é específico de avaliação, mas esta é um dos temas abordados, com a utilização de tecnologias: questionário, fórum, wiki etc. Trata especialmente dos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -1496,7 +1496,7 @@ const cursos = [
         obs: 'Apesar do cursos não ter preenchido 100% todos os critérios para a Elevada Aderência, o mesmo se constitui como apto para indicação como material recomendável para composição da trilha formativa do Plafor. O curso tem aderência aos objetivos deste projeto, pois aborda em amplo espectro os grandes temas da educação inclusiva. Naturalmente, o curso é um prelúdio ao tema, não chegando perto de exaurir a temática tão diversa e complexa, mas pode servir de uma boa introdução no sentido de preparar melhor ao Educador quanto a compreensão do histórico da Educação Inclusiva e as características das pessoas com necessidades educacionais específicas.',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1511,7 +1511,7 @@ const cursos = [
         obs: 'O curso tem uma abordagem bastante pertinente e atual a trilha em tela, devendo compor a lista de possíveis cursos que constituirão a formação do Plafor. Além disso, possui um bom acervo de materiais curados e/ou autênticos (produzidos pela própria universidade) bastante úteis e adaptativos a formação desejada.',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1526,7 +1526,7 @@ const cursos = [
         obs: 'O Curso tem uma temática importante e aderente a trilha, bons textos, mas a quantidade de videos, especialmente os autorais pela instituição ofertante, são poucos. Uma vez sendo utilizado, precisará de outros cursos dentro dessa mesma trilha que complemente melhor os seus conteúdos. Apesar de não ser um curso com uma quantidade de materiais mais robusta ou enriquecida em quantidade, há muita qualidade nos materiais disponibilizados é muito boa e, por isso, merece a inclusão nas trilhas.',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1541,7 +1541,7 @@ const cursos = [
         obs: 'A abordagem de Gamificação trazida no curso fortalece o envolvimento ativo e cria condições para a customização do ensino, nesse sentido o curso agrega muito valor a trilha da Capacitação dos Aprendentes, visto abordar e ensinar sobre a implementação prática e assertiva dos princípios, características e procedimentos de operacionalização da gamificação nos ecossistemas de aprendizagem.',
         filter: {
             competencias: [17, 18],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1556,7 +1556,7 @@ const cursos = [
         obs: 'O curso apresenta um bom conteúdo e uma razoável diversidade de mídias, sua temática é bastante aderente a presente trilha e o mesmo agrega valor ou enriquece a aprendizagem nesta respectiva trilha.',
         filter: {
             competencias: [17, 18],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1571,7 +1571,7 @@ const cursos = [
         obs: 'ATENÇÃO -  O Curso só fica disponível até 31/07/2022. A temática do curso é extremamente pertinente, sendo sua ementa bem construída. O curso está em um nível minimamente viável para utilização, não sendo uma das melhores opções por deter poucas videoaulas. Contudo, mesmo assim, pode contribuir com a formação do docente e ser recomendável quando combinado com outros cursos complementares. ',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1586,7 +1586,7 @@ const cursos = [
         obs: 'Por ser um curso que introjeta a cultura maker no labor docente, isso se revela como bastante promissor e aderente a trilha capacitação dos aprendentes, tendo em vista que as metodologias ativas e a cultura maker são muito indicadas para promover o envolvimento ativo dos aprendentes. Por isso o curso é bastante recomendável.',
         filter: {
             competencias: [17, 18],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1601,7 +1601,7 @@ const cursos = [
         obs: 'ATENÇÃO -  O Curso só fica disponível até 31/07/2022 Temos aqui um curso cuja temática é bastante cara e pertinente a esta trilha. Certamente o curso poderia ser mais enriquecido com videos e materiais para a leitura, contudo traz um conteúdo básico, elementar que pode colaborar com a formação docente. Recomenda-se a indicação deste curso, desde que acompanhada a recomendação para realização concomitante de outros cursos complementares de conteúdo. ',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1616,7 +1616,7 @@ const cursos = [
         obs: 'Curso bem estruturado, muito diversificado em informações. Poderia ter mais videos, de fato. Contudo, é altamente recomendável para a trilha.',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1631,7 +1631,7 @@ const cursos = [
         obs: 'O curso apresenta a metodologia do Design Thinking que é bastante indicada para potencializar a aprendizagem e promover o engahamento ativo. ',
         filter: {
             competencias: [18],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1646,7 +1646,7 @@ const cursos = [
         obs: 'O curso traz uma abordagem interessante para ajudar técnicos da educação (pedagógos e assistente de assuntos educacionais) no desenvolvimento de planos educacionais individualizados no que tange a avaliaçaõ da aprendizagem. Apesar nao ser totalmente específico para o mundo da educação, mas também para o mundo corporativo, o curso traz elementos teóricos e práticos que podem ser transpostos para ajudar no processo de acompanhamento da aprendizagem dos aprendentes no que se refere a diferenciação da avaliaçaõ',
         filter: {
             competencias: [17],
-            subtemas: [1],
+            subtemas: [357],
         }
     },
     {
@@ -1661,7 +1661,7 @@ const cursos = [
         obs: 'Oferta semestral com atualização do link para o curso a cada semestre ou ao atingir um número grande de inscritos.',
         filter: {
             competencias: [20],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1676,7 +1676,7 @@ const cursos = [
         obs: 'Esse curso foi indicado no Padlet para os Técnicos-Administrativos em Educação',
         filter: {
             competencias: [20],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1691,7 +1691,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [16, 20, 56],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1706,7 +1706,7 @@ const cursos = [
         obs: 'Esse curso possui a sua versão em ambiente Moodle e está em processo de homologação na escola virtual da ENAP que permitirá o acesso contínuo.',
         filter: {
             competencias: [19, 20, 21, 56],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1721,7 +1721,7 @@ const cursos = [
         obs: 'O link é válido por 6 meses',
         filter: {
             competencias: [19, 20, 56],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1736,7 +1736,7 @@ const cursos = [
         obs: 'O link é válido por 3 meses',
         filter: {
             competencias: [19, 22],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1751,7 +1751,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [23],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1766,7 +1766,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [23],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1781,7 +1781,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [23],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1796,7 +1796,7 @@ const cursos = [
         obs: 'Esse curso foi indicado no Padlet para os Gestores',
         filter: {
             competencias: [22],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1811,7 +1811,7 @@ const cursos = [
         obs: 'Esse curso foi indicado no Padlet para os Técnicos-Administrativos em Educação e Gestores',
         filter: {
             competencias: [22],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1826,7 +1826,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [21],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1841,7 +1841,7 @@ const cursos = [
         obs: 'O link é válido por 1 ano (faltando 330 dias - contando a partir de 04/02/2021)',
         filter: {
             competencias: [19],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1856,7 +1856,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [20],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -1871,7 +1871,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [50],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1886,7 +1886,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -1901,7 +1901,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [347, 355],
+            subtemas: [353, 361],
         }
     },
     {
@@ -1916,7 +1916,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [349],
+            subtemas: [355],
         }
     },
     {
@@ -1976,7 +1976,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [32],
-            subtemas: [371],
+            subtemas: [377],
         }
     },
     {
@@ -1991,7 +1991,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2006,7 +2006,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2021,7 +2021,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2036,7 +2036,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2051,7 +2051,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [24],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2066,7 +2066,7 @@ const cursos = [
         obs: 'O curso fica disponível 30 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [5],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2081,7 +2081,7 @@ const cursos = [
         obs: 'As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2096,7 +2096,7 @@ const cursos = [
         obs: 'Todos os vídeos contam com a intérprete de Libras em ótimo tamanho de visualização. Contudo, as legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2111,7 +2111,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2126,7 +2126,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2141,7 +2141,7 @@ const cursos = [
         obs: 'O curso só tem 8h, mas é objetivo e direto. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2156,7 +2156,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2171,7 +2171,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2186,7 +2186,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2201,7 +2201,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [2],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2216,7 +2216,7 @@ const cursos = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [2],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2231,7 +2231,7 @@ const cursos = [
         obs: 'Os vídeos disponíveis não contam com Libras, mas apresenta Legenda e Transcrição acessível por link próprio. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [5],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2246,7 +2246,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2261,7 +2261,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2276,7 +2276,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2291,7 +2291,7 @@ const cursos = [
         obs: 'O curso tem diversas aulas em Libras e conta com Transcrição em Português. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2306,7 +2306,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [5],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2321,7 +2321,7 @@ const cursos = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [5],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2336,7 +2336,7 @@ const cursos = [
         obs: 'Os vídeos possuem Libras ou Transcrição completa. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2351,7 +2351,7 @@ const cursos = [
         obs: 'Todos os vídeos contam com a intérprete de Libras em ótimo tamanho de visualização. Contudo, as legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2366,7 +2366,7 @@ const cursos = [
         obs: 'O curso fica disponível 20 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [5],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2381,7 +2381,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [6],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2396,7 +2396,7 @@ const cursos = [
         obs: 'Apesar da carga horária baixa o curso atende muito bem a necessidade de se capacitar para curadoria de objetos de aprendizagem. Os cursos mudam anualmente o link',
         filter: {
             competencias: [6],
-            subtemas: [350],
+            subtemas: [356],
         }
     },
     {
@@ -2411,7 +2411,7 @@ const cursos = [
         obs: 'A plaforma possui software VLibras para auxiliar na acessibiliade',
         filter: {
             competencias: [7],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2426,7 +2426,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [7],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2441,7 +2441,7 @@ const cursos = [
         obs: 'A plaforma possui software VLibras para auxiliar na acessibiliade',
         filter: {
             competencias: [8],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2456,7 +2456,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [8],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2471,7 +2471,7 @@ const cursos = [
         obs: 'O curso muda o link anualmente de acordo com a criação da turma. Esta na seleção da Vanessa também',
         filter: {
             competencias: [7],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2486,7 +2486,7 @@ const cursos = [
         obs: 'Esta na seleção no Paulo Evaristo também',
         filter: {
             competencias: [8],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2501,7 +2501,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [7],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2516,7 +2516,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [7],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2531,7 +2531,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta uma abordagem mais teórica. Os conteúdos se mostraram relevantes para o contexto atual e de pós pandemia.',
         filter: {
             competencias: [10],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2546,7 +2546,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta um interessante enfoque em atividades para tornar as atividades mais dinâmicas com a utilização de metodologias gamificadas.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2561,7 +2561,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. ',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2576,7 +2576,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta um interessante enfoque em atividades para tornar as atividades mais dinâmicas com a utilização de metodologias gamificadas.',
         filter: {
             competencias: [12],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2591,7 +2591,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral. Os conteúdos são voltados para a instrumentalização do educador. ',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2606,7 +2606,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2621,7 +2621,7 @@ const cursos = [
         obs: 'O link é para a página principal da Plataforma. O curso estará disponível a partir de março para o público em geral. A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise. Contato realizado com o Cláudio (21 987967329) Os conteúdos trazem uma interessante abordagem com metodologias de trabalho colaborativo.',
         filter: {
             competencias: [11],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2636,7 +2636,7 @@ const cursos = [
         obs: 'O link é para a página principal da Plataforma. O curso estará disponível a partir de março para o público em geral. A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise. Contato realizado com o Cláudio (21 987967329) .A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2651,7 +2651,7 @@ const cursos = [
         obs: 'O curso traz uma perspectiva mais reflexiva que ajudará no processo decisório para a escolha do ambiente virtual de aprendizagem para as práticas pedagógicas remotas.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2666,7 +2666,7 @@ const cursos = [
         obs: 'O link é para o curso com Oferta semestral.  Os conteúdos trazem uma perspectiva de abordagem do pensamento computacional impostante para compreensão e desenvolvimento de atividades utilizando lógica computacional.',
         filter: {
             competencias: [9],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2681,7 +2681,7 @@ const cursos = [
         obs: 'O curso é trabalhado em perspectiva prática, com o uso de tecnologias e se mostra bastante aderente à trilha Avaliação, especificamente, aos trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2696,7 +2696,7 @@ const cursos = [
         obs: 'O curso é mais teórico e conceitual e não foca apenas no mundo educacional, tratando também do mundo corporativo. Entretanto, traz vídeos e tutoriais sobre uso de ferramentas e tecnologias de apoio. Cobre os três trilhos da trilha, ainda que não em profundidade e nem em atividades práticas o suficiente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT.',
         filter: {
             competencias: [13, 14, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2711,7 +2711,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo parcialmente os trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2726,7 +2726,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é tratada durante todo o curso, uma vez que a gamificação consiste em utilizar recursos de jogos que, no caso é no Moodle, ou seja, de forma tecnológica, permitindo ao professor criar atividades e formatos de avaliação alternativos. O curso é bem prático e aderente aos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2741,7 +2741,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é tratada durante todo o curso, uma vez que a gamificação consiste em utilizar recursos de jogos que, no caso é no Moodle, ou seja, de forma tecnológica, permitindo ao professor criar atividades e formatos de avaliação alternativos. O curso utiliza em sua maioria materiais textuais, mas aborda o uso de tecnologias de forma prática, no caso em como fazer isso na avaliação. Assim, está aderente aos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2756,7 +2756,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2771,7 +2771,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. Uma característica interessante é que é um curso sobre a plataforma Google Classroom, sendo que maioria dos cursos identificados é da plataforma Moodle. Ainda que o curso não trabalhe os itens em profundidade, é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2786,7 +2786,7 @@ const cursos = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas e trabalha o tema de forma prática, em particular os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. ',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2801,7 +2801,7 @@ const cursos = [
         obs: 'O curso é bastante teórico, focado em dois ebooks, mas em determinados momentos aborda sobre o uso de tecnologias como apoio aos processos avaliativos. Desta forma é parcialmente aderente à trilha, especialmente aos trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. ',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2816,7 +2816,7 @@ const cursos = [
         obs: 'O curso foca em um tipo específico de avaliação com a utilização de tecnologias, que no caso é o questionário. Trata especialmente dos trilhos 1 e 3, mas também cobre parte do trilho 2, no módulo Avaliação de questionários, ainda que todos trilhos sejam cobertos apenas parcialmente, especialmente o 2. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. ',
         filter: {
             competencias: [13, 14, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2831,7 +2831,7 @@ const cursos = [
         obs: 'O curso não é específico de avaliação, mas esta é um dos temas abordados, com a utilização de tecnologias: questionário, fórum, wiki etc. Trata especialmente dos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. ',
         filter: {
             competencias: [13, 15],
-            subtemas: [351],
+            subtemas: [357],
         }
     },
     {
@@ -2846,7 +2846,7 @@ const cursos = [
         obs: 'Apesar do cursos não ter preenchido 100% todos os critérios para a Elevada Aderência, o mesmo se constitui como apto para indicação como material recomendável para composição da trilha formativa do Plafor. O curso tem aderência aos objetivos deste projeto, pois aborda em amplo espectro os grandes temas da educação inclusiva. Naturalmente, o curso é um prelúdio ao tema, não chegando perto de exaurir a temática tão diversa e complexa, mas pode servir de uma boa introdução no sentido de preparar melhor ao Educador quanto a compreensão do histórico da Educação Inclusiva e as características das pessoas com necessidades educacionais específicas.',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2861,7 +2861,7 @@ const cursos = [
         obs: 'O curso tem uma abordagem bastante pertinente e atual a trilha em tela, devendo compor a lista de possíveis cursos que constituirão a formação do Plafor. Além disso, possui um bom acervo de materiais curados e/ou autênticos (produzidos pela própria universidade) bastante úteis e adaptativos a formação desejada.',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2876,7 +2876,7 @@ const cursos = [
         obs: 'O Curso tem uma temática importante e aderente a trilha, bons textos, mas a quantidade de videos, especialmente os autorais pela instituição ofertante, são poucos. Uma vez sendo utilizado, precisará de outros cursos dentro dessa mesma trilha que complemente melhor os seus conteúdos. Apesar de não ser um curso com uma quantidade de materiais mais robusta ou enriquecida em quantidade, há muita qualidade nos materiais disponibilizados é muito boa e, por isso, merece a inclusão nas trilhas.',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2891,7 +2891,7 @@ const cursos = [
         obs: 'A abordagem de Gamificação trazida no curso fortalece o envolvimento ativo e cria condições para a customização do ensino, nesse sentido o curso agrega muito valor a trilha da Capacitação dos Aprendentes, visto abordar e ensinar sobre a implementação prática e assertiva dos princípios, características e procedimentos de operacionalização da gamificação nos ecossistemas de aprendizagem.',
         filter: {
             competencias: [17, 18],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2906,7 +2906,7 @@ const cursos = [
         obs: 'O curso apresenta um bom conteúdo e uma razoável diversidade de mídias, sua temática é bastante aderente a presente trilha e o mesmo agrega valor ou enriquece a aprendizagem nesta respectiva trilha.',
         filter: {
             competencias: [17, 18],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2921,7 +2921,7 @@ const cursos = [
         obs: 'ATENÇÃO -  O Curso só fica disponível até 31/07/2022. A temática do curso é extremamente pertinente, sendo sua ementa bem construída. O curso está em um nível minimamente viável para utilização, não sendo uma das melhores opções por deter poucas videoaulas. Contudo, mesmo assim, pode contribuir com a formação do docente e ser recomendável quando combinado com outros cursos complementares. ',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2936,7 +2936,7 @@ const cursos = [
         obs: 'Por ser um curso que introjeta a cultura maker no labor docente, isso se revela como bastante promissor e aderente a trilha capacitação dos aprendentes, tendo em vista que as metodologias ativas e a cultura maker são muito indicadas para promover o envolvimento ativo dos aprendentes. Por isso o curso é bastante recomendável.',
         filter: {
             competencias: [17, 18],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2951,7 +2951,7 @@ const cursos = [
         obs: 'ATENÇÃO -  O Curso só fica disponível até 31/07/2022 Temos aqui um curso cuja temática é bastante cara e pertinente a esta trilha. Certamente o curso poderia ser mais enriquecido com videos e materiais para a leitura, contudo traz um conteúdo básico, elementar que pode colaborar com a formação docente. Recomenda-se a indicação deste curso, desde que acompanhada a recomendação para realização concomitante de outros cursos complementares de conteúdo. ',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2966,7 +2966,7 @@ const cursos = [
         obs: 'Curso bem estruturado, muito diversificado em informações. Poderia ter mais videos, de fato. Contudo, é altamente recomendável para a trilha.',
         filter: {
             competencias: [16, 17],
-            subtemas: [355],
+            subtemas: [361],
         }
     },
     {
@@ -2981,7 +2981,7 @@ const cursos = [
         obs: 'O curso apresenta a metodologia do Design Thinking que é bastante indicada para potencializar a aprendizagem e promover o engahamento ativo. ',
         filter: {
             competencias: [18],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -2996,7 +2996,7 @@ const cursos = [
         obs: 'Oferta semestral com atualização do link para o curso a cada semestre ou ao atingir um número grande de inscritos.',
         filter: {
             competencias: [20],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3011,7 +3011,7 @@ const cursos = [
         obs: 'Esse curso foi indicado no Padlet para os Técnicos-Administrativos em Educação',
         filter: {
             competencias: [20],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3026,7 +3026,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [16, 20, 56],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3041,7 +3041,7 @@ const cursos = [
         obs: 'Esse curso possui a sua versão em ambiente Moodle e está em processo de homologação na escola virtual da ENAP que permitirá o acesso contínuo.',
         filter: {
             competencias: [19, 20, 21, 56],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3056,7 +3056,7 @@ const cursos = [
         obs: 'O link é válido por 6 meses',
         filter: {
             competencias: [19, 20, 56],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3071,7 +3071,7 @@ const cursos = [
         obs: 'O link é válido por 3 meses',
         filter: {
             competencias: [19, 22],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3086,7 +3086,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [23],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3101,7 +3101,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [23],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3116,7 +3116,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [23],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3131,7 +3131,7 @@ const cursos = [
         obs: 'Esse curso foi indicado no Padlet para os Gestores',
         filter: {
             competencias: [22],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3146,7 +3146,7 @@ const cursos = [
         obs: 'Esse curso foi indicado no Padlet para os Técnicos-Administrativos em Educação e Gestores',
         filter: {
             competencias: [22],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3161,7 +3161,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [21],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3176,7 +3176,7 @@ const cursos = [
         obs: 'O link é válido por 1 ano (faltando 330 dias - contando a partir de 04/02/2021)',
         filter: {
             competencias: [19],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3191,7 +3191,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [21],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3206,7 +3206,7 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [20],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
@@ -3221,206 +3221,11 @@ const cursos = [
         obs: 'O link é válido por 1 ano (faltando 330 dias - contando a partir de 04/02/2021)',
         filter: {
             competencias: [21],
-            subtemas: [352],
+            subtemas: [358],
         }
     },
     {
         id: 216,
-        itinerario: 4,
-        title: 'Noções de educação inclusiva',
-        descricao: '',
-        cargaHoraria: 20,
-        instCert: 9,
-        possuiAcessibilidade: 'Não informado',
-        link: '',
-        obs: 'Não há curso associados no Padlet',
-        filter: {
-            competencias: [1],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 217,
-        itinerario: 4,
-        title: 'Controles Institucional e Social dos Gastos Públicos',
-        descricao: 'O curso apresenta noções de controle institucional e social no Brasil para uma compreensão básica sobre a importância da qualidade do gasto, do uso eficiente dos recursos públicos e da participação social.',
-        cargaHoraria: 30,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/12/',
-        obs: '',
-        filter: {
-            competencias: [63],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 218,
-        itinerario: 4,
-        title: 'Educação em Direitos Humanos',
-        descricao: 'O curso busca contribuir para a conformação de uma visão abrangente acerca desafios e alternativas à Educação em Direitos Humanos, constituindo-se em subsídios para a prática e vivência de ações educativas em Direitos Humanos no âmbito de atuação dos participantes.',
-        cargaHoraria: 30,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/129/',
-        obs: '',
-        filter: {
-            competencias: [60],
-            subtemas: [215],
-        }
-    },
-    {
-        id: 219,
-        itinerario: 4,
-        title: 'Gestão Estratégica com BSC ',
-        descricao: 'Esse curso é uma boa oportunidade para conhecer alguns elementos teórico-conceituais e instrumentais de planejamento estratégico e de gestão. A compreensão e a utilização de conhecimentos relacionados ao planejamento estratégico e ao método Balanced Scorecard (BSC) possibilitam a atuação em ambientes dinâmicos que exigem percepção de contexto e proatividade.',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/103/',
-        obs: '',
-        filter: {
-            competencias: [65],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 220,
-        itinerario: 4,
-        title: 'Captação de Recursos',
-        descricao: '',
-        cargaHoraria: 15,
-        instCert: 36,
-        possuiAcessibilidade: 'Não informado',
-        link: '',
-        obs: 'Não há curso relacionado no padlet',
-        filter: {
-            competencias: [1],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 221,
-        itinerario: 4,
-        title: 'Gestão de projetos',
-        descricao: 'A capacitação tem como referência o Guia PMBOK 5° Edição, publicado pelo instituto PMI - Project Management Institute (2013), que reúne as melhores práticas na área de gerenciamento de projetos, com base em experiências de empresas de diferentes segmentos, públicas ou privadas, bem como apresentar outros métodos elaborados pela Administração Pública.',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/104/',
-        obs: '',
-        filter: {
-            competencias: [61],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 222,
-        itinerario: 4,
-        title: 'Análise e melhoria de Processos',
-        descricao: 'O curso Análise e Melhoria de Processos foi transposto da modalidade presencial para a autoinstrucional em 2021 pela Enap, com o intuito de oferecer aos participantes apresenta uma visão geral e abrangente da gestão da qualidade no serviço público, aprofundando um de seus aspectos, a análise e melhoria de processos.',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/424/',
-        obs: '',
-        filter: {
-            competencias: [61],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 223,
-        itinerario: 4,
-        title: 'Governança',
-        descricao: 'Em tempo de economia digital, onde o volume de dados produzidos é imenso, as instituições precisam lidar com este cenário a fim de disponibilizar a informação correta em tempo hábil para a tomada de decisões. A boa governança de dados é o caminho para superar este desafio! Inscreva-se e conheça os fundamentos relacionados à importância da governança de dados especialmente na Administração Pública Federal.',
-        cargaHoraria: 30,
-        instCert: 5,
-        possuiAcessibilidade: 'Não ',
-        link: 'https://www.escolavirtual.gov.br/curso/270/',
-        obs: '',
-        filter: {
-            competencias: [59],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 224,
-        itinerario: 4,
-        title: 'Gestão de Riscos em Processos de Trabalho',
-        descricao: 'O que você sabe sobre gestão de riscos em processos de trabalho? Este curso apresenta os principais conceitos sobre o tema, contribuindo para disseminar conhecimento e medidas de gerenciamento de riscos institucionais. A partir da experiência da Receita Federal, você poderá reconhecer como a gestão de riscos pode proporcionar a contínua melhoria dos processos de trabalho. Abordagem mais genérica, na trilha de orçamento tb tem Riscos',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não ',
-        link: 'https://www.escolavirtual.gov.br/curso/604/',
-        obs: '',
-        filter: {
-            competencias: [65],
-            subtemas: [270],
-        }
-    },
-    {
-        id: 225,
-        itinerario: 4,
-        title: 'Introdução a LGDP',
-        descricao: 'O curso apresenta um panorama sobre a nova legislação brasileira de proteção de dados pessoais (Lei 13.709/18), compreendendo os temas mais importantes para a sua implementação, como: fundamentos e campo de aplicação, princípios e direitos do titular, responsabilidades dos agentes, aspectos internacionais, segurança e a Autoridade Nacional de Proteção de Dados, entre outros. O objetivo do curso é capacitar as pessoas para entenderem, de forma rápida e acessível, o funcionamento e diretrizes básicas expostas na nova lei geral de proteção de dados do Brasil.',
-        cargaHoraria: 10,
-        instCert: 5,
-        possuiAcessibilidade: 'Não ',
-        link: 'https://www.escolavirtual.gov.br/curso/153/',
-        obs: '',
-        filter: {
-            competencias: [60],
-            subtemas: [215],
-        }
-    },
-    {
-        id: 226,
-        itinerario: 4,
-        title: 'Fundamentos da Lei Geral de Proteção de Dados',
-        descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes. Foi desenvolvido pelo Serpro - Serviço Federal de Processamento de Dados, em 2020, originalmente para a capacitação do corpo funcional. Agora é ofertado ao público em geral, por meio de parceria com a Escola Nacional de Administração Pública - Enap.',
-        cargaHoraria: 15,
-        instCert: 5,
-        possuiAcessibilidade: 'Não ',
-        link: 'https://www.escolavirtual.gov.br/curso/603/',
-        obs: '',
-        filter: {
-            competencias: [60],
-            subtemas: [215],
-        }
-    },
-    {
-        id: 227,
-        itinerario: 4,
-        title: 'Controles na Administração Pública ',
-        descricao: 'Ao final deste curso, espera-se que o participante seja capaz de aplicar princípios do controle no contexto da gestão pública. O curso abordará os temas Prestação de Contas, Controles na Administração Pública, Controle Externo, Controle Interno e Controle Social. ',
-        cargaHoraria: 30,
-        instCert: 5,
-        possuiAcessibilidade: 'Não ',
-        link: 'https://www.escolavirtual.gov.br/curso/278/',
-        obs: '',
-        filter: {
-            competencias: [64],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 228,
-        itinerario: 4,
-        title: 'Planejamento e Gestão Orçamentária e Financeira',
-        descricao: 'O Curso de Planejamento e Gestão Orçamentária e Financeira é aberto e autoinstrucional. Público-alvo: servidores da Rede Federal de Educação Profissional e Tecnológica que estejam ocupando cargos de gestão em suas instituições. Após o término do curso você será capaz de: compreender o planejamento e a gestão orçamentária e financeira sob o ponto de vista dos aspectos práticos, qualificando sua rotina de trabalho.',
-        cargaHoraria: 64,
-        instCert: 37,
-        possuiAcessibilidade: 'Não',
-        link: 'https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=14',
-        obs: 'Curso em desenvolvimento',
-        filter: {
-            competencias: [27, 28],
-            subtemas: [262],
-        }
-    },
-    {
-        id: 229,
         itinerario: 4,
         title: 'Comunicação Não Violenta ',
         descricao: 'Comunique com empatia e melhore o relacionamento interpessoal no seu ambiente de trabalho ',
@@ -3430,15 +3235,15 @@ const cursos = [
         link: '',
         obs: 'Sem turmas - verificar ENAP',
         filter: {
-            competencias: [56],
-            subtemas: [1],
+            competencias: [32, 47, 56],
+            subtemas: [273],
         }
     },
     {
-        id: 230,
+        id: 217,
         itinerario: 4,
         title: 'Ferramentas de comunicação nas diversas plataformas',
-        descricao: '',
+        descricao: 'Sem descrição',
         cargaHoraria: 0,
         instCert: 36,
         possuiAcessibilidade: 'Não informado',
@@ -3450,7 +3255,7 @@ const cursos = [
         }
     },
     {
-        id: 231,
+        id: 218,
         itinerario: 4,
         title: 'Ferramentas Tecnológicas Miro ',
         descricao: 'Quer conhecer as principais configurações, funcionalidades e as boas práticas relacionadas à ferramenta interativa Miro? Essa plataforma reúne diversos recursos de colaboração capazes de tornar reuniões de equipes, workshops e aulas online mais atraentes e produtivas.',
@@ -3465,7 +3270,7 @@ const cursos = [
         }
     },
     {
-        id: 232,
+        id: 219,
         itinerario: 4,
         title: 'Ferramentas Tecnológicas - Classroom e Jamboard',
         descricao: 'Esse curso é para você que quer conhecer as principais configurações, funcionalidades e as boas práticas relacionadas às ferramentas interativas Google Classroom e Jamboard.',
@@ -3480,7 +3285,7 @@ const cursos = [
         }
     },
     {
-        id: 233,
+        id: 220,
         itinerario: 4,
         title: 'Primeiros passos para uso de Linguagem Simples',
         descricao: 'Desenvolvido pela Enap, em parceria não onerosa com a jornalista e pesquisadora Heloísa Fischer, este curso tem o intuito de apresentar sete diretrizes para a produção de textos informativos com linguagem simples, que sejam mais fáceis de serem lidos e compreendidos pela maior parte das pessoas. A linguagem simples apresenta-se, ao mesmo tempo, como uma causa social e uma técnica de comunicação. Quer saber como aplicar a linguagem simples?',
@@ -3490,12 +3295,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/315/',
         obs: '',
         filter: {
-            competencias: [56],
-            subtemas: [371],
+            competencias: [32, 47, 56],
+            subtemas: [377],
         }
     },
     {
-        id: 234,
+        id: 221,
         itinerario: 4,
         title: 'Linguagem simples aproxima o governo das pessoas. Como usar',
         descricao: 'Quer aprender como simplificar aquele documento com uma linguagem super complexa? E ainda aprender como escrever textos com uma linguagem simples e compreensível? Este curso vai te ensinar uma forma estruturada de fazer isso. O curso apresenta e aprofunda a discussão sobre o uso da linguagem simples no setor público e a importância da disseminação da pauta no Brasil.',
@@ -3506,11 +3311,11 @@ const cursos = [
         obs: '',
         filter: {
             competencias: [56],
-            subtemas: [371],
+            subtemas: [377],
         }
     },
     {
-        id: 235,
+        id: 222,
         itinerario: 4,
         title: 'Gestão da Inovação',
         descricao: 'O curso aborda conceitos de gestão da inovação articulados ao contexto da administração pública e apresenta desafios e possibilidades de inovação na prestação de serviços públicos mais efetivos. O objetivo é fornecer aos servidores públicos conceitos, processos e experiências referentes à inovação, a fim de fomentar a cultura e os ecossistemas de inovação para criação de valor público.',
@@ -3520,15 +3325,15 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/416/',
         obs: '',
         filter: {
-            competencias: [42],
-            subtemas: [1],
+            competencias: [40, 42],
+            subtemas: [275],
         }
     },
     {
-        id: 236,
+        id: 223,
         itinerario: 4,
         title: 'Gestão do tempo',
-        descricao: '',
+        descricao: 'Sem descrição',
         cargaHoraria: 10,
         instCert: 36,
         possuiAcessibilidade: 'Não informado',
@@ -3540,7 +3345,7 @@ const cursos = [
         }
     },
     {
-        id: 237,
+        id: 224,
         itinerario: 4,
         title: 'Planejamento Estratégico para Organizações Públicas',
         descricao: 'O planejamento estratégico é uma ferramenta de administração que possibilita à gestão pensar no longo prazo da organização. Nesse curso, serão apresentadas noções básicas de planejamento estratégico, estimulando a reflexão sobre a importância de sua aplicação nas organizações públicas.',
@@ -3550,12 +3355,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/107/',
         obs: '',
         filter: {
-            competencias: [65],
-            subtemas: [1],
+            competencias: [28, 54, 58, 65],
+            subtemas: [272],
         }
     },
     {
-        id: 238,
+        id: 225,
         itinerario: 4,
         title: 'Elaboração de Indicadores de Desempenho Institucional',
         descricao: 'O curso integra o Programa de Desenvolvimento de Gerentes Operacionais (PDGO) e tem como objetivo capacitar os servidores públicos para estruturar sistemas de medição do desempenho institucional, dos pontos de vista estratégico e gerencial.',
@@ -3565,15 +3370,15 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/604/',
         obs: '',
         filter: {
-            competencias: [30],
-            subtemas: [1],
+            competencias: [28, 54, 58, 65],
+            subtemas: [272],
         }
     },
     {
-        id: 239,
+        id: 226,
         itinerario: 4,
         title: 'Sistema de Monitoramento- Setec ',
-        descricao: '',
+        descricao: 'Sem descrição',
         cargaHoraria: 10,
         instCert: 36,
         possuiAcessibilidade: 'Não informado',
@@ -3585,82 +3390,262 @@ const cursos = [
         }
     },
     {
-        id: 240,
+        id: 227,
         itinerario: 4,
         title: 'Ágil no contexto da administração pública',
         descricao: 'Apresentação e abordagem forma de pensar e os modelos de trabalho Ágeis no contexto particular da administração pública.',
         cargaHoraria: 30,
-        instCert: 38,
+        instCert: 37,
         possuiAcessibilidade: 'Não informado',
         link: '',
         obs: '-',
         filter: {
-            competencias: [42],
+            competencias: [42, 45, 52],
             subtemas: [233],
+        }
+    },
+    {
+        id: 228,
+        itinerario: 4,
+        title: 'Criando uma Estratégia Organizacional Ágil em uma Organização Pública',
+        descricao: 'Apresentação de opções e caminhos para se implantar práticas de gestão ágil dentro de uma organização pública',
+        cargaHoraria: 30,
+        instCert: 37,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: '',
+        filter: {
+            competencias: [42, 45, 52],
+            subtemas: [233],
+        }
+    },
+    {
+        id: 229,
+        itinerario: 4,
+        title: 'Executando a Estratégia de maneira Ágil dentro de uma Organização Pública',
+        descricao: 'A partir de uma estratégia estabelecida e que promove a agilidade será apresentado maneiras de executar as ações indicadas de maneira ágil',
+        cargaHoraria: 30,
+        instCert: 37,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: '',
+        filter: {
+            competencias: [42, 45, 52],
+            subtemas: [233],
+        }
+    },
+    {
+        id: 230,
+        itinerario: 4,
+        title: 'Teoria das Organizações: clima organizacional, cultura organizacional, mudança organizacional e desaprendizagem organizacional',
+        descricao: 'Compreender a Cultura Organizacional e o impacto no clima do trabalho, bem como o processo de desaprender, reaprender e aprender as novas competências é essencial para que possibilite a mudança e estar em sintonia com este processo social por que passa a humanidade.',
+        cargaHoraria: 20,
+        instCert: 37,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: '',
+        filter: {
+            competencias: [42, 45, 52],
+            subtemas: [233, 260, 273, 275],
+        }
+    },
+    {
+        id: 231,
+        itinerario: 4,
+        title: 'Noções de educação inclusiva',
+        descricao: 'Sem descrição',
+        cargaHoraria: 20,
+        instCert: 9,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: 'Não há curso associados no Padlet',
+        filter: {
+            competencias: [10, 35, 60],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 232,
+        itinerario: 4,
+        title: 'Controles Institucional e Social dos Gastos Públicos',
+        descricao: 'O curso apresenta noções de controle institucional e social no Brasil para uma compreensão básica sobre a importância da qualidade do gasto, do uso eficiente dos recursos públicos e da participação social.',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/12/',
+        obs: '',
+        filter: {
+            competencias: [63],
+            subtemas: [277],
+        }
+    },
+    {
+        id: 233,
+        itinerario: 4,
+        title: 'Educação em Direitos Humanos',
+        descricao: 'O curso busca contribuir para a conformação de uma visão abrangente acerca desafios e alternativas à Educação em Direitos Humanos, constituindo-se em subsídios para a prática e vivência de ações educativas em Direitos Humanos no âmbito de atuação dos participantes.',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/129/',
+        obs: '',
+        filter: {
+            competencias: [60],
+            subtemas: [215],
+        }
+    },
+    {
+        id: 234,
+        itinerario: 4,
+        title: 'Gestão Estratégica com BSC ',
+        descricao: 'Esse curso é uma boa oportunidade para conhecer alguns elementos teórico-conceituais e instrumentais de planejamento estratégico e de gestão. A compreensão e a utilização de conhecimentos relacionados ao planejamento estratégico e ao método Balanced Scorecard (BSC) possibilitam a atuação em ambientes dinâmicos que exigem percepção de contexto e proatividade.',
+        cargaHoraria: 20,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/103/',
+        obs: '',
+        filter: {
+            competencias: [27, 28, 45, 54, 65],
+            subtemas: [272],
+        }
+    },
+    {
+        id: 235,
+        itinerario: 4,
+        title: 'Captação de Recursos',
+        descricao: 'Sem descrição',
+        cargaHoraria: 15,
+        instCert: 36,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: 'Não há curso relacionado no padlet',
+        filter: {
+            competencias: [27, 65],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 236,
+        itinerario: 4,
+        title: 'Gestão de projetos',
+        descricao: 'A capacitação tem como referência o Guia PMBOK 5° Edição, publicado pelo instituto PMI - Project Management Institute (2013), que reúne as melhores práticas na área de gerenciamento de projetos, com base em experiências de empresas de diferentes segmentos, públicas ou privadas, bem como apresentar outros métodos elaborados pela Administração Pública.',
+        cargaHoraria: 20,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/104/',
+        obs: '',
+        filter: {
+            competencias: [25, 45, 61],
+            subtemas: [272],
+        }
+    },
+    {
+        id: 237,
+        itinerario: 4,
+        title: 'Análise e melhoria de Processos',
+        descricao: 'O curso Análise e Melhoria de Processos foi transposto da modalidade presencial para a autoinstrucional em 2021 pela Enap, com o intuito de oferecer aos participantes apresenta uma visão geral e abrangente da gestão da qualidade no serviço público, aprofundando um de seus aspectos, a análise e melhoria de processos.',
+        cargaHoraria: 20,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/424/',
+        obs: '',
+        filter: {
+            competencias: [25, 45, 61],
+            subtemas: [272],
+        }
+    },
+    {
+        id: 238,
+        itinerario: 4,
+        title: 'Governança  ',
+        descricao: 'Em tempo de economia digital, onde o volume de dados produzidos é imenso, as instituições precisam lidar com este cenário a fim de disponibilizar a informação correta em tempo hábil para a tomada de decisões. A boa governança de dados é o caminho para superar este desafio! Inscreva-se e conheça os fundamentos relacionados à importância da governança de dados especialmente na Administração Pública Federal.',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/270/',
+        obs: '',
+        filter: {
+            competencias: [25, 59, 61],
+            subtemas: [274],
+        }
+    },
+    {
+        id: 239,
+        itinerario: 4,
+        title: 'Gestão de Riscos em Processos de Trabalho',
+        descricao: 'O que você sabe sobre gestão de riscos em processos de trabalho? Este curso apresenta os principais conceitos sobre o tema, contribuindo para disseminar conhecimento e medidas de gerenciamento de riscos institucionais. A partir da experiência da Receita Federal, você poderá reconhecer como a gestão de riscos pode proporcionar a contínua melhoria dos processos de trabalho. Abordagem mais genérica, na trilha de orçamento tb tem Riscos',
+        cargaHoraria: 20,
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/604/',
+        obs: '',
+        filter: {
+            competencias: [25, 61, 65],
+            subtemas: [270],
+        }
+    },
+    {
+        id: 240,
+        itinerario: 4,
+        title: 'Introdução a LGDP',
+        descricao: 'O curso apresenta um panorama sobre a nova legislação brasileira de proteção de dados pessoais (Lei 13.709/18), compreendendo os temas mais importantes para a sua implementação, como: fundamentos e campo de aplicação, princípios e direitos do titular, responsabilidades dos agentes, aspectos internacionais, segurança e a Autoridade Nacional de Proteção de Dados, entre outros. O objetivo do curso é capacitar as pessoas para entenderem, de forma rápida e acessível, o funcionamento e diretrizes básicas expostas na nova lei geral de proteção de dados do Brasil.',
+        cargaHoraria: 10,
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/153/',
+        obs: '',
+        filter: {
+            competencias: [60],
+            subtemas: [215],
         }
     },
     {
         id: 241,
         itinerario: 4,
-        title: 'Criando uma Estratégia Organizacional Ágil em uma Organização Pública',
-        descricao: 'Apresentação de opções e caminhos para se implantar práticas de gestão ágil dentro de uma organização pública',
-        cargaHoraria: 30,
-        instCert: 38,
-        possuiAcessibilidade: 'Não informado',
-        link: '',
+        title: 'Fundamentos da Lei Geral de Proteção de Dados',
+        descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes. Foi desenvolvido pelo Serpro - Serviço Federal de Processamento de Dados, em 2020, originalmente para a capacitação do corpo funcional. Agora é ofertado ao público em geral, por meio de parceria com a Escola Nacional de Administração Pública - Enap.',
+        cargaHoraria: 15,
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/603/',
         obs: '',
         filter: {
-            competencias: [42],
-            subtemas: [233],
+            competencias: [60],
+            subtemas: [215],
         }
     },
     {
         id: 242,
         itinerario: 4,
-        title: 'Executando a Estratégia de maneira Ágil dentro de uma Organização Pública',
-        descricao: 'A partir de uma estratégia estabelecida e que promove a agilidade será apresentado maneiras de executar as ações indicadas de maneira ágil',
+        title: 'Controles na Administração Pública ',
+        descricao: 'Ao final deste curso, espera-se que o participante seja capaz de aplicar princípios do controle no contexto da gestão pública. O curso abordará os temas Prestação de Contas, Controles na Administração Pública, Controle Externo, Controle Interno e Controle Social. ',
         cargaHoraria: 30,
-        instCert: 38,
-        possuiAcessibilidade: 'Não informado',
-        link: '',
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/278/',
         obs: '',
         filter: {
-            competencias: [42],
-            subtemas: [233],
+            competencias: [54, 64],
+            subtemas: [277],
         }
     },
     {
         id: 243,
         itinerario: 4,
-        title: 'Teoria das Organizações: clima organizacional, cultura organizacional, mudança organizacional e desaprendizagem organizacional',
-        descricao: 'Compreender a Cultura Organizacional e o impacto no clima do trabalho, bem como o processo de desaprender, reaprender e aprender as novas competências é essencial para que possibilite a mudança e estar em sintonia com este processo social por que passa a humanidade.',
-        cargaHoraria: 20,
+        title: 'Planejamento e Gestão Orçamentária e Financeira',
+        descricao: 'O Curso de Planejamento e Gestão Orçamentária e Financeira é aberto e autoinstrucional. Público-alvo: servidores da Rede Federal de Educação Profissional e Tecnológica que estejam ocupando cargos de gestão em suas instituições. Após o término do curso você será capaz de: compreender o planejamento e a gestão orçamentária e financeira sob o ponto de vista dos aspectos práticos, qualificando sua rotina de trabalho.',
+        cargaHoraria: 64,
         instCert: 38,
-        possuiAcessibilidade: 'Não informado',
-        link: '',
-        obs: '',
+        possuiAcessibilidade: 'Não',
+        link: 'https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=14',
+        obs: 'Curso em desenvolvimento',
         filter: {
-            competencias: [40],
-            subtemas: [233, 260],
+            competencias: [27, 28],
+            subtemas: [262],
         }
     },
     {
         id: 244,
-        itinerario: 4,
-        title: 'Diversidade',
-        descricao: '',
-        cargaHoraria: 0,
-        instCert: 36,
-        possuiAcessibilidade: 'Não informado',
-        link: '',
-        obs: 'Não há cursos relacionado no Padlet',
-        filter: {
-            competencias: [1],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 245,
         itinerario: 4,
         title: 'Inteligência Emocional',
         descricao: 'A gestão emocional excelente é a possibilidade do ser humano autogerir suas emoções e expressá-las de maneira funcional para consigo e em sociedade, que permite a construção de uma mentalidade de crescimento e, a partir disso, a atuação de maneira produtiva e congruente na carreira e vida pessoal.',
@@ -3670,12 +3655,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/318/',
         obs: '',
         filter: {
-            competencias: [66],
-            subtemas: [1],
+            competencias: [32, 34, 37, 55, 56],
+            subtemas: [276],
         }
     },
     {
-        id: 246,
+        id: 245,
         itinerario: 4,
         title: 'Gestão Pessoal - Base da Liderança',
         descricao: 'A base da gestão pessoal é o autoconhecimento. O curso, nessa concepção, permite aos estudantes refletir sobre suas virtudes, forças de caráter, valores pessoais, motivadores intrínsecos de trabalho e perfil comportamental. A reflexão possibilita aos estudantes organizar estratégias de melhoria em sua vida laboral e em sua vida pessoal, por meio de instrumentos que serão disponibilizados ao longo do curso. Nesse sentido, o curso será de extrema importância para os profissionais que desejam obter um estado consciente em relação aos meios viáveis de se conseguir alcançar um determinado objetivo.',
@@ -3685,12 +3670,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/163/',
         obs: '',
         filter: {
-            competencias: [10],
+            competencias: [10, 37, 45, 61],
             subtemas: [258],
         }
     },
     {
-        id: 247,
+        id: 246,
         itinerario: 4,
         title: 'Desenvolvendo Times de Alta Performance',
         descricao: 'Parceria da RFB com a Enap, este curso aborda o conhecimento e o desenvolvimento de competências gerenciais, além da vivência do exercício da liderança, fundamentais no ambiente de trabalho contemporâneo. O objetivo da parceria é trazer conteúdo para possibilitar aos gestores o aprendizado de técnicas que promovem a alta performance de equipes para o alcance dos objetivos estratégicos da instituição.',
@@ -3700,12 +3685,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/356/',
         obs: '',
         filter: {
-            competencias: [58],
+            competencias: [37, 45, 58, 61],
             subtemas: [258],
         }
     },
     {
-        id: 248,
+        id: 247,
         itinerario: 4,
         title: 'Gestão por Competências',
         descricao: 'O que você sabe sobre Gestão por Competências? Como ela é aplicada no setor público? A partir da experiência da Receita Federal, esse curso aborda o papel da gestão por competências no contexto público e como ela pode contribuir na identificação de lacunas e para o aperfeiçoamento de servidores. ',
@@ -3715,12 +3700,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/175/',
         obs: '',
         filter: {
-            competencias: [62],
-            subtemas: [1],
+            competencias: [37, 45, 58, 61],
+            subtemas: [273],
         }
     },
     {
-        id: 249,
+        id: 248,
         itinerario: 4,
         title: 'Gestão de Conflitos e Negociação',
         descricao: 'Resolver diferenças e divergências, e tomar decisões de forma colaborativa são formas efetivas de preservar e ampliar os objetivos a serem alcançados nas organizações. A temática é relevante uma vez que o desenvolvimento das competências de resolução de conflitos e de negociação tem se mostrado fundamental para o adequado desempenho e atuação de gestores e servidores em suas rotinas de trabalho.',
@@ -3730,27 +3715,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/372/',
         obs: '',
         filter: {
-            competencias: [62],
-            subtemas: [1],
+            competencias: [37, 45, 58, 61],
+            subtemas: [273],
         }
     },
     {
-        id: 250,
-        itinerario: 4,
-        title: 'Articulação e Negociação',
-        descricao: '',
-        cargaHoraria: 0,
-        instCert: 36,
-        possuiAcessibilidade: 'Não informado',
-        link: '',
-        obs: 'Não há cursos relacionado no Padlet',
-        filter: {
-            competencias: [1],
-            subtemas: [1],
-        }
-    },
-    {
-        id: 251,
+        id: 249,
         itinerario: 4,
         title: 'Liderança e Gestão De Equipes',
         descricao: 'Este curso apresenta algumas contribuições sobre os estilos e técnicas de liderança para o atual contexto das organizações públicas. O conteúdo ressalta a importância da liderança no trabalho em equipe e na tomada de decisões.',
@@ -3760,12 +3730,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/373/',
         obs: '',
         filter: {
-            competencias: [57],
+            competencias: [37, 45, 58, 61],
             subtemas: [258],
         }
     },
     {
-        id: 252,
+        id: 250,
         itinerario: 4,
         title: 'Gestão de Equipes em Trabalho Remoto',
         descricao: 'Este curso apresenta diversas contribuições para a gestão de equipes em trabalho remoto. O conteúdo traz dicas e ferramentas interessantes, além de abordar pontos importantes relacionados à gestão de pessoas. Trata-se de um curso necessário, criado a partir dos desafios que afetaram as instituições nos últimos tempos.',
@@ -3775,12 +3745,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/334/',
         obs: '',
         filter: {
-            competencias: [64],
+            competencias: [37, 58, 64],
             subtemas: [261],
         }
     },
     {
-        id: 253,
+        id: 251,
         itinerario: 4,
         title: 'A Liderança Pública em Tempos de Crise',
         descricao: 'Em cenários de graves crises mundiais, nossos olhares se voltam para as lideranças. Pensando nisso, o CLP – Liderança Pública e a ENAP prepararam este curso para apresentar a um passo a passo de como liderar em tempos de crise. O conteúdo tem uso prático para que lideranças consigam navegar pela crise, servindo como um repositório de apoio e suporte para o enfrentamento da instabilidade ocasionada pelo coronavírus.',
@@ -3790,12 +3760,12 @@ const cursos = [
         link: 'https://www.escolavirtual.gov.br/curso/299/',
         obs: 'Conversar com a ENAP para revisitar o curso',
         filter: {
-            competencias: [64],
+            competencias: [37, 58, 64],
             subtemas: [258],
         }
     },
     {
-        id: 254,
+        id: 252,
         itinerario: 5,
         title: 'Legislação para aposentadoria',
         descricao: 'Neste MOOC serão apresetados as temáticas relacionadas aos aspectos gerais da legislação, os tipos de aposentadoria e os requisitos para se aposentar',
@@ -3810,7 +3780,7 @@ const cursos = [
         }
     },
     {
-        id: 255,
+        id: 253,
         itinerario: 5,
         title: 'Planejamento Financeiro',
         descricao: 'Neste MOOC serão apresentadas as temáticas relacionadas ao planejamento e organização dos gastos pessoais; planejamento dos investimentos pessoais; alternativas de investimentos no mercado financeiro e; complementando a renda',
@@ -3825,7 +3795,7 @@ const cursos = [
         }
     },
     {
-        id: 256,
+        id: 254,
         itinerario: 5,
         title: 'Aspectos socioemocionais',
         descricao: 'Neste MOOC serãoapresentadas as temáticas relacionadas ao conhecimento a si mesmo, relações pessoais e familares bem como os aspectos da aposentadoria como o começo de uma nova etapa.',
@@ -3840,7 +3810,7 @@ const cursos = [
         }
     },
     {
-        id: 257,
+        id: 255,
         itinerario: 5,
         title: 'Empreendedorismo',
         descricao: 'Neste MOOC serão apresentadas as temáticas sobre a opção do empreendedorismo e motivos para empreender na aposentadoria',
@@ -3855,7 +3825,7 @@ const cursos = [
         }
     },
     {
-        id: 258,
+        id: 256,
         itinerario: 5,
         title: 'Inserção Digital',
         descricao: 'Neste MOOC serão apresentadas as temáticas relacionadas aos principais aspecros da Informática básica e noções básica de uso da Internet',
@@ -3870,7 +3840,7 @@ const cursos = [
         }
     },
     {
-        id: 259,
+        id: 257,
         itinerario: 5,
         title: 'Promoção a saúde',
         descricao: 'Neste MOOC serão apresentadas as temáticas decomo enfrentar a aposentadoria de maneira saudável, ter uma alimentação saudável e os exercícios físico e qualidade de vida para aposentadoria.',
@@ -3885,7 +3855,7 @@ const cursos = [
         }
     },
     {
-        id: 260,
+        id: 258,
         itinerario: 5,
         title: 'Projeto de vida ',
         descricao: 'Neste MOOC serão apresentadas as temáticasde transição para a aposentadoria; visões do futuro e novos hábitos; o tempo livre e a liberdade de escolha; perseguir sempre a felicidade',
@@ -3898,7 +3868,7 @@ const cursos = [
             competencias: [35],
             subtemas: [1],
         }
-    }, 
+    },
 ];
 
 const categoriasDeCompetencias = [
