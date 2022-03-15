@@ -27,7 +27,6 @@ export default function HomePage() {
 
     const setFilter = useStoreActions(actions => actions.cursos.setFilter)
     const filterDefault = useStoreState(state => state.cursos.filterDefault)
-    const filter = useStoreState(state => state.cursos.filter)
 
     const onClickItinerario = (itinerario) => {
         setFilter({ ...filterDefault, itinerario: itinerario, esquemaDeCores: 'categoria' })

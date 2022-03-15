@@ -70,7 +70,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
         }
 
         return debounce(onSubmitDebounceFunction, debounceTimeout)
-    }, [debounceTimeout])
+    }, [debounceTimeout, setFilter])
 
     return (
         <Col style={{ padding: '8px 16px', overflowY: 'scroll' }}>

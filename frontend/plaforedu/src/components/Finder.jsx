@@ -3,7 +3,7 @@ import { Row, Input, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom'
 
 import Fundo from '../assets/fundo02.png';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 
 import {
     SearchOutlined,

@@ -104,7 +104,7 @@ export default function CytoscapeVisualization() {
             cyRef.current.layout(layouts['layoutBreadthFirst']).run() :
             cyRef.current.layout(layouts[layoutAtual]).run()
         setZoom(cyRef.current._private.zoom)
-    }, [elements, layoutAtual]);
+    }, [elements, layoutAtual, filter.tipoClassificacao, layouts]);
 
     return (
         <Col flex='auto'>
