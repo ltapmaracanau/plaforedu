@@ -41,7 +41,7 @@ export default function Finder() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         width: '100%',
-                        height: '78px',
+                        minHeight: '78px',
                         padding: '10px, 0px',
                     }}
                 >

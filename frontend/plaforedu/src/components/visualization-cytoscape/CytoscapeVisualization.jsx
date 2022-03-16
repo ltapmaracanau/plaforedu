@@ -37,16 +37,17 @@ export default function CytoscapeVisualization() {
 
     const cyRef = useRef(null)
 
-    const filterCollapsed = useStoreState(state => state.adm.filterCollapsed);
-    const layouts = useStoreState(state => state.itinerarios.layouts);
-    const layoutAtual = useStoreState(state => state.itinerarios.layoutAtual);
     const filter = useStoreState(state => state.cursos.filter)
-    const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.esquemaDeCores);
     const elements = useStoreState(state => state.cursos.elements);
     const cursos = useStoreState(state => state.cursos.cursos);
-    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados);
-    const competencias = useStoreState(state => state.cursos.competencias);
     const listInst = useStoreState(state => state.cursos.instituicoes);
+    const competencias = useStoreState(state => state.cursos.competencias);
+    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados);
+    const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.esquemaDeCores);
+
+    const layouts = useStoreState(state => state.itinerarios.layouts);
+    const layoutAtual = useStoreState(state => state.itinerarios.layoutAtual);
+    const filterCollapsed = useStoreState(state => state.adm.filterCollapsed);
 
     const setFilter = useStoreActions(actions => actions.cursos.setFilter)
     const setLayoutAtual = useStoreActions(actions => actions.itinerarios.setLayoutAtual)
@@ -99,7 +100,7 @@ export default function CytoscapeVisualization() {
     }
 
     useEffect(() => {
-        cyRef.current.reset()
+        cyRef.current.add(elements)
         filter.tipoClassificacao ?
             cyRef.current.layout(layouts['layoutBreadthFirst']).run() :
             cyRef.current.layout(layouts[layoutAtual]).run()
@@ -114,16 +115,22 @@ export default function CytoscapeVisualization() {
             >
                 <Row
                     align='middle'
-                    style={{ backgroundColor: '#EBEBEB' }}
+                    style={{ backgroundColor: '#EBEBEB', padding: '5px' }}
                 >
-                    <Col>
+                    <Col
+                        style={{ margin: '5px' }}
+                    >
                         <Button
-                            style={{ margin: '5px 10px', height: '35px', width: '35px' }}
+                            style={{ height: '35px' }}
                             onClick={() => { setFilterCollapsed() }}
                             icon={filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                        />
+                        >
+                            Filtro
+                        </Button>
                     </Col>
-                    <Col>
+                    <Col
+                        style={{ margin: '5px' }}
+                    >
                         <Card>
                             <Form.Item
                                 label={'Zoom'}
@@ -174,12 +181,9 @@ export default function CytoscapeVisualization() {
                             </Form.Item>
                         </Card>
                     </Col>
-                    {/* <Col>
-                        <Button onClick={() => { cyRef.current.layout(layouts[layoutAtual]).run() }}>Teste</Button>
-                    </Col> */}
                     {!filter.tipoClassificacao &&
                         <>
-                            <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
+                            <Col style={{ margin: '5px', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
                                 <Card style={{ width: '100%' }}>
                                     <Form.Item
                                         label={'Visualização'}
@@ -202,7 +206,7 @@ export default function CytoscapeVisualization() {
                                     </Form.Item>
                                 </Card>
                             </Col>
-                            <Col style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
+                            <Col style={{ margin: '5px', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', minWidth: '250px' }}>
                                 <Card style={{ width: '100%' }}>
                                     <Form.Item
                                         label={'Esquema de cores'}
@@ -224,12 +228,9 @@ export default function CytoscapeVisualization() {
                             </Col>
                         </>
                     }
-                </Row>
-                <Row
-                    align='middle'
-                    style={{ backgroundColor: '#EBEBEB' }}
-                >
-                    <Col style={{ display: 'flex', flexDirection: 'row' }}>
+                    <Col
+                        style={{ margin: '5px' }}
+                    >
                         <Card style={{ width: '100%' }}>
                             <CSVLink
                                 filename="plaforedu"
@@ -245,7 +246,10 @@ export default function CytoscapeVisualization() {
                                 </Button>
                             </CSVLink>
                         </Card>
-
+                    </Col>
+                    <Col
+                        style={{ margin: '5px' }}
+                    >
                         <Card style={{ width: '100%' }}>
                             <PDFDownloadLink document={<Template sourceImage={() => cyRef?.current.jpg()} />} fileName="plaforedu.pdf">
                                 {({ loading, error }) => loading ? (
@@ -289,7 +293,8 @@ export default function CytoscapeVisualization() {
                     position: 'relative',
                     width: '100%',
                     height: '555px',
-                    backgroundColor: '#fff'
+                    backgroundColor: '#fff',
+                    overflow: 'hidden'
                 }}
                 layout={layouts[layoutAtual]}
                 stylesheet={[

@@ -1,4 +1,4 @@
-import { action, actionOn, unstable_effectOn } from "easy-peasy"
+import { action, computed } from "easy-peasy"
 
 
 // Fundos escala 2 classificação por categorias
@@ -242,9 +242,6 @@ const cursosFilterFuctionDefault = (filtro) => {
     return(novosCursos)
 }
 
-const cursosFiltradosDefault = cursosFilterFuctionDefault(initialFilterDefault)
-
-
 const reformuladorDeElementosCytoscape = (novosCursos, esqCores, tipoClassificacao) => {
     // todos os cursos
     let categoriasAdicionadas = []
@@ -481,7 +478,9 @@ const trilhosModel = {
     
     subtemas: subtemasDefault,
     
-    cursosFiltrados: cursosFiltradosDefault,
+    cursosFiltrados: computed(state => cursosFilterFuctionDefault(state.filter)),
+    
+    elements: computed(state => reformuladorDeElementosCytoscape(state.cursosFiltrados, state.filter.esquemaDeCores, state.filter.tipoClassificacao)),
     
     filterDefault: initialFilterDefault,
 
@@ -491,31 +490,7 @@ const trilhosModel = {
         state.filter = {...state.filter, ...payload}
     }),
     
-    filterFunction: action((state, payload) => {
-        let filtro = payload
-        let novosCursos = cursosFilterFuctionDefault(filtro)
-        state.cursosFiltrados = novosCursos
-        state.elements = reformuladorDeElementosCytoscape(novosCursos, state.filter.esquemaDeCores, state.filter.tipoClassificacao)
-    }),
     
-    onChangeFilter: unstable_effectOn(
-        // targetResolver:
-        [state => state.filter],
-        // handler:
-        (actions, change) => {
-            actions.filterFunction(change.current[0])
-        }
-    ),
-
-    setCursosFiltrados: action((state, payload) => {
-        state.cursosFiltrados = payload
-    }),
-
-    setColorSchema: action((state, payload) => {
-        state.filter.esquemaDeCores = payload
-    }),
-    
-    elements: reformuladorDeElementosCytoscape(cursosFiltradosDefault, initialFilterDefault.esquemaDeCores, false),
 }
     
     export default trilhosModel

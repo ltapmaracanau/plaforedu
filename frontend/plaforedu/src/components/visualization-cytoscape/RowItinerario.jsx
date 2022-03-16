@@ -15,11 +15,12 @@ import {
     Col,
     Typography,
     Card,
+    Grid
 } from 'antd'
 import Title from 'antd/lib/typography/Title'
 
 const { Text } = Typography
-
+const { useBreakpoint } = Grid
 
 export default function RowItinerario() {
 
@@ -28,6 +29,9 @@ export default function RowItinerario() {
     const filter = useStoreState((state) => state.cursos.filter);
     const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
     const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.find((obj) => obj.dados_gerais.id === itinerario));
+
+    const screens = useBreakpoint()
+
 
     const maps = {
         mapGeral: {
@@ -257,7 +261,7 @@ export default function RowItinerario() {
 
     return (
         <Row
-            wrap={false}
+            wrap={!screens.lg}
             style={{
                 display: 'flex',
                 flexDirection: 'row',
