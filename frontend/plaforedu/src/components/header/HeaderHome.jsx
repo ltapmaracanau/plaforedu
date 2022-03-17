@@ -53,7 +53,15 @@ export default function HeaderHome() {
           />
         </Link>
       </Col>
-      <Col flex='auto' style={{ fontFamily: 'Roboto', marginRight: '50px' }} offset={4}>
+      <Col
+        flex='auto'
+        style={
+          !screens.xs ?
+            { fontFamily: 'Roboto', marginRight: '50px' } :
+            { fontFamily: 'Roboto' }
+
+        }
+      >
         <Menu mode='horizontal' selectable={false} overflowedIndicator={<MenuOutlined style={{ fontSize: '20px' }} />} style={{ justifyContent: 'right' }}>
           <Menu.Item key={1}><Link to={'/'}>HOME</Link></Menu.Item>
           <Menu.Item key={2}><Link to={'/about'}>SOBRE</Link></Menu.Item>

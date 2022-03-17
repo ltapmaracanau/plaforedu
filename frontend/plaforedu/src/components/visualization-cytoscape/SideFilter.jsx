@@ -261,7 +261,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                                                 {...field}
                                                 placeholder={'Todos os Subtemas'}
                                                 mode='multiple'
-                                                showSearch
+                                                showArrow
                                                 onChange={(value) => {
                                                     field.onChange(value)
                                                     onSubmit()

@@ -3,7 +3,7 @@ import { Row, Input, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom'
 
 import Fundo from '../assets/fundo02.png';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import {
     SearchOutlined,
@@ -16,9 +16,10 @@ export default function Finder() {
     let navigate = useNavigate();
 
     const setFiltro = useStoreActions(actions => actions.cursos.setFilter)
+    const filtroDefault = useStoreState(state => state.cursos.filterDefault)
 
     const onSearch = (value) => {
-        setFiltro({ buscaInterna: value, itinerario: 0 })
+        setFiltro({ ...filtroDefault, buscaInterna: value })
         navigate(`/cursos`)
     }
 

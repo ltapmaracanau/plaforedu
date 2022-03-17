@@ -49,7 +49,7 @@ export default function CoursesPage() {
                         visible={!filterCollapsed}
                         closeIcon={<CloseOutlined style={{ color: '#000' }} />}
                         placement='left' onClose={onClose}
-                        width={screens.xs ? 300 : 400}
+                        width={screens.xs ? '100%' : 400}
                     >
                         <SideFilter />
                     </Drawer>
