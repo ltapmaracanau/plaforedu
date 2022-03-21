@@ -22,7 +22,6 @@ const { Content } = Layout
 export default function AboutPage() {
 
     const screens = useBreakpoint()
-    console.log(screens);
 
     return (
         <>
@@ -53,6 +52,7 @@ export default function AboutPage() {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
+                                    margin: '40px'
                                 }}
                             >
                                 <Image
@@ -124,6 +124,7 @@ export default function AboutPage() {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
+                                    margin: '40px'
                                 }}
                             >
                                 <Image
@@ -151,6 +152,7 @@ export default function AboutPage() {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
+                                    margin: '40px'
                                 }}
                                 order={screens.lg ? 0 : 1}
                             >
@@ -215,7 +217,7 @@ export default function AboutPage() {
                             </Col>
                             <Col
                                 span={24}
-                                style={{ padding: '40px' }}
+                                style={screens.lg ? { padding: '80px' } : { padding: '40px' }}
                             >
                                 <Image
                                     preview={false}

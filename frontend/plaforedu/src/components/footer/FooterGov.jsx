@@ -1,8 +1,7 @@
 import React from 'react'
 
 /* import secretaria from '../../assets/secretaria.png' */
-import ministerio from '../../assets/ministerio.png'
-import brasil from '../../assets/brasil.png'
+import ministerio from '../../assets/marca.png'
 
 
 import {
@@ -54,12 +53,6 @@ export default function FooterGov() {
                         height='40px'
                         src={ministerio}
                         alt="Ministério da Educação"
-                        preview={false}
-                    />
-                    <Image
-                        height='40px'
-                        src={brasil}
-                        alt="Governo Federal"
                         preview={false}
                     />
                 </Col>
