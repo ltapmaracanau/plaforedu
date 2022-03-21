@@ -16,9 +16,10 @@ export default function Finder() {
     let navigate = useNavigate();
 
     const setFiltro = useStoreActions(actions => actions.cursos.setFilter)
+    const filtroDefault = useStoreState(state => state.cursos.filterDefault)
 
     const onSearch = (value) => {
-        setFiltro({ buscaInterna: value, itinerario: 0 })
+        setFiltro({ ...filtroDefault, buscaInterna: value })
         navigate(`/cursos`)
     }
 
@@ -41,7 +42,7 @@ export default function Finder() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         width: '100%',
-                        height: '78px',
+                        minHeight: '78px',
                         padding: '10px, 0px',
                     }}
                 >

@@ -4,44 +4,65 @@ import { Link } from "react-router-dom";
 
 import LogoPlafor from '../../assets/PLAFORLOGO.png';
 
-import { useStoreActions } from 'easy-peasy'
+import { useStoreActions, useStoreState } from 'easy-peasy'
 import {
   DownOutlined,
+  MenuOutlined,
 } from '@ant-design/icons';
 
 import {
   Row,
   Col,
   Menu,
+  Grid,
   Image,
+  Button,
 } from 'antd';
+
+const { useBreakpoint } = Grid
 
 const { SubMenu } = Menu;
 
 export default function HeaderHome() {
 
-  const setItinerario = useStoreActions(actions => actions.cursos.setItinerario)
-  const setColorSchema = useStoreActions(actions => actions.cursos.setColorSchema)
+  const screens = useBreakpoint()
+
+  const setFilter = useStoreActions(actions => actions.cursos.setFilter)
+  const filterDefault = useStoreState(state => state.cursos.filterDefault)
 
   const onClickItinerario = (itinerario) => {
-    setItinerario(itinerario)
-    setColorSchema('categoria')
+    setFilter({ ...filterDefault, itinerario: itinerario, esquemaDeCores: 'categoria' })
   }
 
   return (
     <Row wrap={false} align='middle' style={{ height: '70px', backgroundImage: 'linear-gradient(to right, #2C55A1, #35A8E0)' }}>
-      <Col flex='300px' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Link to='/'>
+      <Col
+        flex={'300px'}
+        style={
+          !screens.xs ?
+            { display: 'flex', justifyContent: 'center', alignItems: 'center' } :
+            { display: 'flex', justifyContent: 'left', alignItems: 'center', paddingLeft: '10px' }
+        }
+      >
+        <Link to='/' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
           <Image
             preview={false}
             height='65px'
-            style={{ padding: '5px' }}
+            style={{ padding: '5px', minWidth: '190px' }}
             src={LogoPlafor}
           />
         </Link>
       </Col>
-      <Col offset={4} flex='auto' style={{ padding: '0px 100px', display: 'flex', fontFamily: 'Roboto', justifyContent: 'right', alignItems: 'center' }}>
-        <Menu disabledOverflow={true} mode='horizontal' selectable={false}>
+      <Col
+        flex='auto'
+        style={
+          !screens.xs ?
+            { fontFamily: 'Roboto', marginRight: '50px' } :
+            { fontFamily: 'Roboto' }
+
+        }
+      >
+        <Menu mode='horizontal' selectable={false} overflowedIndicator={<MenuOutlined style={{ fontSize: '20px' }} />} style={{ justifyContent: 'right' }}>
           <Menu.Item key={1}><Link to={'/'}>HOME</Link></Menu.Item>
           <Menu.Item key={2}><Link to={'/about'}>SOBRE</Link></Menu.Item>
           {/* <SubMenu icon={<DownOutlined />} key={2} title='SOBRE' >
@@ -50,7 +71,7 @@ export default function HeaderHome() {
             <Menu.Item key={23}>Manuais e Guias</Menu.Item>
             <Menu.Item key={24}>Orientações</Menu.Item>
           </SubMenu> */}
-          <SubMenu icon={<DownOutlined />} key={3} title='RECURSOS' >
+          <SubMenu icon={screens.md ? <DownOutlined /> : null} key={3} title='RECURSOS' >
             <Menu.Item key={31} onClick={() => onClickItinerario(1)} ><Link to={'/cursos'}>Iniciação ao Serviço Público</Link></Menu.Item>
             <Menu.Item key={32} onClick={() => onClickItinerario(2)} ><Link to={'/cursos'}>Técnico-Administrativo em Educação</Link></Menu.Item>
             <Menu.Item key={33} onClick={() => onClickItinerario(3)} ><Link to={'/cursos'}>Docente</Link></Menu.Item>

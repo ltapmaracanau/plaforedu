@@ -1,12 +1,12 @@
 import React from 'react'
 import { useStoreActions, useStoreState } from 'easy-peasy'
 
-import Img0 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_Completa.png'
-import Img1 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_InicServPublico_CLICADO.png'
-import Img2 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_TecAdmEdu_CLICADO.png'
-import Img3 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_Docente_CLICADO.png'
-import Img4 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_Gerencial_CLICADO.png'
-import Img5 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_PrepAposenta_CLICADO.png'
+import Img0 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png'
+import Img1 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_InicServPublico_CLICADO.png'
+import Img2 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_TecAdmEdu_CLICADO.png'
+import Img3 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Docente_CLICADO.png'
+import Img4 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Gerencial_CLICADO.png'
+import Img5 from '../../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_PrepAposenta_CLICADO.png'
 
 import ImageMapper from 'react-image-mapper';
 
@@ -15,11 +15,12 @@ import {
     Col,
     Typography,
     Card,
+    Grid
 } from 'antd'
 import Title from 'antd/lib/typography/Title'
 
 const { Text } = Typography
-
+const { useBreakpoint } = Grid
 
 export default function RowItinerario() {
 
@@ -28,6 +29,9 @@ export default function RowItinerario() {
     const filter = useStoreState((state) => state.cursos.filter);
     const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
     const itinerarioData = useStoreState((state) => state.itinerarios.itinerarios.find((obj) => obj.dados_gerais.id === itinerario));
+
+    const screens = useBreakpoint()
+
 
     const maps = {
         mapGeral: {
@@ -257,7 +261,7 @@ export default function RowItinerario() {
 
     return (
         <Row
-            wrap={false}
+            wrap={!screens.lg}
             style={{
                 display: 'flex',
                 flexDirection: 'row',

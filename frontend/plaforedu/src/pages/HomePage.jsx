@@ -1,11 +1,11 @@
 import React from 'react'
 import HeaderHome from '../components/header/HeaderHome';
 import Finder from '../components/Finder';
-import Int1 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_Docente.png'
-import Int2 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_InicServPublico.png'
-import Int3 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_Gerencial.png'
-import Int4 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_PrepAposenta.png'
-import Int5 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v4_TecAdmEdu.png'
+import Int1 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png'
+import Int2 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png'
+import Int3 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.png'
+import Int4 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png'
+import Int5 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.png'
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import { Link } from "react-router-dom";
 
@@ -27,7 +27,6 @@ export default function HomePage() {
 
     const setFilter = useStoreActions(actions => actions.cursos.setFilter)
     const filterDefault = useStoreState(state => state.cursos.filterDefault)
-    const filter = useStoreState(state => state.cursos.filter)
 
     const onClickItinerario = (itinerario) => {
         setFilter({ ...filterDefault, itinerario: itinerario, esquemaDeCores: 'categoria' })

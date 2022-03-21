@@ -1,82 +1,82 @@
-import { action, actionOn, unstable_effectOn } from "easy-peasy"
+import { action, computed } from "easy-peasy"
 
 
 // Fundos escala 2 classificação por categorias
-import fundoCurso1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 01.png'
-import fundoCategoria1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 01.png'
-import fundoCompetencia1 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 01.png'
+import fundoCurso1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 01.png'
+import fundoCategoria1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 01.png'
+import fundoCompetencia1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 01.png'
 
-import fundoCurso2 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 02.png'
-import fundoCategoria2 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 02.png'
-import fundoCompetencia2 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 02.png'
+import fundoCurso2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 02.png'
+import fundoCategoria2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 02.png'
+import fundoCompetencia2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 02.png'
 
-import fundoCurso3 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 03.png'
-import fundoCategoria3 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 03.png'
-import fundoCompetencia3 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 03.png'
+import fundoCurso3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 03.png'
+import fundoCategoria3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 03.png'
+import fundoCompetencia3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 03.png'
 
-import fundoCurso4 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 04.png'
-import fundoCategoria4 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 04.png'
-import fundoCompetencia4 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 04.png'
+import fundoCurso4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 04.png'
+import fundoCategoria4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 04.png'
+import fundoCompetencia4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 04.png'
 
-import fundoCurso5 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 05.png'
-import fundoCategoria5 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 05.png'
-import fundoCompetencia5 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 05.png'
+import fundoCurso5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 05.png'
+import fundoCategoria5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 05.png'
+import fundoCompetencia5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 05.png'
 
-import fundoCurso6 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 06.png'
-import fundoCategoria6 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 06.png'
-import fundoCompetencia6 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 06.png'
+import fundoCurso6 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 06.png'
+import fundoCategoria6 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 06.png'
+import fundoCompetencia6 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 06.png'
 
-import fundoCurso7 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 07.png'
-import fundoCategoria7 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 07.png'
-import fundoCompetencia7 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 07.png'
+import fundoCurso7 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 07.png'
+import fundoCategoria7 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 07.png'
+import fundoCompetencia7 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 07.png'
 
-import fundoCurso8 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 08.png'
-import fundoCategoria8 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 08.png'
-import fundoCompetencia8 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 08.png'
+import fundoCurso8 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 08.png'
+import fundoCategoria8 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 08.png'
+import fundoCompetencia8 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 08.png'
 
-import fundoCurso9 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 09.png'
-import fundoCategoria9 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 09.png'
-import fundoCompetencia9 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 09.png'
+import fundoCurso9 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 09.png'
+import fundoCategoria9 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 09.png'
+import fundoCompetencia9 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 09.png'
 
-import fundoCurso10 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 10.png'
-import fundoCategoria10 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 10.png'
-import fundoCompetencia10 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 10.png'
+import fundoCurso10 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 10.png'
+import fundoCategoria10 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 10.png'
+import fundoCompetencia10 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 10.png'
 
-import fundoCurso11 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 11.png'
-import fundoCategoria11 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 11.png'
-import fundoCompetencia11 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 11.png'
+import fundoCurso11 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 11.png'
+import fundoCategoria11 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 11.png'
+import fundoCompetencia11 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 11.png'
 
-import fundoCurso12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Curso 12.png'
-import fundoCategoria12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Categoria 12.png'
-import fundoCompetencia12 from '../assets/icones/PLAFOREDU_IconesFiltros_v3_Competencia 12.png'
+import fundoCurso12 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 12.png'
+import fundoCategoria12 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Categoria 12.png'
+import fundoCompetencia12 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Competencia 12.png'
 
 
 // Fundos escala 1 classificação por itinerarios
-import fundoEscala1Curso1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-01.png'
-import fundoEscala1Categoria1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-01.png'
-import fundoEscala1Competencia1 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-01.png'
+import fundoEscala1Curso1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-01.png'
+import fundoEscala1Categoria1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-01.png'
+import fundoEscala1Competencia1 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-01.png'
 
-import fundoEscala1Curso2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-02.png'
-import fundoEscala1Categoria2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-02.png'
-import fundoEscala1Competencia2 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-02.png'
+import fundoEscala1Curso2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-02.png'
+import fundoEscala1Categoria2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-02.png'
+import fundoEscala1Competencia2 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-02.png'
 
-import fundoEscala1Curso3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-03.png'
-import fundoEscala1Categoria3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-03.png'
-import fundoEscala1Competencia3 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-03.png'
+import fundoEscala1Curso3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-03.png'
+import fundoEscala1Categoria3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-03.png'
+import fundoEscala1Competencia3 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-03.png'
 
-import fundoEscala1Curso4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-04.png'
-import fundoEscala1Categoria4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-04.png'
-import fundoEscala1Competencia4 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-04.png'
+import fundoEscala1Curso4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-04.png'
+import fundoEscala1Categoria4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-04.png'
+import fundoEscala1Competencia4 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-04.png'
 
-import fundoEscala1Curso5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Curso Cor-05.png'
-import fundoEscala1Categoria5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Categoria Cor-05.png'
-import fundoEscala1Competencia5 from '../assets/icones/PLAFOREDU_Icones-Filtros_Escala-1_Competencia Cor-05.png'
+import fundoEscala1Curso5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Curso Cor-05.png'
+import fundoEscala1Categoria5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-05.png'
+import fundoEscala1Competencia5 from '../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-05.png'
 
 import {cursosDefault, instituicoesDefault, competenciasDefault, categoriasDeCompetenciasDefault, temasDefault, subtemasDefault} from '../services/dataService.js'
 
 const fundosCategoria = {
     categoria: {
-        1: fundoCategoria1,
+        1: fundoEscala1Categoria3,
         2: fundoCategoria1,
         3: fundoCategoria2,
         4: fundoCategoria3,
@@ -89,9 +89,13 @@ const fundosCategoria = {
         11: fundoCategoria10,
         12: fundoCategoria11,
         13: fundoCategoria12,
+        14: fundoCategoria12,
+        15: fundoCategoria12,
+        16: fundoCategoria12,
+        17: fundoCategoria12,
     },
     curso: {
-        1: fundoCurso1,
+        1: fundoEscala1Curso3,
         2: fundoCurso1,
         3: fundoCurso2,
         4: fundoCurso3,
@@ -104,9 +108,13 @@ const fundosCategoria = {
         11: fundoCurso10,
         12: fundoCurso11,
         13: fundoCurso12,
+        14: fundoCurso12,
+        15: fundoCurso12,
+        16: fundoCurso12,
+        17: fundoCurso12,
     },
     competencia: {
-        1: fundoCompetencia1,
+        1: fundoEscala1Competencia3,
         2: fundoCompetencia1,
         3: fundoCompetencia2,
         4: fundoCompetencia3,
@@ -119,6 +127,10 @@ const fundosCategoria = {
         11: fundoCompetencia10,
         12: fundoCompetencia11,
         13: fundoCompetencia12,
+        14: fundoCompetencia12,
+        15: fundoCompetencia12,
+        16: fundoCompetencia12,
+        17: fundoCompetencia12,
     },
 }
 
@@ -147,7 +159,7 @@ const fundosItinerario = {
 }
 
 const colorsCategorias = {
-    1:  '#ea190f',
+    1:  '#990099',
     2:  '#ea190f',
     3:  '#f98506',
     4:  '#ffbe00',
@@ -160,14 +172,18 @@ const colorsCategorias = {
     11: '#f154ca',
     12: '#997ff7',
     13: '#1db7ed',
+    14: '#1db7ed',
+    15: '#1db7ed',
+    16: '#1db7ed',
+    17: '#1db7ed',
 }
 
 const colorsItinerarios = {
-    1:  '#39A8E0',
-    2:  '#F89406',
-    3:  '#E74C3C',
-    4:  '#009688',
-    5:  '#9966FF',
+    1:  '#0099CC',
+    2:  '#FF9900',
+    3:  '#990099',
+    4:  '#66CC33',
+    5:  '#9999FF',
 }
 
 const initialFilterDefault = {
@@ -186,7 +202,8 @@ const initialFilterDefault = {
 const cursosFilterFuctionDefault = (filtro) => {
     let novosCursos = []
     cursosDefault.forEach(curso => {
-        let contemTema = curso.filter.temas.some(idTema => filtro.temas.includes(idTema))
+        let temasDoCurso = temasDefault.filter(tema => tema.subtemas.some(subtema => curso.filter.subtemas.includes(subtema)))
+        let contemTema = temasDoCurso.some(tema => filtro.temas.includes(tema.id))
         let temasVazio = filtro.temas.length === 0
         
         let contemSubtema = curso.filter.subtemas.some(idSubtema => filtro.subtemas.includes(idSubtema))
@@ -224,9 +241,6 @@ const cursosFilterFuctionDefault = (filtro) => {
     })
     return(novosCursos)
 }
-
-const cursosFiltradosDefault = cursosFilterFuctionDefault(initialFilterDefault)
-
 
 const reformuladorDeElementosCytoscape = (novosCursos, esqCores, tipoClassificacao) => {
     // todos os cursos
@@ -464,7 +478,9 @@ const trilhosModel = {
     
     subtemas: subtemasDefault,
     
-    cursosFiltrados: cursosFiltradosDefault,
+    cursosFiltrados: computed(state => cursosFilterFuctionDefault(state.filter)),
+    
+    elements: computed(state => reformuladorDeElementosCytoscape(state.cursosFiltrados, state.filter.esquemaDeCores, state.filter.tipoClassificacao)),
     
     filterDefault: initialFilterDefault,
 
@@ -474,31 +490,7 @@ const trilhosModel = {
         state.filter = {...state.filter, ...payload}
     }),
     
-    filterFunction: action((state, payload) => {
-        let filtro = payload
-        let novosCursos = cursosFilterFuctionDefault(filtro)
-        state.cursosFiltrados = novosCursos
-        state.elements = reformuladorDeElementosCytoscape(novosCursos, state.filter.esquemaDeCores, state.filter.tipoClassificacao)
-    }),
     
-    onChangeFilter: unstable_effectOn(
-        // targetResolver:
-        [state => state.filter],
-        // handler:
-        (actions, change) => {
-            actions.filterFunction(change.current[0])
-        }
-    ),
-
-    setCursosFiltrados: action((state, payload) => {
-        state.cursosFiltrados = payload
-    }),
-
-    setColorSchema: action((state, payload) => {
-        state.filter.esquemaDeCores = payload
-    }),
-    
-    elements: reformuladorDeElementosCytoscape(cursosFiltradosDefault, initialFilterDefault.esquemaDeCores, false),
 }
     
     export default trilhosModel

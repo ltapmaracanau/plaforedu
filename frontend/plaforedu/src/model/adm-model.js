@@ -4,7 +4,7 @@ const admModel = {
 
     tipoVisualizacao: false, // false: grafo, true: lista
 
-    filterCollapsed : false, // true: filter escondido, false: filter visível
+    filterCollapsed : true, // true: filter escondido, false: filter visível
     
     setFilterCollapsed : action((state, _) => {
         state.filterCollapsed = !state.filterCollapsed

@@ -1,5 +1,4 @@
 
-
 export const cursosDefault = [
     {
         id: 1,
@@ -9,28 +8,26 @@ export const cursosDefault = [
         cargaHoraria: 40,
         instCert: 1,
         possuiAcessibilidade: 'Não',
-        link: 'Trilha a ser desenvolvida pelo MEC e instituições da REDE',
-        obs: ' ',
+        link: '',
+        obs: '',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [259],
         }
     },
     {
         id: 2,
         itinerario: 1,
-        title: 'Iniciação ao Serviço Público nos Institutos Federais',
+        title: 'Iniciação ao Serviço Público nos Institutos Federais ',
         descricao: 'Conheça os Institutos Federais e os conceitos básicos que todo servidor público precisa saber.',
         cargaHoraria: 80,
         instCert: 2,
         possuiAcessibilidade: 'Não',
         link: 'https://moodle.ifrs.edu.br/course/view.php?id=4393ex',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [259],
         }
     },
     {
@@ -42,11 +39,10 @@ export const cursosDefault = [
         instCert: 3,
         possuiAcessibilidade: 'Não',
         link: 'https://virtual.ifg.edu.br/local/staticpage/view.php?page=cursos%0d',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [50],
-            temas: [],
-            subtemas: [],
+            subtemas: [235],
         }
     },
     {
@@ -58,11 +54,10 @@ export const cursosDefault = [
         instCert: 4,
         possuiAcessibilidade: 'Não',
         link: 'https://moodle.ifrj.edu.br/enrol/index.php?id=393',
-        obs: 'Apenas Servidores do IFRJ poderão se inscrever, verificar abertura para todos os usuarios do Plafor. ',
+        obs: 'Apenas Servidores do IFRJ poderão se inscrever, verificar abertura para todos os usuarios do Plafor.',
         filter: {
             competencias: [50],
-            temas: [],
-            subtemas: [],
+            subtemas: [232],
         }
     },
     {
@@ -74,27 +69,25 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/293/',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [260],
         }
     },
     {
         id: 6,
         itinerario: 1,
-        title: 'Teletrabalho e Educação a Distância',
+        title: 'Teletrabalho e Educação a Distância ',
         descricao: 'O desafio de transformação da realidade de trabalho está fazendo com que pessoas e organizações adaptem seus processos de trabalho. Pensando nisso, a Enap traz mais uma oportunidade de capacitação com este curso desenvolvido pelo CEPERJ, instituição parceria da EV.G.',
-        cargaHoraria: 8,
+        cargaHoraria: 80,
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/301',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [50],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
@@ -106,11 +99,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/74/',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [50],
-            temas: [],
-            subtemas: [],
+            subtemas: [232],
         }
     },
     {
@@ -122,11 +114,10 @@ export const cursosDefault = [
         instCert: 6,
         possuiAcessibilidade: 'Não',
         link: 'https://cursos.poca.ufscar.br/course/search.php?search=SCDP',
-        obs: 'Fechar acordo com a UFSCAR ',
+        obs: 'Fechar acordo com a UFSCAR',
         filter: {
             competencias: [50],
-            temas: [],
-            subtemas: [],
+            subtemas: [232],
         }
     },
     {
@@ -138,11 +129,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/4',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [32],
-            temas: [],
-            subtemas: [],
+            subtemas: [240],
         }
     },
     {
@@ -154,11 +144,10 @@ export const cursosDefault = [
         instCert: 7,
         possuiAcessibilidade: 'Não',
         link: 'https://saberes.senado.leg.br/course/index.php?categoryid=260',
-        obs: 'Solicitar a escola do senado a oferta por tempo indeterminado ao curso ',
+        obs: 'Solicitar a escola do senado a oferta por tempo indeterminado ao curso',
         filter: {
             competencias: [32],
-            temas: [],
-            subtemas: [],
+            subtemas: [240],
         }
     },
     {
@@ -166,15 +155,14 @@ export const cursosDefault = [
         itinerario: 1,
         title: 'Assédio Moral e Sexual no Trabalho',
         descricao: 'Objetivo: Debater abertamente sobre Assédio Moral e Sexual no Trabalho visa melhorar as condições de trabalho e as relações entra os trabalhadores, melhorando, assim a qualidade de vida dos indivíduos e a sua produtividade. Tornar o ambiente de trabalho livre de qualquer prática ofensiva é a meta principal.',
-        cargaHoraria: 6,
+        cargaHoraria: 60,
         instCert: 7,
         possuiAcessibilidade: 'Não',
         link: 'https://saberes.senado.leg.br/',
-        obs: 'Solicitar a escola do senado a oferta por tempo indeterminado ao curso ',
+        obs: 'Solicitar a escola do senado a oferta por tempo indeterminado ao curso',
         filter: {
             competencias: [32],
-            temas: [],
-            subtemas: [],
+            subtemas: [240],
         }
     },
     {
@@ -186,11 +174,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/134',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [32],
-            temas: [],
-            subtemas: [],
+            subtemas: [240],
         }
     },
     {
@@ -202,11 +189,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/405/',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [1],
-            temas: [],
-            subtemas: [],
+            subtemas: [226],
         }
     },
     {
@@ -218,11 +204,10 @@ export const cursosDefault = [
         instCert: 8,
         possuiAcessibilidade: 'Não',
         link: 'https://cursoslivres.unifap.br/course/plano-de-carreira-dos-cargos-tecnico-administrativo-em-educacao-pcctae/intro',
-        obs: 'O curso atende parcialmente, o módulo 3 é muito específico para a Universidade Federal do Amapá ',
+        obs: 'O curso atende parcialmente, o módulo 3 é muito específico para a Universidade Federal do Amapá',
         filter: {
             competencias: [1],
-            temas: [],
-            subtemas: [],
+            subtemas: [226],
         }
     },
     {
@@ -234,11 +219,10 @@ export const cursosDefault = [
         instCert: 8,
         possuiAcessibilidade: 'Não',
         link: 'https://cursoslivres.unifap.br/course/processo-administrativo-disciplinar-na-pratica/intro',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [1],
-            temas: [],
-            subtemas: [],
+            subtemas: [241],
         }
     },
     {
@@ -250,11 +234,10 @@ export const cursosDefault = [
         instCert: 6,
         possuiAcessibilidade: 'Não',
         link: 'https://cursos.poca.ufscar.br/login/index.php',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [32],
-            temas: [],
-            subtemas: [],
+            subtemas: [377],
         }
     },
     {
@@ -266,11 +249,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/116',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [27],
-            temas: [],
-            subtemas: [],
+            subtemas: [263],
         }
     },
     {
@@ -282,11 +264,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/368/',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [242],
         }
     },
     {
@@ -298,11 +279,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/341/',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [27],
-            temas: [],
-            subtemas: [],
+            subtemas: [263],
         }
     },
     {
@@ -314,11 +294,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/604',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [25],
-            temas: [],
-            subtemas: [],
+            subtemas: [246],
         }
     },
     {
@@ -330,11 +309,10 @@ export const cursosDefault = [
         instCert: 9,
         possuiAcessibilidade: 'Não',
         link: 'https://mundi.ifsul.edu.br/portal/educacao-especial-e-inclusao.php',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
@@ -346,11 +324,10 @@ export const cursosDefault = [
         instCert: 10,
         possuiAcessibilidade: 'parcial',
         link: 'https://cursos.poca.ufscar.br/login/index.php',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
@@ -362,11 +339,10 @@ export const cursosDefault = [
         instCert: 11,
         possuiAcessibilidade: 'Não',
         link: 'https://mais.ifmg.edu.br/login/index.php',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
@@ -378,11 +354,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://www.escolavirtual.gov.br/curso/153',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [31],
-            temas: [],
-            subtemas: [],
+            subtemas: [270],
         }
     },
     {
@@ -394,11 +369,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://www.escolavirtual.gov.br/curso/153',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [27],
-            temas: [],
-            subtemas: [],
+            subtemas: [232],
         }
     },
     {
@@ -410,11 +384,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://www.escolavirtual.gov.br/curso/604',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [31],
-            temas: [],
-            subtemas: [],
+            subtemas: [246],
         }
     },
     {
@@ -426,11 +399,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://www.escolavirtual.gov.br/curso/452',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [53],
-            temas: [],
-            subtemas: [],
+            subtemas: [377],
         }
     },
     {
@@ -442,11 +414,10 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://www.escolavirtual.gov.br/curso/372',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [10, 30, 35, 55],
-            temas: [],
-            subtemas: [],
+            subtemas: [353],
         }
     },
     {
@@ -458,31 +429,14 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://www.escolavirtual.gov.br/curso/4',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [240, 319],
         }
     },
     {
         id: 30,
-        itinerario: 2,
-        title: 'Administrador de Organizações Civis: Direitos Humanos e Justiça',
-        descricao: 'Qualificar pessoas para agirem na defesa dos valores e princípios gerais dos direitos humanos, objetivando a justiça, a ética, a moral, a equidade, a igualdade e a liberdade.',
-        cargaHoraria: 20,
-        instCert: 11,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=51',
-        obs: ' ',
-        filter: {
-            competencias: [36],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 31,
         itinerario: 2,
         title: 'Introdução à Libras',
         descricao: 'Aprenda a utilizar a Língua Brasileira de Sinais (Libras) e garanta o atendimento e o tratamento adequado às pessoas com deficiência auditiva. A Lei nº 10.436/2002 legitima a Libras como idioma advindo das Comunidades Surdas Brasileiras e obriga o poder público em geral a adotar formas institucionalizadas de apoiar o uso e a difusão dessa língua como meio de comunicação.',
@@ -490,15 +444,14 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://www.escolavirtual.gov.br/curso/11',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [32],
-            temas: [],
-            subtemas: [],
+            subtemas: [377],
         }
     },
     {
-        id: 32,
+        id: 31,
         itinerario: 2,
         title: 'Políticas étnico-raciais: conceitos e métodos na superação do racismo e desigualdades',
         descricao: 'O curso foi desenvolvido em 2021 pela Enap em parceria com o Ministério da Mulher, da Família e dos Direitos Humanos (MMFDH) visando apresentar histórico e atuais políticas étnico-raciais, contemplando conceitos e métodos que auxiliam na superação do racismo e desigualdades raciais.',
@@ -506,27 +459,40 @@ export const cursosDefault = [
         instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://www.escolavirtual.gov.br/curso/417',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [353],
+        }
+    },
+    {
+        id: 32,
+        itinerario: 2,
+        title: 'Noções Básicas do Trabalho Remoto',
+        descricao: 'O trabalho remoto já é uma realidade, pensando nisso, a Enap e a Endeavor prepararam este curso para apresentar diversas estratégias e dicas que facilitam o seu dia a dia, a organização do trabalho individual e do trabalho em equipe. Quer saber mais? Você pode ser inscrever neste curso gratuito e aberto na EVG, assistir o vídeo do GNPapo promovido pelo laboratório de inovação da Enap, disponível com acesso livre em "Conteúdo Relacionado" ou, ainda, acessar a página da Campanha #contecomigo #suavizeacurva que é uma iniciativa da Secretaria de Gestão e Desempenho de Pessoal (SGP).',
+        cargaHoraria: 10,
+        instCert: 5,
+        possuiAcessibilidade: 'Não sei informar',
+        link: 'https://www.escolavirtual.gov.br/curso/293',
+        obs: '',
+        filter: {
+            competencias: [36, 37],
+            subtemas: [232],
         }
     },
     {
         id: 33,
         itinerario: 2,
-        title: 'Educação Inclusiva: Introdução ao Transtorno do Espectro Autista (TEA)',
-        descricao: 'Conhecer aspectos introdutórios sobre o Transtorno do espectro autista (TEA), assim como um pouco da sua história. Pontuar conceitos para a inclusão de estudantes com TEA e o papel do professor nesse processo. Identificar alguns dos materiais didáticos e metodologias de ensino e mais conhecidas para estudantes com TEA.',
+        title: 'Gestão de Equipes em Trabalho Remoto',
+        descricao: 'Este curso apresenta diversas contribuições para a gestão de equipes em trabalho remoto. O conteúdo traz dicas e ferramentas interessantes, além de abordar pontos importantes relacionados à gestão de pessoas. Trata-se de um curso necessário, criado a partir dos desafios que afetaram as instituições nos últimos tempos. Que tal conhecer um pouco mais desse assunto? Inscreva-se.',
         cargaHoraria: 20,
-        instCert: 11,
+        instCert: 5,
         possuiAcessibilidade: 'Não sei informar',
-        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=36',
-        obs: ' ',
+        link: 'https://www.escolavirtual.gov.br/curso/334',
+        obs: '',
         filter: {
-            competencias: [24],
-            temas: [],
-            subtemas: [],
+            competencias: [37],
+            subtemas: [260],
         }
     },
     {
@@ -538,47 +504,14 @@ export const cursosDefault = [
         instCert: 9,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://mundi.ifsul.edu.br/portal/educacao-especial-e-inclusao.php',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [353, 361],
         }
     },
     {
         id: 35,
-        itinerario: 2,
-        title: 'Compras Públicas Sustentáveis',
-        descricao: 'O curso tem por objetivo capacitar servidores públicos para que possam planejar e realizar compras públicas sustentáveis, contribuindo com a proteção ambiental, social e econômica, e disseminando a cultura de ações mais sustentáveis na instituição.',
-        cargaHoraria: 30,
-        instCert: 4,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://portal.ifrj.edu.br/cursos-ead/compras-publicas-sustentaveis',
-        obs: 'Não consta informações se o curso está sendo ofertado.',
-        filter: {
-            competencias: [27],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 36,
-        itinerario: 2,
-        title: 'Curso Básico de Licitações Sustentáveis para servidores solicitantes',
-        descricao: 'O curso tem por objetivo capacitar servidores solicitantes de materiais para as especificações sustentáveis dos objetos demandados.  OBJETIVOS: GERAL: Capacitar servidores solicitantes de materiais para as especificações sustentáveis dos objetos demandados. ESPECÍFICOS: Apresentar conceitos basilares para uma correta especificação de materiais com critérios sustentáveis. Apresentar materiais de suporte às compras sustentáveis existentes, dentro e fora do IFRJ. Apresentar exemplo de demanda de material sustentável.',
-        cargaHoraria: 30,
-        instCert: 4,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://portal.ifrj.edu.br/cursos-ead/curso-basico-licitacoes-sustentaveis-servidores-solicitantes',
-        obs: 'Não consta informações se o curso está sendo ofertado.',
-        filter: {
-            competencias: [27],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 37,
         itinerario: 2,
         title: 'Logística e Administração de Materiais',
         descricao: 'Este curso apresenta os conceitos e fundamentos de logística, não só para o aprimoramento dos processos bem como para a compreensão dos conceitos básicos e de sua importância no cenário atual. Dá ênfase para a apresentação dos principais conceitos, técnicas e ferramentas para gestão de compras, distribuição, armazenagem e transportes na cadeia de suprimentos. Pretende-se não só entender a utilização correta de embalagens bem como mostrar o ciclo de materiais e estoques dos produtos necessários para atender à demanda produtiva.',
@@ -586,63 +519,14 @@ export const cursosDefault = [
         instCert: 9,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://mundi.ifsul.edu.br/portal/logistica-e-administracao-de-materiais.php',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [27],
-            temas: [],
-            subtemas: [],
+            subtemas: [263],
         }
     },
     {
-        id: 38,
-        itinerario: 2,
-        title: 'Introdução à Gestão de Projetos',
-        descricao: 'ste curso foi feito com o objetivo de apresentar os conceitos fundamentais referentes ao tema gestão de projetos, com destaque para a definição e caracterização do termo “projeto” e da apresentação do ciclo de vida dos projetos e das dez áreas do conhecimento, definidas pelo Project Management Institute (PMI), instituição internacional que se dedica ao estudo e à disseminação dos melhores métodos e técnicas de gerenciamento de projetos.',
-        cargaHoraria: 20,
-        instCert: 11,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=25',
-        obs: ' ',
-        filter: {
-            competencias: [28],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 39,
-        itinerario: 2,
-        title: 'Noções Básicas do Trabalho Remoto',
-        descricao: 'O trabalho remoto já é uma realidade, pensando nisso, a Enap e a Endeavor prepararam este curso para apresentar diversas estratégias e dicas que facilitam o seu dia a dia, a organização do trabalho individual e do trabalho em equipe. Quer saber mais? Você pode ser inscrever neste curso gratuito e aberto na EVG, assistir o vídeo do GNPapo promovido pelo laboratório de inovação da Enap, disponível com acesso livre em "Conteúdo Relacionado" ou, ainda, acessar a página da Campanha #contecomigo #suavizeacurva que é uma iniciativa da Secretaria de Gestão e Desempenho de Pessoal (SGP).',
-        cargaHoraria: 10,
-        instCert: 5,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://www.escolavirtual.gov.br/curso/293',
-        obs: ' ',
-        filter: {
-            competencias: [36, 37],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 40,
-        itinerario: 2,
-        title: 'Gestão de Equipes em Trabalho Remoto',
-        descricao: 'Este curso apresenta diversas contribuições para a gestão de equipes em trabalho remoto. O conteúdo traz dicas e ferramentas interessantes, além de abordar pontos importantes relacionados à gestão de pessoas. Trata-se de um curso necessário, criado a partir dos desafios que afetaram as instituições nos últimos tempos. Que tal conhecer um pouco mais desse assunto? Inscreva-se.',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://www.escolavirtual.gov.br/curso/334',
-        obs: ' ',
-        filter: {
-            competencias: [37],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 41,
+        id: 36,
         itinerario: 2,
         title: 'Educação Financeira',
         descricao: 'O curso Educação Financeira tem como objetivo promover e impulsionar a importância desta temática, trazendo estratégias e conhecimentos que venham tornar a tomada de decisão de suas finanças cada vez mais segura e responsável. As informações apresentadas terão o intuito de fazer com que você reflita sobre seus comportamentos básicos de consumo e relacionamento com o dinheiro, contribuindo para promover atitudes com vista no consumo consciente, busca de maior qualidade de vida e visão de futuro próspero e digno.',
@@ -650,63 +534,14 @@ export const cursosDefault = [
         instCert: 9,
         possuiAcessibilidade: 'Não sei informar',
         link: 'https://mundi.ifsul.edu.br/portal/educacao-financeira.php',
-        obs: ' ',
+        obs: '',
         filter: {
             competencias: [35],
-            temas: [],
-            subtemas: [],
+            subtemas: [260],
         }
     },
     {
-        id: 42,
-        itinerario: 2,
-        title: 'Segurança do Trabalho',
-        descricao: 'Ementa: Introdução, história e conceitos básicos. Legislação e procedimentos específicos. Fundamentos das Normas Técnicas de Segurança. Medidas de proteção coletiva e individual. Objetivos gerais: Desenvolver conhecimentos necessários para o trabalho seguro. Objetivos específicos: Analisar/conhecer os princípios das Normas Regulamentadoras de segurança. Entender a importância dos Equipamentos de Proteção individual e medidas de proteção coletivas nos ambientes de trabalho',
-        cargaHoraria: 40,
-        instCert: 11,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=40',
-        obs: ' ',
-        filter: {
-            competencias: [24],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 43,
-        itinerario: 2,
-        title: 'Boas Práticas de Segurança do Trabalho em Laboratórios',
-        descricao: 'Ementa: Introdução a Segurança do Trabalho: Conceitos básicos de Segurança do Trabalho. Equipamentos de Proteção Coletiva e Equipamentos de Proteção Individual e Coletiva. Produtos Químicos. Equipamentos, vidrarias e  utensílios de laboratório. Mapa de Riscos. Manual de Segurança para Laboratórios. Situações de Emergência. Objetivos gerais: O curso se destina a capacitar os usuários de laboratórios (alunos, egressos, docentes, técnicos e auxiliares de laboratório) sobre as orientações básicas de segurança do trabalho aplicáveis aos laboratórios.',
-        cargaHoraria: 40,
-        instCert: 11,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=17',
-        obs: ' ',
-        filter: {
-            competencias: [24],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 44,
-        itinerario: 2,
-        title: 'Prazer e Sofrimento no Trabalho',
-        descricao: 'Ementa: Aspectos conceituais da dinâmica de prazer e sofrimento no trabalho: Organização do trabalho como fonte de sofrimento. Sofrimento no trabalho e estratégias de defesa. Do sofrimento ao prazer no trabalho. Proteção Jurídica no Brasil acerca da relação entre saúde mental e trabalho: Legislação brasileira quanto a proteção da relação entre trabalho a saúde mental: Constituição Federal, Consolidação das Leis Trabalhistas (CLT) e Normas Regulamentadoras (NRs). Patologias e formas de violência associadas a saúde mental e trabalho: Principais patologias que podem ser desenvolvidas nos indivíduos relacionados a saúde mental e trabalho tais como transtornos de humor (transtornos de ansiedade, transtornos de depressão) e desordens musculoesqueléticas (LERT, DORT). Violências no trabalho que estão relacionados a saúde mental e trabalho: assédio moral e assédio sexual.',
-        cargaHoraria: 40,
-        instCert: 11,
-        possuiAcessibilidade: 'Não sei informar',
-        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=38Ementa:',
-        obs: ' ',
-        filter: {
-            competencias: [24],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 45,
+        id: 37,
         itinerario: 2,
         title: 'ASSÉDIO MORAL! - CARTILHA INFORMATIVA',
         descricao: 'Cartlha informativa elaborada pela Corregedoria Geral do IFMG para orientacão e esclarecimento ao servidores sobre Assédio Moral.',
@@ -717,12 +552,11 @@ export const cursosDefault = [
         obs: 'Trata-se de cartilha informativa aos servidores',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [240, 319],
         }
     },
     {
-        id: 46,
+        id: 38,
         itinerario: 2,
         title: 'ASSÉDIO SEXUAL - CARTILHA INFORMATIVA',
         descricao: 'Cartlha informativa elaborada pela Corregedoria Geral do IFMG para orientacão e esclarecimento ao servidores sobre Assédio Sexual.',
@@ -733,15 +567,14 @@ export const cursosDefault = [
         obs: 'Trata-se de cartilha informativa aos servidores',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [240, 319],
         }
     },
     {
-        id: 47,
+        id: 39,
         itinerario: 2,
         title: 'Manual de Conduta do Servidor Público Federal',
-        descricao: 'Este manual tem por finalidade: a) organizar as disposições relacionadas à conduta profissional, buscando trazer uma abordagem atualizada, clara e objetiva sobre os temas relacionados; b) disseminar boas práticas que se constituem no padrão de comportamento que é esperado do servidor. c) auxiliar no aprimoramento de uma cultura organizacional fundamentada no princípio da integridade e na busca constante de alto desempenho nos órgãos e entidades do Poder Executivo Federal.',
+        descricao: 'Este manual tem por finalidade: a) organizar as disposições relacionadas à conduta profissional, buscando trazer uma abordagem atualizada, clara e objetiva sobre os temas relacionados; b) disseminar boas práticas que se constituem no padrão de comportamento que é esperado do servidor; e c) auxiliar no aprimoramento de uma cultura organizacional fundamentada no princípio da integridade e na busca constante de alto desempenho nos órgãos e entidades do Poder Executivo Federal. ',
         cargaHoraria: 0,
         instCert: 12,
         possuiAcessibilidade: 'Não sei informar',
@@ -749,15 +582,14 @@ export const cursosDefault = [
         obs: 'Trata-se de cartilha informativa aos servidores',
         filter: {
             competencias: [24],
-            temas: [],
-            subtemas: [],
+            subtemas: [353],
         }
     },
     {
-        id: 48,
+        id: 40,
         itinerario: 2,
         title: 'Gerenciamento de Projetos e Portfólios de Projetos - Guia',
-        descricao: 'Guia Referencial para Gerenciamento de Projetos e Portfólios de Projetos Este guia orienta a utilização da abordagem de gerenciamento de projetos baseada nas características de cada projeto, no ambiente no qual está contido, nas habilidades da equipe e em outros parâmetros. O documento compila conceitos, modelos e indicações das melhores práticas atuais e amplamente disseminadas a respeito de gerenciamento de projetos e de portfólios de projetos.',
+        descricao: 'Guia Referencial para Gerenciamento de Projetos e Portfólios de Projetos. Este guia orienta a utilização da abordagem de gerenciamento de projetos baseada nas características de cada projeto, no ambiente no qual está contido, nas habilidades da equipe e em outros parâmetros. O documento compila conceitos, modelos e indicações das melhores práticas atuais e amplamente disseminadas a respeito de gerenciamento de projetos e de portfólios de projetos.',
         cargaHoraria: 0,
         instCert: 12,
         possuiAcessibilidade: 'Não sei informar',
@@ -765,12 +597,101 @@ export const cursosDefault = [
         obs: 'Trata-se de manual de orientações',
         filter: {
             competencias: [28],
-            temas: [],
-            subtemas: [],
+            subtemas: [263],
         }
     },
     {
-        id: 49,
+        id: 41,
+        itinerario: 2,
+        title: 'Administrador de Organizações Civis: Direitos Humanos e Justiça',
+        descricao: 'Qualificar pessoas para agirem na defesa dos valores e princípios gerais dos direitos humanos, objetivando a justiça, a ética, a moral, a equidade, a igualdade e a liberdade.',
+        cargaHoraria: 20,
+        instCert: 11,
+        possuiAcessibilidade: 'Não sei informar',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=51',
+        obs: '',
+        filter: {
+            competencias: [36],
+            subtemas: [213, 257],
+        }
+    },
+    {
+        id: 42,
+        itinerario: 2,
+        title: 'Educação Inclusiva: Introdução ao Transtorno do Espectro Autista (TEA)',
+        descricao: 'Conhecer aspectos introdutórios sobre o Transtorno do espectro autista (TEA), assim como um pouco da sua história. Pontuar conceitos para a inclusão de estudantes com TEA e o papel do professor nesse processo. Identificar alguns dos materiais didáticos e metodologias de ensino e mais conhecidas para estudantes com TEA.',
+        cargaHoraria: 20,
+        instCert: 11,
+        possuiAcessibilidade: 'Não sei informar',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=36',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [353, 361],
+        }
+    },
+    {
+        id: 43,
+        itinerario: 2,
+        title: 'Introdução à Gestão de Projetos',
+        descricao: 'ste curso foi feito com o objetivo de apresentar os conceitos fundamentais referentes ao tema gestão de projetos, com destaque para a definição e caracterização do termo “projeto” e da apresentação do ciclo de vida dos projetos e das dez áreas do conhecimento, definidas pelo Project Management Institute (PMI), instituição internacional que se dedica ao estudo e à disseminação dos melhores métodos e técnicas de gerenciamento de projetos.',
+        cargaHoraria: 20,
+        instCert: 11,
+        possuiAcessibilidade: 'Não sei informar',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=25',
+        obs: '',
+        filter: {
+            competencias: [28],
+            subtemas: [263],
+        }
+    },
+    {
+        id: 44,
+        itinerario: 2,
+        title: 'Segurança do Trabalho',
+        descricao: 'Ementa: Introdução, história e conceitos básicos. Legislação e procedimentos específicos. Fundamentos das Normas Técnicas de Segurança. Medidas de proteção coletiva e individual.Objetivos gerais: Desenvolver conhecimentos necessários para o trabalho seguro.Objetivos específicos: Analisar/conhecer os princípios das Normas Regulamentadoras de segurança. Entender a importância dos Equipamentos de Proteção Individual e medidas de proteção coletivas nos ambientes de trabalho',
+        cargaHoraria: 40,
+        instCert: 11,
+        possuiAcessibilidade: 'Não sei informar',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=40',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [174],
+        }
+    },
+    {
+        id: 45,
+        itinerario: 2,
+        title: 'Boas Práticas de Segurança do Trabalho em Laboratórios',
+        descricao: 'Ementa: Introdução a Segurança do Trabalho: Conceitos básicos de Segurança do Trabalho. Equipamentos de Proteção Coletiva e Equipamentos de Proteção Individual e Coletiva. Produtos Químicos. Equipamentos, vidrarias e  utensílios de laboratório. Mapa de Riscos. Manual de Segurança para Laboratórios. Situações de Emergência. Objetivos gerais: O curso se destina a capacitar os usuários de laboratórios (alunos, egressos, docentes, técnicos e auxiliares de laboratório) sobre as orientações básicas de segurança do trabalho aplicáveis aos laboratórios.',
+        cargaHoraria: 40,
+        instCert: 11,
+        possuiAcessibilidade: 'Não sei informar',
+        link: 'https://mais.ifmg.edu.br/maisifmg/enrol/index.php?id=17',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [174],
+        }
+    },
+    {
+        id: 46,
+        itinerario: 2,
+        title: 'Prazer e Sofrimento no Trabalho',
+        descricao: 'Ementa: Aspectos conceituais da dinâmica de prazer e sofrimento no trabalho: Organização do trabalho como fonte de sofrimento. Sofrimento no trabalho e estratégias de defesa. Do sofrimento ao prazer no trabalho. Proteção Jurídica no Brasil acerca da relação entre saúde mental e trabalho: Legislação brasileira quanto a proteção da relação entre trabalho a saúde mental: Constituição Federal, Consolidação das Leis Trabalhistas (CLT) e Normas Regulamentadoras (NRs). Patologias e formas de violência associadas a saúde mental e trabalho: Principais patologias que podem ser desenvolvidas nos indivíduos relacionados a saúde mental e trabalho tais como transtornos de humor (transtornos de ansiedade, transtornos de depressão) e desordens musculoesqueléticas (LERT, DORT). Violências no trabalho que estão relacionados a saúde mental e trabalho: assédio moral e assédio sexual.',
+        cargaHoraria: 40,
+        instCert: 11,
+        possuiAcessibilidade: 'Não sei informar',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=38Ementa:',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [353],
+        }
+    },
+    {
+        id: 47,
         itinerario: 2,
         title: 'Aprendizagem Organizacional e Trilhas de Aprendizagem',
         descricao: 'Este curso apresenta capacitação e conhecimento de boas práticas de desenvolvimento de competências das organizações contemporâneas e a importância da aprendizagem baseada no autodesenvolvimento.',
@@ -781,12 +702,11 @@ export const cursosDefault = [
         obs: 'O curso fica disponível 30 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 50,
+        id: 48,
         itinerario: 2,
         title: 'Comunicação oral e escrita',
         descricao: 'Proporcionar melhorias, pessoais e profissionais, a partir de conhecimentos específicos sobre Comunicação Oral e Escrita.',
@@ -797,12 +717,11 @@ export const cursosDefault = [
         obs: 'As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 51,
+        id: 49,
         itinerario: 2,
         title: 'Fundamentos da linguagem visual',
         descricao: 'Esse curso desenvolve princípios da linguagem visual. Apresenta elementos e técnicas visuais essenciais para o conhecimento da gramática visual, aplicáveis em situações cotidianas em que se estabelece a comunicação visual como a expressão visual de ideias, a elaboração de apresentações e até a criação de layouts mais complexos.',
@@ -813,12 +732,11 @@ export const cursosDefault = [
         obs: 'Todos os vídeos contam com a intérprete de Libras em ótimo tamanho de visualização. Contudo, as legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 52,
+        id: 50,
         itinerario: 2,
         title: 'Análise e melhoria de processos',
         descricao: 'O objetivo do curso é oferecer aos participantes a compreensão do funcionamento e do gerenciamento de processos em instituições públicas e a promoção de melhorias em processos institucionais.',
@@ -829,12 +747,11 @@ export const cursosDefault = [
         obs: 'O curso fica disponível 20 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 53,
+        id: 51,
         itinerario: 2,
         title: 'Desenvolvendo competências em informações acadêmicas e profissionais.',
         descricao: 'A busca, avaliação e uso estratégico, ético e responsável da informação são requisitos fundamentais a indivíduos que estão percorrendo o caminho acadêmico ou se preparando para o mercado de trabalho. Importante, nesse contexto, o desenvolvimento de habilidades no trato da informação, disponível em meios impressos e digitais, de forma a estarem mais capacitados para enfrentar os desafios do século XXI.',
@@ -845,12 +762,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 54,
+        id: 52,
         itinerario: 2,
         title: 'Estratégias Flexíveis de Ensino em Tempos de Pandemia',
         descricao: 'Este curso tem como objetivo auxiliar profissionais da área de educação e demais profissionais a conhecerem as possibilidades oferecidas pelo Ensino Híbrido e como este pode estar presente em suas práticas pedagógicas em tempos de pandemia.',
@@ -861,28 +777,26 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 55,
+        id: 53,
         itinerario: 2,
         title: 'Google Drive: Colaboração na prática',
         descricao: 'Este curso cobre uma introdução à colaboração e aspectos colaborativos no Google Drive, focando em trabalhos em grupo, tanto para a versão para computador quanto para dispositivos móveis.',
-        cargaHoraria: 8,
+        cargaHoraria: 80,
         instCert: 16,
         possuiAcessibilidade: 'Parcial',
         link: 'https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=144',
         obs: 'O curso só tem 8h, mas é objetivo e direto. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 56,
+        id: 54,
         itinerario: 2,
         title: 'Documentos Google: editor de textos',
         descricao: 'Neste curso você vai aprender como criar documentos de texto de uma forma versátil e prática utilizando a ferramenta Documentos Google.',
@@ -893,12 +807,11 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 57,
+        id: 55,
         itinerario: 2,
         title: 'Planilhas Google: Planilha Eletrônica',
         descricao: 'Neste curso você aprenderá a acessar e a utilizar os principais elementos da Planilha Google.',
@@ -909,12 +822,11 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 58,
+        id: 56,
         itinerario: 2,
         title: 'Google Drive',
         descricao: 'Nesse curso você vai conhecer e aprender sobre o Google Drive, ferramenta utilizada para o armazenamento de arquivos.',
@@ -925,12 +837,11 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 59,
+        id: 57,
         itinerario: 2,
         title: 'HTML: Introdução ao desenvolvimento de páginas web',
         descricao: 'Aprenda a criar páginas web do zero e conhecer como funciona a internet para o desenvolvimento de sites. Também criaremos as primeiras páginas. Vamos formatá-las, inserir links, listas, imagens, arquivos de áudio e vídeo. Conheça alguns comandos avançados e dicas especiais de compatibilidade e acessibilidade.',
@@ -941,15 +852,14 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 60,
+        id: 58,
         itinerario: 2,
         title: 'Produção de Vídeos usando OBS Studio e Kdenlive',
-        descricao: 'O curso aborda de forma objetiva, técnicas e ferramentas para produção de vídeos utilizando a captura de tela do computador, gravação de som e imagem. Os softwares utilizados serão o OBS Studio (Open Broadcaster Software) e o Kdenlive, ambos de código aberto e gratuitos.',
+        descricao: 'O curso aborda de forma objetiva, técnicas e ferramentas para produção de vídeos utilizando a captura de tela do computador, gravação de som e imagem. Os softwares utilizados serão o OBS Studio (Open Broadcaster Software) e o Kdenlive, ambos de código aberto e gratuitos. ',
         cargaHoraria: 20,
         instCert: 17,
         possuiAcessibilidade: 'Sim',
@@ -957,12 +867,11 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 61,
+        id: 59,
         itinerario: 2,
         title: 'Iniciação ao serviço Público nos Institutos Federais',
         descricao: 'Este curso apresenta informações e orienta os servidores em início de carreira nos Institutos Federais e aborda os seguinte temas: Institutos Federais; Ensino; Extensão; Pesquisa e Inovação; Pós-Graduação; Comunicação e Redação Oficial; Ética e Cidadania; Legislação de Pessoal; Protocolo; Orçamento, Licitações e Contratos; Saúde do Servidor; Inclusão.',
@@ -973,12 +882,11 @@ export const cursosDefault = [
         obs: 'Os vídeos disponíveis não contam com Libras, mas apresenta Legenda e Transcrição acessível por link próprio. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 62,
+        id: 60,
         itinerario: 2,
         title: 'Inclusão Sociodigital para Multiplicadores',
         descricao: 'Por meio deste curso o multiplicador aprenderá a planejar um curso de inclusão sociodigital e ensinar aos discentes os aplicativos de smartphones úteis no dia a dia, utilizando aplicativos tais como redes sociais, e-mail, aplicativos de localização e mobilidade, fotos e backup de contatos e aplicativos de utilidade pública.',
@@ -989,12 +897,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 63,
+        id: 61,
         itinerario: 2,
         title: 'Moodle para Educadores',
         descricao: 'O curso proporciona o conhecimento básico necessário para a edição de salas virtuais para cursos ou disciplinas na modalidade à distância ou para apoio à modalidade presencial. Apresenta a parte instrucional que orienta à produção da sala virtual com inserção de recursos e atividades e também busca levar o educador a uma reflexão sobre o potencial construcionista do Moodle como suas potencialidades para a realização de aulas com atividades colaborativas, bem como as possibilidades de acompanhamento e avaliação da aprendizagem. O curso foi elaborado em nível básico e a partir da versão Moodle 3.1 (Tema Essential)',
@@ -1005,12 +912,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 64,
+        id: 62,
         itinerario: 2,
         title: 'Acessibilidade e Tecnologia',
         descricao: 'O curso tem como objetivos apresentar os conceitos relacionados à inclusão e acessibilidade, destacar os tipos de acessibilidade e a tecnologia assistiva, bem como apresentar algumas tecnologias para a produção de materiais digitais acessíveis.',
@@ -1021,12 +927,11 @@ export const cursosDefault = [
         obs: 'O curso tem diversas aulas em Libras e conta com Transcrição em Português. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 65,
+        id: 63,
         itinerario: 2,
         title: 'Ferramentas Digitais para Curadoria Educacional',
         descricao: 'Este curso tem como proposta a apresentação sobre os conceitos básicos sobre Curadoria Educacional e apresentar seis ferramentas digitais gratuitas disponíveis na web utilizadas para prática da curadoria',
@@ -1037,12 +942,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 66,
+        id: 64,
         itinerario: 2,
         title: 'Introdução a projetos',
         descricao: 'O curso proporciona ao aluno a aplicação dos conceitos básicos e necessários relativos a projetos, garantindo o entendimento inicial para o sucesso de um projeto. face a carência destes, no que diz respeito aos principais fundamentos associados a projetos.',
@@ -1053,12 +957,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 67,
+        id: 65,
         itinerario: 2,
         title: 'Projetos Educacionais e Interdisciplinares',
         descricao: 'Neste curso aprenderemos um pouco mais sobre Projetos Educacionais e Interdisciplinares. O curso utiliza como base o material "Projetos educacionais " de Elisa Maria Gomide e Denise Mendes França e "Tipos de Projetos" de Denise Mendes França e Marcos Antonio Almeida de Oliveira produzidos para a Rede e-Tec Brasil.',
@@ -1069,12 +972,11 @@ export const cursosDefault = [
         obs: 'Os vídeos possuem Libras ou Transcrição completa. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 68,
+        id: 66,
         itinerario: 2,
         title: 'Auxiliar Pedagógico',
         descricao: 'No curso de Auxiliar Pedagógico você vai ser preparado para auxiliar na elaboração de projetos pedagógicos e planos de cursos. Vai aprender a como colaborar com a organização didática e metodológica das atividades pedagógicas, além de poder auxiliar nos processos de avaliação do ensino e da aprendizagem na educação e na relação pedagógica entre docentes e estudantes. Vai estar preparado para contribuir para o desenvolvimento de ações integradas no âmbito escolar.',
@@ -1085,12 +987,11 @@ export const cursosDefault = [
         obs: 'O curso possui 200h. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 69,
+        id: 67,
         itinerario: 2,
         title: 'Software de Apresentação',
         descricao: 'O curso irá introduzir os conceitos de softwares de apresentação, assim como mostrar exemplos de softwares que podem ser utilizados para criação de apresentações. Serão mostrados recursos básicos e avançados no software PowerPoint para que se possa criar uma apresentação usando os recursos desse software. Além disso, será explorado o uso do software de apresentação online Prezi, que se constitui em uma ótima opção para se desenvolver apresentações dinâmicas e diferentes.',
@@ -1101,12 +1002,11 @@ export const cursosDefault = [
         obs: 'Todos os vídeos contam com a intérprete de Libras em ótimo tamanho de visualização. Contudo, as legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 70,
+        id: 68,
         itinerario: 2,
         title: 'Fundamentos da LGPD',
         descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes.',
@@ -1117,12 +1017,11 @@ export const cursosDefault = [
         obs: 'O curso fica disponível 20 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 71,
+        id: 69,
         itinerario: 2,
         title: 'Repositórios de Materiais Didáticos Digitais e Direitos de Uso',
         descricao: 'O curso oferece a possibilidade de conhecimento acerca de uso de materiais didáticos digitais, locais de repositórios, criação, uso e orienta sobre os direitos de uso destes materiais',
@@ -1133,12 +1032,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [6],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 72,
+        id: 70,
         itinerario: 2,
         title: 'Ferramentas Digitais para Curadoria Educacional',
         descricao: 'Este curso tem como proposta a apresentação sobre os conceitos básicos sobre Curadoria Educacional e apresentar seis ferramentas digitais gratuitas disponíveis na web utilizadas para prática da curadoria',
@@ -1149,15 +1047,14 @@ export const cursosDefault = [
         obs: 'Apesar da carga horária baixa o curso atende muito bem a necessidade de se capacitar para curadoria de objetos de aprendizagem. Os cursos mudam anualmente o link',
         filter: {
             competencias: [6],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 73,
+        id: 71,
         itinerario: 2,
         title: 'Gamificação para Educação',
-        descricao: 'O curso visa introduzir o conceito das mecânicas e das narrativas dos jogos em sistemas educacionais e suas princiais característiacs para educadores e profissionais da educação',
+        descricao: 'O curso visa introduzir o conceito das mecânicas e das narrativas dos jogos em sistemas educacionais e suas princiais característiacs para educadores e profissionais da educação ',
         cargaHoraria: 15,
         instCert: 6,
         possuiAcessibilidade: 'Sim',
@@ -1165,12 +1062,11 @@ export const cursosDefault = [
         obs: 'A plaforma possui software VLibras para auxiliar na acessibiliade',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 74,
+        id: 72,
         itinerario: 2,
         title: 'Videoaula - Da concepção à postagem',
         descricao: 'Passo-a-passo da criação de videoaula usando a linguagem audiovisual; Conceitos da aprendizagem multimídia para criação do conteúdo e conhecimento técnico para a produção, gravação e edição da videoaula',
@@ -1181,12 +1077,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 75,
+        id: 73,
         itinerario: 2,
         title: 'Wiki: produção colaborativa de conhecimento',
         descricao: 'O curso aborda a colaboração e aprendizgem colaborativa em ambientes virtuais de aprendizagens, com destaque para o potencial da wiki na educação',
@@ -1197,12 +1092,11 @@ export const cursosDefault = [
         obs: 'A plaforma possui software VLibras para auxiliar na acessibiliade',
         filter: {
             competencias: [8],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 76,
+        id: 74,
         itinerario: 2,
         title: 'Introdução a criação de sites',
         descricao: 'O curso permite a compreensão de como criar sites para que possa ser realizado o compartilhamento de informações',
@@ -1213,15 +1107,14 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [8],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 77,
+        id: 75,
         itinerario: 2,
         title: 'Introdução ao Google Classroom',
-        descricao: 'O curso traz possibilidades da utilização do Google Classroom por professores, desde como criar uma turma, convidar alunos, convidar professores parceiros, até criar atividades e atribuir notas.',
+        descricao: 'O curso traz possibilidades da utilização do Google Classroom por professores, desde como criar uma turma, convidar alunos, convidar professores parceiros, até criar atividades e atribuir notas. ',
         cargaHoraria: 10,
         instCert: 18,
         possuiAcessibilidade: 'Parcial',
@@ -1229,12 +1122,11 @@ export const cursosDefault = [
         obs: 'O curso muda o link anualmente de acordo com a criação da turma. Esta na seleção da Vanessa também',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 78,
+        id: 76,
         itinerario: 2,
         title: 'Fundamentos da Lei Geral de Proteção de Dados',
         descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes. Foi desenvolvido pelo Serpro - Serviço Federal de Processamento de Dados, em 2020, originalmente para a capacitação do corpo funcional. Agora é ofertado ao público em geral, por meio de parceria com a Escola Nacional de Administração Pública - Enap.',
@@ -1245,12 +1137,11 @@ export const cursosDefault = [
         obs: 'Esta na seleção no Paulo Evaristo também',
         filter: {
             competencias: [8],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 79,
+        id: 77,
         itinerario: 2,
         title: 'HTML: Introdução ao desenvolvimento de páginas web',
         descricao: 'Aprenda a criar páginas web do zero e conhecer como funciona a internet para o desenvolvimento de sites. Também criaremos as primeiras páginas. Vamos formatá-las, inserir links, listas, imagens, arquivos de áudio e vídeo. Conheça alguns comandos avançados e dicas especiais de compatibilidade e acessibilidade.',
@@ -1261,12 +1152,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 80,
+        id: 78,
         itinerario: 2,
         title: 'Design Instrucional e Tecnologia com Articulate StoryLine 360',
         descricao: 'Este curso foi elaborado para ajudar os alunos a compreender a estrutura teórica do design instrucional, a teoria, os métodos, a prática do design instrucional usando vídeo ou storyboards. Também aborda o uso do Articulate Storyline 360 como uma ferramenta de e-Learning para criar um produto completo de design instrucional',
@@ -1277,12 +1167,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 81,
+        id: 79,
         itinerario: 2,
         title: 'Estratégias Flexíveis em Tempos de Pandemia',
         descricao: 'Este curso tem como objetivo auxiliar profissionais da área de educação e demais profissionais a conhecerem as possibilidades oferecidas pelo Ensino Híbrido e como este pode estar presente em suas práticas pedagógicas em tempos de pandemia.',
@@ -1293,15 +1182,14 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta uma abordagem mais teórica. Os conteúdos se mostraram relevantes para o contexto atual e de pós pandemia.',
         filter: {
             competencias: [10],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 82,
+        id: 80,
         itinerario: 2,
         title: 'Gamificação no Moodle',
-        descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem.',
+        descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem. ',
         cargaHoraria: 50,
         instCert: 18,
         possuiAcessibilidade: 'SIM',
@@ -1309,12 +1197,11 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta um interessante enfoque em atividades para tornar as atividades mais dinâmicas com a utilização de metodologias gamificadas.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 83,
+        id: 81,
         itinerario: 2,
         title: 'Realidade Virtual como apoio ao ensino',
         descricao: 'O curso aberto de Realidade Virtual como apoio ao ensino é uma iniciativa do Instituto Federal do Espírito Santo (Ifes), por meio do Centro de Referência em Formação e em Educação a Distância (Cefor). O curso compreende em apresentar a história e evolução da tecnologia de realidade virtual, os diferentes tipos de equipamentos, como instalar, bem como mostrar algumas capacidades da tecnologia e possibilidades de seu uso em sala de aula.',
@@ -1325,12 +1212,11 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. ',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 84,
+        id: 82,
         itinerario: 2,
         title: 'Gamificação no Moodle',
         descricao: 'Neste curso, objetiva compartilhar algumas formas e ideias de gamificar seu curso no Moodle. Mostrar ferramentas, técnicas e aplicações. Vivenciar a gamificação na prática.',
@@ -1341,12 +1227,11 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta um interessante enfoque em atividades para tornar as atividades mais dinâmicas com a utilização de metodologias gamificadas.',
         filter: {
             competencias: [12],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 85,
+        id: 83,
         itinerario: 2,
         title: 'Moodle Básico para Professores',
         descricao: 'O curso aborda elementos para o planejamento das aulas no MOODLE, inserção de conteúdos e atividades.',
@@ -1357,15 +1242,14 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. Os conteúdos são voltados para a instrumentalização do educador. ',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 86,
+        id: 84,
         itinerario: 2,
         title: 'Formação Pedagógica para EaD',
-        descricao: 'O curso aborda Fundamentos da Educação a Distância; Tecnologias educacionais e a linguagem dialógica na Ead; O papel do professor mediador presencial e mediador a distância; O papel do professor conteudista (autor).',
+        descricao: 'O curso aborda Fundamentos da Educação a Distância; Tecnologias educacionais e a linguagem dialógica na Ead; O papel do professor mediador presencial e mediador a distância; O papel do professor conteudista (autor). ',
         cargaHoraria: 50,
         instCert: 19,
         possuiAcessibilidade: 'SIM',
@@ -1373,12 +1257,11 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 87,
+        id: 85,
         itinerario: 2,
         title: 'Moodle Intermediário para Professores - Aprendizagem Colaborativa',
         descricao: 'O curso tem como objetivo desenvolver atividades colaborativas eficazes no Moodle utilizando as atividades "wiki" e "glossário".',
@@ -1389,15 +1272,14 @@ export const cursosDefault = [
         obs: 'O link é para a página principal da Plataforma. O curso estará disponível a partir de março para o público em geral. A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise. Contato realizado com o Cláudio (21 987967329) Os conteúdos trazem uma interessante abordagem com metodologias de trabalho colaborativo.',
         filter: {
             competencias: [11],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 88,
+        id: 86,
         itinerario: 2,
         title: 'Moodle Básico para Professores',
-        descricao: 'O curso oferece conhecimentos básicos sobre criação de cursos online utilizando a plataforma Moodle, apresentando os principais recursos e atividades.',
+        descricao: 'O curso oferece conhecimentos básicos sobre criação de cursos online utilizando a plataforma Moodle, apresentando os principais recursos e atividades. ',
         cargaHoraria: 60,
         instCert: 4,
         possuiAcessibilidade: 'SIM',
@@ -1405,12 +1287,11 @@ export const cursosDefault = [
         obs: 'O link é para a página principal da Plataforma. O curso estará disponível a partir de março para o público em geral. A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise. Contato realizado com o Cláudio (21 987967329) .A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 89,
+        id: 87,
         itinerario: 2,
         title: 'Ambientes Digitais de Aprendizagem',
         descricao: 'O Curso tem por objetivo apresentar as principais características, funcionalidades e limitações existentes nos ambientes digitais de aprendizagem - AVA, contribuindo para a tomada de decisão tanto para a escolha do AVA mais adequado quanto para escolhas de desenho instrucional.',
@@ -1421,12 +1302,11 @@ export const cursosDefault = [
         obs: 'O curso traz uma perspectiva mais reflexiva que ajudará no processo decisório para a escolha do ambiente virtual de aprendizagem para as práticas pedagógicas remotas.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 90,
+        id: 88,
         itinerario: 2,
         title: 'Mooc de Lovelace: Pensamento Computacional com Scratch',
         descricao: 'O curso aborda os conteúdos sobre a Linguagem de Programação Scratch e os pilares do pensamento computacional que são: abstração; pensamento algorítmico; decomposição; e reconhecimento de padrões. A partir desses conhecimentos o docente poderá experimentar e desenvolver novos formatos e métodos pedagógicos para o ensino e estruturar as aulas de modo a que diferentes atividades digitais contribuam em conjunto para reforçar o objetivo de aprendizagem utilizando o Scratch.',
@@ -1437,15 +1317,14 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral.  Os conteúdos trazem uma perspectiva de abordagem do pensamento computacional impostante para compreensão e desenvolvimento de atividades utilizando lógica computacional.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 91,
+        id: 89,
         itinerario: 2,
         title: 'Avaliação por Rubrica no Moodle',
-        descricao: 'O curso apresenta o método de avaliação por rubrica no Moodle e suas potencialidades para contribuir no desenvolvimento do processo de aprendizagem dos estudantes e de acompanhamento, avaliação e feedback pelos professores.',
+        descricao: 'O curso apresenta o método de avaliação por rubrica no Moodle e suas potencialidades para contribuir no desenvolvimento do processo de aprendizagem dos estudantes e de acompanhamento, avaliação e feedback pelos professores. ',
         cargaHoraria: 20,
         instCert: 18,
         possuiAcessibilidade: 'Parcial',
@@ -1453,15 +1332,14 @@ export const cursosDefault = [
         obs: 'O curso é trabalhado em perspectiva prática, com o uso de tecnologias e se mostra bastante aderente à trilha Avaliação, especificamente, aos trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 92,
+        id: 90,
         itinerario: 2,
         title: 'Avaliação em Processos de Aprendizagem e Modelos de Feedback',
-        descricao: 'O curso tem como objetivo fornecer aos servidores públicos aspectos conceituais sobre avaliação da aprendizagem, a partir das metodologias ativas, aplicando habilidades de coleta e análise de dados para a melhoria contínua de projetos educacionais.',
+        descricao: 'O curso tem como objetivo fornecer aos servidores públicos aspectos conceituais sobre avaliação da aprendizagem, a partir das metodologias ativas, aplicando habilidades de coleta e análise de dados para a melhoria contínua de projetos educacionais. ',
         cargaHoraria: 30,
         instCert: 5,
         possuiAcessibilidade: 'Parcial',
@@ -1469,15 +1347,14 @@ export const cursosDefault = [
         obs: 'O curso é mais teórico e conceitual e não foca apenas no mundo educacional, tratando também do mundo corporativo. Entretanto, traz vídeos e tutoriais sobre uso de ferramentas e tecnologias de apoio. Cobre os três trilhos da trilha, ainda que não em profundidade e nem em atividades práticas o suficiente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 14, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 93,
+        id: 91,
         itinerario: 2,
         title: 'Moodle para Mediadores',
-        descricao: 'O curso apresenta os procedimentos para a utilização da plataforma Moodle, construído a fim de identificar os procedimentos habilitados aos professores mediadores, bem como descrever funcionalidades disponibilizadas para a avaliação e o acompanhamento de aprendizagem dos estudantes.',
+        descricao: 'O curso apresenta os procedimentos para a utilização da plataforma Moodle, construído a fim de identificar os procedimentos habilitados aos professores mediadores, bem como descrever funcionalidades disponibilizadas para a avaliação e o acompanhamento de aprendizagem dos estudantes. ',
         cargaHoraria: 40,
         instCert: 9,
         possuiAcessibilidade: 'Sim',
@@ -1485,12 +1362,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo parcialmente os trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 94,
+        id: 92,
         itinerario: 2,
         title: 'Gamificação no Moodle',
         descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem.',
@@ -1501,12 +1377,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é tratada durante todo o curso, uma vez que a gamificação consiste em utilizar recursos de jogos que, no caso é no Moodle, ou seja, de forma tecnológica, permitindo ao professor criar atividades e formatos de avaliação alternativos. O curso é bem prático e aderente aos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 95,
+        id: 93,
         itinerario: 2,
         title: 'Gamificação no Moodle - Turma 2022A',
         descricao: 'O curso trata de conceitos de Gamificação; Gamificação na Prática; Gamificando o Curso no Moodle.',
@@ -1517,12 +1392,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é tratada durante todo o curso, uma vez que a gamificação consiste em utilizar recursos de jogos que, no caso é no Moodle, ou seja, de forma tecnológica, permitindo ao professor criar atividades e formatos de avaliação alternativos. O curso utiliza em sua maioria materiais textuais, mas aborda o uso de tecnologias de forma prática, no caso em como fazer isso na avaliação. Assim, está aderente aos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 96,
+        id: 94,
         itinerario: 2,
         title: 'Moodle para Educadores',
         descricao: 'O curso proporciona o conhecimento básico necessário para a edição de salas virtuais para cursos ou disciplinas na modalidade à distância ou para apoio à modalidade presencial. Apresenta a parte instrucional que orienta à produção da sala virtual com inserção de recursos e atividades e também busca levar o educador a uma reflexão sobre o potencial construcionista do Moodle como suas potencialidades para a realização de aulas com atividades colaborativas, bem como as possibilidades de acompanhamento e avaliação da aprendizagem.',
@@ -1533,15 +1407,14 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 97,
+        id: 95,
         itinerario: 2,
         title: 'Introdução ao Google Classroom',
-        descricao: 'O curso traz possibilidades da utilização do Google Classroom por professores, desde como criar uma turma, convidar alunos, convidar professores parceiros, até criar atividades e atribuir notas.',
+        descricao: 'O curso traz possibilidades da utilização do Google Classroom por professores, desde como criar uma turma, convidar alunos, convidar professores parceiros, até criar atividades e atribuir notas. ',
         cargaHoraria: 10,
         instCert: 18,
         possuiAcessibilidade: 'Parcial',
@@ -1549,12 +1422,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. Uma característica interessante é que é um curso sobre a plataforma Google Classroom, sendo que maioria dos cursos identificados é da plataforma Moodle. Ainda que o curso não trabalhe os itens em profundidade, é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 98,
+        id: 96,
         itinerario: 2,
         title: 'Moodle para Docentes',
         descricao: 'O curso apresenta os procedimentos para a utilização da plataforma Moodle: planejamento, criação e configuração de um curso ou disciplina. Aborda os principais recursos desta plataforma, e também, descreve as principais atividades que o Moodle oferece, como avaliação e acompanhamento da aprendizagem dos estudantes.',
@@ -1565,12 +1437,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas e trabalha o tema de forma prática, em particular os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 99,
+        id: 97,
         itinerario: 2,
         title: 'Docência em EaD: Planejando o uso de instrumentos e critérios nas avaliações on-line',
         descricao: 'O curso trata de instrumentos de avaliação on-line; Critérios de avaliação; Avaliação da aprendizagem.',
@@ -1581,12 +1452,11 @@ export const cursosDefault = [
         obs: 'O curso é bastante teórico, focado em dois ebooks, mas em determinados momentos aborda sobre o uso de tecnologias como apoio aos processos avaliativos. Desta forma é parcialmente aderente à trilha, especialmente aos trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 100,
+        id: 98,
         itinerario: 2,
         title: 'Questionários Moodle',
         descricao: 'O curso trata sobre criação de questionários e ferramentas de auxílio à avaliação final.',
@@ -1597,15 +1467,14 @@ export const cursosDefault = [
         obs: 'O curso foca em um tipo específico de avaliação com a utilização de tecnologias, que no caso é o questionário. Trata especialmente dos trilhos 1 e 3, mas também cobre parte do trilho 2, no módulo Avaliação de questionários, ainda que todos trilhos sejam cobertos apenas parcialmente, especialmente o 2. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 14, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 101,
+        id: 99,
         itinerario: 2,
         title: 'Moodle em Ação: Atividades e Recursos',
-        descricao: 'O curso tem o objetivo de contribuir para a utilização do Moodle em práticas pedagógicas, seja na Educação Básica, ou no Ensino Superior. É composto por vivências de atividades no ambiente virtual, experimentações, materiais de apoio e avaliações.',
+        descricao: 'O curso tem o objetivo de contribuir para a utilização do Moodle em práticas pedagógicas, seja na Educação Básica, ou no Ensino Superior. É composto por vivências de atividades no ambiente virtual, experimentações, materiais de apoio e avaliações. ',
         cargaHoraria: 30,
         instCert: 23,
         possuiAcessibilidade: 'Não',
@@ -1613,15 +1482,14 @@ export const cursosDefault = [
         obs: 'O curso não é específico de avaliação, mas esta é um dos temas abordados, com a utilização de tecnologias: questionário, fórum, wiki etc. Trata especialmente dos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 102,
+        id: 100,
         itinerario: 2,
         title: 'Educação Especial: histórico, políticas e práticas',
-        descricao: 'O curso busca proporcionar um conhecimento introdutório acerca dos aspectos históricos, políticos e práticos da Educação Especial. Do mesmo modo, tem a intenção de desconstruir alguns aspectos relacionados a preconceitos a pessoas com deficiencias , transtorno do espectro autista, altas habilidades/superdotação para tentar reconhecer as suas diferenças e suas potencialidades.',
+        descricao: 'O curso busca proporcionar um conhecimento introdutório acerca dos aspectos históricos, políticos e práticos da Educação Especial. Do mesmo modo, tem a intenção de desconstruir alguns aspectos relacionados a preconceitos a pessoas com deficiencias , transtorno do espectro autista, altas habilidades/superdotação para tentar reconhecer as suas diferenças e suas potencialidades. ',
         cargaHoraria: 30,
         instCert: 10,
         possuiAcessibilidade: 'parcial',
@@ -1629,15 +1497,14 @@ export const cursosDefault = [
         obs: 'Apesar do cursos não ter preenchido 100% todos os critérios para a Elevada Aderência, o mesmo se constitui como apto para indicação como material recomendável para composição da trilha formativa do Plafor. O curso tem aderência aos objetivos deste projeto, pois aborda em amplo espectro os grandes temas da educação inclusiva. Naturalmente, o curso é um prelúdio ao tema, não chegando perto de exaurir a temática tão diversa e complexa, mas pode servir de uma boa introdução no sentido de preparar melhor ao Educador quanto a compreensão do histórico da Educação Inclusiva e as características das pessoas com necessidades educacionais específicas.',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 103,
+        id: 101,
         itinerario: 2,
         title: 'Comunicação para TODOS: recursos e ferramentas de acessibilidade',
-        descricao: ' O curso tem o objetivo de promover a compreensão dos conceitos e princípios básicos sobre Acessibilidade na Comunicação, assim como problematizar a (DE)ficiência com foco na eficiência de cada indivíduo e do coletivo na interação por meio de recursos como: a Audiodescrição para pessoas com deficiência visual; a Língua Brasileira de Sinais (Libras) e as Legendas para Surdos e Ensurdecidos (LSE).Pretende-se desencadear a reflexão a partir da fala de convidados, textos e discussões sobre o público-alvo e especificidades de cada recurso e, mais ainda, como produtos concebidos acessíveis podem beneficiar a todos, incluindo as pessoas com deficiência. Para tanto, o curso conta com recursos e ferramentas de acessibilidade na comunicação como a audiodescrição para as pessoas com deficiência visual, janela de Libras e legendas para surdos e ensurdecidos, mas ressaltamos que estes recursos auxiliam a todos, promovendo novas formas de experiência e mesmo sensibilização.',
+        descricao: ' O curso tem o objetivo de promover a compreensão dos conceitos e princípios básicos sobre Acessibilidade na Comunicação, assim como problematizar a (DE)ficiência com foco na eficiência de cada indivíduo e do coletivo na interação por meio de recursos como: a Audiodescrição para pessoas com deficiência visual; a Língua Brasileira de Sinais (Libras) e as Legendas para Surdos e Ensurdecidos (LSE). Pretende-se desencadear a reflexão a partir da fala de convidados, textos e discussões sobre o público-alvo e especificidades de cada recurso e, mais ainda, como produtos concebidos acessíveis podem beneficiar a todos, incluindo as pessoas com deficiência. Para tanto, o curso conta com recursos e ferramentas de acessibilidade na comunicação como a audiodescrição para as pessoas com deficiência visual, janela de Libras e legendas para surdos e ensurdecidos, mas ressaltamos que estes recursos auxiliam a todos, promovendo novas formas de experiência e mesmo sensibilização. ',
         cargaHoraria: 20,
         instCert: 24,
         possuiAcessibilidade: 'sim',
@@ -1645,12 +1512,11 @@ export const cursosDefault = [
         obs: 'O curso tem uma abordagem bastante pertinente e atual a trilha em tela, devendo compor a lista de possíveis cursos que constituirão a formação do Plafor. Além disso, possui um bom acervo de materiais curados e/ou autênticos (produzidos pela própria universidade) bastante úteis e adaptativos a formação desejada.',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 104,
+        id: 102,
         itinerario: 2,
         title: 'Acessibilidade e Tecnologia',
         descricao: 'O curso tem como objetivos apresentar os conceitos relacionados à inclusão e acessibilidade, destacar os tipos de acessibilidade e a tecnologia assistiva, bem como apresentar algumas tecnologias para a produção de materiais digitais acessíveis.',
@@ -1661,15 +1527,14 @@ export const cursosDefault = [
         obs: 'O Curso tem uma temática importante e aderente a trilha, bons textos, mas a quantidade de videos, especialmente os autorais pela instituição ofertante, são poucos. Uma vez sendo utilizado, precisará de outros cursos dentro dessa mesma trilha que complemente melhor os seus conteúdos. Apesar de não ser um curso com uma quantidade de materiais mais robusta ou enriquecida em quantidade, há muita qualidade nos materiais disponibilizados é muito boa e, por isso, merece a inclusão nas trilhas.',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 105,
+        id: 103,
         itinerario: 2,
         title: 'Gamificação no Moodle',
-        descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem.',
+        descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem. ',
         cargaHoraria: 50,
         instCert: 26,
         possuiAcessibilidade: 'parcial',
@@ -1677,12 +1542,11 @@ export const cursosDefault = [
         obs: 'A abordagem de Gamificação trazida no curso fortalece o envolvimento ativo e cria condições para a customização do ensino, nesse sentido o curso agrega muito valor a trilha da Capacitação dos Aprendentes, visto abordar e ensinar sobre a implementação prática e assertiva dos princípios, características e procedimentos de operacionalização da gamificação nos ecossistemas de aprendizagem.',
         filter: {
             competencias: [17, 18],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 106,
+        id: 104,
         itinerario: 2,
         title: 'Metodologias Ativas: Educação Inovadora',
         descricao: 'Este curso tem como objetivo auxiliar profissionais e futuros profissionais da área de educação a conhecerem as possibilidades oferecidas pela metodologias ativas de aprendizagem com foco em uma educação inovadora para transformação da educação.',
@@ -1693,15 +1557,14 @@ export const cursosDefault = [
         obs: 'O curso apresenta um bom conteúdo e uma razoável diversidade de mídias, sua temática é bastante aderente a presente trilha e o mesmo agrega valor ou enriquece a aprendizagem nesta respectiva trilha.',
         filter: {
             competencias: [17, 18],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 107,
+        id: 105,
         itinerario: 2,
         title: 'Tecnologia Assistiva no Contexto Educacional',
-        descricao: 'A Tecnologia Assistiva é uma área ampla e multidisciplinar e, assim como em outras esferas sociais, na educação ela também faz toda a diferença. Neste curso, buscamos apresentar conceitos, recursos e serviços aplicados ao contexto educacional. E, certamente, essa conversa não se esgota aqui. Existe uma gama enorme de recursos e estratégias. Apresentamos aqui algumas delas, mas é na prática, nas trocas com os estudantes com deficiência e com outros profissionais que acabamos descobrindo novas possibilidades. Além disso, a tecnologia muda rapidamente e precisamos estar sempre em busca do que está surgindo. Por fim, buscamos enfatizar o uso de recursos gratuitos ou de baixo custo. Apresentamos, ao longo do curso, possibilidades de confecção de baixo custo de alguns recursos utilizando materiais e métodos diversos.',
+        descricao: 'A Tecnologia Assistiva é uma área ampla e multidisciplinar e, assim como em outras esferas sociais, na educação ela também faz toda a diferença. Neste curso, buscamos apresentar conceitos, recursos e serviços aplicados ao contexto educacional. E, certamente, essa conversa não se esgota aqui. Existe uma gama enorme de recursos e estratégias. Apresentamos aqui algumas delas, mas é na prática, nas trocas com os estudantes com deficiência e com outros profissionais que acabamos descobrindo novas possibilidades. Além disso, a tecnologia muda rapidamente e precisamos estar sempre em busca do que está surgindo. Por fim, buscamos enfatizar o uso de recursos gratuitos ou de baixo custo. Apresentamos, ao longo do curso, possibilidades de confecção de baixo custo de alguns recursos utilizando materiais e métodos diversos. ',
         cargaHoraria: 60,
         instCert: 27,
         possuiAcessibilidade: 'parcial',
@@ -1709,12 +1572,11 @@ export const cursosDefault = [
         obs: 'ATENÇÃO -  O Curso só fica disponível até 31/07/2022. A temática do curso é extremamente pertinente, sendo sua ementa bem construída. O curso está em um nível minimamente viável para utilização, não sendo uma das melhores opções por deter poucas videoaulas. Contudo, mesmo assim, pode contribuir com a formação do docente e ser recomendável quando combinado com outros cursos complementares. ',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 108,
+        id: 106,
         itinerario: 2,
         title: 'Educador Maker: Aprendizagem Baseada em Projetos',
         descricao: ' Este curso tem como objetivo levar educadores refletirem sobre o uso da Aprendizagem Baseada em Projetos em espaços Maker para atender as demandas do século XXI.',
@@ -1725,12 +1587,11 @@ export const cursosDefault = [
         obs: 'Por ser um curso que introjeta a cultura maker no labor docente, isso se revela como bastante promissor e aderente a trilha capacitação dos aprendentes, tendo em vista que as metodologias ativas e a cultura maker são muito indicadas para promover o envolvimento ativo dos aprendentes. Por isso o curso é bastante recomendável.',
         filter: {
             competencias: [17, 18],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 109,
+        id: 107,
         itinerario: 2,
         title: 'Cultura Surda',
         descricao: 'O curso trata da História da comunidade surda, cultura surda, identidades surdas e a língua de sinais.',
@@ -1741,12 +1602,11 @@ export const cursosDefault = [
         obs: 'ATENÇÃO -  O Curso só fica disponível até 31/07/2022 Temos aqui um curso cuja temática é bastante cara e pertinente a esta trilha. Certamente o curso poderia ser mais enriquecido com videos e materiais para a leitura, contudo traz um conteúdo básico, elementar que pode colaborar com a formação docente. Recomenda-se a indicação deste curso, desde que acompanhada a recomendação para realização concomitante de outros cursos complementares de conteúdo. ',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 110,
+        id: 108,
         itinerario: 2,
         title: 'Acessibilidade em Processos Seletivos Discentes',
         descricao: 'Formação oferecida gratuitamente pelo Instituto Federal do Espírito Santo com o objetivo de promover o conhecimento necessário assim como o compartilhamento de saberes e experiências profissionais tendo em vista os direitos das pessoas com deficiência e a garantia de sua participação em conformidade com o paradigma da inclusão nos processos seletivos discentes.',
@@ -1757,12 +1617,11 @@ export const cursosDefault = [
         obs: 'Curso bem estruturado, muito diversificado em informações. Poderia ter mais videos, de fato. Contudo, é altamente recomendável para a trilha.',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 111,
+        id: 109,
         itinerario: 2,
         title: 'Design Thinking Aplicado à Educação',
         descricao: 'Este curso é uma ótima oportunidade para você conhecer o papel do Design Thinking! O curso Design Thinking aplicado à educação foi desenvolvido em 2021 pela Enap, o qual tem como objetivo apresentar os conceitos, características principais, exemplos da abordagem do Design Thinking (DT), técnicas e ferramentas que poderão ser utilizadas na aplicação da abordagem do DT na educação.',
@@ -1773,15 +1632,14 @@ export const cursosDefault = [
         obs: 'O curso apresenta a metodologia do Design Thinking que é bastante indicada para potencializar a aprendizagem e promover o engahamento ativo. ',
         filter: {
             competencias: [18],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 112,
+        id: 110,
         itinerario: 2,
         title: 'Avaliação em Processos de Aprendizagem e Modelos de Feedback',
-        descricao: 'O curso tem como objetivo fornecer aos servidores públicos aspectos conceituais sobre avaliação da aprendizagem, a partir das metodologias ativas, aplicando habilidades de coleta e análise de dados para a melhoria contínua de projetos educacionais.',
+        descricao: 'O curso tem como objetivo fornecer aos servidores públicos aspectos conceituais sobre avaliação da aprendizagem, a partir das metodologias ativas, aplicando habilidades de coleta e análise de dados para a melhoria contínua de projetos educacionais. ',
         cargaHoraria: 30,
         instCert: 30,
         possuiAcessibilidade: 'parcial',
@@ -1789,12 +1647,11 @@ export const cursosDefault = [
         obs: 'O curso traz uma abordagem interessante para ajudar técnicos da educação (pedagógos e assistente de assuntos educacionais) no desenvolvimento de planos educacionais individualizados no que tange a avaliaçaõ da aprendizagem. Apesar nao ser totalmente específico para o mundo da educação, mas também para o mundo corporativo, o curso traz elementos teóricos e práticos que podem ser transpostos para ajudar no processo de acompanhamento da aprendizagem dos aprendentes no que se refere a diferenciação da avaliaçaõ',
         filter: {
             competencias: [17],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 113,
+        id: 111,
         itinerario: 2,
         title: 'A arte de falar em público',
         descricao: 'Neste curso, você vai conhecer um pouco sobre a arte de falar em público. Irá aprender técnicas para se comunicar bem e preparar-se para falar em público.',
@@ -1805,12 +1662,11 @@ export const cursosDefault = [
         obs: 'Oferta semestral com atualização do link para o curso a cada semestre ou ao atingir um número grande de inscritos.',
         filter: {
             competencias: [20],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 114,
+        id: 112,
         itinerario: 2,
         title: 'Comunicação Oral e Escrita',
         descricao: 'O objetivo geral desse curso é proporcionar melhorias, pessoais e profissionais, a partir de conhecimentos específicos sobre Comunicação Oral e Escrita. A Ementa do curso aborda: Conceitos gerais de comunicação oral e escrita; História da Comunicação; Redação Comercial e Dissertativa; Gramática: Regências e Concordâncias; Técnicas de Oratória; Comunicação Não-Violenta; Práticas e Exercícios Avaliativos.',
@@ -1821,12 +1677,11 @@ export const cursosDefault = [
         obs: 'Esse curso foi indicado no Padlet para os Técnicos-Administrativos em Educação',
         filter: {
             competencias: [20],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 115,
+        id: 113,
         itinerario: 2,
         title: 'Acessibilidade na Comunicação',
         descricao: 'Neste curso, você irá compreender o conceito biopsicossocial e as terminologias ligadas às pessoas com deficiência. Entrará em contato com a legislação, compreenderá como utilizar recursos e técnicas que melhoram a acessibilidade, além de ver exemplos práticos de comunicação acessível, tanto em eventos presenciais como em conteúdo web e impresso. Inscreva-se agora e tenha oportunidade de compreender como a comunicação pode ser mais acessível e democrática para todos!',
@@ -1836,13 +1691,12 @@ export const cursosDefault = [
         link: 'https://escolavirtual.gov.br/curso/615',
         obs: '',
         filter: {
-            competencias: [16, 20],
-            temas: [],
-            subtemas: [],
+            competencias: [16, 20, 56],
+            subtemas: [358],
         }
     },
     {
-        id: 116,
+        id: 114,
         itinerario: 2,
         title: 'Redação científica com tecnologia',
         descricao: 'Neste curso, você vai conhecer um pouco sobre redação acadêmica, competência informacional e ferramentas tecnológicas para a pesquisa científica. Irá aprender técnicas de como refinar sua pesquisa em bases de dados, escrever a introdução, o referencial teórico, a metodologia, a conclusão e o resumo do texto científica e como usar softwares na metodologia do trabalho acadêmico.',
@@ -1852,29 +1706,27 @@ export const cursosDefault = [
         link: 'https://mooc.ifsp.edu.br/course/redacao-cientifica-com-tecnologia-laletec/intro',
         obs: 'Esse curso possui a sua versão em ambiente Moodle e está em processo de homologação na escola virtual da ENAP que permitirá o acesso contínuo.',
         filter: {
-            competencias: [19, 20, 21],
-            temas: [],
-            subtemas: [],
+            competencias: [19, 20, 21, 56],
+            subtemas: [358],
         }
     },
     {
-        id: 117,
+        id: 115,
         itinerario: 2,
         title: 'Desenvolvendo competências em informações acadêmicas e profissionais',
-        descricao: 'A busca, avaliação e uso estratégico, ético e responsável da informação são requisitos fundamentais a indivíduos que estão percorrendo o caminho acadêmico ou se preparando para o mercado de trabalho. Importante, nesse contexto, o desenvolvimento de habilidades no trato da informação, disponível em meios impressos e digitais, de forma a estarem mais capacitados para enfrentar os desafios do século XXI.',
+        descricao: 'A busca, avaliação e uso estratégico, ético e responsável da informação são requisitos fundamentais a indivíduos que estão percorrendo o caminho acadêmico ou se preparando para o mercado de trabalho. Importante, nesse contexto, o desenvolvimento de habilidades no trato da informação, disponível em meios impressos e digitais, de forma a estarem mais capacitados para enfrentar os desafios do século XXI. ',
         cargaHoraria: 30,
         instCert: 18,
         possuiAcessibilidade: 'Não',
         link: 'https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=136',
         obs: 'O link é válido por 6 meses',
         filter: {
-            competencias: [19, 20],
-            temas: [],
-            subtemas: [],
+            competencias: [19, 20, 56],
+            subtemas: [358],
         }
     },
     {
-        id: 118,
+        id: 116,
         itinerario: 2,
         title: 'Educação para boas escolhas on-line',
         descricao: 'Este curso foi idealizado pela SaferNet Brasil para facilitar e ampliar a incorporação dessa temática nas salas de aula e nos projetos políticos pedagógicos. O curso é dedicado aos educadores e profissionais interessados em promover ações educativas de sensibilização sobre cidadania digital. Apesar de criado para educadores, o material permite uma aproximação ao tema para diferentes áreas de atuação. A proposta é que você se familiarize com o contexto e, principalmente, utilize as sugestões de atividades e recursos para criar seu plano de ação para as intervenções que fará em torno do tema em sua instituição, em sua família e em sua própria vida digital abordando também sobre bem-estar e saúde mental na internet.',
@@ -1885,12 +1737,11 @@ export const cursosDefault = [
         obs: 'O link é válido por 3 meses',
         filter: {
             competencias: [19, 22],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 119,
+        id: 117,
         itinerario: 2,
         title: 'Gestão de Projetos Educacionais',
         descricao: 'Diante da crescente demanda das organizações públicas por engenharias didáticas inovadoras e fluidas, este curso apresenta conceitos sobre o planejamento e a gestão de projetos educacionais corporativos com uso de metodologias ágeis e colaborativas. Para isso compreenda os elementos básicos dos projetos e uma possível estruturação a partir da sua relação com o design instrucional, entre outros.',
@@ -1901,12 +1752,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [23],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 120,
+        id: 118,
         itinerario: 2,
         title: 'Design Thinking Aplicado à Educação',
         descricao: 'Este curso é uma ótima oportunidade para você conhecer o papel do Design Thinking! O curso Design Thinking aplicado à educação foi desenvolvido em 2021 pela Enap, o qual tem como objetivo apresentar os conceitos, características principais, exemplos da abordagem do Design Thinking (DT), técnicas e ferramentas que poderão ser utilizadas na aplicação da abordagem do DT na educação.',
@@ -1917,12 +1767,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [23],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 121,
+        id: 119,
         itinerario: 2,
         title: 'Inovações em Tecnologia Educacional',
         descricao: 'O curso apresenta conceitos, processos e experiências referentes à inovação, com foco na concepção, no desenvolvimento, na execução e na avaliação de soluções de capacitação para desenvolvimento de competências, de modo a fomentar a cultura e os ecossistemas de inovação, com vistas à criação de valor público.',
@@ -1933,12 +1782,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [23],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 122,
+        id: 120,
         itinerario: 2,
         title: 'Fundamentos da Lei Geral de Proteção de Dados',
         descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes. Foi desenvolvido pelo Serpro - Serviço Federal de Processamento de Dados, em 2020, originalmente para a capacitação do corpo funcional. Agora é ofertado ao público em geral, por meio de parceria com a Escola Nacional de Administração Pública - Enap.',
@@ -1949,12 +1797,11 @@ export const cursosDefault = [
         obs: 'Esse curso foi indicado no Padlet para os Gestores',
         filter: {
             competencias: [22],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 123,
+        id: 121,
         itinerario: 2,
         title: 'Introdução à Lei Brasileira de Proteção de Dados Pessoais',
         descricao: 'O curso apresenta um panorama sobre a nova legislação brasileira de proteção de dados pessoais (Lei 13.709/18), compreendendo os temas mais importantes para a sua implementação, como: fundamentos e campo de aplicação, princípios e direitos do titular, responsabilidades dos agentes, aspectos internacionais, segurança e a Autoridade Nacional de Proteção de Dados, entre outros. O objetivo do curso é capacitar as pessoas para entenderem, de forma rápida e acessível, o funcionamento e diretrizes básicas expostas na nova lei geral de proteção de dados do Brasil.',
@@ -1965,12 +1812,11 @@ export const cursosDefault = [
         obs: 'Esse curso foi indicado no Padlet para os Técnicos-Administrativos em Educação e Gestores',
         filter: {
             competencias: [22],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 124,
+        id: 122,
         itinerario: 2,
         title: 'Noções Gerais de Direitos Autorais',
         descricao: 'Com o advento da internet, o compartilhamento de materiais aumentou significativamente, causando algumas dúvidas e incertezas em relação à autoria, uso e possibilidade de modificações desses materiais. Nesse curso, você conhecerá algumas questões gerais sobre direitos autorias no Brasil e aprenderá a relacionar as recomendações e determinações legais às situações reais de uso e de compartilhamento de materiais produzidos por terceiros.',
@@ -1981,12 +1827,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [21],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 125,
+        id: 123,
         itinerario: 2,
         title: 'Ferramentas Digitais para Curadoria Educacional',
         descricao: 'este curso tem como proposta a apresentação sobre os conceitos básicos sobre Curadoria Educacional e apresentar seis ferramentas digitais gratuitas disponíveis na web utilizadas para prática da curadoria',
@@ -1997,28 +1842,221 @@ export const cursosDefault = [
         obs: 'O link é válido por 1 ano (faltando 330 dias - contando a partir de 04/02/2021)',
         filter: {
             competencias: [19],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 126,
+        id: 124,
         itinerario: 2,
         title: 'Primeiros passos para uso de Linguagem Simples',
         descricao: 'Desenvolvido pela Enap, em parceria não onerosa com a jornalista e pesquisadora Heloísa Fischer, este curso tem o intuito de apresentar sete diretrizes para a produção de textos informativos com linguagem simples, que sejam mais fáceis de serem lidos e compreendidos pela maior parte das pessoas. A linguagem simples apresenta-se, ao mesmo tempo, como uma causa social e uma técnica de comunicação. Quer saber como aplicar a linguagem simples? Inscreva-se.',
-        cargaHoraria: 8,
+        cargaHoraria: 80,
         instCert: 30,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/315',
         obs: '',
         filter: {
             competencias: [20],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
+        }
+    },
+    {
+        id: 125,
+        itinerario: 3,
+        title: 'Software de Apresentação',
+        descricao: 'O curso irá introduzir os conceitos de softwares de apresentação, assim como mostrar exemplos de softwares que podem ser utilizados para criação de apresentações. Serão mostrados recursos básicos e avançados no software PowerPoint para que se possa criar uma apresentação usando os recursos desse software. Além disso, será explorado o uso do software de apresentação online Prezi, que se constitui em uma ótima opção para se desenvolver apresentações dinâmicas e diferentes.',
+        cargaHoraria: 40,
+        instCert: 15,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://mundi.ifsul.edu.br/portal/software-de-apresentacao.php',
+        obs: '',
+        filter: {
+            competencias: [50],
+            subtemas: [361],
+        }
+    },
+    {
+        id: 126,
+        itinerario: 3,
+        title: 'Educação Especial e Inclusão ',
+        descricao: 'Este curso apresenta as principais leis sobre inclusão de alunos com deficiência no ensino regular. Aponta a definição de integração, inclusão, síndrome, doenças, distúrbios e transtornos. Demonstra o conceito de deficiência intelectual, síndrome de Down, autismo, surdez, cegueira, deficiência física ou motora e a paralisia cerebral. Considera escola para todos, princípios da cultura inclusiva, formação do professor, sala de aula inclusiva, família na educação escolar dos alunos com deficiência e educação inclusiva na educação infantil.',
+        cargaHoraria: 40,
+        instCert: 15,
+        possuiAcessibilidade: 'Sim',
+        link: 'https://mundi.ifsul.edu.br/portal/educacao-especial-e-inclusao.php',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [361],
         }
     },
     {
         id: 127,
+        itinerario: 3,
+        title: 'Educação Inclusiva: Introdução ao Transtorno do Espectro Autista (TEA)',
+        descricao: 'Conhecer aspectos introdutórios sobre o Transtorno do espectro autista (TEA), assim como um pouco da sua história. Pontuar conceitos para a inclusão de estudantes com TEA e o papel do professor nesse processo. Identificar alguns dos materiais didáticos e metodologias de ensino e mais conhecidas para estudantes com TEA.',
+        cargaHoraria: 20,
+        instCert: 14,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=36',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [353, 361],
+        }
+    },
+    {
+        id: 128,
+        itinerario: 3,
+        title: 'Ensino e Aprendizagem: Teorias, Métodos e Avaliação ',
+        descricao: 'Introdução sobre aspectos inerentes ao Ensino e Aprendizagem; Teorias de Ensino/Aprendizagem; Estratégias e Métodos de Ensino; Metodologias Ativas de Ensino; Tecnologias na Educação; Avaliação nos processos de Ensino/Aprendizagem.',
+        cargaHoraria: 30,
+        instCert: 14,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://mais.ifmg.edu.br/login/index.php',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [355],
+        }
+    },
+    {
+        id: 129,
+        itinerario: 3,
+        title: 'Boas Práticas de Segurança do Trabalho em Laboratórios',
+        descricao: 'Introdução a Segurança do Trabalho: Conceitos básicos de Segurança do Trabalho. Equipamentos de Proteção Coletiva e Equipamentos de Proteção Individual e Coletiva. Produtos Químicos. Equipamentos, vidrarias e  utensílios de laboratório. Mapa de Riscos. Manual de Segurança para Laboratórios. Situações de Emergência.',
+        cargaHoraria: 40,
+        instCert: 14,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://mais.ifmg.edu.br/enrol/index.php?id=17',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [174],
+        }
+    },
+    {
+        id: 130,
+        itinerario: 3,
+        title: 'Introdução a Gestão de Projetos',
+        descricao: 'Este curso foi feito com o objetivo de apresentar os conceitos fundamentais referentes ao tema gestão de projetos, com destaque para a definição e caracterização do termo “projeto” e da apresentação do ciclo de vida dos projetos e das dez áreas do conhecimento, definidas pelo Project Management Institute (PMI), instituição internacional que se dedica ao estudo e à disseminação dos melhores métodos e técnicas de gerenciamento de projetos.',
+        cargaHoraria: 30,
+        instCert: 14,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://mais.ifmg.edu.br/login/index.php',
+        obs: '',
+        filter: {
+            competencias: [28],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 131,
+        itinerario: 3,
+        title: 'Ergonomia Aplicada aos Postos de Trabalho',
+        descricao: 'Introdução à Ergonomia: breve histórico; origem e evolução da ergonomia; conceitos, definições e objetivos da ergonomia; tipos de ergonomia; Norma Regulamentadora nº 17 do MTE: conhecer os parâmetros legais que permitem a adaptação das condições de trabalho às características psicofisiológicas dos trabalhadores, de modo a proporcionar um máximo de conforto, segurança e desempenho eficiente. Análise Ergonômica do Trabalho (AET): conceito de AET, aprender as definições básicas de demanda, tarefa e atividade nos postos de trabalho para identificar inadequações e fatores de risco existentes. Ergonomia nos Postos de trabalho: Conceitos básicos da Ergonomia aplicado aos postos de trabalho',
+        cargaHoraria: 20,
+        instCert: 14,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://mais.ifmg.edu.br/login/index.php',
+        obs: '',
+        filter: {
+            competencias: [1],
+            subtemas: [176],
+        }
+    },
+    {
+        id: 132,
+        itinerario: 3,
+        title: 'Cultura Surda',
+        descricao: 'História da comunidade surda, cultura surda, identidades surdas e a língua de sinais.',
+        cargaHoraria: 20,
+        instCert: 17,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Cultura+Surda+&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [32],
+            subtemas: [377],
+        }
+    },
+    {
+        id: 133,
+        itinerario: 3,
+        title: 'Aprendizagem Significativa',
+        descricao: 'Conceitos iniciais sobre Aprendizagem Significativa, Abordagens Teóricas e Tipos de Aprendizagem, Ensino Significativo.',
+        cargaHoraria: 30,
+        instCert: 17,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Aprendizagem+Significativa&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [361],
+        }
+    },
+    {
+        id: 134,
+        itinerario: 3,
+        title: 'Qualidade de Cursos em Educação a Distância',
+        descricao: 'Não basta ter conteúdo, tem que conversar; Organizando o Curso; Produzindo o Conteúdo do Curso; Equívocos Gerais',
+        cargaHoraria: 30,
+        instCert: 17,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Aprendizagem+Significativa&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [361],
+        }
+    },
+    {
+        id: 135,
+        itinerario: 3,
+        title: 'Didática',
+        descricao: 'O que é Didática?; Perfil do Professor; Planejamento;  Técnicas e Métodos; Avaliação',
+        cargaHoraria: 60,
+        instCert: 17,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Did%C3%A1tica+&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [361],
+        }
+    },
+    {
+        id: 136,
+        itinerario: 3,
+        title: 'Pesquisa em Sala de Aula na Educação Básica',
+        descricao: 'Por que pesquisa na educação básica? Projeto de Pesquisa; Problema de pesquisa, objetivos e hipóteses; Abordagem quantitativa; Abordagem qualitativa; Elaboração de perguntas; Análise e apresentação dos dados',
+        cargaHoraria: 40,
+        instCert: 17,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://moodle.ifrs.edu.br/course/search.php?q=Pesquisa+em+Sala+de+Aula+na+Educa%C3%A7%C3%A3o+B%C3%A1sica+&areaids=core_course-course',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [361],
+        }
+    },
+    {
+        id: 137,
+        itinerario: 3,
+        title: 'Planejamento Docente',
+        descricao: 'O curso tem por objetivo compreender e identificar as possibilidades pedagógicas do espaço pedagógico voltado aos processos formativos formais ou informais, a fim de subsidiar o planejamento de ações que desenvolvam respostas a problemas específicos, definindo os fins e os meios que direcionam para soluções.',
+        cargaHoraria: 30,
+        instCert: 35,
+        possuiAcessibilidade: 'Não verificado',
+        link: 'https://moodle.ifrj.edu.br/login/index.php',
+        obs: '',
+        filter: {
+            competencias: [24],
+            subtemas: [361],
+        }
+    },
+    {
+        id: 138,
         itinerario: 3,
         title: 'Aprendizagem Organizacional e Trilhas de Aprendizagem',
         descricao: 'Este curso apresenta capacitação e conhecimento de boas práticas de desenvolvimento de competências das organizações contemporâneas e a importância da aprendizagem baseada no autodesenvolvimento.',
@@ -2029,12 +2067,11 @@ export const cursosDefault = [
         obs: 'O curso fica disponível 30 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 128,
+        id: 139,
         itinerario: 3,
         title: 'Comunicação oral e escrita',
         descricao: 'Proporcionar melhorias, pessoais e profissionais, a partir de conhecimentos específicos sobre Comunicação Oral e Escrita.',
@@ -2045,12 +2082,11 @@ export const cursosDefault = [
         obs: 'As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 129,
+        id: 140,
         itinerario: 3,
         title: 'Fundamentos da linguagem visual',
         descricao: 'Esse curso desenvolve princípios da linguagem visual. Apresenta elementos e técnicas visuais essenciais para o conhecimento da gramática visual, aplicáveis em situações cotidianas em que se estabelece a comunicação visual como a expressão visual de ideias, a elaboração de apresentações e até a criação de layouts mais complexos.',
@@ -2061,12 +2097,11 @@ export const cursosDefault = [
         obs: 'Todos os vídeos contam com a intérprete de Libras em ótimo tamanho de visualização. Contudo, as legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 130,
+        id: 141,
         itinerario: 3,
         title: 'Desenvolvendo competências em informações acadêmicas e profissionais.',
         descricao: 'A busca, avaliação e uso estratégico, ético e responsável da informação são requisitos fundamentais a indivíduos que estão percorrendo o caminho acadêmico ou se preparando para o mercado de trabalho. Importante, nesse contexto, o desenvolvimento de habilidades no trato da informação, disponível em meios impressos e digitais, de forma a estarem mais capacitados para enfrentar os desafios do século XXI.',
@@ -2077,12 +2112,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 131,
+        id: 142,
         itinerario: 3,
         title: 'Estratégias Flexíveis de Ensino em Tempos de Pandemia',
         descricao: 'Este curso tem como objetivo auxiliar profissionais da área de educação e demais profissionais a conhecerem as possibilidades oferecidas pelo Ensino Híbrido e como este pode estar presente em suas práticas pedagógicas em tempos de pandemia.',
@@ -2093,28 +2127,26 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 132,
+        id: 143,
         itinerario: 3,
         title: 'Google Drive: Colaboração na prática',
         descricao: 'Este curso cobre uma introdução à colaboração e aspectos colaborativos no Google Drive, focando em trabalhos em grupo, tanto para a versão para computador quanto para dispositivos móveis.',
-        cargaHoraria: 8,
+        cargaHoraria: 80,
         instCert: 16,
         possuiAcessibilidade: 'Parcial',
         link: 'https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=144',
         obs: 'O curso só tem 8h, mas é objetivo e direto. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 133,
+        id: 144,
         itinerario: 3,
         title: 'Documentos Google: editor de textos',
         descricao: 'Neste curso você vai aprender como criar documentos de texto de uma forma versátil e prática utilizando a ferramenta Documentos Google.',
@@ -2125,12 +2157,11 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 134,
+        id: 145,
         itinerario: 3,
         title: 'Planilhas Google: Planilha Eletrônica',
         descricao: 'Neste curso você aprenderá a acessar e a utilizar os principais elementos da Planilha Google.',
@@ -2141,12 +2172,11 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 135,
+        id: 146,
         itinerario: 3,
         title: 'Google Drive',
         descricao: 'Nesse curso você vai conhecer e aprender sobre o Google Drive, ferramenta utilizada para o armazenamento de arquivos.',
@@ -2157,12 +2187,11 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 136,
+        id: 147,
         itinerario: 3,
         title: 'HTML: Introdução ao desenvolvimento de páginas web',
         descricao: 'Aprenda a criar páginas web do zero e conhecer como funciona a internet para o desenvolvimento de sites. Também criaremos as primeiras páginas. Vamos formatá-las, inserir links, listas, imagens, arquivos de áudio e vídeo. Conheça alguns comandos avançados e dicas especiais de compatibilidade e acessibilidade.',
@@ -2173,15 +2202,14 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 137,
+        id: 148,
         itinerario: 3,
         title: 'Produção de Vídeos usando OBS Studio e Kdenlive',
-        descricao: 'O curso aborda de forma objetiva, técnicas e ferramentas para produção de vídeos utilizando a captura de tela do computador, gravação de som e imagem. Os softwares utilizados serão o OBS Studio (Open Broadcaster Software) e o Kdenlive, ambos de código aberto e gratuitos.',
+        descricao: 'O curso aborda de forma objetiva, técnicas e ferramentas para produção de vídeos utilizando a captura de tela do computador, gravação de som e imagem. Os softwares utilizados serão o OBS Studio (Open Broadcaster Software) e o Kdenlive, ambos de código aberto e gratuitos. ',
         cargaHoraria: 20,
         instCert: 17,
         possuiAcessibilidade: 'Sim',
@@ -2189,12 +2217,11 @@ export const cursosDefault = [
         obs: 'O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 138,
+        id: 149,
         itinerario: 3,
         title: 'Iniciação ao serviço Público nos Institutos Federais',
         descricao: 'Este curso apresenta informações e orienta os servidores em início de carreira nos Institutos Federais e aborda os seguinte temas: Institutos Federais; Ensino; Extensão; Pesquisa e Inovação; Pós-Graduação; Comunicação e Redação Oficial; Ética e Cidadania; Legislação de Pessoal; Protocolo; Orçamento, Licitações e Contratos; Saúde do Servidor; Inclusão.',
@@ -2205,12 +2232,11 @@ export const cursosDefault = [
         obs: 'Os vídeos disponíveis não contam com Libras, mas apresenta Legenda e Transcrição acessível por link próprio. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 139,
+        id: 150,
         itinerario: 3,
         title: 'Inclusão Sociodigital para Multiplicadores',
         descricao: 'Por meio deste curso o multiplicador aprenderá a planejar um curso de inclusão sociodigital e ensinar aos discentes os aplicativos de smartphones úteis no dia a dia, utilizando aplicativos tais como redes sociais, e-mail, aplicativos de localização e mobilidade, fotos e backup de contatos e aplicativos de utilidade pública.',
@@ -2221,12 +2247,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 140,
+        id: 151,
         itinerario: 3,
         title: 'Educador Maker: ensino \'mão na massa\'',
         descricao: 'Este curso tem como objetivo geral formar educadores capazes de reconhecer e integrar características da cultura maker na educação, utilizando a tecnologia como meio e não fim do processo de aprendizagem, a fim de atender as demandas da educação do século XXI.',
@@ -2237,12 +2262,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 141,
+        id: 152,
         itinerario: 3,
         title: 'Moodle para Educadores',
         descricao: 'O curso proporciona o conhecimento básico necessário para a edição de salas virtuais para cursos ou disciplinas na modalidade à distância ou para apoio à modalidade presencial. Apresenta a parte instrucional que orienta à produção da sala virtual com inserção de recursos e atividades e também busca levar o educador a uma reflexão sobre o potencial construcionista do Moodle como suas potencialidades para a realização de aulas com atividades colaborativas, bem como as possibilidades de acompanhamento e avaliação da aprendizagem. O curso foi elaborado em nível básico e a partir da versão Moodle 3.1 (Tema Essential)',
@@ -2253,12 +2277,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 142,
+        id: 153,
         itinerario: 3,
         title: 'Acessibilidade e Tecnologia',
         descricao: 'O curso tem como objetivos apresentar os conceitos relacionados à inclusão e acessibilidade, destacar os tipos de acessibilidade e a tecnologia assistiva, bem como apresentar algumas tecnologias para a produção de materiais digitais acessíveis.',
@@ -2269,12 +2292,11 @@ export const cursosDefault = [
         obs: 'O curso tem diversas aulas em Libras e conta com Transcrição em Português. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [4],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 143,
+        id: 154,
         itinerario: 3,
         title: 'Ferramentas Digitais para Curadoria Educacional',
         descricao: 'Este curso tem como proposta a apresentação sobre os conceitos básicos sobre Curadoria Educacional e apresentar seis ferramentas digitais gratuitas disponíveis na web utilizadas para prática da curadoria',
@@ -2285,12 +2307,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 144,
+        id: 155,
         itinerario: 3,
         title: 'Introdução a projetos',
         descricao: 'O curso proporciona ao aluno a aplicação dos conceitos básicos e necessários relativos a projetos, garantindo o entendimento inicial para o sucesso de um projeto. face a carência destes, no que diz respeito aos principais fundamentos associados a projetos.',
@@ -2301,12 +2322,11 @@ export const cursosDefault = [
         obs: 'A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 145,
+        id: 156,
         itinerario: 3,
         title: 'Projetos Educacionais e Interdisciplinares',
         descricao: 'Neste curso aprenderemos um pouco mais sobre Projetos Educacionais e Interdisciplinares. O curso utiliza como base o material "Projetos educacionais " de Elisa Maria Gomide e Denise Mendes França e "Tipos de Projetos" de Denise Mendes França e Marcos Antonio Almeida de Oliveira produzidos para a Rede e-Tec Brasil.',
@@ -2317,12 +2337,11 @@ export const cursosDefault = [
         obs: 'Os vídeos possuem Libras ou Transcrição completa. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [3],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 146,
+        id: 157,
         itinerario: 3,
         title: 'Software de Apresentação',
         descricao: 'O curso irá introduzir os conceitos de softwares de apresentação, assim como mostrar exemplos de softwares que podem ser utilizados para criação de apresentações. Serão mostrados recursos básicos e avançados no software PowerPoint para que se possa criar uma apresentação usando os recursos desse software. Além disso, será explorado o uso do software de apresentação online Prezi, que se constitui em uma ótima opção para se desenvolver apresentações dinâmicas e diferentes.',
@@ -2333,12 +2352,11 @@ export const cursosDefault = [
         obs: 'Todos os vídeos contam com a intérprete de Libras em ótimo tamanho de visualização. Contudo, as legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).',
         filter: {
             competencias: [2],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 147,
+        id: 158,
         itinerario: 3,
         title: 'Fundamentos da LGPD',
         descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes.',
@@ -2349,12 +2367,11 @@ export const cursosDefault = [
         obs: 'O curso fica disponível 20 dias após o cadastro. Para continuar o acesso ao Curso é necessário matricular-se no curso novamente. As turmas e matrículas são mensais.',
         filter: {
             competencias: [5],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 148,
+        id: 159,
         itinerario: 3,
         title: 'Repositórios de Materiais Didáticos Digitais e Direitos de Uso',
         descricao: 'O curso oferece a possibilidade de conhecimento acerca de uso de materiais didáticos digitais, locais de repositórios, criação, uso e orienta sobre os direitos de uso destes materiais',
@@ -2365,12 +2382,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [6],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 149,
+        id: 160,
         itinerario: 3,
         title: 'Ferramentas Digitais para Curadoria Educacional',
         descricao: 'Este curso tem como proposta a apresentação sobre os conceitos básicos sobre Curadoria Educacional e apresentar seis ferramentas digitais gratuitas disponíveis na web utilizadas para prática da curadoria',
@@ -2381,15 +2397,14 @@ export const cursosDefault = [
         obs: 'Apesar da carga horária baixa o curso atende muito bem a necessidade de se capacitar para curadoria de objetos de aprendizagem. Os cursos mudam anualmente o link',
         filter: {
             competencias: [6],
-            temas: [],
-            subtemas: [],
+            subtemas: [356],
         }
     },
     {
-        id: 150,
+        id: 161,
         itinerario: 3,
         title: 'Gamificação para Educação',
-        descricao: 'O curso visa introduzir o conceito das mecânicas e das narrativas dos jogos em sistemas educacionais e suas princiais característiacs para educadores e profissionais da educação',
+        descricao: 'O curso visa introduzir o conceito das mecânicas e das narrativas dos jogos em sistemas educacionais e suas princiais característiacs para educadores e profissionais da educação ',
         cargaHoraria: 15,
         instCert: 6,
         possuiAcessibilidade: 'Sim',
@@ -2397,12 +2412,11 @@ export const cursosDefault = [
         obs: 'A plaforma possui software VLibras para auxiliar na acessibiliade',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 151,
+        id: 162,
         itinerario: 3,
         title: 'Videoaula - Da concepção à postagem',
         descricao: 'Passo-a-passo da criação de videoaula usando a linguagem audiovisual; Conceitos da aprendizagem multimídia para criação do conteúdo e conhecimento técnico para a produção, gravação e edição da videoaula',
@@ -2413,12 +2427,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 152,
+        id: 163,
         itinerario: 3,
         title: 'Wiki: produção colaborativa de conhecimento',
         descricao: 'O curso aborda a colaboração e aprendizgem colaborativa em ambientes virtuais de aprendizagens, com destaque para o potencial da wiki na educação',
@@ -2429,12 +2442,11 @@ export const cursosDefault = [
         obs: 'A plaforma possui software VLibras para auxiliar na acessibiliade',
         filter: {
             competencias: [8],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 153,
+        id: 164,
         itinerario: 3,
         title: 'Introdução a criação de sites',
         descricao: 'O curso permite a compreensão de como criar sites para que possa ser realizado o compartilhamento de informações',
@@ -2445,15 +2457,14 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [8],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 154,
+        id: 165,
         itinerario: 3,
         title: 'Introdução ao Google Classroom',
-        descricao: 'O curso traz possibilidades da utilização do Google Classroom por professores, desde como criar uma turma, convidar alunos, convidar professores parceiros, até criar atividades e atribuir notas.',
+        descricao: 'O curso traz possibilidades da utilização do Google Classroom por professores, desde como criar uma turma, convidar alunos, convidar professores parceiros, até criar atividades e atribuir notas. ',
         cargaHoraria: 10,
         instCert: 18,
         possuiAcessibilidade: 'Parcial',
@@ -2461,12 +2472,11 @@ export const cursosDefault = [
         obs: 'O curso muda o link anualmente de acordo com a criação da turma. Esta na seleção da Vanessa também',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 155,
+        id: 166,
         itinerario: 3,
         title: 'Fundamentos da Lei Geral de Proteção de Dados',
         descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes. Foi desenvolvido pelo Serpro - Serviço Federal de Processamento de Dados, em 2020, originalmente para a capacitação do corpo funcional. Agora é ofertado ao público em geral, por meio de parceria com a Escola Nacional de Administração Pública - Enap.',
@@ -2477,12 +2487,11 @@ export const cursosDefault = [
         obs: 'Esta na seleção no Paulo Evaristo também',
         filter: {
             competencias: [8],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 156,
+        id: 167,
         itinerario: 3,
         title: 'HTML: Introdução ao desenvolvimento de páginas web',
         descricao: 'Aprenda a criar páginas web do zero e conhecer como funciona a internet para o desenvolvimento de sites. Também criaremos as primeiras páginas. Vamos formatá-las, inserir links, listas, imagens, arquivos de áudio e vídeo. Conheça alguns comandos avançados e dicas especiais de compatibilidade e acessibilidade.',
@@ -2493,12 +2502,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 157,
+        id: 168,
         itinerario: 3,
         title: 'Design Instrucional e Tecnologia com Articulate StoryLine 360',
         descricao: 'Este curso foi elaborado para ajudar os alunos a compreender a estrutura teórica do design instrucional, a teoria, os métodos, a prática do design instrucional usando vídeo ou storyboards. Também aborda o uso do Articulate Storyline 360 como uma ferramenta de e-Learning para criar um produto completo de design instrucional',
@@ -2509,12 +2517,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [7],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 158,
+        id: 169,
         itinerario: 3,
         title: 'Estratégias Flexíveis em Tempos de Pandemia',
         descricao: 'Este curso tem como objetivo auxiliar profissionais da área de educação e demais profissionais a conhecerem as possibilidades oferecidas pelo Ensino Híbrido e como este pode estar presente em suas práticas pedagógicas em tempos de pandemia.',
@@ -2525,15 +2532,14 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta uma abordagem mais teórica. Os conteúdos se mostraram relevantes para o contexto atual e de pós pandemia.',
         filter: {
             competencias: [10],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 159,
+        id: 170,
         itinerario: 3,
         title: 'Gamificação no Moodle',
-        descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem.',
+        descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem. ',
         cargaHoraria: 50,
         instCert: 18,
         possuiAcessibilidade: 'SIM',
@@ -2541,12 +2547,11 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta um interessante enfoque em atividades para tornar as atividades mais dinâmicas com a utilização de metodologias gamificadas.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 160,
+        id: 171,
         itinerario: 3,
         title: 'Realidade Virtual como apoio ao ensino',
         descricao: 'O curso aberto de Realidade Virtual como apoio ao ensino é uma iniciativa do Instituto Federal do Espírito Santo (Ifes), por meio do Centro de Referência em Formação e em Educação a Distância (Cefor). O curso compreende em apresentar a história e evolução da tecnologia de realidade virtual, os diferentes tipos de equipamentos, como instalar, bem como mostrar algumas capacidades da tecnologia e possibilidades de seu uso em sala de aula.',
@@ -2557,12 +2562,11 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. ',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 161,
+        id: 172,
         itinerario: 3,
         title: 'Gamificação no Moodle',
         descricao: 'Neste curso, objetiva compartilhar algumas formas e ideias de gamificar seu curso no Moodle. Mostrar ferramentas, técnicas e aplicações. Vivenciar a gamificação na prática.',
@@ -2573,12 +2577,11 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. O curso apresenta um interessante enfoque em atividades para tornar as atividades mais dinâmicas com a utilização de metodologias gamificadas.',
         filter: {
             competencias: [12],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 162,
+        id: 173,
         itinerario: 3,
         title: 'Moodle Básico para Professores',
         descricao: 'O curso aborda elementos para o planejamento das aulas no MOODLE, inserção de conteúdos e atividades.',
@@ -2589,15 +2592,14 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral. Os conteúdos são voltados para a instrumentalização do educador. ',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 163,
+        id: 174,
         itinerario: 3,
         title: 'Formação Pedagógica para EaD',
-        descricao: 'O curso aborda Fundamentos da Educação a Distância; Tecnologias educacionais e a linguagem dialógica na Ead; O papel do professor mediador presencial e mediador a distância; O papel do professor conteudista (autor).',
+        descricao: 'O curso aborda Fundamentos da Educação a Distância; Tecnologias educacionais e a linguagem dialógica na Ead; O papel do professor mediador presencial e mediador a distância; O papel do professor conteudista (autor). ',
         cargaHoraria: 50,
         instCert: 19,
         possuiAcessibilidade: 'SIM',
@@ -2605,12 +2607,11 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 164,
+        id: 175,
         itinerario: 3,
         title: 'Moodle Intermediário para Professores - Aprendizagem Colaborativa',
         descricao: 'O curso tem como objetivo desenvolver atividades colaborativas eficazes no Moodle utilizando as atividades "wiki" e "glossário".',
@@ -2621,15 +2622,14 @@ export const cursosDefault = [
         obs: 'O link é para a página principal da Plataforma. O curso estará disponível a partir de março para o público em geral. A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise. Contato realizado com o Cláudio (21 987967329) Os conteúdos trazem uma interessante abordagem com metodologias de trabalho colaborativo.',
         filter: {
             competencias: [11],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 165,
+        id: 176,
         itinerario: 3,
         title: 'Moodle Básico para Professores',
-        descricao: 'O curso oferece conhecimentos básicos sobre criação de cursos online utilizando a plataforma Moodle, apresentando os principais recursos e atividades.',
+        descricao: 'O curso oferece conhecimentos básicos sobre criação de cursos online utilizando a plataforma Moodle, apresentando os principais recursos e atividades. ',
         cargaHoraria: 60,
         instCert: 4,
         possuiAcessibilidade: 'SIM',
@@ -2637,12 +2637,11 @@ export const cursosDefault = [
         obs: 'O link é para a página principal da Plataforma. O curso estará disponível a partir de março para o público em geral. A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise. Contato realizado com o Cláudio (21 987967329) .A instituição nos forneceu um código de aceso aos cursos que nos permitiu realizar a análise.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 166,
+        id: 177,
         itinerario: 3,
         title: 'Ambientes Digitais de Aprendizagem',
         descricao: 'O Curso tem por objetivo apresentar as principais características, funcionalidades e limitações existentes nos ambientes digitais de aprendizagem - AVA, contribuindo para a tomada de decisão tanto para a escolha do AVA mais adequado quanto para escolhas de desenho instrucional.',
@@ -2653,12 +2652,11 @@ export const cursosDefault = [
         obs: 'O curso traz uma perspectiva mais reflexiva que ajudará no processo decisório para a escolha do ambiente virtual de aprendizagem para as práticas pedagógicas remotas.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 167,
+        id: 178,
         itinerario: 3,
         title: 'Mooc de Lovelace: Pensamento Computacional com Scratch',
         descricao: 'O curso aborda os conteúdos sobre a Linguagem de Programação Scratch e os pilares do pensamento computacional que são: abstração; pensamento algorítmico; decomposição; e reconhecimento de padrões. A partir desses conhecimentos o docente poderá experimentar e desenvolver novos formatos e métodos pedagógicos para o ensino e estruturar as aulas de modo a que diferentes atividades digitais contribuam em conjunto para reforçar o objetivo de aprendizagem utilizando o Scratch.',
@@ -2669,15 +2667,14 @@ export const cursosDefault = [
         obs: 'O link é para o curso com Oferta semestral.  Os conteúdos trazem uma perspectiva de abordagem do pensamento computacional impostante para compreensão e desenvolvimento de atividades utilizando lógica computacional.',
         filter: {
             competencias: [9],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 168,
+        id: 179,
         itinerario: 3,
         title: 'Avaliação por Rubrica no Moodle',
-        descricao: 'O curso apresenta o método de avaliação por rubrica no Moodle e suas potencialidades para contribuir no desenvolvimento do processo de aprendizagem dos estudantes e de acompanhamento, avaliação e feedback pelos professores.',
+        descricao: 'O curso apresenta o método de avaliação por rubrica no Moodle e suas potencialidades para contribuir no desenvolvimento do processo de aprendizagem dos estudantes e de acompanhamento, avaliação e feedback pelos professores. ',
         cargaHoraria: 20,
         instCert: 18,
         possuiAcessibilidade: 'Parcial',
@@ -2685,15 +2682,14 @@ export const cursosDefault = [
         obs: 'O curso é trabalhado em perspectiva prática, com o uso de tecnologias e se mostra bastante aderente à trilha Avaliação, especificamente, aos trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 169,
+        id: 180,
         itinerario: 3,
         title: 'Avaliação em Processos de Aprendizagem e Modelos de Feedback',
-        descricao: 'O curso tem como objetivo fornecer aos servidores públicos aspectos conceituais sobre avaliação da aprendizagem, a partir das metodologias ativas, aplicando habilidades de coleta e análise de dados para a melhoria contínua de projetos educacionais.',
+        descricao: 'O curso tem como objetivo fornecer aos servidores públicos aspectos conceituais sobre avaliação da aprendizagem, a partir das metodologias ativas, aplicando habilidades de coleta e análise de dados para a melhoria contínua de projetos educacionais. ',
         cargaHoraria: 30,
         instCert: 5,
         possuiAcessibilidade: 'Parcial',
@@ -2701,15 +2697,14 @@ export const cursosDefault = [
         obs: 'O curso é mais teórico e conceitual e não foca apenas no mundo educacional, tratando também do mundo corporativo. Entretanto, traz vídeos e tutoriais sobre uso de ferramentas e tecnologias de apoio. Cobre os três trilhos da trilha, ainda que não em profundidade e nem em atividades práticas o suficiente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT.',
         filter: {
             competencias: [13, 14, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 170,
+        id: 181,
         itinerario: 3,
         title: 'Moodle para Mediadores',
-        descricao: 'O curso apresenta os procedimentos para a utilização da plataforma Moodle, construído a fim de identificar os procedimentos habilitados aos professores mediadores, bem como descrever funcionalidades disponibilizadas para a avaliação e o acompanhamento de aprendizagem dos estudantes.',
+        descricao: 'O curso apresenta os procedimentos para a utilização da plataforma Moodle, construído a fim de identificar os procedimentos habilitados aos professores mediadores, bem como descrever funcionalidades disponibilizadas para a avaliação e o acompanhamento de aprendizagem dos estudantes. ',
         cargaHoraria: 40,
         instCert: 9,
         possuiAcessibilidade: 'Sim',
@@ -2717,12 +2712,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo parcialmente os trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 171,
+        id: 182,
         itinerario: 3,
         title: 'Gamificação no Moodle',
         descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem.',
@@ -2733,12 +2727,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é tratada durante todo o curso, uma vez que a gamificação consiste em utilizar recursos de jogos que, no caso é no Moodle, ou seja, de forma tecnológica, permitindo ao professor criar atividades e formatos de avaliação alternativos. O curso é bem prático e aderente aos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 172,
+        id: 183,
         itinerario: 3,
         title: 'Gamificação no Moodle - Turma 2022A',
         descricao: 'O curso trata de conceitos de Gamificação; Gamificação na Prática; Gamificando o Curso no Moodle.',
@@ -2749,12 +2742,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é tratada durante todo o curso, uma vez que a gamificação consiste em utilizar recursos de jogos que, no caso é no Moodle, ou seja, de forma tecnológica, permitindo ao professor criar atividades e formatos de avaliação alternativos. O curso utiliza em sua maioria materiais textuais, mas aborda o uso de tecnologias de forma prática, no caso em como fazer isso na avaliação. Assim, está aderente aos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 173,
+        id: 184,
         itinerario: 3,
         title: 'Moodle para Educadores',
         descricao: 'O curso proporciona o conhecimento básico necessário para a edição de salas virtuais para cursos ou disciplinas na modalidade à distância ou para apoio à modalidade presencial. Apresenta a parte instrucional que orienta à produção da sala virtual com inserção de recursos e atividades e também busca levar o educador a uma reflexão sobre o potencial construcionista do Moodle como suas potencialidades para a realização de aulas com atividades colaborativas, bem como as possibilidades de acompanhamento e avaliação da aprendizagem.',
@@ -2765,15 +2757,14 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 174,
+        id: 185,
         itinerario: 3,
         title: 'Introdução ao Google Classroom',
-        descricao: 'O curso traz possibilidades da utilização do Google Classroom por professores, desde como criar uma turma, convidar alunos, convidar professores parceiros, até criar atividades e atribuir notas.',
+        descricao: 'O curso traz possibilidades da utilização do Google Classroom por professores, desde como criar uma turma, convidar alunos, convidar professores parceiros, até criar atividades e atribuir notas. ',
         cargaHoraria: 10,
         instCert: 18,
         possuiAcessibilidade: 'Parcial',
@@ -2781,12 +2772,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas. Uma característica interessante é que é um curso sobre a plataforma Google Classroom, sendo que maioria dos cursos identificados é da plataforma Moodle. Ainda que o curso não trabalhe os itens em profundidade, é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. O link é válido por 1ano, pois a cada ano novos links são gerados.',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 175,
+        id: 186,
         itinerario: 3,
         title: 'Moodle para Docentes',
         descricao: 'O curso apresenta os procedimentos para a utilização da plataforma Moodle: planejamento, criação e configuração de um curso ou disciplina. Aborda os principais recursos desta plataforma, e também, descreve as principais atividades que o Moodle oferece, como avaliação e acompanhamento da aprendizagem dos estudantes.',
@@ -2797,12 +2787,11 @@ export const cursosDefault = [
         obs: 'O curso não é específico sobre avaliação, mas esta é um de seus temas e trabalha o tema de forma prática, em particular os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. ',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 176,
+        id: 187,
         itinerario: 3,
         title: 'Docência em EaD: Planejando o uso de instrumentos e critérios nas avaliações on-line',
         descricao: 'O curso trata de instrumentos de avaliação on-line; Critérios de avaliação; Avaliação da aprendizagem.',
@@ -2813,12 +2802,11 @@ export const cursosDefault = [
         obs: 'O curso é bastante teórico, focado em dois ebooks, mas em determinados momentos aborda sobre o uso de tecnologias como apoio aos processos avaliativos. Desta forma é parcialmente aderente à trilha, especialmente aos trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. ',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 177,
+        id: 188,
         itinerario: 3,
         title: 'Questionários Moodle',
         descricao: 'O curso trata sobre criação de questionários e ferramentas de auxílio à avaliação final.',
@@ -2829,15 +2817,14 @@ export const cursosDefault = [
         obs: 'O curso foca em um tipo específico de avaliação com a utilização de tecnologias, que no caso é o questionário. Trata especialmente dos trilhos 1 e 3, mas também cobre parte do trilho 2, no módulo Avaliação de questionários, ainda que todos trilhos sejam cobertos apenas parcialmente, especialmente o 2. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. ',
         filter: {
             competencias: [13, 14, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 178,
+        id: 189,
         itinerario: 3,
         title: 'Moodle em Ação: Atividades e Recursos',
-        descricao: 'O curso tem o objetivo de contribuir para a utilização do Moodle em práticas pedagógicas, seja na Educação Básica, ou no Ensino Superior. É composto por vivências de atividades no ambiente virtual, experimentações, materiais de apoio e avaliações.',
+        descricao: 'O curso tem o objetivo de contribuir para a utilização do Moodle em práticas pedagógicas, seja na Educação Básica, ou no Ensino Superior. É composto por vivências de atividades no ambiente virtual, experimentações, materiais de apoio e avaliações. ',
         cargaHoraria: 30,
         instCert: 23,
         possuiAcessibilidade: 'Não',
@@ -2845,15 +2832,14 @@ export const cursosDefault = [
         obs: 'O curso não é específico de avaliação, mas esta é um dos temas abordados, com a utilização de tecnologias: questionário, fórum, wiki etc. Trata especialmente dos trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, não é da Rede EPCT. ',
         filter: {
             competencias: [13, 15],
-            temas: [],
-            subtemas: [],
+            subtemas: [357],
         }
     },
     {
-        id: 179,
+        id: 190,
         itinerario: 3,
         title: 'Educação Especial: histórico, políticas e práticas',
-        descricao: 'O curso busca proporcionar um conhecimento introdutório acerca dos aspectos históricos, políticos e práticos da Educação Especial. Do mesmo modo, tem a intenção de desconstruir alguns aspectos relacionados a preconceitos a pessoas com deficiencias , transtorno do espectro autista, altas habilidades/superdotação para tentar reconhecer as suas diferenças e suas potencialidades.',
+        descricao: 'O curso busca proporcionar um conhecimento introdutório acerca dos aspectos históricos, políticos e práticos da Educação Especial. Do mesmo modo, tem a intenção de desconstruir alguns aspectos relacionados a preconceitos a pessoas com deficiencias , transtorno do espectro autista, altas habilidades/superdotação para tentar reconhecer as suas diferenças e suas potencialidades. ',
         cargaHoraria: 30,
         instCert: 10,
         possuiAcessibilidade: 'parcial',
@@ -2861,15 +2847,14 @@ export const cursosDefault = [
         obs: 'Apesar do cursos não ter preenchido 100% todos os critérios para a Elevada Aderência, o mesmo se constitui como apto para indicação como material recomendável para composição da trilha formativa do Plafor. O curso tem aderência aos objetivos deste projeto, pois aborda em amplo espectro os grandes temas da educação inclusiva. Naturalmente, o curso é um prelúdio ao tema, não chegando perto de exaurir a temática tão diversa e complexa, mas pode servir de uma boa introdução no sentido de preparar melhor ao Educador quanto a compreensão do histórico da Educação Inclusiva e as características das pessoas com necessidades educacionais específicas.',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 180,
+        id: 191,
         itinerario: 3,
         title: 'Comunicação para TODOS: recursos e ferramentas de acessibilidade',
-        descricao: ' O curso tem o objetivo de promover a compreensão dos conceitos e princípios básicos sobre Acessibilidade na Comunicação, assim como problematizar a (DE)ficiência com foco na eficiência de cada indivíduo e do coletivo na interação por meio de recursos como: a Audiodescrição para pessoas com deficiência visual; a Língua Brasileira de Sinais (Libras) e as Legendas para Surdos e Ensurdecidos (LSE). Pretende-se desencadear a reflexão a partir da fala de convidados, textos e discussões sobre o público-alvo e especificidades de cada recurso e, mais ainda, como produtos concebidos acessíveis podem beneficiar a todos, incluindo as pessoas com deficiência. Para tanto, o curso conta com recursos e ferramentas de acessibilidade na comunicação como a audiodescrição para as pessoas com deficiência visual, janela de Libras e legendas para surdos e ensurdecidos, mas ressaltamos que estes recursos auxiliam a todos, promovendo novas formas de experiência e mesmo sensibilização.',
+        descricao: ' O curso tem o objetivo de promover a compreensão dos conceitos e princípios básicos sobre Acessibilidade na Comunicação, assim como problematizar a (DE)ficiência com foco na eficiência de cada indivíduo e do coletivo na interação por meio de recursos como: a Audiodescrição para pessoas com deficiência visual; a Língua Brasileira de Sinais (Libras) e as Legendas para Surdos e Ensurdecidos (LSE). Pretende-se desencadear a reflexão a partir da fala de convidados, textos e discussões sobre o público-alvo e especificidades de cada recurso e, mais ainda, como produtos concebidos acessíveis podem beneficiar a todos, incluindo as pessoas com deficiência. Para tanto, o curso conta com recursos e ferramentas de acessibilidade na comunicação como a audiodescrição para as pessoas com deficiência visual, janela de Libras e legendas para surdos e ensurdecidos, mas ressaltamos que estes recursos auxiliam a todos, promovendo novas formas de experiência e mesmo sensibilização. ',
         cargaHoraria: 20,
         instCert: 24,
         possuiAcessibilidade: 'sim',
@@ -2877,12 +2862,11 @@ export const cursosDefault = [
         obs: 'O curso tem uma abordagem bastante pertinente e atual a trilha em tela, devendo compor a lista de possíveis cursos que constituirão a formação do Plafor. Além disso, possui um bom acervo de materiais curados e/ou autênticos (produzidos pela própria universidade) bastante úteis e adaptativos a formação desejada.',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 181,
+        id: 192,
         itinerario: 3,
         title: 'Acessibilidade e Tecnologia',
         descricao: 'O curso tem como objetivos apresentar os conceitos relacionados à inclusão e acessibilidade, destacar os tipos de acessibilidade e a tecnologia assistiva, bem como apresentar algumas tecnologias para a produção de materiais digitais acessíveis.',
@@ -2893,15 +2877,14 @@ export const cursosDefault = [
         obs: 'O Curso tem uma temática importante e aderente a trilha, bons textos, mas a quantidade de videos, especialmente os autorais pela instituição ofertante, são poucos. Uma vez sendo utilizado, precisará de outros cursos dentro dessa mesma trilha que complemente melhor os seus conteúdos. Apesar de não ser um curso com uma quantidade de materiais mais robusta ou enriquecida em quantidade, há muita qualidade nos materiais disponibilizados é muito boa e, por isso, merece a inclusão nas trilhas.',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 182,
+        id: 193,
         itinerario: 3,
         title: 'Gamificação no Moodle',
-        descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem.',
+        descricao: 'O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem. ',
         cargaHoraria: 50,
         instCert: 26,
         possuiAcessibilidade: 'parcial',
@@ -2909,12 +2892,11 @@ export const cursosDefault = [
         obs: 'A abordagem de Gamificação trazida no curso fortalece o envolvimento ativo e cria condições para a customização do ensino, nesse sentido o curso agrega muito valor a trilha da Capacitação dos Aprendentes, visto abordar e ensinar sobre a implementação prática e assertiva dos princípios, características e procedimentos de operacionalização da gamificação nos ecossistemas de aprendizagem.',
         filter: {
             competencias: [17, 18],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 183,
+        id: 194,
         itinerario: 3,
         title: 'Metodologias Ativas: Educação Inovadora',
         descricao: 'Este curso tem como objetivo auxiliar profissionais e futuros profissionais da área de educação a conhecerem as possibilidades oferecidas pela metodologias ativas de aprendizagem com foco em uma educação inovadora para transformação da educação.',
@@ -2925,15 +2907,14 @@ export const cursosDefault = [
         obs: 'O curso apresenta um bom conteúdo e uma razoável diversidade de mídias, sua temática é bastante aderente a presente trilha e o mesmo agrega valor ou enriquece a aprendizagem nesta respectiva trilha.',
         filter: {
             competencias: [17, 18],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 184,
+        id: 195,
         itinerario: 3,
         title: 'Tecnologia Assistiva no Contexto Educacional',
-        descricao: 'A Tecnologia Assistiva é uma área ampla e multidisciplinar e, assim como em outras esferas sociais, na educação ela também faz toda a diferença. Neste curso, buscamos apresentar conceitos, recursos e serviços aplicados ao contexto educacional. E, certamente, essa conversa não se esgota aqui. Existe uma gama enorme de recursos e estratégias. Apresentamos aqui algumas delas, mas é na prática, nas trocas com os estudantes com deficiência e com outros profissionais que acabamos descobrindo novas possibilidades. Além disso, a tecnologia muda rapidamente e precisamos estar sempre em busca do que está surgindo. Por fim, buscamos enfatizar o uso de recursos gratuitos ou de baixo custo. Apresentamos, ao longo do curso, possibilidades de confecção de baixo custo de alguns recursos utilizando materiais e métodos diversos.',
+        descricao: 'A Tecnologia Assistiva é uma área ampla e multidisciplinar e, assim como em outras esferas sociais, na educação ela também faz toda a diferença. Neste curso, buscamos apresentar conceitos, recursos e serviços aplicados ao contexto educacional. E, certamente, essa conversa não se esgota aqui. Existe uma gama enorme de recursos e estratégias. Apresentamos aqui algumas delas, mas é na prática, nas trocas com os estudantes com deficiência e com outros profissionais que acabamos descobrindo novas possibilidades. Além disso, a tecnologia muda rapidamente e precisamos estar sempre em busca do que está surgindo. Por fim, buscamos enfatizar o uso de recursos gratuitos ou de baixo custo. Apresentamos, ao longo do curso, possibilidades de confecção de baixo custo de alguns recursos utilizando materiais e métodos diversos. ',
         cargaHoraria: 60,
         instCert: 27,
         possuiAcessibilidade: 'parcial',
@@ -2941,12 +2922,11 @@ export const cursosDefault = [
         obs: 'ATENÇÃO -  O Curso só fica disponível até 31/07/2022. A temática do curso é extremamente pertinente, sendo sua ementa bem construída. O curso está em um nível minimamente viável para utilização, não sendo uma das melhores opções por deter poucas videoaulas. Contudo, mesmo assim, pode contribuir com a formação do docente e ser recomendável quando combinado com outros cursos complementares. ',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 185,
+        id: 196,
         itinerario: 3,
         title: 'Educador Maker: Aprendizagem Baseada em Projetos',
         descricao: ' Este curso tem como objetivo levar educadores refletirem sobre o uso da Aprendizagem Baseada em Projetos em espaços Maker para atender as demandas do século XXI.',
@@ -2957,12 +2937,11 @@ export const cursosDefault = [
         obs: 'Por ser um curso que introjeta a cultura maker no labor docente, isso se revela como bastante promissor e aderente a trilha capacitação dos aprendentes, tendo em vista que as metodologias ativas e a cultura maker são muito indicadas para promover o envolvimento ativo dos aprendentes. Por isso o curso é bastante recomendável.',
         filter: {
             competencias: [17, 18],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 186,
+        id: 197,
         itinerario: 3,
         title: 'Cultura Surda',
         descricao: 'O curso trata da História da comunidade surda, cultura surda, identidades surdas e a língua de sinais.',
@@ -2973,28 +2952,26 @@ export const cursosDefault = [
         obs: 'ATENÇÃO -  O Curso só fica disponível até 31/07/2022 Temos aqui um curso cuja temática é bastante cara e pertinente a esta trilha. Certamente o curso poderia ser mais enriquecido com videos e materiais para a leitura, contudo traz um conteúdo básico, elementar que pode colaborar com a formação docente. Recomenda-se a indicação deste curso, desde que acompanhada a recomendação para realização concomitante de outros cursos complementares de conteúdo. ',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 187,
+        id: 198,
         itinerario: 3,
         title: 'Acessibilidade em Processos Seletivos Discentes',
         descricao: 'Formação oferecida gratuitamente pelo Instituto Federal do Espírito Santo com o objetivo de promover o conhecimento necessário assim como o compartilhamento de saberes e experiências profissionais tendo em vista os direitos das pessoas com deficiência e a garantia de sua participação em conformidade com o paradigma da inclusão nos processos seletivos discentes.',
         cargaHoraria: 60,
         instCert: 29,
-        possuiAcessibilidade: 'Inderteminado',
+        possuiAcessibilidade: 'Não informado',
         link: 'https://mooc.cefor.ifes.edu.br/moodle/course/view.php?id=58',
         obs: 'Curso bem estruturado, muito diversificado em informações. Poderia ter mais videos, de fato. Contudo, é altamente recomendável para a trilha.',
         filter: {
             competencias: [16, 17],
-            temas: [],
-            subtemas: [],
+            subtemas: [361],
         }
     },
     {
-        id: 188,
+        id: 199,
         itinerario: 3,
         title: 'Design Thinking Aplicado à Educação',
         descricao: 'Este curso é uma ótima oportunidade para você conhecer o papel do Design Thinking! O curso Design Thinking aplicado à educação foi desenvolvido em 2021 pela Enap, o qual tem como objetivo apresentar os conceitos, características principais, exemplos da abordagem do Design Thinking (DT), técnicas e ferramentas que poderão ser utilizadas na aplicação da abordagem do DT na educação.',
@@ -3005,12 +2982,11 @@ export const cursosDefault = [
         obs: 'O curso apresenta a metodologia do Design Thinking que é bastante indicada para potencializar a aprendizagem e promover o engahamento ativo. ',
         filter: {
             competencias: [18],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 189,
+        id: 200,
         itinerario: 3,
         title: 'A arte de falar em público',
         descricao: 'Neste curso, você vai conhecer um pouco sobre a arte de falar em público. Irá aprender técnicas para se comunicar bem e preparar-se para falar em público.',
@@ -3021,12 +2997,11 @@ export const cursosDefault = [
         obs: 'Oferta semestral com atualização do link para o curso a cada semestre ou ao atingir um número grande de inscritos.',
         filter: {
             competencias: [20],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 190,
+        id: 201,
         itinerario: 3,
         title: 'Comunicação Oral e Escrita',
         descricao: 'O objetivo geral desse curso é proporcionar melhorias, pessoais e profissionais, a partir de conhecimentos específicos sobre Comunicação Oral e Escrita. A Ementa do curso aborda: Conceitos gerais de comunicação oral e escrita; História da Comunicação; Redação Comercial e Dissertativa; Gramática: Regências e Concordâncias; Técnicas de Oratória; Comunicação Não-Violenta; Práticas e Exercícios Avaliativos.',
@@ -3037,12 +3012,11 @@ export const cursosDefault = [
         obs: 'Esse curso foi indicado no Padlet para os Técnicos-Administrativos em Educação',
         filter: {
             competencias: [20],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 191,
+        id: 202,
         itinerario: 3,
         title: 'Acessibilidade na Comunicação',
         descricao: 'Neste curso, você irá compreender o conceito biopsicossocial e as terminologias ligadas às pessoas com deficiência. Entrará em contato com a legislação, compreenderá como utilizar recursos e técnicas que melhoram a acessibilidade, além de ver exemplos práticos de comunicação acessível, tanto em eventos presenciais como em conteúdo web e impresso. Inscreva-se agora e tenha oportunidade de compreender como a comunicação pode ser mais acessível e democrática para todos!',
@@ -3052,13 +3026,12 @@ export const cursosDefault = [
         link: 'https://escolavirtual.gov.br/curso/615',
         obs: '',
         filter: {
-            competencias: [16, 20],
-            temas: [],
-            subtemas: [],
+            competencias: [16, 20, 56],
+            subtemas: [358],
         }
     },
     {
-        id: 192,
+        id: 203,
         itinerario: 3,
         title: 'Redação científica com tecnologia',
         descricao: 'Neste curso, você vai conhecer um pouco sobre redação acadêmica, competência informacional e ferramentas tecnológicas para a pesquisa científica. Irá aprender técnicas de como refinar sua pesquisa em bases de dados, escrever a introdução, o referencial teórico, a metodologia, a conclusão e o resumo do texto científica e como usar softwares na metodologia do trabalho acadêmico.',
@@ -3068,29 +3041,27 @@ export const cursosDefault = [
         link: 'https://mooc.ifsp.edu.br/course/redacao-cientifica-com-tecnologia-laletec/intro',
         obs: 'Esse curso possui a sua versão em ambiente Moodle e está em processo de homologação na escola virtual da ENAP que permitirá o acesso contínuo.',
         filter: {
-            competencias: [19, 20, 21],
-            temas: [],
-            subtemas: [],
+            competencias: [19, 20, 21, 56],
+            subtemas: [358],
         }
     },
     {
-        id: 193,
+        id: 204,
         itinerario: 3,
         title: 'Desenvolvendo competências em informações acadêmicas e profissionais',
-        descricao: 'A busca, avaliação e uso estratégico, ético e responsável da informação são requisitos fundamentais a indivíduos que estão percorrendo o caminho acadêmico ou se preparando para o mercado de trabalho. Importante, nesse contexto, o desenvolvimento de habilidades no trato da informação, disponível em meios impressos e digitais, de forma a estarem mais capacitados para enfrentar os desafios do século XXI.',
+        descricao: 'A busca, avaliação e uso estratégico, ético e responsável da informação são requisitos fundamentais a indivíduos que estão percorrendo o caminho acadêmico ou se preparando para o mercado de trabalho. Importante, nesse contexto, o desenvolvimento de habilidades no trato da informação, disponível em meios impressos e digitais, de forma a estarem mais capacitados para enfrentar os desafios do século XXI. ',
         cargaHoraria: 30,
         instCert: 18,
         possuiAcessibilidade: 'Não',
         link: 'https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=136',
         obs: 'O link é válido por 6 meses',
         filter: {
-            competencias: [19, 20],
-            temas: [],
-            subtemas: [],
+            competencias: [19, 20, 56],
+            subtemas: [358],
         }
     },
     {
-        id: 194,
+        id: 205,
         itinerario: 3,
         title: 'Educação para boas escolhas on-line',
         descricao: 'Este curso foi idealizado pela SaferNet Brasil para facilitar e ampliar a incorporação dessa temática nas salas de aula e nos projetos políticos pedagógicos. O curso é dedicado aos educadores e profissionais interessados em promover ações educativas de sensibilização sobre cidadania digital. Apesar de criado para educadores, o material permite uma aproximação ao tema para diferentes áreas de atuação. A proposta é que você se familiarize com o contexto e, principalmente, utilize as sugestões de atividades e recursos para criar seu plano de ação para as intervenções que fará em torno do tema em sua instituição, em sua família e em sua própria vida digital abordando também sobre bem-estar e saúde mental na internet.',
@@ -3101,12 +3072,11 @@ export const cursosDefault = [
         obs: 'O link é válido por 3 meses',
         filter: {
             competencias: [19, 22],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 195,
+        id: 206,
         itinerario: 3,
         title: 'Gestão de Projetos Educacionais',
         descricao: 'Diante da crescente demanda das organizações públicas por engenharias didáticas inovadoras e fluidas, este curso apresenta conceitos sobre o planejamento e a gestão de projetos educacionais corporativos com uso de metodologias ágeis e colaborativas. Para isso compreenda os elementos básicos dos projetos e uma possível estruturação a partir da sua relação com o design instrucional, entre outros.',
@@ -3117,12 +3087,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [23],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 196,
+        id: 207,
         itinerario: 3,
         title: 'Design Thinking Aplicado à Educação',
         descricao: 'Este curso é uma ótima oportunidade para você conhecer o papel do Design Thinking! O curso Design Thinking aplicado à educação foi desenvolvido em 2021 pela Enap, o qual tem como objetivo apresentar os conceitos, características principais, exemplos da abordagem do Design Thinking (DT), técnicas e ferramentas que poderão ser utilizadas na aplicação da abordagem do DT na educação.',
@@ -3133,12 +3102,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [23],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 197,
+        id: 208,
         itinerario: 3,
         title: 'Inovações em Tecnologia Educacional',
         descricao: 'O curso apresenta conceitos, processos e experiências referentes à inovação, com foco na concepção, no desenvolvimento, na execução e na avaliação de soluções de capacitação para desenvolvimento de competências, de modo a fomentar a cultura e os ecossistemas de inovação, com vistas à criação de valor público.',
@@ -3149,12 +3117,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [23],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 198,
+        id: 209,
         itinerario: 3,
         title: 'Fundamentos da Lei Geral de Proteção de Dados',
         descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes. Foi desenvolvido pelo Serpro - Serviço Federal de Processamento de Dados, em 2020, originalmente para a capacitação do corpo funcional. Agora é ofertado ao público em geral, por meio de parceria com a Escola Nacional de Administração Pública - Enap.',
@@ -3165,12 +3132,11 @@ export const cursosDefault = [
         obs: 'Esse curso foi indicado no Padlet para os Gestores',
         filter: {
             competencias: [22],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 199,
+        id: 210,
         itinerario: 3,
         title: 'Introdução à Lei Brasileira de Proteção de Dados Pessoais',
         descricao: 'O curso apresenta um panorama sobre a nova legislação brasileira de proteção de dados pessoais (Lei 13.709/18), compreendendo os temas mais importantes para a sua implementação, como: fundamentos e campo de aplicação, princípios e direitos do titular, responsabilidades dos agentes, aspectos internacionais, segurança e a Autoridade Nacional de Proteção de Dados, entre outros. O objetivo do curso é capacitar as pessoas para entenderem, de forma rápida e acessível, o funcionamento e diretrizes básicas expostas na nova lei geral de proteção de dados do Brasil.',
@@ -3181,12 +3147,11 @@ export const cursosDefault = [
         obs: 'Esse curso foi indicado no Padlet para os Técnicos-Administrativos em Educação e Gestores',
         filter: {
             competencias: [22],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 200,
+        id: 211,
         itinerario: 3,
         title: 'Noções Gerais de Direitos Autorais',
         descricao: 'Com o advento da internet, o compartilhamento de materiais aumentou significativamente, causando algumas dúvidas e incertezas em relação à autoria, uso e possibilidade de modificações desses materiais. Nesse curso, você conhecerá algumas questões gerais sobre direitos autorias no Brasil e aprenderá a relacionar as recomendações e determinações legais às situações reais de uso e de compartilhamento de materiais produzidos por terceiros.',
@@ -3197,12 +3162,11 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [21],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 201,
+        id: 212,
         itinerario: 3,
         title: 'Ferramentas Digitais para Curadoria Educacional',
         descricao: 'este curso tem como proposta a apresentação sobre os conceitos básicos sobre Curadoria Educacional e apresentar seis ferramentas digitais gratuitas disponíveis na web utilizadas para prática da curadoria',
@@ -3213,12 +3177,11 @@ export const cursosDefault = [
         obs: 'O link é válido por 1 ano (faltando 330 dias - contando a partir de 04/02/2021)',
         filter: {
             competencias: [19],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 202,
+        id: 213,
         itinerario: 3,
         title: 'Temos que dar aulas remotas... E agora?',
         descricao: 'As aulas presenciais estão suspensas e temos que dar aulas online. São aulas planejadas para ser presenciais e que precisam ser remotas. Como manter o uso de metodologias ativas nesse formato?Como oferecer cursos inovadores? Como garantir que os objetivos serão alcançados? Neste curso buscamos discutir alguns conceitos, ferramentas e dicas para que você encontre suas próprias respostas.',
@@ -3229,348 +3192,116 @@ export const cursosDefault = [
         obs: '',
         filter: {
             competencias: [21],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 203,
+        id: 214,
         itinerario: 3,
         title: 'Primeiros passos para uso de Linguagem Simples',
         descricao: 'Desenvolvido pela Enap, em parceria não onerosa com a jornalista e pesquisadora Heloísa Fischer, este curso tem o intuito de apresentar sete diretrizes para a produção de textos informativos com linguagem simples, que sejam mais fáceis de serem lidos e compreendidos pela maior parte das pessoas. A linguagem simples apresenta-se, ao mesmo tempo, como uma causa social e uma técnica de comunicação. Quer saber como aplicar a linguagem simples? Inscreva-se.',
-        cargaHoraria: 8,
+        cargaHoraria: 80,
         instCert: 30,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/315',
         obs: '',
         filter: {
             competencias: [20],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
-        id: 204,
+        id: 215,
         itinerario: 3,
         title: 'Uso educacional do Canva',
         descricao: 'O curso aberto de Uso educacional do Canva é uma ação do Instituto Federal do Espírito Santo (IFES) por meio de seu Centro de Referência em Formação e em Educação a Distância (CEFOR), que tem como proposta a orientação de professores e quaisquer outros interessados em criar designs, logos, panfletos, dentre outros recursos, que irão potencializar seu trabalho de forma rápida e eficiente.',
-        cargaHoraria: 6,
+        cargaHoraria: 60,
         instCert: 18,
         possuiAcessibilidade: 'Não',
         link: 'https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=146',
         obs: 'O link é válido por 1 ano (faltando 330 dias - contando a partir de 04/02/2021)',
         filter: {
             competencias: [21],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 205,
-        itinerario: 4,
-        title: 'Noções de educação inclusiva',
-        descricao: 'Inderteminado',
-        cargaHoraria: 20,
-        instCert: 9,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Não há curso associados no Padlet',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 206,
-        itinerario: 4,
-        title: 'Controles Institucional e Social dos Gastos Públicos',
-        descricao: 'O curso apresenta noções de controle institucional e social no Brasil para uma compreensão básica sobre a importância da qualidade do gasto, do uso eficiente dos recursos públicos e da participação social.',
-        cargaHoraria: 30,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/12/',
-        obs: '',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 207,
-        itinerario: 4,
-        title: 'Educação em Direitos Humanos',
-        descricao: 'O curso busca contribuir para a conformação de uma visão abrangente acerca desafios e alternativas à Educação em Direitos Humanos, constituindo-se em subsídios para a prática e vivência de ações educativas em Direitos Humanos no âmbito de atuação dos participantes.',
-        cargaHoraria: 30,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/129/',
-        obs: '',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 208,
-        itinerario: 4,
-        title: 'Trilha para orçamento',
-        descricao: 'Inderteminado',
-        cargaHoraria: 80,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Trilha desenvolvida pelo IFRN',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 209,
-        itinerario: 4,
-        title: 'Gestão Estratégica com BSC',
-        descricao: 'Esse curso é uma boa oportunidade para conhecer alguns elementos teórico-conceituais e instrumentais de planejamento estratégico e de gestão. A compreensão e a utilização de conhecimentos relacionados ao planejamento estratégico e ao método Balanced Scorecard (BSC) possibilitam a atuação em ambientes dinâmicos que exigem percepção de contexto e proatividade.',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/103/',
-        obs: '',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 210,
-        itinerario: 4,
-        title: 'Captação de Recursos',
-        descricao: 'Inderteminado',
-        cargaHoraria: 15,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Não há curso relacionado no padlet',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 211,
-        itinerario: 4,
-        title: 'Gestão de projetos',
-        descricao: 'A capacitação tem como referência o Guia PMBOK 5° Edição, publicado pelo instituto PMI - Project Management Institute (2013), que reúne as melhores práticas na área de gerenciamento de projetos, com base em experiências de empresas de diferentes segmentos, públicas ou privadas, bem como apresentar outros métodos elaborados pela Administração Pública.',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/104/',
-        obs: '',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 212,
-        itinerario: 4,
-        title: 'Análise e melhoria de Processos',
-        descricao: 'O curso Análise e Melhoria de Processos foi transposto da modalidade presencial para a autoinstrucional em 2021 pela Enap, com o intuito de oferecer aos participantes apresenta uma visão geral e abrangente da gestão da qualidade no serviço público, aprofundando um de seus aspectos, a análise e melhoria de processos.',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/424/',
-        obs: '',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 213,
-        itinerario: 4,
-        title: 'Governança',
-        descricao: 'Em tempo de economia digital, onde o volume de dados produzidos é imenso, as instituições precisam lidar com este cenário a fim de disponibilizar a informação correta em tempo hábil para a tomada de decisões. A boa governança de dados é o caminho para superar este desafio! Inscreva-se e conheça os fundamentos relacionados à importância da governança de dados especialmente na Administração Pública Federal.',
-        cargaHoraria: 30,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/270/',
-        obs: '',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 214,
-        itinerario: 4,
-        title: 'Gestão de Riscos em Processos de Trabalho',
-        descricao: 'O que você sabe sobre gestão de riscos em processos de trabalho? Este curso apresenta os principais conceitos sobre o tema, contribuindo para disseminar conhecimento e medidas de gerenciamento de riscos institucionais. A partir da experiência da Receita Federal, você poderá reconhecer como a gestão de riscos pode proporcionar a contínua melhoria dos processos de trabalho. Abordagem mais genérica, na trilha de orçamento tb tem Riscos',
-        cargaHoraria: 20,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/604/',
-        obs: '',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 215,
-        itinerario: 4,
-        title: 'Introdução a LGDP',
-        descricao: 'O curso apresenta um panorama sobre a nova legislação brasileira de proteção de dados pessoais (Lei 13.709/18), compreendendo os temas mais importantes para a sua implementação, como: fundamentos e campo de aplicação, princípios e direitos do titular, responsabilidades dos agentes, aspectos internacionais, segurança e a Autoridade Nacional de Proteção de Dados, entre outros. O objetivo do curso é capacitar as pessoas para entenderem, de forma rápida e acessível, o funcionamento e diretrizes básicas expostas na nova lei geral de proteção de dados do Brasil.',
-        cargaHoraria: 10,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/153/',
-        obs: '',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            subtemas: [358],
         }
     },
     {
         id: 216,
         itinerario: 4,
-        title: 'Fundamentos da Lei Geral de Proteção de Dados',
-        descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes. Foi desenvolvido pelo Serpro - Serviço Federal de Processamento de Dados, em 2020, originalmente para a capacitação do corpo funcional. Agora é ofertado ao público em geral, por meio de parceria com a Escola Nacional de Administração Pública - Enap.',
-        cargaHoraria: 15,
+        title: 'Comunicação Não Violenta ',
+        descricao: 'Comunique com empatia e melhore o relacionamento interpessoal no seu ambiente de trabalho ',
+        cargaHoraria: 14,
         instCert: 5,
         possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/603/',
-        obs: '',
+        link: '',
+        obs: 'Sem turmas - verificar ENAP',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [32, 47, 56],
+            subtemas: [273],
         }
     },
     {
         id: 217,
         itinerario: 4,
-        title: 'Controles na Administração Pública',
-        descricao: 'Ao final deste curso, espera-se que o participante seja capaz de aplicar princípios do controle no contexto da gestão pública. O curso abordará os temas Prestação de Contas, Controles na Administração Pública, Controle Externo, Controle Interno e Controle Social.',
-        cargaHoraria: 30,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/278/',
-        obs: '',
+        title: 'Ferramentas de comunicação nas diversas plataformas',
+        descricao: 'Sem descrição',
+        cargaHoraria: 0,
+        instCert: 36,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: 'Não há cursos relacionado no Padlet',
         filter: {
             competencias: [1],
-            temas: [],
-            subtemas: [],
+            subtemas: [1],
         }
     },
     {
         id: 218,
         itinerario: 4,
-        title: 'Planejamento e Gestão Orçamentária e Financeira',
-        descricao: 'O Curso de Planejamento e Gestão Orçamentária e Financeira é aberto e autoinstrucional. Público-alvo: servidores da Rede Federal de Educação Profissional e Tecnológica que estejam ocupando cargos de gestão em suas instituições. Após o término do curso você será capaz de: compreender o planejamento e a gestão orçamentária e financeira sob o ponto de vista dos aspectos práticos, qualificando sua rotina de trabalho.',
-        cargaHoraria: 64,
-        instCert: 36,
-        possuiAcessibilidade: 'Não',
-        link: 'https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=14',
-        obs: 'Curso em desenvolvimento',
-        filter: {
-            competencias: [27, 28],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 219,
-        itinerario: 4,
-        title: 'Comunicação Não Violenta',
-        descricao: 'Comunique com empatia e melhore o relacionamento interpessoal no seu ambiente de trabalho',
-        cargaHoraria: 14,
-        instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'Não especificado',
-        obs: 'Sem turmas - verificar ENAP',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 220,
-        itinerario: 4,
-        title: 'Ferramentas de comunicação nas diversas plataformas',
-        descricao: 'Inderteminado',
-        cargaHoraria: 0,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Não há cursos relacionado no Padlet',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 221,
-        itinerario: 4,
-        title: 'Ferramentas Tecnológicas Miro',
+        title: 'Ferramentas Tecnológicas Miro ',
         descricao: 'Quer conhecer as principais configurações, funcionalidades e as boas práticas relacionadas à ferramenta interativa Miro? Essa plataforma reúne diversos recursos de colaboração capazes de tornar reuniões de equipes, workshops e aulas online mais atraentes e produtivas.',
-        cargaHoraria: 5,
+        cargaHoraria: 50,
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://suap.enap.gov.br/portaldoaluno/curso/1486/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [59],
+            subtemas: [235],
         }
     },
     {
-        id: 222,
+        id: 219,
         itinerario: 4,
         title: 'Ferramentas Tecnológicas - Classroom e Jamboard',
         descricao: 'Esse curso é para você que quer conhecer as principais configurações, funcionalidades e as boas práticas relacionadas às ferramentas interativas Google Classroom e Jamboard.',
-        cargaHoraria: 5,
+        cargaHoraria: 50,
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://suap.enap.gov.br/portaldoaluno/curso/1487/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [59],
+            subtemas: [235],
         }
     },
     {
-        id: 223,
+        id: 220,
         itinerario: 4,
         title: 'Primeiros passos para uso de Linguagem Simples',
         descricao: 'Desenvolvido pela Enap, em parceria não onerosa com a jornalista e pesquisadora Heloísa Fischer, este curso tem o intuito de apresentar sete diretrizes para a produção de textos informativos com linguagem simples, que sejam mais fáceis de serem lidos e compreendidos pela maior parte das pessoas. A linguagem simples apresenta-se, ao mesmo tempo, como uma causa social e uma técnica de comunicação. Quer saber como aplicar a linguagem simples?',
-        cargaHoraria: 8,
+        cargaHoraria: 80,
         instCert: 5,
         possuiAcessibilidade: 'Não',
         link: 'https://www.escolavirtual.gov.br/curso/315/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [32, 47, 56],
+            subtemas: [377],
         }
     },
     {
-        id: 224,
+        id: 221,
         itinerario: 4,
         title: 'Linguagem simples aproxima o governo das pessoas. Como usar',
         descricao: 'Quer aprender como simplificar aquele documento com uma linguagem super complexa? E ainda aprender como escrever textos com uma linguagem simples e compreensível? Este curso vai te ensinar uma forma estruturada de fazer isso. O curso apresenta e aprofunda a discussão sobre o uso da linguagem simples no setor público e a importância da disseminação da pauta no Brasil.',
@@ -3580,13 +3311,12 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/332/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [56],
+            subtemas: [377],
         }
     },
     {
-        id: 225,
+        id: 222,
         itinerario: 4,
         title: 'Gestão da Inovação',
         descricao: 'O curso aborda conceitos de gestão da inovação articulados ao contexto da administração pública e apresenta desafios e possibilidades de inovação na prestação de serviços públicos mais efetivos. O objetivo é fornecer aos servidores públicos conceitos, processos e experiências referentes à inovação, a fim de fomentar a cultura e os ecossistemas de inovação para criação de valor público.',
@@ -3596,45 +3326,27 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/416/',
         obs: '',
         filter: {
-            competencias: [42],
-            temas: [],
-            subtemas: [],
+            competencias: [40, 42],
+            subtemas: [275],
         }
     },
     {
-        id: 226,
+        id: 223,
         itinerario: 4,
         title: 'Gestão do tempo',
-        descricao: 'Inderteminado',
+        descricao: 'Sem descrição',
         cargaHoraria: 10,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
+        instCert: 36,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
         obs: 'Não há cursos relacionado no Padlet',
         filter: {
             competencias: [1],
-            temas: [],
-            subtemas: [],
+            subtemas: [1],
         }
     },
     {
-        id: 227,
-        itinerario: 4,
-        title: 'Trilha do ACT Sebrae',
-        descricao: 'Inderteminado',
-        cargaHoraria: 0,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Trilha do ACT Sebrae',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 228,
+        id: 224,
         itinerario: 4,
         title: 'Planejamento Estratégico para Organizações Públicas',
         descricao: 'O planejamento estratégico é uma ferramenta de administração que possibilita à gestão pensar no longo prazo da organização. Nesse curso, serão apresentadas noções básicas de planejamento estratégico, estimulando a reflexão sobre a importância de sua aplicação nas organizações públicas.',
@@ -3644,13 +3356,12 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/107/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [28, 54, 58, 65],
+            subtemas: [272],
         }
     },
     {
-        id: 229,
+        id: 225,
         itinerario: 4,
         title: 'Elaboração de Indicadores de Desempenho Institucional',
         descricao: 'O curso integra o Programa de Desenvolvimento de Gerentes Operacionais (PDGO) e tem como objetivo capacitar os servidores públicos para estruturar sistemas de medição do desempenho institucional, dos pontos de vista estratégico e gerencial.',
@@ -3660,393 +3371,503 @@ export const cursosDefault = [
         link: 'https://www.escolavirtual.gov.br/curso/604/',
         obs: '',
         filter: {
-            competencias: [30],
-            temas: [],
-            subtemas: [],
+            competencias: [28, 54, 58, 65],
+            subtemas: [272],
         }
     },
     {
-        id: 230,
+        id: 226,
         itinerario: 4,
-        title: 'Sistema de Monitoramento- Setec',
-        descricao: 'Inderteminado',
+        title: 'Sistema de Monitoramento- Setec ',
+        descricao: 'Sem descrição',
         cargaHoraria: 10,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
+        instCert: 36,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
         obs: 'A ser desenvolvido',
         filter: {
             competencias: [1],
-            temas: [],
-            subtemas: [],
+            subtemas: [1],
         }
     },
     {
-        id: 231,
-        itinerario: 4,
-        title: 'Internacionalização',
-        descricao: 'Inderteminado',
-        cargaHoraria: 10,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'A ser desenvolvido',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 232,
-        itinerario: 4,
-        title: 'Arranjos Produtivos Locais',
-        descricao: 'Inderteminado',
-        cargaHoraria: 20,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'A ser desenvolvido pelo ACT Sebrae',
-        filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
-        }
-    },
-    {
-        id: 233,
+        id: 227,
         itinerario: 4,
         title: 'Ágil no contexto da administração pública',
         descricao: 'Apresentação e abordagem forma de pensar e os modelos de trabalho Ágeis no contexto particular da administração pública.',
         cargaHoraria: 30,
         instCert: 37,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: '',
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: '-',
         filter: {
-            competencias: [42],
-            temas: [],
-            subtemas: [],
+            competencias: [42, 45, 52],
+            subtemas: [233],
         }
     },
     {
-        id: 234,
+        id: 228,
         itinerario: 4,
         title: 'Criando uma Estratégia Organizacional Ágil em uma Organização Pública',
         descricao: 'Apresentação de opções e caminhos para se implantar práticas de gestão ágil dentro de uma organização pública',
         cargaHoraria: 30,
         instCert: 37,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Sugiro que esse MOOC realizado depois do que é indicado na linha 2 deste documento',
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: '',
         filter: {
-            competencias: [42],
-            temas: [],
-            subtemas: [],
+            competencias: [42, 45, 52],
+            subtemas: [233],
         }
     },
     {
-        id: 235,
+        id: 229,
         itinerario: 4,
         title: 'Executando a Estratégia de maneira Ágil dentro de uma Organização Pública',
         descricao: 'A partir de uma estratégia estabelecida e que promove a agilidade será apresentado maneiras de executar as ações indicadas de maneira ágil',
         cargaHoraria: 30,
         instCert: 37,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Sugiro que esse MOOC realizado depois do que é indicado na linha 2 e 3 deste documento',
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: '',
         filter: {
-            competencias: [42],
-            temas: [],
-            subtemas: [],
+            competencias: [42, 45, 52],
+            subtemas: [233],
         }
     },
     {
-        id: 236,
+        id: 230,
         itinerario: 4,
         title: 'Teoria das Organizações: clima organizacional, cultura organizacional, mudança organizacional e desaprendizagem organizacional',
         descricao: 'Compreender a Cultura Organizacional e o impacto no clima do trabalho, bem como o processo de desaprender, reaprender e aprender as novas competências é essencial para que possibilite a mudança e estar em sintonia com este processo social por que passa a humanidade.',
         cargaHoraria: 20,
         instCert: 37,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
+        possuiAcessibilidade: 'Não informado',
+        link: '',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [42, 45, 52],
+            subtemas: [233, 260, 273, 275],
+        }
+    },
+    {
+        id: 231,
+        itinerario: 4,
+        title: 'Noções de educação inclusiva',
+        descricao: 'Sem descrição',
+        cargaHoraria: 20,
+        instCert: 9,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: 'Não há curso associados no Padlet',
+        filter: {
+            competencias: [10, 35, 60],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 232,
+        itinerario: 4,
+        title: 'Controles Institucional e Social dos Gastos Públicos',
+        descricao: 'O curso apresenta noções de controle institucional e social no Brasil para uma compreensão básica sobre a importância da qualidade do gasto, do uso eficiente dos recursos públicos e da participação social.',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/12/',
+        obs: '',
+        filter: {
+            competencias: [63],
+            subtemas: [277],
+        }
+    },
+    {
+        id: 233,
+        itinerario: 4,
+        title: 'Educação em Direitos Humanos',
+        descricao: 'O curso busca contribuir para a conformação de uma visão abrangente acerca desafios e alternativas à Educação em Direitos Humanos, constituindo-se em subsídios para a prática e vivência de ações educativas em Direitos Humanos no âmbito de atuação dos participantes.',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/129/',
+        obs: '',
+        filter: {
+            competencias: [60],
+            subtemas: [215],
+        }
+    },
+    {
+        id: 234,
+        itinerario: 4,
+        title: 'Gestão Estratégica com BSC ',
+        descricao: 'Esse curso é uma boa oportunidade para conhecer alguns elementos teórico-conceituais e instrumentais de planejamento estratégico e de gestão. A compreensão e a utilização de conhecimentos relacionados ao planejamento estratégico e ao método Balanced Scorecard (BSC) possibilitam a atuação em ambientes dinâmicos que exigem percepção de contexto e proatividade.',
+        cargaHoraria: 20,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/103/',
+        obs: '',
+        filter: {
+            competencias: [27, 28, 45, 54, 65],
+            subtemas: [272],
+        }
+    },
+    {
+        id: 235,
+        itinerario: 4,
+        title: 'Captação de Recursos',
+        descricao: 'Sem descrição',
+        cargaHoraria: 15,
+        instCert: 36,
+        possuiAcessibilidade: 'Não informado',
+        link: '',
+        obs: 'Não há curso relacionado no padlet',
+        filter: {
+            competencias: [27, 65],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 236,
+        itinerario: 4,
+        title: 'Gestão de projetos',
+        descricao: 'A capacitação tem como referência o Guia PMBOK 5° Edição, publicado pelo instituto PMI - Project Management Institute (2013), que reúne as melhores práticas na área de gerenciamento de projetos, com base em experiências de empresas de diferentes segmentos, públicas ou privadas, bem como apresentar outros métodos elaborados pela Administração Pública.',
+        cargaHoraria: 20,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/104/',
+        obs: '',
+        filter: {
+            competencias: [25, 45, 61],
+            subtemas: [272],
         }
     },
     {
         id: 237,
         itinerario: 4,
-        title: 'Diversidade',
-        descricao: 'Inderteminado',
-        cargaHoraria: 0,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Não há cursos relacionado no Padlet',
+        title: 'Análise e melhoria de Processos',
+        descricao: 'O curso Análise e Melhoria de Processos foi transposto da modalidade presencial para a autoinstrucional em 2021 pela Enap, com o intuito de oferecer aos participantes apresenta uma visão geral e abrangente da gestão da qualidade no serviço público, aprofundando um de seus aspectos, a análise e melhoria de processos.',
+        cargaHoraria: 20,
+        instCert: 5,
+        possuiAcessibilidade: 'Não',
+        link: 'https://www.escolavirtual.gov.br/curso/424/',
+        obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [25, 45, 61],
+            subtemas: [272],
         }
     },
     {
         id: 238,
         itinerario: 4,
-        title: 'Inteligência Emocional',
-        descricao: 'A gestão emocional excelente é a possibilidade do ser humano autogerir suas emoções e expressá-las de maneira funcional para consigo e em sociedade, que permite a construção de uma mentalidade de crescimento e, a partir disso, a atuação de maneira produtiva e congruente na carreira e vida pessoal.',
-        cargaHoraria: 50,
+        title: 'Governança  ',
+        descricao: 'Em tempo de economia digital, onde o volume de dados produzidos é imenso, as instituições precisam lidar com este cenário a fim de disponibilizar a informação correta em tempo hábil para a tomada de decisões. A boa governança de dados é o caminho para superar este desafio! Inscreva-se e conheça os fundamentos relacionados à importância da governança de dados especialmente na Administração Pública Federal.',
+        cargaHoraria: 30,
         instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/318/',
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/270/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [25, 59, 61],
+            subtemas: [274],
         }
     },
     {
         id: 239,
         itinerario: 4,
-        title: 'Gestão Pessoal - Base da Liderança',
-        descricao: 'A base da gestão pessoal é o autoconhecimento. O curso, nessa concepção, permite aos estudantes refletir sobre suas virtudes, forças de caráter, valores pessoais, motivadores intrínsecos de trabalho e perfil comportamental. A reflexão possibilita aos estudantes organizar estratégias de melhoria em sua vida laboral e em sua vida pessoal, por meio de instrumentos que serão disponibilizados ao longo do curso. Nesse sentido, o curso será de extrema importância para os profissionais que desejam obter um estado consciente em relação aos meios viáveis de se conseguir alcançar um determinado objetivo.',
-        cargaHoraria: 50,
+        title: 'Gestão de Riscos em Processos de Trabalho',
+        descricao: 'O que você sabe sobre gestão de riscos em processos de trabalho? Este curso apresenta os principais conceitos sobre o tema, contribuindo para disseminar conhecimento e medidas de gerenciamento de riscos institucionais. A partir da experiência da Receita Federal, você poderá reconhecer como a gestão de riscos pode proporcionar a contínua melhoria dos processos de trabalho. Abordagem mais genérica, na trilha de orçamento tb tem Riscos',
+        cargaHoraria: 20,
         instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/163/',
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/604/',
         obs: '',
         filter: {
-            competencias: [10],
-            temas: [],
-            subtemas: [],
+            competencias: [25, 61, 65],
+            subtemas: [270],
         }
     },
     {
         id: 240,
         itinerario: 4,
-        title: 'Desenvolvendo Times de Alta Performance',
-        descricao: 'Parceria da RFB com a Enap, este curso aborda o conhecimento e o desenvolvimento de competências gerenciais, além da vivência do exercício da liderança, fundamentais no ambiente de trabalho contemporâneo. O objetivo da parceria é trazer conteúdo para possibilitar aos gestores o aprendizado de técnicas que promovem a alta performance de equipes para o alcance dos objetivos estratégicos da instituição.',
-        cargaHoraria: 30,
+        title: 'Introdução a LGDP',
+        descricao: 'O curso apresenta um panorama sobre a nova legislação brasileira de proteção de dados pessoais (Lei 13.709/18), compreendendo os temas mais importantes para a sua implementação, como: fundamentos e campo de aplicação, princípios e direitos do titular, responsabilidades dos agentes, aspectos internacionais, segurança e a Autoridade Nacional de Proteção de Dados, entre outros. O objetivo do curso é capacitar as pessoas para entenderem, de forma rápida e acessível, o funcionamento e diretrizes básicas expostas na nova lei geral de proteção de dados do Brasil.',
+        cargaHoraria: 10,
         instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/356/',
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/153/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [60],
+            subtemas: [215],
         }
     },
     {
         id: 241,
         itinerario: 4,
-        title: 'Gestão por Competências',
-        descricao: 'O que você sabe sobre Gestão por Competências? Como ela é aplicada no setor público? A partir da experiência da Receita Federal, esse curso aborda o papel da gestão por competências no contexto público e como ela pode contribuir na identificação de lacunas e para o aperfeiçoamento de servidores. ',
-        cargaHoraria: 40,
+        title: 'Fundamentos da Lei Geral de Proteção de Dados',
+        descricao: 'O curso foi desenvolvido com foco na apresentação de conceitos gerais da LGPD e nos impactos desta Lei em processos rotineiros de pessoas e empresas. Também pretende-se fomentar o debate sobre a proteção de dados pessoais e a segurança da informação, em face das bases legais existentes. Foi desenvolvido pelo Serpro - Serviço Federal de Processamento de Dados, em 2020, originalmente para a capacitação do corpo funcional. Agora é ofertado ao público em geral, por meio de parceria com a Escola Nacional de Administração Pública - Enap.',
+        cargaHoraria: 15,
         instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/175/',
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/603/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [60],
+            subtemas: [215],
         }
     },
     {
         id: 242,
         itinerario: 4,
-        title: 'Gestão de Conflitos e Negociação',
-        descricao: 'Resolver diferenças e divergências, e tomar decisões de forma colaborativa são formas efetivas de preservar e ampliar os objetivos a serem alcançados nas organizações. A temática é relevante uma vez que o desenvolvimento das competências de resolução de conflitos e de negociação tem se mostrado fundamental para o adequado desempenho e atuação de gestores e servidores em suas rotinas de trabalho.',
-        cargaHoraria: 20,
+        title: 'Controles na Administração Pública ',
+        descricao: 'Ao final deste curso, espera-se que o participante seja capaz de aplicar princípios do controle no contexto da gestão pública. O curso abordará os temas Prestação de Contas, Controles na Administração Pública, Controle Externo, Controle Interno e Controle Social. ',
+        cargaHoraria: 30,
         instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/372/',
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/278/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [54, 64],
+            subtemas: [277],
         }
     },
     {
         id: 243,
         itinerario: 4,
-        title: 'Articulação e Negociação',
-        descricao: 'Inderteminado',
-        cargaHoraria: 0,
-        instCert: 35,
-        possuiAcessibilidade: 'Inderteminado',
-        link: 'Não especificado',
-        obs: 'Não há cursos relacionado no Padlet',
+        title: 'Planejamento e Gestão Orçamentária e Financeira',
+        descricao: 'O Curso de Planejamento e Gestão Orçamentária e Financeira é aberto e autoinstrucional. Público-alvo: servidores da Rede Federal de Educação Profissional e Tecnológica que estejam ocupando cargos de gestão em suas instituições. Após o término do curso você será capaz de: compreender o planejamento e a gestão orçamentária e financeira sob o ponto de vista dos aspectos práticos, qualificando sua rotina de trabalho.',
+        cargaHoraria: 64,
+        instCert: 38,
+        possuiAcessibilidade: 'Não',
+        link: 'https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=14',
+        obs: 'Curso em desenvolvimento',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [27, 28],
+            subtemas: [262],
         }
     },
     {
         id: 244,
         itinerario: 4,
-        title: 'Liderança e Gestão De Equipes',
-        descricao: 'Este curso apresenta algumas contribuições sobre os estilos e técnicas de liderança para o atual contexto das organizações públicas. O conteúdo ressalta a importância da liderança no trabalho em equipe e na tomada de decisões.',
-        cargaHoraria: 30,
+        title: 'Inteligência Emocional',
+        descricao: 'A gestão emocional excelente é a possibilidade do ser humano autogerir suas emoções e expressá-las de maneira funcional para consigo e em sociedade, que permite a construção de uma mentalidade de crescimento e, a partir disso, a atuação de maneira produtiva e congruente na carreira e vida pessoal.',
+        cargaHoraria: 50,
         instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/373/',
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/318/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [32, 34, 37, 55, 56],
+            subtemas: [276],
         }
     },
     {
         id: 245,
         itinerario: 4,
-        title: 'Gestão de Equipes em Trabalho Remoto',
-        descricao: 'Este curso apresenta diversas contribuições para a gestão de equipes em trabalho remoto. O conteúdo traz dicas e ferramentas interessantes, além de abordar pontos importantes relacionados à gestão de pessoas. Trata-se de um curso necessário, criado a partir dos desafios que afetaram as instituições nos últimos tempos.',
-        cargaHoraria: 20,
+        title: 'Gestão Pessoal - Base da Liderança',
+        descricao: 'A base da gestão pessoal é o autoconhecimento. O curso, nessa concepção, permite aos estudantes refletir sobre suas virtudes, forças de caráter, valores pessoais, motivadores intrínsecos de trabalho e perfil comportamental. A reflexão possibilita aos estudantes organizar estratégias de melhoria em sua vida laboral e em sua vida pessoal, por meio de instrumentos que serão disponibilizados ao longo do curso. Nesse sentido, o curso será de extrema importância para os profissionais que desejam obter um estado consciente em relação aos meios viáveis de se conseguir alcançar um determinado objetivo.',
+        cargaHoraria: 50,
         instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/334/',
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/163/',
         obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [10, 37, 45, 61],
+            subtemas: [258],
         }
     },
     {
         id: 246,
         itinerario: 4,
-        title: 'A Liderança Pública em Tempos de Crise',
-        descricao: 'Em cenários de graves crises mundiais, nossos olhares se voltam para as lideranças. Pensando nisso, o CLP – Liderança Pública e a ENAP prepararam este curso para apresentar a um passo a passo de como liderar em tempos de crise. O conteúdo tem uso prático para que lideranças consigam navegar pela crise, servindo como um repositório de apoio e suporte para o enfrentamento da instabilidade ocasionada pelo coronavírus.',
-        cargaHoraria: 10,
+        title: 'Desenvolvendo Times de Alta Performance',
+        descricao: 'Parceria da RFB com a Enap, este curso aborda o conhecimento e o desenvolvimento de competências gerenciais, além da vivência do exercício da liderança, fundamentais no ambiente de trabalho contemporâneo. O objetivo da parceria é trazer conteúdo para possibilitar aos gestores o aprendizado de técnicas que promovem a alta performance de equipes para o alcance dos objetivos estratégicos da instituição.',
+        cargaHoraria: 30,
         instCert: 5,
-        possuiAcessibilidade: 'Não',
-        link: 'https://www.escolavirtual.gov.br/curso/299/',
-        obs: 'Conversar com a ENAP para revisitar o curso',
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/356/',
+        obs: '',
         filter: {
-            competencias: [1],
-            temas: [],
-            subtemas: [],
+            competencias: [37, 45, 58, 61],
+            subtemas: [258],
         }
     },
     {
         id: 247,
-        itinerario: 5,
-        title: 'Legislação para aposentadoria',
-        descricao: 'Neste MOOC serão apresetados as temáticas relacionadas aos aspectos gerais da legislação, os tipos de aposentadoria e os requisitos para se aposentar',
-        cargaHoraria: 20,
-        instCert: 9,
-        possuiAcessibilidade: 'SIM',
-        link: 'Não especificado',
+        itinerario: 4,
+        title: 'Gestão por Competências',
+        descricao: 'O que você sabe sobre Gestão por Competências? Como ela é aplicada no setor público? A partir da experiência da Receita Federal, esse curso aborda o papel da gestão por competências no contexto público e como ela pode contribuir na identificação de lacunas e para o aperfeiçoamento de servidores. ',
+        cargaHoraria: 40,
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/175/',
         obs: '',
         filter: {
-            competencias: [35],
-            temas: [],
-            subtemas: [],
+            competencias: [37, 45, 58, 61],
+            subtemas: [273],
         }
     },
     {
         id: 248,
-        itinerario: 5,
-        title: 'Planejamento Financeiro',
-        descricao: 'Neste MOOC serão apresentadas as temáticas relacionadas ao planejamento e organização dos gastos pessoais; planejamento dos investimentos pessoais; alternativas de investimentos no mercado financeiro e; complementando a renda',
+        itinerario: 4,
+        title: 'Gestão de Conflitos e Negociação',
+        descricao: 'Resolver diferenças e divergências, e tomar decisões de forma colaborativa são formas efetivas de preservar e ampliar os objetivos a serem alcançados nas organizações. A temática é relevante uma vez que o desenvolvimento das competências de resolução de conflitos e de negociação tem se mostrado fundamental para o adequado desempenho e atuação de gestores e servidores em suas rotinas de trabalho.',
         cargaHoraria: 20,
-        instCert: 9,
-        possuiAcessibilidade: 'SIM',
-        link: 'Não especificado',
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/372/',
         obs: '',
         filter: {
-            competencias: [35],
-            temas: [],
-            subtemas: [],
+            competencias: [37, 45, 58, 61],
+            subtemas: [273],
         }
     },
     {
         id: 249,
-        itinerario: 5,
-        title: 'Aspectos socioemocionais',
-        descricao: 'Neste MOOC serãoapresentadas as temáticas relacionadas ao conhecimento a si mesmo, relações pessoais e familares bem como os aspectos da aposentadoria como o começo de uma nova etapa.',
-        cargaHoraria: 20,
-        instCert: 9,
-        possuiAcessibilidade: 'SIM',
-        link: 'Não especificado',
+        itinerario: 4,
+        title: 'Liderança e Gestão De Equipes',
+        descricao: 'Este curso apresenta algumas contribuições sobre os estilos e técnicas de liderança para o atual contexto das organizações públicas. O conteúdo ressalta a importância da liderança no trabalho em equipe e na tomada de decisões.',
+        cargaHoraria: 30,
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/373/',
         obs: '',
         filter: {
-            competencias: [35],
-            temas: [],
-            subtemas: [],
+            competencias: [37, 45, 58, 61],
+            subtemas: [258],
         }
     },
     {
         id: 250,
-        itinerario: 5,
-        title: 'Empreendedorismo',
-        descricao: 'Neste MOOC serão apresentadas as temáticas sobre a opção do empreendedorismo e motivos para empreender na aposentadoria',
+        itinerario: 4,
+        title: 'Gestão de Equipes em Trabalho Remoto',
+        descricao: 'Este curso apresenta diversas contribuições para a gestão de equipes em trabalho remoto. O conteúdo traz dicas e ferramentas interessantes, além de abordar pontos importantes relacionados à gestão de pessoas. Trata-se de um curso necessário, criado a partir dos desafios que afetaram as instituições nos últimos tempos.',
         cargaHoraria: 20,
-        instCert: 9,
-        possuiAcessibilidade: 'SIM',
-        link: 'Não especificado',
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/334/',
         obs: '',
         filter: {
-            competencias: [35],
-            temas: [],
-            subtemas: [],
+            competencias: [37, 58, 64],
+            subtemas: [261],
         }
     },
     {
         id: 251,
-        itinerario: 5,
-        title: 'Inserção Digital',
-        descricao: 'Neste MOOC serão apresentadas as temáticas relacionadas aos principais aspecros da Informática básica e noções básica de uso da Internet',
-        cargaHoraria: 20,
-        instCert: 9,
-        possuiAcessibilidade: 'SIM',
-        link: 'Não especificado',
-        obs: '',
+        itinerario: 4,
+        title: 'A Liderança Pública em Tempos de Crise',
+        descricao: 'Em cenários de graves crises mundiais, nossos olhares se voltam para as lideranças. Pensando nisso, o CLP – Liderança Pública e a ENAP prepararam este curso para apresentar a um passo a passo de como liderar em tempos de crise. O conteúdo tem uso prático para que lideranças consigam navegar pela crise, servindo como um repositório de apoio e suporte para o enfrentamento da instabilidade ocasionada pelo coronavírus.',
+        cargaHoraria: 10,
+        instCert: 5,
+        possuiAcessibilidade: 'Não ',
+        link: 'https://www.escolavirtual.gov.br/curso/299/',
+        obs: 'Conversar com a ENAP para revisitar o curso',
         filter: {
-            competencias: [35],
-            temas: [],
-            subtemas: [],
+            competencias: [37, 58, 64],
+            subtemas: [258],
         }
     },
     {
         id: 252,
         itinerario: 5,
-        title: 'Promoção a saúde',
-        descricao: 'Neste MOOC serão apresentadas as temáticas decomo enfrentar a aposentadoria de maneira saudável, ter uma alimentação saudável e os exercícios físico e qualidade de vida para aposentadoria.',
+        title: 'Legislação para aposentadoria',
+        descricao: 'Neste MOOC serão apresetados as temáticas relacionadas aos aspectos gerais da legislação, os tipos de aposentadoria e os requisitos para se aposentar',
         cargaHoraria: 20,
-        instCert: 9,
+        instCert: 39,
         possuiAcessibilidade: 'SIM',
-        link: 'Não especificado',
+        link: '',
         obs: '',
         filter: {
             competencias: [35],
-            temas: [],
-            subtemas: [],
+            subtemas: [1],
         }
     },
     {
         id: 253,
         itinerario: 5,
-        title: 'Projeto de vida',
-        descricao: 'Neste MOOC serão apresentadas as temáticasde transição para a aposentadoria; visões do futuro e novos hábitos; o tempo livre e a liberdade de escolha; perseguir sempre a felicidade',
+        title: 'Planejamento Financeiro',
+        descricao: 'Neste MOOC serão apresentadas as temáticas relacionadas ao planejamento e organização dos gastos pessoais; planejamento dos investimentos pessoais; alternativas de investimentos no mercado financeiro e; complementando a renda',
         cargaHoraria: 20,
-        instCert: 9,
+        instCert: 39,
         possuiAcessibilidade: 'SIM',
-        link: 'Não especificado',
+        link: '',
         obs: '',
         filter: {
             competencias: [35],
-            temas: [],
-            subtemas: [],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 254,
+        itinerario: 5,
+        title: 'Aspectos socioemocionais',
+        descricao: 'Neste MOOC serãoapresentadas as temáticas relacionadas ao conhecimento a si mesmo, relações pessoais e familares bem como os aspectos da aposentadoria como o começo de uma nova etapa.',
+        cargaHoraria: 20,
+        instCert: 39,
+        possuiAcessibilidade: 'SIM',
+        link: '',
+        obs: '',
+        filter: {
+            competencias: [35],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 255,
+        itinerario: 5,
+        title: 'Empreendedorismo',
+        descricao: 'Neste MOOC serão apresentadas as temáticas sobre a opção do empreendedorismo e motivos para empreender na aposentadoria',
+        cargaHoraria: 20,
+        instCert: 39,
+        possuiAcessibilidade: 'SIM',
+        link: '',
+        obs: '',
+        filter: {
+            competencias: [35],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 256,
+        itinerario: 5,
+        title: 'Inserção Digital',
+        descricao: 'Neste MOOC serão apresentadas as temáticas relacionadas aos principais aspecros da Informática básica e noções básica de uso da Internet',
+        cargaHoraria: 20,
+        instCert: 39,
+        possuiAcessibilidade: 'SIM',
+        link: '',
+        obs: '',
+        filter: {
+            competencias: [35],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 257,
+        itinerario: 5,
+        title: 'Promoção a saúde',
+        descricao: 'Neste MOOC serão apresentadas as temáticas decomo enfrentar a aposentadoria de maneira saudável, ter uma alimentação saudável e os exercícios físico e qualidade de vida para aposentadoria.',
+        cargaHoraria: 20,
+        instCert: 39,
+        possuiAcessibilidade: 'SIM',
+        link: '',
+        obs: '',
+        filter: {
+            competencias: [35],
+            subtemas: [1],
+        }
+    },
+    {
+        id: 258,
+        itinerario: 5,
+        title: 'Projeto de vida ',
+        descricao: 'Neste MOOC serão apresentadas as temáticasde transição para a aposentadoria; visões do futuro e novos hábitos; o tempo livre e a liberdade de escolha; perseguir sempre a felicidade',
+        cargaHoraria: 20,
+        instCert: 39,
+        possuiAcessibilidade: 'SIM',
+        link: '',
+        obs: '',
+        filter: {
+            competencias: [35],
+            subtemas: [1],
         }
     },
 ]
@@ -4190,15 +4011,23 @@ export const instituicoesDefault = [
     },
     {
         id: 35,
-        titulo: 'Não especificado'
+        titulo: 'Instituto Federal do Rio de Janeiro'
     },
     {
         id: 36,
-        titulo: 'Instituto Federal do Rio Grande do Norte'
+        titulo: 'Não Especificado'
     },
     {
         id: 37,
         titulo: 'IFRN'
+    },
+    {
+        id: 38,
+        titulo: 'Instituto Federal do Rio Grande do Norte'
+    },
+    {
+        id: 39,
+        titulo: 'SIM'
     },
 ]
 
@@ -4211,57 +4040,82 @@ export const categoriasDeCompetenciasDefault = [
     {
         id: 2,
         nome: 'Envolvimento profissional',
-        competencias: [2,3,4,5]
+        competencias: [2, 3, 4, 5]
     },
     {
         id: 3,
         nome: 'Recursos digitais',
-        competencias: [6,7,8]
+        competencias: [6, 7, 8]
     },
     {
         id: 4,
         nome: 'Ensino e aprendizagem',
-        competencias: [9,10,11,12]
+        competencias: [9, 10, 11, 12]
     },
     {
         id: 5,
         nome: 'Avaliação',
-        competencias: [13,14,15]
+        competencias: [13, 14, 15]
     },
     {
         id: 6,
         nome: 'Capacitação dos aprendentes',
-        competencias: [16,17,18]
+        competencias: [16, 17, 18]
     },
     {
         id: 7,
         nome: 'Promoção da competência digital dos aprendentes',
-        competencias: [19,20,21,22,23]
+        competencias: [19, 20, 21, 22, 23]
     },
     {
         id: 8,
         nome: 'Gestão de Resultados',
-        competencias: [24,25,26,27,28,29,30,31]
+        competencias: [24, 25, 26, 27, 28, 29, 30, 31]
     },
     {
         id: 9,
         nome: 'Gestão de Relacionamentos',
-        competencias: [32,33,34,35,36,37]
+        competencias: [32, 33, 34, 35, 36, 37]
     },
     {
         id: 10,
         nome: 'Gestão de Mudanças',
-        competencias: [38,39,40,41,42,43,44,45]
+        competencias: [38, 39, 40, 41, 42, 43, 44, 45]
     },
     {
         id: 11,
         nome: 'Orientação a Resultados',
-        competencias: [46,47,48,49,50]
+        competencias: [46, 47, 48, 49, 50]
     },
     {
         id: 12,
         nome: 'Processos de Melhoria',
-        competencias: [51,52,53,54,55]
+        competencias: [51, 52, 53, 54, 55]
+    },
+    {
+        id: 13,
+        nome: 'Competências Transversais',
+        competencias: [56, 57, 58, 59, 60, 61]
+    },
+    {
+        id: 14,
+        nome: 'Competências de Liderança - Pessoas',
+        competencias: [62]
+    },
+    {
+        id: 15,
+        nome: 'Competências de Liderança - Resultados',
+        competencias: [63, 64]
+    },
+    {
+        id: 16,
+        nome: 'Competências de Liderança - Estratégia',
+        competencias: [65]
+    },
+    {
+        id: 17,
+        nome: 'Outras competências associadas',
+        competencias: [66]
     },
 ]
 
@@ -4454,7 +4308,7 @@ export const competenciasDefault = [
     },
     {
         id: 32,
-        titulo: 'Comunicação Interpessoal',
+        titulo: 'Comunicação interpessoal',
         descricao: 'Iniciar e manter comunicações respeitosas e cordiais; transmitir de forma transparente e comportamento estável, informações e gestos, mensagens orais e de texto claros, concisos, fiáveis e apropriados para o destinatário. Atender ativamente informações, consultas, divergências e mensagens de terceiros com uma atitude construtiva e empática.',
         categoria: 9,
     },
@@ -4596,274 +4450,465 @@ export const competenciasDefault = [
         descricao: 'Preservar o diálogo harmônico e respeitoso acerca das divergências, erros e conflitos do ambiente, sem afetar a dinâmica do trabalho sem razão justificável.',
         categoria: 12,
     },
+    {
+        id: 56,
+        titulo: 'Comunicação',
+        descricao: 'Competências Transversais',
+        categoria: 13,
+    },
+    {
+        id: 57,
+        titulo: 'Coordenação e colaboração em rede',
+        descricao: 'Competências Transversais',
+        categoria: 13,
+    },
+    {
+        id: 58,
+        titulo: 'Foco nos resultados para os cidadãos',
+        descricao: 'Competências Transversais',
+        categoria: 13,
+    },
+    {
+        id: 59,
+        titulo: 'Mentalidade Digital',
+        descricao: 'Competências Transversais',
+        categoria: 13,
+    },
+    {
+        id: 60,
+        titulo: 'Orientações por valores éticos',
+        descricao: 'Competência Transversais',
+        categoria: 13,
+    },
+    {
+        id: 61,
+        titulo: 'Visão Sistêmica',
+        descricao: 'Competência Transversal',
+        categoria: 13,
+    },
+    {
+        id: 62,
+        titulo: 'Engajamento de pessoas e equipes',
+        descricao: 'Competências de Liderança - Pessoas',
+        categoria: 14,
+    },
+    {
+        id: 63,
+        titulo: 'Geração de valor para o usuario',
+        descricao: 'Competêcia de Liderança - Resultados',
+        categoria: 15,
+    },
+    {
+        id: 64,
+        titulo: 'Gestão para resultados',
+        descricao: 'Competêcia de Liderança - Resultados',
+        categoria: 15,
+    },
+    {
+        id: 65,
+        titulo: 'Visão de Futuro',
+        descricao: 'Competência de Liderança - Estratégia',
+        categoria: 16,
+    },
+    {
+        id: 66,
+        titulo: 'Saber comunicar-se e lidar com conflitos',
+        descricao: 'Outras competências associadas',
+        categoria: 17,
+    },
 ]
 
 export const temasDefault = [
     {
         id: 1,
-        titulo: 'Matemática',
-        subtemas: []
+        titulo: 'Não Especificado',
+        subtemas: [1]
     },
     {
         id: 2,
-        titulo: 'Probabilidade e Estatística',
-        subtemas: []
+        titulo: 'Matemática',
+        subtemas: [2, 3, 4]
     },
     {
         id: 3,
-        titulo: 'Ciência da Computação',
-        subtemas: []
+        titulo: 'Probabilidade e Estatística',
+        subtemas: [5, 6, 7]
     },
     {
         id: 4,
-        titulo: 'Astronomia',
-        subtemas: []
+        titulo: 'Ciência da Computação',
+        subtemas: [8, 9, 10, 11]
     },
     {
         id: 5,
-        titulo: 'Física',
-        subtemas: []
+        titulo: 'Astronomia',
+        subtemas: [12, 13, 14, 15, 16, 17]
     },
     {
         id: 6,
-        titulo: 'Química',
-        subtemas: []
+        titulo: 'Física',
+        subtemas: [18, 19, 20, 21, 22, 23]
     },
     {
         id: 7,
-        titulo: 'GeoCiências',
-        subtemas: []
+        titulo: 'Química',
+        subtemas: [24, 25, 26, 27]
     },
     {
         id: 8,
-        titulo: 'Oceanografia',
-        subtemas: []
+        titulo: 'GeoCiências',
+        subtemas: [28, 29, 30, 31, 32]
     },
     {
         id: 9,
-        titulo: 'Biologia Geral',
-        subtemas: []
+        titulo: 'Oceanografia',
+        subtemas: [33, 34, 35, 36]
     },
     {
         id: 10,
-        titulo: 'Genética',
-        subtemas: []
+        titulo: 'Biologia Geral',
+        subtemas: [37]
     },
     {
         id: 11,
-        titulo: 'Botânica',
-        subtemas: []
+        titulo: 'Genética',
+        subtemas: [38, 39, 40, 41, 42]
     },
     {
         id: 12,
-        titulo: 'Zoologia',
-        subtemas: []
+        titulo: 'Botânica',
+        subtemas: [43, 44, 45, 46, 47, 48]
     },
     {
         id: 13,
-        titulo: 'Ecologia',
-        subtemas: []
+        titulo: 'Zoologia',
+        subtemas: [49, 50, 51, 52, 53, 54]
     },
     {
         id: 14,
-        titulo: 'Morfologia',
-        subtemas: []
+        titulo: 'Ecologia',
+        subtemas: [55, 56, 57]
     },
     {
         id: 15,
-        titulo: 'Fisiologia',
-        subtemas: []
+        titulo: 'Morfologia',
+        subtemas: [58, 59, 60, 61]
     },
     {
         id: 16,
-        titulo: 'Bioquímica',
-        subtemas: []
+        titulo: 'Fisiologia',
+        subtemas: [62, 63, 64, 65]
     },
     {
         id: 17,
-        titulo: 'Biofísica',
-        subtemas: []
+        titulo: 'Bioquímica',
+        subtemas: [66, 67, 68, 69, 70]
     },
     {
         id: 18,
-        titulo: 'Farmacologia',
-        subtemas: []
+        titulo: 'Biofísica',
+        subtemas: [71, 72, 73, 74]
     },
     {
         id: 19,
-        titulo: 'Imunologia',
-        subtemas: []
+        titulo: 'Farmacologia',
+        subtemas: [75, 76, 77, 78, 79, 80, 81, 82]
     },
     {
         id: 20,
-        titulo: 'Microbiologia',
-        subtemas: []
+        titulo: 'Imunologia',
+        subtemas: [83, 84, 85, 86]
     },
     {
         id: 21,
-        titulo: 'Parasitologia',
-        subtemas: []
+        titulo: 'Microbiologia',
+        subtemas: [87, 88]
     },
     {
         id: 22,
-        titulo: 'Engenharia Civil',
-        subtemas: []
+        titulo: 'Parasitologia',
+        subtemas: [89, 90, 91]
     },
     {
         id: 23,
-        titulo: 'Engenharia de Minas',
-        subtemas: []
+        titulo: 'Engenharia Civil',
+        subtemas: [92, 93, 94, 95, 96]
     },
     {
         id: 24,
-        titulo: 'Engenharia de Materiais e Metalúrgica',
-        subtemas: []
+        titulo: 'Engenharia de Minas',
+        subtemas: [97, 98, 99]
     },
     {
         id: 25,
-        titulo: 'Engenharia Elétrica',
-        subtemas: []
+        titulo: 'Engenharia de Materiais e Metalúrgica',
+        subtemas: [100, 101, 102, 103, 104]
     },
     {
         id: 26,
-        titulo: 'Engenharia Mecânica',
-        subtemas: []
+        titulo: 'Engenharia Elétrica',
+        subtemas: [105, 106, 107, 108, 109, 110]
     },
     {
         id: 27,
-        titulo: 'Engenharia Química',
-        subtemas: []
+        titulo: 'Engenharia Mecânica',
+        subtemas: [111, 112, 113, 114, 115]
     },
     {
         id: 28,
-        titulo: 'Engenharia Sanitária',
-        subtemas: []
+        titulo: 'Engenharia Química',
+        subtemas: [116, 117, 118]
     },
     {
         id: 29,
-        titulo: 'Engenharia de Produção',
-        subtemas: []
+        titulo: 'Engenharia Sanitária',
+        subtemas: [119, 120, 121, 122]
     },
     {
         id: 30,
-        titulo: 'Engenharia Nuclear',
-        subtemas: []
+        titulo: 'Engenharia de Produção',
+        subtemas: [123, 124, 125, 126]
     },
     {
         id: 31,
-        titulo: 'Engenharia de Transportes',
-        subtemas: []
+        titulo: 'Engenharia Nuclear',
+        subtemas: [127, 128, 129, 130]
     },
     {
         id: 32,
-        titulo: 'Engenharia Naval e Oceânica',
-        subtemas: []
+        titulo: 'Engenharia de Transportes',
+        subtemas: [131, 132, 133]
     },
     {
         id: 33,
-        titulo: 'Engenharia Aeroespacial',
-        subtemas: []
+        titulo: 'Engenharia Naval e Oceânica',
+        subtemas: [134, 135, 136, 137, 138]
     },
     {
         id: 34,
-        titulo: 'Engenharia Biomédica',
-        subtemas: []
+        titulo: 'Engenharia Aeroespacial',
+        subtemas: [139, 140, 141, 142, 143, 144]
     },
     {
         id: 35,
-        titulo: 'Medicina',
-        subtemas: []
+        titulo: 'Engenharia Biomédica',
+        subtemas: [145, 146]
     },
     {
         id: 36,
-        titulo: 'Odontologia',
-        subtemas: []
+        titulo: 'Medicina',
+        subtemas: [147, 148, 149, 150, 151, 152, 153]
     },
     {
         id: 37,
-        titulo: 'Farmácia',
-        subtemas: []
+        titulo: 'Odontologia',
+        subtemas: [154, 155, 156, 157, 158, 159, 160, 161, 162]
     },
     {
         id: 38,
-        titulo: 'Nutrição',
-        subtemas: []
+        titulo: 'Farmácia',
+        subtemas: [163, 164, 165, 166, 167]
     },
     {
         id: 39,
-        titulo: 'Saúde Coletiva',
-        subtemas: []
+        titulo: 'Nutrição',
+        subtemas: [168, 169, 170, 171]
     },
     {
         id: 40,
-        titulo: 'Fonoaudiologia',
-        subtemas: []
+        titulo: 'Saúde Coletiva',
+        subtemas: [172, 173, 174]
     },
     {
         id: 41,
-        titulo: 'Fisioterapia e Terapia Ocupacional',
-        subtemas: []
+        titulo: 'Fonoaudiologia',
+        subtemas: [175]
     },
     {
         id: 42,
-        titulo: 'Educação Física',
-        subtemas: []
+        titulo: 'Fisioterapia e Terapia Ocupacional',
+        subtemas: [176]
     },
     {
         id: 43,
-        titulo: 'Agronomia',
-        subtemas: []
+        titulo: 'Educação Física',
+        subtemas: [177]
     },
     {
         id: 44,
-        titulo: 'Recursos Florestais e Engenharia Florestal',
-        subtemas: []
+        titulo: 'Agronomia',
+        subtemas: [178, 179, 180, 181, 182, 183]
     },
     {
         id: 45,
-        titulo: 'Engenharia Agrícola',
-        subtemas: []
+        titulo: 'Recursos Florestais e Engenharia Florestal',
+        subtemas: [184, 185, 186, 187, 188, 189]
     },
     {
         id: 46,
-        titulo: 'Zootecnia',
-        subtemas: []
+        titulo: 'Engenharia Agrícola',
+        subtemas: [190, 191, 192, 193, 194]
     },
     {
         id: 47,
-        titulo: 'Medicina Veterinária',
-        subtemas: []
+        titulo: 'Zootecnia',
+        subtemas: [195, 196, 197, 198, 199]
     },
     {
         id: 48,
-        titulo: 'Recursos Pesqueiros e Engenharia de Pesca',
-        subtemas: []
+        titulo: 'Medicina Veterinária',
+        subtemas: [200, 201, 202, 203, 204]
     },
     {
         id: 49,
-        titulo: 'Ciência e Tecnologia de Alimentos',
-        subtemas: []
+        titulo: 'Recursos Pesqueiros e Engenharia de Pesca',
+        subtemas: [205, 206, 207, 208]
     },
     {
         id: 50,
-        titulo: 'Direito',
-        subtemas: []
+        titulo: 'Ciência e Tecnologia de Alimentos',
+        subtemas: [209, 210, 211]
     },
     {
         id: 51,
+        titulo: 'Direito',
+        subtemas: [212, 213, 214, 215]
+    },
+    {
+        id: 52,
         titulo: 'Administração',
-        subtemas: []
+        subtemas: [216, 217, 218]
+    },
+    {
+        id: 53,
+        titulo: 'Administração Pública',
+        subtemas: [219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277]
+    },
+    {
+        id: 54,
+        titulo: 'Economia',
+        subtemas: [278, 279, 280, 281, 282, 283, 284, 285, 286, 287]
+    },
+    {
+        id: 55,
+        titulo: 'Arquitetura e Urbanismo',
+        subtemas: [288, 289, 290, 291]
+    },
+    {
+        id: 56,
+        titulo: 'Planejamento Urbano e Regional',
+        subtemas: [292, 293, 294]
+    },
+    {
+        id: 57,
+        titulo: 'Demografia',
+        subtemas: [295, 296, 297, 298, 299, 300, 301]
+    },
+    {
+        id: 58,
+        titulo: 'Ciência da Informação',
+        subtemas: [302, 303, 304]
+    },
+    {
+        id: 59,
+        titulo: 'Museologia',
+        subtemas: [305]
+    },
+    {
+        id: 60,
+        titulo: 'Comunicação',
+        subtemas: [306, 307, 308, 309, 310]
+    },
+    {
+        id: 61,
+        titulo: 'Serviço Social',
+        subtemas: [311, 312]
+    },
+    {
+        id: 62,
+        titulo: 'Economia Doméstica',
+        subtemas: [313]
+    },
+    {
+        id: 63,
+        titulo: 'Desenho Industrial',
+        subtemas: [314, 315]
+    },
+    {
+        id: 64,
+        titulo: 'Filosofia',
+        subtemas: [316, 317, 318, 319, 320, 321]
+    },
+    {
+        id: 65,
+        titulo: 'Sociologia',
+        subtemas: [322, 323, 324, 325, 326, 327, 328]
+    },
+    {
+        id: 66,
+        titulo: 'Antropologia',
+        subtemas: [329, 330, 331, 332, 333]
+    },
+    {
+        id: 67,
+        titulo: 'Arqueologia',
+        subtemas: [334, 335, 336]
+    },
+    {
+        id: 68,
+        titulo: 'História',
+        subtemas: [337, 338, 339, 340, 341, 342]
+    },
+    {
+        id: 69,
+        titulo: 'Geografia',
+        subtemas: [343, 344]
+    },
+    {
+        id: 70,
+        titulo: 'Psicologia',
+        subtemas: [345, 346, 347, 348, 349, 350, 351, 352, 353, 354]
+    },
+    {
+        id: 71,
+        titulo: 'Educação',
+        subtemas: [355, 356, 357, 358, 359, 360, 361]
+    },
+    {
+        id: 72,
+        titulo: 'Ciência Política',
+        subtemas: [362, 363, 364, 365, 366]
+    },
+    {
+        id: 73,
+        titulo: 'Teologia',
+        subtemas: [367, 368, 369, 370]
+    },
+    {
+        id: 74,
+        titulo: 'Linguística',
+        subtemas: [371, 372, 373, 374, 375, 376]
+    },
+    {
+        id: 75,
+        titulo: 'Letras',
+        subtemas: [377, 378, 379, 380, 381, 382, 383, 384, 385, 386]
+    },
+    {
+        id: 76,
+        titulo: 'Artes',
+        subtemas: [387, 388, 389, 390, 391, 392, 393, 394, 395, 396]
     },
 ]
 
 export const subtemasDefault = [
     {
         id: 1,
-        titulo: 'Álgebra'
+        titulo: 'Não Especificado'
     },
     {
         id: 2,
-        titulo: 'Análise'
+        titulo: 'Algebra Análise'
     },
     {
         id: 3,
@@ -4947,1482 +4992,1498 @@ export const subtemasDefault = [
     },
     {
         id: 23,
-        titulo: 'Física dos Fluidos, Física de Plasmas e Descargas Elétricas'
+        titulo: 'Física dos Fluidos, Física de Plasmas e Descargas Elétricas Física da Matéria Condensada'
     },
     {
         id: 24,
-        titulo: 'Física da Matéria Condensada'
-    },
-    {
-        id: 25,
         titulo: 'Química Orgânica'
     },
     {
-        id: 26,
+        id: 25,
         titulo: 'Química Inorgânica'
     },
     {
-        id: 27,
+        id: 26,
         titulo: 'Fisico-Química'
     },
     {
-        id: 28,
+        id: 27,
         titulo: 'Química Analítica'
     },
     {
-        id: 29,
+        id: 28,
         titulo: 'Geologia'
     },
     {
-        id: 30,
+        id: 29,
         titulo: 'Geofísica'
     },
     {
-        id: 31,
+        id: 30,
         titulo: 'Meteorologia'
     },
     {
-        id: 32,
+        id: 31,
         titulo: 'Geodesia'
     },
     {
-        id: 33,
+        id: 32,
         titulo: 'Geografia Física'
     },
     {
-        id: 34,
+        id: 33,
         titulo: 'Oceanografia Biológica'
     },
     {
-        id: 35,
+        id: 34,
         titulo: 'Oceanografia Física'
     },
     {
-        id: 36,
+        id: 35,
         titulo: 'Oceanografia Química'
     },
     {
-        id: 37,
+        id: 36,
         titulo: 'Oceanografia Geológica'
     },
     {
-        id: 38,
+        id: 37,
         titulo: 'Biologia Geral'
     },
     {
-        id: 39,
+        id: 38,
         titulo: 'Genética Quantitativa'
     },
     {
-        id: 40,
+        id: 39,
         titulo: 'Genética Molecular e de Microorganismos'
     },
     {
-        id: 41,
+        id: 40,
         titulo: 'Genética Vegetal'
     },
     {
-        id: 42,
+        id: 41,
         titulo: 'Genética Animal'
     },
     {
+        id: 42,
+        titulo: 'Genética Humana e Médica Mutagênese'
+    },
+    {
         id: 43,
-        titulo: 'Genética Humana e Médica'
-    },
-    {
-        id: 44,
-        titulo: 'Mutagênese'
-    },
-    {
-        id: 45,
         titulo: 'Paleobotânica'
     },
     {
-        id: 46,
+        id: 44,
         titulo: 'Morfologia Vegetal'
     },
     {
-        id: 47,
+        id: 45,
         titulo: 'Fisiologia Vegetal'
     },
     {
-        id: 48,
+        id: 46,
         titulo: 'Taxonomia Vegetal'
     },
     {
-        id: 49,
+        id: 47,
         titulo: 'Fitogeografia'
     },
     {
-        id: 50,
+        id: 48,
         titulo: 'Botânica Aplicada'
     },
     {
-        id: 51,
+        id: 49,
         titulo: 'Paleozoologia'
     },
     {
-        id: 52,
+        id: 50,
         titulo: 'Morfologia dos Grupos Recentes'
     },
     {
-        id: 53,
+        id: 51,
         titulo: 'Fisiologia dos Grupos Recentes'
     },
     {
-        id: 54,
+        id: 52,
         titulo: 'Comportamento Animal'
     },
     {
-        id: 55,
+        id: 53,
         titulo: 'Taxonomia dos Grupos Recentes'
     },
     {
-        id: 56,
+        id: 54,
         titulo: 'Zoologia Aplicada'
     },
     {
-        id: 57,
+        id: 55,
         titulo: 'Ecologia Teórica'
     },
     {
-        id: 58,
+        id: 56,
         titulo: 'Ecologia de Ecossistemas'
     },
     {
-        id: 59,
+        id: 57,
         titulo: 'Ecologia Aplicada'
     },
     {
-        id: 60,
+        id: 58,
         titulo: 'Citologia e Biologia Celular'
     },
     {
-        id: 61,
+        id: 59,
         titulo: 'Embriologia'
     },
     {
-        id: 62,
+        id: 60,
         titulo: 'Histologia'
     },
     {
-        id: 63,
+        id: 61,
         titulo: 'Anatomia'
     },
     {
-        id: 64,
+        id: 62,
         titulo: 'Fisiologia Geral'
     },
     {
-        id: 65,
+        id: 63,
         titulo: 'Fisiologia de Órgaos e Sistemas'
     },
     {
-        id: 66,
+        id: 64,
         titulo: 'Fisiologia do Esforço'
     },
     {
-        id: 67,
+        id: 65,
         titulo: 'Fisiologia Comparada'
     },
     {
-        id: 68,
+        id: 66,
         titulo: 'Química de Macromoléculas'
     },
     {
-        id: 69,
+        id: 67,
         titulo: 'Bioquímica dos Microorganismos'
     },
     {
-        id: 70,
+        id: 68,
         titulo: 'Metabolismo e Bioenergética'
     },
     {
-        id: 71,
+        id: 69,
         titulo: 'Biologia Molecular'
     },
     {
-        id: 72,
+        id: 70,
         titulo: 'Enzimologia'
     },
     {
-        id: 73,
+        id: 71,
         titulo: 'Biofísica Molecular'
     },
     {
-        id: 74,
+        id: 72,
         titulo: 'Biofísica Celular'
     },
     {
-        id: 75,
+        id: 73,
         titulo: 'Biofísica de Processos e Sistemas'
     },
     {
-        id: 76,
+        id: 74,
         titulo: 'Radiologia e Fotobiologia'
     },
     {
-        id: 77,
+        id: 75,
         titulo: 'Farmacologia Geral'
     },
     {
-        id: 78,
+        id: 76,
         titulo: 'Farmacologia Autonômica'
     },
     {
-        id: 79,
+        id: 77,
         titulo: 'Neuropsicofarmacologia'
     },
     {
-        id: 80,
+        id: 78,
         titulo: 'Farmacologia Cardiorenal'
     },
     {
-        id: 81,
+        id: 79,
         titulo: 'Farmacologia Bioquímica e Molecular'
     },
     {
-        id: 82,
+        id: 80,
         titulo: 'Etnofarmacologia'
     },
     {
-        id: 83,
+        id: 81,
         titulo: 'Toxicologia'
     },
     {
-        id: 84,
+        id: 82,
         titulo: 'Farmacologia Clínica'
     },
     {
-        id: 85,
+        id: 83,
         titulo: 'Imunoquímica'
     },
     {
-        id: 86,
+        id: 84,
         titulo: 'Imunologia Celular'
     },
     {
-        id: 87,
+        id: 85,
         titulo: 'Imunogenética'
     },
     {
-        id: 88,
+        id: 86,
         titulo: 'Imunologia Aplicada'
     },
     {
-        id: 89,
+        id: 87,
         titulo: 'Biologia e Fisiologia dos Microorganismos'
     },
     {
-        id: 90,
+        id: 88,
         titulo: 'Microbiologia Aplicada'
     },
     {
-        id: 91,
+        id: 89,
         titulo: 'Protozoologia de Parasitos'
     },
     {
-        id: 92,
+        id: 90,
         titulo: 'Helmintologia de Parasitos'
     },
     {
-        id: 93,
+        id: 91,
         titulo: 'Entomologia e Malacologia de Parasitos e Vetores'
     },
     {
-        id: 94,
+        id: 92,
         titulo: 'Construção Civil'
     },
     {
-        id: 95,
+        id: 93,
         titulo: 'Estruturas'
     },
     {
-        id: 96,
+        id: 94,
         titulo: 'Geotécnica'
     },
     {
-        id: 97,
+        id: 95,
         titulo: 'Engenharia Hidráulica'
     },
     {
-        id: 98,
+        id: 96,
         titulo: 'Infra-Estrutura de Transportes'
     },
     {
-        id: 99,
+        id: 97,
         titulo: 'Pesquisa Mineral'
     },
     {
-        id: 100,
+        id: 98,
         titulo: 'Lavra'
     },
     {
-        id: 101,
+        id: 99,
         titulo: 'Tratamento de Minérios'
     },
     {
-        id: 102,
+        id: 100,
         titulo: 'Instalações e Equipamentos Metalúrgicos'
     },
     {
-        id: 103,
+        id: 101,
         titulo: 'Metalurgia Extrativa'
     },
     {
-        id: 104,
+        id: 102,
         titulo: 'Metalurgia de Transformação'
     },
     {
-        id: 105,
+        id: 103,
         titulo: 'Metalurgia Fisica'
     },
     {
-        id: 106,
+        id: 104,
         titulo: 'Materiais não Metálicos'
     },
     {
-        id: 107,
+        id: 105,
         titulo: 'Materiais Elétricos'
     },
     {
-        id: 108,
+        id: 106,
         titulo: 'Medidas Elétricas, Magnéticas e Eletrônicas; Instrumentação'
     },
     {
-        id: 109,
+        id: 107,
         titulo: 'Circuitos Elétricos, Magnéticos e Eletrônicos'
     },
     {
-        id: 110,
+        id: 108,
         titulo: 'Sistemas Elétricos de Potência'
     },
     {
-        id: 111,
+        id: 109,
         titulo: 'Eletrônica Industrial, Sistemas e Controles Eletrônicos'
     },
     {
-        id: 112,
+        id: 110,
         titulo: 'Telecomunicações'
     },
     {
-        id: 113,
+        id: 111,
         titulo: 'Fenômenos de Transporte'
     },
     {
-        id: 114,
+        id: 112,
         titulo: 'Engenharia Térmica'
     },
     {
-        id: 115,
+        id: 113,
         titulo: 'Mecânica dos Sólidos'
     },
     {
-        id: 116,
+        id: 114,
         titulo: 'Projetos de Máquinas'
     },
     {
-        id: 117,
+        id: 115,
         titulo: 'Processos de Fabricação'
     },
     {
-        id: 118,
+        id: 116,
         titulo: 'Processos Industriais de Engenharia Química'
     },
     {
-        id: 119,
+        id: 117,
         titulo: 'Operações Industriais e Equipamentos para Engenharia Química'
     },
     {
-        id: 120,
+        id: 118,
         titulo: 'Tecnologia Química'
     },
     {
-        id: 121,
+        id: 119,
         titulo: 'Recursos Hídricos'
     },
     {
-        id: 122,
+        id: 120,
         titulo: 'Tratamento de Águas de Abastecimento e Residuárias'
     },
     {
-        id: 123,
+        id: 121,
         titulo: 'Saneamento Básico'
     },
     {
-        id: 124,
+        id: 122,
         titulo: 'Saneamento Ambiental'
     },
     {
-        id: 125,
+        id: 123,
         titulo: 'Gerência de Produção'
     },
     {
-        id: 126,
+        id: 124,
         titulo: 'Pesquisa Operacional'
     },
     {
-        id: 127,
+        id: 125,
         titulo: 'Engenharia do Produto'
     },
     {
-        id: 128,
+        id: 126,
         titulo: 'Engenharia Econômica'
     },
     {
-        id: 129,
+        id: 127,
         titulo: 'Aplicações de Radioisotopos'
     },
     {
-        id: 130,
+        id: 128,
         titulo: 'Fusão Controlada'
     },
     {
-        id: 131,
+        id: 129,
         titulo: 'Combustível Nuclear'
     },
     {
-        id: 132,
+        id: 130,
         titulo: 'Tecnologia dos Reatores'
     },
     {
-        id: 133,
+        id: 131,
         titulo: 'Planejamento de Transportes'
     },
     {
-        id: 134,
+        id: 132,
         titulo: 'Veículos e Equipamentos de Controle'
     },
     {
-        id: 135,
+        id: 133,
         titulo: 'Operações de Transportes'
     },
     {
-        id: 136,
+        id: 134,
         titulo: 'Hidrodinâmica de Navios e Sistemas Oceânicos'
     },
     {
-        id: 137,
+        id: 135,
         titulo: 'Estruturas Navais e Oceânicas'
     },
     {
-        id: 138,
+        id: 136,
         titulo: 'Máquinas Marítimas'
     },
     {
-        id: 139,
+        id: 137,
         titulo: 'Projeto de Navios e de Sistemas Oceânicos'
     },
     {
-        id: 140,
+        id: 138,
         titulo: 'Tecnologia de Construção Naval e de Sistemas Oceânicas'
     },
     {
-        id: 141,
+        id: 139,
         titulo: 'Aerodinâmica'
     },
     {
-        id: 142,
+        id: 140,
         titulo: 'Dinâmica de Vôo'
     },
     {
-        id: 143,
+        id: 141,
         titulo: 'Estruturas Aeroespaciais'
     },
     {
-        id: 144,
+        id: 142,
         titulo: 'Materiais e Processos para Engenharia Aeronáutica e Aeroespacial'
     },
     {
-        id: 145,
+        id: 143,
         titulo: 'Propulsão Aeroespacial'
     },
     {
-        id: 146,
+        id: 144,
         titulo: 'Sistemas Aeroespaciais'
     },
     {
-        id: 147,
+        id: 145,
         titulo: 'Bioengenharia'
     },
     {
-        id: 148,
+        id: 146,
         titulo: 'Engenharia Médica'
     },
     {
-        id: 149,
+        id: 147,
         titulo: 'Clínica Médica'
     },
     {
-        id: 150,
+        id: 148,
         titulo: 'Cirurgia'
     },
     {
-        id: 151,
+        id: 149,
         titulo: 'Saúde Materno-Infantil'
     },
     {
-        id: 152,
+        id: 150,
         titulo: 'Psiquiatria'
     },
     {
-        id: 153,
+        id: 151,
         titulo: 'Anatomia Patológica e Patologia Clínica'
     },
     {
-        id: 154,
+        id: 152,
         titulo: 'Radiologia Médica'
     },
     {
-        id: 155,
+        id: 153,
         titulo: 'Medicina Legal e Deontologia'
     },
     {
-        id: 156,
+        id: 154,
         titulo: 'Clínica Odontológica'
     },
     {
-        id: 157,
+        id: 155,
         titulo: 'Cirurgia Buco-Maxilo-Facial'
     },
     {
-        id: 158,
+        id: 156,
         titulo: 'Ortodontia'
     },
     {
-        id: 159,
+        id: 157,
         titulo: 'Odontopediatria'
     },
     {
-        id: 160,
+        id: 158,
         titulo: 'Periodontia'
     },
     {
-        id: 161,
+        id: 159,
         titulo: 'Endodontia'
     },
     {
-        id: 162,
+        id: 160,
         titulo: 'Radiologia Odontológica'
     },
     {
-        id: 163,
+        id: 161,
         titulo: 'Odontologia Social e Preventiva'
     },
     {
-        id: 164,
+        id: 162,
         titulo: 'Materiais Odontológicos'
     },
     {
-        id: 165,
+        id: 163,
         titulo: 'Farmacotecnia'
     },
     {
-        id: 166,
+        id: 164,
         titulo: 'Farmacognosia'
     },
     {
-        id: 167,
+        id: 165,
         titulo: 'Análise Toxicológica'
     },
     {
-        id: 168,
+        id: 166,
         titulo: 'Análise e Controle e Medicamentos'
     },
     {
-        id: 169,
+        id: 167,
         titulo: 'Bromatologia'
     },
     {
-        id: 170,
+        id: 168,
         titulo: 'Bioquímica da Nutrição'
     },
     {
-        id: 171,
+        id: 169,
         titulo: 'Dietética'
     },
     {
-        id: 172,
+        id: 170,
         titulo: 'Análise Nutricional de População'
     },
     {
-        id: 173,
+        id: 171,
         titulo: 'Desnutrição e Desenvolvimento Fisiológico'
     },
     {
-        id: 174,
+        id: 172,
         titulo: 'Epidemiologia'
     },
     {
-        id: 175,
+        id: 173,
         titulo: 'Saúde Publica'
     },
     {
-        id: 176,
+        id: 174,
         titulo: 'Medicina Preventiva'
     },
     {
-        id: 177,
+        id: 175,
         titulo: 'Fonoaudiologia'
     },
     {
-        id: 178,
+        id: 176,
         titulo: 'Fisioterapia e Terapia Ocupacional'
     },
     {
-        id: 179,
+        id: 177,
         titulo: 'Educação Física'
     },
     {
-        id: 180,
+        id: 178,
         titulo: 'Ciência do Solo'
     },
     {
-        id: 181,
+        id: 179,
         titulo: 'Fitossanidade'
     },
     {
-        id: 182,
+        id: 180,
         titulo: 'Fitotecnia'
     },
     {
-        id: 183,
+        id: 181,
         titulo: 'Floricultura, Parques e Jardins'
     },
     {
-        id: 184,
+        id: 182,
         titulo: 'Agrometeorologia'
     },
     {
-        id: 185,
+        id: 183,
         titulo: 'Extensão Rural'
     },
     {
-        id: 186,
+        id: 184,
         titulo: 'Silvicultura'
     },
     {
-        id: 187,
+        id: 185,
         titulo: 'Manejo Florestal'
     },
     {
-        id: 188,
+        id: 186,
         titulo: 'Técnicas e Operações Florestais'
     },
     {
-        id: 189,
+        id: 187,
         titulo: 'Tecnologia e Utilização de Produtos Florestais'
     },
     {
-        id: 190,
+        id: 188,
         titulo: 'Conservação da Natureza'
     },
     {
-        id: 191,
+        id: 189,
         titulo: 'Energia de Biomassa Florestal'
     },
     {
-        id: 192,
+        id: 190,
         titulo: 'Máquinas e Implementos Agrícolas'
     },
     {
-        id: 193,
+        id: 191,
         titulo: 'Engenharia de Água e Solo'
     },
     {
-        id: 194,
+        id: 192,
         titulo: 'Engenharia de Processamento de Produtos Agrícolas'
     },
     {
-        id: 195,
+        id: 193,
         titulo: 'Construções Rurais e Ambiência'
     },
     {
-        id: 196,
+        id: 194,
         titulo: 'Energização Rural'
     },
     {
-        id: 197,
+        id: 195,
         titulo: 'Ecologia dos Animais Domésticos e Etologia'
     },
     {
-        id: 198,
+        id: 196,
         titulo: 'Genética e Melhoramento dos Animais Domésticos'
     },
     {
-        id: 199,
+        id: 197,
         titulo: 'Nutrição e Alimentação Animal'
     },
     {
-        id: 200,
+        id: 198,
         titulo: 'Pastagem e Forragicultura'
     },
     {
-        id: 201,
+        id: 199,
         titulo: 'Produção Animal'
     },
     {
-        id: 202,
+        id: 200,
         titulo: 'Clínica e Cirurgia Animal'
     },
     {
-        id: 203,
+        id: 201,
         titulo: 'Medicina Veterinária Preventiva'
     },
     {
-        id: 204,
+        id: 202,
         titulo: 'Patologia Animal'
     },
     {
-        id: 205,
+        id: 203,
         titulo: 'Reprodução Animal'
     },
     {
-        id: 206,
+        id: 204,
         titulo: 'Inspeção de Produtos de Origem Animal'
     },
     {
-        id: 207,
+        id: 205,
         titulo: 'Recursos Pesqueiros Marinhos'
     },
     {
-        id: 208,
+        id: 206,
         titulo: 'Recursos Pesqueiros de Águas Interiores'
     },
     {
-        id: 209,
+        id: 207,
         titulo: 'Aquicultura'
     },
     {
-        id: 210,
+        id: 208,
         titulo: 'Engenharia de Pesca'
     },
     {
-        id: 211,
+        id: 209,
         titulo: 'Ciência de Alimentos'
     },
     {
-        id: 212,
+        id: 210,
         titulo: 'Tecnologia de Alimentos'
     },
     {
-        id: 213,
+        id: 211,
         titulo: 'Engenharia de Alimentos'
     },
     {
-        id: 214,
+        id: 212,
         titulo: 'Teoria do Direito'
     },
     {
-        id: 215,
+        id: 213,
         titulo: 'Direito Público'
     },
     {
-        id: 216,
+        id: 214,
         titulo: 'Direito Privado'
     },
     {
-        id: 217,
+        id: 215,
         titulo: 'Direitos Especiais'
     },
     {
-        id: 218,
+        id: 216,
         titulo: 'Administração de Empresas'
     },
     {
-        id: 219,
+        id: 217,
         titulo: 'Administração de Setores Específicos'
     },
     {
-        id: 220,
+        id: 218,
         titulo: 'Ciências Contábeis'
     },
     {
-        id: 221,
+        id: 219,
         titulo: 'Teoria da Administração Pública'
     },
     {
-        id: 222,
+        id: 220,
         titulo: 'Administração Pública do Brasil'
     },
     {
-        id: 223,
+        id: 221,
         titulo: 'Administração Pública da Europa'
     },
     {
-        id: 224,
+        id: 222,
         titulo: 'Administração Pública da América Latina'
     },
     {
-        id: 225,
+        id: 223,
         titulo: 'Administração Pública da América do Norte'
     },
     {
-        id: 226,
+        id: 224,
         titulo: 'Administração Pública da Ásia e Oceania'
     },
     {
-        id: 227,
+        id: 225,
         titulo: 'Administração Pública da África'
     },
     {
-        id: 228,
+        id: 226,
         titulo: 'Administração Federal'
     },
     {
-        id: 229,
+        id: 227,
         titulo: 'Administração Municipal'
     },
     {
-        id: 230,
+        id: 228,
         titulo: 'Administração Regional'
     },
     {
-        id: 231,
+        id: 229,
         titulo: 'Administração Estadual'
     },
     {
-        id: 232,
+        id: 230,
         titulo: 'Desburocratização'
     },
     {
-        id: 233,
+        id: 231,
         titulo: 'Reforma Administrativa'
     },
     {
-        id: 234,
+        id: 232,
         titulo: 'Governo Eletrônico / Digital'
     },
     {
-        id: 235,
+        id: 233,
         titulo: 'Inovação na Gestão Pública'
     },
     {
-        id: 236,
+        id: 234,
         titulo: 'Modernização Administrativa'
     },
     {
-        id: 237,
+        id: 235,
         titulo: 'Tecnologia da Informação'
     },
     {
-        id: 238,
+        id: 236,
         titulo: 'Atendimento ao Público'
     },
     {
-        id: 239,
+        id: 237,
         titulo: 'Satisfação do Usuário'
     },
     {
-        id: 240,
+        id: 238,
         titulo: 'Código de Conduta'
     },
     {
-        id: 241,
+        id: 239,
         titulo: 'Corrupção Administrativa'
     },
     {
-        id: 242,
+        id: 240,
         titulo: 'Ética no Setor Público'
     },
     {
-        id: 243,
+        id: 241,
         titulo: 'Fiscalização da Moralidade Pública'
     },
     {
-        id: 244,
-        titulo: 'Avaliação de Desempenho (Setor Público'
+        id: 242,
+        titulo: 'Avaliação de Desempenho (Setor Público)'
     },
     {
-        id: 245,
+        id: 243,
         titulo: 'Consórcio Público'
     },
     {
-        id: 246,
+        id: 244,
         titulo: 'Contrato de gestão'
     },
     {
-        id: 247,
+        id: 245,
         titulo: 'Controle de Gestão'
     },
     {
-        id: 248,
-        titulo: 'Indicador de Desempenho (Setor Público'
+        id: 246,
+        titulo: 'Indicador de Desempenho (Setor Público)'
     },
     {
-        id: 249,
+        id: 247,
         titulo: 'Produtividade'
     },
     {
-        id: 250,
+        id: 248,
         titulo: 'Auditoria'
     },
     {
-        id: 251,
-        titulo: 'Accountability (Prestação Pública de Contas'
+        id: 249,
+        titulo: 'Accountability (Prestação Pública de Contas)'
     },
     {
-        id: 252,
+        id: 250,
         titulo: 'Controle Social'
     },
     {
-        id: 253,
+        id: 251,
         titulo: 'Ouvidoria'
     },
     {
-        id: 254,
+        id: 252,
         titulo: 'Concessão de Serviços Públicos'
     },
     {
-        id: 255,
+        id: 253,
         titulo: 'Parcerias no Setor Público'
     },
     {
-        id: 256,
+        id: 254,
         titulo: 'Parcerias Público-Privadas'
     },
     {
-        id: 257,
+        id: 255,
         titulo: 'Técnicas Gerenciais no Setor Público'
     },
     {
-        id: 258,
+        id: 256,
         titulo: 'Alta Administração Pública'
     },
     {
-        id: 259,
+        id: 257,
         titulo: 'Gestor Público'
     },
     {
-        id: 260,
+        id: 258,
         titulo: 'Liderança'
     },
     {
-        id: 261,
+        id: 259,
         titulo: 'Função Pública'
     },
     {
-        id: 262,
+        id: 260,
         titulo: 'Gestão de Pessoas no Setor Público'
     },
     {
-        id: 263,
+        id: 261,
         titulo: 'Relações de Trabalho no Setor Público'
     },
     {
-        id: 264,
+        id: 262,
         titulo: 'Capacitação Profissional no Setor Público'
     },
     {
-        id: 265,
+        id: 263,
         titulo: 'Compras Governamentais'
     },
     {
-        id: 266,
+        id: 264,
         titulo: 'Terceirização'
     },
     {
-        id: 267,
+        id: 265,
         titulo: 'Empresa Pública'
     },
     {
-        id: 268,
+        id: 266,
         titulo: 'Regulação – Agência Reguladora'
     },
     {
-        id: 269,
+        id: 267,
         titulo: 'Cooperação Internacional'
     },
     {
-        id: 270,
+        id: 268,
         titulo: 'Terceiro Setor – ONG’s – OSCIP'
     },
     {
-        id: 271,
+        id: 269,
         titulo: 'Políticas Públicas e Uso de Evidências'
     },
     {
-        id: 272,
+        id: 270,
         titulo: 'Governança e Gestão de Riscos'
     },
     {
-        id: 273,
+        id: 271,
         titulo: 'Previdência'
     },
     {
+        id: 272,
+        titulo: 'Estratégia, Projetos e Processos'
+    },
+    {
+        id: 273,
+        titulo: 'Gestão de Pessoas'
+    },
+    {
         id: 274,
-        titulo: 'Teoria Econômica'
+        titulo: 'Governo e Transformação Digital'
     },
     {
         id: 275,
-        titulo: 'Métodos Quantitativos em Economia'
+        titulo: 'Inovação'
     },
     {
         id: 276,
-        titulo: 'Economia Monetária e Fiscal'
+        titulo: 'Técnicas, recursos e estratégias para desenvolvimento de pessoa'
     },
     {
         id: 277,
-        titulo: 'Crescimento, Flutuações e Planejamento Econômico'
+        titulo: 'Transparência, Controle e Participação'
     },
     {
         id: 278,
-        titulo: 'Economia Internacional'
+        titulo: 'Teoria Econômica'
     },
     {
         id: 279,
-        titulo: 'Economia dos Recursos Humanos'
+        titulo: 'Métodos Quantitativos em Economia'
     },
     {
         id: 280,
-        titulo: 'Economia Industrial'
+        titulo: 'Economia Monetária e Fiscal'
     },
     {
         id: 281,
-        titulo: 'Economia do Bem-Estar Social'
+        titulo: 'Crescimento, Flutuações e Planejamento Econômico'
     },
     {
         id: 282,
-        titulo: 'Economia Regional e Urbana'
+        titulo: 'Economia Internacional'
     },
     {
         id: 283,
-        titulo: 'Economias Agrária e dos Recursos Naturais'
+        titulo: 'Economia dos Recursos Humanos'
     },
     {
         id: 284,
-        titulo: 'Fundamentos de Arquitetura e Urbanismo'
+        titulo: 'Economia Industrial'
     },
     {
         id: 285,
-        titulo: 'Projeto de Arquitetuta e Urbanismo'
+        titulo: 'Economia do Bem-Estar Social'
     },
     {
         id: 286,
-        titulo: 'Tecnologia de Arquitetura e Urbanismo'
+        titulo: 'Economia Regional e Urbana'
     },
     {
         id: 287,
-        titulo: 'Paisagismo'
+        titulo: 'Economias Agrária e dos Recursos Naturais'
     },
     {
         id: 288,
-        titulo: 'Fundamentos do Planejamento Urbano e Regional'
+        titulo: 'Fundamentos de Arquitetura e Urbanismo'
     },
     {
         id: 289,
-        titulo: 'Métodos e Técnicas do Planejamento Urbano e Regional'
+        titulo: 'Projeto de Arquitetuta e Urbanismo'
     },
     {
         id: 290,
-        titulo: 'Serviços Urbanos e Regionais'
+        titulo: 'Tecnologia de Arquitetura e Urbanismo'
     },
     {
         id: 291,
-        titulo: 'Distribuição Espacial'
+        titulo: 'Paisagismo'
     },
     {
         id: 292,
-        titulo: 'Tendência Populacional'
+        titulo: 'Fundamentos do Planejamento Urbano e Regional'
     },
     {
         id: 293,
-        titulo: 'Componentes da Dinâmica Demográfica'
+        titulo: 'Métodos e Técnicas do Planejamento Urbano e Regional'
     },
     {
         id: 294,
-        titulo: 'Nupcialidade e Família'
+        titulo: 'Serviços Urbanos e Regionais'
     },
     {
         id: 295,
-        titulo: 'Demografia Histórica'
+        titulo: 'Distribuição Espacial'
     },
     {
         id: 296,
-        titulo: 'Política Pública e População'
+        titulo: 'Tendência Populacional'
     },
     {
         id: 297,
-        titulo: 'Fontes de Dados Demográficos'
+        titulo: 'Componentes da Dinâmica Demográfica'
     },
     {
         id: 298,
-        titulo: 'Teoria da Informação'
+        titulo: 'Nupcialidade e Família'
     },
     {
         id: 299,
-        titulo: 'Biblioteconomia'
+        titulo: 'Demografia Histórica'
     },
     {
         id: 300,
-        titulo: 'Arquivologia'
+        titulo: 'Política Pública e População'
     },
     {
         id: 301,
-        titulo: 'Museologia'
+        titulo: 'Fontes de Dados Demográficos'
     },
     {
         id: 302,
-        titulo: 'Teoria da Comunicação'
+        titulo: 'Teoria da Informação'
     },
     {
         id: 303,
-        titulo: 'Jornalismo e Editoração'
+        titulo: 'Biblioteconomia'
     },
     {
         id: 304,
-        titulo: 'Rádio e Televisão'
+        titulo: 'Arquivologia'
     },
     {
         id: 305,
-        titulo: 'Relações Públicas e Propaganda'
+        titulo: 'Museologia'
     },
     {
         id: 306,
-        titulo: 'Comunicação Visual'
+        titulo: 'Teoria da Comunicação'
     },
     {
         id: 307,
-        titulo: 'Fundamentos do Serviço Social'
+        titulo: 'Jornalismo e Editoração'
     },
     {
         id: 308,
-        titulo: 'Serviço Social Aplicado'
+        titulo: 'Rádio e Televisão'
     },
     {
         id: 309,
-        titulo: 'Economia Doméstica'
+        titulo: 'Relações Públicas e Propaganda'
     },
     {
         id: 310,
-        titulo: 'Programação Visual'
+        titulo: 'Comunicação Visual'
     },
     {
         id: 311,
-        titulo: 'Desenho de Produto'
+        titulo: 'Fundamentos do Serviço Social'
     },
     {
         id: 312,
-        titulo: 'História da Filosofia'
+        titulo: 'Serviço Social Aplicado'
     },
     {
         id: 313,
-        titulo: 'Metafísica'
+        titulo: 'Economia Doméstica'
     },
     {
         id: 314,
-        titulo: 'Lógica'
+        titulo: 'Programação Visual'
     },
     {
         id: 315,
-        titulo: 'Ética'
+        titulo: 'Desenho de Produto'
     },
     {
         id: 316,
-        titulo: 'Epistemologia'
+        titulo: 'História da Filosofia'
     },
     {
         id: 317,
-        titulo: 'Filosofia Brasileira'
+        titulo: 'Metafísica'
     },
     {
         id: 318,
-        titulo: 'Fundamentos da Sociologia'
+        titulo: 'Lógica'
     },
     {
         id: 319,
-        titulo: 'Sociologia do Conhecimento'
+        titulo: 'Ética'
     },
     {
         id: 320,
-        titulo: 'Sociologia do Desenvolvimento'
+        titulo: 'Epistemologia'
     },
     {
         id: 321,
-        titulo: 'Sociologia Urbana'
+        titulo: 'Filosofia Brasileira'
     },
     {
         id: 322,
-        titulo: 'Sociologia Rural'
+        titulo: 'Fundamentos da Sociologia'
     },
     {
         id: 323,
-        titulo: 'Sociologia da Saúde'
+        titulo: 'Sociologia do Conhecimento'
     },
     {
         id: 324,
-        titulo: 'Outras Sociologias Específicas'
+        titulo: 'Sociologia do Desenvolvimento'
     },
     {
         id: 325,
-        titulo: 'Teoria Antropológica'
+        titulo: 'Sociologia Urbana'
     },
     {
         id: 326,
-        titulo: 'Etnologia Indígena'
+        titulo: 'Sociologia Rural'
     },
     {
         id: 327,
-        titulo: 'Antropologia Urbana'
+        titulo: 'Sociologia da Saúde'
     },
     {
         id: 328,
-        titulo: 'Antropologia Rural'
+        titulo: 'Outras Sociologias Específicas'
     },
     {
         id: 329,
-        titulo: 'Antropologia das Populações Afro-Brasileiras'
+        titulo: 'Teoria Antropológica'
     },
     {
         id: 330,
-        titulo: 'Teoria e Método em Arqueologia'
+        titulo: 'Etnologia Indígena'
     },
     {
         id: 331,
-        titulo: 'Arqueologia Pré-Histórica'
+        titulo: 'Antropologia Urbana'
     },
     {
         id: 332,
-        titulo: 'Arqueologia Histórica'
+        titulo: 'Antropologia Rural'
     },
     {
         id: 333,
-        titulo: 'Teoria e Filosofia da História'
+        titulo: 'Antropologia das Populações Afro-Brasileiras'
     },
     {
         id: 334,
-        titulo: 'História Antiga e Medieval'
+        titulo: 'Teoria e Método em Arqueologia'
     },
     {
         id: 335,
-        titulo: 'História Moderna e Contemporânea'
+        titulo: 'Arqueologia Pré-Histórica'
     },
     {
         id: 336,
-        titulo: 'História da América'
+        titulo: 'Arqueologia Histórica'
     },
     {
         id: 337,
-        titulo: 'História do Brasi'
+        titulo: 'Teoria e Filosofia da História'
     },
     {
         id: 338,
-        titulo: 'História das Ciências'
+        titulo: 'História Antiga e Medieval'
     },
     {
         id: 339,
-        titulo: 'Geografia Humana'
+        titulo: 'História Moderna e Contemporânea'
     },
     {
         id: 340,
-        titulo: 'Geografia Regional'
+        titulo: 'História da América'
     },
     {
         id: 341,
-        titulo: 'Fundamentos e Medidas da Psicologia'
+        titulo: 'História do Brasi'
     },
     {
         id: 342,
-        titulo: 'Psicologia Experimental'
+        titulo: 'História das Ciências'
     },
     {
         id: 343,
-        titulo: 'Psicologia Fisiológica'
+        titulo: 'Geografia Humana'
     },
     {
         id: 344,
-        titulo: 'Psicologia Comparativa'
+        titulo: 'Geografia Regional'
     },
     {
         id: 345,
-        titulo: 'Psicologia Social'
+        titulo: 'Fundamentos e Medidas da Psicologia'
     },
     {
         id: 346,
-        titulo: 'Psicologia Cognitiva'
+        titulo: 'Psicologia Experimental'
     },
     {
         id: 347,
-        titulo: 'Psicologia do Desenvolvimento Humano'
+        titulo: 'Psicologia Fisiológica'
     },
     {
         id: 348,
-        titulo: 'Psicologia do Ensino e da Aprendizagem'
+        titulo: 'Psicologia Comparativa'
     },
     {
         id: 349,
-        titulo: 'Psicologia do Trabalho e Organizacional'
+        titulo: 'Psicologia Social'
     },
     {
         id: 350,
-        titulo: 'Tratamento e Prevenção Psicológica'
+        titulo: 'Psicologia Cognitiva'
     },
     {
         id: 351,
-        titulo: 'Fundamentos da Educação'
+        titulo: 'Psicologia do Desenvolvimento Humano'
     },
     {
         id: 352,
-        titulo: 'Administração Educacional'
+        titulo: 'Psicologia do Ensino e da Aprendizagem'
     },
     {
         id: 353,
-        titulo: 'Planejamento e Avaliação Educacional'
+        titulo: 'Psicologia do Trabalho e Organizacional'
     },
     {
         id: 354,
-        titulo: 'Ensino-Aprendizagem'
+        titulo: 'Tratamento e Prevenção Psicológica'
     },
     {
         id: 355,
-        titulo: 'Currículo'
+        titulo: 'Fundamentos da Educação'
     },
     {
         id: 356,
-        titulo: 'Orientação e Aconselhamento'
+        titulo: 'Administração Educacional'
     },
     {
         id: 357,
-        titulo: 'Tópicos Específicos de Educação'
+        titulo: 'Planejamento e Avaliação Educacional'
     },
     {
         id: 358,
-        titulo: 'Teoria Política'
+        titulo: 'Ensino-Aprendizagem'
     },
     {
         id: 359,
-        titulo: 'Estado e Governo'
+        titulo: 'Currículo'
     },
     {
         id: 360,
-        titulo: 'Comportamento Político'
+        titulo: 'Orientação e Aconselhamento'
     },
     {
         id: 361,
-        titulo: 'Políticas Públicas'
+        titulo: 'Tópicos Específicos de Educação'
     },
     {
         id: 362,
-        titulo: 'Política Internacional'
+        titulo: 'Teoria Política'
     },
     {
         id: 363,
-        titulo: 'História da Teologia'
+        titulo: 'Estado e Governo'
     },
     {
         id: 364,
-        titulo: 'Teologia Moral'
+        titulo: 'Comportamento Político'
     },
     {
         id: 365,
-        titulo: 'Teologia Sistemática'
+        titulo: 'Políticas Públicas'
     },
     {
         id: 366,
-        titulo: 'Teologia Pastoral'
+        titulo: 'Política Internacional'
     },
     {
         id: 367,
-        titulo: 'Teoria e Análise Linguística'
+        titulo: 'História da Teologia'
     },
     {
         id: 368,
-        titulo: 'Fisiologia da Linguagem'
+        titulo: 'Teologia Moral'
     },
     {
         id: 369,
-        titulo: 'Linguística Histórica'
+        titulo: 'Teologia Sistemática'
     },
     {
         id: 370,
-        titulo: 'Sociolinguística e Dialetologia'
+        titulo: 'Teologia Pastoral'
     },
     {
         id: 371,
-        titulo: 'Psicolinguística'
+        titulo: 'Teoria e Análise Linguística'
     },
     {
         id: 372,
-        titulo: 'Linguística Aplicada'
+        titulo: 'Fisiologia da Linguagem'
     },
     {
         id: 373,
-        titulo: 'Língua Portuguesa'
+        titulo: 'Linguística Histórica'
     },
     {
         id: 374,
-        titulo: 'Línguas Estrangeiras Modernas'
+        titulo: 'Sociolinguística e Dialetologia'
     },
     {
         id: 375,
-        titulo: 'Línguas Clássicas'
+        titulo: 'Psicolinguística'
     },
     {
         id: 376,
-        titulo: 'Línguas Indígenas'
+        titulo: 'Linguística Aplicada'
     },
     {
         id: 377,
-        titulo: 'Teoria Literária'
+        titulo: 'Língua Portuguesa'
     },
     {
         id: 378,
-        titulo: 'Literatura Brasileira'
+        titulo: 'Línguas Estrangeiras Modernas'
     },
     {
         id: 379,
-        titulo: 'Outras Literaturas Vernáculas'
+        titulo: 'Línguas Clássicas'
     },
     {
         id: 380,
-        titulo: 'Literaturas Estrangeiras Modernas'
+        titulo: 'Línguas Indígenas'
     },
     {
         id: 381,
-        titulo: 'Literaturas Clássicas'
+        titulo: 'Teoria Literária'
     },
     {
         id: 382,
-        titulo: 'Literatura Comparada'
+        titulo: 'Literatura Brasileira'
     },
     {
         id: 383,
-        titulo: 'Fundamentos e Crítica das Artes'
+        titulo: 'Outras Literaturas Vernáculas'
     },
     {
         id: 384,
-        titulo: 'Artes Plásticas'
+        titulo: 'Literaturas Estrangeiras Modernas'
     },
     {
         id: 385,
-        titulo: 'Música'
+        titulo: 'Literaturas Clássicas'
     },
     {
         id: 386,
-        titulo: 'Dança'
+        titulo: 'Literatura Comparada'
     },
     {
         id: 387,
-        titulo: 'Teatro'
+        titulo: 'Fundamentos e Crítica das Artes'
     },
     {
         id: 388,
-        titulo: 'Ópera'
+        titulo: 'Artes Plásticas'
     },
     {
         id: 389,
-        titulo: 'Fotografia'
+        titulo: 'Música'
     },
     {
         id: 390,
-        titulo: 'Cinema'
+        titulo: 'Dança'
     },
     {
         id: 391,
-        titulo: 'Artes do Vídeo'
+        titulo: 'Teatro'
     },
     {
         id: 392,
+        titulo: 'Ópera'
+    },
+    {
+        id: 393,
+        titulo: 'Fotografia'
+    },
+    {
+        id: 394,
+        titulo: 'Cinema'
+    },
+    {
+        id: 395,
+        titulo: 'Artes do Vídeo'
+    },
+    {
+        id: 396,
         titulo: 'Educação Artística'
     },
 ]

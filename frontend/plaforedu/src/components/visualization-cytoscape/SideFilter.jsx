@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-
+import React, { useEffect, useRef, useState, useMemo } from 'react'
+import { debounce } from 'lodash';
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
 
@@ -15,10 +15,13 @@ import {
     Slider,
     Input,
     Form,
-    Card
+    Card,
+    Grid,
 } from 'antd'
 
-export default function SideFilter() {
+const { useBreakpoint } = Grid
+
+export default function SideFilter({ debounceTimeout = 800 }) {
 
     const subtemas = useStoreState(state => state.cursos.subtemas)
     const temas = useStoreState(state => state.cursos.temas)
@@ -33,6 +36,8 @@ export default function SideFilter() {
 
     const setFilter = useStoreActions(actions => actions.cursos.setFilter)
     const setTipoVisualizacao = useStoreActions(actions => actions.adm.setTipoVisualizacao)
+
+    const screens = useBreakpoint()
 
     const register = useRef(useForm({
         mode: 'onBlur',
@@ -62,7 +67,15 @@ export default function SideFilter() {
         register.current.setValue('itinerario', filter.itinerario)
     }, [filter.itinerario])
 
+    const onSubmitDebounce = useMemo(() => {
+        const onSubmitDebounceFunction = () => {
+            let allValuesFields = register.current.getValues()
+            delete allValuesFields.tipoVisualizacao
+            setFilter(allValuesFields)
+        }
 
+        return debounce(onSubmitDebounceFunction, debounceTimeout)
+    }, [debounceTimeout, setFilter])
 
     return (
         <Col style={{ padding: '8px 16px', overflowY: 'scroll' }}>
@@ -168,6 +181,9 @@ export default function SideFilter() {
                                             onSubmit()
                                         }}
                                         style={{ width: '100%' }}
+                                        filterOption={(input, option) => {
+                                            return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+                                        }}
                                     >
                                         {categoriasDeCompetencias.map((categoria) => (
                                             <Select.Option key={categoria.id} value={categoria.id}>{categoria.nome}</Select.Option>
@@ -193,6 +209,9 @@ export default function SideFilter() {
                                             onSubmit()
                                         }}
                                         style={{ width: '100%' }}
+                                        filterOption={(input, option) => {
+                                            return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+                                        }}
                                     >
                                         {competencias.map((competencia) => (
                                             <Select.Option key={competencia.id} value={competencia.id}>{competencia.titulo}</Select.Option>
@@ -242,7 +261,7 @@ export default function SideFilter() {
                                                 {...field}
                                                 placeholder={'Todos os Subtemas'}
                                                 mode='multiple'
-                                                showSearch
+                                                showArrow
                                                 onChange={(value) => {
                                                     field.onChange(value)
                                                     onSubmit()
@@ -277,7 +296,7 @@ export default function SideFilter() {
                                                 max={200}
                                                 onChange={(value) => {
                                                     field.onChange(value)
-                                                    onSubmit()
+                                                    onSubmitDebounce()
                                                 }}
                                             />
                                         </Form.Item>
@@ -300,6 +319,9 @@ export default function SideFilter() {
                                                     onSubmit()
                                                 }}
                                                 style={{ width: '100%' }}
+                                                filterOption={(input, option) => {
+                                                    return (option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+                                                }}
                                             >
                                                 {instituicoes.map((instituicao) => (
                                                     <Select.Option key={instituicao.id} value={instituicao.id}>{instituicao.titulo}</Select.Option>
