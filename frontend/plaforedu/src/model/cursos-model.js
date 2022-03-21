@@ -248,7 +248,7 @@ const reformuladorDeElementosCytoscape = (novosCursos, esqCores, tipoClassificac
     let competenciasAdicionadas = []
     let elementos = []
     let contadorEdge = 1
-    tipoClassificacao ?
+    tipoClassificacao ? // False: por competências   True: por trilhas
     novosCursos.forEach(idCurso => {
         const curso = cursosDefault.find((curso) => curso.id === idCurso)
         const competencias = curso.filter.competencias
@@ -349,9 +349,9 @@ const reformuladorDeElementosCytoscape = (novosCursos, esqCores, tipoClassificac
                     grabbable: true,
                     classes: ['curso']
                 })
-                // Aqui estou adicionando a Edge do curso a competência,
-                // pois ela foi recém adicionada, e não tem último curso adicionado
-                // para ligar a ele.
+                /**
+                 * Aqui adiciono a edge do curso ao último adicionado à competência
+                 */
                 elementos.push({
                     group: 'edges',
                     data: {
@@ -361,6 +361,9 @@ const reformuladorDeElementosCytoscape = (novosCursos, esqCores, tipoClassificac
                     }
                 })
                 contadorEdge += 1
+                /**
+                 * Aqui atualizo o último elemento da competência
+                 */
                 competenciasAdicionadas = competenciasAdicionadas.map(competencia => {
                     if (competencia.id === idCompetencia) {
                         return{

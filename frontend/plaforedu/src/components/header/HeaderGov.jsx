@@ -2,7 +2,7 @@ import React from 'react'
 import brasil from '../../assets/br.svg'
 
 import {
-  MenuOutlined,
+  DashOutlined,
 } from '@ant-design/icons';
 
 import {
@@ -137,7 +137,7 @@ export default function HeaderGov() {
         }}
       >
         <Dropdown overlay={menu} trigger={['click']}>
-          <MenuOutlined />
+          <DashOutlined />
         </Dropdown>
       </Col>
     </Row>
