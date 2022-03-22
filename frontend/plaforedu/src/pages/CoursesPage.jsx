@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { Row, Layout, Drawer, Grid } from 'antd';
 

@@ -16,10 +16,7 @@ import {
     Input,
     Form,
     Card,
-    Grid,
 } from 'antd'
-
-const { useBreakpoint } = Grid
 
 export default function SideFilter({ debounceTimeout = 800 }) {
 
@@ -37,8 +34,6 @@ export default function SideFilter({ debounceTimeout = 800 }) {
     const setFilter = useStoreActions(actions => actions.cursos.setFilter)
     const setTipoVisualizacao = useStoreActions(actions => actions.adm.setTipoVisualizacao)
 
-    const screens = useBreakpoint()
-
     const register = useRef(useForm({
         mode: 'onBlur',
         reValidateMode: 'onChange',
@@ -54,6 +49,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
     const onSubmit = () => {
         let allValuesFields = register.current.getValues()
         delete allValuesFields.tipoVisualizacao
+        if (allValuesFields.tipoClassificacao) {
+            allValuesFields.cargaHoraria = filterDefault.cargaHoraria
+            allValuesFields.temas = []
+            allValuesFields.subtemas = []
+            allValuesFields.instCertificadora = []
+        }
         setFilter(allValuesFields)
     }
 
