@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Input, Typography } from 'antd';
+import { Row, Input, Typography, Col } from 'antd';
 import { useNavigate } from 'react-router-dom'
 
 import Fundo from '../assets/fundo02.png';
@@ -9,7 +9,7 @@ import {
     SearchOutlined,
 } from '@ant-design/icons';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function Finder() {
 
@@ -62,6 +62,33 @@ export default function Finder() {
                     </Title>
                 </div>
 
+            </Row>
+            <Row
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderBottom: '10px solid #3291CF4D',
+                    borderTop: '10px solid #3291CF4D',
+                    padding: '40px 0px'
+                }}
+            >
+                <Col
+                    flex={'80%'}
+                    style={{
+                        textAlign: 'center'
+                    }}
+                >
+                    <Text
+                        style={{
+                            fontFamily: 'Roboto',
+                            fontWeight: 'bold',
+                            fontSize: '20px'
+                        }}
+                    >
+                        O PlaforEdu é a plataforma utilizada pelo Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional, Científica e Tecnológica (<a href='http://portal.mec.gov.br/apresentacao-plafor' style={{ textDecoration: 'none' }}>PLAFOR</a>). A plataforma tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
+                    </Text>
+                </Col>
             </Row>
             <Row
                 style={{

@@ -4703,12 +4703,14 @@ export const competenciasDefault = [
         titulo: 'Não especificado',
         descricao: 'Não especificado',
         categoria: 1,
+        cursos: [[1, 2, 3],[1, 2, 3],[],[],[],[]]
     },
     {
         id: 2,
         titulo: 'Comunicação institucional',
         descricao: 'Usar tecnologias digitais para melhorar a comunicação institucional com os aprendentes, encarregados de educação e terceiros. Contribuir, colaborativamente, para desenvolver e melhorar as estratégias de comunicação institucional.',
         categoria: 2,
+        cursos: [[4, 5, 6],[],[4, 5, 6],[],[],[]]
     },
     {
         id: 3,

@@ -29,7 +29,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
     const filter = useStoreState(state => state.cursos.filter)
     const itinerarios = useStoreState(state => state.itinerarios.itinerarios)
 
-    const [filtroCompleto, setFiltroCompleto] = useState(true)
+    const [filtroCompleto, setFiltroCompleto] = useState(false)
 
     const setFilter = useStoreActions(actions => actions.cursos.setFilter)
     const setTipoVisualizacao = useStoreActions(actions => actions.adm.setTipoVisualizacao)
