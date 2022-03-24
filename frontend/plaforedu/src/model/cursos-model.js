@@ -285,7 +285,7 @@ const reformuladorDeElementosCytoscape = (cursosFiltrados, filtro) => {
                     elementos.push({
                         group: 'nodes',
                         data: {
-                            id: 'categoria'+categoriaDaCompetencia.id+'competencia'+categoriaDaCompetencia.id,
+                            id: 'categoria'+categoriaDaCompetencia.id+'competencia'+competencia.id,
                             label: categoriaDaCompetencia.nome,
                             color: colorsCategorias[categoriaDaCompetencia.id],
                             competencias: categoriaDaCompetencia.competencias,
