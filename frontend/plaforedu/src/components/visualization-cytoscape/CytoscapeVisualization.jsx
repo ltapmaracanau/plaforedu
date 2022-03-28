@@ -42,7 +42,7 @@ export default function CytoscapeVisualization() {
     const cursos = useStoreState(state => state.cursos.cursos);
     const listInst = useStoreState(state => state.cursos.instituicoes);
     const competencias = useStoreState(state => state.cursos.competencias);
-    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados);
+    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados.novosCursos);
     const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.esquemaDeCores);
 
     const layouts = useStoreState(state => state.itinerarios.layouts);

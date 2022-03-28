@@ -23,7 +23,7 @@ export default function CoursesListVisualization() {
     const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
     const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed)
     const listData = useStoreState(state => state.cursos.cursos)
-    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados)
+    const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados.novosCursos)
     const listInst = useStoreState(state => state.cursos.instituicoes)
     const listCategoriasCompetencia = useStoreState(state => state.cursos.categoriasDeCompetencias)
     const listCompetencias = useStoreState(state => state.cursos.competencias)

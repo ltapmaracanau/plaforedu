@@ -49,7 +49,12 @@ export default function HomePage() {
                             margin: '32px 0'
                         }}
                     >
-                        <Col>
+                        <Col
+                            flex={'200px'}
+                            style={{
+                                height: '300px'
+                            }}
+                        >
                             <Link onClick={() => { onClickItinerario(1) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
@@ -60,7 +65,12 @@ export default function HomePage() {
                                 </Card>
                             </Link>
                         </Col>
-                        <Col>
+                        <Col
+                            flex={'200px'}
+                            style={{
+                                height: '300px'
+                            }}
+                        >
                             <Link onClick={() => { onClickItinerario(2) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
@@ -71,7 +81,12 @@ export default function HomePage() {
                                 </Card>
                             </Link>
                         </Col>
-                        <Col>
+                        <Col
+                            flex={'200px'}
+                            style={{
+                                height: '300px'
+                            }}
+                        >
                             <Link onClick={() => { onClickItinerario(3) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
@@ -82,7 +97,12 @@ export default function HomePage() {
                                 </Card>
                             </Link>
                         </Col>
-                        <Col>
+                        <Col
+                            flex={'200px'}
+                            style={{
+                                height: '300px'
+                            }}
+                        >
                             <Link onClick={() => { onClickItinerario(4) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
@@ -93,7 +113,12 @@ export default function HomePage() {
                                 </Card>
                             </Link>
                         </Col>
-                        <Col>
+                        <Col
+                            flex={'200px'}
+                            style={{
+                                height: '300px'
+                            }}
+                        >
                             <Link onClick={() => { onClickItinerario(5) }} to='/cursos'>
                                 <Card
                                     style={{ width: '180px', backgroundColor: '#fff', height: '270px' }}
