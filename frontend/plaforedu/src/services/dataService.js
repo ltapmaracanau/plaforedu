@@ -4703,7 +4703,7 @@ export const competenciasDefault = [
         titulo: 'Não especificado',
         descricao: 'Não especificado',
         categoria: 1,
-        cursos: [[271],[],[],[],[271],[]],
+        cursos: [[15, 16, 17, 271],[15, 17, 16],[],[],[271],[]],
     },
     {
         id: 2,
@@ -4806,14 +4806,14 @@ export const competenciasDefault = [
         titulo: 'Acessibilidade e inclusão',
         descricao: 'Garantir acessibilidade a recursos e atividades de aprendizagem para todos os aprendentes, incluindo os que têm necessidades especiais. Ter em consideração e dar resposta às expetativas, capacidades, usos e conceções errôneas (digitais) dos aprendentes, bem como ao uso contextual, físico e cognitivo que fazem das tecnologias digitais.',
         categoria: 6,
-        cursos: [[3, 4, 23, 24, 24, 112, 73, 116, 118, 119, 124, 24, 112, 73, 116, 118, 119, 124, 3, 4],[3, 4, 23, 24],[24, 112, 73, 116, 124, 118, 119],[24, 116, 112, 73, 124, 118, 119],[3, 4],[]],
+        cursos: [[3, 4, 23, 24, 24, 112, 73, 116, 118, 119, 124, 24, 112, 73, 116, 118, 119, 124, 3, 4],[24, 23, 3, 4],[24, 112, 73, 116, 124, 118, 119],[24, 116, 112, 73, 124, 118, 119],[3, 4],[]],
     },
     {
         id: 17,
         titulo: 'Diferenciação e personalização',
         descricao: 'Usar tecnologias digitais para atender às diversas necessidades de aprendizagem dos aprendentes, permitindo que estes progridam a diferentes níveis e velocidades e sigam caminhos e objetivos de aprendizagem individuais.',
         categoria: 6,
-        cursos: [[3, 4, 23, 24, 24, 112, 73, 91, 115, 116, 117, 118, 119, 101, 24, 112, 73, 91, 115, 116, 117, 118, 119, 3, 4],[3, 4, 23, 24],[24, 115, 112, 116, 73, 117, 101, 91, 118, 119],[24, 115, 112, 116, 73, 117, 91, 118, 119],[3, 4],[]],
+        cursos: [[3, 4, 23, 24, 24, 112, 73, 91, 115, 116, 117, 118, 119, 101, 24, 112, 73, 91, 115, 116, 117, 118, 119, 3, 4],[24, 23, 3, 4],[24, 115, 112, 116, 73, 117, 101, 91, 118, 119],[24, 115, 112, 116, 73, 117, 91, 118, 119],[3, 4],[]],
     },
     {
         id: 18,
@@ -4862,7 +4862,7 @@ export const competenciasDefault = [
         titulo: 'Gestão do desenvolvimento de pessoas',
         descricao: 'Forjar um ambiente de trabalho em que os interesses de equipes e indivíduos se harmonizem com os objetivos e resultados da organização, gerando oportunidades de aprendizado e desenvolvimento, bem como incentivos para reforçar o desempenho excepcional.',
         categoria: 8,
-        cursos: [[11, 42, 53, 23, 55, 56, 57, 25, 26, 27],[],[11, 42, 53, 23, 55, 56, 57, 25, 26, 27],[],[],[]],
+        cursos: [[1, 2, 7, 20, 25, 26, 27, 11, 42, 53, 23, 55, 56, 57, 25, 26, 27],[1, 2, 27, 20, 25, 26, 7],[11, 42, 53, 23, 55, 56, 57, 25, 26, 27],[],[],[]],
     },
     {
         id: 25,
@@ -4889,7 +4889,7 @@ export const competenciasDefault = [
         titulo: 'Planejamento',
         descricao: 'Identificar problemas prioritários e oportunidades de sua unidade para projetar planos, programas ou projetos que prefixam objetivos, atividades, recursos, custos, cronogramas, responsáveis e indicadores de progresso, resultados e impacto.',
         categoria: 8,
-        cursos: [[54, 28, 262, 271],[],[54, 28],[],[262, 271],[]],
+        cursos: [[28, 54, 28, 262, 271],[28],[54, 28],[],[262, 271],[]],
     },
     {
         id: 29,
@@ -4916,7 +4916,7 @@ export const competenciasDefault = [
         titulo: 'Comunicação interpessoal',
         descricao: 'Iniciar e manter comunicações respeitosas e cordiais; transmitir de forma transparente e comportamento estável, informações e gestos, mensagens orais e de texto claros, concisos, fiáveis e apropriados para o destinatário. Atender ativamente informações, consultas, divergências e mensagens de terceiros com uma atitude construtiva e empática.',
         categoria: 9,
-        cursos: [[11, 12, 13, 14, 18, 18, 263, 135, 276],[11, 12, 13, 14, 18],[18],[],[135, 276, 263],[]],
+        cursos: [[11, 12, 13, 14, 18, 18, 263, 135, 276],[12, 11, 13, 14, 18],[18],[],[135, 276, 263],[]],
     },
     {
         id: 33,
@@ -5061,6 +5061,7 @@ export const competenciasDefault = [
         titulo: 'Uso de TIC',
         descricao: 'Otimizar o uso das tecnologias de informação e comunicação disponíveis, em seu efetivo potencial, para melhorar seu desempenho.',
         categoria: 11,
+        cursos: [[5, 6, 8, 9, 10],[6, 9, 10, 8, 5],[],[],[],[]],
     },
     {
         id: 55,

@@ -75,9 +75,6 @@ export default function Finder() {
             >
                 <Col
                     flex={'80%'}
-                    style={{
-                        textAlign: 'center'
-                    }}
                 >
                     <Text
                         style={{
