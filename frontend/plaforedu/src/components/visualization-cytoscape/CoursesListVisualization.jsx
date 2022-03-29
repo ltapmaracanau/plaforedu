@@ -9,7 +9,8 @@ import {
     Modal,
     Row,
     Descriptions,
-    Typography
+    Typography,
+    Collapse
 } from 'antd'
 
 import {
@@ -19,14 +20,18 @@ import {
 
 const { Text, Title } = Typography;
 
+const { Panel } = Collapse
+
 export default function CoursesListVisualization() {
     const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
     const setFilterCollapsed = useStoreActions(actions => actions.adm.setFilterCollapsed)
     const listData = useStoreState(state => state.cursos.cursos)
     const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados.novosCursos)
+    const competenciasFiltradas = useStoreState(state => state.cursos.cursosFiltrados.novasTrilhas)
     const listInst = useStoreState(state => state.cursos.instituicoes)
     const listCategoriasCompetencia = useStoreState(state => state.cursos.categoriasDeCompetencias)
     const listCompetencias = useStoreState(state => state.cursos.competencias)
+    const filter = useStoreState(state => state.cursos.filter)
 
     const [courseOnModal, setCourseOnModal] = useState(listData[0])
     const [modalVisible, setModalVisible] = useState(false)
@@ -78,62 +83,138 @@ export default function CoursesListVisualization() {
             <Row>
                 <Col flex={'auto'}>
                     <Card bordered={false} style={{ background: '#eee' }}>
-                        <List
-                            itemLayout="vertical"
-                            dataSource={listData.filter(curso => cursosFiltrados.includes(curso.id))}
-                            renderItem={item => (
-                                <List.Item
-                                    key={item.id}
-                                    style={{ backgroundColor: '#fff' }}
-                                >
-                                    <Card
-                                        hoverable
-                                        bordered={false}
-                                        onClick={() => {
-                                            setCourseOnModal(item)
-                                            setModalVisible(true)
-                                        }}
-                                    >
-                                        <div style={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center'
-                                        }}>
-                                            <Title level={4} style={{ color: '#2C55A1', fontFamily: 'Poppins' }} >{item.title}</Title>
+                        {filter.tipoClassificacao ?  // False: por competências   True: por trilhas
+                            (
+                                <Collapse>
+                                    {competenciasFiltradas.map(competencia =>
+                                    (
+                                        <Panel key={'competencia' + competencia.id} header={competencia.titulo}>
+                                            <List
+                                                itemLayout="vertical"
+                                                dataSource={competencia.cursos[filter.itinerario]}
+                                                renderItem={idCurso => {
+                                                    const curso = listData.find(curso => curso.id === idCurso)
+                                                    return (
+                                                        <List.Item
+                                                            key={`competencia${competencia.id}curso${idCurso}`}
+                                                            style={{ backgroundColor: '#fff' }}
+                                                        >
+                                                            <Card
+                                                                hoverable
+                                                                bordered={false}
+                                                                onClick={() => {
+                                                                    setCourseOnModal(curso)
+                                                                    setModalVisible(true)
+                                                                }}
+                                                            >
+                                                                <div style={{
+                                                                    display: 'flex',
+                                                                    flexDirection: 'column',
+                                                                    justifyContent: 'center'
+                                                                }}>
+                                                                    <Title level={4} style={{ color: '#2C55A1', fontFamily: 'Poppins' }} >{curso.title}</Title>
+                                                                    <div style={{
+                                                                        display: 'flex',
+                                                                        alignItems: 'center',
+                                                                        justifyContent: 'left',
+                                                                    }}>
+                                                                        <Text style={{ fontFamily: 'Roboto' }}>Ordem: {' '}
+                                                                            <Text strong>{competencia.cursos[filter.itinerario].indexOf(idCurso) + 1}</Text>
+                                                                        </Text>
+                                                                    </div>
+                                                                    <div style={{
+                                                                        display: 'flex',
+                                                                        alignItems: 'center',
+                                                                        justifyContent: 'space-between',
+                                                                    }}>
+                                                                        <Text style={{ fontFamily: 'Roboto' }}>Instituição: {' '}
+                                                                            <Text strong>{getInstituicao(curso.instCert)}</Text>
+                                                                        </Text>
 
-                                            <div style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'space-between',
-                                            }}>
-                                                <Text style={{ fontFamily: 'Roboto' }}>Instituição: {' '}
-                                                    <Text strong>{getInstituicao(item.instCert)}</Text>
-                                                </Text>
+                                                                        <Text style={{ fontFamily: 'Roboto' }}>Carga horária:
+                                                                            <Text strong>{` ${curso.cargaHoraria}H`}</Text>
+                                                                        </Text>
+                                                                    </div>
 
-                                                <Text style={{ fontFamily: 'Roboto' }}>Carga horária:
-                                                    <Text strong>{` ${item.cargaHoraria}H`}</Text>
-                                                </Text>
-                                            </div>
+                                                                    <div style={{
+                                                                        display: 'flex',
+                                                                        flexDirection: 'column',
+                                                                    }}>
+                                                                        <Text style={{ fontFamily: 'Roboto' }}>Categorias de competência: {' '}
+                                                                            <Text strong>{getCategoriasCompetencia(curso.filter.competencias)}</Text>
+                                                                        </Text>
 
-                                            <div style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                            }}>
-                                                <Text style={{ fontFamily: 'Roboto' }}>Categorias de competência: {' '}
-                                                    <Text strong>{getCategoriasCompetencia(item.filter.competencias)}</Text>
-                                                </Text>
+                                                                        <Text style={{ fontFamily: 'Roboto' }}>Competências: {' '}
+                                                                            <Text strong>{getCompetencias(curso.filter.competencias)}</Text>
+                                                                        </Text>
+                                                                    </div>
+                                                                </div>
+                                                            </Card>
+                                                        </List.Item>
+                                                    )
+                                                }}
+                                            />
+                                        </Panel>
+                                    )
+                                    )}
+                                </Collapse>
+                            ) : (
+                                <List
+                                    itemLayout="vertical"
+                                    dataSource={listData.filter(curso => cursosFiltrados.includes(curso.id))}
+                                    renderItem={item =>
+                                        <List.Item
+                                            key={item.id}
+                                            style={{ backgroundColor: '#fff' }}
+                                        >
+                                            <Card
+                                                hoverable
+                                                bordered={false}
+                                                onClick={() => {
+                                                    setCourseOnModal(item)
+                                                    setModalVisible(true)
+                                                }}
+                                            >
+                                                <div style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    justifyContent: 'center'
+                                                }}>
+                                                    <Title level={4} style={{ color: '#2C55A1', fontFamily: 'Poppins' }} >{item.title}</Title>
+                                                    <div style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'space-between',
+                                                    }}>
+                                                        <Text style={{ fontFamily: 'Roboto' }}>Instituição: {' '}
+                                                            <Text strong>{getInstituicao(item.instCert)}</Text>
+                                                        </Text>
 
-                                                <Text style={{ fontFamily: 'Roboto' }}>Competências: {' '}
-                                                    <Text strong>{getCompetencias(item.filter.competencias)}</Text>
-                                                </Text>
-                                            </div>
-                                        </div>
-                                    </Card>
-                                </List.Item>
-                            )}
-                        />
+                                                        <Text style={{ fontFamily: 'Roboto' }}>Carga horária:
+                                                            <Text strong>{` ${item.cargaHoraria}H`}</Text>
+                                                        </Text>
+                                                    </div>
+
+                                                    <div style={{
+                                                        display: 'flex',
+                                                        flexDirection: 'column',
+                                                    }}>
+                                                        <Text style={{ fontFamily: 'Roboto' }}>Categorias de competência: {' '}
+                                                            <Text strong>{getCategoriasCompetencia(item.filter.competencias)}</Text>
+                                                        </Text>
+
+                                                        <Text style={{ fontFamily: 'Roboto' }}>Competências: {' '}
+                                                            <Text strong>{getCompetencias(item.filter.competencias)}</Text>
+                                                        </Text>
+                                                    </div>
+                                                </div>
+                                            </Card>
+                                        </List.Item>
+                                    }
+                                />
+                            )
+                        }
                     </Card>
-
                     <Modal
                         visible={modalVisible}
                         onOk={handleOk}

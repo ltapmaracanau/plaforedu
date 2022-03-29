@@ -214,16 +214,17 @@ const cursosFilterFuctionDefault = (filtro) => {
             let competenciaTrue = contemCompetencia || competenciasVazio
             let categoriaTrue = contemCategoria || categoriasVazio
 
-            if (competenciaTrue && categoriaTrue) {
-                novasTrilhas.push(competencia)
+            let contemTrilha = competencia.cursos !== undefined
+            let contemTrilhaNoItinerario = false
+            if (contemTrilha) {
+                contemTrilhaNoItinerario = competencia.cursos[filtro.itinerario].length !== 0
             }
-        })
-        cursosDefault.forEach(curso => {
-            let contemItinerario = curso.itinerario === filtro.itinerario
-            let itinerarioGeral = filtro.itinerario === 0
 
-            if (contemItinerario || itinerarioGeral) {
-                novosCursos.push(curso.id)
+            let competenciaNaoEspecificada = competencia.id === 1 // Se a competência não é especificada
+
+            if (competenciaTrue && categoriaTrue && contemTrilhaNoItinerario && !competenciaNaoEspecificada) {
+                console.log(competencia);
+                novasTrilhas.push(competencia)
             }
         })
     } else {
