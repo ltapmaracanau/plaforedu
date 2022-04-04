@@ -78,6 +78,7 @@ export default function HeaderHome() {
             <Menu.Item key={35} onClick={() => onClickItinerario(5)} ><Link to={'/cursos'}>Preparação para a aposentadoria</Link></Menu.Item>
           </SubMenu>
           <Menu.Item key={4}><Link to={'/faleconosco'}>FALE CONOSCO</Link></Menu.Item>
+          <Menu.Item key={5}><Link to={'/'}>FAQ</Link></Menu.Item>
         </Menu>
       </Col>
     </Row>

@@ -59,7 +59,7 @@ export default function Finder() {
                             backgroundImage: `url(${Fundo2})`,
                             backgroundRepeat: 'no-repeat',
                             height: '408px',
-                            backgroundSize: screens.xxl ? '105vw' : 'auto auto',
+                            backgroundSize: screens.xxl ? '100%' : 'auto auto',
                             justifyContent: 'left',
                             alignItems: 'center',
                         }}
@@ -128,25 +128,29 @@ export default function Finder() {
                     borderTop: '10px solid #3291CF4D',
                     padding: '40px 0px'
                 }}
-                gutter={[40, 40]}
             >
-                <Col>
+                <Col
+                    style={{
+                        margin: '20px'
+                    }}
+                >
                     <Image src={PLAFORLOGO} preview={false} draggable='false' />
                 </Col>
                 <Col
-                    flex={'80%'}
+                    flex={'70%'}
                     style={{
-                        textAlign: 'left'
+                        textAlign: 'left',
+                        margin: '20px'
                     }}
                 >
                     <Text
                         style={{
                             fontFamily: 'Roboto',
                             fontWeight: 'bold',
-                            fontSize: '20px'
+                            fontSize: '20px',
                         }}
                     >
-                        O PlaforEdu é a plataforma utilizada pelo Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional, Científica e Tecnológica (<a href='http://portal.mec.gov.br/apresentacao-plafor' style={{ textDecoration: 'none' }}>PLAFOR</a>). A plataforma tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
+                        Um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
                     </Text>
                 </Col>
             </Row>
