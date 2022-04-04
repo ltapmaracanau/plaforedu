@@ -1,8 +1,12 @@
 import React from 'react';
-import { Row, Input, Typography, Col } from 'antd';
+import { Link } from 'react-router-dom';
+import { Row, Input, Typography, Col, Carousel, Grid, Image } from 'antd';
 import { useNavigate } from 'react-router-dom'
 
-import Fundo from '../assets/fundo02.png';
+import PLAFORLOGO from '../assets/PLAFOR.png'
+import Fundo1 from '../assets/fundo1.png';
+import Fundo2 from '../assets/fundo2.png';
+import Fundo3 from '../assets/fundo3.png';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import {
@@ -10,11 +14,12 @@ import {
 } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
+const { useBreakpoint } = Grid;
 
 export default function Finder() {
 
     let navigate = useNavigate();
-
+    let screens = useBreakpoint();
     const setFiltro = useStoreActions(actions => actions.cursos.setFilter)
     const filtroDefault = useStoreState(state => state.cursos.filterDefault)
 
@@ -25,44 +30,95 @@ export default function Finder() {
 
     return (
         <>
-            <Row
-                style={{
-                    backgroundPosition: 'center top',
-                    backgroundImage: `url(${Fundo})`,
-                    backgroundRepeat: 'no-repeat',
-                    height: '486px',
-                    justifyContent: 'center',
-                    alignItems: 'end',
-                }}
-            >
-                <div
-                    style={{
-                        backgroundColor: '#3183C4',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '100%',
-                        minHeight: '78px',
-                        padding: '10px, 0px',
-                    }}
-                >
-                    <Title
-                        level={3}
+            <Carousel>
+
+                <div>
+                    <Row
                         style={{
-                            margin: '0px',
-                            fontFamily: 'Roboto',
-                            fontWeight: 500,
-                            fontSize: '25px',
-                            textAlign: 'center',
-                            color: '#FFFFFF',
-                            width: '70%',
+                            backgroundPosition: 'top center',
+                            backgroundImage: `url(${Fundo1})`,
+                            backgroundRepeat: 'no-repeat',
+                            height: '408px',
+                            backgroundSize: screens.xxl ? '100% auto' : 'auto auto',
+                            justifyContent: 'left',
+                            alignItems: 'center',
                         }}
                     >
-                        Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional, Científica e Tecnológica
-                    </Title>
+                        <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={screens.lg ? { marginLeft: '100px' } : { marginLeft: '50px' }}>
+                                <Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Conheça a Plataforma PlaforEDU</Title>
+                                <Link to={'/about'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></Link>
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
-
-            </Row>
+                <div>
+                    <Row
+                        style={{
+                            backgroundPosition: 'center center',
+                            backgroundImage: `url(${Fundo2})`,
+                            backgroundRepeat: 'no-repeat',
+                            height: '408px',
+                            backgroundSize: screens.xxl ? '105vw' : 'auto auto',
+                            justifyContent: 'left',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={screens.xl ? { marginLeft: '100px' } : { marginLeft: '50px' }}>
+                                <Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Itinerários e Trilhas Formativas</Title>
+                                <Link to={'/about'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></Link>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
+                <div>
+                    <Row
+                        style={{
+                            backgroundPosition: 'top center',
+                            backgroundImage: `url(${Fundo3})`,
+                            backgroundRepeat: 'no-repeat',
+                            height: '408px',
+                            backgroundSize: screens.xxl ? '100% auto' : 'auto auto',
+                            justifyContent: 'left',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={screens.lg ? { marginLeft: '100px' } : { marginLeft: '50px' }}>
+                                <Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Categorias de Competências</Title>
+                                <Link to={'/about'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></Link>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
+            </Carousel>
+            <div
+                style={{
+                    backgroundColor: '#3183C4',
+                    display: 'flex',
+                    width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    minHeight: '78px',
+                    padding: '10px, 0px',
+                }}
+            >
+                <Title
+                    level={3}
+                    style={{
+                        margin: '0px',
+                        fontFamily: 'Roboto',
+                        fontWeight: 500,
+                        fontSize: '25px',
+                        textAlign: 'center',
+                        color: '#FFFFFF',
+                        width: '70%',
+                    }}
+                >
+                    Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional, Científica e Tecnológica
+                </Title>
+            </div>
             <Row
                 style={{
                     display: 'flex',
@@ -72,9 +128,16 @@ export default function Finder() {
                     borderTop: '10px solid #3291CF4D',
                     padding: '40px 0px'
                 }}
+                gutter={[40, 40]}
             >
+                <Col>
+                    <Image src={PLAFORLOGO} preview={false} draggable='false' />
+                </Col>
                 <Col
                     flex={'80%'}
+                    style={{
+                        textAlign: 'left'
+                    }}
                 >
                     <Text
                         style={{
