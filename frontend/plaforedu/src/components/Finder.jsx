@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Input, Typography, Col, Carousel, Grid } from 'antd';
+import { Row, Input, Typography, Col, Carousel, Grid, Image } from 'antd';
 import { useNavigate } from 'react-router-dom'
 
+import PLAFORLOGO from '../assets/PLAFOR.png'
 import Fundo1 from '../assets/fundo1.png';
 import Fundo2 from '../assets/fundo2.png';
 import Fundo3 from '../assets/fundo3.png';
@@ -96,9 +97,9 @@ export default function Finder() {
                 style={{
                     backgroundColor: '#3183C4',
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     minHeight: '78px',
                     padding: '10px, 0px',
                 }}
@@ -127,7 +128,11 @@ export default function Finder() {
                     borderTop: '10px solid #3291CF4D',
                     padding: '40px 0px'
                 }}
+                gutter={[40, 40]}
             >
+                <Col>
+                    <Image src={PLAFORLOGO} preview={false} draggable='false' />
+                </Col>
                 <Col
                     flex={'80%'}
                     style={{
