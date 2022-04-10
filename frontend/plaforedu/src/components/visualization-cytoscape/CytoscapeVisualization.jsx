@@ -43,6 +43,7 @@ export default function CytoscapeVisualization() {
     const listInst = useStoreState(state => state.cursos.instituicoes);
     const competencias = useStoreState(state => state.cursos.competencias);
     const cursosFiltrados = useStoreState(state => state.cursos.cursosFiltrados.novosCursos);
+    const trilhas = useStoreState(state => state.cursos.cursosFiltrados.novasTrilhas);
     const colorSchemaDefault = useStoreState(state => state.cursos.filterDefault.esquemaDeCores);
 
     const layouts = useStoreState(state => state.itinerarios.layouts);
@@ -68,8 +69,19 @@ export default function CytoscapeVisualization() {
         return 'Instituição não encontrada';
     }, [listInst]);
 
-    const headers = [
-        { label: "Título", key: "title" },
+    const csvCursosHeaders = [
+        { label: "Título", key: "titulo" },
+        { label: "Descrição", key: "descricao" },
+        { label: "Carga horária", key: "cargaHoraria" },
+        { label: "Instituição Certificadora", key: "instCert" },
+        { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
+        { label: "Link", key: "link" }
+    ];
+   
+    const csvTrilhasHeaders = [
+        { label: "Trilha", key: "trilha" },
+        { label: "Descrição trilha", key: "descTrilha" },
+        { label: "Título", key: "titulo" },
         { label: "Descrição", key: "descricao" },
         { label: "Carga horária", key: "cargaHoraria" },
         { label: "Instituição Certificadora", key: "instCert" },
@@ -78,11 +90,35 @@ export default function CytoscapeVisualization() {
     ];
 
     const data = useMemo(() => {
-        const coursesData = cursos.filter(course => cursosFiltrados.includes(course.id))
+        if (filter.tipoClassificacao) {
+            let result = [];
 
+            trilhas.forEach(trilha => {
+                cursos.filter(curso => trilha.cursos[filter.itinerario].includes(curso.id))
+                    .forEach(cursoData => {
+                        const item = {
+                            trilha: trilha.titulo,
+                            descTrilha: trilha.descricao,
+                            titulo: cursoData.title,
+                            descricao: cursoData.descricao,
+                            cargaHoraria: `${cursoData.cargaHoraria}H`,
+                            instCert: getInstituicao(cursoData.instCert),
+                            possuiAcessibilidade: cursoData.possuiAcessibilidade,
+                            link: cursoData.link
+                        };
+    
+                        result.push(item);
+                    });
+            });
+            
+            return result;            
+        }
+
+        const coursesData = cursos.filter(course => cursosFiltrados.includes(course.id))
+        
         return coursesData.map(course => {
             return {
-                title: course.title,
+                titulo: course.title,
                 descricao: course.descricao,
                 cargaHoraria: `${course.cargaHoraria}H`,
                 instCert: getInstituicao(course.instCert),
@@ -90,7 +126,14 @@ export default function CytoscapeVisualization() {
                 link: course.link
             }
         });
-    }, [cursos, cursosFiltrados, getInstituicao]);
+    }, [
+        filter.tipoClassificacao,
+        filter.itinerario,
+        trilhas,
+        cursos,
+        cursosFiltrados,
+        getInstituicao
+    ]);
 
     const handleOk = () => {
         setModalCourseVisible(false)
@@ -232,7 +275,7 @@ export default function CytoscapeVisualization() {
                         <Card style={{ width: '100%' }}>
                             <CSVLink
                                 filename="plaforedu"
-                                headers={headers}
+                                headers={filter.tipoClassificacao ? csvTrilhasHeaders : csvCursosHeaders}
                                 data={data}
                                 target="_blank"
                             >
