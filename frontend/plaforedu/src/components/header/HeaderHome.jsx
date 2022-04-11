@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from "react-router-dom";
 
-import LogoPlafor from '../../assets/PLAFORLOGO.png';
+import LogoPlafor from '../../assets/LOGOPLAFORHEADER.svg';
 
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import {
@@ -46,8 +46,8 @@ export default function HeaderHome() {
         <Link to='/' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
           <Image
             preview={false}
-            height='65px'
-            style={{ padding: '5px', minWidth: '190px' }}
+            height='55px'
+            style={{ padding: '5px' }}
             src={LogoPlafor}
           />
         </Link>
@@ -78,7 +78,7 @@ export default function HeaderHome() {
             <Menu.Item key={35} onClick={() => onClickItinerario(5)} ><Link to={'/cursos'}>Preparação para a aposentadoria</Link></Menu.Item>
           </SubMenu>
           <Menu.Item key={4}><Link to={'/faleconosco'}>FALE CONOSCO</Link></Menu.Item>
-          <Menu.Item key={5}><Link to={'/'}>FAQ</Link></Menu.Item>
+          <Menu.Item key={5}><Link to={'/faq'}>FAQ</Link></Menu.Item>
         </Menu>
       </Col>
     </Row>

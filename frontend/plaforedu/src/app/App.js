@@ -15,6 +15,7 @@ import FaleConosco from '../pages/FaleConosco';
 import {
   Layout
 } from 'antd'
+import FAQ from '../pages/FAQ';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path='/cursos' element={<CoursesPage />}/>
           <Route path='/about' element={<AboutPage />}/>
           <Route path='/faleconosco' element={<FaleConosco />}/>
+          <Route path='/faq' element={<FAQ />}/>
         </Routes>
         <VLibras/>
         <FooterGov/>

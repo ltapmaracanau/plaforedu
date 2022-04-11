@@ -16,9 +16,13 @@ import {
     Input,
     Form,
     Card,
+    Grid,
 } from 'antd'
+const { useBreakpoint } = Grid
 
 export default function SideFilter({ debounceTimeout = 800 }) {
+
+    const screens = useBreakpoint()
 
     const subtemas = useStoreState(state => state.cursos.subtemas)
     const temas = useStoreState(state => state.cursos.temas)
@@ -59,7 +63,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
     }
 
     const onReset = () => {
-        setFiltroCompleto(true)
+        setFiltroCompleto(false)
         register.current.reset(filterDefault)
         onSubmit(filterDefault)
     }
@@ -92,31 +96,43 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                             render={({ field }) => {
                                 return (
                                     <Form.Item style={{ marginBottom: '0' }} >
-                                        <Input allowClear={true} prefix={<SearchOutlined />} placeholder="Buscar" {...field} onPressEnter={onSubmit} />
+                                        <Input
+                                            allowClear={true}
+                                            {...field}
+                                            prefix={<SearchOutlined />}
+                                            placeholder="Buscar"
+                                            onChange={(value) => {
+                                                field.onChange(value)
+                                                onSubmitDebounce();
+                                            }}
+                                            onPressEnter={onSubmit}
+                                        />
                                     </Form.Item>
                                 )
                             }}
                         />
                     </Card>
-                    <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <Controller
-                            control={register.current.control}
-                            name='tipoVisualizacao'
-                            render={() => {
-                                return (
-                                    <Form.Item style={{ marginBottom: '0' }} label={'Visualizar em:'}>
-                                        <Switch
-                                            defaultChecked={false}
-                                            checkedChildren="Lista"
-                                            unCheckedChildren="Grafo"
-                                            onChange={(value) => { setTipoVisualizacao(value) }}
-                                        />
-                                    </Form.Item>
-                                )
-                            }
-                            }
-                        />
-                    </Card>
+                    {screens.lg && (
+                        <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
+                            <Controller
+                                control={register.current.control}
+                                name='tipoVisualizacao'
+                                render={() => {
+                                    return (
+                                        <Form.Item style={{ marginBottom: '0' }} label={'Visualizar em:'}>
+                                            <Switch
+                                                defaultChecked={false}
+                                                checkedChildren="Lista"
+                                                unCheckedChildren="Grafo"
+                                                onChange={(value) => { setTipoVisualizacao(value) }}
+                                            />
+                                        </Form.Item>
+                                    )
+                                }
+                                }
+                            />
+                        </Card>
+                    )}
                     <Card style={{ borderRadius: '21px', marginBottom: '5px' }} bodyStyle={{ alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <Controller
                             control={register.current.control}
@@ -291,10 +307,10 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                                                 range
                                                 marks={{
                                                     0: '0h',
-                                                    200: '200h',
+                                                    300: '300h',
                                                 }}
                                                 step={10}
-                                                max={200}
+                                                max={300}
                                                 onChange={(value) => {
                                                     field.onChange(value)
                                                     onSubmitDebounce()

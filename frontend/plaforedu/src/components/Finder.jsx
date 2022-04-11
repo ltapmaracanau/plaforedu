@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Input, Typography, Col, Carousel, Grid, Image } from 'antd';
+import { HashLink } from 'react-router-hash-link';
 import { useNavigate } from 'react-router-dom'
 
-import PLAFORLOGO from '../assets/PLAFOR.png'
+import PLAFORLOGO from '../assets/PLAFOR.svg'
 import Fundo1 from '../assets/fundo1.png';
 import Fundo2 from '../assets/fundo2.png';
 import Fundo3 from '../assets/fundo3.png';
@@ -30,7 +31,7 @@ export default function Finder() {
 
     return (
         <>
-            <Carousel>
+            <Carousel autoplay effect='fade'>
 
                 <div>
                     <Row
@@ -46,8 +47,8 @@ export default function Finder() {
                     >
                         <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <div style={screens.lg ? { marginLeft: '100px' } : { marginLeft: '50px' }}>
-                                <Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Conheça a Plataforma PlaforEDU</Title>
-                                <Link to={'/about'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></Link>
+                                <HashLink to={'/about#apresentacao'}><Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Conheça a Plataforma PlaforEDU</Title></HashLink>
+                                <HashLink to={'/about#apresentacao'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></HashLink>
                             </div>
                         </Col>
                     </Row>
@@ -66,8 +67,8 @@ export default function Finder() {
                     >
                         <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <div style={screens.xl ? { marginLeft: '100px' } : { marginLeft: '50px' }}>
-                                <Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Itinerários e Trilhas Formativas</Title>
-                                <Link to={'/about'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></Link>
+                                <HashLink to={'/about#itinerarios'}><Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Itinerários e Trilhas Formativas</Title></HashLink>
+                                <HashLink to={'/about#itinerarios'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></HashLink>
                             </div>
                         </Col>
                     </Row>
@@ -86,8 +87,8 @@ export default function Finder() {
                     >
                         <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <div style={screens.lg ? { marginLeft: '100px' } : { marginLeft: '50px' }}>
-                                <Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Categorias de Competências</Title>
-                                <Link to={'/about'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></Link>
+                                <HashLink to={'/about#mandala'}><Title style={{ color: '#fff', fontFamily: 'Roboto' }} >Mandala de Competências</Title></HashLink>
+                                <HashLink to={'/about#mandala'}><Text style={{ color: '#fff', fontFamily: 'Roboto', fontWeight: 'bold' }} >SAIBA MAIS</Text></HashLink>
                             </div>
                         </Col>
                     </Row>
@@ -143,6 +144,15 @@ export default function Finder() {
                         margin: '20px'
                     }}
                 >
+                    <Title
+                        style={{
+                            fontFamily: 'Poppins',
+                            fontSize: '30px',
+                            color: '#2C55A1',
+                        }}
+                    >
+                        PlaforEDU
+                    </Title>
                     <Text
                         style={{
                             fontFamily: 'Roboto',
@@ -150,7 +160,7 @@ export default function Finder() {
                             fontSize: '20px',
                         }}
                     >
-                        Um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
+                        Plataforma Digital de Formação onde os servidores podem encontrar capacitações com a finalidade de potencializar sua atuação na Educação Profissional e Tecnológica, no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica.
                     </Text>
                 </Col>
             </Row>

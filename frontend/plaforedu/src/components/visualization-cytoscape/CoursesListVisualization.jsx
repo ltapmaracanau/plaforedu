@@ -10,7 +10,8 @@ import {
     Row,
     Descriptions,
     Typography,
-    Collapse
+    Collapse,
+    Image
 } from 'antd'
 
 import {
@@ -32,6 +33,7 @@ export default function CoursesListVisualization() {
     const listCategoriasCompetencia = useStoreState(state => state.cursos.categoriasDeCompetencias)
     const listCompetencias = useStoreState(state => state.cursos.competencias)
     const filter = useStoreState(state => state.cursos.filter)
+    const itinerarios = useStoreState(state => state.itinerarios.itinerarios)
 
     const [courseOnModal, setCourseOnModal] = useState(listData[0])
     const [modalVisible, setModalVisible] = useState(false)
@@ -85,79 +87,121 @@ export default function CoursesListVisualization() {
                     <Card bordered={false} style={{ background: '#eee' }}>
                         {filter.tipoClassificacao ?  // False: por competências   True: por trilhas
                             (
-                                <Collapse>
-                                    {competenciasFiltradas.map(competencia =>
-                                    (
-                                        <Panel key={'competencia' + competencia.id} header={competencia.titulo}>
-                                            <List
-                                                itemLayout="vertical"
-                                                dataSource={competencia.cursos[filter.itinerario]}
-                                                renderItem={idCurso => {
-                                                    const curso = listData.find(curso => curso.id === idCurso)
-                                                    return (
-                                                        <List.Item
-                                                            key={`competencia${competencia.id}curso${idCurso}`}
-                                                            style={{ backgroundColor: '#fff' }}
-                                                        >
-                                                            <Card
-                                                                hoverable
-                                                                bordered={false}
-                                                                onClick={() => {
-                                                                    setCourseOnModal(curso)
-                                                                    setModalVisible(true)
-                                                                }}
+                                <>
+                                    <Card
+                                        style={{
+                                            padding: '30px'
+                                        }}
+                                    >
+                                        <Row
+                                            align='middle'
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'left'
+                                            }}
+                                            gutter={[20, 10]}
+                                        >
+                                            <Col>
+                                                {filter.itinerario === 0 ? (
+                                                    <Title
+                                                        style={{
+                                                            fontFamily: 'Poppins',
+                                                            fontSize: '24px',
+                                                            color: '#2C55A1',
+                                                            textAlign: 'center'
+                                                        }}
+                                                    >
+                                                        Trilhas Formativas
+                                                    </Title>
+                                                ) : (
+                                                    <Title
+                                                        style={{
+                                                            fontFamily: 'Poppins',
+                                                            fontSize: '24px',
+                                                            color: '#2C55A1',
+                                                            textAlign: 'center'
+                                                        }}
+                                                    >
+                                                        Trilhas Formativas - {itinerarios[filter.itinerario].dados_gerais.titulo}
+                                                    </Title>
+                                                )}
+                                            </Col>
+                                        </Row>
+                                    </Card>
+                                    <Collapse>
+                                        {competenciasFiltradas.map(competencia =>
+                                        (
+                                            <Panel key={'competencia' + competencia.id} header={competencia.titulo}>
+                                                <List
+                                                    itemLayout="vertical"
+                                                    dataSource={competencia.cursos[filter.itinerario]}
+                                                    renderItem={idCurso => {
+                                                        const curso = listData.find(curso => curso.id === idCurso)
+                                                        return (
+                                                            <List.Item
+                                                                key={`competencia${competencia.id}curso${idCurso}`}
+                                                                style={{ backgroundColor: '#fff' }}
                                                             >
-                                                                <div style={{
-                                                                    display: 'flex',
-                                                                    flexDirection: 'column',
-                                                                    justifyContent: 'center'
-                                                                }}>
-                                                                    <Title level={4} style={{ color: '#2C55A1', fontFamily: 'Poppins' }} >{curso.title}</Title>
-                                                                    <div style={{
-                                                                        display: 'flex',
-                                                                        alignItems: 'center',
-                                                                        justifyContent: 'left',
-                                                                    }}>
-                                                                        <Text style={{ fontFamily: 'Roboto' }}>Ordem: {' '}
-                                                                            <Text strong>{competencia.cursos[filter.itinerario].indexOf(idCurso) + 1}</Text>
-                                                                        </Text>
-                                                                    </div>
-                                                                    <div style={{
-                                                                        display: 'flex',
-                                                                        alignItems: 'center',
-                                                                        justifyContent: 'space-between',
-                                                                    }}>
-                                                                        <Text style={{ fontFamily: 'Roboto' }}>Instituição: {' '}
-                                                                            <Text strong>{getInstituicao(curso.instCert)}</Text>
-                                                                        </Text>
-
-                                                                        <Text style={{ fontFamily: 'Roboto' }}>Carga horária:
-                                                                            <Text strong>{` ${curso.cargaHoraria}H`}</Text>
-                                                                        </Text>
-                                                                    </div>
-
+                                                                <Card
+                                                                    hoverable
+                                                                    bordered={false}
+                                                                    onClick={() => {
+                                                                        setCourseOnModal(curso)
+                                                                        setModalVisible(true)
+                                                                    }}
+                                                                >
                                                                     <div style={{
                                                                         display: 'flex',
                                                                         flexDirection: 'column',
+                                                                        justifyContent: 'center'
                                                                     }}>
-                                                                        <Text style={{ fontFamily: 'Roboto' }}>Categorias de competência: {' '}
-                                                                            <Text strong>{getCategoriasCompetencia(curso.filter.competencias)}</Text>
-                                                                        </Text>
+                                                                        <Title level={4} style={{ color: '#2C55A1', fontFamily: 'Poppins' }} >{curso.title}</Title>
+                                                                        <div style={{
+                                                                            display: 'flex',
+                                                                            alignItems: 'center',
+                                                                            justifyContent: 'left',
+                                                                        }}>
+                                                                            <Text style={{ fontFamily: 'Roboto' }}>Ordem: {' '}
+                                                                                <Text strong>{competencia.cursos[filter.itinerario].indexOf(idCurso) + 1}</Text>
+                                                                            </Text>
+                                                                        </div>
+                                                                        <div style={{
+                                                                            display: 'flex',
+                                                                            alignItems: 'center',
+                                                                            justifyContent: 'space-between',
+                                                                        }}>
+                                                                            <Text style={{ fontFamily: 'Roboto' }}>Instituição: {' '}
+                                                                                <Text strong>{getInstituicao(curso.instCert)}</Text>
+                                                                            </Text>
 
-                                                                        <Text style={{ fontFamily: 'Roboto' }}>Competências: {' '}
-                                                                            <Text strong>{getCompetencias(curso.filter.competencias)}</Text>
-                                                                        </Text>
+                                                                            <Text style={{ fontFamily: 'Roboto' }}>Carga horária:
+                                                                                <Text strong>{` ${curso.cargaHoraria}H`}</Text>
+                                                                            </Text>
+                                                                        </div>
+
+                                                                        <div style={{
+                                                                            display: 'flex',
+                                                                            flexDirection: 'column',
+                                                                        }}>
+                                                                            <Text style={{ fontFamily: 'Roboto' }}>Categorias de competência: {' '}
+                                                                                <Text strong>{getCategoriasCompetencia(curso.filter.competencias)}</Text>
+                                                                            </Text>
+
+                                                                            <Text style={{ fontFamily: 'Roboto' }}>Competências: {' '}
+                                                                                <Text strong>{getCompetencias(curso.filter.competencias)}</Text>
+                                                                            </Text>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </Card>
-                                                        </List.Item>
-                                                    )
-                                                }}
-                                            />
-                                        </Panel>
-                                    )
-                                    )}
-                                </Collapse>
+                                                                </Card>
+                                                            </List.Item>
+                                                        )
+                                                    }}
+                                                />
+                                            </Panel>
+                                        )
+                                        )}
+                                    </Collapse>
+                                </>
                             ) : (
                                 <List
                                     itemLayout="vertical"

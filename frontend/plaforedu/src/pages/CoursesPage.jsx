@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { Row, Layout, Drawer, Grid } from 'antd';
 
@@ -16,6 +16,11 @@ const { useBreakpoint } = Grid
 const { Sider, Content } = Layout;
 
 export default function CoursesPage() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
 
     const filterCollapsed = useStoreState(state => state.adm.filterCollapsed)
     const tipoVisualizacao = useStoreState(state => state.adm.tipoVisualizacao)
@@ -67,6 +72,10 @@ export default function CoursesPage() {
                     </Row>
                 </Content>
             </Layout>
+            <div style={{
+                height: '30px',
+                backgroundImage: 'linear-gradient(to right, #2C55A1, #35A8E0)'
+            }}></div>
         </Layout >
     )
 }
