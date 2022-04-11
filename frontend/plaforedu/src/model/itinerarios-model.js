@@ -1,5 +1,13 @@
 import { action } from "easy-peasy";
 
+import Banner0 from '../assets/PLAFOR.png'
+import Banner1 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png'
+import Banner2 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.png'
+import Banner3 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png'
+import Banner4 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.png'
+import Banner5 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png'
+
+
 const itinerariosModel = {
 
     layoutAtual: 'layoutCose',
@@ -14,9 +22,11 @@ const itinerariosModel = {
                 id: 0,
                 titulo: 'PlaforEDU',
                 publico: '',
-                descricao: 'O PlaforEdu é a plataforma utilizada pelo Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional e Tecnológica (PLAFOR). A plataforma tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).',
+                descricao: 'A PlaforEDU tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar sua atuação na Educação Profissional e Tecnológica, no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).',
             },
 
+            banner: Banner0,
+            
             grafo_publicado: {
                 trilhas: [],
                 elementos: [],    
@@ -27,9 +37,11 @@ const itinerariosModel = {
                 id: 1,
                 titulo: 'Iniciação ao Serviço Público',
                 publico: '',
-                descricao: 'Este Itinerário Formativo pretende integrar o servidor recém-empossado ao ambiente institucional a qual terá exercício, preparando-o para o desempenho de atividades vinculadas ao ambiente organizacional em que atuará e ao cargo que ocupa na instituição.',
+                descricao: 'Este Itinerário Formativo pretende integrar o servidor recém-empossado ao ambiente institucional ao qual terá exercício, preparando-o para o desempenho de atividades vinculadas ao ambiente organizacional em que atuará e ao cargo que ocupa na instituição.',
             },
-
+            
+            banner: Banner1,
+            
             grafo_publicado: {
                 trilhas: [],
                 elementos: [],    
@@ -40,9 +52,11 @@ const itinerariosModel = {
                 id: 2,
                 titulo: 'Técnico-Administrativo em Educação', 
                 publico: '',
-                descricao: 'Este Itinerário formativo visa formar profissionais alinhados com as políticas institucionais, neste sentido, a trilha apresentará  inicialmente aos Técnicos Administrativos em Educação o Plano de Carreira, suas atribuições e responsabilidades para o desempenho do cargo a qual foi nomeado. Os outros cursos da trilha pretendem qualificar os servidores nas diversas áreas de atuação - educacional e administrativa.',
+                descricao: 'Este Itinerário formativo visa capacitar profissionais alinhados com as políticas institucionais. Nesse sentido, o itinerário apresentará inicialmente aos Técnicos-Administrativos em Educação o Plano de Carreira, suas atribuições e responsabilidades para o desempenho do cargo ao qual foi nomeado. Os outros cursos do itinerário pretendem qualificar os servidores nas diversas áreas de atuação - educacional e administrativa.',
             },
-
+            
+            banner: Banner2,
+            
             grafo_publicado: {
                 trilhas: [],
                 elementos: [],    
@@ -53,9 +67,11 @@ const itinerariosModel = {
                 id: 3,
                 titulo: 'Docente',  // NOME DO ITINERARIO
                 publico: '',
-                descricao: 'Este itinerário é um processo formativo interativo e reflexivo, proporcionando ao docente a resolução dos problemas enfrentados nas práticas educativas em um contexto pedagógico. A metodologia adotada é dinâmica, proporcionando a construção de novos saberes através das trilhas vinculadas à teoria e às práticas docentes.',
+                descricao: 'Este itinerário é um processo formativo interativo e reflexivo, proporcionando ao docente a resolução dos problemas enfrentados nas práticas educativas em um contexto pedagógico. A metodologia adotada é dinâmica, proporcionando a construção de novos saberes por intermédio das trilhas vinculadas à teoria e às práticas docentes.',
             },
-
+            
+            banner: Banner3,
+            
             grafo_publicado: {
                 trilhas: [], // ids das trilhas
                 elementos: [],
@@ -66,9 +82,11 @@ const itinerariosModel = {
                 id: 4,
                 titulo: 'Gerencial',
                 publico: '',
-                descricao: 'O itinerário formativo gerencial/liderança pode ser percorrido por servidores técnicos ou docentes que estejam em cargos/funções de gestão ou que desejem se capacitar para tal. Objetiva, através de trilhas, capacitar os servidores na área escolhida de atuação, planejados dentro das metodologias mais modernas abarcando temáticas tradicionais e contemporâneas, proporcionando uma formação completa dentro dos eixos de interesse.',
+                descricao: 'O itinerário formativo gerencial pode ser percorrido por servidores técnicos-administrativos ou docentes que estejam em cargos/funções de gestão ou que desejem se capacitar para tal, com metodologias modernas, abarcando temáticas tradicionais e contemporâneas.',
             },
-
+            
+            banner: Banner4,
+            
             grafo_publicado: {
                 trilhas: [], 
                 elementos: [],    
@@ -79,8 +97,10 @@ const itinerariosModel = {
                 id: 5,
                 titulo: 'Preparação para a aposentadoria',
                 publico: '',
-                descricao: 'A aposentadoria já é realidade na Rede Federal EPCT, o itinerário que se apresenta traz o enfoque para um novo encarreiramento. A preparação para aposentadoria é assunto significativo e se tratando de poder público cabe lembrar que é reconhecida e priorizada a partir da instituição da lei nº 10.741 de 2003, que dispõe sobre o Estatuto do Idoso. Elaborado a partir de  3 pilares: Formação no contexto  psicológico preparando-se para esta nova realidade, em que estas demandas de trabalho e rotina anteriores não existirão mais. Atividades futuras: o aposentado deve pensar no seu perfil de trabalho, fazer análise de suas características pessoais, habilidades, preferências, para descobrir o que irá fazer depois. Pode se associar a ONGs, empreender, etc. Financeiro: se este aspecto não estiver bem equacionado, dificilmente o aposentado conseguirá realizar as outras coisas. É fundamental o planejamento financeiro, saber o  quanto vai gastar do momento do desligamento para frente e fazer uma análise de expectativa de vida.',
+                descricao: 'A aposentadoria já é realidade na Rede Federal EPCT, o itinerário que se apresenta traz o enfoque para um novo encarreiramento. O itinerário foi elaborado a partir de 3 pilares: Formação no contexto  psicológico preparando-se para esta nova realidade, em que as demandas de trabalho e rotina anteriores não existirão mais. Atividades futuras: o aposentado deve pensar no seu perfil, fazer análise de suas características pessoais, habilidades e preferências para descobrir o que irá fazer depois. Pode se associar a ONGs, empreender etc. Financeiro: se este aspecto não estiver bem equacionado, dificilmente o aposentado conseguirá realizar as outras coisas. É fundamental o planejamento financeiro, saber o quanto vai gastar do momento do desligamento para frente e fazer uma análise de expectativa de vida.',
             },
+            
+            banner: Banner5,
 
             grafo_publicado: {
                 trilhas: [], 

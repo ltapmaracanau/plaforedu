@@ -1,0 +1,110 @@
+---
+stages:
+  - prepare
+  - sonarqube-check
+  - build
+  - deploy
+
+variables:
+  ROLE_KEY: AWS_ACCESS_KEY_ID_$CI_COMMIT_REF_NAME
+  ROLE_SECRET: AWS_SECRET_ACCESS_KEY_$CI_COMMIT_REF_NAME
+  PROJECT_NAMESPACE: plaforedu
+
+prepare:
+  stage: prepare
+  image: node:14.16.0-buster
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - node_modules/
+  script:
+    - echo "Preparing Frontend Package"
+    - apt -y update -q
+    - export AWS_ACCESS_KEY_ID="${!ROLE_KEY}"
+    - export AWS_SECRET_ACCESS_KEY="${!ROLE_SECRET}"
+    - apt install python3 python3-pip -y -qqq
+    - pip3 install awscli -qqq
+    - export AWS_BUCKET=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/frontend/AWS_S3_APP_FRONT" --output text --query Parameter.Value --region sa-east-1)
+    # - export COGNITO_USER_POOL_ID=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/COGNITO_USER_POOL_ID" --output text --query Parameter.Value --region sa-east-1)
+    # - export COGNITO_POOL_WEB_CLIENT_ID=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/COGNITO_CLIENT_ID_NO_SECRET" --output text --query Parameter.Value --region sa-east-1)
+    # - export REACT_APP_API_BASE_URL=https://$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/backend/API_URL" --output text --query Parameter.Value --region sa-east-1)
+    # - export RECAPTCHA_KEY_V2=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/backend/RECAPTCHA_KEY_V2" --output text --query Parameter.Value --region sa-east-1)
+    # - export RECAPTCHA_KEY_V3=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/backend/RECAPTCHA_KEY_V3" --output text --query Parameter.Value --region sa-east-1)
+    # - export COGNITO_REGION=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/COGNITO_REGION" --output text --query Parameter.Value --region sa-east-1)
+    - mkdir -p $HOME/src/app/
+    - cp -r . $HOME/src/app/
+    - cd $HOME/src/app/
+    - npm install
+    - CI=false yarn build
+    - cp -r $HOME/src/app/build ${CI_PROJECT_DIR}/
+    - echo "Frontend Build Package Successful"
+  artifacts:
+    paths:
+      - ${CI_PROJECT_DIR}/build/
+  only:
+    - dev
+    - tst
+    - hmg
+    - prd
+
+sonarqube-check:
+  stage: sonarqube-check
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: ['']
+  variables:
+    SONAR_USER_HOME: 'build/.sonar'
+    GIT_DEPTH: '0'
+  cache:
+    key: '${CI_JOB_NAME}'
+    paths:
+      - build/.sonar/cache
+  script:
+    - echo "Starting Analyze"
+    - export AWS_ACCESS_KEY_ID="${!ROLE_KEY}"
+    - export AWS_SECRET_ACCESS_KEY="${!ROLE_SECRET}"
+    - apk add --no-cache --update python3
+    - pip3 install awscli -qqq
+    - export SONAR_HOST_URL=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/backend/SONAR_HOST_URL" --output text --query Parameter.Value --region sa-east-1)
+    - export SONAR_TOKEN=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/backend/SONAR_TOKEN" --output text --query Parameter.Value --region sa-east-1)
+    - sonar-scanner -Dsonar.projectKey=$CI_PROJECT_PATH_SLUG -Dsonar.qualitygate.wait=true
+    - echo "Frontend Artifacts Successfully Analyzed"
+  allow_failure: true
+  only:
+    - dev
+
+build:
+  stage: build
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+    - echo " Starting Deploy"
+    - export AWS_ACCESS_KEY_ID="${!ROLE_KEY}"
+    - export AWS_SECRET_ACCESS_KEY="${!ROLE_SECRET}"
+    - export AWS_BUCKET=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/frontend/AWS_S3_APP_FRONT" --output text --query Parameter.Value --region sa-east-1)
+    - aws s3 rm s3://$AWS_BUCKET --recursive
+    - aws s3 cp build/ s3://$AWS_BUCKET --recursive --include "*"
+    - echo "Frontend Deploy Package Successful"
+  only:
+    - dev
+    - tst
+    - hmg
+    - prd
+
+deploy:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+    - echo "Deploying Frontend Package"
+    - apt -y update -q
+    - export AWS_ACCESS_KEY_ID="${!ROLE_KEY}"
+    - export AWS_SECRET_ACCESS_KEY="${!ROLE_SECRET}"
+    - export AWS_DISTRIBUTION=$(aws ssm get-parameter --name "/$PROJECT_NAMESPACE/$CI_COMMIT_REF_NAME/frontend/CLOUDFRONT_ID" --output text --query Parameter.Value --region sa-east-1)
+    - aws cloudfront create-invalidation --distribution-id $AWS_DISTRIBUTION --paths "/*"
+    - echo "Frontend Deploy Package Successful"
+    - echo "Wait for Global Distribution"
+    - echo "---- END ----"
+  only:
+    - dev
+    - tst
+    - hmg
+    - prd

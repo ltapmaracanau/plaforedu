@@ -77,7 +77,7 @@ export default function CytoscapeVisualization() {
         { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
         { label: "Link", key: "link" }
     ];
-   
+
     const csvTrilhasHeaders = [
         { label: "Trilha", key: "trilha" },
         { label: "Descrição trilha", key: "descTrilha" },
@@ -106,16 +106,16 @@ export default function CytoscapeVisualization() {
                             possuiAcessibilidade: cursoData.possuiAcessibilidade,
                             link: cursoData.link
                         };
-    
+
                         result.push(item);
                     });
             });
-            
-            return result;            
+
+            return result;
         }
 
         const coursesData = cursos.filter(course => cursosFiltrados.includes(course.id))
-        
+
         return coursesData.map(course => {
             return {
                 titulo: course.title,
@@ -145,7 +145,7 @@ export default function CytoscapeVisualization() {
         filter.tipoClassificacao ?
             cyRef.current.layout(layouts['layoutBreadthFirst']).run() :
             cyRef.current.layout(layouts[layoutAtual]).run()
-        setZoom(cyRef.current._private.zoom)
+        setZoom(cyRef.current._private.zoom + 0.3)
     }, [elements, layoutAtual, filter.tipoClassificacao, layouts]);
 
     return (
@@ -288,7 +288,7 @@ export default function CytoscapeVisualization() {
                             </CSVLink>
                         </Card>
                     </Col>
-                    <Col
+                    {/* <Col
                         style={{ margin: '5px' }}
                     >
                         <Card style={{ width: '100%' }}>
@@ -304,7 +304,7 @@ export default function CytoscapeVisualization() {
                                 )}
                             </PDFDownloadLink>
                         </Card>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Form>
             <CytoscapeComponent
