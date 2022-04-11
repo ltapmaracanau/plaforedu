@@ -189,7 +189,7 @@ const colorsItinerarios = {
 const initialFilterDefault = {
     buscaInterna: '',
     cargaHoraria: [0, 200],
-    tipoClassificacao: true, // False: por competências   True: por trilhas
+    tipoClassificacao: true, // false: por cursos, true: por trilhas
     categoriasDeCompetencias: [],
     competencias: [],
     temas: [],
@@ -202,7 +202,7 @@ const initialFilterDefault = {
 const cursosFilterFuctionDefault = (filtro) => {
     let novosCursos = []
     let novasTrilhas = []
-    if (filtro.tipoClassificacao) { // true: trilhas, false: competencias
+    if (filtro.tipoClassificacao) { // false: por cursos, true: por trilhas
         competenciasDefault.forEach(competencia => {
             let categoriaDaCompetencia = categoriasDeCompetenciasDefault.find(categoria => categoria.competencias.includes(competencia.id))
             let contemCategoria = filtro.categoriasDeCompetencias.includes(categoriaDaCompetencia.id)
@@ -223,7 +223,7 @@ const cursosFilterFuctionDefault = (filtro) => {
             let competenciaNaoEspecificada = competencia.id === 1 // Se a competência não é especificada
 
             if (competenciaTrue && categoriaTrue && contemTrilhaNoItinerario && !competenciaNaoEspecificada) {
-                console.log(competencia);
+                // console.log(competencia);
                 novasTrilhas.push(competencia)
             }
         })
@@ -267,7 +267,7 @@ const cursosFilterFuctionDefault = (filtro) => {
             }
         })
     }
-    return({novosCursos, novasTrilhas})
+    return({ novosCursos, novasTrilhas })
 }
 
 const reformuladorDeElementosCytoscape = (cursosFiltrados, filtro) => {
