@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~antd/dist/antd.less';
+@import "~antd/dist/antd.less";
 
 @body-background: #f2f2f2;
 @layout-body-background: #f8f8f8;
@@ -9,7 +9,7 @@
 
 // Default ant design variales ->>> https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 // -------- Colors -----------
-@primary-color: #1890FF;
+@primary-color: #1890ff;
 @info-color: #1890ff;
 @success-color: #52c41a;
 @processing-color: #1890ff;
@@ -22,14 +22,13 @@
 @text-color: rgba(0, 0, 0, 0.65);
 @text-color-secondary: rgba(0, 0, 0, 0.45);
 
-
 // --------     Form      -----------
 
 @input-height-lg: 80px;
 @font-size-lg: 24px;
 
 .ant-input-affix-wrapper {
-    border-radius: 30px;
+  border-radius: 30px;
 }
 
 // -------- Border radius -----------
@@ -41,12 +40,12 @@
 @border-color-split: rgba(0, 0, 0, 0.05);
 
 // -------- Font family -----------
-@font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
-    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
-@code-family: 'Anonymous Pro', 'SFMono-Regular', Consolas, 'Liberation Mono',
-    Menlo, Courier, monospace;
+@font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol";
+@code-family: "Anonymous Pro", "SFMono-Regular", Consolas, "Liberation Mono",
+  Menlo, Courier, monospace;
 
 // -------- Header -----------
 //@layout-header-background: #ffffff;
@@ -58,7 +57,6 @@
 
 @menu-dark-bg: #9fa09f;
 @menu-dark-submenu-bg: #9fa0a0;
-
 
 // -------- Menu -------------
 
@@ -106,7 +104,8 @@
 @modal-header-padding-horizontal: @padding-lg;
 @modal-body-padding: @padding-lg;
 @modal-header-bg: linear-gradient(to right, #2c56a1, #35a7df);
-@modal-header-padding: @modal-header-padding-vertical @modal-header-padding-horizontal;
+@modal-header-padding: @modal-header-padding-vertical
+  @modal-header-padding-horizontal;
 @modal-header-border-width: @border-width-base;
 @modal-header-border-style: @border-style-base;
 @modal-header-title-line-height: 22px;
@@ -137,22 +136,21 @@
 @descriptions-item-label-colon-margin-left: 2px;
 @descriptions-extra-color: @text-color;
 
-
 .linkHeader {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0px 8px;
-    border-left: 2px solid #e7e7e7;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+  border-left: 2px solid #e7e7e7;
 
-    :hover {
-        color: rgba(0, 0, 0, 0.9);
-    }
+  :hover {
+    color: rgba(0, 0, 0, 0.9);
+  }
 }
 
 h4.ant-typography,
 .ant-typography h4 {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 // Card
@@ -172,41 +170,40 @@ h4.ant-typography,
 @card-actions-li-margin: 12px 0;
 @card-skeleton-bg: #cfd8dc;
 @card-background: @component-background;
-@card-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
-    0 5px 12px 4px rgba(0, 0, 0, 0.09);
+@card-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+  0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
 @card-radius: @border-radius-base;
 @card-head-tabs-margin-bottom: -17px;
 @card-head-extra-color: @text-color;
 
-
 // Scroll bar
 
 ::-webkit-scrollbar {
-    width: 15px;
-    /* width of the entire scrollbar */
+  width: 15px;
+  /* width of the entire scrollbar */
 }
 
 ::-webkit-scrollbar-track {
-    background: rgb(255, 255, 255);
-    /* color of the tracking area */
+  background: rgb(255, 255, 255);
+  /* color of the tracking area */
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(112, 112, 112);
-    /* color of the scroll thumb */
-    border-radius: 20px;
-    /* roundness of the scroll thumb */
-    border: 3px solid rgb(255, 255, 255);
-    /* creates padding around scroll thumb */
+  background-color: rgb(112, 112, 112);
+  /* color of the scroll thumb */
+  border-radius: 20px;
+  /* roundness of the scroll thumb */
+  border: 3px solid rgb(255, 255, 255);
+  /* creates padding around scroll thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(70, 70, 70);
-    /* color of the scroll thumb */
-    border-radius: 20px;
-    /* roundness of the scroll thumb */
-    border: 3px solid rgb(255, 255, 255);
-    /* creates padding around scroll thumb */
+  background-color: rgb(70, 70, 70);
+  /* color of the scroll thumb */
+  border-radius: 20px;
+  /* roundness of the scroll thumb */
+  border: 3px solid rgb(255, 255, 255);
+  /* creates padding around scroll thumb */
 }
 
 // Carousel
