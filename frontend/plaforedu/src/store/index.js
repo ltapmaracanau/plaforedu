@@ -1,6 +1,6 @@
-import { createStore } from 'easy-peasy'
-import storeModel from '../model'
+import { createStore } from "easy-peasy";
+import storeModel from "../model";
 
-const store = createStore(storeModel)
+const store = createStore(storeModel);
 
-export default store
+export default store;
