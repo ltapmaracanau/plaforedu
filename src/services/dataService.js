@@ -1,3 +1,22 @@
+import axios from 'axios'
+
+export const login = (payload = { username: "", password: "" }) => new Promise(async (resolve, reject) => {
+
+  await axios.post('https://plaforedubackend-production.up.railway.app/sessions', {
+    email: payload.username,
+    password: payload.password
+  })
+    .then((response) => {
+      console.log(response);
+      resolve(response.data)
+    })
+    .catch(() => {
+      resolve({
+        error: "Erro no serviço de login!"
+      })
+    })
+})
+
 export const cursosDefault = [
   {
     id: 1,

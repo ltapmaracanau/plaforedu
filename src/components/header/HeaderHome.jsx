@@ -7,7 +7,8 @@ import LogoPlafor from "../../assets/LOGOPLAFORHEADER.svg";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 
-import { Row, Col, Menu, Grid, Image } from "antd";
+import { Row, Col, Menu, Grid, Image, Button } from "antd";
+import Login from "../login";
 
 const { useBreakpoint } = Grid;
 
@@ -17,7 +18,11 @@ export default function HeaderHome() {
   const screens = useBreakpoint();
 
   const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
+  const setLoginIsVisible = useStoreActions(
+    (actions) => actions.adm.setLoginIsVisible
+  );
   const filterDefault = useStoreState((state) => state.cursos.filterDefault);
+  const loginIsVisible = useStoreState((state) => state.adm.loginIsVisible);
 
   const onClickItinerario = (itinerario) => {
     setFilter({
@@ -122,8 +127,19 @@ export default function HeaderHome() {
           <Menu.Item key={5}>
             <Link to={"/faq"}>FAQ</Link>
           </Menu.Item>
+          <Menu.Item key={6} disabled={true}>
+            <Button
+              onClick={() => {
+                setLoginIsVisible(!loginIsVisible);
+              }}
+              shape="round"
+            >
+              Login
+            </Button>
+          </Menu.Item>
         </Menu>
       </Col>
+      <Login />
     </Row>
   );
 }
