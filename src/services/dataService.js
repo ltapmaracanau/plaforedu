@@ -1,18 +1,54 @@
-import axios from 'axios'
+import axios from "axios"
+
+const authAxios = axios.create({
+  baseURL: 'https://plaforedubackend-production.up.railway.app'
+})
 
 export const login = (payload = { username: "", password: "" }) => new Promise(async (resolve, reject) => {
 
-  await axios.post('https://plaforedubackend-production.up.railway.app/sessions', {
+  await authAxios.post('/sessions', {
     email: payload.username,
     password: payload.password
   })
     .then((response) => {
-      console.log(response);
       resolve(response.data)
     })
     .catch(() => {
       resolve({
         error: "Erro no serviço de login!"
+      })
+    })
+})
+
+export const forgetPassword = (payload = { username: "" }) => new Promise(async (resolve, reject) => {
+
+  await authAxios.post('/password/forgot', {
+    email: payload.username
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch(() => {
+      resolve({
+        error: true,
+        message: 'Erro na comunicação com os serviços!'
+      })
+    })
+})
+
+export const resetPassword = (payload = { token: "", password: "" }) => new Promise(async (resolve, reject) => {
+
+  await authAxios.post('/password/reset', {
+    token: payload.token,
+    password: payload.password
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch(() => {
+      resolve({
+        error: true,
+        message: 'Erro na comunicação com os serviços!'
       })
     })
 })

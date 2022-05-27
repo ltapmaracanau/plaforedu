@@ -2,11 +2,10 @@ import React from "react";
 
 import ministerio from "../../assets/marca.png";
 
-import { Layout, Typography, Row, Col, Grid, Image } from "antd";
+import { Typography, Row, Col, Grid, Image } from "antd";
 
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
-const { Footer } = Layout;
 
 export default function FooterGov() {
   const screens = useBreakpoint();

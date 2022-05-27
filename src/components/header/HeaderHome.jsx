@@ -1,14 +1,19 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import LogoPlafor from "../../assets/LOGOPLAFORHEADER.svg";
 
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { DownOutlined, MenuOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  MenuOutlined,
+  LogoutOutlined,
+  UserAddOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
-import { Row, Col, Menu, Grid, Image, Button } from "antd";
-import Login from "../login";
+import { Row, Col, Menu, Grid, Image, Button, Avatar, Space } from "antd";
 
 const { useBreakpoint } = Grid;
 
@@ -16,13 +21,13 @@ const { SubMenu } = Menu;
 
 export default function HeaderHome() {
   const screens = useBreakpoint();
+  let navigate = useNavigate();
 
   const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
-  const setLoginIsVisible = useStoreActions(
-    (actions) => actions.adm.setLoginIsVisible
-  );
   const filterDefault = useStoreState((state) => state.cursos.filterDefault);
-  const loginIsVisible = useStoreState((state) => state.adm.loginIsVisible);
+  const isAuthenticated = useStoreState((state) => state.adm.isAuthenticated);
+  const logout = useStoreActions((actions) => actions.adm.logout);
+  const user = useStoreState((actions) => actions.adm.user);
 
   const onClickItinerario = (itinerario) => {
     setFilter({
@@ -127,19 +132,46 @@ export default function HeaderHome() {
           <Menu.Item key={5}>
             <Link to={"/faq"}>FAQ</Link>
           </Menu.Item>
-          <Menu.Item key={6} disabled={true}>
-            <Button
-              onClick={() => {
-                setLoginIsVisible(!loginIsVisible);
-              }}
-              shape="round"
+          {isAuthenticated ? (
+            <SubMenu
+              key={6}
+              icon={<Avatar size="default" icon={<UserOutlined />} />}
             >
-              Login
-            </Button>
-          </Menu.Item>
+              {user.roles.includes("ADMINISTRADOR") ? (
+                <Menu.Item
+                  key={62}
+                  onClick={() => {
+                    navigate("/register");
+                  }}
+                  icon={
+                    <Space>
+                      Registrar Usuário <UserAddOutlined />
+                    </Space>
+                  }
+                />
+              ) : null}
+              <Menu.Item
+                key={61}
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                icon={
+                  <Space>
+                    Sair <LogoutOutlined />
+                  </Space>
+                }
+              />
+            </SubMenu>
+          ) : (
+            <Menu.Item key={6}>
+              <Link to={"/login"}>
+                <Button shape="round">LOGIN</Button>
+              </Link>
+            </Menu.Item>
+          )}
         </Menu>
       </Col>
-      <Login />
     </Row>
   );
 }

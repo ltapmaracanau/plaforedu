@@ -1,5 +1,5 @@
 import { action, thunk } from "easy-peasy";
-import { login } from "../services/dataService";
+import { login, forgetPassword, resetPassword } from "../services/dataService";
 
 const admModel = {
 
@@ -7,17 +7,63 @@ const admModel = {
 
   isAuthenticated: false,
 
-  loginIsVisible: false,
+  user: {},
+
+  init: thunk(async (actions, payload) => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const token = localStorage.getItem('token')
+    if (user != null && token != null) {
+      actions.setUser(user)
+      // authAxios.defaults.headers.Authorization = `Bearer ${token}`;
+      actions.setIsAuthenticated(true)
+    }
+
+  }),
 
   login: thunk(async (actions, payload) => {
     actions.setLoading(true)
     const authentication = await login({ username: payload.username, password: payload.password })
     if (authentication.token) {
-      localStorage.setItem('token', JSON.stringify(authentication.token))
+      localStorage.setItem('token', authentication.token)
+      localStorage.setItem('user', JSON.stringify(authentication.user))
       actions.setIsAuthenticated(true)
+      // authAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
+      actions.setUser(authentication.user)
     }
     actions.setLoading(false)
     return (authentication)
+  }),
+
+  registerNewUser: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    console.log('Criar novo usuário: ', payload);
+    actions.setLoading(false)
+    return ({ error: true })
+  }),
+
+  forgetPassword: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const tryForgetPassword = await forgetPassword({ username: payload.username })
+    console.log('Esqueci senha: ', tryForgetPassword);
+    actions.setLoading(false)
+    return (tryForgetPassword)
+  }),
+
+  resetPassword: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const tryResetPassword = resetPassword({ token: payload.token, password: payload.password })
+    console.log('Reset de senha: ', tryResetPassword);
+    actions.setLoading(false)
+    return (tryResetPassword)
+  }),
+
+  logout: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    actions.setIsAuthenticated(false)
+    actions.setUser({})
+    actions.setLoading(false)
   }),
 
   tipoVisualizacao: false, // false: grafo, true: lista
@@ -40,8 +86,8 @@ const admModel = {
     state.loading = payload;
   }),
 
-  setLoginIsVisible: action((state, payload) => {
-    state.loginIsVisible = payload;
+  setUser: action((state, payload) => {
+    state.user = payload;
   }),
 };
 
