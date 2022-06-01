@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app/App";
-import { StoreProvider } from "easy-peasy";
-import store from "./store";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-  <StoreProvider store={store}>
+  <BrowserRouter>
     <App />
-  </StoreProvider>,
+  </BrowserRouter>,
   document.getElementById("root")
 );

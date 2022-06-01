@@ -47,53 +47,51 @@ export default function CustomRoutes() {
     }
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/faleconosco" element={<FaleConosco />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route
-                    path="/cursos"
-                    element={
-                        <RequireAuth>
-                            <CoursesPage />
-                        </RequireAuth>
-                    }
-                />
-                <Route
-                    path="/login"
-                    element={
-                        <RequireNoAuth>
-                            <Login />
-                        </RequireNoAuth>
-                    }
-                />
-                <Route
-                    path="/register"
-                    element={
-                        <RequireAuth>
-                            <Register />
-                        </RequireAuth>
-                    }
-                />
-                <Route
-                    path="/forget"
-                    element={
-                        <RequireNoAuth>
-                            <ForgetPassword />
-                        </RequireNoAuth>
-                    }
-                />
-                <Route
-                    path="/resetpassword"
-                    element={
-                        <RequireNoAuth>
-                            <ResetPassword />
-                        </RequireNoAuth>
-                    }
-                />
-            </Routes>
-        </BrowserRouter>
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/faleconosco" element={<FaleConosco />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route
+                path="/cursos"
+                element={
+                    <RequireAuth>
+                        <CoursesPage />
+                    </RequireAuth>
+                }
+            />
+            <Route
+                path="/login"
+                element={
+                    <RequireNoAuth>
+                        <Login />
+                    </RequireNoAuth>
+                }
+            />
+            <Route
+                path="/register"
+                element={
+                    <RequireAuth>
+                        <Register />
+                    </RequireAuth>
+                }
+            />
+            <Route
+                path="/forget"
+                element={
+                    <RequireNoAuth>
+                        <ForgetPassword />
+                    </RequireNoAuth>
+                }
+            />
+            <Route
+                path="/resetpassword"
+                element={
+                    <RequireNoAuth>
+                        <ResetPassword />
+                    </RequireNoAuth>
+                }
+            />
+        </Routes>
     );
 }
