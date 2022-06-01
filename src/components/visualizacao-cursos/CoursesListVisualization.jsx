@@ -11,7 +11,6 @@ import {
   Descriptions,
   Typography,
   Collapse,
-  Image,
 } from "antd";
 
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
