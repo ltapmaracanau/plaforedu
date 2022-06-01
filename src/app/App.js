@@ -9,6 +9,7 @@ import FooterGov from "../components/footer/FooterGov.jsx";
 import { Layout } from "antd";
 import CustomRoutes from "../routes/routes";
 import store from "../store";
+import { StoreProvider } from "easy-peasy";
 
 function App() {
 
