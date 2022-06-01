@@ -4,12 +4,11 @@ import mandala from "../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Co
 import retangulo from "../assets/about/Rectangle.png";
 import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png";
 import { useNavigate } from "react-router-dom";
-import YouTube from "react-youtube";
 
 import { Layout, Row, Col, Card, Typography, Image, Grid } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-const { Text, Title } = Typography;
+const { Text, Title, Link } = Typography;
 const { useBreakpoint } = Grid;
 const { Content } = Layout;
 
@@ -69,19 +68,11 @@ export default function AboutPage() {
               </Title>
             </Row>
             <Row>
-              <YouTube
-                videoId="s4hchxxjuRo"
-                opts={
-                  screens.md
-                    ? {
-                        height: "449",
-                        width: "740",
-                      }
-                    : {
-                        height: "250",
-                        width: "300",
-                      }
-                }
+              <iframe
+                title="Apresentação SETEC"
+                src="https://www.youtube.com/embed/s4hchxxjuRo"
+                height={screens.md ? "449" : "250"}
+                width={screens.md ? "740" : "300"}
               />
             </Row>
           </Row>
@@ -107,19 +98,11 @@ export default function AboutPage() {
             }
           >
             <Col order={screens.lg ? 0 : 1}>
-              <YouTube
-                videoId="XJS8nvbW754"
-                opts={
-                  screens.md
-                    ? {
-                        height: "310",
-                        width: "534",
-                      }
-                    : {
-                        height: "250",
-                        width: "300",
-                      }
-                }
+              <iframe
+                title="Apresentação PlaforEDU"
+                src="https://www.youtube.com/embed/XJS8nvbW754"
+                height={screens.md ? "310" : "250"}
+                width={screens.md ? "534" : "300"}
               />
             </Col>
             <Col
@@ -205,7 +188,7 @@ export default function AboutPage() {
                                     fontSize: '18px',
                                 }}
                             >
-                                Para conhecer a PlaforEDU, consulte o <a>Guia do Usuário</a>.
+                                Para conhecer a PlaforEDU, consulte o <Link>Guia do Usuário</Link>.
                             </Text> */}
             </Col>
             <Col
@@ -308,7 +291,7 @@ export default function AboutPage() {
             }
           >
             <Col style={{ padding: "40px" }}>
-              <a>
+              <Link>
                 <Title
                   style={{
                     fontFamily: "Poppins",
@@ -322,7 +305,7 @@ export default function AboutPage() {
                 >
                   Iniciação ao serviço público
                 </Title>
-              </a>
+              </Link>
               <Text
                 style={{
                   fontFamily: "Roboto",
@@ -337,19 +320,11 @@ export default function AboutPage() {
               </Text>
             </Col>
             <Col>
-              <YouTube
-                videoId="FCSD3x-a8KA"
-                opts={
-                  screens.md
-                    ? {
-                        height: "310",
-                        width: "534",
-                      }
-                    : {
-                        height: "250",
-                        width: "300",
-                      }
-                }
+              <iframe
+                title="Iniciação ao Serviço Público"
+                src="https://www.youtube.com/embed/FCSD3x-a8KA"
+                height={screens.md ? "310" : "250"}
+                width={screens.md ? "534" : "300"}
               />
               <Text
                 style={{
@@ -363,7 +338,7 @@ export default function AboutPage() {
                   onClickHandler(1);
                 }}
               >
-                <a>Clique aqui para ir para o itinerário.</a>
+                <Link>Clique aqui para ir para o itinerário.</Link>
               </Text>
             </Col>
           </Row>
@@ -390,7 +365,7 @@ export default function AboutPage() {
             }
           >
             <Col style={{ padding: "40px" }}>
-              <a>
+              <Link>
                 <Title
                   style={{
                     fontFamily: "Poppins",
@@ -404,7 +379,7 @@ export default function AboutPage() {
                 >
                   Técnico-Administrativo em Educação
                 </Title>
-              </a>
+              </Link>
               <Text
                 style={{
                   fontFamily: "Roboto",
@@ -426,19 +401,11 @@ export default function AboutPage() {
                 justifyContent: "center",
               }}
             >
-              <YouTube
-                videoId="dalwDRu-KMA"
-                opts={
-                  screens.md
-                    ? {
-                        height: "310",
-                        width: "534",
-                      }
-                    : {
-                        height: "250",
-                        width: "300",
-                      }
-                }
+              <iframe
+                title="Técnico-Administrativo em Educação"
+                src="https://www.youtube.com/embed/dalwDRu-KMA"
+                height={screens.md ? "310" : "250"}
+                width={screens.md ? "534" : "300"}
               />
               <Text
                 style={{
@@ -452,7 +419,7 @@ export default function AboutPage() {
                   onClickHandler(2);
                 }}
               >
-                <a>Clique aqui para ir para o itinerário.</a>
+                <Link>Clique aqui para ir para o itinerário.</Link>
               </Text>
             </Col>
           </Row>
@@ -479,7 +446,7 @@ export default function AboutPage() {
             }
           >
             <Col style={{ padding: "40px" }}>
-              <a>
+              <Link>
                 <Title
                   style={{
                     fontFamily: "Poppins",
@@ -493,7 +460,7 @@ export default function AboutPage() {
                 >
                   Docente
                 </Title>
-              </a>
+              </Link>
               <Text
                 style={{
                   fontFamily: "Roboto",
@@ -509,19 +476,11 @@ export default function AboutPage() {
               </Text>
             </Col>
             <Col>
-              <YouTube
-                videoId="QB0Gf_wwGn8"
-                opts={
-                  screens.md
-                    ? {
-                        height: "310",
-                        width: "534",
-                      }
-                    : {
-                        height: "250",
-                        width: "300",
-                      }
-                }
+              <iframe
+                title="Docente"
+                src="https://www.youtube.com/embed/QB0Gf_wwGn8"
+                height={screens.md ? "310" : "250"}
+                width={screens.md ? "534" : "300"}
               />
               <Text
                 style={{
@@ -535,7 +494,7 @@ export default function AboutPage() {
                   onClickHandler(3);
                 }}
               >
-                <a>Clique aqui para ir para o itinerário.</a>
+                <Link>Clique aqui para ir para o itinerário.</Link>
               </Text>
             </Col>
           </Row>
@@ -562,7 +521,7 @@ export default function AboutPage() {
             }
           >
             <Col style={{ padding: "40px" }}>
-              <a>
+              <Link>
                 <Title
                   style={{
                     fontFamily: "Poppins",
@@ -576,7 +535,7 @@ export default function AboutPage() {
                 >
                   Gerencial
                 </Title>
-              </a>
+              </Link>
               <Text
                 style={{
                   fontFamily: "Roboto",
@@ -591,19 +550,11 @@ export default function AboutPage() {
               </Text>
             </Col>
             <Col>
-              <YouTube
-                videoId="SHo-7vJLWn8"
-                opts={
-                  screens.md
-                    ? {
-                        height: "310",
-                        width: "534",
-                      }
-                    : {
-                        height: "250",
-                        width: "300",
-                      }
-                }
+              <iframe
+                title="Gerencial"
+                src="https://www.youtube.com/embed/SHo-7vJLWn8"
+                height={screens.md ? "310" : "250"}
+                width={screens.md ? "534" : "300"}
               />
               <Text
                 style={{
@@ -617,7 +568,7 @@ export default function AboutPage() {
                   onClickHandler(4);
                 }}
               >
-                <a>Clique aqui para ir para o itinerário.</a>
+                <Link>Clique aqui para ir para o itinerário.</Link>
               </Text>
             </Col>
           </Row>
@@ -644,7 +595,7 @@ export default function AboutPage() {
             }
           >
             <Col style={{ padding: "40px" }}>
-              <a>
+              <Link>
                 <Title
                   style={{
                     fontFamily: "Poppins",
@@ -658,7 +609,7 @@ export default function AboutPage() {
                 >
                   Aposentadoria
                 </Title>
-              </a>
+              </Link>
               <Text
                 style={{
                   fontFamily: "Roboto",
@@ -691,19 +642,11 @@ export default function AboutPage() {
               </Text>
             </Col>
             <Col>
-              <YouTube
-                videoId="mCFeSDFQWzk"
-                opts={
-                  screens.md
-                    ? {
-                        height: "310",
-                        width: "534",
-                      }
-                    : {
-                        height: "250",
-                        width: "300",
-                      }
-                }
+              <iframe
+                title="Aposentadoria"
+                src="https://www.youtube.com/embed/mCFeSDFQWzk"
+                height={screens.md ? "310" : "250"}
+                width={screens.md ? "534" : "300"}
               />
               <Text
                 style={{
@@ -717,7 +660,7 @@ export default function AboutPage() {
                   onClickHandler(5);
                 }}
               >
-                <a>Clique aqui para ir para o itinerário.</a>
+                <Link>Clique aqui para ir para o itinerário.</Link>
               </Text>
             </Col>
           </Row>

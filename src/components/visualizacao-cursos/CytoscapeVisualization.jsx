@@ -8,11 +8,11 @@ import React, {
 import { useStoreActions, useStoreState } from "easy-peasy";
 import CytoscapeComponent from "react-cytoscapejs";
 import { CSVLink } from "react-csv";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+/* import { PDFDownloadLink } from "@react-pdf/renderer"; */
 
 import fundoLegenda from "../../assets/icones/PLAFOREDU_Icones-Legenda.png";
 
-import { Template } from "../pdf-document";
+/* import { Template } from "../pdf-document"; */
 
 import {
   MenuUnfoldOutlined,
@@ -20,8 +20,6 @@ import {
   PlusOutlined,
   MinusOutlined,
   FileExcelOutlined,
-  FilePdfOutlined,
-  LoadingOutlined,
 } from "@ant-design/icons";
 
 import {

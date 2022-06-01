@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Row, Input, Typography, Col, Carousel, Grid, Image } from "antd";
 import { HashLink } from "react-router-hash-link";
 import { useNavigate } from "react-router-dom";

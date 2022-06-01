@@ -1,13 +1,19 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import LogoPlafor from "../../assets/LOGOPLAFORHEADER.svg";
 
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { DownOutlined, MenuOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  MenuOutlined,
+  LogoutOutlined,
+  UserAddOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
-import { Row, Col, Menu, Grid, Image } from "antd";
+import { Row, Col, Menu, Grid, Image, Button, Avatar, Space } from "antd";
 
 const { useBreakpoint } = Grid;
 
@@ -15,9 +21,13 @@ const { SubMenu } = Menu;
 
 export default function HeaderHome() {
   const screens = useBreakpoint();
+  let navigate = useNavigate();
 
   const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
   const filterDefault = useStoreState((state) => state.cursos.filterDefault);
+  const isAuthenticated = useStoreState((state) => state.adm.isAuthenticated);
+  const logout = useStoreActions((actions) => actions.adm.logout);
+  const user = useStoreState((actions) => actions.adm.user);
 
   const onClickItinerario = (itinerario) => {
     setFilter({
@@ -122,6 +132,44 @@ export default function HeaderHome() {
           <Menu.Item key={5}>
             <Link to={"/faq"}>FAQ</Link>
           </Menu.Item>
+          {isAuthenticated ? (
+            <SubMenu
+              key={6}
+              icon={<Avatar size="default" icon={<UserOutlined />} />}
+            >
+              {user.roles.includes("ADMINISTRADOR") ? (
+                <Menu.Item
+                  key={62}
+                  onClick={() => {
+                    navigate("/register");
+                  }}
+                  icon={
+                    <Space>
+                      Registrar Usuário <UserAddOutlined />
+                    </Space>
+                  }
+                />
+              ) : null}
+              <Menu.Item
+                key={61}
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                icon={
+                  <Space>
+                    Sair <LogoutOutlined />
+                  </Space>
+                }
+              />
+            </SubMenu>
+          ) : (
+            <Menu.Item key={6}>
+              <Link to={"/login"}>
+                <Button shape="round">LOGIN</Button>
+              </Link>
+            </Menu.Item>
+          )}
         </Menu>
       </Col>
     </Row>
