@@ -11,6 +11,7 @@ import {
   LogoutOutlined,
   UserAddOutlined,
   UserOutlined,
+  KeyOutlined,
 } from "@ant-design/icons";
 
 import { Row, Col, Menu, Grid, Image, Button, Avatar, Space } from "antd";
@@ -150,6 +151,17 @@ export default function HeaderHome() {
                   }
                 />
               ) : null}
+              <Menu.Item
+                key={63}
+                onClick={() => {
+                  navigate("/update-password");
+                }}
+                icon={
+                  <Space>
+                    Alterar Senha <KeyOutlined />
+                  </Space>
+                }
+              />
               <Menu.Item
                 key={61}
                 onClick={() => {

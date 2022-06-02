@@ -34,14 +34,21 @@ export default function Login() {
     if (tryLogin.error) {
       notification.error({
         message: "Algo deu errado!",
-        description: "Verifique seu login ou senha.",
+        description: tryLogin.message,
       });
     } else {
-      notification.success({
-        message: "Login bem sucedido!",
-        description: "Agora você tem total acesso!",
-      });
-      navigate(`/`);
+      if (tryLogin.user.status === "PENDING") {
+        notification.error({
+          message: "Login mal sucedido",
+          description:
+            "Antes do acesso total ao sistema você precisa alterar sua senha. Verifique o link enviado para seu email!",
+        });
+      } else {
+        notification.success({
+          message: "Login bem sucedido!",
+        });
+        navigate(`/`);
+      }
     }
   };
 

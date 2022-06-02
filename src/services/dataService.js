@@ -1,21 +1,38 @@
-import axios from "axios"
-
-const authAxios = axios.create({
-  baseURL: 'https://plaforedubackend-production.up.railway.app'
-})
+import { authAxios } from "./authAxios"
 
 export const login = (payload = { username: "", password: "" }) => new Promise(async (resolve, reject) => {
 
   await authAxios.post('/sessions', {
-    email: payload.username,
-    password: payload.password
+    "email": payload.username,
+    "password": payload.password
   })
     .then((response) => {
       resolve(response.data)
     })
-    .catch(() => {
+    .catch((error) => {
       resolve({
-        error: "Erro no serviço de login!"
+        error: true,
+        message: error.response.data.message
+      })
+    })
+})
+
+export const createUser = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.post('/users/new', {
+    "cpf": payload.cpf,
+    "email": payload.email,
+    "institution": payload.institution,
+    "name": payload.name,
+    "phone": payload.phone,
+    "roles": payload.roles
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
       })
     })
 })
@@ -23,15 +40,15 @@ export const login = (payload = { username: "", password: "" }) => new Promise(a
 export const forgetPassword = (payload = { username: "" }) => new Promise(async (resolve, reject) => {
 
   await authAxios.post('/password/forgot', {
-    email: payload.username
+    "email": payload.username
   })
     .then((response) => {
       resolve(response.data)
     })
-    .catch(() => {
+    .catch((error) => {
       resolve({
         error: true,
-        message: 'Erro na comunicação com os serviços!'
+        message: error.response.data.message
       })
     })
 })
@@ -39,16 +56,47 @@ export const forgetPassword = (payload = { username: "" }) => new Promise(async 
 export const resetPassword = (payload = { token: "", password: "" }) => new Promise(async (resolve, reject) => {
 
   await authAxios.post('/password/reset', {
-    token: payload.token,
-    password: payload.password
+    "token": payload.token,
+    "password": payload.password
   })
     .then((response) => {
       resolve(response.data)
     })
-    .catch(() => {
+    .catch((error) => {
       resolve({
         error: true,
-        message: 'Erro na comunicação com os serviços!'
+        message: error.response.data.message
+      })
+    })
+})
+
+export const updatePassword = (payload = { oldPassword: "", newPassword: "" }) => new Promise(async (resolve, reject) => {
+
+  await authAxios.patch('/password/update', {
+    "oldPassword": payload.oldPassword,
+    "newPassword": payload.newPassword
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
+      })
+    })
+})
+
+export const getRoles = () => new Promise(async (resolve, reject) => {
+
+  await authAxios.get('/roles/list')
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
       })
     })
 })
