@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { registerSchema } from "../schemas/RegisterSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,6 +6,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
 import HeaderHome from "../components/header/HeaderHome";
+import InputMask from "../components/InputMask";
 
 const { Content } = Layout;
 
@@ -13,7 +14,9 @@ export default function Register() {
   const registerNewUser = useStoreActions(
     (actions) => actions.adm.registerNewUser
   );
+  const getRoles = useStoreActions((state) => state.adm.getRoles);
   const loading = useStoreState((state) => state.adm.loading);
+  const roles = useStoreState((state) => state.adm.roles);
 
   const register = useForm({
     mode: "onBlur",
@@ -29,11 +32,17 @@ export default function Register() {
   });
 
   const onSubmit = async (values) => {
+    values.cpf = values.cpf.replace(/\./g, "").replace(/\-/g, "");
+    values.phone = values.phone
+      .replace(/\(/g, "")
+      .replace(/\)/g, "")
+      .replace(" ", "")
+      .replace(/\-/g, "");
     const newUser = await registerNewUser(values);
     if (newUser.error) {
       notification.error({
         message: "Algo deu errado!",
-        description: "Verifique seu login ou senha.",
+        description: newUser.message,
       });
     } else {
       notification.success({
@@ -42,6 +51,10 @@ export default function Register() {
       });
     }
   };
+
+  useEffect(() => {
+    getRoles();
+  }, []);
 
   return (
     <>
@@ -84,7 +97,24 @@ export default function Register() {
                 }}
               />
               <Controller
-                name="username"
+                name="institution"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Instituição"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input placeholder="Instituição" {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="email"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
@@ -101,7 +131,49 @@ export default function Register() {
                 }}
               />
               <Controller
-                name="cargo"
+                name="cpf"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"CPF"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <InputMask
+                        mask="999.999.999-99"
+                        placeholder="___.___.___-__"
+                        {...field}
+                      />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="phone"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Número de Telefone"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <InputMask
+                        mask="(99) 99999-9999"
+                        placeholder="(__) _____-____"
+                        {...field}
+                      />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="roles"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
@@ -112,49 +184,18 @@ export default function Register() {
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <Select placeholder="cargo" {...field}>
-                        <Select.Option value={"TAE"}>
-                          Técnico-Administrativo em Educação
-                        </Select.Option>
-                        <Select.Option value={"Docente"}>Docente</Select.Option>
-                        <Select.Option value={"Aposentado"}>
-                          Aposentado
-                        </Select.Option>
+                      <Select
+                        mode="multiple"
+                        loading={loading}
+                        placeholder="cargo"
+                        {...field}
+                      >
+                        {roles.map((role) => (
+                          <Select.Option key={role.id} value={role.id}>
+                            {role.name}
+                          </Select.Option>
+                        ))}
                       </Select>
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="password1"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Senha"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input.Password {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="password2"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Confirme a senha"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input.Password {...field} />
                     </Form.Item>
                   );
                 }}
@@ -173,7 +214,7 @@ export default function Register() {
                   shape="round"
                   htmlType="submit"
                 >
-                  Cadastre-se
+                  Cadastrar
                 </Button>
               </div>
             </Form>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "antd/dist/antd.css";
 import "./App.less";
 
@@ -8,26 +9,28 @@ import FooterGov from "../components/footer/FooterGov.jsx";
 
 import { Layout } from "antd";
 import CustomRoutes from "../routes/routes";
-import store from "../store";
-import { StoreProvider } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 
 function App() {
+
+  const init = useStoreActions(actions => actions.adm.init)
 
   var s = document.createElement("script");
   s.setAttribute("data-account", "yPtwRHQcX8");
   s.setAttribute("src", "https://cdn.userway.org/widget.js");
   document.body.appendChild(s);
 
+  useEffect(() => {
+    init()
+  }, [])
 
   return (
-    <StoreProvider store={store}>
-      <Layout style={{ minHeight: "100vh" }}>
-        <HeaderGov />
-        <CustomRoutes />
-        <VLibras />
-        <FooterGov />
-      </Layout>
-    </StoreProvider>
+    <Layout style={{ minHeight: "100vh" }}>
+      <HeaderGov />
+      <CustomRoutes />
+      <VLibras />
+      <FooterGov />
+    </Layout>
   );
 }
 

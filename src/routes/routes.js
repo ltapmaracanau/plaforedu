@@ -11,6 +11,7 @@ import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
 import ForgetPassword from '../pages/ForgetPassword.jsx';
 import ResetPassword from '../pages/ResetPassword.jsx';
+import UpdatePassword from '../pages/UpdatePassword.jsx';
 
 
 export default function CustomRoutes() {
@@ -72,7 +73,9 @@ export default function CustomRoutes() {
                 path="/register"
                 element={
                     <RequireAuth>
-                        <Register />
+                        <RequireAdmin>
+                            <Register />
+                        </RequireAdmin>
                     </RequireAuth>
                 }
             />
@@ -85,11 +88,19 @@ export default function CustomRoutes() {
                 }
             />
             <Route
-                path="/resetpassword"
+                path="/reset-password/:api_token"
                 element={
                     <RequireNoAuth>
                         <ResetPassword />
                     </RequireNoAuth>
+                }
+            />
+            <Route
+                path="/update-password"
+                element={
+                    <RequireAuth>
+                        <UpdatePassword />
+                    </RequireAuth>
                 }
             />
         </Routes>
