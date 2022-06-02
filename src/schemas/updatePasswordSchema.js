@@ -1,6 +1,9 @@
 import * as yup from "yup";
 
-export const resetPasswordSchema = yup.object().shape({
+export const updatePasswordSchema = yup.object().shape({
+    oldPassword: yup
+        .string()
+        .required('Obrigatório!'),
     password1: yup
         .string()
         .required('Obrigatório!')

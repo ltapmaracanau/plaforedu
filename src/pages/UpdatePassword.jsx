@@ -6,18 +6,14 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { Button, Card, Form, Input, Layout, notification } from "antd";
 import HeaderHome from "../components/header/HeaderHome";
-import { useNavigate, useParams } from "react-router-dom";
 
 const { Content } = Layout;
 
-export default function ResetPassword() {
-  const resetPassword = useStoreActions((actions) => actions.adm.resetPassword);
+export default function UpdatePassword() {
+  const updatePassword = useStoreActions(
+    (actions) => actions.adm.updatePassword
+  );
   const loading = useStoreState((state) => state.adm.loading);
-
-  let navigate = useNavigate();
-
-  const params = useParams();
-  console.log(params);
 
   const register = useForm({
     mode: "onBlur",
@@ -33,9 +29,9 @@ export default function ResetPassword() {
   });
 
   const onSubmit = async (values) => {
-    const tryReset = await resetPassword({
-      token: params.api_token,
-      password: values.password1,
+    const tryReset = await updatePassword({
+      oldPassword: values.oldPassword,
+      newPassword: values.password1,
     });
     if (tryReset.error) {
       notification.error({
@@ -44,10 +40,9 @@ export default function ResetPassword() {
       });
     } else {
       notification.success({
-        message: "Alteração bem sucedida!",
-        description: "Agora você pode fazer login!",
+        message: "A senha foi alterada com sucesso!",
       });
-      navigate(`/`);
+      register.reset();
     }
   };
 
@@ -74,6 +69,23 @@ export default function ResetPassword() {
             title={"ALTERAÇÃO DE SENHA"}
           >
             <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+              <Controller
+                name="oldPassword"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Senha Antiga"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input.Password {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
               <Controller
                 name="password1"
                 control={register.control}
