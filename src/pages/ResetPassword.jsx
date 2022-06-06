@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { resetPasswordSchema } from "../schemas/resetPasswordSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,6 +23,8 @@ export default function ResetPassword() {
 
   let navigate = useNavigate();
 
+  console.log(query.get("token").replace('"', ""));
+
   const register = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -38,7 +40,7 @@ export default function ResetPassword() {
 
   const onSubmit = async (values) => {
     const tryReset = await resetPassword({
-      token: query.get("token"),
+      token: query.get("token").replace('"', ""),
       password: values.password1,
     });
     if (tryReset.error) {

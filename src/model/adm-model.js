@@ -35,10 +35,13 @@ const admModel = {
     const token = localStorage.getItem('token')
     if (user != null && token != null) {
       authAxios.defaults.headers.Authorization = `Bearer ${token}`;
+      const myUser = await getMyProfile();
+
+      user.status = myUser.status
+
       actions.setUser(user)
       actions.setIsAuthenticated(true)
 
-      const myUser = await getMyProfile();
       if (myUser.error) {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
@@ -56,16 +59,14 @@ const admModel = {
     actions.setLoading(true)
     const authentication = await login({ username: payload.username, password: payload.password })
     if (authentication.token) {
-      if (authentication.user.status !== 'PENDING') {
-        localStorage.setItem('token', authentication.token)
-        localStorage.setItem('user', JSON.stringify(authentication.user))
-        actions.setUser(authentication.user)
-        authAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
-        actions.setIsAuthenticated(true)
-      }
+      actions.setUser(authentication.user)
+      localStorage.setItem('token', authentication.token)
+      localStorage.setItem('user', JSON.stringify(authentication.user))
+      authAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
+      actions.setIsAuthenticated(true)
+      actions.setLoading(false)
+      return (authentication)
     }
-    actions.setLoading(false)
-    return (authentication)
   }),
 
   registerNewUser: thunk(async (actions, payload) => {
@@ -92,7 +93,7 @@ const admModel = {
 
   resetPassword: thunk(async (actions, payload) => {
     actions.setLoading(true)
-    const tryResetPassword = await resetPassword({ token: payload.api_token, password: payload.password })
+    const tryResetPassword = await resetPassword({ token: payload.token, password: payload.password })
     actions.setLoading(false)
     return (tryResetPassword)
   }),
@@ -100,6 +101,11 @@ const admModel = {
   updatePassword: thunk(async (actions, payload) => {
     actions.setLoading(true)
     const tryUpdatePassword = await updatePassword({ ...payload })
+    await getMyProfile().then((result) => {
+      if (!result.error) {
+        actions.setUserStatus(result.status)
+      }
+    })
     actions.setLoading(false)
     return (tryUpdatePassword)
   }),
@@ -113,7 +119,6 @@ const admModel = {
     actions.setUser({})
     actions.setLoading(false)
   }),
-
 
   // Getters
 
@@ -181,6 +186,10 @@ const admModel = {
 
   setUser: action((state, payload) => {
     state.user = payload;
+  }),
+
+  setUserStatus: action((state, payload) => {
+    state.user.status = payload;
   }),
 
   setItinerarios: action((state, payload) => {

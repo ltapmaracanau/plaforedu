@@ -38,11 +38,12 @@ export default function Login() {
       });
     } else {
       if (tryLogin.user.status === "PENDING") {
-        notification.error({
-          message: "Login mal sucedido",
+        notification.warning({
+          message: "Login bem sucedido!",
           description:
-            "Antes do acesso total ao sistema você precisa alterar sua senha. Verifique o link enviado para seu email!",
+            "Antes do acesso total ao sistema você precisa alterar sua senha!",
         });
+        navigate("/update-password");
       } else {
         notification.success({
           message: "Login bem sucedido!",

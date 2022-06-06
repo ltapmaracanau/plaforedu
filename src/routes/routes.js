@@ -13,6 +13,7 @@ import ForgetPassword from '../pages/ForgetPassword.jsx';
 import ResetPassword from '../pages/ResetPassword.jsx';
 import UpdatePassword from '../pages/UpdatePassword.jsx';
 import RegisterCourse from '../pages/RegisterCourse.jsx';
+import { notification } from 'antd';
 
 
 export default function CustomRoutes() {
@@ -44,7 +45,22 @@ export default function CustomRoutes() {
             return children
         }
 
-        return (<Navigate to={'/login'} />)
+        return (<Navigate to={'/'} />)
+
+    }
+
+    const RequireActive = ({ children }) => {
+
+        if (user.status !== "PENDING") {
+            return children
+        }
+
+        notification.warning({
+            message: 'Acesso não permitido',
+            description: 'Para acessar você deve alterar sua senha!'
+        })
+
+        return (<Navigate to={'/update-password'} />)
 
     }
 
@@ -58,7 +74,9 @@ export default function CustomRoutes() {
                 path="/cursos"
                 element={
                     <RequireAuth>
-                        <CoursesPage />
+                        <RequireActive>
+                            <CoursesPage />
+                        </RequireActive>
                     </RequireAuth>
                 }
             />
@@ -74,9 +92,11 @@ export default function CustomRoutes() {
                 path="/register"
                 element={
                     <RequireAuth>
-                        <RequireAdmin>
-                            <Register />
-                        </RequireAdmin>
+                        <RequireActive>
+                            <RequireAdmin>
+                                <Register />
+                            </RequireAdmin>
+                        </RequireActive>
                     </RequireAuth>
                 }
             />
@@ -105,11 +125,13 @@ export default function CustomRoutes() {
                 }
             />
             <Route
-                path="/register-course:token"
+                path="/register-course"
                 element={
                     <RequireAuth>
                         <RequireAdmin>
-                            <RegisterCourse />
+                            <RequireActive>
+                                <RegisterCourse />
+                            </RequireActive>
                         </RequireAdmin>
                     </RequireAuth>
                 }
