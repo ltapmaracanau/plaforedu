@@ -1,12 +1,29 @@
 import { action, thunk } from "easy-peasy";
 import { authAxios } from "../services/authAxios";
-import { login, forgetPassword, resetPassword, getRoles, createUser, updatePassword } from "../services/dataService";
+import {
+  login,
+  forgetPassword,
+  resetPassword,
+  getRoles,
+  createUser,
+  updatePassword,
+  registerCourse,
+  getAcessibilidades,
+  getItinerarios,
+  getMyProfile,
+  getInstituicoes,
+} from "../services/dataService";
 
 const admModel = {
 
+  tipoVisualizacao: false, // false: grafo, true: lista
+  filterCollapsed: true, // true: filter escondido, false: filter visível
   loading: false,
   iniciando: false,
   roles: [],
+  itinerarios: [],
+  acessibilidades: [],
+  instituicoes: [],
 
   isAuthenticated: false,
 
@@ -17,9 +34,19 @@ const admModel = {
     const user = JSON.parse(localStorage.getItem('user'))
     const token = localStorage.getItem('token')
     if (user != null && token != null) {
-      actions.setUser(user)
       authAxios.defaults.headers.Authorization = `Bearer ${token}`;
+      actions.setUser(user)
       actions.setIsAuthenticated(true)
+
+      const myUser = await getMyProfile();
+      if (myUser.error) {
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        authAxios.defaults.headers.Authorization = undefined;
+        actions.setIsAuthenticated(false)
+        actions.setUser({})
+      }
+
     }
     actions.setIniciando(false)
 
@@ -29,7 +56,7 @@ const admModel = {
     actions.setLoading(true)
     const authentication = await login({ username: payload.username, password: payload.password })
     if (authentication.token) {
-      if (authentication.user.status != 'PENDING') {
+      if (authentication.user.status !== 'PENDING') {
         localStorage.setItem('token', authentication.token)
         localStorage.setItem('user', JSON.stringify(authentication.user))
         actions.setUser(authentication.user)
@@ -46,6 +73,14 @@ const admModel = {
     const newUser = await createUser({ ...payload })
     actions.setLoading(false)
     return (newUser)
+  }),
+
+  registerNewCourse: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const newCourse = await registerCourse({ ...payload })
+    actions.setLoading(false)
+    return (newCourse)
+    //return { error: true, message: "Não conectado ao back!" }
   }),
 
   forgetPassword: thunk(async (actions, payload) => {
@@ -69,15 +104,6 @@ const admModel = {
     return (tryUpdatePassword)
   }),
 
-  getRoles: thunk(async (actions, _) => {
-    actions.setLoading(true)
-    const roles = await getRoles()
-    if (roles?.length > 0) {
-      actions.setRoles(roles)
-    }
-    actions.setLoading(false)
-  }),
-
   logout: thunk(async (actions, _) => {
     actions.setLoading(true)
     localStorage.removeItem('token')
@@ -88,9 +114,46 @@ const admModel = {
     actions.setLoading(false)
   }),
 
-  tipoVisualizacao: false, // false: grafo, true: lista
 
-  filterCollapsed: true, // true: filter escondido, false: filter visível
+  // Getters
+
+  getRoles: thunk(async (actions, _) => {
+    actions.setLoading(true)
+    const roles = await getRoles()
+    if (roles?.length > 0) {
+      actions.setRoles(roles)
+    }
+    actions.setLoading(false)
+  }),
+
+  getItinerarios: thunk(async (actions, _) => {
+    actions.setLoading(true)
+    const itinerarios = await getItinerarios();
+    if (itinerarios?.length > 0) {
+      actions.setItinerarios(itinerarios)
+    }
+    actions.setLoading(false)
+  }),
+
+  getAcessibilidades: thunk(async (actions, _) => {
+    actions.setLoading(true)
+    const itinerarios = await getAcessibilidades();
+    if (itinerarios?.length > 0) {
+      actions.setAcessibilidades(itinerarios)
+    }
+    actions.setLoading(false)
+  }),
+
+  getInstituicoes: thunk(async (actions, _) => {
+    actions.setLoading(true)
+    const instituicoes = await getInstituicoes();
+    if (instituicoes?.length > 0) {
+      actions.setInstituicoes(instituicoes)
+    }
+    actions.setLoading(false)
+  }),
+
+  // Setters
 
   setFilterCollapsed: action((state, _) => {
     state.filterCollapsed = !state.filterCollapsed;
@@ -118,6 +181,18 @@ const admModel = {
 
   setUser: action((state, payload) => {
     state.user = payload;
+  }),
+
+  setItinerarios: action((state, payload) => {
+    state.itinerarios = payload;
+  }),
+
+  setAcessibilidades: action((state, payload) => {
+    state.acessibilidades = payload;
+  }),
+
+  setInstituicoes: action((state, payload) => {
+    state.instituicoes = payload;
   }),
 };
 
