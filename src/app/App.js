@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     init()
-  }, [])
+  }, [init])
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
