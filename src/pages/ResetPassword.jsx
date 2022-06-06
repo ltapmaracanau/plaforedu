@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { resetPasswordSchema } from "../schemas/resetPasswordSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,18 +6,22 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { Button, Card, Form, Input, Layout, notification } from "antd";
 import HeaderHome from "../components/header/HeaderHome";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 export default function ResetPassword() {
+  const query = useQuery();
   const resetPassword = useStoreActions((actions) => actions.adm.resetPassword);
   const loading = useStoreState((state) => state.adm.loading);
 
   let navigate = useNavigate();
-
-  const params = useParams();
-  console.log(params);
 
   const register = useForm({
     mode: "onBlur",
@@ -34,7 +38,7 @@ export default function ResetPassword() {
 
   const onSubmit = async (values) => {
     const tryReset = await resetPassword({
-      token: params.api_token,
+      token: query.get("token"),
       password: values.password1,
     });
     if (tryReset.error) {
