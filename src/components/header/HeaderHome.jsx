@@ -139,17 +139,30 @@ export default function HeaderHome() {
               icon={<Avatar size="default" icon={<UserOutlined />} />}
             >
               {user.roles.includes("ADMINISTRADOR") ? (
-                <Menu.Item
-                  key={62}
-                  onClick={() => {
-                    navigate("/register");
-                  }}
-                  icon={
-                    <Space>
-                      Registrar Usuário <UserAddOutlined />
-                    </Space>
-                  }
-                />
+                <>
+                  <Menu.Item
+                    key={61}
+                    onClick={() => {
+                      navigate("/register");
+                    }}
+                    icon={
+                      <Space>
+                        Registrar Usuário <UserAddOutlined />
+                      </Space>
+                    }
+                  />
+                  <Menu.Item
+                    key={62}
+                    onClick={() => {
+                      navigate("/register-course");
+                    }}
+                    icon={
+                      <Space>
+                        Registrar Curso <UserAddOutlined />
+                      </Space>
+                    }
+                  />
+                </>
               ) : null}
               <Menu.Item
                 key={63}
@@ -163,7 +176,7 @@ export default function HeaderHome() {
                 }
               />
               <Menu.Item
-                key={61}
+                key={64}
                 onClick={() => {
                   logout();
                   navigate("/");

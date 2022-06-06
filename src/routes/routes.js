@@ -1,6 +1,6 @@
 import { useStoreState } from 'easy-peasy';
 import React from 'react';
-import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import HomePage from '../pages/HomePage.jsx'
 import CoursesPage from '../pages/CoursesPage.jsx'
@@ -12,6 +12,7 @@ import Register from '../pages/Register.jsx';
 import ForgetPassword from '../pages/ForgetPassword.jsx';
 import ResetPassword from '../pages/ResetPassword.jsx';
 import UpdatePassword from '../pages/UpdatePassword.jsx';
+import RegisterCourse from '../pages/RegisterCourse.jsx';
 
 
 export default function CustomRoutes() {
@@ -88,7 +89,7 @@ export default function CustomRoutes() {
                 }
             />
             <Route
-                path="/reset-password/:api_token"
+                path="/reset-password"
                 element={
                     <RequireNoAuth>
                         <ResetPassword />
@@ -100,6 +101,16 @@ export default function CustomRoutes() {
                 element={
                     <RequireAuth>
                         <UpdatePassword />
+                    </RequireAuth>
+                }
+            />
+            <Route
+                path="/register-course"
+                element={
+                    <RequireAuth>
+                        <RequireAdmin>
+                            <RegisterCourse />
+                        </RequireAdmin>
                     </RequireAuth>
                 }
             />

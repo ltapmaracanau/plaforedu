@@ -37,6 +37,27 @@ export const createUser = (payload) => new Promise(async (resolve, reject) => {
     })
 })
 
+export const registerCourse = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.post('/courses/new', {
+    "name": payload.name,
+    "description": payload.description,
+    "hours": payload.hours,
+    "link": payload.link,
+    "institutionId": payload.institutionId,
+    "accessibilities": payload.accessibilities,
+    "itineraries": payload.itineraries
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
+      })
+    })
+})
+
 export const forgetPassword = (payload = { username: "" }) => new Promise(async (resolve, reject) => {
 
   await authAxios.post('/password/forgot', {
@@ -90,6 +111,62 @@ export const updatePassword = (payload = { oldPassword: "", newPassword: "" }) =
 export const getRoles = () => new Promise(async (resolve, reject) => {
 
   await authAxios.get('/roles/list')
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
+      })
+    })
+})
+
+export const getItinerarios = () => new Promise(async (resolve, reject) => {
+
+  await authAxios.get('/itineraries/list')
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
+      })
+    })
+})
+
+export const getAcessibilidades = () => new Promise(async (resolve, reject) => {
+
+  await authAxios.get('/accessibilities/list')
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
+      })
+    })
+})
+
+export const getInstituicoes = () => new Promise(async (resolve, reject) => {
+
+  await authAxios.get('/institutions/all')
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
+      })
+    })
+})
+
+export const getMyProfile = () => new Promise(async (resolve, reject) => {
+
+  await authAxios.get('/profile/me')
     .then((response) => {
       resolve(response.data)
     })

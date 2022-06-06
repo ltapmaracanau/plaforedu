@@ -117,9 +117,9 @@ const itinerariosModel = {
     layoutCose: {
       name: "cose",
       // Called on `layoutready`
-      ready: function () {},
+      ready: function () { },
       // Called on `layoutstop`
-      stop: function () {},
+      stop: function () { },
       // Whether to animate while running the layout
       // true : Animate continuously as the layout is running
       // false : Just show the end result
@@ -266,7 +266,7 @@ const itinerariosModel = {
       condense: false, // uses all available space on false, uses minimal space on true
       rows: undefined, // force num of rows in the grid
       cols: undefined, // force num of columns in the grid
-      position: function (node) {}, // returns { row, col } for element
+      position: function (node) { }, // returns { row, col } for element
       sort: undefined, // a sorting function to order the nodes; e.g. function(a, b){ return a.data('weight') - b.data('weight') }
       animate: false, // whether to transition the node positions
       animationDuration: 500, // duration of animation in ms if enabled
