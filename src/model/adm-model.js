@@ -33,7 +33,7 @@ const admModel = {
     actions.setIniciando(true)
     const user = JSON.parse(localStorage.getItem('user'))
     const token = localStorage.getItem('token')
-    if (user != null && token != null) {
+    if (user && token) {
       authAxios.defaults.headers.Authorization = `Bearer ${token}`;
       const myUser = await getMyProfile();
 
@@ -64,9 +64,9 @@ const admModel = {
       localStorage.setItem('user', JSON.stringify(authentication.user))
       authAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
       actions.setIsAuthenticated(true)
-      actions.setLoading(false)
-      return (authentication)
     }
+    actions.setLoading(false)
+    return (authentication)
   }),
 
   registerNewUser: thunk(async (actions, payload) => {
