@@ -105,7 +105,7 @@ export default function CustomRoutes() {
                 }
             />
             <Route
-                path="/register-course"
+                path="/register-course:token"
                 element={
                     <RequireAuth>
                         <RequireAdmin>
