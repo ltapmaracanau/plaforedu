@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { registerSchema } from "../../schemas/RegisterSchema";
+import { registerSchema } from "../../schemas/registers/registerSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";

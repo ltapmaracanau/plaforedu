@@ -58,6 +58,22 @@ export const registerCourse = (payload) => new Promise(async (resolve, reject) =
     })
 })
 
+export const registerInstitution = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.post('/institutions/new', {
+    "name": payload.name,
+    "abbreviation": payload.abbreviation
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data.message
+      })
+    })
+})
+
 export const forgetPassword = (payload = { username: "" }) => new Promise(async (resolve, reject) => {
 
   await authAxios.post('/password/forgot', {

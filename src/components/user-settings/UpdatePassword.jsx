@@ -1,5 +1,5 @@
 import React from "react";
-import { updatePasswordSchema } from "../../schemas/updatePasswordSchema";
+import { updatePasswordSchema } from "../../schemas/registers/updatePasswordSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";

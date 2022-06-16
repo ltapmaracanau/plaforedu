@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerCourseSchema } from "../../schemas/registerCourseSchema";
+import { registerCourseSchema } from "../../schemas/registers/registerCourseSchema";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import {

@@ -12,6 +12,7 @@ import {
   getItinerarios,
   getMyProfile,
   getInstituicoes,
+  registerInstitution,
 } from "../services/dataService";
 
 const admModel = {
@@ -83,6 +84,15 @@ const admModel = {
     const newCourse = await registerCourse({ ...payload })
     actions.setLoading(false)
     return (newCourse)
+    //return { error: true, message: "Não conectado ao back!" }
+  }),
+
+  registerNewInstitution: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    console.log(payload);
+    const newInstitution = await registerInstitution({ ...payload })
+    actions.setLoading(false)
+    return (newInstitution)
     //return { error: true, message: "Não conectado ao back!" }
   }),
 
