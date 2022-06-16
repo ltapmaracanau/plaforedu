@@ -9,12 +9,21 @@ import {
   DownOutlined,
   MenuOutlined,
   LogoutOutlined,
-  UserAddOutlined,
+  SettingOutlined,
   UserOutlined,
-  KeyOutlined,
 } from "@ant-design/icons";
 
-import { Row, Col, Menu, Grid, Image, Button, Avatar, Space } from "antd";
+import {
+  Row,
+  Col,
+  Menu,
+  Grid,
+  Image,
+  Button,
+  Avatar,
+  Space,
+  notification,
+} from "antd";
 
 const { useBreakpoint } = Grid;
 
@@ -28,7 +37,7 @@ export default function HeaderHome() {
   const filterDefault = useStoreState((state) => state.cursos.filterDefault);
   const isAuthenticated = useStoreState((state) => state.adm.isAuthenticated);
   const logout = useStoreActions((actions) => actions.adm.logout);
-  const user = useStoreState((actions) => actions.adm.user);
+  /* const user = useStoreState((actions) => actions.adm.user); */
 
   const onClickItinerario = (itinerario) => {
     setFilter({
@@ -138,48 +147,25 @@ export default function HeaderHome() {
               key={6}
               icon={<Avatar size="default" icon={<UserOutlined />} />}
             >
-              {user.roles.includes("ADMINISTRADOR") ? (
-                <>
-                  <Menu.Item
-                    key={61}
-                    onClick={() => {
-                      navigate("/register");
-                    }}
-                    icon={
-                      <Space>
-                        Registrar Usuário <UserAddOutlined />
-                      </Space>
-                    }
-                  />
-                  <Menu.Item
-                    key={62}
-                    onClick={() => {
-                      navigate("/register-course");
-                    }}
-                    icon={
-                      <Space>
-                        Registrar Curso <UserAddOutlined />
-                      </Space>
-                    }
-                  />
-                </>
-              ) : null}
               <Menu.Item
-                key={63}
+                key={61}
                 onClick={() => {
-                  navigate("/update-password");
+                  navigate("/settings");
                 }}
                 icon={
                   <Space>
-                    Alterar Senha <KeyOutlined />
+                    Configurações <SettingOutlined />
                   </Space>
                 }
               />
               <Menu.Item
-                key={64}
+                key={62}
                 onClick={() => {
                   logout();
-                  navigate("/");
+                  notification.success({
+                    message: "Logout concluído com sucesso!",
+                  });
+                  navigate("/login");
                 }}
                 icon={
                   <Space>
