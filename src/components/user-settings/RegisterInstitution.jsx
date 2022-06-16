@@ -1,19 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerInstitutionSchema } from "../../schemas/registers/registerInstitutionSchema";
 
-import {
-  Button,
-  InputNumber,
-  Card,
-  Form,
-  Input,
-  Layout,
-  notification,
-  Select,
-} from "antd";
+import { Button, Card, Form, Input, Layout, notification } from "antd";
 
 const { Content } = Layout;
 
