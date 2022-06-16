@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerCourseSchema } from "../schemas/registerCourseSchema";
+import { registerCourseSchema } from "../../schemas/registerCourseSchema";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import {
@@ -14,7 +14,6 @@ import {
   notification,
   Select,
 } from "antd";
-import HeaderHome from "../components/header/HeaderHome";
 
 const { Content } = Layout;
 
@@ -70,7 +69,6 @@ export default function RegisterCourse() {
 
   return (
     <>
-      <HeaderHome />
       <Layout>
         <Content
           style={{

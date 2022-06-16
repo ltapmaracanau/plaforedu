@@ -541,7 +541,7 @@ export const cursosDefault = [
     descricao:
       "Este curso apresenta as principais leis sobre inclusão de alunos com deficiência no ensino regular. Aponta a definição de integração, inclusão, síndrome, doenças, distúrbios e transtornos. Demonstra o conceito de deficiência intelectual, síndrome de Down, autismo, surdez, cegueira, deficiência física ou motora e a paralisia cerebral. Considera escola para todos, princípios da cultura inclusiva, formação do professor, sala de aula inclusiva, família na educação escolar dos alunos com deficiência e educação inclusiva na educação infantil.",
     cargaHoraria: 40,
-    instCert: 10,
+    instCert: 14,
     possuiAcessibilidade: "Não",
     link: "https://mundi.ifsul.edu.br/portal/educacao-especial-e-inclusao.php",
     obs: "",
@@ -575,7 +575,7 @@ export const cursosDefault = [
     cargaHoraria: 0,
     instCert: 12,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -591,7 +591,7 @@ export const cursosDefault = [
     cargaHoraria: 0,
     instCert: 12,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -605,9 +605,9 @@ export const cursosDefault = [
     descricao:
       "Este manual tem por finalidade: a) organizar as disposições relacionadas à conduta profissional, buscando trazer uma abordagem atualizada, clara e objetiva sobre os temas relacionados; b) disseminar boas práticas que se constituem no padrão de comportamento que é esperado do servidor; e c) auxiliar no aprimoramento de uma cultura organizacional fundamentada no princípio da integridade e na busca constante de alto desempenho nos órgãos e entidades do Poder Executivo Federal. ",
     cargaHoraria: 0,
-    instCert: 13,
+    instCert: 38,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -621,7 +621,7 @@ export const cursosDefault = [
     descricao:
       "Guia Referencial para Gerenciamento de Projetos e Portfólios de Projetos Este guia orienta a utilização da abordagem de gerenciamento de projetos baseada nas características de cada projeto, no ambiente no qual está contido, nas habilidades da equipe e em outros parâmetros. O documento compila conceitos, modelos e indicações das melhores práticas atuais e amplamente disseminadas a respeito de gerenciamento de projetos e de portfólios de projetos.",
     cargaHoraria: 0,
-    instCert: 13,
+    instCert: 38,
     possuiAcessibilidade: "Não sei informar",
     link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
     obs: "Trata-se de manual de orientações",
@@ -894,7 +894,7 @@ export const cursosDefault = [
     descricao:
       "Este curso apresenta as principais leis sobre inclusão de alunos com deficiência no ensino regular. Aponta a definição de integração, inclusão, síndrome, doenças, distúrbios e transtornos. Demonstra o conceito de deficiência intelectual, síndrome de Down, autismo, surdez, cegueira, deficiência física ou motora e a paralisia cerebral. Considera escola para todos, princípios da cultura inclusiva, formação do professor, sala de aula inclusiva, família na educação escolar dos alunos com deficiência e educação inclusiva na educação infantil.",
     cargaHoraria: 40,
-    instCert: 10,
+    instCert: 14,
     possuiAcessibilidade: "Não sei informar",
     link: "https://mundi.ifsul.edu.br/portal/educacao-especial-e-inclusao.php",
     obs: "",
@@ -910,7 +910,7 @@ export const cursosDefault = [
     descricao:
       "Este curso apresenta os conceitos e fundamentos de logística, não só para o aprimoramento dos processos bem como para a compreensão dos conceitos básicos e de sua importância no cenário atual. Dá ênfase para a apresentação dos principais conceitos, técnicas e ferramentas para gestão de compras, distribuição, armazenagem e transportes na cadeia de suprimentos. Pretende-se não só entender a utilização correta de embalagens bem como mostrar o ciclo de materiais e estoques dos produtos necessários para atender à demanda produtiva.",
     cargaHoraria: 20,
-    instCert: 10,
+    instCert: 14,
     possuiAcessibilidade: "Não sei informar",
     link: "https://mundi.ifsul.edu.br/portal/logistica-e-administracao-de-materiais.php",
     obs: "",
@@ -926,7 +926,7 @@ export const cursosDefault = [
     descricao:
       "O curso Educação Financeira tem como objetivo promover e impulsionar a importância desta temática, trazendo estratégias e conhecimentos que venham tornar a tomada de decisão de suas finanças cada vez mais segura e responsável. As informações apresentadas terão o intuito de fazer com que você reflita sobre seus comportamentos básicos de consumo e relacionamento com o dinheiro, contribuindo para promover atitudes com vista no consumo consciente, busca de maior qualidade de vida e visão de futuro próspero e digno.",
     cargaHoraria: 40,
-    instCert: 10,
+    instCert: 14,
     possuiAcessibilidade: "Não sei informar",
     link: "https://mundi.ifsul.edu.br/portal/educacao-financeira.php",
     obs: "",
@@ -944,7 +944,7 @@ export const cursosDefault = [
     cargaHoraria: 0,
     instCert: 12,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -960,7 +960,7 @@ export const cursosDefault = [
     cargaHoraria: 0,
     instCert: 12,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -974,9 +974,9 @@ export const cursosDefault = [
     descricao:
       "Este manual tem por finalidade: a) organizar as disposições relacionadas à conduta profissional, buscando trazer uma abordagem atualizada, clara e objetiva sobre os temas relacionados; b) disseminar boas práticas que se constituem no padrão de comportamento que é esperado do servidor; e c) auxiliar no aprimoramento de uma cultura organizacional fundamentada no princípio da integridade e na busca constante de alto desempenho nos órgãos e entidades do Poder Executivo Federal. ",
     cargaHoraria: 0,
-    instCert: 13,
+    instCert: 38,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -990,7 +990,7 @@ export const cursosDefault = [
     descricao:
       "Guia Referencial para Gerenciamento de Projetos e Portfólios de Projetos Este guia orienta a utilização da abordagem de gerenciamento de projetos baseada nas características de cada projeto, no ambiente no qual está contido, nas habilidades da equipe e em outros parâmetros. O documento compila conceitos, modelos e indicações das melhores práticas atuais e amplamente disseminadas a respeito de gerenciamento de projetos e de portfólios de projetos.",
     cargaHoraria: 0,
-    instCert: 13,
+    instCert: 38,
     possuiAcessibilidade: "Não sei informar",
     link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
     obs: "Trata-se de manual de orientações",
@@ -1119,7 +1119,7 @@ export const cursosDefault = [
     descricao:
       "Proporcionar melhorias, pessoais e profissionais, a partir de conhecimentos específicos sobre Comunicação Oral e Escrita.",
     cargaHoraria: 30,
-    instCert: 16,
+    instCert: 12,
     possuiAcessibilidade: "Não",
     link: "https://mais.ifmg.edu.br/enrol/index.php?id=48",
     obs: "As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1168,7 +1168,7 @@ export const cursosDefault = [
     descricao:
       "A busca, avaliação e uso estratégico, ético e responsável da informação são requisitos fundamentais a indivíduos que estão percorrendo o caminho acadêmico ou se preparando para o mercado de trabalho. Importante, nesse contexto, o desenvolvimento de habilidades no trato da informação, disponível em meios impressos e digitais, de forma a estarem mais capacitados para enfrentar os desafios do século XXI.",
     cargaHoraria: 30,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=136",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1184,7 +1184,7 @@ export const cursosDefault = [
     descricao:
       "Este curso tem como objetivo auxiliar profissionais da área de educação e demais profissionais a conhecerem as possibilidades oferecidas pelo Ensino Híbrido e como este pode estar presente em suas práticas pedagógicas em tempos de pandemia.",
     cargaHoraria: 30,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=177 ",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1200,7 +1200,7 @@ export const cursosDefault = [
     descricao:
       "Este curso cobre uma introdução à colaboração e aspectos colaborativos no Google Drive, focando em trabalhos em grupo, tanto para a versão para computador quanto para dispositivos móveis.",
     cargaHoraria: 80,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=144",
     obs: "O curso só tem 8h, mas é objetivo e direto. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1216,7 +1216,7 @@ export const cursosDefault = [
     descricao:
       "Neste curso você vai aprender como criar documentos de texto de uma forma versátil e prática utilizando a ferramenta Documentos Google.",
     cargaHoraria: 40,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4389",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -1232,7 +1232,7 @@ export const cursosDefault = [
     descricao:
       "Neste curso você aprenderá a acessar e a utilizar os principais elementos da Planilha Google.",
     cargaHoraria: 60,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4391",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -1248,7 +1248,7 @@ export const cursosDefault = [
     descricao:
       "Nesse curso você vai conhecer e aprender sobre o Google Drive, ferramenta utilizada para o armazenamento de arquivos.",
     cargaHoraria: 20,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4390",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -1264,7 +1264,7 @@ export const cursosDefault = [
     descricao:
       "Aprenda a criar páginas web do zero e conhecer como funciona a internet para o desenvolvimento de sites. Também criaremos as primeiras páginas. Vamos formatá-las, inserir links, listas, imagens, arquivos de áudio e vídeo. Conheça alguns comandos avançados e dicas especiais de compatibilidade e acessibilidade.",
     cargaHoraria: 20,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4975",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -1280,7 +1280,7 @@ export const cursosDefault = [
     descricao:
       "O curso aborda de forma objetiva, técnicas e ferramentas para produção de vídeos utilizando a captura de tela do computador, gravação de som e imagem. Os softwares utilizados serão o OBS Studio (Open Broadcaster Software) e o Kdenlive, ambos de código aberto e gratuitos. ",
     cargaHoraria: 20,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4991",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -1296,7 +1296,7 @@ export const cursosDefault = [
     descricao:
       "Este curso apresenta informações e orienta os servidores em início de carreira nos Institutos Federais e aborda os seguinte temas: Institutos Federais; Ensino; Extensão; Pesquisa e Inovação; Pós-Graduação; Comunicação e Redação Oficial; Ética e Cidadania; Legislação de Pessoal; Protocolo; Orçamento, Licitações e Contratos; Saúde do Servidor; Inclusão.",
     cargaHoraria: 80,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=5004",
     obs: "Os vídeos disponíveis não contam com Libras, mas apresenta Legenda e Transcrição acessível por link próprio. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -1312,7 +1312,7 @@ export const cursosDefault = [
     descricao:
       "Por meio deste curso o multiplicador aprenderá a planejar um curso de inclusão sociodigital e ensinar aos discentes os aplicativos de smartphones úteis no dia a dia, utilizando aplicativos tais como redes sociais, e-mail, aplicativos de localização e mobilidade, fotos e backup de contatos e aplicativos de utilidade pública.",
     cargaHoraria: 30,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=167",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1328,7 +1328,7 @@ export const cursosDefault = [
     descricao:
       "O curso proporciona o conhecimento básico necessário para a edição de salas virtuais para cursos ou disciplinas na modalidade à distância ou para apoio à modalidade presencial. Apresenta a parte instrucional que orienta à produção da sala virtual com inserção de recursos e atividades e também busca levar o educador a uma reflexão sobre o potencial construcionista do Moodle como suas potencialidades para a realização de aulas com atividades colaborativas, bem como as possibilidades de acompanhamento e avaliação da aprendizagem. O curso foi elaborado em nível básico e a partir da versão Moodle 3.1 (Tema Essential)",
     cargaHoraria: 60,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=141",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1344,7 +1344,7 @@ export const cursosDefault = [
     descricao:
       "O curso tem como objetivos apresentar os conceitos relacionados à inclusão e acessibilidade, destacar os tipos de acessibilidade e a tecnologia assistiva, bem como apresentar algumas tecnologias para a produção de materiais digitais acessíveis.",
     cargaHoraria: 60,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Sim",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=151",
     obs: "O curso tem diversas aulas em Libras e conta com Transcrição em Português. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1360,7 +1360,7 @@ export const cursosDefault = [
     descricao:
       "Este curso tem como proposta a apresentação sobre os conceitos básicos sobre Curadoria Educacional e apresentar seis ferramentas digitais gratuitas disponíveis na web utilizadas para prática da curadoria",
     cargaHoraria: 10,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=161 ",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1376,7 +1376,7 @@ export const cursosDefault = [
     descricao:
       "O curso proporciona ao aluno a aplicação dos conceitos básicos e necessários relativos a projetos, garantindo o entendimento inicial para o sucesso de um projeto. face a carência destes, no que diz respeito aos principais fundamentos associados a projetos.",
     cargaHoraria: 20,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=169 ",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -1392,7 +1392,7 @@ export const cursosDefault = [
     descricao:
       'Neste curso aprenderemos um pouco mais sobre Projetos Educacionais e Interdisciplinares. O curso utiliza como base o material "Projetos educacionais " de Elisa Maria Gomide e Denise Mendes França e "Tipos de Projetos" de Denise Mendes França e Marcos Antonio Almeida de Oliveira produzidos para a Rede e-Tec Brasil.',
     cargaHoraria: 30,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Parcial",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4948",
     obs: "Os vídeos possuem Libras ou Transcrição completa. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -1408,7 +1408,7 @@ export const cursosDefault = [
     descricao:
       "No curso de Auxiliar Pedagógico você vai ser preparado para auxiliar na elaboração de projetos pedagógicos e planos de cursos. Vai aprender a como colaborar com a organização didática e metodológica das atividades pedagógicas, além de poder auxiliar nos processos de avaliação do ensino e da aprendizagem na educação e na relação pedagógica entre docentes e estudantes. Vai estar preparado para contribuir para o desenvolvimento de ações integradas no âmbito escolar.",
     cargaHoraria: 200,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Não",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4899",
     obs: "O curso possui 200h. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -1808,7 +1808,7 @@ export const cursosDefault = [
     descricao:
       "O curso apresenta os procedimentos para a utilização da plataforma Moodle, construído a fim de identificar os procedimentos habilitados aos professores mediadores, bem como descrever funcionalidades disponibilizadas para a avaliação e o acompanhamento de aprendizagem dos estudantes. ",
     cargaHoraria: 40,
-    instCert: 10,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://mundi.ifsul.edu.br/portal/moodle-para-mediadores.php",
     obs: "O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo parcialmente os trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.",
@@ -1888,7 +1888,7 @@ export const cursosDefault = [
     descricao:
       "O curso apresenta os procedimentos para a utilização da plataforma Moodle: planejamento, criação e configuração de um curso ou disciplina. Aborda os principais recursos desta plataforma, e também, descreve as principais atividades que o Moodle oferece, como avaliação e acompanhamento da aprendizagem dos estudantes.",
     cargaHoraria: 60,
-    instCert: 10,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://mundi.ifsul.edu.br/portal/moodle-para-docentes.php",
     obs: "O curso não é específico sobre avaliação, mas esta é um de seus temas e trabalha o tema de forma prática, em particular os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. Apesar de ser mais dirigido a docentes, pode ser interessante a pedagogos, orientadores educacionais, profissionais técnicos de criação de materiais educacionais, profissionais de educação especial, entre outros.",
@@ -1985,7 +1985,7 @@ export const cursosDefault = [
     descricao:
       "O curso tem como objetivos apresentar os conceitos relacionados à inclusão e acessibilidade, destacar os tipos de acessibilidade e a tecnologia assistiva, bem como apresentar algumas tecnologias para a produção de materiais digitais acessíveis.",
     cargaHoraria: 60,
-    instCert: 26,
+    instCert: 29,
     possuiAcessibilidade: "parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=97 ",
     obs: "O Curso tem uma temática importante e aderente a trilha, bons textos, mas a quantidade de videos, especialmente os autorais pela instituição ofertante, são poucos. Uma vez sendo utilizado, precisará de outros cursos dentro dessa mesma trilha que complemente melhor os seus conteúdos. Apesar de não ser um curso com uma quantidade de materiais mais robusta ou enriquecida em quantidade, há muita qualidade nos materiais disponibilizados é muito boa e, por isso, merece a inclusão nas trilhas.",
@@ -2001,7 +2001,7 @@ export const cursosDefault = [
     descricao:
       "O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem. ",
     cargaHoraria: 50,
-    instCert: 27,
+    instCert: 29,
     possuiAcessibilidade: "parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/course/view.php?id=83 ",
     obs: "A abordagem de Gamificação trazida no curso fortalece o envolvimento ativo e cria condições para a customização do ensino, nesse sentido o curso agrega muito valor a trilha da Capacitação dos Aprendentes, visto abordar e ensinar sobre a implementação prática e assertiva dos princípios, características e procedimentos de operacionalização da gamificação nos ecossistemas de aprendizagem.",
@@ -2017,7 +2017,7 @@ export const cursosDefault = [
     descricao:
       "Este curso tem como objetivo auxiliar profissionais e futuros profissionais da área de educação a conhecerem as possibilidades oferecidas pela metodologias ativas de aprendizagem com foco em uma educação inovadora para transformação da educação.",
     cargaHoraria: 30,
-    instCert: 26,
+    instCert: 29,
     possuiAcessibilidade: "parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=115",
     obs: "O curso apresenta um bom conteúdo e uma razoável diversidade de mídias, sua temática é bastante aderente a presente trilha e o mesmo agrega valor ou enriquece a aprendizagem nesta respectiva trilha.",
@@ -2033,7 +2033,7 @@ export const cursosDefault = [
     descricao:
       "A Tecnologia Assistiva é uma área ampla e multidisciplinar e, assim como em outras esferas sociais, na educação ela também faz toda a diferença. Neste curso, buscamos apresentar conceitos, recursos e serviços aplicados ao contexto educacional. E, certamente, essa conversa não se esgota aqui. Existe uma gama enorme de recursos e estratégias. Apresentamos aqui algumas delas, mas é na prática, nas trocas com os estudantes com deficiência e com outros profissionais que acabamos descobrindo novas possibilidades. Além disso, a tecnologia muda rapidamente e precisamos estar sempre em busca do que está surgindo. Por fim, buscamos enfatizar o uso de recursos gratuitos ou de baixo custo. Apresentamos, ao longo do curso, possibilidades de confecção de baixo custo de alguns recursos utilizando materiais e métodos diversos. ",
     cargaHoraria: 60,
-    instCert: 28,
+    instCert: 14,
     possuiAcessibilidade: "parcial",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4954",
     obs: "ATENÇÃO -  O Curso só fica disponível até 31/07/2022. A temática do curso é extremamente pertinente, sendo sua ementa bem construída. O curso está em um nível minimamente viável para utilização, não sendo uma das melhores opções por deter poucas videoaulas. Contudo, mesmo assim, pode contribuir com a formação do docente e ser recomendável quando combinado com outros cursos complementares. ",
@@ -2065,7 +2065,7 @@ export const cursosDefault = [
     descricao:
       "O curso trata da História da comunidade surda, cultura surda, identidades surdas e a língua de sinais.",
     cargaHoraria: 20,
-    instCert: 28,
+    instCert: 14,
     possuiAcessibilidade: "parcial",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4906",
     obs: "ATENÇÃO -  O Curso só fica disponível até 31/07/2022 Temos aqui um curso cuja temática é bastante cara e pertinente a esta trilha. Certamente o curso poderia ser mais enriquecido com videos e materiais para a leitura, contudo traz um conteúdo básico, elementar que pode colaborar com a formação docente. Recomenda-se a indicação deste curso, desde que acompanhada a recomendação para realização concomitante de outros cursos complementares de conteúdo. ",
@@ -2081,7 +2081,7 @@ export const cursosDefault = [
     descricao:
       "Formação oferecida gratuitamente pelo Instituto Federal do Espírito Santo com o objetivo de promover o conhecimento necessário assim como o compartilhamento de saberes e experiências profissionais tendo em vista os direitos das pessoas com deficiência e a garantia de sua participação em conformidade com o paradigma da inclusão nos processos seletivos discentes.",
     cargaHoraria: 60,
-    instCert: 30,
+    instCert: 29,
     possuiAcessibilidade: "parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/course/view.php?id=58",
     obs: "Curso bem estruturado, muito diversificado em informações. Poderia ter mais videos, de fato. Contudo, é altamente recomendável para a trilha.",
@@ -2483,7 +2483,7 @@ export const cursosDefault = [
     descricao:
       "Conhecer aspectos introdutórios sobre o Transtorno do espectro autista (TEA), assim como um pouco da sua história. Pontuar conceitos para a inclusão de estudantes com TEA e o papel do professor nesse processo. Identificar alguns dos materiais didáticos e metodologias de ensino e mais conhecidas para estudantes com TEA.",
     cargaHoraria: 20,
-    instCert: 16,
+    instCert: 12,
     possuiAcessibilidade: "Não verificado",
     link: "https://mais.ifmg.edu.br/maisifmg/enrol/index.php?id=36",
     obs: "",
@@ -2499,7 +2499,7 @@ export const cursosDefault = [
     descricao:
       "Introdução sobre aspectos inerentes ao Ensino e Aprendizagem; Teorias de Ensino/Aprendizagem; Estratégias e Métodos de Ensino; Metodologias Ativas de Ensino; Tecnologias na Educação; Avaliação nos processos de Ensino/Aprendizagem.",
     cargaHoraria: 30,
-    instCert: 16,
+    instCert: 12,
     possuiAcessibilidade: "Não verificado",
     link: "https://mais.ifmg.edu.br/maisifmg/enrol/index.php?id=13",
     obs: "",
@@ -2515,7 +2515,7 @@ export const cursosDefault = [
     descricao:
       "Introdução a Segurança do Trabalho: Conceitos básicos de Segurança do Trabalho. Equipamentos de Proteção Coletiva e Equipamentos de Proteção Individual e Coletiva. Produtos Químicos. Equipamentos, vidrarias e  utensílios de laboratório. Mapa de Riscos. Manual de Segurança para Laboratórios. Situações de Emergência.",
     cargaHoraria: 40,
-    instCert: 16,
+    instCert: 12,
     possuiAcessibilidade: "Não verificado",
     link: "https://mais.ifmg.edu.br/maisifmg/enrol/index.php?id=17",
     obs: "",
@@ -2531,7 +2531,7 @@ export const cursosDefault = [
     descricao:
       "Este curso foi feito com o objetivo de apresentar os conceitos fundamentais referentes ao tema gestão de projetos, com destaque para a definição e caracterização do termo “projeto” e da apresentação do ciclo de vida dos projetos e das dez áreas do conhecimento, definidas pelo Project Management Institute (PMI), instituição internacional que se dedica ao estudo e à disseminação dos melhores métodos e técnicas de gerenciamento de projetos.",
     cargaHoraria: 30,
-    instCert: 16,
+    instCert: 12,
     possuiAcessibilidade: "Não verificado",
     link: "https://mais.ifmg.edu.br/maisifmg/enrol/index.php?id=25",
     obs: "",
@@ -2547,7 +2547,7 @@ export const cursosDefault = [
     descricao:
       "Introdução à Ergonomia: breve histórico; origem e evolução da ergonomia; conceitos, definições e objetivos da ergonomia; tipos de ergonomia; Norma Regulamentadora nº 17 do MTE: conhecer os parâmetros legais que permitem a adaptação das condições de trabalho às características psicofisiológicas dos trabalhadores, de modo a proporcionar um máximo de conforto, segurança e desempenho eficiente. Análise Ergonômica do Trabalho (AET): conceito de AET, aprender as definições básicas de demanda, tarefa e atividade nos postos de trabalho para identificar inadequações e fatores de risco existentes. Ergonomia nos Postos de trabalho: Conceitos básicos da Ergonomia aplicado aos postos de trabalho",
     cargaHoraria: 20,
-    instCert: 16,
+    instCert: 12,
     possuiAcessibilidade: "Não verificado",
     link: "https://mais.ifmg.edu.br/maisifmg/enrol/index.php?id=27",
     obs: "",
@@ -2563,7 +2563,7 @@ export const cursosDefault = [
     descricao:
       "História da comunidade surda, cultura surda, identidades surdas e a língua de sinais.",
     cargaHoraria: 20,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Não verificado",
     link: "https://moodle.ifrs.edu.br/course/search.php?q=Cultura+Surda+&areaids=core_course-course",
     obs: "",
@@ -2579,7 +2579,7 @@ export const cursosDefault = [
     descricao:
       "Conceitos iniciais sobre Aprendizagem Significativa, Abordagens Teóricas e Tipos de Aprendizagem, Ensino Significativo.",
     cargaHoraria: 30,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Não verificado",
     link: "https://moodle.ifrs.edu.br/course/search.php?q=Aprendizagem+Significativa&areaids=core_course-course",
     obs: "",
@@ -2595,7 +2595,7 @@ export const cursosDefault = [
     descricao:
       "Não basta ter conteúdo, tem que conversar; Organizando o Curso; Produzindo o Conteúdo do Curso; Equívocos Gerais",
     cargaHoraria: 30,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Não verificado",
     link: "https://moodle.ifrs.edu.br/course/search.php?q=Aprendizagem+Significativa&areaids=core_course-course",
     obs: "",
@@ -2611,7 +2611,7 @@ export const cursosDefault = [
     descricao:
       "O que é Didática?; Perfil do Professor; Planejamento;  Técnicas e Métodos; Avaliação",
     cargaHoraria: 60,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Não verificado",
     link: "https://moodle.ifrs.edu.br/course/search.php?q=Did%C3%A1tica+&areaids=core_course-course",
     obs: "",
@@ -2627,7 +2627,7 @@ export const cursosDefault = [
     descricao:
       "Por que pesquisa na educação básica? Projeto de Pesquisa; Problema de pesquisa, objetivos e hipóteses; Abordagem quantitativa; Abordagem qualitativa; Elaboração de perguntas; Análise e apresentação dos dados",
     cargaHoraria: 40,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Não verificado",
     link: "https://moodle.ifrs.edu.br/course/search.php?q=Pesquisa+em+Sala+de+Aula+na+Educa%C3%A7%C3%A3o+B%C3%A1sica+&areaids=core_course-course",
     obs: "",
@@ -2643,7 +2643,7 @@ export const cursosDefault = [
     descricao:
       "O curso tem por objetivo compreender e identificar as possibilidades pedagógicas do espaço pedagógico voltado aos processos formativos formais ou informais, a fim de subsidiar o planejamento de ações que desenvolvam respostas a problemas específicos, definindo os fins e os meios que direcionam para soluções.",
     cargaHoraria: 30,
-    instCert: 36,
+    instCert: 5,
     possuiAcessibilidade: "Não verificado",
     link: "https://moodle.ifrj.edu.br/login/index.php",
     obs: "",
@@ -2661,7 +2661,7 @@ export const cursosDefault = [
     cargaHoraria: 0,
     instCert: 12,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -2677,7 +2677,7 @@ export const cursosDefault = [
     cargaHoraria: 0,
     instCert: 12,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -2691,9 +2691,9 @@ export const cursosDefault = [
     descricao:
       "Este manual tem por finalidade: a) organizar as disposições relacionadas à conduta profissional, buscando trazer uma abordagem atualizada, clara e objetiva sobre os temas relacionados;b) disseminar boas práticas que se constituem no padrão de comportamento que é esperado do servidor; e c) auxiliar no aprimoramento de uma cultura organizacional fundamentada no princípio da integridade e na busca constante de alto desempenho nos órgãos e entidades do Poder Executivo Federal. ",
     cargaHoraria: 0,
-    instCert: 13,
+    instCert: 38,
     possuiAcessibilidade: "Não sei informar",
-    link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=21",
     obs: "Trata-se de cartilha informativa aos servidores",
     filter: {
       competencias: [24],
@@ -2707,7 +2707,7 @@ export const cursosDefault = [
     descricao:
       "Guia Referencial para Gerenciamento de Projetos e Portfólios de Projetos. Este guia orienta a utilização da abordagem de gerenciamento de projetos baseada nas características de cada projeto, no ambiente no qual está contido, nas habilidades da equipe e em outros parâmetros. O documento compila conceitos, modelos e indicações das melhores práticas atuais e amplamente disseminadas a respeito de gerenciamento de projetos e de portfólios de projetos.",
     cargaHoraria: 0,
-    instCert: 13,
+    instCert: 38,
     possuiAcessibilidade: "Não sei informar",
     link: "https://ead.ifrn.edu.br/ava/extensao/enrol/index.php?id=21",
     obs: "Trata-se de manual de orientações",
@@ -2739,7 +2739,7 @@ export const cursosDefault = [
     descricao:
       "Proporcionar melhorias, pessoais e profissionais, a partir de conhecimentos específicos sobre Comunicação Oral e Escrita.",
     cargaHoraria: 30,
-    instCert: 16,
+    instCert: 12,
     possuiAcessibilidade: "Não",
     link: "https://mais.ifmg.edu.br/enrol/index.php?id=48",
     obs: "As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2772,7 +2772,7 @@ export const cursosDefault = [
     descricao:
       "A busca, avaliação e uso estratégico, ético e responsável da informação são requisitos fundamentais a indivíduos que estão percorrendo o caminho acadêmico ou se preparando para o mercado de trabalho. Importante, nesse contexto, o desenvolvimento de habilidades no trato da informação, disponível em meios impressos e digitais, de forma a estarem mais capacitados para enfrentar os desafios do século XXI.",
     cargaHoraria: 30,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=136",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2788,7 +2788,7 @@ export const cursosDefault = [
     descricao:
       "Este curso tem como objetivo auxiliar profissionais da área de educação e demais profissionais a conhecerem as possibilidades oferecidas pelo Ensino Híbrido e como este pode estar presente em suas práticas pedagógicas em tempos de pandemia.",
     cargaHoraria: 30,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=177 ",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2804,7 +2804,7 @@ export const cursosDefault = [
     descricao:
       "Este curso cobre uma introdução à colaboração e aspectos colaborativos no Google Drive, focando em trabalhos em grupo, tanto para a versão para computador quanto para dispositivos móveis.",
     cargaHoraria: 80,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=144",
     obs: "O curso só tem 8h, mas é objetivo e direto. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2820,7 +2820,7 @@ export const cursosDefault = [
     descricao:
       "Neste curso você vai aprender como criar documentos de texto de uma forma versátil e prática utilizando a ferramenta Documentos Google.",
     cargaHoraria: 40,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4389",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -2836,7 +2836,7 @@ export const cursosDefault = [
     descricao:
       "Neste curso você aprenderá a acessar e a utilizar os principais elementos da Planilha Google.",
     cargaHoraria: 60,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4391",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -2852,7 +2852,7 @@ export const cursosDefault = [
     descricao:
       "Nesse curso você vai conhecer e aprender sobre o Google Drive, ferramenta utilizada para o armazenamento de arquivos.",
     cargaHoraria: 20,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4390",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -2868,7 +2868,7 @@ export const cursosDefault = [
     descricao:
       "Aprenda a criar páginas web do zero e conhecer como funciona a internet para o desenvolvimento de sites. Também criaremos as primeiras páginas. Vamos formatá-las, inserir links, listas, imagens, arquivos de áudio e vídeo. Conheça alguns comandos avançados e dicas especiais de compatibilidade e acessibilidade.",
     cargaHoraria: 20,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4975",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -2884,7 +2884,7 @@ export const cursosDefault = [
     descricao:
       "O curso aborda de forma objetiva, técnicas e ferramentas para produção de vídeos utilizando a captura de tela do computador, gravação de som e imagem. Os softwares utilizados serão o OBS Studio (Open Broadcaster Software) e o Kdenlive, ambos de código aberto e gratuitos. ",
     cargaHoraria: 20,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4991",
     obs: "O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -2900,7 +2900,7 @@ export const cursosDefault = [
     descricao:
       "Este curso apresenta informações e orienta os servidores em início de carreira nos Institutos Federais e aborda os seguinte temas: Institutos Federais; Ensino; Extensão; Pesquisa e Inovação; Pós-Graduação; Comunicação e Redação Oficial; Ética e Cidadania; Legislação de Pessoal; Protocolo; Orçamento, Licitações e Contratos; Saúde do Servidor; Inclusão.",
     cargaHoraria: 80,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=5004",
     obs: "Os vídeos disponíveis não contam com Libras, mas apresenta Legenda e Transcrição acessível por link próprio. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -2916,7 +2916,7 @@ export const cursosDefault = [
     descricao:
       "Por meio deste curso o multiplicador aprenderá a planejar um curso de inclusão sociodigital e ensinar aos discentes os aplicativos de smartphones úteis no dia a dia, utilizando aplicativos tais como redes sociais, e-mail, aplicativos de localização e mobilidade, fotos e backup de contatos e aplicativos de utilidade pública.",
     cargaHoraria: 30,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=167",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2932,7 +2932,7 @@ export const cursosDefault = [
     descricao:
       "Este curso tem como objetivo geral formar educadores capazes de reconhecer e integrar características da cultura maker na educação, utilizando a tecnologia como meio e não fim do processo de aprendizagem, a fim de atender as demandas da educação do século XXI.",
     cargaHoraria: 30,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=160",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2948,7 +2948,7 @@ export const cursosDefault = [
     descricao:
       "O curso proporciona o conhecimento básico necessário para a edição de salas virtuais para cursos ou disciplinas na modalidade à distância ou para apoio à modalidade presencial. Apresenta a parte instrucional que orienta à produção da sala virtual com inserção de recursos e atividades e também busca levar o educador a uma reflexão sobre o potencial construcionista do Moodle como suas potencialidades para a realização de aulas com atividades colaborativas, bem como as possibilidades de acompanhamento e avaliação da aprendizagem. O curso foi elaborado em nível básico e a partir da versão Moodle 3.1 (Tema Essential)",
     cargaHoraria: 60,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=141",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2964,7 +2964,7 @@ export const cursosDefault = [
     descricao:
       "O curso tem como objetivos apresentar os conceitos relacionados à inclusão e acessibilidade, destacar os tipos de acessibilidade e a tecnologia assistiva, bem como apresentar algumas tecnologias para a produção de materiais digitais acessíveis.",
     cargaHoraria: 60,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Sim",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=151",
     obs: "O curso tem diversas aulas em Libras e conta com Transcrição em Português. A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2980,7 +2980,7 @@ export const cursosDefault = [
     descricao:
       "Este curso tem como proposta a apresentação sobre os conceitos básicos sobre Curadoria Educacional e apresentar seis ferramentas digitais gratuitas disponíveis na web utilizadas para prática da curadoria",
     cargaHoraria: 10,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=161 ",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -2996,7 +2996,7 @@ export const cursosDefault = [
     descricao:
       "O curso proporciona ao aluno a aplicação dos conceitos básicos e necessários relativos a projetos, garantindo o entendimento inicial para o sucesso de um projeto. face a carência destes, no que diz respeito aos principais fundamentos associados a projetos.",
     cargaHoraria: 20,
-    instCert: 17,
+    instCert: 19,
     possuiAcessibilidade: "Parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=169 ",
     obs: "A Plataforma MOOC (Moodle) possui o software VLibras para auxiliar na acessibilidade. As legendas nos vídeos só estão disponíveis se o usuário visualizar a partir do Youtube e clicar na geração automática de legenda (as mesmas não foram editadas previamente).",
@@ -3012,7 +3012,7 @@ export const cursosDefault = [
     descricao:
       'Neste curso aprenderemos um pouco mais sobre Projetos Educacionais e Interdisciplinares. O curso utiliza como base o material "Projetos educacionais " de Elisa Maria Gomide e Denise Mendes França e "Tipos de Projetos" de Denise Mendes França e Marcos Antonio Almeida de Oliveira produzidos para a Rede e-Tec Brasil.',
     cargaHoraria: 30,
-    instCert: 18,
+    instCert: 14,
     possuiAcessibilidade: "Parcial",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4948",
     obs: "Os vídeos possuem Libras ou Transcrição completa. O curso não adota PDFs e materiais que estejam disponíveis para download. O link é válido por 1 semestre, pois a cada semestre novos links são gerados.",
@@ -3412,7 +3412,7 @@ export const cursosDefault = [
     descricao:
       "O curso apresenta os procedimentos para a utilização da plataforma Moodle, construído a fim de identificar os procedimentos habilitados aos professores mediadores, bem como descrever funcionalidades disponibilizadas para a avaliação e o acompanhamento de aprendizagem dos estudantes. ",
     cargaHoraria: 40,
-    instCert: 10,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://mundi.ifsul.edu.br/portal/moodle-para-mediadores.php",
     obs: "O curso não é específico sobre avaliação, mas esta é um de seus temas. O curso é prático e mostra a avaliação por meio do uso de tecnologias, cobrindo parcialmente os trilhos 1 e 3. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT.",
@@ -3492,7 +3492,7 @@ export const cursosDefault = [
     descricao:
       "O curso apresenta os procedimentos para a utilização da plataforma Moodle: planejamento, criação e configuração de um curso ou disciplina. Aborda os principais recursos desta plataforma, e também, descreve as principais atividades que o Moodle oferece, como avaliação e acompanhamento da aprendizagem dos estudantes.",
     cargaHoraria: 60,
-    instCert: 10,
+    instCert: 14,
     possuiAcessibilidade: "Sim",
     link: "https://mundi.ifsul.edu.br/portal/moodle-para-docentes.php",
     obs: "O curso não é específico sobre avaliação, mas esta é um de seus temas e trabalha o tema de forma prática, em particular os trilhos 1 e 3, ainda que parcialmente. É gratuito, sem pré-requisitos, com acesso contínuo, certificação automática, sem tutoria, da Rede EPCT. ",
@@ -3589,7 +3589,7 @@ export const cursosDefault = [
     descricao:
       "O curso tem como objetivos apresentar os conceitos relacionados à inclusão e acessibilidade, destacar os tipos de acessibilidade e a tecnologia assistiva, bem como apresentar algumas tecnologias para a produção de materiais digitais acessíveis.",
     cargaHoraria: 60,
-    instCert: 26,
+    instCert: 29,
     possuiAcessibilidade: "parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=97 ",
     obs: "O Curso tem uma temática importante e aderente a trilha, bons textos, mas a quantidade de videos, especialmente os autorais pela instituição ofertante, são poucos. Uma vez sendo utilizado, precisará de outros cursos dentro dessa mesma trilha que complemente melhor os seus conteúdos. Apesar de não ser um curso com uma quantidade de materiais mais robusta ou enriquecida em quantidade, há muita qualidade nos materiais disponibilizados é muito boa e, por isso, merece a inclusão nas trilhas.",
@@ -3605,7 +3605,7 @@ export const cursosDefault = [
     descricao:
       "O curso visa orientar professores e demais profissionais da educação interessados a compreender e implementar algumas formas e técnicas de gamificar um curso em um ambiente virtual de aprendizagem. ",
     cargaHoraria: 50,
-    instCert: 27,
+    instCert: 29,
     possuiAcessibilidade: "parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/course/view.php?id=83 ",
     obs: "A abordagem de Gamificação trazida no curso fortalece o envolvimento ativo e cria condições para a customização do ensino, nesse sentido o curso agrega muito valor a trilha da Capacitação dos Aprendentes, visto abordar e ensinar sobre a implementação prática e assertiva dos princípios, características e procedimentos de operacionalização da gamificação nos ecossistemas de aprendizagem.",
@@ -3621,7 +3621,7 @@ export const cursosDefault = [
     descricao:
       "Este curso tem como objetivo auxiliar profissionais e futuros profissionais da área de educação a conhecerem as possibilidades oferecidas pela metodologias ativas de aprendizagem com foco em uma educação inovadora para transformação da educação.",
     cargaHoraria: 30,
-    instCert: 26,
+    instCert: 29,
     possuiAcessibilidade: "parcial",
     link: "https://mooc.cefor.ifes.edu.br/moodle/enrol/index.php?id=115",
     obs: "O curso apresenta um bom conteúdo e uma razoável diversidade de mídias, sua temática é bastante aderente a presente trilha e o mesmo agrega valor ou enriquece a aprendizagem nesta respectiva trilha.",
@@ -3637,7 +3637,7 @@ export const cursosDefault = [
     descricao:
       "A Tecnologia Assistiva é uma área ampla e multidisciplinar e, assim como em outras esferas sociais, na educação ela também faz toda a diferença. Neste curso, buscamos apresentar conceitos, recursos e serviços aplicados ao contexto educacional. E, certamente, essa conversa não se esgota aqui. Existe uma gama enorme de recursos e estratégias. Apresentamos aqui algumas delas, mas é na prática, nas trocas com os estudantes com deficiência e com outros profissionais que acabamos descobrindo novas possibilidades. Além disso, a tecnologia muda rapidamente e precisamos estar sempre em busca do que está surgindo. Por fim, buscamos enfatizar o uso de recursos gratuitos ou de baixo custo. Apresentamos, ao longo do curso, possibilidades de confecção de baixo custo de alguns recursos utilizando materiais e métodos diversos. ",
     cargaHoraria: 60,
-    instCert: 28,
+    instCert: 14,
     possuiAcessibilidade: "parcial",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4954",
     obs: "ATENÇÃO -  O Curso só fica disponível até 31/07/2022. A temática do curso é extremamente pertinente, sendo sua ementa bem construída. O curso está em um nível minimamente viável para utilização, não sendo uma das melhores opções por deter poucas videoaulas. Contudo, mesmo assim, pode contribuir com a formação do docente e ser recomendável quando combinado com outros cursos complementares. ",
@@ -3669,7 +3669,7 @@ export const cursosDefault = [
     descricao:
       "O curso trata da História da comunidade surda, cultura surda, identidades surdas e a língua de sinais.",
     cargaHoraria: 20,
-    instCert: 28,
+    instCert: 14,
     possuiAcessibilidade: "parcial",
     link: "https://moodle.ifrs.edu.br/enrol/index.php?id=4906",
     obs: "ATENÇÃO -  O Curso só fica disponível até 31/07/2022 Temos aqui um curso cuja temática é bastante cara e pertinente a esta trilha. Certamente o curso poderia ser mais enriquecido com videos e materiais para a leitura, contudo traz um conteúdo básico, elementar que pode colaborar com a formação docente. Recomenda-se a indicação deste curso, desde que acompanhada a recomendação para realização concomitante de outros cursos complementares de conteúdo. ",
@@ -3685,7 +3685,7 @@ export const cursosDefault = [
     descricao:
       "Formação oferecida gratuitamente pelo Instituto Federal do Espírito Santo com o objetivo de promover o conhecimento necessário assim como o compartilhamento de saberes e experiências profissionais tendo em vista os direitos das pessoas com deficiência e a garantia de sua participação em conformidade com o paradigma da inclusão nos processos seletivos discentes.",
     cargaHoraria: 60,
-    instCert: 30,
+    instCert: 29,
     possuiAcessibilidade: "Não informado",
     link: "https://mooc.cefor.ifes.edu.br/moodle/course/view.php?id=58",
     obs: "Curso bem estruturado, muito diversificado em informações. Poderia ter mais videos, de fato. Contudo, é altamente recomendável para a trilha.",
@@ -4166,9 +4166,9 @@ export const cursosDefault = [
     descricao:
       "O Curso de Planejamento e Gestão Orçamentária e Financeira é aberto e autoinstrucional. Público-alvo: servidores da Rede Federal de Educação Profissional e Tecnológica que estejam ocupando cargos de gestão em suas instituições. Após o término do curso você será capaz de: compreender o planejamento e a gestão orçamentária e financeira sob o ponto de vista dos aspectos práticos, qualificando sua rotina de trabalho.",
     cargaHoraria: 64,
-    instCert: 37,
+    instCert: 38,
     possuiAcessibilidade: "Não",
-    link: "https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=14",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=16",
     obs: "Curso em desenvolvimento",
     filter: {
       competencias: [27, 28],
@@ -4312,7 +4312,7 @@ export const cursosDefault = [
     cargaHoraria: 10,
     instCert: 38,
     possuiAcessibilidade: "Não",
-    link: "https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=20",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=18",
     obs: "",
     filter: {
       competencias: [28, 58, 62, 70],
@@ -4328,7 +4328,7 @@ export const cursosDefault = [
     cargaHoraria: 30,
     instCert: 38,
     possuiAcessibilidade: "Não informado",
-    link: "https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=17",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=17",
     obs: "",
     filter: {
       competencias: [46],
@@ -4345,7 +4345,7 @@ export const cursosDefault = [
     cargaHoraria: 30,
     instCert: 38,
     possuiAcessibilidade: "Não informado",
-    link: "https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=18 ",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=20",
     obs: "",
     filter: {
       competencias: [46],
@@ -4362,7 +4362,7 @@ export const cursosDefault = [
     cargaHoraria: 30,
     instCert: 38,
     possuiAcessibilidade: "Não informado",
-    link: "https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=19",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=19",
     obs: "",
     filter: {
       competencias: [46],
@@ -4379,7 +4379,7 @@ export const cursosDefault = [
     cargaHoraria: 20,
     instCert: 38,
     possuiAcessibilidade: "Não informado",
-    link: "https://ead.ifrn.edu.br/ava/extensao/course/view.php?id=15",
+    link: "https://ead.ifrn.edu.br/ava/aberto/course/view.php?id=22",
     obs: "",
     filter: {
       competencias: [44],
@@ -4521,7 +4521,7 @@ export const cursosDefault = [
     descricao:
       "Tem como foco mostrar na prática o uso das ferramentas computacionais básicas que são utilizadas nas tecnologias da informação e comunicação. Ao longo desta disciplina vamos utilizar ferramentas como planilhas eletrônicas, processadores de texto, softwares de apresentação, além de ferramentas de acesso a internet, como navegadores.",
     cargaHoraria: 20,
-    instCert: 39,
+    instCert: 14,
     possuiAcessibilidade: "SIM",
     link: "https://mundi.ifsul.edu.br/portal/informatica-basica.php",
     obs: "",
@@ -4537,7 +4537,7 @@ export const cursosDefault = [
     descricao:
       "Neste MOOC serão apresentadas as temáticas relacionadas ao planejamento e organização dos gastos pessoais; planejamento dos investimentos pessoais; alternativas de investimentos no mercado financeiro e; complementando a renda",
     cargaHoraria: 20,
-    instCert: 39,
+    instCert: 14,
     possuiAcessibilidade: "SIM",
     link: "https://mundi.ifsul.edu.br/portal/educacao-financeira.php",
     obs: "",
@@ -4553,7 +4553,7 @@ export const cursosDefault = [
     descricao:
       "Neste MOOC serão apresentadas as temáticas sobre a opção do empreendedorismo e motivos para empreender na aposentadoria",
     cargaHoraria: 20,
-    instCert: 39,
+    instCert: 14,
     possuiAcessibilidade: "SIM",
     link: "https://mundi.ifsul.edu.br/portal/empreendedorismo.php",
     obs: "",
@@ -4762,10 +4762,6 @@ export const instituicoesDefault = [
     titulo: "UNIFAP",
   },
   {
-    id: 10,
-    titulo: "IFSUL",
-  },
-  {
     id: 11,
     titulo: "PoCA - UFSCar",
   },
@@ -4784,18 +4780,6 @@ export const instituicoesDefault = [
   {
     id: 15,
     titulo: "ENAP Escola Virtual",
-  },
-  {
-    id: 16,
-    titulo: "Instituto Federal de Minas Gerais",
-  },
-  {
-    id: 17,
-    titulo: "Instituto Federal do Espírito Santo",
-  },
-  {
-    id: 18,
-    titulo: "Instituto Federal do Rio Grande do Sul",
   },
   {
     id: 19,
@@ -4826,24 +4810,8 @@ export const instituicoesDefault = [
     titulo: "UFRGS (LUMINA educação para todos)",
   },
   {
-    id: 26,
-    titulo: "Instituto Federal do Espírito Santo / CEFOR",
-  },
-  {
-    id: 27,
-    titulo: "Instituto Federal do Espírito Santo / Cefor",
-  },
-  {
-    id: 28,
-    titulo: "Instituto Federal do Rio Grande do Sul (IFRS)",
-  },
-  {
     id: 29,
     titulo: "CEFOR IFES",
-  },
-  {
-    id: 30,
-    titulo: "IFES CEFOR",
   },
   {
     id: 31,
@@ -4866,20 +4834,8 @@ export const instituicoesDefault = [
     titulo: "NUTEAD - UEPG",
   },
   {
-    id: 36,
-    titulo: "Instituto Federal do Rio de Janeiro",
-  },
-  {
-    id: 37,
-    titulo: "Instituto Federal do Rio Grande do Norte",
-  },
-  {
     id: 38,
     titulo: "IFRN",
-  },
-  {
-    id: 39,
-    titulo: "Instituto Federal Sul-rio-grandense",
   },
   {
     id: 40,

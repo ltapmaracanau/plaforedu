@@ -1,18 +1,17 @@
-import { useStoreState } from 'easy-peasy';
 import React from 'react';
+import { useStoreState } from 'easy-peasy';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import HomePage from '../pages/HomePage.jsx'
-import CoursesPage from '../pages/CoursesPage.jsx'
-import AboutPage from '../pages/AboutPage.jsx'
-import FaleConosco from '../pages/FaleConosco.jsx'
 import FAQ from '../pages/FAQ.jsx'
 import Login from '../pages/Login.jsx';
-import Register from '../pages/Register.jsx';
-import ForgetPassword from '../pages/ForgetPassword.jsx';
+import HomePage from '../pages/HomePage.jsx'
+import AboutPage from '../pages/AboutPage.jsx'
+import CoursesPage from '../pages/CoursesPage.jsx'
+import FaleConosco from '../pages/FaleConosco.jsx'
+import SettingsPage from '../pages/SettingsPage.jsx';
 import ResetPassword from '../pages/ResetPassword.jsx';
-import UpdatePassword from '../pages/UpdatePassword.jsx';
-import RegisterCourse from '../pages/RegisterCourse.jsx';
+import ForgetPassword from '../pages/ForgetPassword.jsx';
+
 import { notification } from 'antd';
 
 
@@ -39,7 +38,7 @@ export default function CustomRoutes() {
 
     }
 
-    const RequireAdmin = ({ children }) => {
+    /* const RequireAdmin = ({ children }) => {
 
         if (user.roles.includes("ADMINISTRADOR")) {
             return children
@@ -47,7 +46,7 @@ export default function CustomRoutes() {
 
         return (<Navigate to={'/'} />)
 
-    }
+    } */
 
     const RequireActive = ({ children }) => {
 
@@ -60,7 +59,7 @@ export default function CustomRoutes() {
             description: 'Para acessar você deve alterar sua senha!'
         })
 
-        return (<Navigate to={'/update-password'} />)
+        return (<Navigate to={'/settings'} />)
 
     }
 
@@ -89,18 +88,6 @@ export default function CustomRoutes() {
                 }
             />
             <Route
-                path="/register"
-                element={
-                    <RequireAuth>
-                        <RequireActive>
-                            <RequireAdmin>
-                                <Register />
-                            </RequireAdmin>
-                        </RequireActive>
-                    </RequireAuth>
-                }
-            />
-            <Route
                 path="/forget"
                 element={
                     <RequireNoAuth>
@@ -117,22 +104,10 @@ export default function CustomRoutes() {
                 }
             />
             <Route
-                path="/update-password"
+                path="/settings"
                 element={
                     <RequireAuth>
-                        <UpdatePassword />
-                    </RequireAuth>
-                }
-            />
-            <Route
-                path="/register-course"
-                element={
-                    <RequireAuth>
-                        <RequireAdmin>
-                            <RequireActive>
-                                <RegisterCourse />
-                            </RequireActive>
-                        </RequireAdmin>
+                        <SettingsPage />
                     </RequireAuth>
                 }
             />

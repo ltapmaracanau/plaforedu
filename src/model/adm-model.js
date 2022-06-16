@@ -1,4 +1,4 @@
-import { action, thunk } from "easy-peasy";
+import { action, computed, thunk } from "easy-peasy";
 import { authAxios } from "../services/authAxios";
 import {
   login,
@@ -28,6 +28,8 @@ const admModel = {
   isAuthenticated: false,
 
   user: {},
+
+  isAdm: computed((state) => state.user.roles?.includes("ADMINISTRADOR")),
 
   init: thunk(async (actions, _) => {
     actions.setIniciando(true)

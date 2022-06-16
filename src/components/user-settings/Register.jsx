@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import { registerSchema } from "../schemas/RegisterSchema";
+import { registerSchema } from "../../schemas/RegisterSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import InputMask from '../InputMask'
 
 import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
-import HeaderHome from "../components/header/HeaderHome";
-import InputMask from "../components/InputMask";
 
 const { Content } = Layout;
 
@@ -58,7 +57,6 @@ export default function Register() {
 
   return (
     <>
-      <HeaderHome />
       <Layout>
         <Content
           style={{
