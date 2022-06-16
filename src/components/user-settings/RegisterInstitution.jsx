@@ -1,17 +1,16 @@
 import React from "react";
-import { resetPasswordSchema } from "../schemas/resetPasswordSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import { registerInstitutionSchema } from "../../schemas/registers/registerInstitutionSchema";
 
 import { Button, Card, Form, Input, Layout, notification } from "antd";
-import HeaderHome from "../components/header/HeaderHome";
 
 const { Content } = Layout;
 
-export default function UpdatePassword() {
-  const updatePassword = useStoreActions(
-    (actions) => actions.adm.updatePassword
+export default function RegisterInstitution() {
+  const registerNewInstitution = useStoreActions(
+    (actions) => actions.adm.registerNewInstitution
   );
   const loading = useStoreState((state) => state.adm.loading);
 
@@ -19,7 +18,7 @@ export default function UpdatePassword() {
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {},
-    resolver: yupResolver(resetPasswordSchema),
+    resolver: yupResolver(registerInstitutionSchema),
     context: undefined,
     criteriaMode: "firstError",
     shouldFocusError: true,
@@ -29,18 +28,15 @@ export default function UpdatePassword() {
   });
 
   const onSubmit = async (values) => {
-    const tryReset = await updatePassword({
-      oldPassword: values.oldPassword,
-      newPassword: values.password1,
-    });
-    if (tryReset.error) {
+    const newInstitution = await registerNewInstitution(values);
+    if (newInstitution.error) {
       notification.error({
         message: "Algo deu errado!",
-        description: tryReset.message,
+        description: newInstitution.message,
       });
     } else {
       notification.success({
-        message: "A senha foi alterada com sucesso!",
+        message: "Instituição cadastrada com sucesso!",
       });
       register.reset();
     }
@@ -48,7 +44,6 @@ export default function UpdatePassword() {
 
   return (
     <>
-      <HeaderHome />
       <Layout>
         <Content
           style={{
@@ -58,7 +53,7 @@ export default function UpdatePassword() {
           }}
         >
           <Card
-            style={{ width: "350px" }}
+            style={{ width: "350px", margin: "30px 0px" }}
             headStyle={{
               backgroundColor: "#2C55A1",
               textAlign: "center",
@@ -66,56 +61,39 @@ export default function UpdatePassword() {
               fontFamily: "Poppins",
               fontSize: "18px",
             }}
-            title={"ALTERAÇÃO DE SENHA"}
+            title={"CADASTRO DE INSTITUIÇÃO"}
           >
             <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
               <Controller
-                name="oldPassword"
+                name="name"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Senha Antiga"}
+                      label={"Nome da instituição"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <Input.Password {...field} />
+                      <Input placeholder="Nome" {...field} />
                     </Form.Item>
                   );
                 }}
               />
               <Controller
-                name="password1"
+                name="abbreviation"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Nova Senha"}
+                      label={"Sigla da instituição"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <Input.Password {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="password2"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Repita a Nova Senha"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input.Password {...field} />
+                      <Input placeholder="Sigla" {...field} />
                     </Form.Item>
                   );
                 }}
@@ -129,11 +107,12 @@ export default function UpdatePassword() {
               >
                 <Button
                   loading={loading}
+                  disabled={!register.formState.isValid}
                   type="primary"
-                  htmlType="submit"
                   shape="round"
+                  htmlType="submit"
                 >
-                  Enviar
+                  Cadastrar
                 </Button>
               </div>
             </Form>

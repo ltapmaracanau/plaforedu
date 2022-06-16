@@ -1,4 +1,4 @@
-import { action, thunk } from "easy-peasy";
+import { action, computed, thunk } from "easy-peasy";
 import { authAxios } from "../services/authAxios";
 import {
   login,
@@ -12,6 +12,7 @@ import {
   getItinerarios,
   getMyProfile,
   getInstituicoes,
+  registerInstitution,
 } from "../services/dataService";
 
 const admModel = {
@@ -28,6 +29,8 @@ const admModel = {
   isAuthenticated: false,
 
   user: {},
+
+  isAdm: computed((state) => state.user.roles?.includes("ADMINISTRADOR")),
 
   init: thunk(async (actions, _) => {
     actions.setIniciando(true)
@@ -81,6 +84,15 @@ const admModel = {
     const newCourse = await registerCourse({ ...payload })
     actions.setLoading(false)
     return (newCourse)
+    //return { error: true, message: "Não conectado ao back!" }
+  }),
+
+  registerNewInstitution: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    console.log(payload);
+    const newInstitution = await registerInstitution({ ...payload })
+    actions.setLoading(false)
+    return (newInstitution)
     //return { error: true, message: "Não conectado ao back!" }
   }),
 

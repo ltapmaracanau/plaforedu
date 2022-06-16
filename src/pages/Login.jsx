@@ -43,7 +43,7 @@ export default function Login() {
           description:
             "Antes do acesso total ao sistema você precisa alterar sua senha!",
         });
-        navigate("/update-password");
+        navigate("/settings");
       } else {
         notification.success({
           message: "Login bem sucedido!",

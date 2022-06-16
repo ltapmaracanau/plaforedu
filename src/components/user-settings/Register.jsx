@@ -1,42 +1,27 @@
 import React, { useEffect } from "react";
+import { registerSchema } from "../../schemas/registers/registerSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerCourseSchema } from "../schemas/registerCourseSchema";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import InputMask from '../InputMask'
 
-import {
-  Button,
-  InputNumber,
-  Card,
-  Form,
-  Input,
-  Layout,
-  notification,
-  Select,
-} from "antd";
-import HeaderHome from "../components/header/HeaderHome";
+import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
 
 const { Content } = Layout;
 
-export default function RegisterCourse() {
-  const registerNewCourse = useStoreActions(
-    (actions) => actions.adm.registerNewCourse
+export default function Register() {
+  const registerNewUser = useStoreActions(
+    (actions) => actions.adm.registerNewUser
   );
-  const getItinerarios = useStoreActions((state) => state.adm.getItinerarios);
-  const getInstituicoes = useStoreActions((state) => state.adm.getInstituicoes);
-  const getAcessibilidades = useStoreActions(
-    (state) => state.adm.getAcessibilidades
-  );
+  const getRoles = useStoreActions((state) => state.adm.getRoles);
   const loading = useStoreState((state) => state.adm.loading);
-  const itinerarios = useStoreState((state) => state.adm.itinerarios);
-  const acessibilidades = useStoreState((state) => state.adm.acessibilidades);
-  const instituicoes = useStoreState((state) => state.adm.instituicoes);
+  const roles = useStoreState((state) => state.adm.roles);
 
   const register = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {},
-    resolver: yupResolver(registerCourseSchema),
+    resolver: yupResolver(registerSchema),
     context: undefined,
     criteriaMode: "firstError",
     shouldFocusError: true,
@@ -46,31 +31,32 @@ export default function RegisterCourse() {
   });
 
   const onSubmit = async (values) => {
-    const newCourse = await registerNewCourse(values);
-    if (newCourse.error) {
+    values.cpf = values.cpf.replace(/\./g, "").replace(/-/g, "");
+    values.phone = values.phone
+      .replace(/\(/g, "")
+      .replace(/\)/g, "")
+      .replace(" ", "")
+      .replace(/-/g, "");
+    const newUser = await registerNewUser(values);
+    if (newUser.error) {
       notification.error({
         message: "Algo deu errado!",
-        description: newCourse.message,
+        description: newUser.message,
       });
     } else {
       notification.success({
-        message: "Curso cadastrado com sucesso!",
+        message: "Registo bem sucedido!",
+        description: "Agora você pode entrar na PlaforEDU!",
       });
-      register.reset();
     }
   };
 
   useEffect(() => {
-    (async () => {
-      await getItinerarios();
-      await getAcessibilidades();
-      await getInstituicoes();
-    })();
-  }, [getItinerarios, getAcessibilidades, getInstituicoes]);
+    getRoles();
+  }, [getRoles]);
 
   return (
     <>
-      <HeaderHome />
       <Layout>
         <Content
           style={{
@@ -88,7 +74,7 @@ export default function RegisterCourse() {
               fontFamily: "Poppins",
               fontSize: "18px",
             }}
-            title={"CADASTRO DE CURSO"}
+            title={"CADASTRO"}
           >
             <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
               <Controller
@@ -97,31 +83,66 @@ export default function RegisterCourse() {
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Título do curso"}
+                      label={"Nome Completo"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <Input placeholder="Título" {...field} />
+                      <Input placeholder="Nome Completo" {...field} />
                     </Form.Item>
                   );
                 }}
               />
               <Controller
-                name="description"
+                name="institution"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Descrição do curso"}
+                      label={"Instituição"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <Input.TextArea
-                        placeholder="Digite aqui a descrição..."
+                      <Input placeholder="Instituição" {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="email"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Login"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input placeholder="email@exemplo.com" {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="cpf"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"CPF"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <InputMask
+                        mask="999.999.999-99"
+                        placeholder="___.___.___-__"
                         {...field}
                       />
                     </Form.Item>
@@ -129,117 +150,33 @@ export default function RegisterCourse() {
                 }}
               />
               <Controller
-                name="institutionId"
+                name="phone"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Instituição Certificadora"}
+                      label={"Número de Telefone"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <Select
-                        loading={loading}
-                        showSearch
-                        placeholder="Instituição"
-                        filterOption={(input, option) => {
-                          return (
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          );
-                        }}
+                      <InputMask
+                        mask="(99) 99999-9999"
+                        placeholder="(__) _____-____"
                         {...field}
-                      >
-                        {instituicoes.map((item) => (
-                          <Select.Option key={item.id} value={item.id}>
-                            {item.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                      />
                     </Form.Item>
                   );
                 }}
               />
               <Controller
-                name="hours"
+                name="roles"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Carga Horária"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <InputNumber min={0} {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="link"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Link do curso"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input placeholder="https://exemplo.com.br" {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="accessibilities"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Acessibilidades"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Select
-                        mode="multiple"
-                        showSearch
-                        loading={loading}
-                        placeholder="Acessibilidades"
-                        filterOption={(input, option) => {
-                          return (
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          );
-                        }}
-                        {...field}
-                      >
-                        {acessibilidades.map((item) => (
-                          <Select.Option key={item.id} value={item.id}>
-                            {item.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="itineraries"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Itinerários"}
+                      label={"Cargo"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
@@ -248,20 +185,12 @@ export default function RegisterCourse() {
                       <Select
                         mode="multiple"
                         loading={loading}
-                        showSearch
-                        placeholder="Itinerários"
+                        placeholder="cargo"
                         {...field}
-                        filterOption={(input, option) => {
-                          return (
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          );
-                        }}
                       >
-                        {itinerarios.map((item) => (
-                          <Select.Option key={item.id} value={item.id}>
-                            {item.name}
+                        {roles.map((role) => (
+                          <Select.Option key={role.id} value={role.id}>
+                            {role.name}
                           </Select.Option>
                         ))}
                       </Select>
