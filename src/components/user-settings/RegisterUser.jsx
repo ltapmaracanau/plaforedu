@@ -3,13 +3,13 @@ import { registerSchema } from "../../schemas/registers/registerSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import InputMask from '../InputMask'
+import InputMask from "../InputMask";
 
 import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
 
 const { Content } = Layout;
 
-export default function Register() {
+export default function RegisterUser() {
   const registerNewUser = useStoreActions(
     (actions) => actions.adm.registerNewUser
   );
@@ -46,7 +46,7 @@ export default function Register() {
     } else {
       notification.success({
         message: "Registo bem sucedido!",
-        description: "Agora você pode entrar na PlaforEDU!",
+        description: "O novo usuário deve verificar seu email!",
       });
     }
   };

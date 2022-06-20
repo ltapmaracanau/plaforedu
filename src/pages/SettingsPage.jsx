@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import { useStoreState } from "easy-peasy";
 
 import HeaderHome from "../components/header/HeaderHome";
-import Register from "../components/user-settings/Register";
-import RegisterCourse from "../components/user-settings/RegisterCourse";
+import RegisterUser from "../components/user-settings/RegisterUser";
 import UpdatePassword from "../components/user-settings/UpdatePassword";
-import RegisterInstitution from "../components/user-settings/RegisterInstitution";
+import InstitutionList from "../components/user-settings/InstitutionsList";
+import CoursesList from "../components/user-settings/CoursesList";
 
 import { Layout, Menu } from "antd";
 
-const { Sider, Content } = Layout;
+const { Sider } = Layout;
 
 export default function SettingsPage() {
   const isAdm = useStoreState((state) => state.adm.isAdm);
 
   const contentArray = [
     <UpdatePassword />,
-    <Register />,
-    <RegisterCourse />,
-    <RegisterInstitution />,
+    <RegisterUser />,
+    <CoursesList />,
+    <InstitutionList />,
   ];
 
   const [index, setIndex] = useState(0);
@@ -60,7 +60,7 @@ export default function SettingsPage() {
                     setIndex(1);
                   }}
                 >
-                  Cadastrar Usuário
+                  Usuários
                 </Menu.Item>
                 <Menu.Item
                   style={{ fontFamily: "Roboto" }}
@@ -69,7 +69,7 @@ export default function SettingsPage() {
                     setIndex(2);
                   }}
                 >
-                  Cadastrar Curso
+                  Cursos
                 </Menu.Item>
                 <Menu.Item
                   style={{ fontFamily: "Roboto" }}
@@ -78,21 +78,13 @@ export default function SettingsPage() {
                     setIndex(3);
                   }}
                 >
-                  Cadastrar Instituição
+                  Instituições
                 </Menu.Item>
               </Menu.SubMenu>
             ) : null}
           </Menu>
         </Sider>
-        <Content
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {contentArray[index]}
-        </Content>
+        {contentArray[index]}
       </Layout>
     </Layout>
   );

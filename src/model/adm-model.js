@@ -8,10 +8,13 @@ import {
   createUser,
   updatePassword,
   registerCourse,
+  updateInstitution,
+  updateCourse,
   getAcessibilidades,
   getItinerarios,
   getMyProfile,
   getInstituicoes,
+  getCursos,
   registerInstitution,
 } from "../services/dataService";
 
@@ -25,6 +28,7 @@ const admModel = {
   itinerarios: [],
   acessibilidades: [],
   instituicoes: [],
+  cursos: [],
 
   isAuthenticated: false,
 
@@ -63,6 +67,8 @@ const admModel = {
     const authentication = await login({ username: payload.username, password: payload.password })
     if (authentication.token) {
       actions.setUser(authentication.user)
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
       localStorage.setItem('token', authentication.token)
       localStorage.setItem('user', JSON.stringify(authentication.user))
       authAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
@@ -87,12 +93,27 @@ const admModel = {
     //return { error: true, message: "Não conectado ao back!" }
   }),
 
+  updateCourse: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const tryUpdateCourse = await updateCourse({ ...payload })
+    actions.setLoading(false)
+    return (tryUpdateCourse)
+    //return { error: true, message: "Não conectado ao back!" }
+  }),
+
   registerNewInstitution: thunk(async (actions, payload) => {
     actions.setLoading(true)
-    console.log(payload);
     const newInstitution = await registerInstitution({ ...payload })
     actions.setLoading(false)
     return (newInstitution)
+    //return { error: true, message: "Não conectado ao back!" }
+  }),
+
+  updateInstitution: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const tryUpdateInstitution = await updateInstitution({ ...payload })
+    actions.setLoading(false)
+    return (tryUpdateInstitution)
     //return { error: true, message: "Não conectado ao back!" }
   }),
 
@@ -134,20 +155,20 @@ const admModel = {
 
   // Getters
 
-  getRoles: thunk(async (actions, _) => {
-    actions.setLoading(true)
-    const roles = await getRoles()
-    if (roles?.length > 0) {
-      actions.setRoles(roles)
-    }
-    actions.setLoading(false)
-  }),
-
   getItinerarios: thunk(async (actions, _) => {
     actions.setLoading(true)
     const itinerarios = await getItinerarios();
     if (itinerarios?.length > 0) {
       actions.setItinerarios(itinerarios)
+    }
+    actions.setLoading(false)
+  }),
+
+  getRoles: thunk(async (actions, _) => {
+    actions.setLoading(true)
+    const roles = await getRoles()
+    if (roles?.length > 0) {
+      actions.setRoles(roles)
     }
     actions.setLoading(false)
   }),
@@ -166,6 +187,15 @@ const admModel = {
     const instituicoes = await getInstituicoes();
     if (instituicoes?.length > 0) {
       actions.setInstituicoes(instituicoes)
+    }
+    actions.setLoading(false)
+  }),
+
+  getCursos: thunk(async (actions, _) => {
+    actions.setLoading(true)
+    const cursos = await getCursos();
+    if (cursos?.length > 0) {
+      actions.setCursos(cursos)
     }
     actions.setLoading(false)
   }),
@@ -214,6 +244,10 @@ const admModel = {
 
   setInstituicoes: action((state, payload) => {
     state.instituicoes = payload;
+  }),
+
+  setCursos: action((state, payload) => {
+    state.cursos = payload;
   }),
 };
 

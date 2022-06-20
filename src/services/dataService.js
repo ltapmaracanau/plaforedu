@@ -12,7 +12,7 @@ export const login = (payload = { username: "", password: "" }) => new Promise(a
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Usuário e/ou senha incorretos!"
       })
     })
 })
@@ -32,7 +32,7 @@ export const createUser = (payload) => new Promise(async (resolve, reject) => {
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -53,7 +53,28 @@ export const registerCourse = (payload) => new Promise(async (resolve, reject) =
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
+export const updateCourse = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.put(`/courses/${payload.id}/update`, {
+    "name": payload.name,
+    "description": payload.description,
+    "hours": payload.hours,
+    "link": payload.link,
+    "institutionId": payload.institutionId,
+    "accessibilities": payload.accessibilities,
+    "itineraries": payload.itineraries
+  })
+    .then((response) => {
+      resolve({})
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -69,7 +90,23 @@ export const registerInstitution = (payload) => new Promise(async (resolve, reje
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
+export const updateInstitution = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.put(`/institutions/${payload.id}/update`, {
+    "name": payload.name,
+    "abbreviation": payload.abbreviation
+  })
+    .then((response) => {
+      resolve({})
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -85,7 +122,7 @@ export const forgetPassword = (payload = { username: "" }) => new Promise(async 
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -102,7 +139,7 @@ export const resetPassword = (payload = { token: "", password: "" }) => new Prom
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -119,7 +156,7 @@ export const updatePassword = (payload = { oldPassword: "", newPassword: "" }) =
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -133,7 +170,7 @@ export const getRoles = () => new Promise(async (resolve, reject) => {
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -147,7 +184,7 @@ export const getItinerarios = () => new Promise(async (resolve, reject) => {
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -161,7 +198,7 @@ export const getAcessibilidades = () => new Promise(async (resolve, reject) => {
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -175,7 +212,21 @@ export const getInstituicoes = () => new Promise(async (resolve, reject) => {
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
+export const getCursos = () => new Promise(async (resolve, reject) => {
+
+  await authAxios.get('/courses/all')
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
@@ -189,7 +240,7 @@ export const getMyProfile = () => new Promise(async (resolve, reject) => {
     .catch((error) => {
       resolve({
         error: true,
-        message: error.response.data.message
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
       })
     })
 })
