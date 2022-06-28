@@ -4,7 +4,9 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { Button, Card, Form, Input, notification } from "antd";
+import { Button, Card, Form, Input, notification, Layout } from "antd";
+
+const { Content } = Layout;
 
 export default function UpdatePassword() {
   const updatePassword = useStoreActions(
@@ -44,86 +46,107 @@ export default function UpdatePassword() {
   };
 
   return (
-    <Card
-      style={{ width: "350px" }}
-      headStyle={{
-        backgroundColor: "#2C55A1",
-        textAlign: "center",
-        color: "#fff",
-        fontFamily: "Poppins",
-        fontSize: "18px",
-      }}
-      title={"ALTERAÇÃO DE SENHA"}
-    >
-      <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-        <Controller
-          name="oldPassword"
-          control={register.control}
-          render={({ field, fieldState: { error } }) => {
-            return (
-              <Form.Item
-                label={"Senha Antiga"}
-                style={{ marginBottom: "0" }}
-                validateStatus={error ? "error" : ""}
-                help={error ? error.message : ""}
-                hasFeedback
-              >
-                <Input.Password {...field} />
-              </Form.Item>
-            );
-          }}
-        />
-        <Controller
-          name="password1"
-          control={register.control}
-          render={({ field, fieldState: { error } }) => {
-            return (
-              <Form.Item
-                label={"Nova Senha"}
-                style={{ marginBottom: "0" }}
-                validateStatus={error ? "error" : ""}
-                help={error ? error.message : ""}
-                hasFeedback
-              >
-                <Input.Password {...field} />
-              </Form.Item>
-            );
-          }}
-        />
-        <Controller
-          name="password2"
-          control={register.control}
-          render={({ field, fieldState: { error } }) => {
-            return (
-              <Form.Item
-                label={"Repita a Nova Senha"}
-                style={{ marginBottom: "0" }}
-                validateStatus={error ? "error" : ""}
-                help={error ? error.message : ""}
-                hasFeedback
-              >
-                <Input.Password {...field} />
-              </Form.Item>
-            );
-          }}
-        />
-        <div
+    <>
+      <Layout
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "20px",
+        }}
+      >
+        <Content
           style={{
+            width: "100%",
             display: "flex",
             justifyContent: "center",
-            marginBottom: "15px",
+            alignItems: "center",
+            padding: "20px",
           }}
         >
-          <Button
-            loading={loading}
-            type="primary"
-            htmlType="submit"
-            shape="round"
+          <Card
+            style={{ width: "350px" }}
+            headStyle={{
+              backgroundColor: "#2C55A1",
+              textAlign: "center",
+              color: "#fff",
+              fontFamily: "Poppins",
+              fontSize: "18px",
+            }}
+            title={"ALTERAÇÃO DE SENHA"}
           >
-            Enviar
-          </Button>
-        </div>
-      </Form>
-    </Card>
+            <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+              <Controller
+                name="oldPassword"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Senha Antiga"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input.Password {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="password1"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Nova Senha"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input.Password {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="password2"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Repita a Nova Senha"}
+                      style={{ marginBottom: "0" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input.Password {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "15px",
+                }}
+              >
+                <Button
+                  loading={loading}
+                  type="primary"
+                  htmlType="submit"
+                  shape="round"
+                >
+                  Enviar
+                </Button>
+              </div>
+            </Form>
+          </Card>
+        </Content>
+      </Layout>
+    </>
   );
 }

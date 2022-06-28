@@ -23,8 +23,6 @@ export default function ResetPassword() {
 
   let navigate = useNavigate();
 
-  console.log(query.get("token").replace('"', ""));
-
   const register = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
