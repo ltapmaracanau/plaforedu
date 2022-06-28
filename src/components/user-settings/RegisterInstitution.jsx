@@ -8,16 +8,21 @@ import { Button, Card, Form, Input, Layout, notification } from "antd";
 
 const { Content } = Layout;
 
-export default function RegisterInstitution() {
+export default function RegisterInstitution(props) {
+  const { instituicao = {} } = props;
+
   const registerNewInstitution = useStoreActions(
     (actions) => actions.adm.registerNewInstitution
+  );
+  const updateInstitution = useStoreActions(
+    (actions) => actions.adm.updateInstitution
   );
   const loading = useStoreState((state) => state.adm.loading);
 
   const register = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
-    defaultValues: {},
+    defaultValues: instituicao,
     resolver: yupResolver(registerInstitutionSchema),
     context: undefined,
     criteriaMode: "firstError",
@@ -28,17 +33,34 @@ export default function RegisterInstitution() {
   });
 
   const onSubmit = async (values) => {
-    const newInstitution = await registerNewInstitution(values);
-    if (newInstitution.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: newInstitution.message,
+    if (instituicao !== {}) {
+      const tryUpdate = await updateInstitution({
+        ...values,
+        id: instituicao.id,
       });
+      if (tryUpdate.error) {
+        notification.error({
+          message: "Erro!",
+          description: tryUpdate.message,
+        });
+      } else {
+        notification.success({
+          message: "Instituição alterada com sucesso!",
+        });
+      }
     } else {
-      notification.success({
-        message: "Instituição cadastrada com sucesso!",
-      });
-      register.reset();
+      const newInstitution = await registerNewInstitution(values);
+      if (newInstitution.error) {
+        notification.error({
+          message: "Algo deu errado!",
+          description: newInstitution.message,
+        });
+      } else {
+        notification.success({
+          message: "Instituição cadastrada com sucesso!",
+        });
+        register.reset();
+      }
     }
   };
 
@@ -54,14 +76,11 @@ export default function RegisterInstitution() {
         >
           <Card
             style={{ width: "350px", margin: "30px 0px" }}
-            headStyle={{
-              backgroundColor: "#2C55A1",
-              textAlign: "center",
-              color: "#fff",
-              fontFamily: "Poppins",
-              fontSize: "18px",
+            bodyStyle={{
+              backgroundColor: "#f8f8f8",
+              fontFamily: "Roboto",
             }}
-            title={"CADASTRO DE INSTITUIÇÃO"}
+            bordered={false}
           >
             <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
               <Controller
@@ -112,7 +131,7 @@ export default function RegisterInstitution() {
                   shape="round"
                   htmlType="submit"
                 >
-                  Cadastrar
+                  {instituicao !== {} ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>

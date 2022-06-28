@@ -17,10 +17,13 @@ import {
 
 const { Content } = Layout;
 
-export default function RegisterCourse() {
+export default function RegisterCourse(props) {
+  const { curso = {} } = props;
+
   const registerNewCourse = useStoreActions(
     (actions) => actions.adm.registerNewCourse
   );
+  const updateCourse = useStoreActions((actions) => actions.adm.updateCourse);
   const getItinerarios = useStoreActions((state) => state.adm.getItinerarios);
   const getInstituicoes = useStoreActions((state) => state.adm.getInstituicoes);
   const getAcessibilidades = useStoreActions(
@@ -34,7 +37,7 @@ export default function RegisterCourse() {
   const register = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
-    defaultValues: {},
+    defaultValues: curso,
     resolver: yupResolver(registerCourseSchema),
     context: undefined,
     criteriaMode: "firstError",
@@ -45,17 +48,31 @@ export default function RegisterCourse() {
   });
 
   const onSubmit = async (values) => {
-    const newCourse = await registerNewCourse(values);
-    if (newCourse.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: newCourse.message,
-      });
+    if (curso !== {}) {
+      const tryUpdate = await updateCourse({ ...values, id: curso.id });
+      if (tryUpdate.error) {
+        notification.error({
+          message: "Erro!",
+          description: tryUpdate.message,
+        });
+      } else {
+        notification.success({
+          message: "Curso alterado com sucesso!",
+        });
+      }
     } else {
-      notification.success({
-        message: "Curso cadastrado com sucesso!",
-      });
-      register.reset();
+      const newCourse = await registerNewCourse(values);
+      if (newCourse.error) {
+        notification.error({
+          message: "Algo deu errado!",
+          description: newCourse.message,
+        });
+      } else {
+        notification.success({
+          message: "Curso cadastrado com sucesso!",
+        });
+        register.reset();
+      }
     }
   };
 
@@ -79,14 +96,11 @@ export default function RegisterCourse() {
         >
           <Card
             style={{ width: "350px", margin: "30px 0px" }}
-            headStyle={{
-              backgroundColor: "#2C55A1",
-              textAlign: "center",
-              color: "#fff",
-              fontFamily: "Poppins",
-              fontSize: "18px",
+            bodyStyle={{
+              backgroundColor: "#f8f8f8",
+              fontFamily: "Roboto",
             }}
-            title={"CADASTRO DE CURSO"}
+            bordered={false}
           >
             <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
               <Controller
@@ -281,7 +295,7 @@ export default function RegisterCourse() {
                   shape="round"
                   htmlType="submit"
                 >
-                  Cadastrar
+                  {curso.id ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>
