@@ -6,13 +6,20 @@ import {
   resetPassword,
   getRoles,
   createUser,
+  resendCredentials,
   updatePassword,
   registerCourse,
   updateInstitution,
+  blockUser,
+  archiveUser,
+  activeUser,
   updateCourse,
+  updateUser,
   getAcessibilidades,
   getItinerarios,
+  getUsers,
   getMyProfile,
+  getUniqueUser,
   getInstituicoes,
   getCursos,
   registerInstitution,
@@ -23,16 +30,19 @@ const admModel = {
   tipoVisualizacao: false, // false: grafo, true: lista
   filterCollapsed: true, // true: filter escondido, false: filter visível
   loading: false,
+  loadingSecondary: false,
   iniciando: false,
   roles: [],
   itinerarios: [],
   acessibilidades: [],
   instituicoes: [],
   cursos: [],
+  users: [],
 
   isAuthenticated: false,
 
   user: {},
+  myProfile: {},
 
   isAdm: computed((state) => state.user.roles?.includes("ADMINISTRADOR")),
 
@@ -62,6 +72,8 @@ const admModel = {
 
   }),
 
+  // POSTS
+
   login: thunk(async (actions, payload) => {
     actions.setLoading(true)
     const authentication = await login({ username: payload.username, password: payload.password })
@@ -78,7 +90,7 @@ const admModel = {
     return (authentication)
   }),
 
-  registerNewUser: thunk(async (actions, payload) => {
+  registerNewUser: thunk(async (actions, payload = { id: "" }) => {
     actions.setLoading(true)
     const newUser = await createUser({ ...payload })
     actions.setLoading(false)
@@ -93,27 +105,11 @@ const admModel = {
     //return { error: true, message: "Não conectado ao back!" }
   }),
 
-  updateCourse: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const tryUpdateCourse = await updateCourse({ ...payload })
-    actions.setLoading(false)
-    return (tryUpdateCourse)
-    //return { error: true, message: "Não conectado ao back!" }
-  }),
-
   registerNewInstitution: thunk(async (actions, payload) => {
     actions.setLoading(true)
     const newInstitution = await registerInstitution({ ...payload })
     actions.setLoading(false)
     return (newInstitution)
-    //return { error: true, message: "Não conectado ao back!" }
-  }),
-
-  updateInstitution: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const tryUpdateInstitution = await updateInstitution({ ...payload })
-    actions.setLoading(false)
-    return (tryUpdateInstitution)
     //return { error: true, message: "Não conectado ao back!" }
   }),
 
@@ -124,11 +120,64 @@ const admModel = {
     return (tryForgetPassword)
   }),
 
+  resendCredentials: thunk(async (actions, payload) => {
+    actions.setLoadingSecondary(true)
+    const tryResendCredentials = await resendCredentials({ ...payload })
+    actions.setLoadingSecondary(false)
+    return (tryResendCredentials)
+  }),
+
   resetPassword: thunk(async (actions, payload) => {
     actions.setLoading(true)
     const tryResetPassword = await resetPassword({ token: payload.token, password: payload.password })
     actions.setLoading(false)
     return (tryResetPassword)
+  }),
+
+  // PUTS
+
+  updateUser: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const tryUpdateUser = await updateUser({ ...payload })
+    actions.setLoading(false)
+    return (tryUpdateUser)
+  }),
+
+  blockUser: thunk(async (actions, payload = { id: "" }) => {
+    actions.setLoading(true)
+    const tryBlockUser = await blockUser({ id: payload.id })
+    actions.setLoading(false)
+    return (tryBlockUser)
+  }),
+
+  archiveUser: thunk(async (actions, payload = { id: "" }) => {
+    actions.setLoading(true)
+    const tryArchiveUser = await archiveUser({ id: payload.id })
+    actions.setLoading(false)
+    return (tryArchiveUser)
+  }),
+
+  activeUser: thunk(async (actions, payload = { id: "" }) => {
+    actions.setLoading(true)
+    const tryActiveUser = await activeUser({ id: payload.id })
+    actions.setLoading(false)
+    return (tryActiveUser)
+  }),
+
+  updateCourse: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const tryUpdateCourse = await updateCourse({ ...payload })
+    actions.setLoading(false)
+    return (tryUpdateCourse)
+    //return { error: true, message: "Não conectado ao back!" }
+  }),
+
+  updateInstitution: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const tryUpdateInstitution = await updateInstitution({ ...payload })
+    actions.setLoading(false)
+    return (tryUpdateInstitution)
+    //return { error: true, message: "Não conectado ao back!" }
   }),
 
   updatePassword: thunk(async (actions, payload) => {
@@ -142,6 +191,8 @@ const admModel = {
     actions.setLoading(false)
     return (tryUpdatePassword)
   }),
+
+  // ELSE
 
   logout: thunk(async (actions, _) => {
     actions.setLoading(true)
@@ -182,22 +233,49 @@ const admModel = {
     actions.setLoading(false)
   }),
 
-  getInstituicoes: thunk(async (actions, _) => {
+  getInstituicoes: thunk(async (actions, payload = { query: "" }) => {
+
     actions.setLoading(true)
-    const instituicoes = await getInstituicoes();
-    if (instituicoes?.length > 0) {
+    const instituicoes = await getInstituicoes({ query: payload.query });
+    if (instituicoes?.length >= 0) {
       actions.setInstituicoes(instituicoes)
     }
     actions.setLoading(false)
   }),
 
-  getCursos: thunk(async (actions, _) => {
+  getCursos: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true)
-    const cursos = await getCursos();
-    if (cursos?.length > 0) {
+    const cursos = await getCursos({ query: payload.query });
+    if (cursos?.length >= 0) {
       actions.setCursos(cursos)
     }
     actions.setLoading(false)
+  }),
+
+  getUsers: thunk(async (actions, payload = { query: "" }) => {
+    actions.setLoading(true)
+    const users = await getUsers({ query: payload.query });
+    if (users?.length >= 0) {
+      actions.setUsers(users)
+    }
+    actions.setLoading(false)
+  }),
+
+  getUniqueUser: thunk(async (actions, payload = { id: "" }) => {
+    const user = await getUniqueUser({ id: payload.id });
+    if (user) {
+      return (user)
+    }
+  }),
+
+  getMyProfile: thunk(async (actions, _) => {
+    actions.setLoading(true)
+    const myProfile = await getMyProfile();
+    if (!myProfile.error) {
+      actions.setMyProfile(myProfile)
+    }
+    actions.setLoading(false)
+    return (myProfile)
   }),
 
   // Setters
@@ -216,6 +294,10 @@ const admModel = {
 
   setLoading: action((state, payload) => {
     state.loading = payload;
+  }),
+
+  setLoadingSecondary: action((state, payload) => {
+    state.loadingSecondary = payload;
   }),
 
   setIniciando: action((state, payload) => {
@@ -248,6 +330,14 @@ const admModel = {
 
   setCursos: action((state, payload) => {
     state.cursos = payload;
+  }),
+
+  setUsers: action((state, payload) => {
+    state.users = payload;
+  }),
+
+  setMyProfile: action((state, payload) => {
+    state.myProfile = payload;
   }),
 };
 

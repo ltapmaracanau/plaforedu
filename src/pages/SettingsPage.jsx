@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useStoreState } from "easy-peasy";
 
 import HeaderHome from "../components/header/HeaderHome";
-import RegisterUser from "../components/user-settings/RegisterUser";
+import UsersList from "../components/user-settings/UsersList";
+import CoursesList from "../components/user-settings/CoursesList";
 import UpdatePassword from "../components/user-settings/UpdatePassword";
 import InstitutionList from "../components/user-settings/InstitutionsList";
-import CoursesList from "../components/user-settings/CoursesList";
 
 import { Layout, Menu } from "antd";
+import MyProfile from "../components/user-settings/MyProfile";
 
 const { Sider } = Layout;
 
@@ -15,8 +16,9 @@ export default function SettingsPage() {
   const isAdm = useStoreState((state) => state.adm.isAdm);
 
   const contentArray = [
+    <MyProfile />,
     <UpdatePassword />,
-    <RegisterUser />,
+    <UsersList />,
     <CoursesList />,
     <InstitutionList />,
   ];
@@ -45,37 +47,46 @@ export default function SettingsPage() {
                 setIndex(0);
               }}
             >
+              Meu Perfil
+            </Menu.Item>
+            <Menu.Item
+              style={{ fontFamily: "Roboto" }}
+              key={"1"}
+              onClick={() => {
+                setIndex(1);
+              }}
+            >
               Alterar Senha
             </Menu.Item>
             {isAdm ? (
               <Menu.SubMenu
                 style={{ fontFamily: "Roboto" }}
-                key={"1"}
+                key={"2"}
                 title={"Cadastros"}
               >
                 <Menu.Item
                   style={{ fontFamily: "Roboto" }}
-                  key={"11"}
+                  key={"21"}
                   onClick={() => {
-                    setIndex(1);
+                    setIndex(2);
                   }}
                 >
                   Usuários
                 </Menu.Item>
                 <Menu.Item
                   style={{ fontFamily: "Roboto" }}
-                  key={"12"}
+                  key={"22"}
                   onClick={() => {
-                    setIndex(2);
+                    setIndex(3);
                   }}
                 >
                   Cursos
                 </Menu.Item>
                 <Menu.Item
                   style={{ fontFamily: "Roboto" }}
-                  key={"13"}
+                  key={"23"}
                   onClick={() => {
-                    setIndex(3);
+                    setIndex(4);
                   }}
                 >
                   Instituições

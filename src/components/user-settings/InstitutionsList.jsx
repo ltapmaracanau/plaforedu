@@ -3,10 +3,11 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal } from "antd";
+import { Button, Card, Input, Layout, List, Modal } from "antd";
 import RegisterInstitution from "./RegisterInstitution";
 
 const { Content } = Layout;
+const { Search } = Input;
 
 export default function InstitutionList() {
   const getInstituicoes = useStoreActions(
@@ -40,16 +41,34 @@ export default function InstitutionList() {
           <Card
             title={"Instituições"}
             extra={
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  setEditandoInstituicao({});
-                  setRegisterVisible(true);
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "450px",
                 }}
               >
-                Adicionar
-              </Button>
+                <Search
+                  onSearch={(e) => {
+                    getInstituicoes({ query: e });
+                  }}
+                  style={{
+                    marginRight: "30px",
+                  }}
+                  placeholder={"Buscar instituições"}
+                />
+                <Button
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setEditandoInstituicao({});
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </div>
             }
           >
             <List

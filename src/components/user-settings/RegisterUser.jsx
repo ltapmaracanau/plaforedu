@@ -67,14 +67,11 @@ export default function RegisterUser() {
         >
           <Card
             style={{ width: "350px", margin: "30px 0px" }}
-            headStyle={{
-              backgroundColor: "#2C55A1",
-              textAlign: "center",
-              color: "#fff",
-              fontFamily: "Poppins",
-              fontSize: "18px",
+            bodyStyle={{
+              backgroundColor: "#f8f8f8",
+              fontFamily: "Roboto",
             }}
-            title={"CADASTRO"}
+            bordered={false}
           >
             <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
               <Controller

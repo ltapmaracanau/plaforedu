@@ -202,7 +202,6 @@ export default function CytoscapeVisualization() {
                   <Button
                     shape="circle"
                     onClick={() => {
-                      console.log(cyRef.current);
                       setZoom((zoomAtual) => {
                         return zoomAtual > 0.01 ? zoomAtual - 0.01 : zoomAtual;
                       });
@@ -357,7 +356,6 @@ export default function CytoscapeVisualization() {
           cy.on("click", "node", function (event) {
             const element = event.target._private.data;
             if (element.id.includes("curso")) {
-              console.log("cliquei no curso: ", element.id);
               setCourseOnModal(
                 cursos.find(
                   (curso) =>
@@ -374,7 +372,6 @@ export default function CytoscapeVisualization() {
               !element.id.includes("categoria") &&
               !element.id.includes("curso")
             ) {
-              console.log("cliquei na competencia: ", element.id);
               setCourseOnModal(
                 competencias.find(
                   (competencia) =>
