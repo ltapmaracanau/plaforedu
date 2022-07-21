@@ -23,6 +23,10 @@ import {
   getInstituicoes,
   getCursos,
   registerInstitution,
+  getCompetencias,
+  getCatComp,
+  registerCatComp,
+  registerComp,
 } from "../services/dataService";
 
 const admModel = {
@@ -36,6 +40,8 @@ const admModel = {
   itinerarios: [],
   acessibilidades: [],
   instituicoes: [],
+  competencias: [],
+  catComp: [],
   cursos: [],
   users: [],
 
@@ -111,6 +117,22 @@ const admModel = {
     actions.setLoading(false)
     return (newInstitution)
     //return { error: true, message: "Não conectado ao back!" }
+  }),
+
+  registerCatComp: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const newCat = await registerCatComp({ ...payload })
+    actions.setLoading(false)
+    return (newCat)
+    // return { error: true, message: "Não conectado ao back!" }
+  }),
+
+  registerComp: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const newComp = await registerComp({ ...payload })
+    actions.setLoading(false)
+    return (newComp)
+    // return { error: true, message: "Não conectado ao back!" }
   }),
 
   forgetPassword: thunk(async (actions, payload) => {
@@ -243,6 +265,26 @@ const admModel = {
     actions.setLoading(false)
   }),
 
+  getComp: thunk(async (actions, payload = { query: "" }) => {
+
+    actions.setLoading(true)
+    const competencias = await getCompetencias({ query: payload.query });
+    if (competencias?.length >= 0) {
+      actions.setCompetencias(competencias)
+    }
+    actions.setLoading(false)
+  }),
+
+  getCatComp: thunk(async (actions, payload = { query: "" }) => {
+
+    actions.setLoading(true)
+    const catComp = await getCatComp({ query: payload.query });
+    if (catComp?.length >= 0) {
+      actions.setCatComp(catComp)
+    }
+    actions.setLoading(false)
+  }),
+
   getCursos: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true)
     const cursos = await getCursos({ query: payload.query });
@@ -326,6 +368,14 @@ const admModel = {
 
   setInstituicoes: action((state, payload) => {
     state.instituicoes = payload;
+  }),
+
+  setCompetencias: action((state, payload) => {
+    state.competencias = payload;
+  }),
+
+  setCatComp: action((state, payload) => {
+    state.catComp = payload;
   }),
 
   setCursos: action((state, payload) => {

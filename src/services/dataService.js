@@ -130,6 +130,38 @@ export const registerCourse = (payload) => new Promise(async (resolve, reject) =
     })
 })
 
+export const registerCatComp = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.post('/competencies-category/new', {
+    "name": payload.name,
+    "description": payload.description
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
+export const registerComp = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.post('/competencies/new', {
+    "name": payload.name,
+    "competenciesCategoryIds": payload.competenciesCategoryIds
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
 export const updateCourse = (payload) => new Promise(async (resolve, reject) => {
   await authAxios.put(`/courses/${payload.id}/update`, {
     "name": payload.name,
@@ -278,6 +310,34 @@ export const getAcessibilidades = () => new Promise(async (resolve, reject) => {
 export const getInstituicoes = (payload) => new Promise(async (resolve, reject) => {
 
   await authAxios.get(`/institutions/all?search=${payload.query}`)
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
+export const getCompetencias = (payload) => new Promise(async (resolve, reject) => {
+
+  await authAxios.get(`/competencies/list?search=${payload.query}`)
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
+export const getCatComp = (payload) => new Promise(async (resolve, reject) => {
+
+  await authAxios.get(`/competencies-category/list?search=${payload.query}`)
     .then((response) => {
       resolve(response.data)
     })
