@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import { useStoreState } from "easy-peasy";
 
 import HeaderHome from "../components/header/HeaderHome";
+import CompList from "../components/user-settings/CompList";
 import UsersList from "../components/user-settings/UsersList";
 import CoursesList from "../components/user-settings/CoursesList";
+import CategCompList from "../components/user-settings/CategCompList";
 import UpdatePassword from "../components/user-settings/UpdatePassword";
 import InstitutionList from "../components/user-settings/InstitutionsList";
+
+import {
+  UserOutlined,
+  DiffOutlined,
+  TeamOutlined,
+  KeyOutlined,
+} from "@ant-design/icons";
 
 import { Layout, Menu } from "antd";
 import MyProfile from "../components/user-settings/MyProfile";
@@ -21,6 +30,8 @@ export default function SettingsPage() {
     <UsersList />,
     <CoursesList />,
     <InstitutionList />,
+    <CategCompList />,
+    <CompList />,
   ];
 
   const [index, setIndex] = useState(0);
@@ -42,6 +53,7 @@ export default function SettingsPage() {
           >
             <Menu.Item
               style={{ fontFamily: "Roboto" }}
+              icon={<UserOutlined />}
               key={"0"}
               onClick={() => {
                 setIndex(0);
@@ -52,6 +64,7 @@ export default function SettingsPage() {
             <Menu.Item
               style={{ fontFamily: "Roboto" }}
               key={"1"}
+              icon={<KeyOutlined />}
               onClick={() => {
                 setIndex(1);
               }}
@@ -61,12 +74,14 @@ export default function SettingsPage() {
             {isAdm ? (
               <Menu.SubMenu
                 style={{ fontFamily: "Roboto" }}
+                icon={<DiffOutlined />}
                 key={"2"}
                 title={"Cadastros"}
               >
                 <Menu.Item
                   style={{ fontFamily: "Roboto" }}
                   key={"21"}
+                  icon={<TeamOutlined />}
                   onClick={() => {
                     setIndex(2);
                   }}
@@ -90,6 +105,24 @@ export default function SettingsPage() {
                   }}
                 >
                   Instituições
+                </Menu.Item>
+                <Menu.Item
+                  style={{ fontFamily: "Roboto" }}
+                  key={"24"}
+                  onClick={() => {
+                    setIndex(5);
+                  }}
+                >
+                  Categorias de competências
+                </Menu.Item>
+                <Menu.Item
+                  style={{ fontFamily: "Roboto" }}
+                  key={"25"}
+                  onClick={() => {
+                    setIndex(6);
+                  }}
+                >
+                  Competências
                 </Menu.Item>
               </Menu.SubMenu>
             ) : null}
