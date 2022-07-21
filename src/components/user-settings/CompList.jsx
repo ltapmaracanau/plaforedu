@@ -1,0 +1,114 @@
+import React, { useEffect, useState } from "react";
+import { useStoreActions, useStoreState } from "easy-peasy";
+
+import { PlusOutlined } from "@ant-design/icons";
+
+import { Button, Card, Layout, List, Modal, Input } from "antd";
+import RegisterComp from "./RegisterComp";
+
+const { Content } = Layout;
+const { Search } = Input;
+
+export default function CompList() {
+  const getComp = useStoreActions((actions) => actions.adm.getComp);
+
+  const [registerVisible, setRegisterVisible] = useState(false);
+
+  const loading = useStoreState((state) => state.adm.loading);
+  const competencias = useStoreState((state) => state.adm.competencias);
+
+  useEffect(() => {
+    (async () => {
+      await getComp();
+    })();
+  }, [getComp]);
+
+  return (
+    <>
+      <Layout
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          padding: "20px",
+        }}
+      >
+        <Content style={{ width: "100%" }}>
+          <Card
+            title={"Competências"}
+            extra={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "450px",
+                }}
+              >
+                <Search
+                  onSearch={(e) => {
+                    getComp({ query: e });
+                  }}
+                  style={{
+                    marginRight: "30px",
+                  }}
+                  placeholder={"Buscar competências"}
+                />
+                <Button
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </div>
+            }
+          >
+            <List
+              loading={loading}
+              dataSource={competencias}
+              style={{ width: "100%" }}
+              renderItem={(item) => {
+                return (
+                  <List.Item key={item.id}>
+                    <List.Item.Meta
+                      style={{ fontFamily: "Roboto" }}
+                      title={item.name}
+                      description={item.description}
+                    />
+                  </List.Item>
+                );
+              }}
+            />
+          </Card>
+          <Modal
+            title={"Cadastrar Competência"}
+            visible={registerVisible}
+            destroyOnClose={true}
+            onCancel={() => {
+              getComp();
+              setRegisterVisible(false);
+            }}
+            bodyStyle={{ backgroundColor: "#f8f8f8" }}
+            footer={[
+              <Button
+                type="primary"
+                key={"back"}
+                onClick={() => {
+                  getComp();
+                  setRegisterVisible(false);
+                }}
+              >
+                Cancelar
+              </Button>,
+            ]}
+          >
+            <RegisterComp />
+          </Modal>
+        </Content>
+      </Layout>
+    </>
+  );
+}
