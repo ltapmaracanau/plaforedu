@@ -10,6 +10,21 @@ import EditUser from "./EditUser";
 const { Content } = Layout;
 const { Search } = Input;
 
+const userStatusRefactor = (status) => {
+  switch (status) {
+    case "PENDING":
+      return "PENDENTE";
+    case "ACTIVE":
+      return "ATIVO";
+    case "FILED":
+      return "ARQUIVADO";
+    case "BLOCKED":
+      return "BLOQUEADO";
+    default:
+      return "ATIVO";
+  }
+};
+
 export default function UsersList() {
   const getUsers = useStoreActions((actions) => actions.adm.getUsers);
 
@@ -93,7 +108,9 @@ export default function UsersList() {
                 return (
                   <List.Item
                     actions={[
-                      <Tag color={colorStatus(item.status)}>{item.status}</Tag>,
+                      <Tag color={colorStatus(item.status)}>
+                        {userStatusRefactor(item.status)}
+                      </Tag>,
                       <Button
                         onClick={() => {
                           setEditandoUsuario(item);

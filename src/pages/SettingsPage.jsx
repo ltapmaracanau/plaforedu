@@ -3,8 +3,11 @@ import { useStoreState } from "easy-peasy";
 
 import HeaderHome from "../components/header/HeaderHome";
 import CompList from "../components/user-settings/CompList";
+import MyProfile from "../components/user-settings/MyProfile";
+import TemasList from "../components/user-settings/TemasList";
 import UsersList from "../components/user-settings/UsersList";
 import CoursesList from "../components/user-settings/CoursesList";
+import SubtemasList from "../components/user-settings/SubtemasList";
 import CategCompList from "../components/user-settings/CategCompList";
 import UpdatePassword from "../components/user-settings/UpdatePassword";
 import InstitutionList from "../components/user-settings/InstitutionsList";
@@ -17,7 +20,6 @@ import {
 } from "@ant-design/icons";
 
 import { Layout, Menu } from "antd";
-import MyProfile from "../components/user-settings/MyProfile";
 
 const { Sider } = Layout;
 
@@ -32,6 +34,8 @@ export default function SettingsPage() {
     <InstitutionList />,
     <CategCompList />,
     <CompList />,
+    <TemasList />,
+    <SubtemasList />,
   ];
 
   const [index, setIndex] = useState(0);
@@ -123,6 +127,24 @@ export default function SettingsPage() {
                   }}
                 >
                   Competências
+                </Menu.Item>
+                <Menu.Item
+                  style={{ fontFamily: "Roboto" }}
+                  key={"26"}
+                  onClick={() => {
+                    setIndex(7);
+                  }}
+                >
+                  Temas
+                </Menu.Item>
+                <Menu.Item
+                  style={{ fontFamily: "Roboto" }}
+                  key={"27"}
+                  onClick={() => {
+                    setIndex(8);
+                  }}
+                >
+                  Subtemas
                 </Menu.Item>
               </Menu.SubMenu>
             ) : null}

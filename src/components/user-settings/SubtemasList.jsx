@@ -3,25 +3,25 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal, Input, Tag } from "antd";
-import RegisterComp from "./RegisterComp";
+import { Button, Card, Layout, List, Modal, Input } from "antd";
+import SubtemaRegister from "./SubtemaRegister";
 
 const { Content } = Layout;
 const { Search } = Input;
 
-export default function CompList() {
-  const getComp = useStoreActions((actions) => actions.adm.getComp);
+export default function SubtemasList() {
+  const getSubthemes = useStoreActions((actions) => actions.adm.getSubthemes);
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
   const loading = useStoreState((state) => state.adm.loading);
-  const competencias = useStoreState((state) => state.adm.competencias);
+  const subthemes = useStoreState((state) => state.adm.subthemes);
 
   useEffect(() => {
     (async () => {
-      await getComp();
+      await getSubthemes();
     })();
-  }, [getComp]);
+  }, [getSubthemes]);
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function CompList() {
       >
         <Content style={{ width: "100%" }}>
           <Card
-            title={"Competências"}
+            title={"Subtemas"}
             extra={
               <div
                 style={{
@@ -47,12 +47,12 @@ export default function CompList() {
               >
                 <Search
                   onSearch={(e) => {
-                    getComp({ query: e });
+                    getSubthemes({ query: e });
                   }}
                   style={{
                     marginRight: "30px",
                   }}
-                  placeholder={"Buscar competências"}
+                  placeholder={"Buscar subtemas"}
                 />
                 <Button
                   type="primary"
@@ -68,7 +68,7 @@ export default function CompList() {
           >
             <List
               loading={loading}
-              dataSource={competencias}
+              dataSource={subthemes}
               style={{ width: "100%" }}
               renderItem={(item) => {
                 return (
@@ -76,18 +76,6 @@ export default function CompList() {
                     <List.Item.Meta
                       style={{ fontFamily: "Roboto" }}
                       title={item.name}
-                      description={
-                        <span>
-                          {item.CategoriesCompetencies.map((categoria) => (
-                            <Tag
-                              color="blue"
-                              key={categoria.competenciesCategory.id}
-                            >
-                              {categoria.competenciesCategory.name}
-                            </Tag>
-                          ))}
-                        </span>
-                      }
                     />
                   </List.Item>
                 );
@@ -95,11 +83,11 @@ export default function CompList() {
             />
           </Card>
           <Modal
-            title={"Cadastrar Competência"}
+            title={"Cadastrar Subtema"}
             visible={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getComp();
+              getSubthemes();
               setRegisterVisible(false);
             }}
             bodyStyle={{ backgroundColor: "#f8f8f8" }}
@@ -108,7 +96,7 @@ export default function CompList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getComp();
+                  getSubthemes();
                   setRegisterVisible(false);
                 }}
               >
@@ -116,7 +104,7 @@ export default function CompList() {
               </Button>,
             ]}
           >
-            <RegisterComp />
+            <SubtemaRegister />
           </Modal>
         </Content>
       </Layout>
