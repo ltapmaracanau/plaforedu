@@ -3,7 +3,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal, Input } from "antd";
+import { Button, Card, Layout, List, Modal, Input, Tag } from "antd";
 import RegisterComp from "./RegisterComp";
 
 const { Content } = Layout;
@@ -76,7 +76,18 @@ export default function CompList() {
                     <List.Item.Meta
                       style={{ fontFamily: "Roboto" }}
                       title={item.name}
-                      description={item.description}
+                      description={
+                        <span>
+                          {item.CategoriesCompetencies.map((categoria) => (
+                            <Tag
+                              color="blue"
+                              key={categoria.competenciesCategory.id}
+                            >
+                              {categoria.competenciesCategory.name}
+                            </Tag>
+                          ))}
+                        </span>
+                      }
                     />
                   </List.Item>
                 );
