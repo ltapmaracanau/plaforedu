@@ -162,6 +162,37 @@ export const registerComp = (payload) => new Promise(async (resolve, reject) => 
     })
 })
 
+export const registerTheme = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.post('/themes/new', {
+    "name": payload.name
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
+export const registerSubtheme = (payload) => new Promise(async (resolve, reject) => {
+  await authAxios.post('/sub-themes/new', {
+    "name": payload.name,
+    "themeIds": payload.themeIds
+  })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+
 export const updateCourse = (payload) => new Promise(async (resolve, reject) => {
   await authAxios.put(`/courses/${payload.id}/update`, {
     "name": payload.name,
@@ -321,6 +352,32 @@ export const getInstituicoes = (payload) => new Promise(async (resolve, reject) 
     })
 })
 
+export const getThemes = (payload) => new Promise(async (resolve, reject) => {
+
+  await authAxios.get(`/themes/list?search=${payload.query}`)
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
+export const getSubthemes = (payload) => new Promise(async (resolve, reject) => {
+
+  await authAxios.get(`/sub-themes/list?search=${payload.query}`)
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      resolve({
+        error: true,
+        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      })
+    })
+})
 export const getCompetencias = (payload) => new Promise(async (resolve, reject) => {
 
   await authAxios.get(`/competencies/list?search=${payload.query}`)

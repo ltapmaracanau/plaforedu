@@ -27,6 +27,10 @@ import {
   getCatComp,
   registerCatComp,
   registerComp,
+  getSubthemes,
+  getThemes,
+  registerTheme,
+  registerSubtheme,
 } from "../services/dataService";
 
 const admModel = {
@@ -41,6 +45,8 @@ const admModel = {
   acessibilidades: [],
   instituicoes: [],
   competencias: [],
+  themes: [],
+  subthemes: [],
   catComp: [],
   cursos: [],
   users: [],
@@ -132,6 +138,22 @@ const admModel = {
     const newComp = await registerComp({ ...payload })
     actions.setLoading(false)
     return (newComp)
+    // return { error: true, message: "Não conectado ao back!" }
+  }),
+
+  registerTheme: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const theme = await registerTheme({ ...payload })
+    actions.setLoading(false)
+    return (theme)
+    // return { error: true, message: "Não conectado ao back!" }
+  }),
+
+  registerSubtheme: thunk(async (actions, payload) => {
+    actions.setLoading(true)
+    const subtheme = await registerSubtheme({ ...payload })
+    actions.setLoading(false)
+    return (subtheme)
     // return { error: true, message: "Não conectado ao back!" }
   }),
 
@@ -285,6 +307,26 @@ const admModel = {
     actions.setLoading(false)
   }),
 
+  getThemes: thunk(async (actions, payload = { query: "" }) => {
+
+    actions.setLoading(true)
+    const themes = await getThemes({ query: payload.query });
+    if (themes?.length >= 0) {
+      actions.setThemes(themes)
+    }
+    actions.setLoading(false)
+  }),
+
+  getSubthemes: thunk(async (actions, payload = { query: "" }) => {
+
+    actions.setLoading(true)
+    const subthemes = await getSubthemes({ query: payload.query });
+    if (subthemes?.length >= 0) {
+      actions.setSubthemes(subthemes)
+    }
+    actions.setLoading(false)
+  }),
+
   getCursos: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true)
     const cursos = await getCursos({ query: payload.query });
@@ -376,6 +418,14 @@ const admModel = {
 
   setCatComp: action((state, payload) => {
     state.catComp = payload;
+  }),
+
+  setThemes: action((state, payload) => {
+    state.themes = payload;
+  }),
+
+  setSubthemes: action((state, payload) => {
+    state.subthemes = payload;
   }),
 
   setCursos: action((state, payload) => {
