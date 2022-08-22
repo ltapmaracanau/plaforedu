@@ -2,7 +2,7 @@
 import axios from "axios"
 
 const authAxios = axios.create({
-    baseURL: 'https://plaforedubackend-production.up.railway.app'
+    baseURL: 'https://plafor-server.herokuapp.com'
 })
 
 export { authAxios }
