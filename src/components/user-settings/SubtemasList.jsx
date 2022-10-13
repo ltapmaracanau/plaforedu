@@ -18,9 +18,7 @@ export default function SubtemasList() {
   const subthemes = useStoreState((state) => state.adm.subthemes);
 
   useEffect(() => {
-    (async () => {
-      await getSubthemes();
-    })();
+    getSubthemes();
   }, [getSubthemes]);
 
   return (
@@ -84,7 +82,7 @@ export default function SubtemasList() {
           </Card>
           <Modal
             title={"Cadastrar Subtema"}
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getSubthemes();
@@ -104,7 +102,12 @@ export default function SubtemasList() {
               </Button>,
             ]}
           >
-            <SubtemaRegister />
+            <SubtemaRegister
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getSubthemes();
+              }}
+            />
           </Modal>
         </Content>
       </Layout>

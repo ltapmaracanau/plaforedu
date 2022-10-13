@@ -2,14 +2,14 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { registerInstitutionSchema } from "../../schemas/registers/registerInstitutionSchema";
+import { registerInstitutionSchema } from "../../schemas/registers/registersSchema";
 
 import { Button, Card, Form, Input, Layout, notification } from "antd";
 
 const { Content } = Layout;
 
-export default function RegisterInstitution(props) {
-  const { instituicao = {} } = props;
+export default function InstitutionRegister(props) {
+  const { instituicao = {}, actionVisible } = props;
 
   const registerNewInstitution = useStoreActions(
     (actions) => actions.adm.registerNewInstitution
@@ -33,7 +33,21 @@ export default function RegisterInstitution(props) {
   });
 
   const onSubmit = async (values) => {
-    if (instituicao !== {}) {
+    if (instituicao === null) {
+      const newInstitution = await registerNewInstitution(values);
+      if (newInstitution.error) {
+        notification.error({
+          message: "Algo deu errado!",
+          description: newInstitution.message,
+        });
+      } else {
+        notification.success({
+          message: "Instituição cadastrada com sucesso!",
+        });
+        register.reset();
+        actionVisible();
+      }
+    } else {
       const tryUpdate = await updateInstitution({
         ...values,
         id: instituicao.id,
@@ -47,19 +61,7 @@ export default function RegisterInstitution(props) {
         notification.success({
           message: "Instituição alterada com sucesso!",
         });
-      }
-    } else {
-      const newInstitution = await registerNewInstitution(values);
-      if (newInstitution.error) {
-        notification.error({
-          message: "Algo deu errado!",
-          description: newInstitution.message,
-        });
-      } else {
-        notification.success({
-          message: "Instituição cadastrada com sucesso!",
-        });
-        register.reset();
+        actionVisible();
       }
     }
   };
@@ -121,7 +123,7 @@ export default function RegisterInstitution(props) {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "15px",
+                  margin: "15px 0px",
                 }}
               >
                 <Button
@@ -131,7 +133,7 @@ export default function RegisterInstitution(props) {
                   shape="round"
                   htmlType="submit"
                 >
-                  {instituicao !== {} ? <>Alterar</> : <>Cadastrar</>}
+                  {instituicao === null ? <>Cadastrar</> : <>Alterar</>}
                 </Button>
               </div>
             </Form>

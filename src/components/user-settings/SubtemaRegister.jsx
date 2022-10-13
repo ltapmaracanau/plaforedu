@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { registerSubthemeSchema } from "../../schemas/registers/registerSubthemeSchema";
+import { registerSubthemeSchema } from "../../schemas/registers/registersSchema";
 
 import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
 
 const { Content } = Layout;
 
-export default function SubtemaRegister() {
+export default function SubtemaRegister(props) {
+  const { actionVisible } = props;
+
   const getThemes = useStoreActions((actions) => actions.adm.getThemes);
   const registerSubtheme = useStoreActions(
     (actions) => actions.adm.registerSubtheme
@@ -41,6 +43,7 @@ export default function SubtemaRegister() {
         message: "Subtema cadastrado com sucesso!",
       });
       register.reset();
+      actionVisible();
     }
   };
 
@@ -125,7 +128,7 @@ export default function SubtemaRegister() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "15px",
+                  margin: "15px 0px",
                 }}
               >
                 <Button

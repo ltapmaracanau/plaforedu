@@ -4,7 +4,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
 import { Button, Card, Layout, List, Modal, Input } from "antd";
-import RegisterCourse from "./RegisterCourse";
+import CourseRegister from "./CourseRegister";
 
 const { Content } = Layout;
 const { Search } = Input;
@@ -21,9 +21,7 @@ export default function CoursesList() {
   const [modalText, setModalText] = useState("Cadastrar Curso");
 
   useEffect(() => {
-    (async () => {
-      await getCursos();
-    })();
+    getCursos();
   }, [getCursos]);
 
   return (
@@ -129,7 +127,13 @@ export default function CoursesList() {
               </Button>,
             ]}
           >
-            <RegisterCourse curso={editandoCurso} />
+            <CourseRegister
+              curso={editandoCurso}
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getCursos();
+              }}
+            />
           </Modal>
         </Content>
       </Layout>

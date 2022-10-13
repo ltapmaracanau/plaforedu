@@ -1,24 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { registerCompSchema } from "../../schemas/registers/registerCompSchema";
+import { registerCatCompSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
+import { Button, Card, Form, Input, Layout, notification } from "antd";
 
 const { Content } = Layout;
 
-export default function RegisterComp() {
-  const getCatComp = useStoreActions((actions) => actions.adm.getCatComp);
-  const registerComp = useStoreActions((actions) => actions.adm.registerComp);
-  const catComp = useStoreState((state) => state.adm.catComp);
+export default function CatCompRegister(props) {
+  const { actionVisible } = props;
+
+  const registerCatComp = useStoreActions(
+    (actions) => actions.adm.registerCatComp
+  );
   const loading = useStoreState((state) => state.adm.loading);
 
   const register = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {},
-    resolver: yupResolver(registerCompSchema),
+    resolver: yupResolver(registerCatCompSchema),
     context: undefined,
     criteriaMode: "firstError",
     shouldFocusError: true,
@@ -28,25 +30,20 @@ export default function RegisterComp() {
   });
 
   const onSubmit = async (values) => {
-    const newComp = await registerComp(values);
-    if (newComp.error) {
+    const newCat = await registerCatComp(values);
+    if (newCat.error) {
       notification.error({
         message: "Algo deu errado!",
-        description: newComp.message,
+        description: newCat.message,
       });
     } else {
       notification.success({
-        message: "Competência cadastrada com sucesso!",
+        message: "Categoria cadastrada com sucesso!",
       });
       register.reset();
+      actionVisible();
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      await getCatComp();
-    })();
-  }, [getCatComp]);
 
   return (
     <>
@@ -73,7 +70,7 @@ export default function RegisterComp() {
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Nome da competência"}
+                      label={"Nome da categoria"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
@@ -85,36 +82,18 @@ export default function RegisterComp() {
                 }}
               />
               <Controller
-                name="competenciesCategoryIds"
+                name="description"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Categorias da competência"}
+                      label={"Descrição da categoria"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <Select
-                        placeholder="Categorias"
-                        {...field}
-                        showSearch
-                        mode={"multiple"}
-                        filterOption={(input, option) => {
-                          return (
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          );
-                        }}
-                      >
-                        {catComp.map((element) => (
-                          <Select.Option key={element.id} value={element.id}>
-                            {element.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                      <Input.TextArea placeholder="Descrição" {...field} />
                     </Form.Item>
                   );
                 }}
@@ -123,7 +102,7 @@ export default function RegisterComp() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "15px",
+                  margin: "15px 0px",
                 }}
               >
                 <Button

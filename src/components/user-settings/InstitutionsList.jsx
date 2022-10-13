@@ -4,7 +4,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
 import { Button, Card, Input, Layout, List, Modal } from "antd";
-import RegisterInstitution from "./RegisterInstitution";
+import InstitutionRegister from "./InstitutionRegister";
 
 const { Content } = Layout;
 const { Search } = Input;
@@ -19,12 +19,10 @@ export default function InstitutionList() {
   const loading = useStoreState((state) => state.adm.loading);
   const instituicoes = useStoreState((state) => state.adm.instituicoes);
 
-  const [editandoInstituicao, setEditandoInstituicao] = useState({});
+  const [editandoInstituicao, setEditandoInstituicao] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      await getInstituicoes();
-    })();
+    getInstituicoes();
   }, [getInstituicoes]);
 
   return (
@@ -62,7 +60,7 @@ export default function InstitutionList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
-                    setEditandoInstituicao({});
+                    setEditandoInstituicao(null);
                     setRegisterVisible(true);
                   }}
                 >
@@ -103,7 +101,11 @@ export default function InstitutionList() {
             />
           </Card>
           <Modal
-            title={"Cadastrar Instituição"}
+            title={
+              editandoInstituicao === null
+                ? "Cadastrar Instituição"
+                : "Editar Instituição"
+            }
             visible={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
@@ -124,7 +126,13 @@ export default function InstitutionList() {
               </Button>,
             ]}
           >
-            <RegisterInstitution instituicao={editandoInstituicao} />
+            <InstitutionRegister
+              instituicao={editandoInstituicao}
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getInstituicoes();
+              }}
+            />
           </Modal>
         </Content>
       </Layout>

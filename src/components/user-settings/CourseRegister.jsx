@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerCourseSchema } from "../../schemas/registers/registerCourseSchema";
+import { registerCourseSchema } from "../../schemas/registers/registersSchema";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import {
@@ -17,8 +17,8 @@ import {
 
 const { Content } = Layout;
 
-export default function RegisterCourse(props) {
-  const { curso = {} } = props;
+export default function CourseRegister(props) {
+  const { curso = {}, actionVisible } = props;
 
   const registerNewCourse = useStoreActions(
     (actions) => actions.adm.registerNewCourse
@@ -59,6 +59,7 @@ export default function RegisterCourse(props) {
         notification.success({
           message: "Curso alterado com sucesso!",
         });
+        actionVisible();
       }
     } else {
       const newCourse = await registerNewCourse(values);
@@ -72,6 +73,7 @@ export default function RegisterCourse(props) {
           message: "Curso cadastrado com sucesso!",
         });
         register.reset();
+        actionVisible();
       }
     }
   };
@@ -285,7 +287,7 @@ export default function RegisterCourse(props) {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "15px",
+                  margin: "15px 0px",
                 }}
               >
                 <Button

@@ -8,7 +8,7 @@ import TemasList from "../components/user-settings/TemasList";
 import UsersList from "../components/user-settings/UsersList";
 import CoursesList from "../components/user-settings/CoursesList";
 import SubtemasList from "../components/user-settings/SubtemasList";
-import ListCategComp from "../components/user-settings/ListCategComp";
+import CategCompList from "../components/user-settings/CategCompList";
 import UpdatePassword from "../components/user-settings/UpdatePassword";
 import InstitutionList from "../components/user-settings/InstitutionsList";
 
@@ -32,7 +32,7 @@ export default function SettingsPage() {
     <UsersList key={"users-list"} />,
     <CoursesList key={"courses-list"} />,
     <InstitutionList key={"institution-list"} />,
-    <ListCategComp key={"categ-comp-list"} />,
+    <CategCompList key={"categ-comp-list"} />,
     <CompList key={"comp-list"} />,
     <TemasList key={"temas-list"} />,
     <SubtemasList key={"subtemas-list"} />,

@@ -2,13 +2,15 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { registerThemeSchema } from "../../schemas/registers/registerThemeSchema";
+import { registerThemeSchema } from "../../schemas/registers/registersSchema";
 
 import { Button, Card, Form, Input, Layout, notification } from "antd";
 
 const { Content } = Layout;
 
-export default function TemasRegister() {
+export default function TemasRegister(props) {
+  const { actionVisible } = props;
+
   const registerTheme = useStoreActions((actions) => actions.adm.registerTheme);
   const loading = useStoreState((state) => state.adm.loading);
 
@@ -37,6 +39,7 @@ export default function TemasRegister() {
         message: "Tema cadastrado com sucesso!",
       });
       register.reset();
+      actionVisible();
     }
   };
 
@@ -80,7 +83,7 @@ export default function TemasRegister() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "15px",
+                  margin: "15px 0px",
                 }}
               >
                 <Button

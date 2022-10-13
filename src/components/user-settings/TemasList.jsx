@@ -18,9 +18,7 @@ export default function TemasList() {
   const themes = useStoreState((state) => state.adm.themes);
 
   useEffect(() => {
-    (async () => {
-      await getThemes();
-    })();
+    getThemes();
   }, [getThemes]);
 
   return (
@@ -84,7 +82,7 @@ export default function TemasList() {
           </Card>
           <Modal
             title={"Cadastrar Tema"}
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getThemes();
@@ -104,7 +102,12 @@ export default function TemasList() {
               </Button>,
             ]}
           >
-            <TemasRegister />
+            <TemasRegister
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getThemes();
+              }}
+            />
           </Modal>
         </Content>
       </Layout>

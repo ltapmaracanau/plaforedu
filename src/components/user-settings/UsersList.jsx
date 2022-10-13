@@ -4,57 +4,44 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
 import { Button, Card, Input, Layout, List, Modal, Tag } from "antd";
-import RegisterUser from "./RegisterUser";
-import EditUser from "./EditUser";
+import UserRegister from "./UserRegister";
+import UserUpdate from "./UserUpdate";
 
 const { Content } = Layout;
 const { Search } = Input;
 
 const userStatusRefactor = (status) => {
-  switch (status) {
-    case "PENDING":
-      return "PENDENTE";
-    case "ACTIVE":
-      return "ATIVO";
-    case "FILED":
-      return "ARQUIVADO";
-    case "BLOCKED":
-      return "BLOQUEADO";
-    default:
-      return "ATIVO";
-  }
+  const options = {
+    PENDING: "PENDENTE",
+    ACTIVE: "ATIVO",
+    FILED: "ARQUIVADO",
+    BLOCKED: "BLOQUEADO",
+  };
+  return options[status] || options.ACTIVE;
+};
+
+const colorStatus = (status) => {
+  const options = {
+    PENDING: "#ffe000",
+    ACTIVE: "#87d068",
+    FILED: "#2db7f5",
+    BLOCKED: "#f50",
+  };
+  return options[status] || options.FILED;
 };
 
 export default function UsersList() {
   const getUsers = useStoreActions((actions) => actions.adm.getUsers);
 
-  const [registerVisible, setRegisterVisible] = useState(false);
-
   const loading = useStoreState((state) => state.adm.loading);
   const users = useStoreState((state) => state.adm.users);
 
+  const [registerVisible, setRegisterVisible] = useState(false);
   const [editandoUsuario, setEditandoUsuario] = useState({});
   const [editVisible, setEditVisible] = useState(false);
 
-  const colorStatus = (status) => {
-    switch (status) {
-      case "PENDING":
-        return "#ffe000";
-      case "ACTIVE":
-        return "#87d068";
-      case "FILED":
-        return "#2db7f5";
-      case "BLOCKED":
-        return "#f50";
-      default:
-        return "#2db7f5";
-    }
-  };
-
   useEffect(() => {
-    (async () => {
-      await getUsers();
-    })();
+    getUsers();
   }, [getUsers]);
 
   return (
@@ -156,7 +143,12 @@ export default function UsersList() {
               </Button>,
             ]}
           >
-            <RegisterUser />
+            <UserRegister
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getUsers();
+              }}
+            />
           </Modal>
           <Modal
             title={"Editar usuário"}
@@ -181,7 +173,13 @@ export default function UsersList() {
               </Button>,
             ]}
           >
-            <EditUser id={editandoUsuario.id} />
+            <UserUpdate
+              id={editandoUsuario.id}
+              actionVisible={() => {
+                setEditVisible(false);
+                getUsers();
+              }}
+            />
           </Modal>
         </Content>
       </Layout>
