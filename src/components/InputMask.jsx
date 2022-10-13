@@ -4,19 +4,20 @@ import ReactInputMask from "react-input-mask";
 import PropTypes from "prop-types";
 
 const InputMask = forwardRef((props, ref) => {
+  const { disabled } = props;
   return (
     <ReactInputMask {...props}>
       {(inputProps) => (
         <Input
           {...inputProps}
           ref={ref}
-          disabled={props.disabled ? props.disabled : null}
+          disabled={disabled ? disabled : null}
         />
       )}
     </ReactInputMask>
   );
 });
-
+InputMask.displayName = "InputMask";
 InputMask.propTypes = {
   mask: PropTypes.string,
   maskChar: PropTypes.string,

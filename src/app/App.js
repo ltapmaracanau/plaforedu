@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import "antd/dist/antd.css";
 import "./App.less";
 
@@ -12,8 +12,7 @@ import CustomRoutes from "../routes/routes";
 import { useStoreActions } from "easy-peasy";
 
 function App() {
-
-  const init = useStoreActions(actions => actions.adm.init)
+  const init = useStoreActions((actions) => actions.adm.init);
 
   var s = document.createElement("script");
   s.setAttribute("data-account", "yPtwRHQcX8");
@@ -21,8 +20,8 @@ function App() {
   document.body.appendChild(s);
 
   useEffect(() => {
-    init()
-  }, [init])
+    init();
+  }, [init]);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>

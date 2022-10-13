@@ -80,6 +80,7 @@ export default function InstitutionList() {
                   <List.Item
                     actions={[
                       <Button
+                        key={item.id}
                         onClick={() => {
                           setEditandoInstituicao(item);
                           setRegisterVisible(true);

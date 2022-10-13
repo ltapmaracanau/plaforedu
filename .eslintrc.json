@@ -1,0 +1,18 @@
+{
+  "env": {
+    "es6": false,
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": ["plugin:react/recommended", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/prop-types": "off"
+  }
+}

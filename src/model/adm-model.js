@@ -1,5 +1,5 @@
 import { action, computed, thunk } from "easy-peasy";
-import { authAxios } from "../services/authAxios";
+import AuthAxios from "../services/AuthAxios";
 import {
   login,
   forgetPassword,
@@ -34,7 +34,6 @@ import {
 } from "../services/dataService";
 
 const admModel = {
-
   tipoVisualizacao: false, // false: grafo, true: lista
   filterCollapsed: true, // true: filter escondido, false: filter visível
   loading: false,
@@ -59,307 +58,308 @@ const admModel = {
   isAdm: computed((state) => state.user.roles?.includes("ADMINISTRADOR")),
 
   init: thunk(async (actions, _) => {
-    actions.setIniciando(true)
-    const user = JSON.parse(localStorage.getItem('user'))
-    const token = localStorage.getItem('token')
+    actions.setIniciando(true);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("token");
     if (user && token) {
-      authAxios.defaults.headers.Authorization = `Bearer ${token}`;
+      AuthAxios.defaults.headers.Authorization = `Bearer ${token}`;
       const myUser = await getMyProfile();
 
-      user.status = myUser.status
+      user.status = myUser.status;
 
-      actions.setUser(user)
-      actions.setIsAuthenticated(true)
+      actions.setUser(user);
+      actions.setIsAuthenticated(true);
 
       if (myUser.error) {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
-        authAxios.defaults.headers.Authorization = undefined;
-        actions.setIsAuthenticated(false)
-        actions.setUser({})
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        AuthAxios.defaults.headers.Authorization = undefined;
+        actions.setIsAuthenticated(false);
+        actions.setUser({});
       }
-
     }
-    actions.setIniciando(false)
-
+    actions.setIniciando(false);
   }),
 
   // POSTS
 
   login: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const authentication = await login({ username: payload.username, password: payload.password })
+    actions.setLoading(true);
+    const authentication = await login({
+      username: payload.username,
+      password: payload.password,
+    });
     if (authentication.token) {
-      actions.setUser(authentication.user)
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
-      localStorage.setItem('token', authentication.token)
-      localStorage.setItem('user', JSON.stringify(authentication.user))
-      authAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
-      actions.setIsAuthenticated(true)
+      actions.setUser(authentication.user);
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.setItem("token", authentication.token);
+      localStorage.setItem("user", JSON.stringify(authentication.user));
+      AuthAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
+      actions.setIsAuthenticated(true);
     }
-    actions.setLoading(false)
-    return (authentication)
+    actions.setLoading(false);
+    return authentication;
   }),
 
   registerNewUser: thunk(async (actions, payload = { id: "" }) => {
-    actions.setLoading(true)
-    const newUser = await createUser({ ...payload })
-    actions.setLoading(false)
-    return (newUser)
+    actions.setLoading(true);
+    const newUser = await createUser({ ...payload });
+    actions.setLoading(false);
+    return newUser;
   }),
 
   registerNewCourse: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const newCourse = await registerCourse({ ...payload })
-    actions.setLoading(false)
-    return (newCourse)
-    //return { error: true, message: "Não conectado ao back!" }
+    actions.setLoading(true);
+    const newCourse = await registerCourse({ ...payload });
+    actions.setLoading(false);
+    return newCourse;
+    // return { error: true, message: "Não conectado ao back!" }
   }),
 
   registerNewInstitution: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const newInstitution = await registerInstitution({ ...payload })
-    actions.setLoading(false)
-    return (newInstitution)
+    actions.setLoading(true);
+    const newInstitution = await registerInstitution({ ...payload });
+    actions.setLoading(false);
+    return newInstitution;
     //return { error: true, message: "Não conectado ao back!" }
   }),
 
   registerCatComp: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const newCat = await registerCatComp({ ...payload })
-    actions.setLoading(false)
-    return (newCat)
+    actions.setLoading(true);
+    const newCat = await registerCatComp({ ...payload });
+    actions.setLoading(false);
+    return newCat;
     // return { error: true, message: "Não conectado ao back!" }
   }),
 
   registerComp: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const newComp = await registerComp({ ...payload })
-    actions.setLoading(false)
-    return (newComp)
+    actions.setLoading(true);
+    const newComp = await registerComp({ ...payload });
+    actions.setLoading(false);
+    return newComp;
     // return { error: true, message: "Não conectado ao back!" }
   }),
 
   registerTheme: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const theme = await registerTheme({ ...payload })
-    actions.setLoading(false)
-    return (theme)
+    actions.setLoading(true);
+    const theme = await registerTheme({ ...payload });
+    actions.setLoading(false);
+    return theme;
     // return { error: true, message: "Não conectado ao back!" }
   }),
 
   registerSubtheme: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const subtheme = await registerSubtheme({ ...payload })
-    actions.setLoading(false)
-    return (subtheme)
+    actions.setLoading(true);
+    const subtheme = await registerSubtheme({ ...payload });
+    actions.setLoading(false);
+    return subtheme;
     // return { error: true, message: "Não conectado ao back!" }
   }),
 
   forgetPassword: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const tryForgetPassword = await forgetPassword({ username: payload.username })
-    actions.setLoading(false)
-    return (tryForgetPassword)
+    actions.setLoading(true);
+    const tryForgetPassword = await forgetPassword({
+      username: payload.username,
+    });
+    actions.setLoading(false);
+    return tryForgetPassword;
   }),
 
   resendCredentials: thunk(async (actions, payload) => {
-    actions.setLoadingSecondary(true)
-    const tryResendCredentials = await resendCredentials({ ...payload })
-    actions.setLoadingSecondary(false)
-    return (tryResendCredentials)
+    actions.setLoadingSecondary(true);
+    const tryResendCredentials = await resendCredentials({ ...payload });
+    actions.setLoadingSecondary(false);
+    return tryResendCredentials;
   }),
 
   resetPassword: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const tryResetPassword = await resetPassword({ token: payload.token, password: payload.password })
-    actions.setLoading(false)
-    return (tryResetPassword)
+    actions.setLoading(true);
+    const tryResetPassword = await resetPassword({
+      token: payload.token,
+      password: payload.password,
+    });
+    actions.setLoading(false);
+    return tryResetPassword;
   }),
 
   // PUTS
 
   updateUser: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const tryUpdateUser = await updateUser({ ...payload })
-    actions.setLoading(false)
-    return (tryUpdateUser)
+    actions.setLoading(true);
+    const tryUpdateUser = await updateUser({ ...payload });
+    actions.setLoading(false);
+    return tryUpdateUser;
   }),
 
   blockUser: thunk(async (actions, payload = { id: "" }) => {
-    actions.setLoading(true)
-    const tryBlockUser = await blockUser({ id: payload.id })
-    actions.setLoading(false)
-    return (tryBlockUser)
+    actions.setLoading(true);
+    const tryBlockUser = await blockUser({ id: payload.id });
+    actions.setLoading(false);
+    return tryBlockUser;
   }),
 
   archiveUser: thunk(async (actions, payload = { id: "" }) => {
-    actions.setLoading(true)
-    const tryArchiveUser = await archiveUser({ id: payload.id })
-    actions.setLoading(false)
-    return (tryArchiveUser)
+    actions.setLoading(true);
+    const tryArchiveUser = await archiveUser({ id: payload.id });
+    actions.setLoading(false);
+    return tryArchiveUser;
   }),
 
   activeUser: thunk(async (actions, payload = { id: "" }) => {
-    actions.setLoading(true)
-    const tryActiveUser = await activeUser({ id: payload.id })
-    actions.setLoading(false)
-    return (tryActiveUser)
+    actions.setLoading(true);
+    const tryActiveUser = await activeUser({ id: payload.id });
+    actions.setLoading(false);
+    return tryActiveUser;
   }),
 
   updateCourse: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const tryUpdateCourse = await updateCourse({ ...payload })
-    actions.setLoading(false)
-    return (tryUpdateCourse)
+    actions.setLoading(true);
+    const tryUpdateCourse = await updateCourse({ ...payload });
+    actions.setLoading(false);
+    return tryUpdateCourse;
     //return { error: true, message: "Não conectado ao back!" }
   }),
 
   updateInstitution: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const tryUpdateInstitution = await updateInstitution({ ...payload })
-    actions.setLoading(false)
-    return (tryUpdateInstitution)
+    actions.setLoading(true);
+    const tryUpdateInstitution = await updateInstitution({ ...payload });
+    actions.setLoading(false);
+    return tryUpdateInstitution;
     //return { error: true, message: "Não conectado ao back!" }
   }),
 
   updatePassword: thunk(async (actions, payload) => {
-    actions.setLoading(true)
-    const tryUpdatePassword = await updatePassword({ ...payload })
+    actions.setLoading(true);
+    const tryUpdatePassword = await updatePassword({ ...payload });
     await getMyProfile().then((result) => {
       if (!result.error) {
-        actions.setUserStatus(result.status)
+        actions.setUserStatus(result.status);
       }
-    })
-    actions.setLoading(false)
-    return (tryUpdatePassword)
+    });
+    actions.setLoading(false);
+    return tryUpdatePassword;
   }),
 
   // ELSE
 
   logout: thunk(async (actions, _) => {
-    actions.setLoading(true)
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    authAxios.defaults.headers.Authorization = undefined;
-    actions.setIsAuthenticated(false)
-    actions.setUser({})
-    actions.setLoading(false)
+    actions.setLoading(true);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    AuthAxios.defaults.headers.Authorization = undefined;
+    actions.setIsAuthenticated(false);
+    actions.setUser({});
+    actions.setLoading(false);
   }),
 
   // Getters
 
   getItinerarios: thunk(async (actions, _) => {
-    actions.setLoading(true)
+    actions.setLoading(true);
     const itinerarios = await getItinerarios();
     if (itinerarios?.length > 0) {
-      actions.setItinerarios(itinerarios)
+      actions.setItinerarios(itinerarios);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getRoles: thunk(async (actions, _) => {
-    actions.setLoading(true)
-    const roles = await getRoles()
+    actions.setLoading(true);
+    const roles = await getRoles();
     if (roles?.length > 0) {
-      actions.setRoles(roles)
+      actions.setRoles(roles);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getAcessibilidades: thunk(async (actions, _) => {
-    actions.setLoading(true)
+    actions.setLoading(true);
     const itinerarios = await getAcessibilidades();
     if (itinerarios?.length > 0) {
-      actions.setAcessibilidades(itinerarios)
+      actions.setAcessibilidades(itinerarios);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getInstituicoes: thunk(async (actions, payload = { query: "" }) => {
-
-    actions.setLoading(true)
+    actions.setLoading(true);
     const instituicoes = await getInstituicoes({ query: payload.query });
     if (instituicoes?.length >= 0) {
-      actions.setInstituicoes(instituicoes)
+      actions.setInstituicoes(instituicoes);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getComp: thunk(async (actions, payload = { query: "" }) => {
-
-    actions.setLoading(true)
+    actions.setLoading(true);
     const competencias = await getCompetencias({ query: payload.query });
     if (competencias?.length >= 0) {
-      actions.setCompetencias(competencias)
+      actions.setCompetencias(competencias);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getCatComp: thunk(async (actions, payload = { query: "" }) => {
-
-    actions.setLoading(true)
+    actions.setLoading(true);
     const catComp = await getCatComp({ query: payload.query });
     if (catComp?.length >= 0) {
-      actions.setCatComp(catComp)
+      actions.setCatComp(catComp);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getThemes: thunk(async (actions, payload = { query: "" }) => {
-
-    actions.setLoading(true)
+    actions.setLoading(true);
     const themes = await getThemes({ query: payload.query });
     if (themes?.length >= 0) {
-      actions.setThemes(themes)
+      actions.setThemes(themes);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getSubthemes: thunk(async (actions, payload = { query: "" }) => {
-
-    actions.setLoading(true)
+    actions.setLoading(true);
     const subthemes = await getSubthemes({ query: payload.query });
     if (subthemes?.length >= 0) {
-      actions.setSubthemes(subthemes)
+      actions.setSubthemes(subthemes);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getCursos: thunk(async (actions, payload = { query: "" }) => {
-    actions.setLoading(true)
+    actions.setLoading(true);
     const cursos = await getCursos({ query: payload.query });
     if (cursos?.length >= 0) {
-      actions.setCursos(cursos)
+      actions.setCursos(cursos);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getUsers: thunk(async (actions, payload = { query: "" }) => {
-    actions.setLoading(true)
+    actions.setLoading(true);
     const users = await getUsers({ query: payload.query });
     if (users?.length >= 0) {
-      actions.setUsers(users)
+      actions.setUsers(users);
     }
-    actions.setLoading(false)
+    actions.setLoading(false);
   }),
 
   getUniqueUser: thunk(async (actions, payload = { id: "" }) => {
     const user = await getUniqueUser({ id: payload.id });
     if (user) {
-      return (user)
+      return user;
     }
   }),
 
   getMyProfile: thunk(async (actions, _) => {
-    actions.setLoading(true)
+    actions.setLoading(true);
     const myProfile = await getMyProfile();
     if (!myProfile.error) {
-      actions.setMyProfile(myProfile)
+      actions.setMyProfile(myProfile);
     }
-    actions.setLoading(false)
-    return (myProfile)
+    actions.setLoading(false);
+    return myProfile;
   }),
 
   // Setters

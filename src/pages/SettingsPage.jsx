@@ -8,7 +8,7 @@ import TemasList from "../components/user-settings/TemasList";
 import UsersList from "../components/user-settings/UsersList";
 import CoursesList from "../components/user-settings/CoursesList";
 import SubtemasList from "../components/user-settings/SubtemasList";
-import CategCompList from "../components/user-settings/CategCompList";
+import ListCategComp from "../components/user-settings/ListCategComp";
 import UpdatePassword from "../components/user-settings/UpdatePassword";
 import InstitutionList from "../components/user-settings/InstitutionsList";
 
@@ -27,15 +27,15 @@ export default function SettingsPage() {
   const isAdm = useStoreState((state) => state.adm.isAdm);
 
   const contentArray = [
-    <MyProfile />,
-    <UpdatePassword />,
-    <UsersList />,
-    <CoursesList />,
-    <InstitutionList />,
-    <CategCompList />,
-    <CompList />,
-    <TemasList />,
-    <SubtemasList />,
+    <MyProfile key={"my-profile"} />,
+    <UpdatePassword key={"my-password"} />,
+    <UsersList key={"users-list"} />,
+    <CoursesList key={"courses-list"} />,
+    <InstitutionList key={"institution-list"} />,
+    <ListCategComp key={"categ-comp-list"} />,
+    <CompList key={"comp-list"} />,
+    <TemasList key={"temas-list"} />,
+    <SubtemasList key={"subtemas-list"} />,
   ];
 
   const [index, setIndex] = useState(0);

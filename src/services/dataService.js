@@ -1,466 +1,536 @@
-import { authAxios } from "./authAxios"
+import AuthAxios from "./AuthAxios";
 
-export const login = (payload = { username: "", password: "" }) => new Promise(async (resolve, reject) => {
-
-  await authAxios.post('/sessions', {
-    "email": payload.username,
-    "password": payload.password
+export const login = (payload = { username: "", password: "" }) =>
+  AuthAxios.post("/sessions", {
+    email: payload.username,
+    password: payload.password,
   })
-    .then((response) => {
-      resolve(response.data)
+    .then((response) => response.data)
+    .catch((error) => ({
+      error: true,
+      message: error.response.data
+        ? error.response.data.message
+        : "Usuário e/ou senha incorretos!",
+    }));
+
+export const createUser = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/users/new", {
+      cpf: payload.cpf,
+      email: payload.email,
+      institution: payload.institution,
+      name: payload.name,
+      phone: payload.phone,
+      roles: payload.roles,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Usuário e/ou senha incorretos!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const createUser = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.post('/users/new', {
-    "cpf": payload.cpf,
-    "email": payload.email,
-    "institution": payload.institution,
-    "name": payload.name,
-    "phone": payload.phone,
-    "roles": payload.roles
-  })
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const resendCredentials = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.post(`/users/${payload.id}/resend-credentials`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const resendCredentials = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.post(`/users/${payload.id}/resend-credentials`)
-    .then((response) => {
-      resolve(response.data)
+export const updateUser = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.put(`/profile/${payload.id}/update`, {
+      cpf: payload.cpf,
+      email: payload.email,
+      institution: payload.institution,
+      name: payload.name,
+      phone: payload.phone,
+      roles: payload.roles,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const updateUser = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.put(`/profile/${payload.id}/update`, {
-    "cpf": payload.cpf,
-    "email": payload.email,
-    "institution": payload.institution,
-    "name": payload.name,
-    "phone": payload.phone,
-    "roles": payload.roles
-  })
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const blockUser = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.patch(`/users/${payload.id}/block`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const blockUser = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.patch(`/users/${payload.id}/block`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const archiveUser = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.patch(`/users/${payload.id}/archive`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const archiveUser = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.patch(`/users/${payload.id}/archive`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const activeUser = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.patch(`/users/${payload.id}/active`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const activeUser = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.patch(`/users/${payload.id}/active`)
-    .then((response) => {
-      resolve(response.data)
+export const registerCourse = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/courses/new", {
+      name: payload.name,
+      description: payload.description,
+      hours: payload.hours,
+      link: payload.link,
+      institutionId: payload.institutionId,
+      accessibilities: payload.accessibilities,
+      itineraries: payload.itineraries,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const registerCourse = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.post('/courses/new', {
-    "name": payload.name,
-    "description": payload.description,
-    "hours": payload.hours,
-    "link": payload.link,
-    "institutionId": payload.institutionId,
-    "accessibilities": payload.accessibilities,
-    "itineraries": payload.itineraries
-  })
-    .then((response) => {
-      resolve(response.data)
+export const registerCatComp = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/competencies-category/new", {
+      name: payload.name,
+      description: payload.description,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const registerCatComp = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.post('/competencies-category/new', {
-    "name": payload.name,
-    "description": payload.description
-  })
-    .then((response) => {
-      resolve(response.data)
+export const registerComp = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/competencies/new", {
+      name: payload.name,
+      competenciesCategoryIds: payload.competenciesCategoryIds,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const registerComp = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.post('/competencies/new', {
-    "name": payload.name,
-    "competenciesCategoryIds": payload.competenciesCategoryIds
-  })
-    .then((response) => {
-      resolve(response.data)
+export const registerTheme = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/themes/new", {
+      name: payload.name,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const registerTheme = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.post('/themes/new', {
-    "name": payload.name
-  })
-    .then((response) => {
-      resolve(response.data)
+export const registerSubtheme = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/sub-themes/new", {
+      name: payload.name,
+      themeIds: payload.themeIds,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const registerSubtheme = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.post('/sub-themes/new', {
-    "name": payload.name,
-    "themeIds": payload.themeIds
-  })
-    .then((response) => {
-      resolve(response.data)
+export const updateCourse = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.put(`/courses/${payload.id}/update`, {
+      name: payload.name,
+      description: payload.description,
+      hours: payload.hours,
+      link: payload.link,
+      institutionId: payload.institutionId,
+      accessibilities: payload.accessibilities,
+      itineraries: payload.itineraries,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then(() => {
+        resolve({});
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const updateCourse = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.put(`/courses/${payload.id}/update`, {
-    "name": payload.name,
-    "description": payload.description,
-    "hours": payload.hours,
-    "link": payload.link,
-    "institutionId": payload.institutionId,
-    "accessibilities": payload.accessibilities,
-    "itineraries": payload.itineraries
-  })
-    .then((response) => {
-      resolve({})
+export const registerInstitution = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/institutions/new", {
+      name: payload.name,
+      abbreviation: payload.abbreviation,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const registerInstitution = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.post('/institutions/new', {
-    "name": payload.name,
-    "abbreviation": payload.abbreviation
-  })
-    .then((response) => {
-      resolve(response.data)
+export const updateInstitution = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.put(`/institutions/${payload.id}/update`, {
+      name: payload.name,
+      abbreviation: payload.abbreviation,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then(() => {
+        resolve({});
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const updateInstitution = (payload) => new Promise(async (resolve, reject) => {
-  await authAxios.put(`/institutions/${payload.id}/update`, {
-    "name": payload.name,
-    "abbreviation": payload.abbreviation
-  })
-    .then((response) => {
-      resolve({})
+export const forgetPassword = (payload = { username: "" }) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/password/forgot", {
+      email: payload.username,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const forgetPassword = (payload = { username: "" }) => new Promise(async (resolve, reject) => {
-
-  await authAxios.post('/password/forgot', {
-    "email": payload.username
-  })
-    .then((response) => {
-      resolve(response.data)
+export const resetPassword = (payload = { token: "", password: "" }) =>
+  new Promise((resolve) => {
+    AuthAxios.post("/password/reset", {
+      token: payload.token,
+      password: payload.password,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const resetPassword = (payload = { token: "", password: "" }) => new Promise(async (resolve, reject) => {
-
-  await authAxios.post('/password/reset', {
-    "token": payload.token,
-    "password": payload.password
-  })
-    .then((response) => {
-      resolve(response.data)
+export const updatePassword = (
+  payload = { oldPassword: "", newPassword: "" }
+) =>
+  new Promise((resolve) => {
+    AuthAxios.patch("/password/update", {
+      oldPassword: payload.oldPassword,
+      newPassword: payload.newPassword,
     })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const updatePassword = (payload = { oldPassword: "", newPassword: "" }) => new Promise(async (resolve, reject) => {
-
-  await authAxios.patch('/password/update', {
-    "oldPassword": payload.oldPassword,
-    "newPassword": payload.newPassword
-  })
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getRoles = () =>
+  new Promise((resolve) => {
+    AuthAxios.get("/roles/list")
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const getRoles = () => new Promise(async (resolve, reject) => {
-
-  await authAxios.get('/roles/list')
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getItinerarios = () =>
+  new Promise((resolve) => {
+    AuthAxios.get("/itineraries/list")
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const getItinerarios = () => new Promise(async (resolve, reject) => {
-
-  await authAxios.get('/itineraries/list')
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getAcessibilidades = () =>
+  new Promise((resolve) => {
+    AuthAxios.get("/accessibilities/list")
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const getAcessibilidades = () => new Promise(async (resolve, reject) => {
-
-  await authAxios.get('/accessibilities/list')
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getInstituicoes = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.get(`/institutions/all?search=${payload.query}`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const getInstituicoes = (payload) => new Promise(async (resolve, reject) => {
-
-  await authAxios.get(`/institutions/all?search=${payload.query}`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getThemes = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.get(`/themes/list?search=${payload.query}`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
-
-export const getThemes = (payload) => new Promise(async (resolve, reject) => {
-
-  await authAxios.get(`/themes/list?search=${payload.query}`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
+export const getSubthemes = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.get(`/sub-themes/list?search=${payload.query}`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
-export const getSubthemes = (payload) => new Promise(async (resolve, reject) => {
-
-  await authAxios.get(`/sub-themes/list?search=${payload.query}`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
+export const getCompetencias = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.get(`/competencies/list?search=${payload.query}`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
-export const getCompetencias = (payload) => new Promise(async (resolve, reject) => {
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-  await authAxios.get(`/competencies/list?search=${payload.query}`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getCatComp = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.get(`/competencies-category/list?search=${payload.query}`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const getCatComp = (payload) => new Promise(async (resolve, reject) => {
-
-  await authAxios.get(`/competencies-category/list?search=${payload.query}`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getCursos = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.get(`/courses/all?search=${payload.query}`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const getCursos = (payload) => new Promise(async (resolve, reject) => {
-
-  await authAxios.get(`/courses/all?search=${payload.query}`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getUsers = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.get(`/users/all?search=${payload.query}`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const getUsers = (payload) => new Promise(async (resolve, reject) => {
-
-  await authAxios.get(`/users/all?search=${payload.query}`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getUniqueUser = (payload) =>
+  new Promise((resolve) => {
+    AuthAxios.get(`/profile/${payload.id}`)
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
-export const getUniqueUser = (payload) => new Promise(async (resolve, reject) => {
-
-  await authAxios.get(`/profile/${payload.id}`)
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
+export const getMyProfile = () =>
+  new Promise((resolve) => {
+    AuthAxios.get("/profile/me")
+      .then((response) => {
+        resolve(response.data);
       })
-    })
-})
-
-export const getMyProfile = () => new Promise(async (resolve, reject) => {
-
-  await authAxios.get('/profile/me')
-    .then((response) => {
-      resolve(response.data)
-    })
-    .catch((error) => {
-      resolve({
-        error: true,
-        message: error.response.data ? error.response.data.message : "Algo deu errado!"
-      })
-    })
-})
+      .catch((error) => {
+        resolve({
+          error: true,
+          message: error.response.data
+            ? error.response.data.message
+            : "Algo deu errado!",
+        });
+      });
+  });
 
 export const cursosDefault = [
   {

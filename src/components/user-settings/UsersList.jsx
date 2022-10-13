@@ -108,10 +108,11 @@ export default function UsersList() {
                 return (
                   <List.Item
                     actions={[
-                      <Tag color={colorStatus(item.status)}>
+                      <Tag key={item.id} color={colorStatus(item.status)}>
                         {userStatusRefactor(item.status)}
                       </Tag>,
                       <Button
+                        key={item.id}
                         onClick={() => {
                           setEditandoUsuario(item);
                           setEditVisible(true);

@@ -9,7 +9,7 @@ import RegisterCatComp from "./RegisterCatComp";
 const { Content } = Layout;
 const { Search } = Input;
 
-export default function CategCompList() {
+export default function ListCategComp() {
   const getCatComp = useStoreActions((actions) => actions.adm.getCatComp);
 
   const [registerVisible, setRegisterVisible] = useState(false);

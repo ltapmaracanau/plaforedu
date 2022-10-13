@@ -80,6 +80,7 @@ export default function CoursesList() {
                   <List.Item
                     actions={[
                       <Button
+                        key={item.id}
                         onClick={() => {
                           setEditandoCurso(item);
                           setModalText("Alterar Curso");

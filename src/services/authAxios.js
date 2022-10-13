@@ -1,8 +1,7 @@
+import axios from "axios";
 
-import axios from "axios"
+const AuthAxios = axios.create({
+  baseURL: "http://localhost:3333",
+});
 
-const authAxios = axios.create({
-    baseURL: 'http://localhost:3333'
-})
-
-export { authAxios }
+export default AuthAxios;
