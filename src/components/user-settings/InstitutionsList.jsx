@@ -48,6 +48,7 @@ export default function InstitutionList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
                     getInstituicoes({ query: e });
                   }}
@@ -106,7 +107,7 @@ export default function InstitutionList() {
                 ? "Cadastrar Instituição"
                 : "Editar Instituição"
             }
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getInstituicoes();

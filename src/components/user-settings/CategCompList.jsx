@@ -44,6 +44,7 @@ export default function CategCompList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
                     getCatComp({ query: e });
                   }}

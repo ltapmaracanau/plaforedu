@@ -13,6 +13,7 @@ import {
   Layout,
   notification,
   Select,
+  Skeleton,
 } from "antd";
 
 const { Content } = Layout;
@@ -24,11 +25,7 @@ export default function CourseRegister(props) {
     (actions) => actions.adm.registerNewCourse
   );
   const updateCourse = useStoreActions((actions) => actions.adm.updateCourse);
-  const getItinerarios = useStoreActions((state) => state.adm.getItinerarios);
-  const getInstituicoes = useStoreActions((state) => state.adm.getInstituicoes);
-  const getAcessibilidades = useStoreActions(
-    (state) => state.adm.getAcessibilidades
-  );
+
   const loading = useStoreState((state) => state.adm.loading);
   const itinerarios = useStoreState((state) => state.adm.itinerarios);
   const acessibilidades = useStoreState((state) => state.adm.acessibilidades);
@@ -77,14 +74,6 @@ export default function CourseRegister(props) {
       }
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      await getItinerarios();
-      await getAcessibilidades();
-      await getInstituicoes();
-    })();
-  }, [getItinerarios, getAcessibilidades, getInstituicoes]);
 
   return (
     <>
@@ -155,7 +144,6 @@ export default function CourseRegister(props) {
                       hasFeedback
                     >
                       <Select
-                        loading={loading}
                         showSearch
                         placeholder="Instituição"
                         filterOption={(input, option) => {
@@ -226,7 +214,6 @@ export default function CourseRegister(props) {
                       <Select
                         mode="multiple"
                         showSearch
-                        loading={loading}
                         placeholder="Acessibilidades"
                         filterOption={(input, option) => {
                           return (
@@ -261,7 +248,6 @@ export default function CourseRegister(props) {
                     >
                       <Select
                         mode="multiple"
-                        loading={loading}
                         showSearch
                         placeholder="Itinerários"
                         {...field}

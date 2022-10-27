@@ -38,7 +38,7 @@ const admModel = {
   filterCollapsed: true, // true: filter escondido, false: filter visível
   loading: false,
   loadingSecondary: false,
-  iniciando: false,
+  iniciando: true,
   roles: [],
   itinerarios: [],
   acessibilidades: [],
@@ -50,33 +50,29 @@ const admModel = {
   cursos: [],
   users: [],
 
-  isAuthenticated: false,
+  isAuthenticated: true,
 
-  user: {},
   myProfile: {},
 
-  isAdm: computed((state) => state.user.roles?.includes("ADMINISTRADOR")),
+  isAdm: computed((state) =>
+    state.myProfile.UsersRoles?.some(
+      (item) => item.role.name === "ADMINISTRADOR"
+    )
+  ),
 
   init: thunk(async (actions, _) => {
-    actions.setIniciando(true);
-    const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
-    if (user && token) {
+    if (token) {
       AuthAxios.defaults.headers.Authorization = `Bearer ${token}`;
-      const myUser = await getMyProfile();
-
-      user.status = myUser.status;
-
-      actions.setUser(user);
-      actions.setIsAuthenticated(true);
-
-      if (myUser.error) {
+      try {
+        const myUser = await getMyProfile();
+        actions.setMyProfile(myUser);
+      } catch (error) {
         localStorage.removeItem("token");
-        localStorage.removeItem("user");
         AuthAxios.defaults.headers.Authorization = undefined;
-        actions.setIsAuthenticated(false);
-        actions.setUser({});
       }
+    } else {
+      actions.setIsAuthenticated(false);
     }
     actions.setIniciando(false);
   }),
@@ -90,11 +86,9 @@ const admModel = {
       password: payload.password,
     });
     if (authentication.token) {
-      actions.setUser(authentication.user);
+      actions.setMyProfile(authentication.user);
       localStorage.removeItem("token");
-      localStorage.removeItem("user");
       localStorage.setItem("token", authentication.token);
-      localStorage.setItem("user", JSON.stringify(authentication.user));
       AuthAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
       actions.setIsAuthenticated(true);
     }
@@ -232,11 +226,8 @@ const admModel = {
   updatePassword: thunk(async (actions, payload) => {
     actions.setLoading(true);
     const tryUpdatePassword = await updatePassword({ ...payload });
-    await getMyProfile().then((result) => {
-      if (!result.error) {
-        actions.setUserStatus(result.status);
-      }
-    });
+    const newUser = await getMyProfile();
+    actions.setMyProfile(newUser);
     actions.setLoading(false);
     return tryUpdatePassword;
   }),
@@ -249,35 +240,52 @@ const admModel = {
     localStorage.removeItem("user");
     AuthAxios.defaults.headers.Authorization = undefined;
     actions.setIsAuthenticated(false);
-    actions.setUser({});
+    actions.setMyProfile({});
     actions.setLoading(false);
   }),
 
   // Getters
 
-  getItinerarios: thunk(async (actions, _) => {
+  getCoursesInfoRelated: thunk(async (actions, _) => {
     actions.setLoading(true);
     const itinerarios = await getItinerarios();
+    if (itinerarios?.length > 0) {
+      actions.setItinerarios(itinerarios);
+    }
+    const acessibilidades = await getAcessibilidades();
+    if (acessibilidades?.length > 0) {
+      actions.setAcessibilidades(acessibilidades);
+    }
+    const instituicoes = await getInstituicoes();
+    if (instituicoes?.length > 0) {
+      actions.setInstituicoes(instituicoes);
+    }
+    actions.setLoading(false);
+  }),
+
+  getItinerarios: thunk(async (actions, payload = { query: "" }) => {
+    actions.setLoading(true);
+    const itinerarios = await getItinerarios({ query: payload.query });
     if (itinerarios?.length > 0) {
       actions.setItinerarios(itinerarios);
     }
     actions.setLoading(false);
   }),
 
-  getRoles: thunk(async (actions, _) => {
+  getRoles: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true);
-    const roles = await getRoles();
+    const roles = await getRoles({ query: payload.query });
     if (roles?.length > 0) {
       actions.setRoles(roles);
     }
     actions.setLoading(false);
   }),
 
-  getAcessibilidades: thunk(async (actions, _) => {
+  getAcessibilidades: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true);
-    const itinerarios = await getAcessibilidades();
-    if (itinerarios?.length > 0) {
-      actions.setAcessibilidades(itinerarios);
+    const acessibilidades = await getAcessibilidades({ query: payload.query });
+    if (acessibilidades?.length > 0) {
+      actions.setAcessibilidades(acessibilidades);
     }
     actions.setLoading(false);
   }),
@@ -336,9 +344,13 @@ const admModel = {
     actions.setLoading(false);
   }),
 
-  getUsers: thunk(async (actions, payload = { query: "" }) => {
+  getUsers: thunk(async (actions, payload = { query: "", showFiled: "" }) => {
+    const { query = "", showFiled = "" } = payload;
     actions.setLoading(true);
-    const users = await getUsers({ query: payload.query });
+    const users = await getUsers({
+      query: query,
+      showFiled: showFiled,
+    });
     if (users?.length >= 0) {
       actions.setUsers(users);
     }
@@ -390,14 +402,6 @@ const admModel = {
 
   setRoles: action((state, payload) => {
     state.roles = payload;
-  }),
-
-  setUser: action((state, payload) => {
-    state.user = payload;
-  }),
-
-  setUserStatus: action((state, payload) => {
-    state.user.status = payload;
   }),
 
   setItinerarios: action((state, payload) => {

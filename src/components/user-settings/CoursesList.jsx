@@ -11,6 +11,9 @@ const { Search } = Input;
 
 export default function CoursesList() {
   const getCursos = useStoreActions((actions) => actions.adm.getCursos);
+  const getCoursesInfoRelated = useStoreActions(
+    (actions) => actions.adm.getCoursesInfoRelated
+  );
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
@@ -22,6 +25,7 @@ export default function CoursesList() {
 
   useEffect(() => {
     getCursos();
+    getCoursesInfoRelated();
   }, [getCursos]);
 
   return (
@@ -47,6 +51,7 @@ export default function CoursesList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
                     getCursos({ query: e });
                   }}
@@ -59,9 +64,9 @@ export default function CoursesList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
-                    setEditandoCurso({});
-                    setModalText("Cadastrar Curso");
-                    setRegisterVisible(true);
+                    //setEditandoCurso({});
+                    //setModalText("Cadastrar Curso");
+                    //setRegisterVisible(true);
                   }}
                 >
                   Adicionar
@@ -80,9 +85,9 @@ export default function CoursesList() {
                       <Button
                         key={item.id}
                         onClick={() => {
-                          setEditandoCurso(item);
-                          setModalText("Alterar Curso");
-                          setRegisterVisible(true);
+                          //setEditandoCurso(item);
+                          //setModalText("Alterar Curso");
+                          //setRegisterVisible(true);
                         }}
                         icon={<EditOutlined />}
                       >
@@ -94,7 +99,13 @@ export default function CoursesList() {
                     <List.Item.Meta
                       style={{ fontFamily: "Roboto" }}
                       title={item.name}
-                      description={item.institution.name}
+                      description={
+                        <>
+                          {item.institutions.map((inst) => (
+                            <span key={inst.id}>{inst.name}</span>
+                          ))}
+                        </>
+                      }
                     />
                   </List.Item>
                 );
@@ -103,7 +114,7 @@ export default function CoursesList() {
           </Card>
           <Modal
             title={modalText}
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getCursos();

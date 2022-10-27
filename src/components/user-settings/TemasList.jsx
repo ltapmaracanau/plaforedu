@@ -44,6 +44,7 @@ export default function TemasList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
                     getThemes({ query: e });
                   }}

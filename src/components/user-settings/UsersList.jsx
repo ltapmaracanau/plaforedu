@@ -3,7 +3,17 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Input, Layout, List, Modal, Tag } from "antd";
+import {
+  Button,
+  Card,
+  Input,
+  Layout,
+  List,
+  Modal,
+  Switch,
+  Tag,
+  Tooltip,
+} from "antd";
 import UserRegister from "./UserRegister";
 import UserUpdate from "./UserUpdate";
 
@@ -39,6 +49,8 @@ export default function UsersList() {
   const [registerVisible, setRegisterVisible] = useState(false);
   const [editandoUsuario, setEditandoUsuario] = useState({});
   const [editVisible, setEditVisible] = useState(false);
+  const [showFiled, setShowFiled] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   useEffect(() => {
     getUsers();
@@ -67,14 +79,29 @@ export default function UsersList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
-                    getUsers({ query: e });
+                    setTextSearch(e);
+                    getUsers({ query: e, showFiled: showFiled });
                   }}
                   style={{
-                    marginRight: "30px",
+                    marginRight: "10px",
                   }}
                   placeholder={"Buscar usuários"}
                 />
+                <Tooltip title={"Exibir Arquivados"}>
+                  <Switch
+                    defaultChecked={showFiled}
+                    checked={showFiled}
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    onClick={(checked) => {
+                      setShowFiled(checked);
+                      getUsers({ query: textSearch, showFiled: checked });
+                    }}
+                  />
+                </Tooltip>
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
@@ -123,10 +150,10 @@ export default function UsersList() {
           </Card>
           <Modal
             title={"Cadastrar Usuário"}
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getUsers();
+              getUsers({ query: textSearch, showFiled: showFiled });
               setRegisterVisible(false);
             }}
             bodyStyle={{ backgroundColor: "#f8f8f8" }}
@@ -135,7 +162,7 @@ export default function UsersList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getUsers();
+                  getUsers({ query: textSearch, showFiled: showFiled });
                   setRegisterVisible(false);
                 }}
               >
@@ -146,16 +173,16 @@ export default function UsersList() {
             <UserRegister
               actionVisible={() => {
                 setRegisterVisible(false);
-                getUsers();
+                getUsers({ query: textSearch, showFiled: showFiled });
               }}
             />
           </Modal>
           <Modal
             title={"Editar usuário"}
-            visible={editVisible}
+            open={editVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getUsers();
+              getUsers({ query: textSearch, showFiled: showFiled });
               setEditVisible(false);
             }}
             width={"1000px"}
@@ -165,7 +192,7 @@ export default function UsersList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getUsers();
+                  getUsers({ query: textSearch, showFiled: showFiled });
                   setEditVisible(false);
                 }}
               >
@@ -177,7 +204,7 @@ export default function UsersList() {
               id={editandoUsuario.id}
               actionVisible={() => {
                 setEditVisible(false);
-                getUsers();
+                getUsers({ query: textSearch, showFiled: showFiled });
               }}
             />
           </Modal>

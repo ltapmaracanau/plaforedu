@@ -1,5 +1,9 @@
 import AuthAxios from "./AuthAxios";
 
+export const getToken = () => {
+  return localStorage.getItem("token");
+};
+
 export const login = (payload = { username: "", password: "" }) =>
   AuthAxios.post("/sessions", {
     email: payload.username,
@@ -270,7 +274,7 @@ export const getAcessibilidades = () =>
         : "Algo deu errado!",
     }));
 
-export const getInstituicoes = (payload) =>
+export const getInstituicoes = (payload = { query: "" }) =>
   AuthAxios.get(`/institutions/all?search=${payload.query}`)
     .then((response) => response.data)
     .catch((error) => ({
@@ -280,7 +284,7 @@ export const getInstituicoes = (payload) =>
         : "Algo deu errado!",
     }));
 
-export const getThemes = (payload) =>
+export const getThemes = (payload = { query: "" }) =>
   AuthAxios.get(`/themes/list?search=${payload.query}`)
     .then((response) => response.data)
     .catch((error) => ({
@@ -289,7 +293,7 @@ export const getThemes = (payload) =>
         ? error.response.data.message
         : "Algo deu errado!",
     }));
-export const getSubthemes = (payload) =>
+export const getSubthemes = (payload = { query: "" }) =>
   AuthAxios.get(`/sub-themes/list?search=${payload.query}`)
     .then((response) => response.data)
     .catch((error) => ({
@@ -298,7 +302,7 @@ export const getSubthemes = (payload) =>
         ? error.response.data.message
         : "Algo deu errado!",
     }));
-export const getCompetencias = (payload) =>
+export const getCompetencias = (payload = { query: "" }) =>
   AuthAxios.get(`/competencies/list?search=${payload.query}`)
     .then((response) => response.data)
     .catch((error) => ({
@@ -308,7 +312,7 @@ export const getCompetencias = (payload) =>
         : "Algo deu errado!",
     }));
 
-export const getCatComp = (payload) =>
+export const getCatComp = (payload = { query: "" }) =>
   AuthAxios.get(`/competencies-category/list?search=${payload.query}`)
     .then((response) => response.data)
     .catch((error) => ({
@@ -318,7 +322,7 @@ export const getCatComp = (payload) =>
         : "Algo deu errado!",
     }));
 
-export const getCursos = (payload) =>
+export const getCursos = (payload = { query: "" }) =>
   AuthAxios.get(`/courses/all?search=${payload.query}`)
     .then((response) => response.data)
     .catch((error) => ({
@@ -328,8 +332,10 @@ export const getCursos = (payload) =>
         : "Algo deu errado!",
     }));
 
-export const getUsers = (payload) =>
-  AuthAxios.get(`/users/all?search=${payload.query}`)
+export const getUsers = (payload = { query: "", showFiled: false }) =>
+  AuthAxios.get(
+    `/users/all?search=${payload.query}&includeFiled=${payload.showFiled}`
+  )
     .then((response) => response.data)
     .catch((error) => ({
       error: true,
@@ -351,12 +357,9 @@ export const getUniqueUser = (payload) =>
 export const getMyProfile = () =>
   AuthAxios.get("/profile/me")
     .then((response) => response.data)
-    .catch((error) => ({
-      error: true,
-      message: error.response.data
-        ? error.response.data.message
-        : "Algo deu errado!",
-    }));
+    .catch((error) => {
+      throw new Error(error);
+    });
 
 export const cursosDefault = [
   {

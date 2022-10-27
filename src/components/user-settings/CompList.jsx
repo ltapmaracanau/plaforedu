@@ -44,6 +44,7 @@ export default function CompList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
                     getComp({ query: e });
                   }}
@@ -76,12 +77,9 @@ export default function CompList() {
                       title={item.name}
                       description={
                         <span>
-                          {item.CategoriesCompetencies.map((categoria) => (
-                            <Tag
-                              color="blue"
-                              key={categoria.competenciesCategory.id}
-                            >
-                              {categoria.competenciesCategory.name}
+                          {item.categoriesCompetencies.map((categoria) => (
+                            <Tag color="blue" key={categoria.id}>
+                              {categoria.name}
                             </Tag>
                           ))}
                         </span>
