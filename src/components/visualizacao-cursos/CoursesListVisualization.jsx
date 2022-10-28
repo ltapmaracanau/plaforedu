@@ -332,7 +332,7 @@ export default function CoursesListVisualization() {
             )}
           </Card>
           <Modal
-            visible={modalVisible}
+            open={modalVisible}
             onOk={handleOk}
             onCancel={handleOk}
             title={courseOnModal.title}

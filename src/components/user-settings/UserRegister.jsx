@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { registerSchema } from "../../schemas/registers/registerSchema";
+import { registerSchema } from "../../schemas/registers/registersSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -9,7 +9,9 @@ import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
 
 const { Content } = Layout;
 
-export default function RegisterUser() {
+export default function UserRegister(props) {
+  const { actionVisible } = props;
+
   const registerNewUser = useStoreActions(
     (actions) => actions.adm.registerNewUser
   );
@@ -48,6 +50,7 @@ export default function RegisterUser() {
         message: "Registo bem sucedido!",
         description: "O novo usuário deve verificar seu email!",
       });
+      actionVisible();
     }
   };
 
@@ -199,7 +202,7 @@ export default function RegisterUser() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "15px",
+                  margin: "15px 0px",
                 }}
               >
                 <Button

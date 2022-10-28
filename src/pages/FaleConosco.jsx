@@ -247,7 +247,7 @@ export default function FaleConosco() {
               </Col>
             </Row>
           </Form>
-          <Modal visible={modalIsVisible} footer={null}>
+          <Modal open={modalIsVisible} footer={null}>
             {resultado}
           </Modal>
           <div

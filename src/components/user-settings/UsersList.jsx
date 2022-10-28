@@ -3,58 +3,57 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Input, Layout, List, Modal, Tag } from "antd";
-import RegisterUser from "./RegisterUser";
-import EditUser from "./EditUser";
+import {
+  Button,
+  Card,
+  Input,
+  Layout,
+  List,
+  Modal,
+  Switch,
+  Tag,
+  Tooltip,
+} from "antd";
+import UserRegister from "./UserRegister";
+import UserUpdate from "./UserUpdate";
 
 const { Content } = Layout;
 const { Search } = Input;
 
 const userStatusRefactor = (status) => {
-  switch (status) {
-    case "PENDING":
-      return "PENDENTE";
-    case "ACTIVE":
-      return "ATIVO";
-    case "FILED":
-      return "ARQUIVADO";
-    case "BLOCKED":
-      return "BLOQUEADO";
-    default:
-      return "ATIVO";
-  }
+  const options = {
+    PENDING: "PENDENTE",
+    ACTIVE: "ATIVO",
+    FILED: "ARQUIVADO",
+    BLOCKED: "BLOQUEADO",
+  };
+  return options[status] || options.ACTIVE;
+};
+
+const colorStatus = (status) => {
+  const options = {
+    PENDING: "#ffe000",
+    ACTIVE: "#87d068",
+    FILED: "#2db7f5",
+    BLOCKED: "#f50",
+  };
+  return options[status] || options.FILED;
 };
 
 export default function UsersList() {
   const getUsers = useStoreActions((actions) => actions.adm.getUsers);
 
-  const [registerVisible, setRegisterVisible] = useState(false);
-
   const loading = useStoreState((state) => state.adm.loading);
   const users = useStoreState((state) => state.adm.users);
 
+  const [registerVisible, setRegisterVisible] = useState(false);
   const [editandoUsuario, setEditandoUsuario] = useState({});
   const [editVisible, setEditVisible] = useState(false);
-
-  const colorStatus = (status) => {
-    switch (status) {
-      case "PENDING":
-        return "#ffe000";
-      case "ACTIVE":
-        return "#87d068";
-      case "FILED":
-        return "#2db7f5";
-      case "BLOCKED":
-        return "#f50";
-      default:
-        return "#2db7f5";
-    }
-  };
+  const [showFiled, setShowFiled] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   useEffect(() => {
-    (async () => {
-      await getUsers();
-    })();
+    getUsers();
   }, [getUsers]);
 
   return (
@@ -80,14 +79,29 @@ export default function UsersList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
-                    getUsers({ query: e });
+                    setTextSearch(e);
+                    getUsers({ query: e, showFiled: showFiled });
                   }}
                   style={{
-                    marginRight: "30px",
+                    marginRight: "10px",
                   }}
                   placeholder={"Buscar usuários"}
                 />
+                <Tooltip title={"Exibir Arquivados"}>
+                  <Switch
+                    defaultChecked={showFiled}
+                    checked={showFiled}
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    onClick={(checked) => {
+                      setShowFiled(checked);
+                      getUsers({ query: textSearch, showFiled: checked });
+                    }}
+                  />
+                </Tooltip>
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
@@ -108,10 +122,11 @@ export default function UsersList() {
                 return (
                   <List.Item
                     actions={[
-                      <Tag color={colorStatus(item.status)}>
+                      <Tag key={item.id} color={colorStatus(item.status)}>
                         {userStatusRefactor(item.status)}
                       </Tag>,
                       <Button
+                        key={item.id}
                         onClick={() => {
                           setEditandoUsuario(item);
                           setEditVisible(true);
@@ -135,10 +150,10 @@ export default function UsersList() {
           </Card>
           <Modal
             title={"Cadastrar Usuário"}
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getUsers();
+              getUsers({ query: textSearch, showFiled: showFiled });
               setRegisterVisible(false);
             }}
             bodyStyle={{ backgroundColor: "#f8f8f8" }}
@@ -147,7 +162,7 @@ export default function UsersList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getUsers();
+                  getUsers({ query: textSearch, showFiled: showFiled });
                   setRegisterVisible(false);
                 }}
               >
@@ -155,14 +170,19 @@ export default function UsersList() {
               </Button>,
             ]}
           >
-            <RegisterUser />
+            <UserRegister
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getUsers({ query: textSearch, showFiled: showFiled });
+              }}
+            />
           </Modal>
           <Modal
             title={"Editar usuário"}
-            visible={editVisible}
+            open={editVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getUsers();
+              getUsers({ query: textSearch, showFiled: showFiled });
               setEditVisible(false);
             }}
             width={"1000px"}
@@ -172,7 +192,7 @@ export default function UsersList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getUsers();
+                  getUsers({ query: textSearch, showFiled: showFiled });
                   setEditVisible(false);
                 }}
               >
@@ -180,7 +200,13 @@ export default function UsersList() {
               </Button>,
             ]}
           >
-            <EditUser id={editandoUsuario.id} />
+            <UserUpdate
+              id={editandoUsuario.id}
+              actionVisible={() => {
+                setEditVisible(false);
+                getUsers({ query: textSearch, showFiled: showFiled });
+              }}
+            />
           </Modal>
         </Content>
       </Layout>

@@ -48,7 +48,7 @@ export default function CoursesPage() {
         ) : (
           <Drawer
             title={"Filtro"}
-            visible={!filterCollapsed}
+            open={!filterCollapsed}
             closeIcon={<CloseOutlined style={{ color: "#000" }} />}
             placement="left"
             onClose={onClose}

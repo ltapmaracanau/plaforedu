@@ -3,7 +3,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal, Input } from "antd";
+import { Button, Card, Layout, List, Modal, Input, Tag } from "antd";
 import SubtemaRegister from "./SubtemaRegister";
 
 const { Content } = Layout;
@@ -18,9 +18,7 @@ export default function SubtemasList() {
   const subthemes = useStoreState((state) => state.adm.subthemes);
 
   useEffect(() => {
-    (async () => {
-      await getSubthemes();
-    })();
+    getSubthemes();
   }, [getSubthemes]);
 
   return (
@@ -46,6 +44,7 @@ export default function SubtemasList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
                     getSubthemes({ query: e });
                   }}
@@ -76,6 +75,15 @@ export default function SubtemasList() {
                     <List.Item.Meta
                       style={{ fontFamily: "Roboto" }}
                       title={item.name}
+                      description={
+                        <span>
+                          {item.themes.map((theme) => (
+                            <Tag color="blue" key={theme.id}>
+                              {theme.name}
+                            </Tag>
+                          ))}
+                        </span>
+                      }
                     />
                   </List.Item>
                 );
@@ -84,7 +92,7 @@ export default function SubtemasList() {
           </Card>
           <Modal
             title={"Cadastrar Subtema"}
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getSubthemes();
@@ -104,7 +112,12 @@ export default function SubtemasList() {
               </Button>,
             ]}
           >
-            <SubtemaRegister />
+            <SubtemaRegister
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getSubthemes();
+              }}
+            />
           </Modal>
         </Content>
       </Layout>
