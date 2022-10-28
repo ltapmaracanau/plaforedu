@@ -37,7 +37,6 @@ export default function HeaderHome() {
   const filterDefault = useStoreState((state) => state.cursos.filterDefault);
   const isAuthenticated = useStoreState((state) => state.adm.isAuthenticated);
   const logout = useStoreActions((actions) => actions.adm.logout);
-  /* const user = useStoreState((actions) => actions.adm.user); */
 
   const onClickItinerario = (itinerario) => {
     setFilter({

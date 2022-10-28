@@ -1,8 +1,8 @@
+import axios from "axios";
 
-import axios from "axios"
+const AuthAxios = axios.create({
+  baseURL: "http://plaforedu.iticdigital.com.br",
+  headers: { "Content-Type": "application/json" },
+});
 
-const authAxios = axios.create({
-    baseURL: 'https://plafor-server.herokuapp.com'
-})
-
-export { authAxios }
+export default AuthAxios;

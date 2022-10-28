@@ -27,15 +27,15 @@ export default function SettingsPage() {
   const isAdm = useStoreState((state) => state.adm.isAdm);
 
   const contentArray = [
-    <MyProfile />,
-    <UpdatePassword />,
-    <UsersList />,
-    <CoursesList />,
-    <InstitutionList />,
-    <CategCompList />,
-    <CompList />,
-    <TemasList />,
-    <SubtemasList />,
+    <MyProfile key={"my-profile"} />,
+    <UpdatePassword key={"my-password"} />,
+    <UsersList key={"users-list"} />,
+    <CoursesList key={"courses-list"} />,
+    <InstitutionList key={"institution-list"} />,
+    <CategCompList key={"categ-comp-list"} />,
+    <CompList key={"comp-list"} />,
+    <TemasList key={"temas-list"} />,
+    <SubtemasList key={"subtemas-list"} />,
   ];
 
   const [index, setIndex] = useState(0);

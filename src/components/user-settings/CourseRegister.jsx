@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerCourseSchema } from "../../schemas/registers/registerCourseSchema";
+import { registerCourseSchema } from "../../schemas/registers/registersSchema";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import {
@@ -13,22 +13,19 @@ import {
   Layout,
   notification,
   Select,
+  Skeleton,
 } from "antd";
 
 const { Content } = Layout;
 
-export default function RegisterCourse(props) {
-  const { curso = {} } = props;
+export default function CourseRegister(props) {
+  const { curso = {}, actionVisible } = props;
 
   const registerNewCourse = useStoreActions(
     (actions) => actions.adm.registerNewCourse
   );
   const updateCourse = useStoreActions((actions) => actions.adm.updateCourse);
-  const getItinerarios = useStoreActions((state) => state.adm.getItinerarios);
-  const getInstituicoes = useStoreActions((state) => state.adm.getInstituicoes);
-  const getAcessibilidades = useStoreActions(
-    (state) => state.adm.getAcessibilidades
-  );
+
   const loading = useStoreState((state) => state.adm.loading);
   const itinerarios = useStoreState((state) => state.adm.itinerarios);
   const acessibilidades = useStoreState((state) => state.adm.acessibilidades);
@@ -59,6 +56,7 @@ export default function RegisterCourse(props) {
         notification.success({
           message: "Curso alterado com sucesso!",
         });
+        actionVisible();
       }
     } else {
       const newCourse = await registerNewCourse(values);
@@ -72,17 +70,10 @@ export default function RegisterCourse(props) {
           message: "Curso cadastrado com sucesso!",
         });
         register.reset();
+        actionVisible();
       }
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      await getItinerarios();
-      await getAcessibilidades();
-      await getInstituicoes();
-    })();
-  }, [getItinerarios, getAcessibilidades, getInstituicoes]);
 
   return (
     <>
@@ -153,7 +144,6 @@ export default function RegisterCourse(props) {
                       hasFeedback
                     >
                       <Select
-                        loading={loading}
                         showSearch
                         placeholder="Instituição"
                         filterOption={(input, option) => {
@@ -224,7 +214,6 @@ export default function RegisterCourse(props) {
                       <Select
                         mode="multiple"
                         showSearch
-                        loading={loading}
                         placeholder="Acessibilidades"
                         filterOption={(input, option) => {
                           return (
@@ -259,7 +248,6 @@ export default function RegisterCourse(props) {
                     >
                       <Select
                         mode="multiple"
-                        loading={loading}
                         showSearch
                         placeholder="Itinerários"
                         {...field}
@@ -285,7 +273,7 @@ export default function RegisterCourse(props) {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "15px",
+                  margin: "15px 0px",
                 }}
               >
                 <Button

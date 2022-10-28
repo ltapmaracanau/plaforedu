@@ -4,7 +4,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { PlusOutlined } from "@ant-design/icons";
 
 import { Button, Card, Layout, List, Modal, Input } from "antd";
-import RegisterCatComp from "./RegisterCatComp";
+import CatCompRegister from "./CatCompRegister";
 
 const { Content } = Layout;
 const { Search } = Input;
@@ -18,9 +18,7 @@ export default function CategCompList() {
   const catComp = useStoreState((state) => state.adm.catComp);
 
   useEffect(() => {
-    (async () => {
-      await getCatComp();
-    })();
+    getCatComp();
   }, [getCatComp]);
 
   return (
@@ -46,6 +44,7 @@ export default function CategCompList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
                     getCatComp({ query: e });
                   }}
@@ -85,7 +84,7 @@ export default function CategCompList() {
           </Card>
           <Modal
             title={"Cadastrar Categoria de Competência"}
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getCatComp();
@@ -105,7 +104,12 @@ export default function CategCompList() {
               </Button>,
             ]}
           >
-            <RegisterCatComp />
+            <CatCompRegister
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getCatComp();
+              }}
+            />
           </Modal>
         </Content>
       </Layout>

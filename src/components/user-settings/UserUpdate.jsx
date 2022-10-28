@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { editUserSchema } from "../../schemas/registers/editUserSchema";
+import { updateUserSchema } from "../../schemas/registers/registersSchema";
 
 import InputMask from "../InputMask";
 
@@ -24,8 +24,8 @@ import {
 
 const { Content } = Layout;
 
-export default function EditUser(props) {
-  const { id } = props;
+export default function UserUpdate(props) {
+  const { id, actionVisible } = props;
 
   const updateUser = useStoreActions((actions) => actions.adm.updateUser);
   const activeUser = useStoreActions((actions) => actions.adm.activeUser);
@@ -50,7 +50,7 @@ export default function EditUser(props) {
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: user,
-    resolver: yupResolver(editUserSchema),
+    resolver: yupResolver(updateUserSchema),
     context: undefined,
     criteriaMode: "firstError",
     shouldFocusError: true,
@@ -76,6 +76,7 @@ export default function EditUser(props) {
       notification.success({
         message: "Usuário Alterado com Sucesso!",
       });
+      actionVisible();
     }
   };
 
@@ -281,7 +282,7 @@ export default function EditUser(props) {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "20px",
+                  margin: "20px 0px",
                 }}
               >
                 <Button

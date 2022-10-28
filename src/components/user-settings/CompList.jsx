@@ -4,7 +4,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { PlusOutlined } from "@ant-design/icons";
 
 import { Button, Card, Layout, List, Modal, Input, Tag } from "antd";
-import RegisterComp from "./RegisterComp";
+import CompRegister from "./CompRegister";
 
 const { Content } = Layout;
 const { Search } = Input;
@@ -18,9 +18,7 @@ export default function CompList() {
   const competencias = useStoreState((state) => state.adm.competencias);
 
   useEffect(() => {
-    (async () => {
-      await getComp();
-    })();
+    getComp();
   }, [getComp]);
 
   return (
@@ -46,6 +44,7 @@ export default function CompList() {
                 }}
               >
                 <Search
+                  allowClear
                   onSearch={(e) => {
                     getComp({ query: e });
                   }}
@@ -78,12 +77,9 @@ export default function CompList() {
                       title={item.name}
                       description={
                         <span>
-                          {item.CategoriesCompetencies.map((categoria) => (
-                            <Tag
-                              color="blue"
-                              key={categoria.competenciesCategory.id}
-                            >
-                              {categoria.competenciesCategory.name}
+                          {item.categoriesCompetencies.map((categoria) => (
+                            <Tag color="blue" key={categoria.id}>
+                              {categoria.name}
                             </Tag>
                           ))}
                         </span>
@@ -96,7 +92,7 @@ export default function CompList() {
           </Card>
           <Modal
             title={"Cadastrar Competência"}
-            visible={registerVisible}
+            open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getComp();
@@ -116,7 +112,12 @@ export default function CompList() {
               </Button>,
             ]}
           >
-            <RegisterComp />
+            <CompRegister
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getComp();
+              }}
+            />
           </Modal>
         </Content>
       </Layout>

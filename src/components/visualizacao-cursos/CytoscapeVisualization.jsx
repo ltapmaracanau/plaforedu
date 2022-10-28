@@ -213,7 +213,7 @@ export default function CytoscapeVisualization() {
                     min={0.01}
                     max={1.0}
                     value={zoom}
-                    tooltipVisible={false}
+                    open={false}
                     style={{ width: "80px", margin: "0 15px" }}
                     onChange={(value) => {
                       setZoom(value);
@@ -490,7 +490,7 @@ export default function CytoscapeVisualization() {
         draggable={false}
       />
       <Modal // Modal de Curso
-        visible={modalCourseVisible}
+        open={modalCourseVisible}
         onOk={handleOk}
         onCancel={handleOk}
         title={courseOnModal.title}
@@ -525,7 +525,7 @@ export default function CytoscapeVisualization() {
         </Descriptions>
       </Modal>
       <Modal // Modal de Categoria
-        visible={modalCompetenciaVisible}
+        open={modalCompetenciaVisible}
         onOk={handleOk}
         onCancel={handleOk}
         title={courseOnModal.titulo}

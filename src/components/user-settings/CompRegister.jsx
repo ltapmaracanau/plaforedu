@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { registerCatCompSchema } from "../../schemas/registers/registerCatCompSchema";
+import { registerCompSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification } from "antd";
+import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
 
 const { Content } = Layout;
 
-export default function RegisterCatComp() {
-  const registerCatComp = useStoreActions(
-    (actions) => actions.adm.registerCatComp
-  );
+export default function CompRegister(props) {
+  const { actionVisible } = props;
+
+  const getCatComp = useStoreActions((actions) => actions.adm.getCatComp);
+  const registerComp = useStoreActions((actions) => actions.adm.registerComp);
+  const catComp = useStoreState((state) => state.adm.catComp);
   const loading = useStoreState((state) => state.adm.loading);
 
   const register = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {},
-    resolver: yupResolver(registerCatCompSchema),
+    resolver: yupResolver(registerCompSchema),
     context: undefined,
     criteriaMode: "firstError",
     shouldFocusError: true,
@@ -28,19 +30,26 @@ export default function RegisterCatComp() {
   });
 
   const onSubmit = async (values) => {
-    const newCat = await registerCatComp(values);
-    if (newCat.error) {
+    const newComp = await registerComp(values);
+    if (newComp.error) {
       notification.error({
         message: "Algo deu errado!",
-        description: newCat.message,
+        description: newComp.message,
       });
     } else {
       notification.success({
-        message: "Categoria cadastrada com sucesso!",
+        message: "Competência cadastrada com sucesso!",
       });
       register.reset();
+      actionVisible();
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      await getCatComp();
+    })();
+  }, [getCatComp]);
 
   return (
     <>
@@ -67,7 +76,7 @@ export default function RegisterCatComp() {
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Nome da categoria"}
+                      label={"Nome da competência"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
@@ -79,18 +88,36 @@ export default function RegisterCatComp() {
                 }}
               />
               <Controller
-                name="description"
+                name="competenciesCategoryIds"
                 control={register.control}
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Descrição da categoria"}
+                      label={"Categorias da competência"}
                       style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <Input.TextArea placeholder="Descrição" {...field} />
+                      <Select
+                        placeholder="Categorias"
+                        {...field}
+                        showSearch
+                        mode={"multiple"}
+                        filterOption={(input, option) => {
+                          return (
+                            option.children
+                              .toLowerCase()
+                              .indexOf(input.toLowerCase()) >= 0
+                          );
+                        }}
+                      >
+                        {catComp.map((element) => (
+                          <Select.Option key={element.id} value={element.id}>
+                            {element.name}
+                          </Select.Option>
+                        ))}
+                      </Select>
                     </Form.Item>
                   );
                 }}
@@ -99,7 +126,7 @@ export default function RegisterCatComp() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom: "15px",
+                  margin: "15px 0px",
                 }}
               >
                 <Button
