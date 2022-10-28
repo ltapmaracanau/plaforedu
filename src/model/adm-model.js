@@ -1,5 +1,5 @@
 import { action, computed, thunk } from "easy-peasy";
-import AuthAxios from "../services/AuthAxios";
+import AuthAxios from "../services/authAxios";
 import {
   login,
   forgetPassword,

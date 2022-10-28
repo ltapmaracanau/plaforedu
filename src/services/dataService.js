@@ -1,4 +1,4 @@
-import AuthAxios from "./AuthAxios";
+import AuthAxios from "./authAxios";
 
 export const getToken = () => {
   return localStorage.getItem("token");
