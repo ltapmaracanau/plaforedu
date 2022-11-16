@@ -17,12 +17,12 @@ const { Text } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function RowItinerario() {
-  const itinerario = useStoreState((state) => state.cursos.filter.itinerario);
+  const itinerario = useStoreState((state) => state.courses.filter.itinerario);
 
-  const filter = useStoreState((state) => state.cursos.filter);
-  const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
+  const filter = useStoreState((state) => state.courses.filter);
+  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const itinerarioData = useStoreState((state) =>
-    state.itinerarios.itinerarios.find(
+    state.itineraries.itinerarios.find(
       (obj) => obj.dados_gerais.id === itinerario
     )
   );

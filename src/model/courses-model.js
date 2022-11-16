@@ -1,4 +1,4 @@
-import { action, computed } from "easy-peasy";
+import { action, computed, thunk } from "easy-peasy";
 
 // Fundos escala 2 classificação por categorias
 import fundoCurso1 from "../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-2_V2_Curso 01.png";
@@ -77,6 +77,7 @@ import {
   categoriasDeCompetenciasDefault,
   temasDefault,
   subtemasDefault,
+  dataService,
 } from "../services/dataService.js";
 
 const fundosCategoria = {
@@ -523,8 +524,13 @@ const reformuladorDeElementosCytoscape = (cursosFiltrados, filtro) => {
   return elementos;
 };
 
-const trilhosModel = {
+const coursesModel = {
+  loading: false,
+  registering: false,
+
   cursos: cursosDefault,
+
+  cursosSecondary: [],
 
   instituicoes: instituicoesDefault,
 
@@ -551,6 +557,41 @@ const trilhosModel = {
   setFilter: action((state, payload) => {
     state.filter = { ...state.filter, ...payload };
   }),
+
+  getCursos: thunk(async (actions, payload = { query: "" }) => {
+    actions.setLoading(true);
+    const cursos = await dataService.getCursos({ query: payload.query });
+    if (cursos?.length >= 0) {
+      actions.setCursos(cursos);
+    }
+    actions.setLoading(false);
+  }),
+
+  registerNewCourse: thunk(async (actions, payload) => {
+    actions.setRegistering(true);
+    const newCourse = await dataService.registerCourse({ ...payload });
+    actions.setRegistering(false);
+    return newCourse;
+  }),
+
+  updateCourse: thunk(async (actions, payload) => {
+    actions.setRegistering(true);
+    const tryUpdateCourse = await dataService.updateCourse({ ...payload });
+    actions.setRegistering(false);
+    return tryUpdateCourse;
+  }),
+
+  setLoading: action((state, payload) => {
+    state.loading = payload;
+  }),
+
+  setRegistering: action((state, payload) => {
+    state.registering = payload;
+  }),
+
+  setCursos: action((state, payload) => {
+    state.cursosSecondary = payload;
+  }),
 };
 
-export default trilhosModel;
+export default coursesModel;

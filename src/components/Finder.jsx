@@ -17,8 +17,8 @@ const { useBreakpoint } = Grid;
 export default function Finder() {
   let navigate = useNavigate();
   let screens = useBreakpoint();
-  const setFiltro = useStoreActions((actions) => actions.cursos.setFilter);
-  const filtroDefault = useStoreState((state) => state.cursos.filterDefault);
+  const setFiltro = useStoreActions((actions) => actions.courses.setFilter);
+  const filtroDefault = useStoreState((state) => state.courses.filterDefault);
 
   const onSearch = (value) => {
     setFiltro({ ...filtroDefault, buscaInterna: value });

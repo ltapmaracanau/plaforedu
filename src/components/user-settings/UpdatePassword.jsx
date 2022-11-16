@@ -15,7 +15,7 @@ export default function UpdatePassword() {
   const loading = useStoreState((state) => state.adm.loading);
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {},
     resolver: yupResolver(updatePasswordSchema),

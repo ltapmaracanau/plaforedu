@@ -24,20 +24,20 @@ export default function CoursesListVisualization() {
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
-  const listData = useStoreState((state) => state.cursos.cursos);
+  const listData = useStoreState((state) => state.courses.cursos);
   const cursosFiltrados = useStoreState(
-    (state) => state.cursos.cursosFiltrados.novosCursos
+    (state) => state.courses.cursosFiltrados.novosCursos
   );
   const competenciasFiltradas = useStoreState(
-    (state) => state.cursos.cursosFiltrados.novasTrilhas
+    (state) => state.courses.cursosFiltrados.novasTrilhas
   );
-  const listInst = useStoreState((state) => state.cursos.instituicoes);
+  const listInst = useStoreState((state) => state.courses.instituicoes);
   const listCategoriasCompetencia = useStoreState(
-    (state) => state.cursos.categoriasDeCompetencias
+    (state) => state.courses.categoriasDeCompetencias
   );
-  const listCompetencias = useStoreState((state) => state.cursos.competencias);
-  const filter = useStoreState((state) => state.cursos.filter);
-  const itinerarios = useStoreState((state) => state.itinerarios.itinerarios);
+  const listCompetencias = useStoreState((state) => state.courses.competencias);
+  const filter = useStoreState((state) => state.courses.filter);
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
 
   const [courseOnModal, setCourseOnModal] = useState(listData[0]);
   const [modalVisible, setModalVisible] = useState(false);

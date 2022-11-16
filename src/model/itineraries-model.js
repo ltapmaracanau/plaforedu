@@ -1,4 +1,4 @@
-import { action } from "easy-peasy";
+import { action, thunk } from "easy-peasy";
 
 import Banner0 from "../assets/PLAFOR.png";
 import Banner1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -6,15 +6,40 @@ import Banner2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmE
 import Banner3 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Banner4 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.png";
 import Banner5 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png";
+import { dataService } from "../services/dataService";
 
 const itinerariosModel = {
+  loading: false,
+
+  itinerariosSecondary: [],
+
   layoutAtual: "layoutCose",
 
   setLayoutAtual: action((state, payload) => {
     state.layoutAtual = payload;
   }),
 
+  getItinerarios: thunk(async (actions, payload = { query: "" }) => {
+    actions.setLoading(true);
+    const itinerarios = await dataService.getItinerarios({
+      query: payload.query,
+    });
+    if (itinerarios?.length > 0) {
+      actions.setItinerarios(itinerarios);
+    }
+    actions.setLoading(false);
+  }),
+
+  setLoading: action((state, payload) => {
+    state.loading = payload;
+  }),
+
+  setItinerarios: action((state, payload) => {
+    state.itinerariosSecondary = payload;
+  }),
+
   itinerarios: [
+    // PlaforEDU
     {
       dados_gerais: {
         id: 0,
@@ -31,6 +56,7 @@ const itinerariosModel = {
         elementos: [],
       },
     },
+    // Iniciação ao Serviçõ Púlico
     {
       dados_gerais: {
         id: 1,
@@ -47,6 +73,7 @@ const itinerariosModel = {
         elementos: [],
       },
     },
+    // TAE
     {
       dados_gerais: {
         id: 2,
@@ -63,6 +90,7 @@ const itinerariosModel = {
         elementos: [],
       },
     },
+    // Docente
     {
       dados_gerais: {
         id: 3,
@@ -79,6 +107,7 @@ const itinerariosModel = {
         elementos: [],
       },
     },
+    // Gerencial
     {
       dados_gerais: {
         id: 4,
@@ -95,6 +124,7 @@ const itinerariosModel = {
         elementos: [],
       },
     },
+    // Preparação para a Aposentadoria
     {
       dados_gerais: {
         id: 5,
@@ -113,6 +143,7 @@ const itinerariosModel = {
     },
   ],
 
+  // Layouts de organização do grafo da Cytoscape
   layouts: {
     layoutCose: {
       name: "cose",

@@ -40,28 +40,28 @@ const { Text } = Typography;
 export default function CytoscapeVisualization() {
   const cyRef = useRef(null);
 
-  const filter = useStoreState((state) => state.cursos.filter);
-  const elements = useStoreState((state) => state.cursos.elements);
-  const cursos = useStoreState((state) => state.cursos.cursos);
-  const listInst = useStoreState((state) => state.cursos.instituicoes);
-  const competencias = useStoreState((state) => state.cursos.competencias);
+  const filter = useStoreState((state) => state.courses.filter);
+  const elements = useStoreState((state) => state.courses.elements);
+  const cursos = useStoreState((state) => state.courses.cursos);
+  const listInst = useStoreState((state) => state.courses.instituicoes);
+  const competencias = useStoreState((state) => state.courses.competencias);
   const cursosFiltrados = useStoreState(
-    (state) => state.cursos.cursosFiltrados.novosCursos
+    (state) => state.courses.cursosFiltrados.novosCursos
   );
   const trilhas = useStoreState(
-    (state) => state.cursos.cursosFiltrados.novasTrilhas
+    (state) => state.courses.cursosFiltrados.novasTrilhas
   );
   const colorSchemaDefault = useStoreState(
-    (state) => state.cursos.filterDefault.esquemaDeCores
+    (state) => state.courses.filterDefault.esquemaDeCores
   );
 
-  const layouts = useStoreState((state) => state.itinerarios.layouts);
-  const layoutAtual = useStoreState((state) => state.itinerarios.layoutAtual);
+  const layouts = useStoreState((state) => state.itineraries.layouts);
+  const layoutAtual = useStoreState((state) => state.itineraries.layoutAtual);
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
 
-  const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
+  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const setLayoutAtual = useStoreActions(
-    (actions) => actions.itinerarios.setLayoutAtual
+    (actions) => actions.itineraries.setLayoutAtual
   );
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed

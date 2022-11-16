@@ -9,17 +9,40 @@ import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
 const { Content } = Layout;
 
 export default function CompRegister(props) {
-  const { actionVisible } = props;
+  const {
+    comp = {
+      name: "",
+      categoriesCompetencies: [],
+      description: "",
+    },
+    actionVisible,
+  } = props;
 
-  const getCatComp = useStoreActions((actions) => actions.adm.getCatComp);
-  const registerComp = useStoreActions((actions) => actions.adm.registerComp);
-  const catComp = useStoreState((state) => state.adm.catComp);
-  const loading = useStoreState((state) => state.adm.loading);
+  const compRefactored = {
+    name: comp.name,
+    competenciesCategoryIds: comp.categoriesCompetencies?.map(
+      (item) => item.id
+    ),
+    description: comp.description,
+  };
+
+  const getCatComp = useStoreActions(
+    (actions) => actions.competencies.getCatComp
+  );
+  const registerComp = useStoreActions(
+    (actions) => actions.competencies.registerComp
+  );
+
+  const updateComp = useStoreActions(
+    (actions) => actions.competencies.updateComp
+  );
+  const catComp = useStoreState((state) => state.competencies.catComp);
+  const registering = useStoreState((state) => state.competencies.registering);
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
-    defaultValues: {},
+    defaultValues: compRefactored,
     resolver: yupResolver(registerCompSchema),
     context: undefined,
     criteriaMode: "firstError",
@@ -30,18 +53,33 @@ export default function CompRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    const newComp = await registerComp(values);
-    if (newComp.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: newComp.message,
-      });
+    if (comp === {}) {
+      const newComp = await registerComp(values);
+      if (newComp.error) {
+        notification.error({
+          message: "Algo deu errado!",
+          description: newComp.message,
+        });
+      } else {
+        notification.success({
+          message: "Competência cadastrada com sucesso!",
+        });
+        register.reset();
+        actionVisible();
+      }
     } else {
-      notification.success({
-        message: "Competência cadastrada com sucesso!",
-      });
-      register.reset();
-      actionVisible();
+      const tryUpdate = await updateComp({ ...values, id: comp.id });
+      if (tryUpdate?.error) {
+        notification.error({
+          message: "Erro!",
+          description: tryUpdate.message,
+        });
+      } else {
+        notification.success({
+          message: "Competência alterada com sucesso!",
+        });
+        actionVisible();
+      }
     }
   };
 
@@ -77,12 +115,29 @@ export default function CompRegister(props) {
                   return (
                     <Form.Item
                       label={"Nome da competência"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
                     >
                       <Input placeholder="Nome" {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="description"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Descrição da categoria"}
+                      style={{ marginBottom: "20px" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input.TextArea placeholder="Descrição" {...field} />
                     </Form.Item>
                   );
                 }}
@@ -94,7 +149,7 @@ export default function CompRegister(props) {
                   return (
                     <Form.Item
                       label={"Categorias da competência"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -130,13 +185,13 @@ export default function CompRegister(props) {
                 }}
               >
                 <Button
-                  loading={loading}
+                  loading={registering}
                   disabled={!register.formState.isValid}
                   type="primary"
                   shape="round"
                   htmlType="submit"
                 >
-                  Cadastrar
+                  {comp.id ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>

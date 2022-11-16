@@ -9,15 +9,18 @@ import { Button, Card, Form, Input, Layout, notification } from "antd";
 const { Content } = Layout;
 
 export default function TemasRegister(props) {
-  const { actionVisible } = props;
+  const { theme = {}, actionVisible } = props;
 
-  const registerTheme = useStoreActions((actions) => actions.adm.registerTheme);
-  const loading = useStoreState((state) => state.adm.loading);
+  const registerTheme = useStoreActions(
+    (actions) => actions.themes.registerTheme
+  );
+  const updateTheme = useStoreActions((actions) => actions.themes.updateTheme);
+  const registering = useStoreState((state) => state.themes.registering);
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
-    defaultValues: {},
+    defaultValues: theme,
     resolver: yupResolver(registerThemeSchema),
     context: undefined,
     criteriaMode: "firstError",
@@ -28,18 +31,33 @@ export default function TemasRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    const newTheme = await registerTheme(values);
-    if (newTheme.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: newTheme.message,
-      });
+    if (theme === {}) {
+      const newTheme = await registerTheme(values);
+      if (newTheme.error) {
+        notification.error({
+          message: "Algo deu errado!",
+          description: newTheme.message,
+        });
+      } else {
+        notification.success({
+          message: "Tema cadastrado com sucesso!",
+        });
+        register.reset();
+        actionVisible();
+      }
     } else {
-      notification.success({
-        message: "Tema cadastrado com sucesso!",
-      });
-      register.reset();
-      actionVisible();
+      const tryUpdate = await updateTheme({ ...values, id: theme.id });
+      if (tryUpdate?.error) {
+        notification.error({
+          message: "Erro!",
+          description: tryUpdate.message,
+        });
+      } else {
+        notification.success({
+          message: "Tema alterado com sucesso!",
+        });
+        actionVisible();
+      }
     }
   };
 
@@ -69,7 +87,7 @@ export default function TemasRegister(props) {
                   return (
                     <Form.Item
                       label={"Nome do tema"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -87,13 +105,13 @@ export default function TemasRegister(props) {
                 }}
               >
                 <Button
-                  loading={loading}
+                  loading={registering}
                   disabled={!register.formState.isValid}
                   type="primary"
                   shape="round"
                   htmlType="submit"
                 >
-                  Cadastrar
+                  {theme.id ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>

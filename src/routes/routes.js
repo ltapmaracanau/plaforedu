@@ -29,10 +29,10 @@ export default function CustomRoutes() {
     <BrowserRouter>
       <Routes>
         <Route element={<ProtectedRoutes />}>
-          <Route path="/cursos" element={<CoursesPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
 
+        <Route path="/cursos" element={<CoursesPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/faleconosco" element={<FaleConosco />} />

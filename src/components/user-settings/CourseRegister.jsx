@@ -22,17 +22,21 @@ export default function CourseRegister(props) {
   const { curso = {}, actionVisible } = props;
 
   const registerNewCourse = useStoreActions(
-    (actions) => actions.adm.registerNewCourse
+    (actions) => actions.courses.registerNewCourse
   );
-  const updateCourse = useStoreActions((actions) => actions.adm.updateCourse);
+  const updateCourse = useStoreActions(
+    (actions) => actions.courses.updateCourse
+  );
 
-  const loading = useStoreState((state) => state.adm.loading);
-  const itinerarios = useStoreState((state) => state.adm.itinerarios);
-  const acessibilidades = useStoreState((state) => state.adm.acessibilidades);
-  const instituicoes = useStoreState((state) => state.adm.instituicoes);
+  const registering = useStoreState((state) => state.courses.registering);
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
+  const acessibilidades = useStoreState(
+    (state) => state.acessibilities.acessibilidades
+  );
+  const instituicoes = useStoreState((state) => state.nstitutions.instituicoes);
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: curso,
     resolver: yupResolver(registerCourseSchema),
@@ -101,7 +105,7 @@ export default function CourseRegister(props) {
                   return (
                     <Form.Item
                       label={"Título do curso"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -118,7 +122,7 @@ export default function CourseRegister(props) {
                   return (
                     <Form.Item
                       label={"Descrição do curso"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -138,7 +142,7 @@ export default function CourseRegister(props) {
                   return (
                     <Form.Item
                       label={"Instituição Certificadora"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -172,7 +176,7 @@ export default function CourseRegister(props) {
                   return (
                     <Form.Item
                       label={"Carga Horária"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -189,7 +193,7 @@ export default function CourseRegister(props) {
                   return (
                     <Form.Item
                       label={"Link do curso"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -206,7 +210,7 @@ export default function CourseRegister(props) {
                   return (
                     <Form.Item
                       label={"Acessibilidades"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -241,7 +245,7 @@ export default function CourseRegister(props) {
                   return (
                     <Form.Item
                       label={"Itinerários"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -277,7 +281,7 @@ export default function CourseRegister(props) {
                 }}
               >
                 <Button
-                  loading={loading}
+                  loading={registering}
                   disabled={!register.formState.isValid}
                   type="primary"
                   shape="round"
