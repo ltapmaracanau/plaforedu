@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
 import { Button, Card, Layout, List, Modal, Input } from "antd";
 import CatCompRegister from "./CatCompRegister";
@@ -10,12 +10,16 @@ const { Content } = Layout;
 const { Search } = Input;
 
 export default function CategCompList() {
-  const getCatComp = useStoreActions((actions) => actions.adm.getCatComp);
+  const getCatComp = useStoreActions(
+    (actions) => actions.competencies.getCatComp
+  );
 
   const [registerVisible, setRegisterVisible] = useState(false);
+  const [modalText, setModalText] = useState("Cadastrar Categoria");
+  const [editandoCatComp, setEditandoCatComp] = useState({});
 
-  const loading = useStoreState((state) => state.adm.loading);
-  const catComp = useStoreState((state) => state.adm.catComp);
+  const loading = useStoreState((state) => state.competencies.loading);
+  const catComp = useStoreState((state) => state.competencies.catComp);
 
   useEffect(() => {
     getCatComp();
@@ -57,6 +61,8 @@ export default function CategCompList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
+                    setEditandoCatComp({});
+                    setModalText("Cadastrar Categoria");
                     setRegisterVisible(true);
                   }}
                 >
@@ -71,7 +77,22 @@ export default function CategCompList() {
               style={{ width: "100%" }}
               renderItem={(item) => {
                 return (
-                  <List.Item key={item.id}>
+                  <List.Item
+                    key={item.id}
+                    actions={[
+                      <Button
+                        key={item.id}
+                        onClick={() => {
+                          setEditandoCatComp(item);
+                          setModalText("Editar Categoria");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>,
+                    ]}
+                  >
                     <List.Item.Meta
                       style={{ fontFamily: "Roboto" }}
                       title={item.name}
@@ -83,11 +104,13 @@ export default function CategCompList() {
             />
           </Card>
           <Modal
-            title={"Cadastrar Categoria de Competência"}
+            title={modalText}
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getCatComp();
+              setEditandoCatComp({});
+              setModalText("Cadastrar Categoria");
               setRegisterVisible(false);
             }}
             bodyStyle={{ backgroundColor: "#f8f8f8" }}
@@ -97,6 +120,8 @@ export default function CategCompList() {
                 key={"back"}
                 onClick={() => {
                   getCatComp();
+                  setEditandoCatComp({});
+                  setModalText("Cadastrar Categoria");
                   setRegisterVisible(false);
                 }}
               >
@@ -105,6 +130,7 @@ export default function CategCompList() {
             ]}
           >
             <CatCompRegister
+              catComp={editandoCatComp}
               actionVisible={() => {
                 setRegisterVisible(false);
                 getCatComp();

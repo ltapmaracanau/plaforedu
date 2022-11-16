@@ -12,15 +12,15 @@ export default function InstitutionRegister(props) {
   const { instituicao = {}, actionVisible } = props;
 
   const registerNewInstitution = useStoreActions(
-    (actions) => actions.adm.registerNewInstitution
+    (actions) => actions.institutions.registerNewInstitution
   );
   const updateInstitution = useStoreActions(
-    (actions) => actions.adm.updateInstitution
+    (actions) => actions.institutions.updateInstitution
   );
-  const loading = useStoreState((state) => state.adm.loading);
+  const registering = useStoreState((state) => state.institutions.registering);
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: instituicao,
     resolver: yupResolver(registerInstitutionSchema),
@@ -92,7 +92,7 @@ export default function InstitutionRegister(props) {
                   return (
                     <Form.Item
                       label={"Nome da instituição"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -109,7 +109,7 @@ export default function InstitutionRegister(props) {
                   return (
                     <Form.Item
                       label={"Sigla da instituição"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -127,7 +127,7 @@ export default function InstitutionRegister(props) {
                 }}
               >
                 <Button
-                  loading={loading}
+                  loading={registering}
                   disabled={!register.formState.isValid}
                   type="primary"
                   shape="round"

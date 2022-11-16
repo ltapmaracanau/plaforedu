@@ -17,7 +17,7 @@ export default function Login() {
   let navigate = useNavigate();
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {},
     resolver: yupResolver(loginSchema),

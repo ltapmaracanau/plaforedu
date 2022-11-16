@@ -16,8 +16,8 @@ export default function AboutPage() {
   const screens = useBreakpoint();
   const navigate = useNavigate();
 
-  const filterDefault = useStoreState((state) => state.cursos.filterDefalult);
-  const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
+  const filterDefault = useStoreState((state) => state.courses.filterDefault);
+  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
 
   const onClickHandler = (itinerario) => {
     setFilter({ ...filterDefault, itinerario: itinerario });

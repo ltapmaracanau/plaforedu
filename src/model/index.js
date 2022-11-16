@@ -1,11 +1,23 @@
+import accessibilitiesModel from "./accessibilities-model";
 import admModel from "./adm-model";
-import cursosModel from "./cursos-model";
-import itinerariosModel from "./itinerarios-model";
+import competenciesModel from "./competencies-model";
+import coursesModel from "./courses-model";
+import instituicoesModel from "./institutions-model";
+import itinerariosModel from "./itineraries-model";
+import rolesModel from "./roles-model";
+import themesModel from "./themes-model";
+import usuariosModel from "./users-model";
 
 const storeModel = {
+  accessibilities: accessibilitiesModel,
   adm: admModel,
-  itinerarios: itinerariosModel,
-  cursos: cursosModel,
+  competencies: competenciesModel,
+  courses: coursesModel,
+  institutions: instituicoesModel,
+  itineraries: itinerariosModel,
+  roles: rolesModel,
+  themes: themesModel,
+  users: usuariosModel,
 };
 
 export default storeModel;

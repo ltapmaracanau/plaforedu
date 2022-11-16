@@ -9,19 +9,33 @@ import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
 const { Content } = Layout;
 
 export default function SubtemaRegister(props) {
-  const { actionVisible } = props;
+  const {
+    subtheme = {
+      name: "",
+      themes: [],
+    },
+    actionVisible,
+  } = props;
 
-  const getThemes = useStoreActions((actions) => actions.adm.getThemes);
+  const subthemeRefactored = {
+    name: subtheme.name,
+    themeIds: subtheme.themes?.map((item) => item.id),
+  };
+
+  const getThemes = useStoreActions((actions) => actions.themes.getThemes);
   const registerSubtheme = useStoreActions(
-    (actions) => actions.adm.registerSubtheme
+    (actions) => actions.themes.registerSubtheme
   );
-  const themes = useStoreState((state) => state.adm.themes);
-  const loading = useStoreState((state) => state.adm.loading);
+  const updateSubtheme = useStoreActions(
+    (actions) => actions.themes.updateSubtheme
+  );
+  const themes = useStoreState((state) => state.themes.themes);
+  const registering = useStoreState((state) => state.themes.registering);
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
-    defaultValues: {},
+    defaultValues: subthemeRefactored,
     resolver: yupResolver(registerSubthemeSchema),
     context: undefined,
     criteriaMode: "firstError",
@@ -32,18 +46,33 @@ export default function SubtemaRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    const newComp = await registerSubtheme(values);
-    if (newComp.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: newComp.message,
-      });
+    if (subtheme === {}) {
+      const newComp = await registerSubtheme(values);
+      if (newComp.error) {
+        notification.error({
+          message: "Algo deu errado!",
+          description: newComp.message,
+        });
+      } else {
+        notification.success({
+          message: "Subtema cadastrado com sucesso!",
+        });
+        register.reset();
+        actionVisible();
+      }
     } else {
-      notification.success({
-        message: "Subtema cadastrado com sucesso!",
-      });
-      register.reset();
-      actionVisible();
+      const tryUpdate = await updateSubtheme({ ...values, id: subtheme.id });
+      if (tryUpdate?.error) {
+        notification.error({
+          message: "Erro!",
+          description: tryUpdate.message,
+        });
+      } else {
+        notification.success({
+          message: "Subtema alterado com sucesso!",
+        });
+        actionVisible();
+      }
     }
   };
 
@@ -79,7 +108,7 @@ export default function SubtemaRegister(props) {
                   return (
                     <Form.Item
                       label={"Nome do subtema"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -96,7 +125,7 @@ export default function SubtemaRegister(props) {
                   return (
                     <Form.Item
                       label={"Temas do subtema"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -132,13 +161,13 @@ export default function SubtemaRegister(props) {
                 }}
               >
                 <Button
-                  loading={loading}
+                  loading={registering}
                   disabled={!register.formState.isValid}
                   type="primary"
                   shape="round"
                   htmlType="submit"
                 >
-                  Cadastrar
+                  {subtheme.id ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>

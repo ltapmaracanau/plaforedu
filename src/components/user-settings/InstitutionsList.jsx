@@ -11,13 +11,15 @@ const { Search } = Input;
 
 export default function InstitutionList() {
   const getInstituicoes = useStoreActions(
-    (actions) => actions.adm.getInstituicoes
+    (actions) => actions.institutions.getInstituicoes
   );
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
-  const loading = useStoreState((state) => state.adm.loading);
-  const instituicoes = useStoreState((state) => state.adm.instituicoes);
+  const loading = useStoreState((state) => state.institutions.loading);
+  const instituicoes = useStoreState(
+    (state) => state.institutions.instituicoes
+  );
 
   const [editandoInstituicao, setEditandoInstituicao] = useState(null);
 
