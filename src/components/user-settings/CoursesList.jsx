@@ -10,22 +10,30 @@ const { Content } = Layout;
 const { Search } = Input;
 
 export default function CoursesList() {
-  const getCursos = useStoreActions((actions) => actions.adm.getCursos);
-  const getCoursesInfoRelated = useStoreActions(
-    (actions) => actions.adm.getCoursesInfoRelated
+  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
+  const getItinerarios = useStoreActions(
+    (actions) => actions.itineraries.getItinerarios
+  );
+  const getAcessibilidades = useStoreActions(
+    (actions) => actions.accessibilities.getAcessibilidades
+  );
+  const getInstituicoes = useStoreActions(
+    (actions) => actions.institutions.getInstituicoes
   );
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
-  const loading = useStoreState((state) => state.adm.loading);
-  const cursos = useStoreState((state) => state.adm.cursos);
+  const loading = useStoreState((state) => state.courses.loading);
+  const cursos = useStoreState((state) => state.courses.cursosSecondary);
 
   const [editandoCurso, setEditandoCurso] = useState({});
   const [modalText, setModalText] = useState("Cadastrar Curso");
 
   useEffect(() => {
     getCursos();
-    getCoursesInfoRelated();
+    getItinerarios();
+    getAcessibilidades();
+    getInstituicoes();
   }, [getCursos]);
 
   return (
@@ -86,7 +94,7 @@ export default function CoursesList() {
                         key={item.id}
                         onClick={() => {
                           //setEditandoCurso(item);
-                          //setModalText("Alterar Curso");
+                          //setModalText("Editar Curso");
                           //setRegisterVisible(true);
                         }}
                         icon={<EditOutlined />}

@@ -13,14 +13,15 @@ export default function UserRegister(props) {
   const { actionVisible } = props;
 
   const registerNewUser = useStoreActions(
-    (actions) => actions.adm.registerNewUser
+    (actions) => actions.users.registerNewUser
   );
-  const getRoles = useStoreActions((state) => state.adm.getRoles);
-  const loading = useStoreState((state) => state.adm.loading);
-  const roles = useStoreState((state) => state.adm.roles);
+  const getRoles = useStoreActions((state) => state.roles.getRoles);
+  const loading = useStoreState((state) => state.users.loading);
+  const registering = useStoreState((state) => state.users.registering);
+  const roles = useStoreState((state) => state.roles.roles);
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {},
     resolver: yupResolver(registerSchema),
@@ -84,7 +85,7 @@ export default function UserRegister(props) {
                   return (
                     <Form.Item
                       label={"Nome Completo"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -101,7 +102,7 @@ export default function UserRegister(props) {
                   return (
                     <Form.Item
                       label={"Instituição"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -118,7 +119,7 @@ export default function UserRegister(props) {
                   return (
                     <Form.Item
                       label={"Login"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -135,7 +136,7 @@ export default function UserRegister(props) {
                   return (
                     <Form.Item
                       label={"CPF"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -156,7 +157,7 @@ export default function UserRegister(props) {
                   return (
                     <Form.Item
                       label={"Número de Telefone"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -177,7 +178,7 @@ export default function UserRegister(props) {
                   return (
                     <Form.Item
                       label={"Cargo"}
-                      style={{ marginBottom: "0" }}
+                      style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -206,7 +207,7 @@ export default function UserRegister(props) {
                 }}
               >
                 <Button
-                  loading={loading}
+                  loading={registering}
                   disabled={!register.formState.isValid}
                   type="primary"
                   shape="round"

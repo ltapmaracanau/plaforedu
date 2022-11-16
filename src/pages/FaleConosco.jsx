@@ -38,7 +38,7 @@ export default function FaleConosco() {
   const screens = useBreakpoint();
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
       from_name: "",

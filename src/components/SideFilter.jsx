@@ -21,27 +21,27 @@ const { useBreakpoint } = Grid;
 export default function SideFilter({ debounceTimeout = 800 }) {
   const screens = useBreakpoint();
 
-  const subtemas = useStoreState((state) => state.cursos.subtemas);
-  const temas = useStoreState((state) => state.cursos.temas);
-  const competencias = useStoreState((state) => state.cursos.competencias);
+  const subtemas = useStoreState((state) => state.courses.subtemas);
+  const temas = useStoreState((state) => state.courses.temas);
+  const competencias = useStoreState((state) => state.courses.competencias);
   const categoriasDeCompetencias = useStoreState(
-    (state) => state.cursos.categoriasDeCompetencias
+    (state) => state.courses.categoriasDeCompetencias
   );
-  const instituicoes = useStoreState((state) => state.cursos.instituicoes);
-  const filterDefault = useStoreState((state) => state.cursos.filterDefault);
-  const filter = useStoreState((state) => state.cursos.filter);
-  const itinerarios = useStoreState((state) => state.itinerarios.itinerarios);
+  const instituicoes = useStoreState((state) => state.courses.instituicoes);
+  const filterDefault = useStoreState((state) => state.courses.filterDefault);
+  const filter = useStoreState((state) => state.courses.filter);
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
 
   const [filtroCompleto, setFiltroCompleto] = useState(false);
 
-  const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
+  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const setTipoVisualizacao = useStoreActions(
     (actions) => actions.adm.setTipoVisualizacao
   );
 
   const register = useRef(
     useForm({
-      mode: "onBlur",
+      mode: "onChange",
       reValidateMode: "onChange",
       defaultValues: filter,
       context: undefined,

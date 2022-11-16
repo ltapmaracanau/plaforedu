@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
 import { Button, Card, Layout, List, Modal, Input } from "antd";
 import TemasRegister from "./TemasRegister";
@@ -10,12 +10,14 @@ const { Content } = Layout;
 const { Search } = Input;
 
 export default function TemasList() {
-  const getThemes = useStoreActions((actions) => actions.adm.getThemes);
+  const getThemes = useStoreActions((actions) => actions.themes.getThemes);
 
   const [registerVisible, setRegisterVisible] = useState(false);
+  const [modalText, setModalText] = useState("Cadastrar Tema");
+  const [editandoTema, setEditandoTema] = useState({});
 
-  const loading = useStoreState((state) => state.adm.loading);
-  const themes = useStoreState((state) => state.adm.themes);
+  const loading = useStoreState((state) => state.themes.loading);
+  const themes = useStoreState((state) => state.themes.themes);
 
   useEffect(() => {
     getThemes();
@@ -57,6 +59,8 @@ export default function TemasList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
+                    setEditandoTema({});
+                    setModalText("Cadastrar Tema");
                     setRegisterVisible(true);
                   }}
                 >
@@ -71,7 +75,22 @@ export default function TemasList() {
               style={{ width: "100%" }}
               renderItem={(item) => {
                 return (
-                  <List.Item key={item.id}>
+                  <List.Item
+                    key={item.id}
+                    actions={[
+                      <Button
+                        onClick={() => {
+                          setEditandoTema(item);
+                          setModalText("Editar Tema");
+                          setRegisterVisible(true);
+                        }}
+                        key={item.id}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>,
+                    ]}
+                  >
                     <List.Item.Meta
                       style={{ fontFamily: "Roboto" }}
                       title={item.name}
@@ -82,11 +101,13 @@ export default function TemasList() {
             />
           </Card>
           <Modal
-            title={"Cadastrar Tema"}
+            title={modalText}
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getThemes();
+              setEditandoTema({});
+              setModalText("Cadastrar Tema");
               setRegisterVisible(false);
             }}
             bodyStyle={{ backgroundColor: "#f8f8f8" }}
@@ -96,6 +117,8 @@ export default function TemasList() {
                 key={"back"}
                 onClick={() => {
                   getThemes();
+                  setEditandoTema({});
+                  setModalText("Cadastrar Tema");
                   setRegisterVisible(false);
                 }}
               >
@@ -104,9 +127,12 @@ export default function TemasList() {
             ]}
           >
             <TemasRegister
+              theme={editandoTema}
               actionVisible={() => {
                 setRegisterVisible(false);
                 getThemes();
+                setEditandoTema({});
+                setModalText("Cadastrar Tema");
               }}
             />
           </Modal>

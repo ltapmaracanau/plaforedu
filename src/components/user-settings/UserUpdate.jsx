@@ -27,19 +27,21 @@ const { Content } = Layout;
 export default function UserUpdate(props) {
   const { id, actionVisible } = props;
 
-  const updateUser = useStoreActions((actions) => actions.adm.updateUser);
-  const activeUser = useStoreActions((actions) => actions.adm.activeUser);
-  const archiveUser = useStoreActions((actions) => actions.adm.archiveUser);
-  const blockUser = useStoreActions((actions) => actions.adm.blockUser);
+  const updateUser = useStoreActions((actions) => actions.users.updateUser);
+  const activeUser = useStoreActions((actions) => actions.users.activeUser);
+  const archiveUser = useStoreActions((actions) => actions.users.archiveUser);
+  const blockUser = useStoreActions((actions) => actions.users.blockUser);
   const resendCredentials = useStoreActions(
-    (actions) => actions.adm.resendCredentials
+    (actions) => actions.users.resendCredentials
   );
-  const getRoles = useStoreActions((state) => state.adm.getRoles);
-  const getUniqueUser = useStoreActions((actions) => actions.adm.getUniqueUser);
+  const getRoles = useStoreActions((state) => state.roles.getRoles);
+  const getUniqueUser = useStoreActions(
+    (actions) => actions.users.getUniqueUser
+  );
 
-  const loading = useStoreState((state) => state.adm.loading);
-  const loadingSecondary = useStoreState((state) => state.adm.loadingSecondary);
-  const roles = useStoreState((state) => state.adm.roles);
+  const loading = useStoreState((state) => state.users.loading);
+  const registering = useStoreState((state) => state.users.registering);
+  const roles = useStoreState((state) => state.roles.roles);
 
   const [iniciando, setIniciando] = useState(true);
   const [user, setUser] = useState({});
@@ -47,7 +49,7 @@ export default function UserUpdate(props) {
   const [userArchived, setUserArchived] = useState(false);
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: user,
     resolver: yupResolver(updateUserSchema),
@@ -295,7 +297,7 @@ export default function UserUpdate(props) {
                   Salvar
                 </Button>
                 <Button
-                  loading={loadingSecondary}
+                  loading={registering}
                   disabled={user.status !== "PENDING"}
                   type="primary"
                   shape="round"

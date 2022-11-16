@@ -16,8 +16,8 @@ const { Title } = Typography;
 const { Content } = Layout;
 
 export default function HomePage() {
-  const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
-  const filterDefault = useStoreState((state) => state.cursos.filterDefault);
+  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
+  const filterDefault = useStoreState((state) => state.courses.filterDefault);
 
   const onClickItinerario = (itinerario) => {
     setFilter({

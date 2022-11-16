@@ -24,6 +24,7 @@ export const registerCompSchema = yup.object().shape({
     .string()
     .required("Obrigatório!")
     .max(256, "256 caracteres no máximo!"),
+  description: yup.string().required("Obrigatório!"),
   competenciesCategoryIds: yup
     .array()
     .of(yup.string())

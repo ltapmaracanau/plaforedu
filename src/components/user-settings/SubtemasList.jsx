@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
 import { Button, Card, Layout, List, Modal, Input, Tag } from "antd";
 import SubtemaRegister from "./SubtemaRegister";
@@ -10,12 +10,16 @@ const { Content } = Layout;
 const { Search } = Input;
 
 export default function SubtemasList() {
-  const getSubthemes = useStoreActions((actions) => actions.adm.getSubthemes);
+  const getSubthemes = useStoreActions(
+    (actions) => actions.themes.getSubthemes
+  );
 
   const [registerVisible, setRegisterVisible] = useState(false);
+  const [modalText, setModalText] = useState("Cadastrar Subtema");
+  const [editandoSubtema, setEditandoSubtema] = useState({});
 
-  const loading = useStoreState((state) => state.adm.loading);
-  const subthemes = useStoreState((state) => state.adm.subthemes);
+  const loading = useStoreState((state) => state.themes.loading);
+  const subthemes = useStoreState((state) => state.themes.subthemes);
 
   useEffect(() => {
     getSubthemes();
@@ -57,6 +61,8 @@ export default function SubtemasList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
+                    setEditandoSubtema({});
+                    setModalText("Cadastrar Subtema");
                     setRegisterVisible(true);
                   }}
                 >
@@ -71,7 +77,22 @@ export default function SubtemasList() {
               style={{ width: "100%" }}
               renderItem={(item) => {
                 return (
-                  <List.Item key={item.id}>
+                  <List.Item
+                    key={item.id}
+                    actions={[
+                      <Button
+                        key={item.id}
+                        onClick={() => {
+                          setEditandoSubtema(item);
+                          setModalText("Editar Subtema");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>,
+                    ]}
+                  >
                     <List.Item.Meta
                       style={{ fontFamily: "Roboto" }}
                       title={item.name}
@@ -91,11 +112,13 @@ export default function SubtemasList() {
             />
           </Card>
           <Modal
-            title={"Cadastrar Subtema"}
+            title={modalText}
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
               getSubthemes();
+              setEditandoSubtema({});
+              setModalText("Cadastrar Subtema");
               setRegisterVisible(false);
             }}
             bodyStyle={{ backgroundColor: "#f8f8f8" }}
@@ -105,6 +128,8 @@ export default function SubtemasList() {
                 key={"back"}
                 onClick={() => {
                   getSubthemes();
+                  setEditandoSubtema({});
+                  setModalText("Cadastrar Subtema");
                   setRegisterVisible(false);
                 }}
               >
@@ -113,8 +138,11 @@ export default function SubtemasList() {
             ]}
           >
             <SubtemaRegister
+              subtheme={editandoSubtema}
               actionVisible={() => {
                 setRegisterVisible(false);
+                setEditandoSubtema({});
+                setModalText("Cadastrar Subtema");
                 getSubthemes();
               }}
             />

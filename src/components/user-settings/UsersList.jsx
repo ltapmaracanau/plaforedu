@@ -41,10 +41,10 @@ const colorStatus = (status) => {
 };
 
 export default function UsersList() {
-  const getUsers = useStoreActions((actions) => actions.adm.getUsers);
+  const getUsers = useStoreActions((actions) => actions.users.getUsers);
 
-  const loading = useStoreState((state) => state.adm.loading);
-  const users = useStoreState((state) => state.adm.users);
+  const loading = useStoreState((state) => state.users.loading);
+  const users = useStoreState((state) => state.users.users);
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [editandoUsuario, setEditandoUsuario] = useState({});

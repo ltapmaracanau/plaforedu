@@ -24,7 +24,7 @@ export default function ResetPassword() {
   let navigate = useNavigate();
 
   const register = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {},
     resolver: yupResolver(resetPasswordSchema),

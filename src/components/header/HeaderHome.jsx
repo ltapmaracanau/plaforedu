@@ -33,8 +33,8 @@ export default function HeaderHome() {
   const screens = useBreakpoint();
   let navigate = useNavigate();
 
-  const setFilter = useStoreActions((actions) => actions.cursos.setFilter);
-  const filterDefault = useStoreState((state) => state.cursos.filterDefault);
+  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
+  const filterDefault = useStoreState((state) => state.courses.filterDefault);
   const isAuthenticated = useStoreState((state) => state.adm.isAuthenticated);
   const logout = useStoreActions((actions) => actions.adm.logout);
 
