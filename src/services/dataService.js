@@ -153,6 +153,7 @@ export const dataService = {
     AuthAxios.put(`/competencies/${payload.id}/update`, {
       name: payload.name,
       competenciesCategoryIds: payload.competenciesCategoryIds,
+      description: payload.description,
     })
       .then(() => {})
       .catch((error) => ({
