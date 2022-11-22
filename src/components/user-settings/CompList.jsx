@@ -3,7 +3,18 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal, Input, Tag, Space } from "antd";
+import {
+  Button,
+  Card,
+  Layout,
+  List,
+  Modal,
+  Input,
+  Tag,
+  Space,
+  Tooltip,
+  Switch,
+} from "antd";
 import CompRegister from "./CompRegister";
 
 const { Content } = Layout;
@@ -15,6 +26,8 @@ export default function CompList() {
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Competência");
   const [editandoComp, setEditandoComp] = useState({});
+  const [showFiled, setShowFiled] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   const loading = useStoreState((state) => state.competencies.loading);
   const competencias = useStoreState(
@@ -50,13 +63,33 @@ export default function CompList() {
                 <Search
                   allowClear
                   onSearch={(e) => {
-                    getComp({ query: e });
+                    setTextSearch(e);
+                    getComp({
+                      query: e,
+                      showFiled: showFiled,
+                    });
                   }}
                   style={{
-                    marginRight: "30px",
+                    marginRight: "10px",
                   }}
                   placeholder={"Buscar competências"}
                 />
+                <Tooltip title={"Exibir Arquivados"}>
+                  <Switch
+                    defaultChecked={showFiled}
+                    checked={showFiled}
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    onClick={(checked) => {
+                      setShowFiled(checked);
+                      getComp({
+                        query: textSearch,
+                        showFiled: checked,
+                      });
+                    }}
+                  />
+                </Tooltip>
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
@@ -119,7 +152,10 @@ export default function CompList() {
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getComp();
+              getComp({
+                query: textSearch,
+                showFiled: showFiled,
+              });
               setEditandoComp({});
               setModalText("Cadastrar Competência");
               setRegisterVisible(false);
@@ -130,7 +166,10 @@ export default function CompList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getComp();
+                  getComp({
+                    query: textSearch,
+                    showFiled: showFiled,
+                  });
                   setEditandoComp({});
                   setModalText("Cadastrar Competência");
                   setRegisterVisible(false);
@@ -144,7 +183,10 @@ export default function CompList() {
               comp={editandoComp}
               actionVisible={() => {
                 setRegisterVisible(false);
-                getComp();
+                getComp({
+                  query: textSearch,
+                  showFiled: showFiled,
+                });
               }}
             />
           </Modal>

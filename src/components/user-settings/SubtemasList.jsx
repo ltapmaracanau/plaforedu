@@ -3,7 +3,17 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal, Input, Tag } from "antd";
+import {
+  Button,
+  Card,
+  Layout,
+  List,
+  Modal,
+  Input,
+  Tag,
+  Tooltip,
+  Switch,
+} from "antd";
 import SubtemaRegister from "./SubtemaRegister";
 
 const { Content } = Layout;
@@ -17,6 +27,8 @@ export default function SubtemasList() {
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Subtema");
   const [editandoSubtema, setEditandoSubtema] = useState({});
+  const [showFiled, setShowFiled] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   const loading = useStoreState((state) => state.themes.loading);
   const subthemes = useStoreState((state) => state.themes.subthemes);
@@ -50,13 +62,33 @@ export default function SubtemasList() {
                 <Search
                   allowClear
                   onSearch={(e) => {
-                    getSubthemes({ query: e });
+                    setTextSearch(e);
+                    getSubthemes({
+                      query: e,
+                      showFiled: showFiled,
+                    });
                   }}
                   style={{
-                    marginRight: "30px",
+                    marginRight: "10px",
                   }}
                   placeholder={"Buscar subtemas"}
                 />
+                <Tooltip title={"Exibir Arquivados"}>
+                  <Switch
+                    defaultChecked={showFiled}
+                    checked={showFiled}
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    onClick={(checked) => {
+                      setShowFiled(checked);
+                      getSubthemes({
+                        query: textSearch,
+                        showFiled: checked,
+                      });
+                    }}
+                  />
+                </Tooltip>
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
@@ -116,7 +148,10 @@ export default function SubtemasList() {
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getSubthemes();
+              getSubthemes({
+                query: textSearch,
+                showFiled: showFiled,
+              });
               setEditandoSubtema({});
               setModalText("Cadastrar Subtema");
               setRegisterVisible(false);
@@ -127,7 +162,10 @@ export default function SubtemasList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getSubthemes();
+                  getSubthemes({
+                    query: textSearch,
+                    showFiled: showFiled,
+                  });
                   setEditandoSubtema({});
                   setModalText("Cadastrar Subtema");
                   setRegisterVisible(false);
@@ -143,7 +181,10 @@ export default function SubtemasList() {
                 setRegisterVisible(false);
                 setEditandoSubtema({});
                 setModalText("Cadastrar Subtema");
-                getSubthemes();
+                getSubthemes({
+                  query: textSearch,
+                  showFiled: showFiled,
+                });
               }}
             />
           </Modal>

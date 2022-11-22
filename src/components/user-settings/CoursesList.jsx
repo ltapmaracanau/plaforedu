@@ -3,7 +3,16 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal, Input } from "antd";
+import {
+  Button,
+  Card,
+  Layout,
+  List,
+  Modal,
+  Input,
+  Tooltip,
+  Switch,
+} from "antd";
 import CourseRegister from "./CourseRegister";
 
 const { Content } = Layout;
@@ -28,6 +37,8 @@ export default function CoursesList() {
 
   const [editandoCurso, setEditandoCurso] = useState({});
   const [modalText, setModalText] = useState("Cadastrar Curso");
+  const [showFiled, setShowFiled] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   useEffect(() => {
     getCursos();
@@ -61,13 +72,33 @@ export default function CoursesList() {
                 <Search
                   allowClear
                   onSearch={(e) => {
-                    getCursos({ query: e });
+                    setTextSearch(e);
+                    getCursos({
+                      query: e,
+                      showFiled: showFiled,
+                    });
                   }}
                   style={{
                     marginRight: "30px",
                   }}
                   placeholder={"Buscar cursos"}
                 />
+                <Tooltip title={"Exibir Arquivados"}>
+                  <Switch
+                    defaultChecked={showFiled}
+                    checked={showFiled}
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    onClick={(checked) => {
+                      setShowFiled(checked);
+                      getCursos({
+                        query: textSearch,
+                        showFiled: checked,
+                      });
+                    }}
+                  />
+                </Tooltip>
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
@@ -125,7 +156,10 @@ export default function CoursesList() {
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getCursos();
+              getCursos({
+                query: textSearch,
+                showFiled: showFiled,
+              });
               setEditandoCurso({});
               setModalText("Cadastrar Curso");
               setRegisterVisible(false);
@@ -136,7 +170,10 @@ export default function CoursesList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getCursos();
+                  getCursos({
+                    query: textSearch,
+                    showFiled: showFiled,
+                  });
                   setEditandoCurso({});
                   setModalText("Cadastrar Curso");
                   setRegisterVisible(false);
@@ -150,7 +187,10 @@ export default function CoursesList() {
               curso={editandoCurso}
               actionVisible={() => {
                 setRegisterVisible(false);
-                getCursos();
+                getCursos({
+                  query: textSearch,
+                  showFiled: showFiled,
+                });
               }}
             />
           </Modal>

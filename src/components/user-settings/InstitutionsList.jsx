@@ -3,7 +3,18 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Input, Layout, List, Modal } from "antd";
+import {
+  Button,
+  Card,
+  Input,
+  Layout,
+  List,
+  Modal,
+  Space,
+  Switch,
+  Tag,
+  Tooltip,
+} from "antd";
 import InstitutionRegister from "./InstitutionRegister";
 
 const { Content } = Layout;
@@ -22,6 +33,8 @@ export default function InstitutionList() {
   );
 
   const [editandoInstituicao, setEditandoInstituicao] = useState(null);
+  const [showFiled, setShowFiled] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   useEffect(() => {
     getInstituicoes();
@@ -52,13 +65,33 @@ export default function InstitutionList() {
                 <Search
                   allowClear
                   onSearch={(e) => {
-                    getInstituicoes({ query: e });
+                    setTextSearch(e);
+                    getInstituicoes({
+                      query: e,
+                      showFiled: showFiled,
+                    });
                   }}
                   style={{
-                    marginRight: "30px",
+                    marginRight: "10px",
                   }}
                   placeholder={"Buscar instituições"}
                 />
+                <Tooltip title={"Exibir Arquivados"}>
+                  <Switch
+                    defaultChecked={showFiled}
+                    checked={showFiled}
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    onClick={(checked) => {
+                      setShowFiled(checked);
+                      getInstituicoes({
+                        query: textSearch,
+                        showFiled: checked,
+                      });
+                    }}
+                  />
+                </Tooltip>
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
@@ -96,7 +129,12 @@ export default function InstitutionList() {
                     <List.Item.Meta
                       style={{ fontFamily: "Roboto" }}
                       title={item.abbreviation}
-                      description={item.name}
+                      description={
+                        <Space direction="horizontal">
+                          {item.name}
+                          {item.uf && <Tag color="blue">{item.uf}</Tag>}
+                        </Space>
+                      }
                     />
                   </List.Item>
                 );
@@ -112,7 +150,10 @@ export default function InstitutionList() {
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getInstituicoes();
+              getInstituicoes({
+                query: textSearch,
+                showFiled: showFiled,
+              });
               setRegisterVisible(false);
             }}
             bodyStyle={{ backgroundColor: "#f8f8f8" }}
@@ -121,7 +162,10 @@ export default function InstitutionList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getInstituicoes();
+                  getInstituicoes({
+                    query: textSearch,
+                    showFiled: showFiled,
+                  });
                   setRegisterVisible(false);
                 }}
               >
@@ -133,7 +177,10 @@ export default function InstitutionList() {
               instituicao={editandoInstituicao}
               actionVisible={() => {
                 setRegisterVisible(false);
-                getInstituicoes();
+                getInstituicoes({
+                  query: textSearch,
+                  showFiled: showFiled,
+                });
               }}
             />
           </Modal>

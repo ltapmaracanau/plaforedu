@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerInstitutionSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification } from "antd";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  Layout,
+  notification,
+  Select,
+  Space,
+} from "antd";
 
 const { Content } = Layout;
 
@@ -17,7 +26,14 @@ export default function InstitutionRegister(props) {
   const updateInstitution = useStoreActions(
     (actions) => actions.institutions.updateInstitution
   );
+  const getEstados = useStoreActions(
+    (actions) => actions.institutions.getEstados
+  );
+  const estados = useStoreState((state) => state.institutions.estados);
   const registering = useStoreState((state) => state.institutions.registering);
+  const loadingEstados = useStoreState(
+    (state) => state.institutions.loadingEstados
+  );
 
   const register = useForm({
     mode: "onChange",
@@ -65,6 +81,10 @@ export default function InstitutionRegister(props) {
       }
     }
   };
+
+  useEffect(() => {
+    getEstados();
+  }, [getEstados]);
 
   return (
     <>
@@ -115,6 +135,44 @@ export default function InstitutionRegister(props) {
                       hasFeedback
                     >
                       <Input placeholder="Sigla" {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+              <Controller
+                name="uf"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      label={"Estado da instituição"}
+                      style={{ marginBottom: "20px" }}
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Select
+                        placeholder="Estado"
+                        {...field}
+                        loading={loadingEstados}
+                        showSearch
+                        filterOption={(input, option) => {
+                          return (
+                            option.children
+                              .toLowerCase()
+                              .indexOf(input.toLowerCase()) >= 0
+                          );
+                        }}
+                      >
+                        {estados.map((element) => (
+                          <Select.Option
+                            key={element.sigla}
+                            value={element.sigla}
+                          >
+                            {element.nome}
+                          </Select.Option>
+                        ))}
+                      </Select>
                     </Form.Item>
                   );
                 }}

@@ -27,6 +27,7 @@ const admModel = {
       } catch (error) {
         localStorage.removeItem("token");
         AuthAxios.defaults.headers.Authorization = undefined;
+        actions.setIsAuthenticated(false);
       }
     } else {
       actions.setIsAuthenticated(false);

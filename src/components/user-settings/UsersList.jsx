@@ -49,6 +49,7 @@ export default function UsersList() {
   const [registerVisible, setRegisterVisible] = useState(false);
   const [editandoUsuario, setEditandoUsuario] = useState({});
   const [editVisible, setEditVisible] = useState(false);
+
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 

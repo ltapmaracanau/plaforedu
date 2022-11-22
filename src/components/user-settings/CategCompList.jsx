@@ -3,7 +3,16 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal, Input } from "antd";
+import {
+  Button,
+  Card,
+  Layout,
+  List,
+  Modal,
+  Input,
+  Tooltip,
+  Switch,
+} from "antd";
 import CatCompRegister from "./CatCompRegister";
 
 const { Content } = Layout;
@@ -17,6 +26,8 @@ export default function CategCompList() {
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Categoria");
   const [editandoCatComp, setEditandoCatComp] = useState({});
+  const [showFiled, setShowFiled] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   const loading = useStoreState((state) => state.competencies.loading);
   const catComp = useStoreState((state) => state.competencies.catComp);
@@ -50,13 +61,33 @@ export default function CategCompList() {
                 <Search
                   allowClear
                   onSearch={(e) => {
-                    getCatComp({ query: e });
+                    setTextSearch(e);
+                    getCatComp({
+                      query: e,
+                      showFiled: showFiled,
+                    });
                   }}
                   style={{
-                    marginRight: "30px",
+                    marginRight: "10px",
                   }}
                   placeholder={"Buscar categorias"}
                 />
+                <Tooltip title={"Exibir Arquivados"}>
+                  <Switch
+                    defaultChecked={showFiled}
+                    checked={showFiled}
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    onClick={(checked) => {
+                      setShowFiled(checked);
+                      getCatComp({
+                        query: textSearch,
+                        showFiled: checked,
+                      });
+                    }}
+                  />
+                </Tooltip>
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
@@ -108,7 +139,10 @@ export default function CategCompList() {
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getCatComp();
+              getCatComp({
+                query: textSearch,
+                showFiled: showFiled,
+              });
               setEditandoCatComp({});
               setModalText("Cadastrar Categoria");
               setRegisterVisible(false);
@@ -119,7 +153,10 @@ export default function CategCompList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getCatComp();
+                  getCatComp({
+                    query: textSearch,
+                    showFiled: showFiled,
+                  });
                   setEditandoCatComp({});
                   setModalText("Cadastrar Categoria");
                   setRegisterVisible(false);
@@ -133,7 +170,10 @@ export default function CategCompList() {
               catComp={editandoCatComp}
               actionVisible={() => {
                 setRegisterVisible(false);
-                getCatComp();
+                getCatComp({
+                  query: textSearch,
+                  showFiled: showFiled,
+                });
               }}
             />
           </Modal>
