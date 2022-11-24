@@ -79,6 +79,7 @@ export const registerInstitutionSchema = yup.object().shape({
     .string()
     .required("Obrigatório!")
     .max(256, "256 caracteres no máximo!"),
+  uf: yup.string().required("Obrigatório!").max(2, "2 caracteres no máximo!"),
   abbreviation: yup.string().required("Obrigatório!"),
 });
 

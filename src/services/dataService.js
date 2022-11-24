@@ -248,6 +248,7 @@ export const dataService = {
     AuthAxios.put(`/institutions/${payload.id}/update`, {
       name: payload.name,
       abbreviation: payload.abbreviation,
+      uf: payload.uf,
     })
       .then(() => ({}))
       .catch((error) => ({
@@ -325,8 +326,10 @@ export const dataService = {
           : "Algo deu errado!",
       })),
 
-  getInstituicoes: (payload = { query: "" }) =>
-    AuthAxios.get(`/institutions/all?search=${payload.query}`)
+  getInstituicoes: (payload = { query: "", showFiled: false }) =>
+    AuthAxios.get(
+      `/institutions/all?search=${payload.query}&includeFiled=${payload.showFiled}`
+    )
       .then((response) => response.data)
       .catch((error) => ({
         error: true,
@@ -335,26 +338,8 @@ export const dataService = {
           : "Algo deu errado!",
       })),
 
-  getThemes: (payload = { query: "" }) =>
-    AuthAxios.get(`/themes/list?search=${payload.query}`)
-      .then((response) => response.data)
-      .catch((error) => ({
-        error: true,
-        message: error.response.data
-          ? error.response.data.message
-          : "Algo deu errado!",
-      })),
-  getSubthemes: (payload = { query: "" }) =>
-    AuthAxios.get(`/sub-themes/list?search=${payload.query}`)
-      .then((response) => response.data)
-      .catch((error) => ({
-        error: true,
-        message: error.response.data
-          ? error.response.data.message
-          : "Algo deu errado!",
-      })),
-  getCompetencias: (payload = { query: "" }) =>
-    AuthAxios.get(`/competencies/list?search=${payload.query}`)
+  getEstados: () =>
+    AuthAxios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados`)
       .then((response) => response.data)
       .catch((error) => ({
         error: true,
@@ -363,8 +348,32 @@ export const dataService = {
           : "Algo deu errado!",
       })),
 
-  getCatComp: (payload = { query: "" }) =>
-    AuthAxios.get(`/competencies-category/list?search=${payload.query}`)
+  getThemes: (payload = { query: "", showFiled: false }) =>
+    AuthAxios.get(
+      `/themes/list?search=${payload.query}&includeFiled=${payload.showFiled}`
+    )
+      .then((response) => response.data)
+      .catch((error) => ({
+        error: true,
+        message: error.response.data
+          ? error.response.data.message
+          : "Algo deu errado!",
+      })),
+  getSubthemes: (payload = { query: "", showFiled: false }) =>
+    AuthAxios.get(
+      `/sub-themes/list?search=${payload.query}&includeFiled=${payload.showFiled}`
+    )
+      .then((response) => response.data)
+      .catch((error) => ({
+        error: true,
+        message: error.response.data
+          ? error.response.data.message
+          : "Algo deu errado!",
+      })),
+  getCompetencias: (payload = { query: "", showFiled: false }) =>
+    AuthAxios.get(
+      `/competencies/list?search=${payload.query}&includeFiled=${payload.showFiled}`
+    )
       .then((response) => response.data)
       .catch((error) => ({
         error: true,
@@ -373,8 +382,22 @@ export const dataService = {
           : "Algo deu errado!",
       })),
 
-  getCursos: (payload = { query: "" }) =>
-    AuthAxios.get(`/courses/all?search=${payload.query}`)
+  getCatComp: (payload = { query: "", showFiled: false }) =>
+    AuthAxios.get(
+      `/competencies-category/list?search=${payload.query}&includeFiled=${payload.showFiled}`
+    )
+      .then((response) => response.data)
+      .catch((error) => ({
+        error: true,
+        message: error.response.data
+          ? error.response.data.message
+          : "Algo deu errado!",
+      })),
+
+  getCursos: (payload = { query: "", showFiled: false }) =>
+    AuthAxios.get(
+      `/courses/all?search=${payload.query}&includeFiled=${payload.showFiled}`
+    )
       .then((response) => response.data)
       .catch((error) => ({
         error: true,
