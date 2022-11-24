@@ -3,40 +3,55 @@ import { dataService } from "../services/dataService";
 
 const instituicoesModel = {
   loading: false,
+  loadingEstados: false,
   registering: false,
   instituicoes: [],
+  estados: [],
 
   registerNewInstitution: thunk(async (actions, payload) => {
-    actions.setLoading(true);
+    actions.setRegistering(true);
     const newInstitution = await dataService.registerInstitution({
       ...payload,
     });
-    actions.setLoading(false);
+    actions.setRegistering(false);
     return newInstitution;
   }),
 
   updateInstitution: thunk(async (actions, payload) => {
-    actions.setLoading(true);
+    actions.setRegistering(true);
     const tryUpdateInstitution = await dataService.updateInstitution({
       ...payload,
     });
-    actions.setLoading(false);
+    actions.setRegistering(false);
     return tryUpdateInstitution;
   }),
 
-  getInstituicoes: thunk(async (actions, payload = { query: "" }) => {
-    actions.setLoading(true);
-    const instituicoes = await dataService.getInstituicoes({
-      query: payload.query,
-    });
-    if (instituicoes?.length >= 0) {
-      actions.setInstituicoes(instituicoes);
+  getInstituicoes: thunk(
+    async (actions, payload = { query: "", showFiled: false }) => {
+      actions.setLoading(true);
+      const instituicoes = await dataService.getInstituicoes(payload);
+      if (instituicoes?.length >= 0) {
+        actions.setInstituicoes(instituicoes);
+      }
+      actions.setLoading(false);
     }
-    actions.setLoading(false);
+  ),
+
+  getEstados: thunk(async (actions, _) => {
+    actions.setLoadingEstados(true);
+    const estados = await dataService.getEstados();
+    if (estados?.length >= 0) {
+      actions.setEstados(estados);
+    }
+    actions.setLoadingEstados(false);
   }),
 
   setLoading: action((state, payload) => {
     state.loading = payload;
+  }),
+
+  setLoadingEstados: action((state, payload) => {
+    state.loadingEstados = payload;
   }),
 
   setRegistering: action((state, payload) => {
@@ -45,6 +60,10 @@ const instituicoesModel = {
 
   setInstituicoes: action((state, payload) => {
     state.instituicoes = payload;
+  }),
+
+  setEstados: action((state, payload) => {
+    state.estados = payload;
   }),
 };
 

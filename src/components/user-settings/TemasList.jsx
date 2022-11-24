@@ -3,7 +3,16 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, Layout, List, Modal, Input } from "antd";
+import {
+  Button,
+  Card,
+  Layout,
+  List,
+  Modal,
+  Input,
+  Tooltip,
+  Switch,
+} from "antd";
 import TemasRegister from "./TemasRegister";
 
 const { Content } = Layout;
@@ -15,6 +24,8 @@ export default function TemasList() {
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Tema");
   const [editandoTema, setEditandoTema] = useState({});
+  const [showFiled, setShowFiled] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   const loading = useStoreState((state) => state.themes.loading);
   const themes = useStoreState((state) => state.themes.themes);
@@ -48,13 +59,33 @@ export default function TemasList() {
                 <Search
                   allowClear
                   onSearch={(e) => {
-                    getThemes({ query: e });
+                    setTextSearch(e);
+                    getThemes({
+                      query: e,
+                      showFiled: showFiled,
+                    });
                   }}
                   style={{
-                    marginRight: "30px",
+                    marginRight: "10px",
                   }}
                   placeholder={"Buscar temas"}
                 />
+                <Tooltip title={"Exibir Arquivados"}>
+                  <Switch
+                    defaultChecked={showFiled}
+                    checked={showFiled}
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    onClick={(checked) => {
+                      setShowFiled(checked);
+                      getThemes({
+                        query: textSearch,
+                        showFiled: checked,
+                      });
+                    }}
+                  />
+                </Tooltip>
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
@@ -105,7 +136,10 @@ export default function TemasList() {
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getThemes();
+              getThemes({
+                query: textSearch,
+                showFiled: showFiled,
+              });
               setEditandoTema({});
               setModalText("Cadastrar Tema");
               setRegisterVisible(false);
@@ -116,7 +150,10 @@ export default function TemasList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getThemes();
+                  getThemes({
+                    query: textSearch,
+                    showFiled: showFiled,
+                  });
                   setEditandoTema({});
                   setModalText("Cadastrar Tema");
                   setRegisterVisible(false);
@@ -130,7 +167,10 @@ export default function TemasList() {
               theme={editandoTema}
               actionVisible={() => {
                 setRegisterVisible(false);
-                getThemes();
+                getThemes({
+                  query: textSearch,
+                  showFiled: showFiled,
+                });
                 setEditandoTema({});
                 setModalText("Cadastrar Tema");
               }}
