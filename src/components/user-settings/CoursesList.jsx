@@ -29,23 +29,37 @@ export default function CoursesList() {
   const getInstituicoes = useStoreActions(
     (actions) => actions.institutions.getInstituicoes
   );
+  const getComp = useStoreActions((actions) => actions.competencies.getComp);
+  const getSubthemes = useStoreActions(
+    (actions) => actions.themes.getSubthemes
+  );
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
   const loading = useStoreState((state) => state.courses.loading);
-  const cursos = useStoreState((state) => state.courses.cursosSecondary);
+  const cursos = useStoreState((state) => state.courses.cursos);
 
-  const [editandoCurso, setEditandoCurso] = useState({});
+  const [editandoCurso, setEditandoCurso] = useState(null);
   const [modalText, setModalText] = useState("Cadastrar Curso");
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     getCursos();
     getItinerarios();
     getAcessibilidades();
     getInstituicoes();
-  }, [getCursos]);
+    getComp();
+    getSubthemes();
+  }, [
+    getCursos,
+    getItinerarios,
+    getAcessibilidades,
+    getInstituicoes,
+    getComp,
+    getSubthemes,
+  ]);
 
   return (
     <>
@@ -58,100 +72,121 @@ export default function CoursesList() {
         }}
       >
         <Content style={{ width: "100%" }}>
-          <Card
-            title={"Cursos"}
-            extra={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "450px",
-                }}
-              >
-                <Search
-                  allowClear
-                  onSearch={(e) => {
-                    setTextSearch(e);
-                    getCursos({
-                      query: e,
-                      showFiled: showFiled,
-                    });
-                  }}
-                  style={{
-                    marginRight: "30px",
-                  }}
-                  placeholder={"Buscar cursos"}
-                />
-                <Tooltip title={"Exibir Arquivados"}>
-                  <Switch
-                    defaultChecked={showFiled}
-                    checked={showFiled}
-                    style={{
-                      marginRight: "10px",
-                    }}
-                    onClick={(checked) => {
-                      setShowFiled(checked);
-                      getCursos({
-                        query: textSearch,
-                        showFiled: checked,
-                      });
-                    }}
-                  />
-                </Tooltip>
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={() => {
-                    //setEditandoCurso({});
-                    //setModalText("Cadastrar Curso");
-                    //setRegisterVisible(true);
-                  }}
-                >
-                  Adicionar
-                </Button>
-              </div>
-            }
-          >
-            <List
-              loading={loading}
-              dataSource={cursos}
-              style={{ width: "100%" }}
-              renderItem={(item) => {
-                return (
-                  <List.Item
-                    actions={[
-                      <Button
-                        key={item.id}
-                        onClick={() => {
-                          //setEditandoCurso(item);
-                          //setModalText("Editar Curso");
-                          //setRegisterVisible(true);
-                        }}
-                        icon={<EditOutlined />}
-                      >
-                        Editar
-                      </Button>,
-                    ]}
-                    key={item.id}
-                  >
-                    <List.Item.Meta
-                      style={{ fontFamily: "Roboto" }}
-                      title={item.name}
-                      description={
-                        <>
-                          {item.institutions.map((inst) => (
-                            <span key={inst.id}>{inst.name}</span>
-                          ))}
-                        </>
-                      }
-                    />
-                  </List.Item>
-                );
+          {registerVisible ? (
+            <CourseRegister
+              curso={editandoCurso}
+              title={modalText}
+              actionVisible={() => {
+                setRegisterVisible(false);
+                getCursos({
+                  query: textSearch,
+                  showFiled: showFiled,
+                });
               }}
             />
-          </Card>
-          <Modal
+          ) : (
+            <Card
+              title={"Cursos"}
+              extra={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "450px",
+                  }}
+                >
+                  <Search
+                    allowClear
+                    onSearch={(e) => {
+                      setTextSearch(e);
+                      getCursos({
+                        query: e,
+                        showFiled: showFiled,
+                      });
+                    }}
+                    style={{
+                      marginRight: "30px",
+                    }}
+                    placeholder={"Buscar cursos"}
+                  />
+                  <Tooltip title={"Exibir Arquivados"}>
+                    <Switch
+                      defaultChecked={showFiled}
+                      checked={showFiled}
+                      style={{
+                        marginRight: "10px",
+                      }}
+                      onClick={(checked) => {
+                        setShowFiled(checked);
+                        getCursos({
+                          query: textSearch,
+                          showFiled: checked,
+                        });
+                      }}
+                    />
+                  </Tooltip>
+                  <Button
+                    type="primary"
+                    icon={<PlusOutlined />}
+                    onClick={() => {
+                      setEditandoCurso(null);
+                      setModalText("Cadastrar Curso");
+                      setRegisterVisible(true);
+                    }}
+                  >
+                    Adicionar
+                  </Button>
+                </div>
+              }
+            >
+              <List
+                loading={loading}
+                dataSource={cursos}
+                pagination={{
+                  onChange: (page) => {
+                    setPageNumber(page);
+                  },
+                  current: pageNumber,
+                  hideOnSinglePage: true,
+                }}
+                style={{ width: "100%" }}
+                renderItem={(item) => {
+                  return (
+                    <List.Item
+                      actions={[
+                        <Button
+                          key={item.id}
+                          onClick={() => {
+                            setEditandoCurso(item);
+                            setModalText("Editar Curso");
+                            setRegisterVisible(true);
+                          }}
+                          icon={<EditOutlined />}
+                        >
+                          Editar
+                        </Button>,
+                      ]}
+                      key={item.id}
+                    >
+                      <List.Item.Meta
+                        style={{ fontFamily: "Roboto" }}
+                        title={item.name}
+                        description={
+                          <>
+                            {item.institutions
+                              .map((item) => item.name)
+                              .join(", ")}
+                          </>
+                        }
+                      />
+                    </List.Item>
+                  );
+                }}
+              />
+            </Card>
+          )}
+          {/* <Modal
             title={modalText}
             open={registerVisible}
             destroyOnClose={true}
@@ -160,7 +195,7 @@ export default function CoursesList() {
                 query: textSearch,
                 showFiled: showFiled,
               });
-              setEditandoCurso({});
+              setEditandoCurso(null);
               setModalText("Cadastrar Curso");
               setRegisterVisible(false);
             }}
@@ -174,7 +209,7 @@ export default function CoursesList() {
                     query: textSearch,
                     showFiled: showFiled,
                   });
-                  setEditandoCurso({});
+                  setEditandoCurso(null);
                   setModalText("Cadastrar Curso");
                   setRegisterVisible(false);
                 }}
@@ -193,7 +228,7 @@ export default function CoursesList() {
                 });
               }}
             />
-          </Modal>
+          </Modal> */}
         </Content>
       </Layout>
     </>

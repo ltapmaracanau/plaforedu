@@ -204,7 +204,7 @@ const initialFilterDefault = {
   esquemaDeCores: "categoria",
   itinerario: 0,
 };
-
+/* 
 const cursosFilterFuctionDefault = (filtro) => {
   let novosCursos = [];
   let novasTrilhas = [];
@@ -523,32 +523,24 @@ const reformuladorDeElementosCytoscape = (cursosFiltrados, filtro) => {
 
   return elementos;
 };
-
+ */
 const coursesModel = {
   loading: false,
   registering: false,
 
-  cursos: cursosDefault,
+  cursos: [],
 
-  cursosSecondary: [],
-
-  instituicoes: instituicoesDefault,
-
-  categoriasDeCompetencias: categoriasDeCompetenciasDefault,
-
-  competencias: competenciasDefault,
-
-  temas: temasDefault,
-
-  subtemas: subtemasDefault,
-
-  cursosFiltrados: computed((state) =>
+  /* cursosFiltrados: computed((state) =>
     cursosFilterFuctionDefault(state.filter)
   ),
 
   elements: computed((state) =>
     reformuladorDeElementosCytoscape(state.cursosFiltrados, state.filter)
-  ),
+  ), */
+
+  cursosFiltrados: { novosCursos: [] },
+
+  elements: [],
 
   filterDefault: initialFilterDefault,
 
@@ -575,10 +567,43 @@ const coursesModel = {
   }),
 
   updateCourse: thunk(async (actions, payload) => {
+    const {
+      id,
+      name,
+      description,
+      hours,
+      link,
+      institutions,
+      accessibilities,
+      itineraries,
+      competencies,
+      subThemes,
+    } = payload;
     actions.setRegistering(true);
-    const tryUpdateCourse = await dataService.updateCourse({ ...payload });
-    actions.setRegistering(false);
-    return tryUpdateCourse;
+    try {
+      await dataService.updateCourse({
+        id,
+        name,
+        description,
+        hours,
+        link,
+      });
+      await dataService.updateCourseInstitutions({ id, institutions });
+      await dataService.updateCourseAccessibilities({
+        id,
+        accessibilities,
+      });
+      await dataService.updateCourseItineraries({
+        id,
+        itineraries,
+      });
+      await dataService.updateCourseCompetencies({ id, competencies });
+      await dataService.updateCourseSubThemes({ id, subThemes });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   setLoading: action((state, payload) => {
@@ -590,7 +615,7 @@ const coursesModel = {
   }),
 
   setCursos: action((state, payload) => {
-    state.cursosSecondary = payload;
+    state.cursos = payload;
   }),
 };
 

@@ -96,7 +96,9 @@ export const registerCourseSchema = yup.object().shape({
     .required("Obrigatório!")
     .min(0, "Obrigatório números positivos!"),
   link: yup.string().url("Link inválido!").required("Obrigatório!"),
-  institutionId: yup.string().required("Obrigatório!"),
+  institutions: yup.array().of(yup.string()).required("Obrigatório!"),
   accessibilities: yup.array().of(yup.string()).required("Obrigatório!"),
   itineraries: yup.array().of(yup.string()).required("Obrigatório!"),
+  competencies: yup.array().of(yup.string()).required("Obrigatório!"),
+  subThemes: yup.array().of(yup.string()).required("Obrigatório!"),
 });
