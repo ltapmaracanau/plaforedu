@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerCatCompSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification } from "antd";
+import { Button, Card, Form, Input, Layout, notification, Switch } from "antd";
 
 const { Content } = Layout;
 
 export default function CatCompRegister(props) {
-  const { catComp = {}, actionVisible } = props;
+  const { catComp = null, actionVisible } = props;
 
   const registerCatComp = useStoreActions(
     (actions) => actions.competencies.registerCatComp
@@ -19,6 +19,8 @@ export default function CatCompRegister(props) {
     (actions) => actions.competencies.updateCatComp
   );
   const registering = useStoreState((state) => state.competencies.registering);
+
+  const [filed, setFiled] = useState(catComp?.filedAt !== null);
 
   const register = useForm({
     mode: "onChange",
@@ -34,32 +36,43 @@ export default function CatCompRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    if (catComp === {}) {
-      const newCat = await registerCatComp(values);
-      if (newCat.error) {
-        notification.error({
-          message: "Algo deu errado!",
-          description: newCat.message,
+    if (catComp) {
+      try {
+        if ((catComp.filedAt !== null) !== filed) {
+          await updateCatComp({
+            ...values,
+            id: catComp.id,
+            filed: filed,
+          });
+        } else {
+          await updateCatComp({
+            ...values,
+            id: catComp.id,
+          });
+        }
+        notification.success({
+          message: "Categoria alterada com sucesso!",
         });
-      } else {
+        actionVisible();
+      } catch (error) {
+        notification.error({
+          message: "Erro!",
+          description: error.message,
+        });
+      }
+    } else {
+      try {
+        await registerCatComp(values);
         notification.success({
           message: "Categoria cadastrada com sucesso!",
         });
         register.reset();
         actionVisible();
-      }
-    } else {
-      const tryUpdate = await updateCatComp({ ...values, id: catComp.id });
-      if (tryUpdate?.error) {
+      } catch (error) {
         notification.error({
-          message: "Erro!",
-          description: tryUpdate.message,
+          message: "Algo deu errado!",
+          description: error.message,
         });
-      } else {
-        notification.success({
-          message: "Categoria alterada com sucesso!",
-        });
-        actionVisible();
       }
     }
   };
@@ -117,6 +130,20 @@ export default function CatCompRegister(props) {
                   );
                 }}
               />
+              {catComp && (
+                <Form.Item
+                  label={"Categoria arquivada"}
+                  style={{ marginBottom: "20px" }}
+                >
+                  <Switch
+                    checked={filed}
+                    defaultChecked={catComp.filedAt}
+                    onChange={(value) => {
+                      setFiled(value);
+                    }}
+                  />
+                </Form.Item>
+              )}
               <div
                 style={{
                   display: "flex",
@@ -131,7 +158,7 @@ export default function CatCompRegister(props) {
                   shape="round"
                   htmlType="submit"
                 >
-                  {catComp.id ? <>Alterar</> : <>Cadastrar</>}
+                  {catComp?.id ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>

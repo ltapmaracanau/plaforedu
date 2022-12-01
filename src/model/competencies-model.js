@@ -1,5 +1,5 @@
 import { action, thunk } from "easy-peasy";
-import { dataService } from "../services/dataService";
+import services from "../services";
 
 const competenciasModel = {
   loading: false,
@@ -9,50 +9,104 @@ const competenciasModel = {
 
   registerCatComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const newCat = await dataService.registerCatComp({ ...payload });
-    actions.setRegistering(false);
-    return newCat;
+    try {
+      await services.compService.registerCatComp({ ...payload });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
-  getCatComp: thunk(async (actions, payload = { query: "" }) => {
-    actions.setLoading(true);
-    const catComp = await dataService.getCatComp({ query: payload.query });
-    if (catComp?.length >= 0) {
-      actions.setCatComp(catComp);
+  getCatComp: thunk(
+    async (actions, payload = { query: "", showFiled: false }) => {
+      actions.setLoading(true);
+      try {
+        await services.compService
+          .getCatComp({
+            query: payload.query,
+            showFiled: payload.showFiled,
+          })
+          .then((list) => {
+            if (list?.length >= 0) {
+              actions.setCatComp(list);
+            }
+          });
+      } catch (error) {
+        throw new Error(error.message);
+      } finally {
+        actions.setLoading(false);
+      }
     }
-    actions.setLoading(false);
-  }),
+  ),
 
   updateCatComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const tryUpdateCatComp = await dataService.updateCatComp({ ...payload });
-    actions.setRegistering(false);
-    return tryUpdateCatComp;
+    try {
+      await services.compService.updateCatComp({
+        ...payload,
+      });
+      if (payload.filed !== undefined) {
+        if (payload.filed) {
+          await services.compService.archiveCatComp({ id: payload.id });
+        } else {
+          await services.compService.unarchiveCatComp({ id: payload.id });
+        }
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   registerComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const newComp = await dataService.registerComp({ ...payload });
-    actions.setRegistering(false);
-    return newComp;
+    try {
+      await services.compService.registerComp({ ...payload });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   updateComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const tryUpdateComp = await dataService.updateComp({ ...payload });
-    actions.setRegistering(false);
-    return tryUpdateComp;
+    try {
+      await services.compService.updateComp({ ...payload });
+      if (payload.filed !== undefined) {
+        if (payload.filed) {
+          await services.compService.archiveComp({ id: payload.id });
+        } else {
+          await services.compService.unarchiveComp({ id: payload.id });
+        }
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
-  getComp: thunk(async (actions, payload = { query: "" }) => {
+  getComp: thunk(async (actions, payload = { query: "", showFiled: false }) => {
     actions.setLoading(true);
-    const competencias = await dataService.getCompetencias({
-      query: payload.query,
-    });
-    if (competencias?.length >= 0) {
-      actions.setCompetencias(competencias);
+    try {
+      await services.compService
+        .getCompetencias({
+          query: payload.query,
+          showFiled: payload.showFiled,
+        })
+        .then((competencias) => {
+          if (competencias?.length >= 0) {
+            actions.setCompetencias(competencias);
+          }
+        });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setLoading(false);
     }
-    actions.setLoading(false);
   }),
 
   setLoading: action((state, payload) => {

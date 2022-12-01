@@ -1,29 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerCompSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  Layout,
+  notification,
+  Select,
+  Switch,
+} from "antd";
 
 const { Content } = Layout;
 
 export default function CompRegister(props) {
-  const {
-    comp = {
-      name: "",
-      categoriesCompetencies: [],
-      description: "",
-    },
-    actionVisible,
-  } = props;
+  const { comp = null, actionVisible } = props;
 
   const compRefactored = {
-    name: comp.name,
-    competenciesCategoryIds: comp.categoriesCompetencies?.map(
-      (item) => item.id
-    ),
-    description: comp.description,
+    name: comp?.name || "",
+    competenciesCategoryIds:
+      comp?.categoriesCompetencies?.map((item) => item.id) || [],
+    description: comp?.description || "",
   };
 
   const getCatComp = useStoreActions(
@@ -39,6 +40,8 @@ export default function CompRegister(props) {
   const catComp = useStoreState((state) => state.competencies.catComp);
   const registering = useStoreState((state) => state.competencies.registering);
 
+  const [filed, setFiled] = useState(comp?.filedAt !== null);
+
   const register = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -53,32 +56,43 @@ export default function CompRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    if (comp === {}) {
-      const newComp = await registerComp(values);
-      if (newComp.error) {
-        notification.error({
-          message: "Algo deu errado!",
-          description: newComp.message,
+    if (comp) {
+      try {
+        if ((comp.filedAt !== null) !== filed) {
+          await updateComp({
+            ...values,
+            id: comp.id,
+            filed: filed,
+          });
+        } else {
+          await updateComp({
+            ...values,
+            id: comp.id,
+          });
+        }
+        notification.success({
+          message: "Competência alterada com sucesso!",
         });
-      } else {
+        actionVisible();
+      } catch (error) {
+        notification.error({
+          message: "Erro!",
+          description: error.message,
+        });
+      }
+    } else {
+      try {
+        await registerComp(values);
         notification.success({
           message: "Competência cadastrada com sucesso!",
         });
         register.reset();
         actionVisible();
-      }
-    } else {
-      const tryUpdate = await updateComp({ ...values, id: comp.id });
-      if (tryUpdate?.error) {
+      } catch (error) {
         notification.error({
-          message: "Erro!",
-          description: tryUpdate.message,
+          message: "Algo deu errado!",
+          description: error.message,
         });
-      } else {
-        notification.success({
-          message: "Competência alterada com sucesso!",
-        });
-        actionVisible();
       }
     }
   };
@@ -177,6 +191,20 @@ export default function CompRegister(props) {
                   );
                 }}
               />
+              {comp && (
+                <Form.Item
+                  label={"Competência arquivada"}
+                  style={{ marginBottom: "20px" }}
+                >
+                  <Switch
+                    checked={filed}
+                    defaultChecked={comp.filedAt}
+                    onChange={(value) => {
+                      setFiled(value);
+                    }}
+                  />
+                </Form.Item>
+              )}
               <div
                 style={{
                   display: "flex",
@@ -191,7 +219,7 @@ export default function CompRegister(props) {
                   shape="round"
                   htmlType="submit"
                 >
-                  {comp.id ? <>Alterar</> : <>Cadastrar</>}
+                  {comp ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>

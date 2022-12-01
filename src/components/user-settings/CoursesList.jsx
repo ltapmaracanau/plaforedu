@@ -33,17 +33,19 @@ export default function CoursesList() {
   const getSubthemes = useStoreActions(
     (actions) => actions.themes.getSubthemes
   );
+  const setPage = useStoreActions((actions) => actions.courses.setPage);
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
   const loading = useStoreState((state) => state.courses.loading);
   const cursos = useStoreState((state) => state.courses.cursos);
+  const pageNumber = useStoreState((state) => state.courses.page);
+  const count = useStoreState((state) => state.courses.count);
 
   const [editandoCurso, setEditandoCurso] = useState(null);
   const [modalText, setModalText] = useState("Cadastrar Curso");
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
-  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     getCursos();
@@ -78,6 +80,7 @@ export default function CoursesList() {
               title={modalText}
               actionVisible={() => {
                 setRegisterVisible(false);
+                setPage(0);
                 getCursos({
                   query: textSearch,
                   showFiled: showFiled,
@@ -103,6 +106,7 @@ export default function CoursesList() {
                       getCursos({
                         query: e,
                         showFiled: showFiled,
+                        page: 0,
                       });
                     }}
                     style={{
@@ -122,6 +126,7 @@ export default function CoursesList() {
                         getCursos({
                           query: textSearch,
                           showFiled: checked,
+                          page: 0,
                         });
                       }}
                     />
@@ -133,6 +138,7 @@ export default function CoursesList() {
                       setEditandoCurso(null);
                       setModalText("Cadastrar Curso");
                       setRegisterVisible(true);
+                      setPage(0);
                     }}
                   >
                     Adicionar
@@ -145,9 +151,18 @@ export default function CoursesList() {
                 dataSource={cursos}
                 pagination={{
                   onChange: (page) => {
-                    setPageNumber(page);
+                    setPage(page);
+                    getCursos({
+                      page: page - 1,
+                      query: textSearch,
+                      showFiled: showFiled,
+                    });
                   },
+                  pageSize: 20,
+                  total: count,
+                  showSizeChanger: false,
                   current: pageNumber,
+                  defaultCurrent: 1,
                   hideOnSinglePage: true,
                 }}
                 style={{ width: "100%" }}
@@ -186,49 +201,6 @@ export default function CoursesList() {
               />
             </Card>
           )}
-          {/* <Modal
-            title={modalText}
-            open={registerVisible}
-            destroyOnClose={true}
-            onCancel={() => {
-              getCursos({
-                query: textSearch,
-                showFiled: showFiled,
-              });
-              setEditandoCurso(null);
-              setModalText("Cadastrar Curso");
-              setRegisterVisible(false);
-            }}
-            bodyStyle={{ backgroundColor: "#f8f8f8" }}
-            footer={[
-              <Button
-                type="primary"
-                key={"back"}
-                onClick={() => {
-                  getCursos({
-                    query: textSearch,
-                    showFiled: showFiled,
-                  });
-                  setEditandoCurso(null);
-                  setModalText("Cadastrar Curso");
-                  setRegisterVisible(false);
-                }}
-              >
-                Cancelar
-              </Button>,
-            ]}
-          >
-            <CourseRegister
-              curso={editandoCurso}
-              actionVisible={() => {
-                setRegisterVisible(false);
-                getCursos({
-                  query: textSearch,
-                  showFiled: showFiled,
-                });
-              }}
-            />
-          </Modal> */}
         </Content>
       </Layout>
     </>

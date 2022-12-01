@@ -25,7 +25,7 @@ export default function CompList() {
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Competência");
-  const [editandoComp, setEditandoComp] = useState({});
+  const [editandoComp, setEditandoComp] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
@@ -94,7 +94,7 @@ export default function CompList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
-                    setEditandoComp({});
+                    setEditandoComp(null);
                     setModalText("Cadastrar Competência");
                     setRegisterVisible(true);
                   }}
@@ -156,7 +156,7 @@ export default function CompList() {
                 query: textSearch,
                 showFiled: showFiled,
               });
-              setEditandoComp({});
+              setEditandoComp(null);
               setModalText("Cadastrar Competência");
               setRegisterVisible(false);
             }}
@@ -170,7 +170,7 @@ export default function CompList() {
                     query: textSearch,
                     showFiled: showFiled,
                   });
-                  setEditandoComp({});
+                  setEditandoComp(null);
                   setModalText("Cadastrar Competência");
                   setRegisterVisible(false);
                 }}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerCourseSchema } from "../../schemas/registers/registersSchema";
@@ -21,6 +21,7 @@ import {
   Typography,
   Tooltip,
   Tag,
+  Switch,
 } from "antd";
 
 const { Text } = Typography;
@@ -63,6 +64,8 @@ export default function CourseRegister(props) {
   );
   const subthemes = useStoreState((state) => state.themes.subthemes);
 
+  const [filed, setFiled] = useState(curso?.filedAt !== null);
+
   const register = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -79,7 +82,11 @@ export default function CourseRegister(props) {
   const onSubmit = async (values) => {
     if (curso) {
       try {
-        await updateCourse({ ...values, id: curso.id });
+        if ((curso.filedAt !== null) !== filed) {
+          await updateCourse({ ...values, id: curso.id, filed: filed });
+        } else {
+          await updateCourse({ ...values, id: curso.id });
+        }
         notification.success({
           message: "Curso alterado com sucesso!",
         });
@@ -91,7 +98,7 @@ export default function CourseRegister(props) {
         });
       }
     } else {
-      const newCourse = await registerNewCourse(values);
+      const newCourse = await registerNewCourse({ ...values });
       if (newCourse.error) {
         notification.error({
           message: "Algo deu errado!",
@@ -419,6 +426,17 @@ export default function CourseRegister(props) {
                     }}
                   />
                 </Descriptions.Item>
+                {curso && (
+                  <Descriptions.Item label={"Curso arquivado"}>
+                    <Switch
+                      checked={filed}
+                      defaultChecked={curso.filedAt}
+                      onChange={(value) => {
+                        setFiled(value);
+                      }}
+                    />
+                  </Descriptions.Item>
+                )}
               </Descriptions>
               <div
                 style={{

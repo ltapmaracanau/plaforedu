@@ -1,25 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerSubthemeSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification, Select } from "antd";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  Layout,
+  notification,
+  Select,
+  Switch,
+} from "antd";
 
 const { Content } = Layout;
 
 export default function SubtemaRegister(props) {
-  const {
-    subtheme = {
-      name: "",
-      themes: [],
-    },
-    actionVisible,
-  } = props;
+  const { subtheme = null, actionVisible } = props;
 
   const subthemeRefactored = {
-    name: subtheme.name,
-    themeIds: subtheme.themes?.map((item) => item.id),
+    name: subtheme.name || "",
+    themeIds: subtheme.themes?.map((item) => item.id) || [],
   };
 
   const getThemes = useStoreActions((actions) => actions.themes.getThemes);
@@ -31,6 +34,8 @@ export default function SubtemaRegister(props) {
   );
   const themes = useStoreState((state) => state.themes.themes);
   const registering = useStoreState((state) => state.themes.registering);
+
+  const [filed, setFiled] = useState(subtheme?.filedAt !== null);
 
   const register = useForm({
     mode: "onChange",
@@ -46,32 +51,36 @@ export default function SubtemaRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    if (subtheme === {}) {
-      const newComp = await registerSubtheme(values);
-      if (newComp.error) {
-        notification.error({
-          message: "Algo deu errado!",
-          description: newComp.message,
+    if (subtheme) {
+      try {
+        if ((subtheme.filedAt !== null) !== filed) {
+          await updateSubtheme({ ...values, id: subtheme.id, filed: filed });
+        } else {
+          await updateSubtheme({ ...values, id: subtheme.id });
+        }
+        notification.success({
+          message: "Subtema alterado com sucesso!",
         });
-      } else {
+        actionVisible();
+      } catch (error) {
+        notification.error({
+          message: "Erro!",
+          description: error.message,
+        });
+      }
+    } else {
+      try {
+        await registerSubtheme(values);
         notification.success({
           message: "Subtema cadastrado com sucesso!",
         });
         register.reset();
         actionVisible();
-      }
-    } else {
-      const tryUpdate = await updateSubtheme({ ...values, id: subtheme.id });
-      if (tryUpdate?.error) {
+      } catch (error) {
         notification.error({
-          message: "Erro!",
-          description: tryUpdate.message,
+          message: "Algo deu errado!",
+          description: error.message,
         });
-      } else {
-        notification.success({
-          message: "Subtema alterado com sucesso!",
-        });
-        actionVisible();
       }
     }
   };
@@ -153,6 +162,20 @@ export default function SubtemaRegister(props) {
                   );
                 }}
               />
+              {subtheme && (
+                <Form.Item
+                  label={"Sub-tema arquivado"}
+                  style={{ marginBottom: "20px" }}
+                >
+                  <Switch
+                    checked={filed}
+                    defaultChecked={subtheme.filedAt}
+                    onChange={(value) => {
+                      setFiled(value);
+                    }}
+                  />
+                </Form.Item>
+              )}
               <div
                 style={{
                   display: "flex",
@@ -167,7 +190,7 @@ export default function SubtemaRegister(props) {
                   shape="round"
                   htmlType="submit"
                 >
-                  {subtheme.id ? <>Alterar</> : <>Cadastrar</>}
+                  {subtheme?.id ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>
