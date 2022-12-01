@@ -23,7 +23,7 @@ export default function TemasList() {
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Tema");
-  const [editandoTema, setEditandoTema] = useState({});
+  const [editandoTema, setEditandoTema] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
@@ -90,7 +90,7 @@ export default function TemasList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
-                    setEditandoTema({});
+                    setEditandoTema(null);
                     setModalText("Cadastrar Tema");
                     setRegisterVisible(true);
                   }}
@@ -140,7 +140,7 @@ export default function TemasList() {
                 query: textSearch,
                 showFiled: showFiled,
               });
-              setEditandoTema({});
+              setEditandoTema(null);
               setModalText("Cadastrar Tema");
               setRegisterVisible(false);
             }}
@@ -154,7 +154,7 @@ export default function TemasList() {
                     query: textSearch,
                     showFiled: showFiled,
                   });
-                  setEditandoTema({});
+                  setEditandoTema(null);
                   setModalText("Cadastrar Tema");
                   setRegisterVisible(false);
                 }}
@@ -171,7 +171,7 @@ export default function TemasList() {
                   query: textSearch,
                   showFiled: showFiled,
                 });
-                setEditandoTema({});
+                setEditandoTema(null);
                 setModalText("Cadastrar Tema");
               }}
             />

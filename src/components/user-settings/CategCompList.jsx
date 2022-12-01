@@ -25,7 +25,7 @@ export default function CategCompList() {
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Categoria");
-  const [editandoCatComp, setEditandoCatComp] = useState({});
+  const [editandoCatComp, setEditandoCatComp] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
@@ -92,7 +92,7 @@ export default function CategCompList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
-                    setEditandoCatComp({});
+                    setEditandoCatComp(null);
                     setModalText("Cadastrar Categoria");
                     setRegisterVisible(true);
                   }}
@@ -143,7 +143,7 @@ export default function CategCompList() {
                 query: textSearch,
                 showFiled: showFiled,
               });
-              setEditandoCatComp({});
+              setEditandoCatComp(null);
               setModalText("Cadastrar Categoria");
               setRegisterVisible(false);
             }}
@@ -157,7 +157,7 @@ export default function CategCompList() {
                     query: textSearch,
                     showFiled: showFiled,
                   });
-                  setEditandoCatComp({});
+                  setEditandoCatComp(null);
                   setModalText("Cadastrar Categoria");
                   setRegisterVisible(false);
                 }}

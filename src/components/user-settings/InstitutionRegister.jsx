@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -13,12 +13,13 @@ import {
   notification,
   Select,
   Space,
+  Switch,
 } from "antd";
 
 const { Content } = Layout;
 
 export default function InstitutionRegister(props) {
-  const { instituicao = {}, actionVisible } = props;
+  const { instituicao = null, actionVisible } = props;
 
   const registerNewInstitution = useStoreActions(
     (actions) => actions.institutions.registerNewInstitution
@@ -35,6 +36,8 @@ export default function InstitutionRegister(props) {
     (state) => state.institutions.loadingEstados
   );
 
+  const [filed, setFiled] = useState(instituicao?.filedAt !== null);
+
   const register = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -49,35 +52,43 @@ export default function InstitutionRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    if (instituicao === null) {
-      const newInstitution = await registerNewInstitution(values);
-      if (newInstitution.error) {
-        notification.error({
-          message: "Algo deu errado!",
-          description: newInstitution.message,
+    if (instituicao) {
+      try {
+        if ((instituicao.filedAt !== null) !== filed) {
+          await updateInstitution({
+            ...values,
+            id: instituicao.id,
+            filed: filed,
+          });
+        } else {
+          await updateInstitution({
+            ...values,
+            id: instituicao.id,
+          });
+        }
+        notification.success({
+          message: "Instituição alterada com sucesso!",
         });
-      } else {
+        actionVisible();
+      } catch (error) {
+        notification.error({
+          message: "Erro!",
+          description: error.message,
+        });
+      }
+    } else {
+      try {
+        await registerNewInstitution(values);
         notification.success({
           message: "Instituição cadastrada com sucesso!",
         });
         register.reset();
         actionVisible();
-      }
-    } else {
-      const tryUpdate = await updateInstitution({
-        ...values,
-        id: instituicao.id,
-      });
-      if (tryUpdate.error) {
+      } catch (error) {
         notification.error({
-          message: "Erro!",
-          description: tryUpdate.message,
+          message: "Algo deu errado!",
+          description: error.message,
         });
-      } else {
-        notification.success({
-          message: "Instituição alterada com sucesso!",
-        });
-        actionVisible();
       }
     }
   };
@@ -177,6 +188,20 @@ export default function InstitutionRegister(props) {
                   );
                 }}
               />
+              {instituicao && (
+                <Form.Item
+                  label={"Instituição arquivada"}
+                  style={{ marginBottom: "20px" }}
+                >
+                  <Switch
+                    checked={filed}
+                    defaultChecked={instituicao.filedAt}
+                    onChange={(value) => {
+                      setFiled(value);
+                    }}
+                  />
+                </Form.Item>
+              )}
               <div
                 style={{
                   display: "flex",
@@ -191,7 +216,7 @@ export default function InstitutionRegister(props) {
                   shape="round"
                   htmlType="submit"
                 >
-                  {instituicao === null ? <>Cadastrar</> : <>Alterar</>}
+                  {instituicao ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>

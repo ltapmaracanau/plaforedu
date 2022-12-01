@@ -29,13 +29,20 @@ export default function CoursesList() {
   const getInstituicoes = useStoreActions(
     (actions) => actions.institutions.getInstituicoes
   );
+  const getComp = useStoreActions((actions) => actions.competencies.getComp);
+  const getSubthemes = useStoreActions(
+    (actions) => actions.themes.getSubthemes
+  );
+  const setPage = useStoreActions((actions) => actions.courses.setPage);
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
   const loading = useStoreState((state) => state.courses.loading);
-  const cursos = useStoreState((state) => state.courses.cursosSecondary);
+  const cursos = useStoreState((state) => state.courses.cursos);
+  const pageNumber = useStoreState((state) => state.courses.page);
+  const count = useStoreState((state) => state.courses.count);
 
-  const [editandoCurso, setEditandoCurso] = useState({});
+  const [editandoCurso, setEditandoCurso] = useState(null);
   const [modalText, setModalText] = useState("Cadastrar Curso");
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
@@ -45,7 +52,16 @@ export default function CoursesList() {
     getItinerarios();
     getAcessibilidades();
     getInstituicoes();
-  }, [getCursos]);
+    getComp();
+    getSubthemes();
+  }, [
+    getCursos,
+    getItinerarios,
+    getAcessibilidades,
+    getInstituicoes,
+    getComp,
+    getSubthemes,
+  ]);
 
   return (
     <>
@@ -58,142 +74,133 @@ export default function CoursesList() {
         }}
       >
         <Content style={{ width: "100%" }}>
-          <Card
-            title={"Cursos"}
-            extra={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "450px",
-                }}
-              >
-                <Search
-                  allowClear
-                  onSearch={(e) => {
-                    setTextSearch(e);
-                    getCursos({
-                      query: e,
-                      showFiled: showFiled,
-                    });
-                  }}
-                  style={{
-                    marginRight: "30px",
-                  }}
-                  placeholder={"Buscar cursos"}
-                />
-                <Tooltip title={"Exibir Arquivados"}>
-                  <Switch
-                    defaultChecked={showFiled}
-                    checked={showFiled}
-                    style={{
-                      marginRight: "10px",
-                    }}
-                    onClick={(checked) => {
-                      setShowFiled(checked);
-                      getCursos({
-                        query: textSearch,
-                        showFiled: checked,
-                      });
-                    }}
-                  />
-                </Tooltip>
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={() => {
-                    //setEditandoCurso({});
-                    //setModalText("Cadastrar Curso");
-                    //setRegisterVisible(true);
-                  }}
-                >
-                  Adicionar
-                </Button>
-              </div>
-            }
-          >
-            <List
-              loading={loading}
-              dataSource={cursos}
-              style={{ width: "100%" }}
-              renderItem={(item) => {
-                return (
-                  <List.Item
-                    actions={[
-                      <Button
-                        key={item.id}
-                        onClick={() => {
-                          //setEditandoCurso(item);
-                          //setModalText("Editar Curso");
-                          //setRegisterVisible(true);
-                        }}
-                        icon={<EditOutlined />}
-                      >
-                        Editar
-                      </Button>,
-                    ]}
-                    key={item.id}
-                  >
-                    <List.Item.Meta
-                      style={{ fontFamily: "Roboto" }}
-                      title={item.name}
-                      description={
-                        <>
-                          {item.institutions.map((inst) => (
-                            <span key={inst.id}>{inst.name}</span>
-                          ))}
-                        </>
-                      }
-                    />
-                  </List.Item>
-                );
-              }}
-            />
-          </Card>
-          <Modal
-            title={modalText}
-            open={registerVisible}
-            destroyOnClose={true}
-            onCancel={() => {
-              getCursos({
-                query: textSearch,
-                showFiled: showFiled,
-              });
-              setEditandoCurso({});
-              setModalText("Cadastrar Curso");
-              setRegisterVisible(false);
-            }}
-            bodyStyle={{ backgroundColor: "#f8f8f8" }}
-            footer={[
-              <Button
-                type="primary"
-                key={"back"}
-                onClick={() => {
-                  getCursos({
-                    query: textSearch,
-                    showFiled: showFiled,
-                  });
-                  setEditandoCurso({});
-                  setModalText("Cadastrar Curso");
-                  setRegisterVisible(false);
-                }}
-              >
-                Cancelar
-              </Button>,
-            ]}
-          >
+          {registerVisible ? (
             <CourseRegister
               curso={editandoCurso}
+              title={modalText}
               actionVisible={() => {
                 setRegisterVisible(false);
+                setPage(0);
                 getCursos({
                   query: textSearch,
                   showFiled: showFiled,
                 });
               }}
             />
-          </Modal>
+          ) : (
+            <Card
+              title={"Cursos"}
+              extra={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "450px",
+                  }}
+                >
+                  <Search
+                    allowClear
+                    onSearch={(e) => {
+                      setTextSearch(e);
+                      getCursos({
+                        query: e,
+                        showFiled: showFiled,
+                        page: 0,
+                      });
+                    }}
+                    style={{
+                      marginRight: "30px",
+                    }}
+                    placeholder={"Buscar cursos"}
+                  />
+                  <Tooltip title={"Exibir Arquivados"}>
+                    <Switch
+                      defaultChecked={showFiled}
+                      checked={showFiled}
+                      style={{
+                        marginRight: "10px",
+                      }}
+                      onClick={(checked) => {
+                        setShowFiled(checked);
+                        getCursos({
+                          query: textSearch,
+                          showFiled: checked,
+                          page: 0,
+                        });
+                      }}
+                    />
+                  </Tooltip>
+                  <Button
+                    type="primary"
+                    icon={<PlusOutlined />}
+                    onClick={() => {
+                      setEditandoCurso(null);
+                      setModalText("Cadastrar Curso");
+                      setRegisterVisible(true);
+                      setPage(0);
+                    }}
+                  >
+                    Adicionar
+                  </Button>
+                </div>
+              }
+            >
+              <List
+                loading={loading}
+                dataSource={cursos}
+                pagination={{
+                  onChange: (page) => {
+                    setPage(page);
+                    getCursos({
+                      page: page - 1,
+                      query: textSearch,
+                      showFiled: showFiled,
+                    });
+                  },
+                  pageSize: 20,
+                  total: count,
+                  showSizeChanger: false,
+                  current: pageNumber,
+                  defaultCurrent: 1,
+                  hideOnSinglePage: true,
+                }}
+                style={{ width: "100%" }}
+                renderItem={(item) => {
+                  return (
+                    <List.Item
+                      actions={[
+                        <Button
+                          key={item.id}
+                          onClick={() => {
+                            setEditandoCurso(item);
+                            setModalText("Editar Curso");
+                            setRegisterVisible(true);
+                          }}
+                          icon={<EditOutlined />}
+                        >
+                          Editar
+                        </Button>,
+                      ]}
+                      key={item.id}
+                    >
+                      <List.Item.Meta
+                        style={{ fontFamily: "Roboto" }}
+                        title={item.name}
+                        description={
+                          <>
+                            {item.institutions
+                              .map((item) => item.name)
+                              .join(", ")}
+                          </>
+                        }
+                      />
+                    </List.Item>
+                  );
+                }}
+              />
+            </Card>
+          )}
         </Content>
       </Layout>
     </>

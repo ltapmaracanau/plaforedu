@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerThemeSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification } from "antd";
+import { Button, Card, Form, Input, Layout, notification, Switch } from "antd";
 
 const { Content } = Layout;
 
 export default function TemasRegister(props) {
-  const { theme = {}, actionVisible } = props;
+  const { theme = null, actionVisible } = props;
 
   const registerTheme = useStoreActions(
     (actions) => actions.themes.registerTheme
   );
   const updateTheme = useStoreActions((actions) => actions.themes.updateTheme);
   const registering = useStoreState((state) => state.themes.registering);
+
+  const [filed, setFiled] = useState(theme?.filedAt !== null);
 
   const register = useForm({
     mode: "onChange",
@@ -31,32 +33,36 @@ export default function TemasRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    if (theme === {}) {
-      const newTheme = await registerTheme(values);
-      if (newTheme.error) {
-        notification.error({
-          message: "Algo deu errado!",
-          description: newTheme.message,
+    if (theme) {
+      try {
+        if ((theme.filedAt !== null) !== filed) {
+          await updateTheme({ ...values, id: theme.id, filed: filed });
+        } else {
+          await updateTheme({ ...values, id: theme.id });
+        }
+        notification.success({
+          message: "Tema alterado com sucesso!",
         });
-      } else {
+        actionVisible();
+      } catch (error) {
+        notification.error({
+          message: "Erro!",
+          description: error.message,
+        });
+      }
+    } else {
+      try {
+        await registerTheme(values);
         notification.success({
           message: "Tema cadastrado com sucesso!",
         });
         register.reset();
         actionVisible();
-      }
-    } else {
-      const tryUpdate = await updateTheme({ ...values, id: theme.id });
-      if (tryUpdate?.error) {
+      } catch (error) {
         notification.error({
-          message: "Erro!",
-          description: tryUpdate.message,
+          message: "Algo deu errado!",
+          description: error.message,
         });
-      } else {
-        notification.success({
-          message: "Tema alterado com sucesso!",
-        });
-        actionVisible();
       }
     }
   };
@@ -97,6 +103,20 @@ export default function TemasRegister(props) {
                   );
                 }}
               />
+              {theme && (
+                <Form.Item
+                  label={"Tema arquivado"}
+                  style={{ marginBottom: "20px" }}
+                >
+                  <Switch
+                    checked={filed}
+                    defaultChecked={theme.filedAt}
+                    onChange={(value) => {
+                      setFiled(value);
+                    }}
+                  />
+                </Form.Item>
+              )}
               <div
                 style={{
                   display: "flex",
@@ -111,7 +131,7 @@ export default function TemasRegister(props) {
                   shape="round"
                   htmlType="submit"
                 >
-                  {theme.id ? <>Alterar</> : <>Cadastrar</>}
+                  {theme ? <>Alterar</> : <>Cadastrar</>}
                 </Button>
               </div>
             </Form>
