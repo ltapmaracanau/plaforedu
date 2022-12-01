@@ -1,5 +1,5 @@
 import { thunk, action } from "easy-peasy";
-import { dataService } from "../services/dataService";
+import services from "../services";
 
 const instituicoesModel = {
   loading: false,
@@ -10,40 +10,73 @@ const instituicoesModel = {
 
   registerNewInstitution: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const newInstitution = await dataService.registerInstitution({
-      ...payload,
-    });
-    actions.setRegistering(false);
-    return newInstitution;
+    try {
+      await services.institutionService.registerInstitution({
+        ...payload,
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   updateInstitution: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const tryUpdateInstitution = await dataService.updateInstitution({
-      ...payload,
-    });
-    actions.setRegistering(false);
-    return tryUpdateInstitution;
+    try {
+      await services.institutionService.updateInstitution({
+        ...payload,
+      });
+      if (payload.filed !== undefined) {
+        if (payload.filed) {
+          await services.institutionService.archiveInstitution({
+            id: payload.id,
+          });
+        } else {
+          await services.institutionService.unarchiveInstitution({
+            id: payload.id,
+          });
+        }
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   getInstituicoes: thunk(
     async (actions, payload = { query: "", showFiled: false }) => {
       actions.setLoading(true);
-      const instituicoes = await dataService.getInstituicoes(payload);
-      if (instituicoes?.length >= 0) {
-        actions.setInstituicoes(instituicoes);
+      try {
+        await services.institutionService
+          .getInstituicoes(payload)
+          .then((instituicoes) => {
+            if (instituicoes?.length >= 0) {
+              actions.setInstituicoes(instituicoes);
+            }
+          });
+      } catch (error) {
+        throw new Error(error.message);
+      } finally {
+        actions.setLoading(false);
       }
-      actions.setLoading(false);
     }
   ),
 
   getEstados: thunk(async (actions, _) => {
     actions.setLoadingEstados(true);
-    const estados = await dataService.getEstados();
-    if (estados?.length >= 0) {
-      actions.setEstados(estados);
+    try {
+      await services.institutionService.getEstados().then((estados) => {
+        if (estados?.length >= 0) {
+          actions.setEstados(estados);
+        }
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setLoadingEstados(false);
     }
-    actions.setLoadingEstados(false);
   }),
 
   setLoading: action((state, payload) => {

@@ -70,15 +70,7 @@ import fundoEscala1Curso5 from "../assets/icones/PLAFOREDU_Icones-Filtros_Escala
 import fundoEscala1Categoria5 from "../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Categoria Cor-05.png";
 import fundoEscala1Competencia5 from "../assets/icones/PLAFOREDU_Icones-Filtros_EscalaCores-1_V2_Competencia Cor-05.png";
 
-import {
-  cursosDefault,
-  instituicoesDefault,
-  competenciasDefault,
-  categoriasDeCompetenciasDefault,
-  temasDefault,
-  subtemasDefault,
-  dataService,
-} from "../services/dataService.js";
+import services from "../services";
 
 const fundosCategoria = {
   categoria: {
@@ -204,7 +196,7 @@ const initialFilterDefault = {
   esquemaDeCores: "categoria",
   itinerario: 0,
 };
-
+/* 
 const cursosFilterFuctionDefault = (filtro) => {
   let novosCursos = [];
   let novasTrilhas = [];
@@ -523,32 +515,26 @@ const reformuladorDeElementosCytoscape = (cursosFiltrados, filtro) => {
 
   return elementos;
 };
-
+ */
 const coursesModel = {
   loading: false,
   registering: false,
 
-  cursos: cursosDefault,
+  count: 0,
+  page: 1,
+  cursos: [],
 
-  cursosSecondary: [],
-
-  instituicoes: instituicoesDefault,
-
-  categoriasDeCompetencias: categoriasDeCompetenciasDefault,
-
-  competencias: competenciasDefault,
-
-  temas: temasDefault,
-
-  subtemas: subtemasDefault,
-
-  cursosFiltrados: computed((state) =>
+  /* cursosFiltrados: computed((state) =>
     cursosFilterFuctionDefault(state.filter)
   ),
 
   elements: computed((state) =>
     reformuladorDeElementosCytoscape(state.cursosFiltrados, state.filter)
-  ),
+  ), */
+
+  cursosFiltrados: { novosCursos: [] },
+
+  elements: [],
 
   filterDefault: initialFilterDefault,
 
@@ -558,27 +544,85 @@ const coursesModel = {
     state.filter = { ...state.filter, ...payload };
   }),
 
-  getCursos: thunk(async (actions, payload = { query: "" }) => {
-    actions.setLoading(true);
-    const cursos = await dataService.getCursos({ query: payload.query });
-    if (cursos?.length >= 0) {
-      actions.setCursos(cursos);
+  getCursos: thunk(
+    async (actions, payload = { query: "", showFiled: false, page: 0 }) => {
+      const { query = "", showFiled = false, page = 0 } = payload;
+      actions.setLoading(true);
+      console.log(payload);
+      const cursos = await services.courseService.getCursos({
+        query: query,
+        showFiled: showFiled,
+        page: page,
+      });
+      if (cursos?.data?.length >= 0) {
+        actions.setCursos(cursos.data);
+        actions.setCount(cursos.count);
+      }
+      actions.setLoading(false);
     }
-    actions.setLoading(false);
-  }),
+  ),
 
   registerNewCourse: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const newCourse = await dataService.registerCourse({ ...payload });
+    const newCourse = await services.courseService.registerCourse({
+      ...payload,
+    });
     actions.setRegistering(false);
     return newCourse;
   }),
 
   updateCourse: thunk(async (actions, payload) => {
+    const {
+      id,
+      name,
+      description,
+      hours,
+      link,
+      institutions,
+      accessibilities,
+      itineraries,
+      competencies,
+      subThemes,
+      filed = undefined,
+    } = payload;
     actions.setRegistering(true);
-    const tryUpdateCourse = await dataService.updateCourse({ ...payload });
-    actions.setRegistering(false);
-    return tryUpdateCourse;
+    try {
+      await services.courseService.updateCourse({
+        id,
+        name,
+        description,
+        hours,
+        link,
+      });
+      await services.courseService.updateCourseInstitutions({
+        id,
+        institutions,
+      });
+      await services.courseService.updateCourseAccessibilities({
+        id,
+        accessibilities,
+      });
+      await services.courseService.updateCourseItineraries({
+        id,
+        itineraries,
+      });
+      await services.courseService.updateCourseCompetencies({
+        id,
+        competencies,
+      });
+      await services.courseService.updateCourseSubThemes({ id, subThemes });
+      if (filed !== undefined) {
+        if (filed) {
+          await services.courseService.archiveCourse({ id });
+        } else {
+          await services.courseService.unarchiveCourse({ id });
+        }
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   setLoading: action((state, payload) => {
@@ -590,7 +634,15 @@ const coursesModel = {
   }),
 
   setCursos: action((state, payload) => {
-    state.cursosSecondary = payload;
+    state.cursos = payload;
+  }),
+
+  setCount: action((state, payload) => {
+    state.count = payload;
+  }),
+
+  setPage: action((state, payload) => {
+    state.page = payload;
   }),
 };
 

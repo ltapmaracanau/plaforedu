@@ -1,5 +1,5 @@
 import { action, thunk } from "easy-peasy";
-import { dataService } from "../services/dataService";
+import services from "../services";
 
 const temasModel = {
   loading: false,
@@ -7,50 +7,120 @@ const temasModel = {
   themes: [],
   subthemes: [],
 
-  getThemes: thunk(async (actions, payload = { query: "" }) => {
-    actions.setLoading(true);
-    const themes = await dataService.getThemes({ query: payload.query });
-    if (themes?.length >= 0) {
-      actions.setThemes(themes);
+  getThemes: thunk(
+    async (actions, payload = { query: "", showFiled: false }) => {
+      actions.setLoading(true);
+      try {
+        await services.themesService
+          .getThemes({
+            query: payload.query,
+            showFiled: payload.showFiled,
+          })
+          .then((themes) => {
+            if (themes?.length >= 0) {
+              actions.setThemes(themes);
+            }
+          });
+      } catch (error) {
+        throw new Error(error.message);
+      } finally {
+        actions.setLoading(false);
+      }
     }
-    actions.setLoading(false);
-  }),
+  ),
 
   registerTheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const theme = await dataService.registerTheme({ ...payload });
-    actions.setRegistering(false);
-    return theme;
+    try {
+      await services.themesService.registerTheme({ ...payload });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   updateTheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const tryUpdateTheme = await dataService.updateTheme({ ...payload });
-    actions.setRegistering(false);
-    return tryUpdateTheme;
-  }),
-
-  getSubthemes: thunk(async (actions, payload = { query: "" }) => {
-    actions.setLoading(true);
-    const subthemes = await dataService.getSubthemes({ query: payload.query });
-    if (subthemes?.length >= 0) {
-      actions.setSubthemes(subthemes);
+    try {
+      await services.themesService.updateTheme({
+        ...payload,
+      });
+      if (payload.filed !== undefined) {
+        if (payload.filed) {
+          await services.themesService.archiveTheme({
+            id: payload.id,
+          });
+        } else {
+          await services.themesService.unarchiveTheme({
+            id: payload.id,
+          });
+        }
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
     }
-    actions.setLoading(false);
-  }),
-
-  registerSubtheme: thunk(async (actions, payload) => {
-    actions.setRegistering(true);
-    const subtheme = await dataService.registerSubtheme({ ...payload });
-    actions.setRegistering(false);
-    return subtheme;
   }),
 
   updateSubtheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const tryUpdate = await dataService.updateSubtheme({ ...payload });
-    actions.setRegistering(false);
-    return tryUpdate;
+    try {
+      await services.themesService.updateSubtheme({
+        ...payload,
+      });
+      if (payload.filed !== undefined) {
+        if (payload.filed) {
+          await services.themesService.archiveSubtheme({
+            id: payload.id,
+          });
+        } else {
+          await services.themesService.unarchiveSubtheme({
+            id: payload.id,
+          });
+        }
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
+  }),
+
+  getSubthemes: thunk(
+    async (actions, payload = { query: "", showFiled: false }) => {
+      actions.setLoading(true);
+      try {
+        await services.themesService
+          .getSubthemes({
+            query: payload.query,
+            showFiled: payload.showFiled,
+          })
+          .then((subthemes) => {
+            if (subthemes?.length >= 0) {
+              actions.setSubthemes(subthemes);
+            }
+          });
+      } catch (error) {
+        throw new Error(error.message);
+      } finally {
+        actions.setLoading(false);
+      }
+    }
+  ),
+
+  registerSubtheme: thunk(async (actions, payload) => {
+    actions.setRegistering(true);
+    try {
+      await services.themesService.registerSubtheme({
+        ...payload,
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   setLoading: action((state, payload) => {

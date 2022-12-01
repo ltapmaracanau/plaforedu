@@ -6,6 +6,7 @@ import instituicoesModel from "./institutions-model";
 import itinerariosModel from "./itineraries-model";
 import rolesModel from "./roles-model";
 import themesModel from "./themes-model";
+import trilhasModel from "./trilhas-model";
 import usuariosModel from "./users-model";
 
 const storeModel = {
@@ -18,6 +19,7 @@ const storeModel = {
   roles: rolesModel,
   themes: themesModel,
   users: usuariosModel,
+  trilhas: trilhasModel,
 };
 
 export default storeModel;

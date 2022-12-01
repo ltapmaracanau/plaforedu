@@ -43,14 +43,14 @@ export default function CytoscapeVisualization() {
   const filter = useStoreState((state) => state.courses.filter);
   const elements = useStoreState((state) => state.courses.elements);
   const cursos = useStoreState((state) => state.courses.cursos);
-  const listInst = useStoreState((state) => state.courses.instituicoes);
-  const competencias = useStoreState((state) => state.courses.competencias);
+  const listInst = useStoreState((state) => state.institutions.instituicoes);
+  const competencias = useStoreState(
+    (state) => state.competencies.competencias
+  );
   const cursosFiltrados = useStoreState(
     (state) => state.courses.cursosFiltrados.novosCursos
   );
-  const trilhas = useStoreState(
-    (state) => state.courses.cursosFiltrados.novasTrilhas
-  );
+  const trilhas = useStoreState((state) => state.trilhas.trilhas);
   const colorSchemaDefault = useStoreState(
     (state) => state.courses.filterDefault.esquemaDeCores
   );
@@ -71,19 +71,6 @@ export default function CytoscapeVisualization() {
   const [courseOnModal, setCourseOnModal] = useState(cursos[0]);
   const [modalCourseVisible, setModalCourseVisible] = useState(false);
   const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
-
-  const getInstituicao = useCallback(
-    (id_instituicao) => {
-      const instituicao = listInst.find(({ id }) => id === id_instituicao);
-
-      if (instituicao) {
-        return instituicao.titulo;
-      }
-
-      return "Instituição não encontrada";
-    },
-    [listInst]
-  );
 
   const csvCursosHeaders = [
     { label: "Título", key: "titulo" },
@@ -142,7 +129,7 @@ export default function CytoscapeVisualization() {
         titulo: course.title,
         descricao: course.descricao,
         cargaHoraria: `${course.cargaHoraria}H`,
-        instCert: getInstituicao(course.instCert),
+        instCert: course.instituicoes,
         possuiAcessibilidade: course.possuiAcessibilidade,
         link: course.link,
       };
@@ -153,7 +140,6 @@ export default function CytoscapeVisualization() {
     trilhas,
     cursos,
     cursosFiltrados,
-    getInstituicao,
   ]);
 
   const handleOk = () => {
@@ -493,34 +479,36 @@ export default function CytoscapeVisualization() {
         open={modalCourseVisible}
         onOk={handleOk}
         onCancel={handleOk}
-        title={courseOnModal.title}
+        title={courseOnModal?.title}
         centered={true}
         footer={[
-          <Button type="primary" key={courseOnModal.id} onClick={handleOk}>
+          <Button type="primary" key={courseOnModal?.id} onClick={handleOk}>
             Ok
           </Button>,
         ]}
       >
         <Descriptions column={1} bordered>
           <Descriptions.Item label="Descrição">
-            {courseOnModal.descricao}
+            {courseOnModal?.descricao}
           </Descriptions.Item>
           <Descriptions.Item label="Carga Horária">
-            {courseOnModal.cargaHoraria}
+            {courseOnModal?.cargaHoraria}
           </Descriptions.Item>
           <Descriptions.Item label="Instituição Certificadora">
-            {getInstituicao(courseOnModal.instCert)}
+            {courseOnModal?.instituicoes.map((instituicao) => (
+              <span key={instituicao.id}>{instituicao.nome}</span>
+            ))}
           </Descriptions.Item>
           {/* <Descriptions.Item label='Possui Acessibilidade'>
-                        {courseOnModal.possuiAcessibilidade}
+                        {courseOnModal?.possuiAcessibilidade}
                     </Descriptions.Item> */}
           <Descriptions.Item label="Link">
-            <a target="_blank" rel="noreferrer" href={courseOnModal.link}>
-              {courseOnModal.link}
+            <a target="_blank" rel="noreferrer" href={courseOnModal?.link}>
+              {courseOnModal?.link}
             </a>
           </Descriptions.Item>
           {/* <Descriptions.Item label='Observações'>
-                        {courseOnModal.obs}
+                        {courseOnModal?.obs}
                     </Descriptions.Item> */}
         </Descriptions>
       </Modal>
@@ -528,17 +516,17 @@ export default function CytoscapeVisualization() {
         open={modalCompetenciaVisible}
         onOk={handleOk}
         onCancel={handleOk}
-        title={courseOnModal.titulo}
+        title={courseOnModal?.titulo}
         centered={true}
         footer={[
-          <Button type="primary" key={courseOnModal.id} onClick={handleOk}>
+          <Button type="primary" key={courseOnModal?.id} onClick={handleOk}>
             Ok
           </Button>,
         ]}
       >
         <Descriptions column={1} bordered style={{ fontFamily: "Roboto" }}>
           <Descriptions.Item label="Descrição" style={{ fontFamily: "Roboto" }}>
-            {courseOnModal.descricao}
+            {courseOnModal?.descricao}
           </Descriptions.Item>
         </Descriptions>
       </Modal>
