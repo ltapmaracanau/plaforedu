@@ -80,7 +80,7 @@ export default function CoursesList() {
               title={modalText}
               actionVisible={() => {
                 setRegisterVisible(false);
-                setPage(0);
+                setPage(1);
                 getCursos({
                   query: textSearch,
                   showFiled: showFiled,
@@ -106,8 +106,8 @@ export default function CoursesList() {
                       getCursos({
                         query: e,
                         showFiled: showFiled,
-                        page: 0,
                       });
+                      setPage(1);
                     }}
                     style={{
                       marginRight: "30px",
@@ -123,10 +123,11 @@ export default function CoursesList() {
                       }}
                       onClick={(checked) => {
                         setShowFiled(checked);
+                        setPage(1);
                         getCursos({
                           query: textSearch,
                           showFiled: checked,
-                          page: 0,
+                          page: 1,
                         });
                       }}
                     />
@@ -138,7 +139,7 @@ export default function CoursesList() {
                       setEditandoCurso(null);
                       setModalText("Cadastrar Curso");
                       setRegisterVisible(true);
-                      setPage(0);
+                      setPage(1);
                     }}
                   >
                     Adicionar
@@ -153,7 +154,7 @@ export default function CoursesList() {
                   onChange: (page) => {
                     setPage(page);
                     getCursos({
-                      page: page - 1,
+                      page: page,
                       query: textSearch,
                       showFiled: showFiled,
                     });
@@ -163,7 +164,7 @@ export default function CoursesList() {
                   showSizeChanger: false,
                   current: pageNumber,
                   defaultCurrent: 1,
-                  hideOnSinglePage: true,
+                  hideOnSinglePage: false,
                 }}
                 style={{ width: "100%" }}
                 renderItem={(item) => {
