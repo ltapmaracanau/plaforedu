@@ -12,56 +12,39 @@ import {
   Input,
   Tooltip,
   Switch,
+  Space,
+  Tag,
 } from "antd";
-import CourseRegister from "./CourseRegister";
+import FormativeTrailsRegister from "./FormativeTrailsRegister";
 
 const { Content } = Layout;
 const { Search } = Input;
-
-export default function CoursesList() {
-  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
+export default function FormativeTrailsList() {
+  const getTrilhas = useStoreActions((actions) => actions.trilhas.getTrilhas);
+  const getCompetencies = useStoreActions(
+    (actions) => actions.competencies.getComp
+  );
   const getItinerarios = useStoreActions(
     (actions) => actions.itineraries.getItinerarios
   );
-  const getAcessibilidades = useStoreActions(
-    (actions) => actions.accessibilities.getAcessibilidades
-  );
-  const getInstituicoes = useStoreActions(
-    (actions) => actions.institutions.getInstituicoes
-  );
-  const getComp = useStoreActions((actions) => actions.competencies.getComp);
-  const getSubthemes = useStoreActions(
-    (actions) => actions.themes.getSubthemes
-  );
-  const setPage = useStoreActions((actions) => actions.courses.setPage);
+  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
-  const loading = useStoreState((state) => state.courses.loading);
-  const cursos = useStoreState((state) => state.courses.cursos);
-  const pageNumber = useStoreState((state) => state.courses.page);
-  const count = useStoreState((state) => state.courses.count);
+  const loading = useStoreState((state) => state.trilhas.loading);
+  const trilhas = useStoreState((state) => state.trilhas.trilhas);
 
-  const [editandoCurso, setEditandoCurso] = useState(null);
-  const [modalText, setModalText] = useState("Cadastrar Curso");
+  const [editandoTrilha, setEditandoTrilha] = useState(null);
+  const [modalText, setModalText] = useState("Cadastrar Trilha");
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
   useEffect(() => {
-    getCursos();
+    getTrilhas();
+    getCompetencies();
     getItinerarios();
-    getAcessibilidades();
-    getInstituicoes();
-    getComp();
-    getSubthemes();
-  }, [
-    getCursos,
-    getItinerarios,
-    getAcessibilidades,
-    getInstituicoes,
-    getComp,
-    getSubthemes,
-  ]);
+    getCursos();
+  }, [getTrilhas]);
 
   return (
     <>
@@ -75,13 +58,12 @@ export default function CoursesList() {
       >
         <Content style={{ width: "100%" }}>
           {registerVisible ? (
-            <CourseRegister
-              curso={editandoCurso}
+            <FormativeTrailsRegister
+              trilha={editandoTrilha}
               title={modalText}
               actionVisible={() => {
                 setRegisterVisible(false);
-                setPage(1);
-                getCursos({
+                getTrilhas({
                   query: textSearch,
                   showFiled: showFiled,
                 });
@@ -89,7 +71,7 @@ export default function CoursesList() {
             />
           ) : (
             <Card
-              title={"Cursos"}
+              title={"Trilhas Formativas"}
               extra={
                 <div
                   style={{
@@ -103,16 +85,15 @@ export default function CoursesList() {
                     allowClear
                     onSearch={(e) => {
                       setTextSearch(e);
-                      getCursos({
+                      getTrilhas({
                         query: e,
                         showFiled: showFiled,
                       });
-                      setPage(1);
                     }}
                     style={{
                       marginRight: "30px",
                     }}
-                    placeholder={"Buscar cursos"}
+                    placeholder={"Buscar trilhas"}
                   />
                   <Tooltip title={"Exibir Arquivados"}>
                     <Switch
@@ -123,11 +104,9 @@ export default function CoursesList() {
                       }}
                       onClick={(checked) => {
                         setShowFiled(checked);
-                        setPage(1);
-                        getCursos({
+                        getTrilhas({
                           query: textSearch,
                           showFiled: checked,
-                          page: 1,
                         });
                       }}
                     />
@@ -136,10 +115,9 @@ export default function CoursesList() {
                     type="primary"
                     icon={<PlusOutlined />}
                     onClick={() => {
-                      setEditandoCurso(null);
-                      setModalText("Cadastrar Curso");
+                      setEditandoTrilha(null);
+                      setModalText("Cadastrar Trilha");
                       setRegisterVisible(true);
-                      setPage(1);
                     }}
                   >
                     Adicionar
@@ -149,23 +127,7 @@ export default function CoursesList() {
             >
               <List
                 loading={loading}
-                dataSource={cursos}
-                pagination={{
-                  onChange: (page) => {
-                    setPage(page);
-                    getCursos({
-                      page: page,
-                      query: textSearch,
-                      showFiled: showFiled,
-                    });
-                  },
-                  pageSize: 20,
-                  total: count,
-                  showSizeChanger: false,
-                  current: pageNumber,
-                  defaultCurrent: 1,
-                  hideOnSinglePage: false,
-                }}
+                dataSource={trilhas}
                 style={{ width: "100%" }}
                 renderItem={(item) => {
                   return (
@@ -174,8 +136,8 @@ export default function CoursesList() {
                         <Button
                           key={item.id}
                           onClick={() => {
-                            setEditandoCurso(item);
-                            setModalText("Editar Curso");
+                            setEditandoTrilha(item);
+                            setModalText("Editar Trilha");
                             setRegisterVisible(true);
                           }}
                           icon={<EditOutlined />}
@@ -189,11 +151,16 @@ export default function CoursesList() {
                         style={{ fontFamily: "Roboto" }}
                         title={item.name}
                         description={
-                          <>
-                            {item.institutions
-                              .map((item) => item.name)
-                              .join(", ")}
-                          </>
+                          <Space direction="vertical">
+                            {item.description}
+                            <Space direction="horizontal">
+                              {item.competencies.map((competencia) => (
+                                <Tag key={competencia.id} color={"#108ee9"}>
+                                  {competencia.name}
+                                </Tag>
+                              ))}
+                            </Space>
+                          </Space>
                         }
                       />
                     </List.Item>

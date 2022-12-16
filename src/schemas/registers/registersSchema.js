@@ -102,3 +102,14 @@ export const registerCourseSchema = yup.object().shape({
   competencies: yup.array().of(yup.string()).required("Obrigatório!"),
   subThemes: yup.array().of(yup.string()).required("Obrigatório!"),
 });
+// TRILHAS
+
+export const registerTrilhaSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Obrigatório!")
+    .max(256, "256 caracteres no máximo!"),
+  description: yup.string().required("Obrigatório!"),
+  itineraries: yup.array().of(yup.string()).required("Obrigatório!"),
+  competencies: yup.array().of(yup.string()).required("Obrigatório!"),
+});

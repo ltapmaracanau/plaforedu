@@ -545,14 +545,13 @@ const coursesModel = {
   }),
 
   getCursos: thunk(
-    async (actions, payload = { query: "", showFiled: false, page: 0 }) => {
-      const { query = "", showFiled = false, page = 0 } = payload;
+    async (actions, payload = { query: "", showFiled: false, page: 1 }) => {
+      const { query = "", showFiled = false, page = 1 } = payload;
       actions.setLoading(true);
-      console.log(payload);
       const cursos = await services.courseService.getCursos({
         query: query,
         showFiled: showFiled,
-        page: page,
+        page: page - 1,
       });
       if (cursos?.data?.length >= 0) {
         actions.setCursos(cursos.data);
