@@ -20,6 +20,7 @@ import {
 } from "@ant-design/icons";
 
 import { Layout, Menu } from "antd";
+import FormativeTrailsList from "../components/user-settings/FormativeTrailsList";
 
 const { Sider } = Layout;
 
@@ -36,6 +37,7 @@ export default function SettingsPage() {
     <CompList key={"comp-list"} />,
     <TemasList key={"temas-list"} />,
     <SubtemasList key={"subtemas-list"} />,
+    <FormativeTrailsList key={"trails-list"} />,
   ];
 
   const [index, setIndex] = useState(0);
@@ -145,6 +147,15 @@ export default function SettingsPage() {
                   }}
                 >
                   Subtemas
+                </Menu.Item>
+                <Menu.Item
+                  style={{ fontFamily: "Roboto" }}
+                  key={"28"}
+                  onClick={() => {
+                    setIndex(9);
+                  }}
+                >
+                  Trilhas Formativas
                 </Menu.Item>
               </Menu.SubMenu>
             ) : null}
