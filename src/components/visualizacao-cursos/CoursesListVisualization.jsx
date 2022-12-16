@@ -26,7 +26,7 @@ export default function CoursesListVisualization() {
 
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
   const cursos = useStoreState((state) => state.courses.cursos);
-  const trilhas = useStoreState((state) => state.trilhas.trilhas);
+  const trilhas = useStoreState((state) => state.trilhas.trilhasSecondary);
 
   const filter = useStoreState((state) => state.courses.filter);
   const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
