@@ -22,7 +22,7 @@ export default function RowItinerario() {
   const filter = useStoreState((state) => state.courses.filter);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const itinerarioData = useStoreState((state) =>
-    state.itineraries.itinerarios.find(
+    state.itineraries.itinerariosSecondary.find(
       (obj) => obj.dados_gerais.id === itinerario
     )
   );

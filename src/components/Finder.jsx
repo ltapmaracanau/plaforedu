@@ -18,10 +18,26 @@ export default function Finder() {
   let navigate = useNavigate();
   let screens = useBreakpoint();
   const setFiltro = useStoreActions((actions) => actions.courses.setFilter);
+  const setTipoVisualizacao = useStoreActions(
+    (actions) => actions.adm.setTipoVisualizacao
+  );
+  const setFilterCollapsed = useStoreActions(
+    (actions) => actions.adm.setFilterCollapsed
+  );
   const filtroDefault = useStoreState((state) => state.courses.filterDefault);
+  const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
 
   const onSearch = (value) => {
     setFiltro({ ...filtroDefault, buscaInterna: value });
+    setFiltro({
+      ...filtroDefault,
+      buscaInterna: value,
+      tipoClassificacao: false,
+    });
+    if (filterCollapsed) {
+      setFilterCollapsed();
+    }
+    setTipoVisualizacao(true);
     navigate(`/cursos`);
   };
 

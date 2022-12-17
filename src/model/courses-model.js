@@ -72,6 +72,13 @@ import fundoEscala1Competencia5 from "../assets/icones/PLAFOREDU_Icones-Filtros_
 
 import services from "../services";
 
+import {
+  cursosDefault,
+  categoriasDeCompetenciasDefault,
+  competenciasDefault,
+  temasDefault,
+} from "../services/mockData";
+
 const fundosCategoria = {
   categoria: {
     1: fundoEscala1Categoria3,
@@ -196,13 +203,14 @@ const initialFilterDefault = {
   esquemaDeCores: "categoria",
   itinerario: 0,
 };
-/* 
+
 const cursosFilterFuctionDefault = (filtro) => {
   let novosCursos = [];
   let novasTrilhas = [];
   if (filtro.tipoClassificacao) {
     // false: por cursos, true: por trilhas
     competenciasDefault.forEach((competencia) => {
+      // filtrar por categoria
       let categoriaDaCompetencia = categoriasDeCompetenciasDefault.find(
         (categoria) => categoria.competencias.includes(competencia.id)
       );
@@ -211,27 +219,61 @@ const cursosFilterFuctionDefault = (filtro) => {
       );
       let categoriasVazio = filtro.categoriasDeCompetencias.length === 0;
 
+      // filtrar por competencia
       let contemCompetencia = filtro.competencias.includes(competencia.id);
       let competenciasVazio = filtro.competencias.length === 0;
 
       let competenciaTrue = contemCompetencia || competenciasVazio;
       let categoriaTrue = contemCategoria || categoriasVazio;
 
+      // Verifica se a competência possui trilha
       let contemTrilha = competencia.cursos !== undefined;
       let contemTrilhaNoItinerario = false;
+
+      // Verifica se contém trilha no itinerário selecionado
       if (contemTrilha) {
         contemTrilhaNoItinerario =
           competencia.cursos[filtro.itinerario].length !== 0;
       }
 
-      let competenciaNaoEspecificada = competencia.id === 1; // Se a competência não é especificada
+      // Verifica se a competência é a não especificada
+      // Se for não deverá ser mostrada
+      let competenciaNaoEspecificada = competencia.id === 1;
+
+      // Verificar busca interna na competência
+      let buscaInternaVazia =
+        filtro.buscaInterna === "" || filtro.buscaInterna === undefined;
+      let buscaInterna = false;
+      let buscaInternaCurso = false;
+      if (!buscaInternaVazia) {
+        buscaInterna =
+          competencia.titulo
+            .toLowerCase()
+            .indexOf(filtro.buscaInterna.toLowerCase()) !== -1;
+        if (contemTrilha) {
+          buscaInternaCurso = competencia.cursos[filtro.itinerario].some(
+            (idCurso) => {
+              const curso = cursosDefault.find((curso) => curso.id === idCurso);
+              return (
+                curso.title
+                  .toLowerCase()
+                  .indexOf(filtro.buscaInterna.toLowerCase()) !== -1
+              );
+            }
+          );
+        }
+      }
+
+      let busca = buscaInterna || buscaInternaVazia || buscaInternaCurso;
 
       if (
         competenciaTrue &&
         categoriaTrue &&
         contemTrilhaNoItinerario &&
-        !competenciaNaoEspecificada
+        !competenciaNaoEspecificada &&
+        busca
       ) {
+        // console.log(competencia);
         novasTrilhas.push(competencia);
       }
     });
@@ -412,6 +454,13 @@ const reformuladorDeElementosCytoscape = (cursosFiltrados, filtro) => {
           curso.filter.competencias.includes(competencia)
         )
       );
+      // console.log('Curso: ', curso.id);
+      // console.log(catData);
+      if (curso.id === 9) {
+        //console.log('Curso', curso.id)
+        //console.log(competencias);
+        //console.log(catData);
+      }
       elementos.push({
         group: "nodes",
         data: {
@@ -515,26 +564,24 @@ const reformuladorDeElementosCytoscape = (cursosFiltrados, filtro) => {
 
   return elementos;
 };
- */
+
 const coursesModel = {
   loading: false,
   registering: false,
 
   count: 0,
   page: 1,
-  cursos: [],
 
-  /* cursosFiltrados: computed((state) =>
+  cursos: [],
+  cursosSecondary: cursosDefault,
+
+  cursosFiltrados: computed((state) =>
     cursosFilterFuctionDefault(state.filter)
   ),
 
   elements: computed((state) =>
     reformuladorDeElementosCytoscape(state.cursosFiltrados, state.filter)
-  ), */
-
-  cursosFiltrados: { novosCursos: [] },
-
-  elements: [],
+  ),
 
   filterDefault: initialFilterDefault,
 

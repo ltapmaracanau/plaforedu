@@ -11,7 +11,7 @@ import { dataService } from "../services/dataService";
 const itinerariosModel = {
   loading: false,
 
-  itinerariosSecondary: [],
+  itinerarios: [],
 
   layoutAtual: "layoutCose",
 
@@ -35,10 +35,10 @@ const itinerariosModel = {
   }),
 
   setItinerarios: action((state, payload) => {
-    state.itinerariosSecondary = payload;
+    state.itinerarios = payload;
   }),
 
-  itinerarios: [
+  itinerariosSecondary: [
     // PlaforEDU
     {
       dados_gerais: {
