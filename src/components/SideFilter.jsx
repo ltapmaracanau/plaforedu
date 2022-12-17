@@ -21,20 +21,22 @@ const { useBreakpoint } = Grid;
 export default function SideFilter({ debounceTimeout = 800 }) {
   const screens = useBreakpoint();
 
-  const subtemas = useStoreState((state) => state.themes.subthemes);
-  const temas = useStoreState((state) => state.themes.themes);
+  const subtemas = useStoreState((state) => state.themes.subthemesSecondary);
+  const temas = useStoreState((state) => state.themes.themesSecondary);
   const competencias = useStoreState(
-    (state) => state.competencies.competencias
+    (state) => state.competencies.competenciasSecondary
   );
   const categoriasDeCompetencias = useStoreState(
-    (state) => state.competencies.catComp
+    (state) => state.competencies.catCompSecondary
   );
   const instituicoes = useStoreState(
-    (state) => state.institutions.instituicoes
+    (state) => state.institutions.instituicoesSecondary
   );
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
   const filter = useStoreState((state) => state.courses.filter);
-  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
+  const itinerarios = useStoreState(
+    (state) => state.itineraries.itinerariosSecondary
+  );
 
   const [filtroCompleto, setFiltroCompleto] = useState(false);
 

@@ -1,11 +1,15 @@
 import { action, thunk } from "easy-peasy";
 import services from "../services";
 
+import { temasDefault, subtemasDefault } from "../services/mockData";
+
 const temasModel = {
   loading: false,
   registering: false,
   themes: [],
+  themesSecondary: temasDefault,
   subthemes: [],
+  subthemesSecondary: subtemasDefault,
 
   getThemes: thunk(
     async (actions, payload = { query: "", showFiled: false }) => {
