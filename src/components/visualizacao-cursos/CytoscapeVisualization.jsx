@@ -42,15 +42,19 @@ export default function CytoscapeVisualization() {
 
   const filter = useStoreState((state) => state.courses.filter);
   const elements = useStoreState((state) => state.courses.elements);
-  const cursos = useStoreState((state) => state.courses.cursos);
-  const listInst = useStoreState((state) => state.institutions.instituicoes);
+  const cursos = useStoreState((state) => state.courses.cursosSecondary);
+  const listInst = useStoreState(
+    (state) => state.institutions.instituicoesSecondary
+  );
   const competencias = useStoreState(
-    (state) => state.competencies.competencias
+    (state) => state.competencies.competenciasSecondary
   );
   const cursosFiltrados = useStoreState(
     (state) => state.courses.cursosFiltrados.novosCursos
   );
-  const trilhas = useStoreState((state) => state.trilhas.trilhas);
+  const trilhas = useStoreState(
+    (state) => state.courses.cursosFiltrados.novasTrilhas
+  );
   const colorSchemaDefault = useStoreState(
     (state) => state.courses.filterDefault.esquemaDeCores
   );
@@ -71,6 +75,19 @@ export default function CytoscapeVisualization() {
   const [courseOnModal, setCourseOnModal] = useState(cursos[0]);
   const [modalCourseVisible, setModalCourseVisible] = useState(false);
   const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
+
+  const getInstituicao = useCallback(
+    (id_instituicao) => {
+      const instituicao = listInst.find(({ id }) => id === id_instituicao);
+
+      if (instituicao) {
+        return instituicao.titulo;
+      }
+
+      return "Instituição não encontrada";
+    },
+    [listInst]
+  );
 
   const csvCursosHeaders = [
     { label: "Título", key: "titulo" },
@@ -495,9 +512,7 @@ export default function CytoscapeVisualization() {
             {courseOnModal?.cargaHoraria}
           </Descriptions.Item>
           <Descriptions.Item label="Instituição Certificadora">
-            {courseOnModal?.instituicoes.map((instituicao) => (
-              <span key={instituicao.id}>{instituicao.nome}</span>
-            ))}
+            {getInstituicao(courseOnModal.instCert)}
           </Descriptions.Item>
           {/* <Descriptions.Item label='Possui Acessibilidade'>
                         {courseOnModal?.possuiAcessibilidade}

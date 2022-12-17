@@ -1,11 +1,18 @@
 import { action, thunk } from "easy-peasy";
 import services from "../services";
 
+import {
+  categoriasDeCompetenciasDefault,
+  competenciasDefault,
+} from "../services/mockData";
+
 const competenciasModel = {
   loading: false,
   registering: false,
   competencias: [],
+  competenciasSecondary: competenciasDefault,
   catComp: [],
+  catCompSecondary: categoriasDeCompetenciasDefault,
 
   registerCatComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
