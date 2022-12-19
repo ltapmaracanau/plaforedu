@@ -67,21 +67,14 @@ export default function FormativeTrailsRegister(props) {
 
   const registering = useStoreState((state) => state.trilhas.registering);
 
-  const itinerarios = useStoreState(
-    (state) => state.itineraries.itinerariosSecondary
-  );
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
 
   const competencies = useStoreState(
     (state) => state.competencies.competencias
   );
 
-  const setPage = useStoreActions((actions) => actions.courses.setPage);
-  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
-
   const cursos = useStoreState((state) => state.courses.cursos);
   const loadingCursos = useStoreState((state) => state.courses.loading);
-  const pageNumber = useStoreState((state) => state.courses.page);
-  const count = useStoreState((state) => state.courses.count);
 
   const [filed, setFiled] = useState(trilha?.filedAt !== null);
   const [addCourseVisible, setAddCourseVisible] = useState(false);
@@ -176,6 +169,7 @@ export default function FormativeTrailsRegister(props) {
         newIndex
       ).filter((el) => !!el);
       setCursosTrilha(newData);
+      setCursosTrilhaIds(newData.map((item) => item.id));
     }
   };
 

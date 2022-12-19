@@ -22,7 +22,7 @@ export const dataService = {
     AuthAxios.post("/users/new", {
       cpf: payload.cpf,
       email: payload.email,
-
+      institution: payload.institution,
       name: payload.name,
       phone: payload.phone,
       roles: payload.roles,

@@ -41,7 +41,7 @@ const trilhasModel = {
       filed = undefined,
     } = payload;
     const coursesRefactored = courses.map((item, index) => ({
-      idCourse: item,
+      courseId: item,
       sequence: index + 1,
     }));
     actions.setRegistering(true);
@@ -55,6 +55,7 @@ const trilhasModel = {
         id,
         itineraries,
       });
+      console.log({ courses: coursesRefactored });
       await services.trailsService.updateTrilhaCourses({
         id,
         courses: coursesRefactored,
