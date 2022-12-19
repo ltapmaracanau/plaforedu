@@ -15,7 +15,7 @@ export default function ListSearchLogs() {
 
   const columns = [
     {
-      title: "Usuáro",
+      title: "Usuário",
       dataIndex: "user",
       key: "user",
     },
