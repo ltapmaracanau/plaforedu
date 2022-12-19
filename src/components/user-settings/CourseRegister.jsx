@@ -50,9 +50,7 @@ export default function CourseRegister(props) {
   );
 
   const registering = useStoreState((state) => state.courses.registering);
-  const itinerarios = useStoreState(
-    (state) => state.itineraries.itinerariosSecondary
-  );
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
   const acessibilidades = useStoreState(
     (state) => state.accessibilities.acessibilidades
   );

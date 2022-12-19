@@ -14,9 +14,9 @@ export default {
         throw new Error(error.response?.data?.message || "Algo deu errado!");
       }),
 
-  getTrilhas: (payload = { includeFiled: true, query: "" }) =>
+  getTrilhas: (payload = { showFiled: false, query: "" }) =>
     AuthAxios.get(
-      `/formative-trails/all?includeFiled=${payload.includeFiled}&search=${payload.query}`
+      `/formative-trails/all?includeFiled=${payload.showFiled}&search=${payload.query}`
     )
       .then((response) => response.data)
       .catch((error) => {

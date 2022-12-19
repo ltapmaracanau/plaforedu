@@ -41,7 +41,7 @@ const trilhasModel = {
       filed = undefined,
     } = payload;
     const coursesRefactored = courses.map((item, index) => ({
-      idCourse: item,
+      courseId: item,
       sequence: index + 1,
     }));
     actions.setRegistering(true);

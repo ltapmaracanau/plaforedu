@@ -22,7 +22,7 @@ export const dataService = {
     AuthAxios.post("/users/new", {
       cpf: payload.cpf,
       email: payload.email,
-
+      institution: payload.institution,
       name: payload.name,
       phone: payload.phone,
       roles: payload.roles,
@@ -146,4 +146,13 @@ export const dataService = {
       .catch((error) => {
         throw new Error(error);
       }),
+
+  getSearchLogs: () => [
+    {
+      user: "Usuáro tal",
+      string: "Valor de busca aleatório",
+      datetime: new Date().toISOString(),
+      id: "39432432423",
+    },
+  ],
 };
