@@ -26,7 +26,7 @@ const usuariosModel = {
     }
   }),
 
-  registerNewUser: thunk(async (actions, payload = { id: "" }) => {
+  registerNewUser: thunk(async (actions, payload) => {
     actions.setRegistering(true);
     const newUser = await dataService.createUser({ ...payload });
     actions.setRegistering(false);

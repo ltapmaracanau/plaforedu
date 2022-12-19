@@ -6,8 +6,10 @@ const admModel = {
   tipoVisualizacao: false, // false: grafo, true: lista
   filterCollapsed: true, // true: filtro escondido, false: filtro visível
   loading: false,
+  loadingLogs: false,
   iniciando: true,
   isAuthenticated: true,
+  searchLogs: [],
 
   myProfile: {},
 
@@ -110,6 +112,18 @@ const admModel = {
     return myProfile;
   }),
 
+  getSearchLogs: thunk(async (actions, _) => {
+    actions.setLoadingLogs(true);
+    try {
+      const logs = dataService.getSearchLogs();
+      actions.setSearchLogs(logs);
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setLoadingLogs(false);
+    }
+  }),
+
   // Setters
 
   setFilterCollapsed: action((state, _) => {
@@ -134,6 +148,14 @@ const admModel = {
 
   setMyProfile: action((state, payload) => {
     state.myProfile = payload;
+  }),
+
+  setSearchLogs: action((state, payload) => {
+    state.searchLogs = payload;
+  }),
+
+  setLoadingLogs: action((state, payload) => {
+    state.loadingLogs = payload;
   }),
 };
 
