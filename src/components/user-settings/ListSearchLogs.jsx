@@ -29,7 +29,6 @@ export default function ListSearchLogs() {
       dataIndex: "datetime",
       key: "datetime",
       render: (item) => {
-        console.log(item);
         return <>{new Date(item).toLocaleString()}</>;
       },
     },

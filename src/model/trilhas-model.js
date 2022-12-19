@@ -55,7 +55,6 @@ const trilhasModel = {
         id,
         itineraries,
       });
-      console.log({ courses: coursesRefactored });
       await services.trailsService.updateTrilhaCourses({
         id,
         courses: coursesRefactored,
