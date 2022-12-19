@@ -17,10 +17,12 @@ import {
   DiffOutlined,
   TeamOutlined,
   KeyOutlined,
+  FileSearchOutlined,
 } from "@ant-design/icons";
 
 import { Layout, Menu } from "antd";
 import FormativeTrailsList from "../components/user-settings/FormativeTrailsList";
+import ListSearchLogs from "../components/user-settings/ListSearchLogs";
 
 const { Sider } = Layout;
 
@@ -38,6 +40,7 @@ export default function SettingsPage() {
     <TemasList key={"temas-list"} />,
     <SubtemasList key={"subtemas-list"} />,
     <FormativeTrailsList key={"trails-list"} />,
+    <ListSearchLogs key={"search-list"} />,
   ];
 
   const [index, setIndex] = useState(0);
@@ -78,86 +81,98 @@ export default function SettingsPage() {
               Alterar Senha
             </Menu.Item>
             {isAdm ? (
-              <Menu.SubMenu
-                style={{ fontFamily: "Roboto" }}
-                icon={<DiffOutlined />}
-                key={"2"}
-                title={"Cadastros"}
-              >
-                <Menu.Item
+              <>
+                <Menu.SubMenu
                   style={{ fontFamily: "Roboto" }}
-                  key={"21"}
-                  icon={<TeamOutlined />}
+                  icon={<DiffOutlined />}
+                  key={"2"}
+                  title={"Cadastros"}
+                >
+                  <Menu.Item
+                    style={{ fontFamily: "Roboto" }}
+                    key={"21"}
+                    icon={<TeamOutlined />}
+                    onClick={() => {
+                      setIndex(2);
+                    }}
+                  >
+                    Usuários
+                  </Menu.Item>
+                  <Menu.Item
+                    style={{ fontFamily: "Roboto" }}
+                    key={"22"}
+                    onClick={() => {
+                      setIndex(3);
+                    }}
+                  >
+                    Cursos
+                  </Menu.Item>
+                  <Menu.Item
+                    style={{ fontFamily: "Roboto" }}
+                    key={"23"}
+                    onClick={() => {
+                      setIndex(4);
+                    }}
+                  >
+                    Instituições
+                  </Menu.Item>
+                  <Menu.Item
+                    style={{ fontFamily: "Roboto" }}
+                    key={"24"}
+                    onClick={() => {
+                      setIndex(5);
+                    }}
+                  >
+                    Categorias de competências
+                  </Menu.Item>
+                  <Menu.Item
+                    style={{ fontFamily: "Roboto" }}
+                    key={"25"}
+                    onClick={() => {
+                      setIndex(6);
+                    }}
+                  >
+                    Competências
+                  </Menu.Item>
+                  <Menu.Item
+                    style={{ fontFamily: "Roboto" }}
+                    key={"26"}
+                    onClick={() => {
+                      setIndex(7);
+                    }}
+                  >
+                    Temas
+                  </Menu.Item>
+                  <Menu.Item
+                    style={{ fontFamily: "Roboto" }}
+                    key={"27"}
+                    onClick={() => {
+                      setIndex(8);
+                    }}
+                  >
+                    Subtemas
+                  </Menu.Item>
+                  <Menu.Item
+                    style={{ fontFamily: "Roboto" }}
+                    key={"28"}
+                    onClick={() => {
+                      setIndex(9);
+                    }}
+                  >
+                    Trilhas Formativas
+                  </Menu.Item>
+                </Menu.SubMenu>
+                <Menu.Item
+                  key={"3"}
+                  style={{ fontFamily: "Roboto" }}
+                  icon={<FileSearchOutlined />}
                   onClick={() => {
-                    setIndex(2);
+                    setIndex(10);
                   }}
                 >
-                  Usuários
+                  Relatório de Buscas
                 </Menu.Item>
-                <Menu.Item
-                  style={{ fontFamily: "Roboto" }}
-                  key={"22"}
-                  onClick={() => {
-                    setIndex(3);
-                  }}
-                >
-                  Cursos
-                </Menu.Item>
-                <Menu.Item
-                  style={{ fontFamily: "Roboto" }}
-                  key={"23"}
-                  onClick={() => {
-                    setIndex(4);
-                  }}
-                >
-                  Instituições
-                </Menu.Item>
-                <Menu.Item
-                  style={{ fontFamily: "Roboto" }}
-                  key={"24"}
-                  onClick={() => {
-                    setIndex(5);
-                  }}
-                >
-                  Categorias de competências
-                </Menu.Item>
-                <Menu.Item
-                  style={{ fontFamily: "Roboto" }}
-                  key={"25"}
-                  onClick={() => {
-                    setIndex(6);
-                  }}
-                >
-                  Competências
-                </Menu.Item>
-                <Menu.Item
-                  style={{ fontFamily: "Roboto" }}
-                  key={"26"}
-                  onClick={() => {
-                    setIndex(7);
-                  }}
-                >
-                  Temas
-                </Menu.Item>
-                <Menu.Item
-                  style={{ fontFamily: "Roboto" }}
-                  key={"27"}
-                  onClick={() => {
-                    setIndex(8);
-                  }}
-                >
-                  Subtemas
-                </Menu.Item>
-                <Menu.Item
-                  style={{ fontFamily: "Roboto" }}
-                  key={"28"}
-                  onClick={() => {
-                    setIndex(9);
-                  }}
-                >
-                  Trilhas Formativas
-                </Menu.Item>
-              </Menu.SubMenu>
+              </>
             ) : null}
           </Menu>
         </Sider>

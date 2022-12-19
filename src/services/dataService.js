@@ -146,4 +146,13 @@ export const dataService = {
       .catch((error) => {
         throw new Error(error);
       }),
+
+  getSearchLogs: () => [
+    {
+      user: "Usuáro tal",
+      string: "Valor de busca aleatório",
+      datetime: new Date().toISOString(),
+      id: "39432432423",
+    },
+  ],
 };
