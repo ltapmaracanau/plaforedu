@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerCourseSchema } from "../../schemas/registers/registersSchema";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { RollbackOutlined } from "@ant-design/icons";
+import { RollbackOutlined, PlusOutlined } from "@ant-design/icons";
 
 import {
   Button,
@@ -22,9 +22,12 @@ import {
   Tooltip,
   Tag,
   Switch,
+  Table,
+  List,
+  Popconfirm,
 } from "antd";
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 const { Content } = Layout;
 
 export default function CourseRegister(props) {
@@ -33,9 +36,8 @@ export default function CourseRegister(props) {
   const cursoDefault = {
     name: curso ? curso.name : "",
     description: curso ? curso.description : "",
-    institutions: curso ? curso.institutions.map((item) => item.id) : [],
+    institutions: curso ? curso.institutions : [],
     hours: curso ? curso.hours : "",
-    link: curso ? curso.link : "",
     accessibilities: curso ? curso.accessibilities.map((item) => item.id) : [],
     itineraries: curso ? curso.itineraries.map((item) => item.id) : [],
     competencies: curso ? curso.competencies.map((item) => item.id) : [],
@@ -63,6 +65,159 @@ export default function CourseRegister(props) {
   const subthemes = useStoreState((state) => state.themes.subthemes);
 
   const [filed, setFiled] = useState(curso?.filedAt !== null);
+  const [instituicoesAtuais, setInstituicoesAtuais] = useState(
+    cursoDefault.institutions.map((item, index) => ({ ...item, count: index }))
+  );
+
+  const [countInstitutions, setcountInstitutions] = useState(
+    cursoDefault.institutions.length - 1
+  );
+
+  const [form] = Form.useForm();
+
+  const EditableCell = (props) => {
+    const {
+      title,
+      text,
+      children,
+      editable,
+      dataIndex,
+      record = { count: 0 },
+      action = false,
+      handleSave,
+      ...restProps
+    } = props;
+    let childNode = children;
+    if (editable) {
+      childNode = text ? (
+        <Form.Item
+          style={{
+            margin: 0,
+          }}
+          name={`${dataIndex}${record.count}`}
+          rules={[
+            {
+              required: true,
+              message: `${title} é obrigatório!`,
+            },
+          ]}
+        >
+          <Input placeholder={"Link do curso na instituição"} />
+        </Form.Item>
+      ) : (
+        <Form.Item
+          style={{
+            margin: 0,
+          }}
+          name={`${dataIndex}${record.count}`}
+          rules={[
+            {
+              required: true,
+              message: `${title} é obrigatório!`,
+            },
+          ]}
+        >
+          <Select
+            optionLabelProp="label"
+            showSearch
+            filterOption={(input, option) => {
+              return (
+                option.children[2].toLowerCase().indexOf(input.toLowerCase()) >=
+                  0 ||
+                option.children[0].toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+              );
+            }}
+          >
+            {instituicoes.map((inst) => (
+              <Select.Option
+                key={inst.id}
+                value={inst.id}
+                label={inst.abbreviation}
+              >
+                {inst.abbreviation}
+                <br />
+                {inst.name}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+      );
+    }
+
+    return <td {...restProps}>{childNode}</td>;
+  };
+
+  const handleDelete = (count) => {
+    setInstituicoesAtuais((antg) => antg.filter((inst) => inst.count != count));
+  };
+
+  const defaultColumns = [
+    {
+      title: "Instituição",
+      dataIndex: "name",
+      text: false,
+      editable: true,
+      width: "40%",
+    },
+    {
+      title: "Link",
+      dataIndex: "link",
+      text: true,
+      editable: true,
+      width: "40%",
+    },
+    {
+      title: "",
+      action: true,
+      editable: false,
+      width: "20%",
+      dataIndex: "operation",
+      render: (_, record) =>
+        instituicoesAtuais.length >= 1 ? (
+          <Popconfirm
+            title="Tem certeza?"
+            onConfirm={() => handleDelete(record.count)}
+          >
+            <a>Excluir</a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+
+  const components = {
+    body: {
+      cell: EditableCell,
+    },
+  };
+
+  const columns = defaultColumns.map((col) => {
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        action: col.action,
+        text: col.text,
+        editable: col.editable,
+        dataIndex: col.dataIndex,
+        title: col.title,
+      }),
+    };
+  });
+
+  const handleAdd = () => {
+    setInstituicoesAtuais((antg) => [
+      ...antg,
+      {
+        id: "",
+        name: "",
+        abbreviation: "",
+        link: "",
+        count: countInstitutions + 1,
+      },
+    ]);
+    setcountInstitutions((antg) => antg + 1);
+  };
 
   const register = useForm({
     mode: "onChange",
@@ -78,36 +233,74 @@ export default function CourseRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    if (curso) {
-      try {
-        if ((curso.filedAt !== null) !== filed) {
-          await updateCourse({ ...values, id: curso.id, filed: filed });
-        } else {
-          await updateCourse({ ...values, id: curso.id });
-        }
-        notification.success({
-          message: "Curso alterado com sucesso!",
-        });
-        actionVisible();
-      } catch (error) {
-        notification.error({
-          message: "Erro!",
-          description: error.message,
+    let instituicoesValidadas = false;
+    let arrayInstituicoesDoForm = [];
+    Object.entries(form.getFieldsValue()).forEach((item, _index, array) => {
+      if (item[0].includes("name")) {
+        let count = item[0].slice(4);
+        let link = array.find(
+          (element) =>
+            element[0].includes("link") && element[0].slice(4) === count
+        );
+        arrayInstituicoesDoForm.push({
+          institutionId: item[1],
+          link: link[1],
         });
       }
+    });
+    if (instituicoesAtuais.length !== 0) {
+      await form
+        .validateFields()
+        .then(() => {
+          instituicoesValidadas = true;
+        })
+        .catch(() => {
+          notification.error({
+            message: "Erro ao submeter!",
+            description: "Verifique as instituições certificadoras!",
+          });
+          form.submit();
+        });
     } else {
-      const newCourse = await registerNewCourse({ ...values });
-      if (newCourse.error) {
-        notification.error({
-          message: "Algo deu errado!",
-          description: newCourse.message,
-        });
+      notification.error({
+        message: "Erro ao submeter!",
+        description:
+          "Adicione as instituições certificadoras do curso e seus respectivos links.",
+      });
+    }
+    const newValues = { ...values, institutions: arrayInstituicoesDoForm };
+    if (instituicoesValidadas) {
+      if (curso) {
+        try {
+          if ((curso.filedAt !== null) !== filed) {
+            await updateCourse({ ...newValues, id: curso.id, filed: filed });
+          } else {
+            await updateCourse({ ...newValues, id: curso.id });
+          }
+          notification.success({
+            message: "Curso alterado com sucesso!",
+          });
+          actionVisible();
+        } catch (error) {
+          notification.error({
+            message: "Erro!",
+            description: error.message,
+          });
+        }
       } else {
-        notification.success({
-          message: "Curso cadastrado com sucesso!",
-        });
-        register.reset();
-        actionVisible();
+        const newCourse = await registerNewCourse({ ...newValues });
+        if (newCourse.error) {
+          notification.error({
+            message: "Algo deu errado!",
+            description: newCourse.message,
+          });
+        } else {
+          notification.success({
+            message: "Curso cadastrado com sucesso!",
+          });
+          register.reset();
+          actionVisible();
+        }
       }
     }
   };
@@ -130,17 +323,28 @@ export default function CourseRegister(props) {
           >
             <RollbackOutlined /> Voltar
           </Button>
-          <Card
-            style={{ margin: "0px 0px" }}
-            bodyStyle={{
-              fontFamily: "Roboto",
-            }}
-            title={title}
-            bordered={false}
-          >
-            <Form
-              layout="horizontal"
-              onFinish={register.handleSubmit(onSubmit)}
+          <Form layout="horizontal" onFinish={register.handleSubmit(onSubmit)}>
+            <Card
+              style={{ margin: "0px 0px" }}
+              bodyStyle={{
+                fontFamily: "Roboto",
+              }}
+              title={title}
+              bordered={false}
+              extra={
+                <Button
+                  loading={registering}
+                  disabled={
+                    !register.formState.isValid &&
+                    instituicoesAtuais.length === 0
+                  }
+                  type="primary"
+                  shape="round"
+                  htmlType="submit"
+                >
+                  {curso?.id ? <>Salvar</> : <>Cadastrar</>}
+                </Button>
+              }
             >
               <Descriptions
                 bordered
@@ -187,7 +391,7 @@ export default function CourseRegister(props) {
                     }}
                   />
                 </Descriptions.Item>
-                <Descriptions.Item label={"Instituição Certificadora"}>
+                {/* <Descriptions.Item label={"Instituição Certificadora"}>
                   <Controller
                     key={"institutions"}
                     name="institutions"
@@ -240,7 +444,7 @@ export default function CourseRegister(props) {
                       );
                     }}
                   />
-                </Descriptions.Item>
+                </Descriptions.Item> */}
                 <Descriptions.Item label={"Carga Horária"}>
                   <Controller
                     key={"hours"}
@@ -254,27 +458,6 @@ export default function CourseRegister(props) {
                           hasFeedback
                         >
                           <InputNumber min={0} {...field} />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Link do curso"}>
-                  <Controller
-                    key={"link"}
-                    name="link"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Input
-                            placeholder="https://exemplo.com.br"
-                            {...field}
-                          />
                         </Form.Item>
                       );
                     }}
@@ -330,9 +513,9 @@ export default function CourseRegister(props) {
                         >
                           <Select
                             mode="multiple"
-                            showSearch
                             placeholder="Itinerários"
                             {...field}
+                            showSearch
                             filterOption={(input, option) => {
                               return (
                                 option.children
@@ -436,25 +619,51 @@ export default function CourseRegister(props) {
                   </Descriptions.Item>
                 )}
               </Descriptions>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  margin: "15px 0px",
-                }}
-              >
-                <Button
-                  loading={registering}
-                  disabled={!register.formState.isValid}
-                  type="primary"
-                  shape="round"
-                  htmlType="submit"
-                >
-                  {curso?.id ? <>Alterar</> : <>Cadastrar</>}
-                </Button>
-              </div>
+            </Card>
+          </Form>
+          <div>
+            <Form
+              form={form}
+              initialValues={Object.fromEntries([
+                ...cursoDefault.institutions.map((item, index) => [
+                  `name${index}`,
+                  item.id,
+                ]),
+                ...cursoDefault.institutions.map((item, index) => [
+                  `link${index}`,
+                  item.link,
+                ]),
+              ])}
+            >
+              <Table
+                title={() => (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Title level={4}>Instituições Certificadoras</Title>
+                    <Button
+                      onClick={handleAdd}
+                      type="primary"
+                      style={{
+                        margin: "0px 20px",
+                      }}
+                    >
+                      Adicionar <PlusOutlined />
+                    </Button>
+                  </div>
+                )}
+                pagination={false}
+                components={components}
+                rowKey={"count"}
+                bordered
+                dataSource={instituicoesAtuais}
+                columns={columns}
+              />
             </Form>
-          </Card>
+          </div>
         </Content>
       </Layout>
     </>

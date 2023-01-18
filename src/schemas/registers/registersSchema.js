@@ -95,8 +95,6 @@ export const registerCourseSchema = yup.object().shape({
     .number()
     .required("Obrigatório!")
     .min(0, "Obrigatório números positivos!"),
-  link: yup.string().url("Link inválido!").required("Obrigatório!"),
-  institutions: yup.array().of(yup.string()).required("Obrigatório!"),
   accessibilities: yup.array().of(yup.string()).required("Obrigatório!"),
   itineraries: yup.array().of(yup.string()).required("Obrigatório!"),
   competencies: yup.array().of(yup.string()).required("Obrigatório!"),
