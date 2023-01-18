@@ -273,7 +273,6 @@ const cursosFilterFuctionDefault = (filtro) => {
         !competenciaNaoEspecificada &&
         busca
       ) {
-        // console.log(competencia);
         novasTrilhas.push(competencia);
       }
     });
@@ -454,13 +453,6 @@ const reformuladorDeElementosCytoscape = (cursosFiltrados, filtro) => {
           curso.filter.competencias.includes(competencia)
         )
       );
-      // console.log('Curso: ', curso.id);
-      // console.log(catData);
-      if (curso.id === 9) {
-        //console.log('Curso', curso.id)
-        //console.log(competencias);
-        //console.log(catData);
-      }
       elementos.push({
         group: "nodes",
         data: {
