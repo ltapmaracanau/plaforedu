@@ -242,7 +242,11 @@ export default function CourseRegister(props) {
           (element) =>
             element[0].includes("link") && element[0].slice(4) === count
         );
+        let relationObject = instituicoesAtuais.find((element) => {
+          return element.count == count && element.institutionId === item[1];
+        });
         arrayInstituicoesDoForm.push({
+          relationId: relationObject ? relationObject.relationId : undefined,
           institutionId: item[1],
           link: link[1],
         });
@@ -269,6 +273,8 @@ export default function CourseRegister(props) {
       });
     }
     const newValues = { ...values, institutions: arrayInstituicoesDoForm };
+    console.log(arrayInstituicoesDoForm);
+
     if (instituicoesValidadas) {
       if (curso) {
         try {
@@ -391,60 +397,6 @@ export default function CourseRegister(props) {
                     }}
                   />
                 </Descriptions.Item>
-                {/* <Descriptions.Item label={"Instituição Certificadora"}>
-                  <Controller
-                    key={"institutions"}
-                    name="institutions"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Select
-                            mode="multiple"
-                            dropdownMatchSelectWidth={false}
-                            showSearch
-                            placeholder="Instituição"
-                            tagRender={(props) => {
-                              const { label, closable, onClose } = props;
-                              return (
-                                <Tag
-                                  closable={closable}
-                                  onClose={onClose}
-                                  style={{ marginRight: 3 }}
-                                >
-                                  {label[0]}
-                                </Tag>
-                              );
-                            }}
-                            filterOption={(input, option) => {
-                              return (
-                                option.children[2]
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0 ||
-                                option.children[0]
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                              );
-                            }}
-                            {...field}
-                          >
-                            {instituicoes.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.abbreviation}
-                                <br />
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item> */}
                 <Descriptions.Item label={"Carga Horária"}>
                   <Controller
                     key={"hours"}
@@ -627,7 +579,7 @@ export default function CourseRegister(props) {
               initialValues={Object.fromEntries([
                 ...cursoDefault.institutions.map((item, index) => [
                   `name${index}`,
-                  item.id,
+                  item.institutionId,
                 ]),
                 ...cursoDefault.institutions.map((item, index) => [
                   `link${index}`,
