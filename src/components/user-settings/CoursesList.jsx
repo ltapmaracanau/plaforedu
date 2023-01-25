@@ -80,10 +80,10 @@ export default function CoursesList() {
               title={modalText}
               actionVisible={() => {
                 setRegisterVisible(false);
-                setPage(1);
                 getCursos({
                   query: textSearch,
                   showFiled: showFiled,
+                  page: pageNumber,
                 });
               }}
             />
@@ -139,7 +139,6 @@ export default function CoursesList() {
                       setEditandoCurso(null);
                       setModalText("Cadastrar Curso");
                       setRegisterVisible(true);
-                      setPage(1);
                     }}
                   >
                     Adicionar
