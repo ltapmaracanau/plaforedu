@@ -273,7 +273,6 @@ export default function CourseRegister(props) {
       });
     }
     const newValues = { ...values, institutions: arrayInstituicoesDoForm };
-    console.log(arrayInstituicoesDoForm);
 
     if (instituicoesValidadas) {
       if (curso) {
