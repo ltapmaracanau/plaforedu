@@ -144,15 +144,17 @@ export const dataService = {
     AuthAxios.get("/profile/me")
       .then((response) => response.data)
       .catch((error) => {
-        throw new Error(error);
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
       }),
 
-  getSearchLogs: () => [
-    {
-      user: "Usuáro tal",
-      string: "Valor de busca aleatório",
-      datetime: new Date().toISOString(),
-      id: "39432432423",
-    },
-  ],
+  getSearchLogs: (payload) =>
+    AuthAxios.get(`/logs/all`, {
+      params: {
+        ...payload,
+      },
+    })
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
 };

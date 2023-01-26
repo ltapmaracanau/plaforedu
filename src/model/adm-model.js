@@ -10,6 +10,7 @@ const admModel = {
   iniciando: true,
   isAuthenticated: true,
   searchLogs: [],
+  countLogs: 0,
 
   myProfile: {},
 
@@ -112,11 +113,33 @@ const admModel = {
     return myProfile;
   }),
 
-  getSearchLogs: thunk(async (actions, _) => {
+  getSearchLogs: thunk(async (actions, payload = {}) => {
+    const {
+      page = 1,
+      description = "",
+      user = "",
+      initialDate = "",
+      finalDate = "",
+    } = payload;
+    let newInitialDate = "";
+    let newFinalDate = "";
+    if (initialDate) {
+      newInitialDate = initialDate.toDate().toISOString().split("T")[0];
+    }
+    if (finalDate) {
+      newFinalDate = finalDate.toDate().toISOString().split("T")[0];
+    }
     actions.setLoadingLogs(true);
     try {
-      const logs = dataService.getSearchLogs();
-      actions.setSearchLogs(logs);
+      const logs = await dataService.getSearchLogs({
+        page: page,
+        description: description,
+        userName: user,
+        initialDate: newInitialDate,
+        finalDate: newFinalDate,
+      });
+      actions.setSearchLogs(logs.data);
+      actions.setCountLogs(logs.count);
     } catch (error) {
       throw new Error(error.message);
     } finally {
@@ -152,6 +175,10 @@ const admModel = {
 
   setSearchLogs: action((state, payload) => {
     state.searchLogs = payload;
+  }),
+
+  setCountLogs: action((state, payload) => {
+    state.countLogs = payload;
   }),
 
   setLoadingLogs: action((state, payload) => {
