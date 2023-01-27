@@ -28,6 +28,7 @@ const { Sider } = Layout;
 
 export default function SettingsPage() {
   const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const contentArray = [
     <MyProfile key={"my-profile"} />,
@@ -80,7 +81,7 @@ export default function SettingsPage() {
             >
               Alterar Senha
             </Menu.Item>
-            {isAdm ? (
+            {isAdm || isCoord ? (
               <>
                 <Menu.SubMenu
                   style={{ fontFamily: "Roboto" }}

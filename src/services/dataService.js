@@ -41,10 +41,10 @@ export const dataService = {
 
   updateUser: (payload) =>
     AuthAxios.put(`/profile/${payload.id}/update`, {
-      cpf: payload.cpf,
-      email: payload.email,
-
       name: payload.name,
+      email: payload.email,
+      cpf: payload.cpf,
+      institution: payload.institution,
       phone: payload.phone,
       roles: payload.roles,
     })
