@@ -20,6 +20,22 @@ const admModel = {
     )
   ),
 
+  isCoord: computed((state) =>
+    state.myProfile.UsersRoles?.some((item) => item.role.name === "COORDENADOR")
+  ),
+
+  isCoordAVA: computed((state) =>
+    state.myProfile.UsersRoles?.some(
+      (item) => item.role.name === "COORDENADOR AVA"
+    )
+  ),
+
+  isAnalDados: computed((state) =>
+    state.myProfile.UsersRoles?.some(
+      (item) => item.role.name === "ANALISTA DE DADOS"
+    )
+  ),
+
   init: thunk(async (actions, _) => {
     const token = localStorage.getItem("token");
     if (token) {
