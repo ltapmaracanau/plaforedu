@@ -1,6 +1,6 @@
 import React from "react";
 
-import ministerio from "../../assets/marca.png";
+import ministerio from "../../assets/LOGO_2023_COM_MINISTERIO.png";
 
 import { Typography, Row, Col, Grid, Image } from "antd";
 
@@ -11,13 +11,20 @@ export default function FooterGov() {
   const screens = useBreakpoint();
 
   return (
-    <footer style={{ backgroundColor: "#404040", color: "white" }}>
+    <footer
+      style={{
+        backgroundColor: "#404040",
+        color: "white",
+        backgroundImage: "linear-gradient(to right, #2C55A1, #35A8E0)",
+      }}
+    >
       <Row
         align={"middle"}
         wrap={!screens.md}
         style={{
           display: "flex",
           justifyContent: "space-evenly",
+          minHeight: "50px",
         }}
       >
         <Col
@@ -31,7 +38,7 @@ export default function FooterGov() {
           <Text
             style={{ color: "white", fontSize: "16px", textAlign: "center" }}
           >
-            Copyright © 2022 PlaforEDU. Todos os direitos reservados.
+            Copyright © 2023 PlaforEDU. Todos os direitos reservados.
           </Text>
         </Col>
         <Col
@@ -40,10 +47,11 @@ export default function FooterGov() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            margin: "10px",
           }}
         >
           <Image
-            height="57px"
+            height={60}
             src={ministerio}
             alt="Ministério da Educação"
             preview={false}
