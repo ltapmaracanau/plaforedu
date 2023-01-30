@@ -28,37 +28,69 @@ const usuariosModel = {
 
   registerNewUser: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const newUser = await dataService.createUser({ ...payload });
-    actions.setRegistering(false);
-    return newUser;
+    try {
+      newUser = await dataService.createUser({ ...payload });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   updateUser: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const tryUpdateUser = await dataService.updateUser({ ...payload });
-    actions.setRegistering(false);
-    return tryUpdateUser;
+    const { id, name, email, cpf, institution, phone, roles } = payload;
+    try {
+      await dataService.updateUser({
+        id,
+        name,
+        email,
+        cpf,
+        institution,
+        phone,
+      });
+      await dataService.updateUserRoles({
+        id,
+        roles,
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   blockUser: thunk(async (actions, payload = { id: "" }) => {
     actions.setRegistering(true);
-    const tryBlockUser = await dataService.blockUser({ id: payload.id });
-    actions.setRegistering(false);
-    return tryBlockUser;
+    try {
+      await dataService.blockUser({ id: payload.id });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   archiveUser: thunk(async (actions, payload = { id: "" }) => {
     actions.setRegistering(true);
-    const tryArchiveUser = await dataService.archiveUser({ id: payload.id });
-    actions.setRegistering(false);
-    return tryArchiveUser;
+    try {
+      await dataService.archiveUser({ id: payload.id });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   activeUser: thunk(async (actions, payload = { id: "" }) => {
     actions.setRegistering(true);
-    const tryActiveUser = await dataService.activeUser({ id: payload.id });
-    actions.setRegistering(false);
-    return tryActiveUser;
+    try {
+      await dataService.activeUser({ id: payload.id });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   setLoading: action((state, payload) => {

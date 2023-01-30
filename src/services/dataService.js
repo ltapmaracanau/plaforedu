@@ -46,6 +46,14 @@ export const dataService = {
       cpf: payload.cpf,
       institution: payload.institution,
       phone: payload.phone,
+    })
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
+  updateUserRoles: (payload) =>
+    AuthAxios.patch(`/profile/${payload.id}/update-roles`, {
       roles: payload.roles,
     })
       .then((response) => response.data)
