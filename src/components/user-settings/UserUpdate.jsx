@@ -68,17 +68,18 @@ export default function UserUpdate(props) {
       .replace(/\)/g, "")
       .replace(" ", "")
       .replace(/-/g, "");
-    const tryUpdateUser = await updateUser(values);
-    if (tryUpdateUser.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: tryUpdateUser.message,
-      });
-    } else {
+    console.log(values);
+    try {
+      await updateUser(values);
       notification.success({
         message: "Usuário Alterado com Sucesso!",
       });
       actionVisible();
+    } catch (error) {
+      notification.error({
+        message: "Algo deu errado!",
+        description: error.message,
+      });
     }
   };
 
@@ -315,13 +316,28 @@ export default function UserUpdate(props) {
                     <Switch
                       disabled={userArchived}
                       checked={userBlocked}
-                      onChange={(e) => {
+                      onChange={async (e) => {
                         if (e) {
-                          blockUser({ id: id });
+                          try {
+                            await blockUser({ id: id });
+                            setUserBlocked(e);
+                          } catch (error) {
+                            notification.error({
+                              message: "Erro ao arquivar!",
+                              description: error.message,
+                            });
+                          }
                         } else {
-                          activeUser({ id: id });
+                          try {
+                            await activeUser({ id: id });
+                            setUserBlocked(e);
+                          } catch (error) {
+                            notification.error({
+                              message: "Erro ao arquivar!",
+                              description: error.message,
+                            });
+                          }
                         }
-                        setUserBlocked(e);
                       }}
                     />
                   </Form.Item>
@@ -331,13 +347,28 @@ export default function UserUpdate(props) {
                     <Switch
                       disabled={userBlocked}
                       checked={userArchived}
-                      onChange={(e) => {
+                      onChange={async (e) => {
                         if (e) {
-                          archiveUser({ id: id });
+                          try {
+                            await archiveUser({ id: id });
+                            setUserArchived(e);
+                          } catch (error) {
+                            notification.error({
+                              message: "Erro ao arquivar!",
+                              description: error.message,
+                            });
+                          }
                         } else {
-                          activeUser({ id: id });
+                          try {
+                            await activeUser({ id: id });
+                            setUserArchived(e);
+                          } catch (error) {
+                            notification.error({
+                              message: "Erro ao arquivar!",
+                              description: error.message,
+                            });
+                          }
                         }
-                        setUserArchived(e);
                       }}
                     />
                   </Form.Item>

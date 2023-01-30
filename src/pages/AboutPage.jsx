@@ -836,12 +836,6 @@ export default function AboutPage() {
               <Image preview={false} src={infografico} width={"100%"} />
             </Col>
           </Row>
-          <div
-            style={{
-              height: "30px",
-              backgroundImage: "linear-gradient(to right, #2C55A1, #35A8E0)",
-            }}
-          ></div>
         </Content>
       </Layout>
     </>

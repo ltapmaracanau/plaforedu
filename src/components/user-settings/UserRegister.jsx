@@ -40,18 +40,18 @@ export default function UserRegister(props) {
       .replace(/\)/g, "")
       .replace(" ", "")
       .replace(/-/g, "");
-    const newUser = await registerNewUser(values);
-    if (newUser.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: newUser.message,
-      });
-    } else {
+    try {
+      await registerNewUser(values);
       notification.success({
         message: "Registo bem sucedido!",
         description: "O novo usuário deve verificar seu email!",
       });
       actionVisible();
+    } catch (error) {
+      notification.error({
+        message: "Algo deu errado!",
+        description: error.message,
+      });
     }
   };
 
