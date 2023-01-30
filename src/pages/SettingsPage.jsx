@@ -89,16 +89,18 @@ export default function SettingsPage() {
                   key={"2"}
                   title={"Cadastros"}
                 >
-                  <Menu.Item
-                    style={{ fontFamily: "Roboto" }}
-                    key={"21"}
-                    icon={<TeamOutlined />}
-                    onClick={() => {
-                      setIndex(2);
-                    }}
-                  >
-                    Usuários
-                  </Menu.Item>
+                  {isAdm && (
+                    <Menu.Item
+                      style={{ fontFamily: "Roboto" }}
+                      key={"21"}
+                      icon={<TeamOutlined />}
+                      onClick={() => {
+                        setIndex(2);
+                      }}
+                    >
+                      Usuários
+                    </Menu.Item>
+                  )}
                   <Menu.Item
                     style={{ fontFamily: "Roboto" }}
                     key={"22"}

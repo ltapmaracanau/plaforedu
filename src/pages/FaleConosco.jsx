@@ -250,12 +250,6 @@ export default function FaleConosco() {
           <Modal open={modalIsVisible} footer={null}>
             {resultado}
           </Modal>
-          <div
-            style={{
-              height: "30px",
-              backgroundImage: "linear-gradient(to right, #2C55A1, #35A8E0)",
-            }}
-          ></div>
         </Content>
       </Layout>
     </Layout>
