@@ -293,18 +293,18 @@ export default function CourseRegister(props) {
           });
         }
       } else {
-        const newCourse = await registerNewCourse({ ...newValues });
-        if (newCourse.error) {
-          notification.error({
-            message: "Algo deu errado!",
-            description: newCourse.message,
-          });
-        } else {
+        try {
+          await registerNewCourse({ ...newValues });
           notification.success({
             message: "Curso cadastrado com sucesso!",
           });
           register.reset();
           actionVisible();
+        } catch (error) {
+          notification.error({
+            message: "Algo deu errado!",
+            description: error.message,
+          });
         }
       }
     }
