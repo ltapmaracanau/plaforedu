@@ -8,6 +8,7 @@ const admModel = {
   loading: false,
   loadingLogs: false,
   iniciando: true,
+  downloadingSearchLogs: false,
   isAuthenticated: true,
   searchLogs: [],
   countLogs: 0,
@@ -163,6 +164,17 @@ const admModel = {
     }
   }),
 
+  downloadSearchLogs: thunk(async (actions, payload) => {
+    actions.setDownloadingSearchLogs(true);
+    try {
+      await dataService.downloadListLogs();
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setDownloadingSearchLogs(false);
+    }
+  }),
+
   // Setters
 
   setFilterCollapsed: action((state, _) => {
@@ -199,6 +211,10 @@ const admModel = {
 
   setLoadingLogs: action((state, payload) => {
     state.loadingLogs = payload;
+  }),
+
+  setDownloadingSearchLogs: action((state, payload) => {
+    state.downloadingSearchLogs = payload;
   }),
 };
 

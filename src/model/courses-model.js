@@ -602,11 +602,15 @@ const coursesModel = {
 
   registerNewCourse: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const newCourse = await services.courseService.registerCourse({
-      ...payload,
-    });
-    actions.setRegistering(false);
-    return newCourse;
+    try {
+      await services.courseService.registerCourse({
+        ...payload,
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setRegistering(false);
+    }
   }),
 
   updateCourse: thunk(async (actions, payload) => {

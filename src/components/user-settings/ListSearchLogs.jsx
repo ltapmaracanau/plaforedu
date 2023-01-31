@@ -5,6 +5,7 @@ import {
   Empty,
   Input,
   Layout,
+  notification,
   Space,
   Table,
 } from "antd";
@@ -22,7 +23,13 @@ export default function ListSearchLogs() {
   const logs = useStoreState((state) => state.adm.searchLogs);
   const loading = useStoreState((state) => state.adm.loadingLogs);
   const count = useStoreState((state) => state.adm.countLogs);
+  const downloadingSearchLogs = useStoreState(
+    (state) => state.adm.downloadingSearchLogs
+  );
   const getSearchLogs = useStoreActions((actions) => actions.adm.getSearchLogs);
+  const downloadSearchLogs = useStoreActions(
+    (actions) => actions.adm.downloadSearchLogs
+  );
 
   const [page, setPage] = useState(1);
 
@@ -263,6 +270,24 @@ export default function ListSearchLogs() {
       }}
     >
       <Content style={{ width: "100%" }}>
+        <Button
+          loading={downloadingSearchLogs}
+          onClick={async () => {
+            try {
+              await downloadSearchLogs();
+            } catch (error) {
+              notification.error({
+                message: "Algo deu errado!",
+                description: error.message,
+              });
+            }
+          }}
+          style={{
+            marginBottom: "10px",
+          }}
+        >
+          Download CSV
+        </Button>
         <Table
           dataSource={logs.map((item) => ({
             user: item.user.name || "Anônimo",

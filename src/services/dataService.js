@@ -165,4 +165,13 @@ export const dataService = {
       .catch((error) => {
         throw new Error(error.response?.data?.message || "Algo deu errado!");
       }),
+
+  downloadListLogs: () =>
+    AuthAxios.get("/logs/export-csv")
+      .then((value) => value)
+      .catch((error) => {
+        throw new Error(
+          error.response?.data?.message || "Não foi possível fazer o download!"
+        );
+      }),
 };
