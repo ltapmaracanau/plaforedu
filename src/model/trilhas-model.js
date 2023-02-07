@@ -1,4 +1,5 @@
-import { action, thunk } from "easy-peasy";
+import { action, computed, thunk, thunkOn } from "easy-peasy";
+import reformuladorDeElementosCytoscape from "../helpers/reformuladorDeElementosCytoscape";
 import services from "../services";
 
 const trilhasModel = {
@@ -6,16 +7,62 @@ const trilhasModel = {
   registering: false,
 
   trilhas: [],
-  trilhasSecondary: [],
+
+  elements: computed(
+    [
+      (state) => state.trilhas,
+      (_state, storeState) => storeState.courses.filter,
+      (_state, storeState) => storeState.competencies.competencias,
+    ],
+    (trilhas, filter, competencias) => {
+      return reformuladorDeElementosCytoscape(
+        trilhas,
+        filter,
+        competencias,
+        true
+      );
+    }
+  ),
+
+  onSetFilter: thunkOn(
+    // targetResolver:
+    (_actions, storeActions) => storeActions.courses.setFilter,
+    // handler:
+    async (actions, target) => {
+      await actions.getTrilhas(target.payload);
+    }
+  ),
 
   getTrilhas: thunk(
-    async (actions, payload = { query: "", showFiled: false }) => {
+    async (
+      actions,
+      payload = {
+        showFiled: false,
+        query: "",
+        page: 0,
+        registerLog: false,
+        itinerario: undefined,
+        competencias: [],
+      }
+    ) => {
       actions.setLoading(true);
+      const {
+        showFiled = false,
+        query = "",
+        page = 0,
+        registerLog = false,
+        itinerario = undefined,
+        competencias = [],
+      } = payload;
       try {
         await services.trailsService
           .getTrilhas({
-            query: payload.query,
-            showFiled: payload.showFiled,
+            includeFiled: showFiled,
+            search: query,
+            page: page,
+            registerLog: registerLog,
+            itineraries: itinerario ? [itinerario] : [],
+            competencies: competencias,
           })
           .then((trilhas) => {
             if (trilhas?.data?.length >= 0) {

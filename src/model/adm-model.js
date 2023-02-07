@@ -37,7 +37,7 @@ const admModel = {
     )
   ),
 
-  init: thunk(async (actions, _) => {
+  init: thunk(async (actions, _, { getStoreActions }) => {
     const token = localStorage.getItem("token");
     if (token) {
       AuthAxios.defaults.headers.Authorization = `Bearer ${token}`;
@@ -52,7 +52,18 @@ const admModel = {
     } else {
       actions.setIsAuthenticated(false);
     }
-    actions.setIniciando(false);
+    try {
+      await getStoreActions().competencies.getComp();
+      await getStoreActions().itineraries.getItinerarios();
+      await getStoreActions().courses.getCursos();
+      await getStoreActions().trilhas.getTrilhas();
+      await getStoreActions().institutions.getInstituicoes();
+      await getStoreActions().themes.getSubthemes();
+    } catch (error) {
+      //console.log(error);
+    } finally {
+      actions.setIniciando(false);
+    }
   }),
 
   login: thunk(async (actions, payload) => {
