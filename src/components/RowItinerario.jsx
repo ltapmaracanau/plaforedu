@@ -22,10 +22,17 @@ export default function RowItinerario() {
   const filter = useStoreState((state) => state.courses.filter);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const itinerarioData = useStoreState((state) =>
-    state.itineraries.itinerariosSecondary.find(
-      (obj) => obj.dados_gerais.id === itinerario
-    )
+    state.itineraries.itinerarios.find((obj) => obj.id === itinerario)
   );
+
+  const idsItinerarios = {
+    0: undefined,
+    1: "00911570-d01c-4cb3-81e2-721999eab901",
+    2: "357d300e-95a4-4de9-a653-140841e2090a",
+    3: "6f20336b-5519-423a-a708-db9114190e63",
+    4: "35218055-9fa5-4bc3-a4e1-04c07a9c2872",
+    5: "55876032-32c1-432a-a020-9f70c73e7d6b",
+  };
 
   const screens = useBreakpoint();
 
@@ -243,7 +250,7 @@ export default function RowItinerario() {
   };
 
   const onClick = (area) => {
-    setFilter({ ...filter, itinerario: Number(area.name) });
+    setFilter({ ...filter, itinerario: idsItinerarios[area.name] });
   };
 
   const linha = {
@@ -257,7 +264,7 @@ export default function RowItinerario() {
         fillColor="rgba(0,0,0,0)"
       />
     ),
-    1: (
+    "00911570-d01c-4cb3-81e2-721999eab901": (
       <ImageMapper
         src={Img1}
         width={220}
@@ -267,7 +274,7 @@ export default function RowItinerario() {
         fillColor="rgba(0,0,0,0)"
       />
     ),
-    2: (
+    "357d300e-95a4-4de9-a653-140841e2090a": (
       <ImageMapper
         src={Img2}
         width={250}
@@ -277,7 +284,7 @@ export default function RowItinerario() {
         fillColor="rgba(0,0,0,0)"
       />
     ),
-    3: (
+    "6f20336b-5519-423a-a708-db9114190e63": (
       <ImageMapper
         src={Img3}
         width={250}
@@ -287,7 +294,7 @@ export default function RowItinerario() {
         fillColor="rgba(0,0,0,0)"
       />
     ),
-    4: (
+    "35218055-9fa5-4bc3-a4e1-04c07a9c2872": (
       <ImageMapper
         src={Img4}
         width={240}
@@ -297,7 +304,7 @@ export default function RowItinerario() {
         fillColor="rgba(0,0,0,0)"
       />
     ),
-    5: (
+    "55876032-32c1-432a-a020-9f70c73e7d6b": (
       <ImageMapper
         src={Img5}
         width={250}
@@ -320,7 +327,9 @@ export default function RowItinerario() {
         padding: "20px 60px",
       }}
     >
-      <Col style={{ marginRight: 24 }}>{linha[itinerario]}</Col>
+      <Col style={{ marginRight: 24 }}>
+        {linha[itinerario] ? linha[itinerario] : linha[0]}
+      </Col>
       <Col>
         <Card bordered={false}>
           <Title
@@ -332,10 +341,11 @@ export default function RowItinerario() {
               marginBottom: "10px",
             }}
           >
-            {itinerarioData.dados_gerais.titulo}
+            {itinerarioData?.name}
           </Title>
           <Text style={{ fontFamily: "Roboto", color: "#444343" }}>
-            {itinerarioData.dados_gerais.descricao}
+            Faltou colocar a descrição no banco 😢
+            {/* {itinerarioData.descricao} */}
           </Text>
         </Card>
       </Col>

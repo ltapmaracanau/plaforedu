@@ -1,27 +1,43 @@
 import AuthAxios from "./authAxios";
 
 export default {
-  getCursos: (payload = { query: "", showFiled: false }) => {
-    return payload.page
-      ? AuthAxios.get(
-          `/courses/all?search=${payload.query}&includeFiled=${payload.showFiled}&page=${payload.page}`
-        )
-          .then((response) => response.data)
-          .catch((error) => {
-            throw new Error(
-              error.response?.data?.message || "Algo deu errado!"
-            );
-          })
-      : AuthAxios.get(
-          `/courses/all?search=${payload.query}&includeFiled=${payload.showFiled}`
-        )
-          .then((response) => response.data)
-          .catch((error) => {
-            throw new Error(
-              error.response?.data?.message || "Algo deu errado!"
-            );
-          });
-  },
+  getCursos: (
+    payload = {
+      query: "",
+      showFiled: false,
+      page: 0,
+      search: "",
+      hours: [],
+      institutions: [],
+      itineraries: [],
+      accessibilities: [],
+      competencies: [],
+      subThemes: [],
+    }
+  ) =>
+    AuthAxios.post(
+      `/courses/all?page=${payload.query}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}`,
+      {
+        search: payload.search,
+        hours: payload.hours,
+        institutions: payload.institutions,
+        itineraries: payload.itineraries,
+        accessibilities: payload.accessibilities,
+        competencies: payload.competencies,
+        subThemes: payload.subThemes,
+      }
+    )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
+  getUniqueCourse: (payload = { id: "" }) =>
+    AuthAxios.get(`/courses/${payload.id}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
 
   registerCourse: (payload) =>
     AuthAxios.post("/courses/new", {

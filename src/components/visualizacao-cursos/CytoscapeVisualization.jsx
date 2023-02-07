@@ -33,6 +33,7 @@ import {
   Slider,
   Select,
   Form,
+  Skeleton,
 } from "antd";
 
 const { Text } = Typography;
@@ -41,20 +42,8 @@ export default function CytoscapeVisualization() {
   const cyRef = useRef(null);
 
   const filter = useStoreState((state) => state.courses.filter);
-  const elements = useStoreState((state) => state.courses.elements);
-  const cursos = useStoreState((state) => state.courses.cursosSecondary);
-  const listInst = useStoreState(
-    (state) => state.institutions.instituicoesSecondary
-  );
-  const competencias = useStoreState(
-    (state) => state.competencies.competenciasSecondary
-  );
-  const cursosFiltrados = useStoreState(
-    (state) => state.courses.cursosFiltrados.novosCursos
-  );
-  const trilhas = useStoreState(
-    (state) => state.courses.cursosFiltrados.novasTrilhas
-  );
+  const elementsCourses = useStoreState((state) => state.courses.elements);
+  const elementsTrails = useStoreState((state) => state.trilhas.elements);
   const colorSchemaDefault = useStoreState(
     (state) => state.courses.filterDefault.esquemaDeCores
   );
@@ -62,32 +51,34 @@ export default function CytoscapeVisualization() {
   const layouts = useStoreState((state) => state.itineraries.layouts);
   const layoutAtual = useStoreState((state) => state.itineraries.layoutAtual);
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
+  const listCompetencias = useStoreState(
+    (state) => state.competencies.competencias
+  );
 
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
+  const setUniqueCourse = useStoreActions(
+    (actions) => actions.courses.setUniqueCourse
+  );
   const setLayoutAtual = useStoreActions(
     (actions) => actions.itineraries.setLayoutAtual
   );
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
+  const getUniqueCourse = useStoreActions(
+    (actions) => actions.courses.getUniqueCourse
+  );
 
   const [zoom, setZoom] = useState(1);
-  const [courseOnModal, setCourseOnModal] = useState(cursos[0]);
+  const [competenceOnModal, setCompetenceOnModal] = useState(undefined);
+
+  const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
+  const loadingUniqueCourse = useStoreState(
+    (state) => state.courses.loadingUniqueCourse
+  );
+
   const [modalCourseVisible, setModalCourseVisible] = useState(false);
   const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
-
-  const getInstituicao = useCallback(
-    (id_instituicao) => {
-      const instituicao = listInst.find(({ id }) => id === id_instituicao);
-
-      if (instituicao) {
-        return instituicao.titulo;
-      }
-
-      return "Instituição não encontrada";
-    },
-    [listInst]
-  );
 
   const csvCursosHeaders = [
     { label: "Título", key: "titulo" },
@@ -109,71 +100,27 @@ export default function CytoscapeVisualization() {
     { label: "Link", key: "link" },
   ];
 
-  const data = useMemo(() => {
-    if (filter.tipoClassificacao) {
-      let result = [];
-
-      trilhas.forEach((trilha) => {
-        cursos
-          .filter((curso) =>
-            trilha.cursos[filter.itinerario].includes(curso.id)
-          )
-          .forEach((cursoData) => {
-            const item = {
-              trilha: trilha.titulo,
-              descTrilha: trilha.descricao,
-              titulo: cursoData.title,
-              descricao: cursoData.descricao,
-              cargaHoraria: `${cursoData.cargaHoraria}H`,
-              instCert: getInstituicao(cursoData.instCert),
-              possuiAcessibilidade: cursoData.possuiAcessibilidade,
-              link: cursoData.link,
-            };
-
-            result.push(item);
-          });
-      });
-
-      return result;
-    }
-
-    const coursesData = cursos.filter((course) =>
-      cursosFiltrados.includes(course.id)
-    );
-
-    return coursesData.map((course) => {
-      return {
-        titulo: course.title,
-        descricao: course.descricao,
-        cargaHoraria: `${course.cargaHoraria}H`,
-        instCert: course.instituicoes,
-        possuiAcessibilidade: course.possuiAcessibilidade,
-        link: course.link,
-      };
-    });
-  }, [
-    filter.tipoClassificacao,
-    filter.itinerario,
-    trilhas,
-    cursos,
-    cursosFiltrados,
-  ]);
-
   const handleOk = () => {
+    setCompetenceOnModal(undefined);
+    setUniqueCourse({});
     setModalCourseVisible(false);
     setModalCompetenciaVisible(false);
   };
 
   useEffect(() => {
-    cyRef.current.add(elements);
-    filter.tipoClassificacao
-      ? cyRef.current.layout(layouts["layoutBreadthFirst"]).run()
-      : cyRef.current.layout(layouts[layoutAtual]).run();
+    if (filter.tipoClassificacao) {
+      cyRef.current.add(elementsTrails);
+      cyRef.current.layout(layouts["layoutBreadthFirst"]).run();
+    } else {
+      cyRef.current.add(elementsCourses);
+      cyRef.current.layout(layouts[layoutAtual]).run();
+    }
     setZoom(cyRef.current._private.zoom + 0.3);
-  }, [elements, layoutAtual, filter.tipoClassificacao, layouts]);
+  }, [elementsCourses, elementsTrails, layoutAtual, filter, layouts]);
 
   return (
     <Col flex="auto">
+      {/* Barra de Tarefas */}
       <Form size="small" layout="horizontal">
         <Row
           align="middle"
@@ -310,7 +257,7 @@ export default function CytoscapeVisualization() {
               </Col>
             </>
           )}
-          <Col style={{ margin: "5px" }}>
+          {/* <Col style={{ margin: "5px" }}>
             <Card style={{ width: "100%" }}>
               <CSVLink
                 filename="plaforedu"
@@ -327,7 +274,7 @@ export default function CytoscapeVisualization() {
                 </Button>
               </CSVLink>
             </Card>
-          </Col>
+          </Col> */}
           {/* <Col
                         style={{ margin: '5px' }}
                     >
@@ -347,8 +294,9 @@ export default function CytoscapeVisualization() {
                     </Col> */}
         </Row>
       </Form>
+      {/* Canvas Cytoscape */}
       <CytoscapeComponent
-        elements={elements}
+        elements={filter.tipoClassificacao ? elementsTrails : elementsCourses}
         minZoom={0.01}
         maxZoom={1.0}
         zoom={zoom}
@@ -359,15 +307,8 @@ export default function CytoscapeVisualization() {
           cy.on("click", "node", function (event) {
             const element = event.target._private.data;
             if (element.id.includes("curso")) {
-              setCourseOnModal(
-                cursos.find(
-                  (curso) =>
-                    curso.id.toString() ===
-                    element.id
-                      .replace(/competencia\d+$/gim, "")
-                      .replace(/curso/gi, "")
-                )
-              );
+              console.log(element.id.replace(/curso/gi, ""));
+              getUniqueCourse({ id: element.id.replace(/curso/gi, "") });
               setModalCourseVisible(true);
             }
             if (
@@ -375,11 +316,10 @@ export default function CytoscapeVisualization() {
               !element.id.includes("categoria") &&
               !element.id.includes("curso")
             ) {
-              setCourseOnModal(
-                competencias.find(
+              setCompetenceOnModal(
+                listCompetencias.find(
                   (competencia) =>
-                    competencia.id.toString() ===
-                    element.id.replace(/competencia/gi, "")
+                    competencia.id === element.id.replace(/competencia/gi, "")
                 )
               );
               setModalCompetenciaVisible(true);
@@ -477,7 +417,7 @@ export default function CytoscapeVisualization() {
             },
           },
         ]}
-      ></CytoscapeComponent>
+      />
       <img
         src={fundoLegenda}
         width={180}
@@ -492,56 +432,72 @@ export default function CytoscapeVisualization() {
         }}
         draggable={false}
       />
-      <Modal // Modal de Curso
+      <Modal
         open={modalCourseVisible}
         onOk={handleOk}
+        key={`modalCurso`}
         onCancel={handleOk}
-        title={courseOnModal?.title}
+        title={uniqueCourse?.name}
+        destroyOnClose={true}
         centered={true}
         footer={[
-          <Button type="primary" key={courseOnModal?.id} onClick={handleOk}>
+          <Button type="primary" key={"buttonOk"} onClick={handleOk}>
             Ok
           </Button>,
         ]}
       >
-        <Descriptions column={1} bordered>
-          <Descriptions.Item label="Descrição">
-            {courseOnModal?.descricao}
-          </Descriptions.Item>
-          <Descriptions.Item label="Carga Horária">
-            {courseOnModal?.cargaHoraria}
-          </Descriptions.Item>
-          <Descriptions.Item label="Instituição Certificadora">
-            {getInstituicao(courseOnModal.instCert)}
-          </Descriptions.Item>
-          {/* <Descriptions.Item label='Possui Acessibilidade'>
-                        {courseOnModal?.possuiAcessibilidade}
-                    </Descriptions.Item> */}
-          <Descriptions.Item label="Link">
-            <a target="_blank" rel="noreferrer" href={courseOnModal?.link}>
-              {courseOnModal?.link}
-            </a>
-          </Descriptions.Item>
-          {/* <Descriptions.Item label='Observações'>
-                        {courseOnModal?.obs}
-                    </Descriptions.Item> */}
-        </Descriptions>
+        {loadingUniqueCourse ? (
+          <Skeleton active />
+        ) : (
+          <Descriptions column={1} bordered>
+            <Descriptions.Item label="Descrição">
+              {uniqueCourse?.description}
+            </Descriptions.Item>
+            <Descriptions.Item label="Carga Horária">
+              {uniqueCourse?.hours}
+            </Descriptions.Item>
+            <Descriptions.Item label="Instituições Certificadoras">
+              {uniqueCourse?.institutions?.map((inst) => (
+                <Card key={inst.institutionId} bordered>
+                  {inst.name}
+                  <br />
+                  <strong>Link: </strong>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    key={`link${inst.id}`}
+                    href={inst.link}
+                  >
+                    {inst.link}
+                  </a>
+                </Card>
+              ))}
+            </Descriptions.Item>
+            <Descriptions.Item label="Acessibilidades">
+              {uniqueCourse?.accessibilities?.map((ac) => ac.name).join(" | ")}
+            </Descriptions.Item>
+            <Descriptions.Item label="Subtemas">
+              {uniqueCourse?.subThemes?.map((sub) => sub.name).join(" | ")}
+            </Descriptions.Item>
+          </Descriptions>
+        )}
       </Modal>
-      <Modal // Modal de Categoria
+      <Modal // Modal de Competência
         open={modalCompetenciaVisible}
         onOk={handleOk}
         onCancel={handleOk}
-        title={courseOnModal?.titulo}
+        destroyOnClose={true}
+        title={competenceOnModal?.name}
         centered={true}
         footer={[
-          <Button type="primary" key={courseOnModal?.id} onClick={handleOk}>
+          <Button type="primary" key={"modalCompetence"} onClick={handleOk}>
             Ok
           </Button>,
         ]}
       >
         <Descriptions column={1} bordered style={{ fontFamily: "Roboto" }}>
           <Descriptions.Item label="Descrição" style={{ fontFamily: "Roboto" }}>
-            {courseOnModal?.descricao}
+            {competenceOnModal?.description}
           </Descriptions.Item>
         </Descriptions>
       </Modal>

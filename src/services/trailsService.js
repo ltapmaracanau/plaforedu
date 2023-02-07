@@ -14,9 +14,23 @@ export default {
         throw new Error(error.response?.data?.message || "Algo deu errado!");
       }),
 
-  getTrilhas: (payload = { showFiled: false, query: "" }) =>
-    AuthAxios.get(
-      `/formative-trails/all?includeFiled=${payload.showFiled}&search=${payload.query}`
+  getTrilhas: (
+    payload = {
+      includeFiled: false,
+      search: "",
+      page: 0,
+      registerLog: false,
+      itineraries: [],
+      competencies: [],
+    }
+  ) =>
+    AuthAxios.post(
+      `/formative-trails/all?includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}&page=${payload.page}`,
+      {
+        search: payload.search,
+        itineraries: payload.itineraries,
+        competencies: payload.competencies,
+      }
     )
       .then((response) => response.data)
       .catch((error) => {
