@@ -40,6 +40,7 @@ export default function CourseRegister(props) {
     hours: curso ? curso.hours : "",
     accessibilities: curso ? curso.accessibilities.map((item) => item.id) : [],
     itineraries: curso ? curso.itineraries.map((item) => item.id) : [],
+    taxonomies: curso ? curso.taxonomies.map((item) => item.id) : [],
     competencies: curso ? curso.competencies.map((item) => item.id) : [],
     subThemes: curso ? curso.subThemes.map((item) => item.id) : [],
   };
@@ -53,6 +54,7 @@ export default function CourseRegister(props) {
 
   const registering = useStoreState((state) => state.courses.registering);
   const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
+  const taxonomies = useStoreState((state) => state.courses.taxonomies);
   const acessibilidades = useStoreState(
     (state) => state.accessibilities.acessibilidades
   );
@@ -293,18 +295,18 @@ export default function CourseRegister(props) {
           });
         }
       } else {
-        const newCourse = await registerNewCourse({ ...newValues });
-        if (newCourse.error) {
-          notification.error({
-            message: "Algo deu errado!",
-            description: newCourse.message,
-          });
-        } else {
+        try {
+          await registerNewCourse({ ...newValues });
           notification.success({
             message: "Curso cadastrado com sucesso!",
           });
           register.reset();
           actionVisible();
+        } catch (error) {
+          notification.error({
+            message: "Algo deu errado!",
+            description: error.message,
+          });
         }
       }
     }
@@ -512,6 +514,42 @@ export default function CourseRegister(props) {
                             }}
                           >
                             {competencies.map((item) => (
+                              <Select.Option key={item.id} value={item.id}>
+                                {item.name}
+                              </Select.Option>
+                            ))}
+                          </Select>
+                        </Form.Item>
+                      );
+                    }}
+                  />
+                </Descriptions.Item>
+                <Descriptions.Item label={"Taxonomias de Bloom"}>
+                  <Controller
+                    key={"taxonomias"}
+                    name="taxonomies"
+                    control={register.control}
+                    render={({ field, fieldState: { error } }) => {
+                      return (
+                        <Form.Item
+                          validateStatus={error ? "error" : ""}
+                          help={error ? error.message : ""}
+                          hasFeedback
+                        >
+                          <Select
+                            mode="multiple"
+                            showSearch
+                            placeholder="Taxonomias"
+                            {...field}
+                            filterOption={(input, option) => {
+                              return (
+                                option.children
+                                  .toLowerCase()
+                                  .indexOf(input.toLowerCase()) >= 0
+                              );
+                            }}
+                          >
+                            {taxonomies.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
                                 {item.name}
                               </Select.Option>

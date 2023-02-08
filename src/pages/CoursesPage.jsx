@@ -14,15 +14,29 @@ const { useBreakpoint } = Grid;
 const { Sider, Content } = Layout;
 
 export default function CoursesPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
   const tipoVisualizacao = useStoreState((state) => state.adm.tipoVisualizacao);
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
+  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
+  const getCompetencias = useStoreActions(
+    (actions) => actions.competencies.getComp
+  );
+  const getTrilhas = useStoreActions((actions) => actions.trilhas.getTrilhas);
+  const getItinerarios = useStoreActions(
+    (actions) => actions.itineraries.getItinerarios
+  );
+  const getInstituicoes = useStoreActions(
+    (actions) => actions.institutions.getInstituicoes
+  );
+  const getSubthemes = useStoreActions(
+    (actions) => actions.themes.getSubthemes
+  );
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const screens = useBreakpoint();
 

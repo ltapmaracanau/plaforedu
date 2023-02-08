@@ -38,10 +38,19 @@ export default function HeaderHome() {
   const isAuthenticated = useStoreState((state) => state.adm.isAuthenticated);
   const logout = useStoreActions((actions) => actions.adm.logout);
 
+  const idsItinerarios = {
+    0: undefined,
+    1: "00911570-d01c-4cb3-81e2-721999eab901",
+    2: "357d300e-95a4-4de9-a653-140841e2090a",
+    3: "6f20336b-5519-423a-a708-db9114190e63",
+    4: "35218055-9fa5-4bc3-a4e1-04c07a9c2872",
+    5: "55876032-32c1-432a-a020-9f70c73e7d6b",
+  };
+
   const onClickItinerario = (itinerario) => {
     setFilter({
       ...filterDefault,
-      itinerario: itinerario,
+      itinerario: idsItinerarios[itinerario],
       esquemaDeCores: "categoria",
     });
   };

@@ -1,27 +1,43 @@
 import AuthAxios from "./authAxios";
 
 export default {
-  getCursos: (payload = { query: "", showFiled: false }) => {
-    return payload.page
-      ? AuthAxios.get(
-          `/courses/all?search=${payload.query}&includeFiled=${payload.showFiled}&page=${payload.page}`
-        )
-          .then((response) => response.data)
-          .catch((error) => {
-            throw new Error(
-              error.response?.data?.message || "Algo deu errado!"
-            );
-          })
-      : AuthAxios.get(
-          `/courses/all?search=${payload.query}&includeFiled=${payload.showFiled}`
-        )
-          .then((response) => response.data)
-          .catch((error) => {
-            throw new Error(
-              error.response?.data?.message || "Algo deu errado!"
-            );
-          });
-  },
+  getCursos: (
+    payload = {
+      query: "",
+      showFiled: false,
+      page: 0,
+      search: "",
+      hours: [],
+      institutions: [],
+      itineraries: [],
+      accessibilities: [],
+      competencies: [],
+      subThemes: [],
+    }
+  ) =>
+    AuthAxios.post(
+      `/courses/all?page=${payload.query}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}`,
+      {
+        search: payload.search,
+        hours: payload.hours,
+        institutions: payload.institutions,
+        itineraries: payload.itineraries,
+        accessibilities: payload.accessibilities,
+        competencies: payload.competencies,
+        subThemes: payload.subThemes,
+      }
+    )
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
+  getUniqueCourse: (payload = { id: "" }) =>
+    AuthAxios.get(`/courses/${payload.id}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
 
   registerCourse: (payload) =>
     AuthAxios.post("/courses/new", {
@@ -34,6 +50,7 @@ export default {
       itineraries: payload.itineraries,
       subThemes: payload.subThemes,
       competencies: payload.competencies,
+      taxonomies: payload.taxonomias,
     })
       .then((response) => response.data)
       .catch((error) => {
@@ -75,6 +92,15 @@ export default {
         throw new Error(error.response?.data?.message || "Algo deu errado!");
       }),
 
+  updateCourseTaxonomies: (payload) =>
+    AuthAxios.patch(`/courses/${payload.id}/update-taxonomies`, {
+      taxonomies: payload.taxonomies,
+    })
+      .then(() => ({}))
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
   updateCourseAccessibilities: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/update-accessibilities`, {
       accessibilities: payload.accessibilities,
@@ -109,5 +135,14 @@ export default {
       .then(() => ({}))
       .catch((error) => {
         throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
+  getTaxonomias: () =>
+    AuthAxios.get("/taxonomies/all")
+      .then((value) => value)
+      .catch((error) => {
+        throw new Error(
+          error.response?.data?.message || "Não foi possível fazer o download!"
+        );
       }),
 };

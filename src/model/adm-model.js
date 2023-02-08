@@ -8,6 +8,7 @@ const admModel = {
   loading: false,
   loadingLogs: false,
   iniciando: true,
+  downloadingSearchLogs: false,
   isAuthenticated: true,
   searchLogs: [],
   countLogs: 0,
@@ -36,7 +37,7 @@ const admModel = {
     )
   ),
 
-  init: thunk(async (actions, _) => {
+  init: thunk(async (actions, _, { getStoreActions }) => {
     const token = localStorage.getItem("token");
     if (token) {
       AuthAxios.defaults.headers.Authorization = `Bearer ${token}`;
@@ -51,7 +52,18 @@ const admModel = {
     } else {
       actions.setIsAuthenticated(false);
     }
-    actions.setIniciando(false);
+    try {
+      await getStoreActions().competencies.getComp();
+      await getStoreActions().itineraries.getItinerarios();
+      await getStoreActions().courses.getCursos();
+      await getStoreActions().trilhas.getTrilhas();
+      await getStoreActions().institutions.getInstituicoes();
+      await getStoreActions().themes.getSubthemes();
+    } catch (error) {
+      //console.log(error);
+    } finally {
+      actions.setIniciando(false);
+    }
   }),
 
   login: thunk(async (actions, payload) => {
@@ -163,6 +175,17 @@ const admModel = {
     }
   }),
 
+  downloadSearchLogs: thunk(async (actions, payload) => {
+    actions.setDownloadingSearchLogs(true);
+    try {
+      await dataService.downloadListLogs();
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setDownloadingSearchLogs(false);
+    }
+  }),
+
   // Setters
 
   setFilterCollapsed: action((state, _) => {
@@ -199,6 +222,10 @@ const admModel = {
 
   setLoadingLogs: action((state, payload) => {
     state.loadingLogs = payload;
+  }),
+
+  setDownloadingSearchLogs: action((state, payload) => {
+    state.downloadingSearchLogs = payload;
   }),
 };
 

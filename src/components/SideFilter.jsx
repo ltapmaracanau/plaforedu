@@ -21,22 +21,20 @@ const { useBreakpoint } = Grid;
 export default function SideFilter({ debounceTimeout = 800 }) {
   const screens = useBreakpoint();
 
-  const subtemas = useStoreState((state) => state.themes.subthemesSecondary);
-  const temas = useStoreState((state) => state.themes.themesSecondary);
+  const subtemas = useStoreState((state) => state.themes.subthemes);
+  const temas = useStoreState((state) => state.themes.themes);
   const competencias = useStoreState(
-    (state) => state.competencies.competenciasSecondary
+    (state) => state.competencies.competencias
   );
   const categoriasDeCompetencias = useStoreState(
-    (state) => state.competencies.catCompSecondary
+    (state) => state.competencies.catComp
   );
   const instituicoes = useStoreState(
-    (state) => state.institutions.instituicoesSecondary
+    (state) => state.institutions.instituicoes
   );
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
   const filter = useStoreState((state) => state.courses.filter);
-  const itinerarios = useStoreState(
-    (state) => state.itineraries.itinerariosSecondary
-  );
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
 
   const [filtroCompleto, setFiltroCompleto] = useState(false);
 
@@ -215,29 +213,20 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                     }}
                     style={{ width: "100%" }}
                   >
-                    {itinerarios.map((itinerario) => {
-                      return itinerario.dados_gerais.id === 0 ? (
-                        <Select.Option
-                          key={itinerario.dados_gerais.id}
-                          value={itinerario.dados_gerais.id}
-                        >
-                          Todos os Itinerários
-                        </Select.Option>
-                      ) : (
-                        <Select.Option
-                          key={itinerario.dados_gerais.id}
-                          value={itinerario.dados_gerais.id}
-                        >
-                          {itinerario.dados_gerais.titulo}
-                        </Select.Option>
-                      );
-                    })}
+                    <Select.Option key={0} value={undefined}>
+                      Todos os Itinerários
+                    </Select.Option>
+                    {itinerarios.map((itinerario) => (
+                      <Select.Option key={itinerario.id} value={itinerario.id}>
+                        {itinerario.name}
+                      </Select.Option>
+                    ))}
                   </Select>
                 </Form.Item>
               )}
             />
           </Card>
-          <Card
+          {/* <Card
             style={{ borderRadius: "21px", marginBottom: "5px" }}
             bodyStyle={{
               alignItems: "center",
@@ -280,7 +269,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                 </Form.Item>
               )}
             />
-          </Card>
+          </Card> */}
           <Card
             style={{ borderRadius: "21px", marginBottom: "5px" }}
             bodyStyle={{
@@ -320,7 +309,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                         key={competencia.id}
                         value={competencia.id}
                       >
-                        {competencia.titulo}
+                        {competencia.name}
                       </Select.Option>
                     ))}
                   </Select>
@@ -330,7 +319,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           </Card>
           {filtroCompleto && (
             <>
-              <Card
+              {/* <Card
                 style={{ borderRadius: "21px", marginBottom: "5px" }}
                 bodyStyle={{
                   alignItems: "center",
@@ -370,7 +359,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                     </Form.Item>
                   )}
                 />
-              </Card>
+              </Card> */}
               <Card
                 style={{ borderRadius: "21px", marginBottom: "5px" }}
                 bodyStyle={{
@@ -407,7 +396,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                       >
                         {subtemas.map((subtema) => (
                           <Select.Option key={subtema.id} value={subtema.id}>
-                            {subtema.titulo}
+                            {subtema.name}
                           </Select.Option>
                         ))}
                       </Select>
@@ -483,12 +472,9 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                           );
                         }}
                       >
-                        {instituicoes.map((instituicao) => (
-                          <Select.Option
-                            key={instituicao.id}
-                            value={instituicao.id}
-                          >
-                            {instituicao.titulo}
+                        {instituicoes.map((inst) => (
+                          <Select.Option key={inst.id} value={inst.id}>
+                            {inst.name}
                           </Select.Option>
                         ))}
                       </Select>

@@ -5,6 +5,7 @@ import {
   Empty,
   Input,
   Layout,
+  notification,
   Space,
   Table,
 } from "antd";
@@ -15,6 +16,7 @@ import "moment/locale/pt-br";
 import locale from "antd/es/locale/pt_BR";
 
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
+import AuthAxios from "../../services/authAxios";
 
 const { Content } = Layout;
 
@@ -22,7 +24,13 @@ export default function ListSearchLogs() {
   const logs = useStoreState((state) => state.adm.searchLogs);
   const loading = useStoreState((state) => state.adm.loadingLogs);
   const count = useStoreState((state) => state.adm.countLogs);
+  const downloadingSearchLogs = useStoreState(
+    (state) => state.adm.downloadingSearchLogs
+  );
   const getSearchLogs = useStoreActions((actions) => actions.adm.getSearchLogs);
+  const downloadSearchLogs = useStoreActions(
+    (actions) => actions.adm.downloadSearchLogs
+  );
 
   const [page, setPage] = useState(1);
 
@@ -46,6 +54,28 @@ export default function ListSearchLogs() {
     initialDate: false,
     finalDate: false,
   });
+
+  const downloadSearchLogsTemp = async () => {
+    try {
+      const { data } = await AuthAxios.get("/logs/export-csv", {
+        responseType: "blob",
+      });
+
+      const downloadURL = window.URL.createObjectURL(new Blob([data]));
+
+      const linkElement = document.createElement("a");
+      linkElement.href = downloadURL;
+      linkElement.setAttribute("download", "PLAFOR_logs.csv");
+      document.body.appendChild(linkElement);
+      linkElement.click();
+      linkElement.remove();
+    } catch (error) {
+      notification.error({
+        message: "Algo deu errado!",
+        description: error.message,
+      });
+    }
+  };
 
   useEffect(() => {
     getSearchLogs({ page: 1 });
@@ -263,6 +293,24 @@ export default function ListSearchLogs() {
       }}
     >
       <Content style={{ width: "100%" }}>
+        <Button
+          loading={downloadingSearchLogs}
+          onClick={async () => {
+            try {
+              await downloadSearchLogsTemp();
+            } catch (error) {
+              notification.error({
+                message: "Algo deu errado!",
+                description: error.message,
+              });
+            }
+          }}
+          style={{
+            marginBottom: "10px",
+          }}
+        >
+          Download CSV
+        </Button>
         <Table
           dataSource={logs.map((item) => ({
             user: item.user.name || "Anônimo",

@@ -30,6 +30,9 @@ export default function CoursesList() {
     (actions) => actions.institutions.getInstituicoes
   );
   const getComp = useStoreActions((actions) => actions.competencies.getComp);
+  const getTaxonomias = useStoreActions(
+    (actions) => actions.courses.getTaxonomias
+  );
   const getSubthemes = useStoreActions(
     (actions) => actions.themes.getSubthemes
   );
@@ -54,6 +57,7 @@ export default function CoursesList() {
     getInstituicoes();
     getComp();
     getSubthemes();
+    getTaxonomias();
   }, [
     getCursos,
     getItinerarios,
