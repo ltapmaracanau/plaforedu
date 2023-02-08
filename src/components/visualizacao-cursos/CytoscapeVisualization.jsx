@@ -476,6 +476,9 @@ export default function CytoscapeVisualization() {
             <Descriptions.Item label="Acessibilidades">
               {uniqueCourse?.accessibilities?.map((ac) => ac.name).join(" | ")}
             </Descriptions.Item>
+            <Descriptions.Item label="Taxonomia revisada de Bloom">
+              {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
+            </Descriptions.Item>
             <Descriptions.Item label="Subtemas">
               {uniqueCourse?.subThemes?.map((sub) => sub.name).join(" | ")}
             </Descriptions.Item>

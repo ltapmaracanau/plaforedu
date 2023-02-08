@@ -98,6 +98,7 @@ export const registerCourseSchema = yup.object().shape({
   accessibilities: yup.array().of(yup.string()).required("Obrigatório!"),
   itineraries: yup.array().of(yup.string()).required("Obrigatório!"),
   competencies: yup.array().of(yup.string()).required("Obrigatório!"),
+  taxonomies: yup.array().of(yup.string()).required("Obrigatório!"),
   subThemes: yup.array().of(yup.string()).required("Obrigatório!"),
 });
 // TRILHAS
