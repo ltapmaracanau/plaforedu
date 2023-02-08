@@ -16,6 +16,7 @@ import "moment/locale/pt-br";
 import locale from "antd/es/locale/pt_BR";
 
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
+import AuthAxios from "../../services/authAxios";
 
 const { Content } = Layout;
 
@@ -53,6 +54,28 @@ export default function ListSearchLogs() {
     initialDate: false,
     finalDate: false,
   });
+
+  const downloadSearchLogsTemp = async () => {
+    try {
+      const { data } = await AuthAxios.get("/logs/export-csv", {
+        responseType: "blob",
+      });
+
+      const downloadURL = window.URL.createObjectURL(new Blob([data]));
+
+      const linkElement = document.createElement("a");
+      linkElement.href = downloadURL;
+      linkElement.setAttribute("download", "PLAFOR_logs.csv");
+      document.body.appendChild(linkElement);
+      linkElement.click();
+      linkElement.remove();
+    } catch (error) {
+      notification.error({
+        message: "Algo deu errado!",
+        description: error.message,
+      });
+    }
+  };
 
   useEffect(() => {
     getSearchLogs({ page: 1 });
@@ -274,7 +297,7 @@ export default function ListSearchLogs() {
           loading={downloadingSearchLogs}
           onClick={async () => {
             try {
-              await downloadSearchLogs();
+              await downloadSearchLogsTemp();
             } catch (error) {
               notification.error({
                 message: "Algo deu errado!",

@@ -26,6 +26,7 @@ const coursesModel = {
 
   uniqueCourse: {},
   cursos: [],
+  taxonomies: [],
 
   elements: computed(
     [
@@ -133,6 +134,7 @@ const coursesModel = {
       itineraries,
       competencies,
       subThemes,
+      taxonomies,
       filed = undefined,
     } = payload;
     actions.setRegistering(true);
@@ -151,6 +153,10 @@ const coursesModel = {
       await services.courseService.updateCourseAccessibilities({
         id,
         accessibilities,
+      });
+      await services.courseService.updateCourseTaxonomies({
+        id,
+        taxonomies,
       });
       await services.courseService.updateCourseItineraries({
         id,
@@ -175,6 +181,15 @@ const coursesModel = {
     }
   }),
 
+  getTaxonomias: thunk(async (actions, _payload) => {
+    actions.setLoading(true);
+    const taxonomias = await services.courseService.getTaxonomias();
+    if (taxonomias?.data?.length >= 0) {
+      actions.setTaxonomias(taxonomias.data);
+    }
+    actions.setLoading(false);
+  }),
+
   setLoading: action((state, payload) => {
     state.loading = payload;
   }),
@@ -189,6 +204,10 @@ const coursesModel = {
 
   setCursos: action((state, payload) => {
     state.cursos = payload;
+  }),
+
+  setTaxonomias: action((state, payload) => {
+    state.taxonomies = payload;
   }),
 
   setUniqueCourse: action((state, payload) => {

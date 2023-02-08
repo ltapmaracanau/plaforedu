@@ -50,6 +50,7 @@ export default {
       itineraries: payload.itineraries,
       subThemes: payload.subThemes,
       competencies: payload.competencies,
+      taxonomies: payload.taxonomias,
     })
       .then((response) => response.data)
       .catch((error) => {
@@ -91,6 +92,15 @@ export default {
         throw new Error(error.response?.data?.message || "Algo deu errado!");
       }),
 
+  updateCourseTaxonomies: (payload) =>
+    AuthAxios.patch(`/courses/${payload.id}/update-taxonomies`, {
+      taxonomies: payload.taxonomies,
+    })
+      .then(() => ({}))
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
   updateCourseAccessibilities: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/update-accessibilities`, {
       accessibilities: payload.accessibilities,
@@ -125,5 +135,14 @@ export default {
       .then(() => ({}))
       .catch((error) => {
         throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
+  getTaxonomias: () =>
+    AuthAxios.get("/taxonomies/all")
+      .then((value) => value)
+      .catch((error) => {
+        throw new Error(
+          error.response?.data?.message || "Não foi possível fazer o download!"
+        );
       }),
 };
