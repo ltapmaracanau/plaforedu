@@ -36,21 +36,16 @@ export default function HeaderHome() {
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
   const isAuthenticated = useStoreState((state) => state.adm.isAuthenticated);
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
   const logout = useStoreActions((actions) => actions.adm.logout);
 
-  const idsItinerarios = {
-    0: undefined,
-    1: "00911570-d01c-4cb3-81e2-721999eab901",
-    2: "357d300e-95a4-4de9-a653-140841e2090a",
-    3: "6f20336b-5519-423a-a708-db9114190e63",
-    4: "35218055-9fa5-4bc3-a4e1-04c07a9c2872",
-    5: "55876032-32c1-432a-a020-9f70c73e7d6b",
-  };
-
   const onClickItinerario = (itinerario) => {
+    const itinerarioClicado = itinerarios.find((item) =>
+      item.name.toLowerCase().includes(itinerario.toLowerCase())
+    );
     setFilter({
       ...filterDefault,
-      itinerario: idsItinerarios[itinerario],
+      itinerario: itinerarioClicado.id,
       esquemaDeCores: "categoria",
     });
   };
@@ -128,19 +123,19 @@ export default function HeaderHome() {
             key={3}
             title="RECURSOS"
           >
-            <Menu.Item key={31} onClick={() => onClickItinerario(1)}>
+            <Menu.Item key={31} onClick={() => onClickItinerario("Iniciação")}>
               <Link to={"/cursos"}>Iniciação ao Serviço Público</Link>
             </Menu.Item>
-            <Menu.Item key={32} onClick={() => onClickItinerario(2)}>
+            <Menu.Item key={32} onClick={() => onClickItinerario("Educação")}>
               <Link to={"/cursos"}>Técnico-Administrativo em Educação</Link>
             </Menu.Item>
-            <Menu.Item key={33} onClick={() => onClickItinerario(3)}>
+            <Menu.Item key={33} onClick={() => onClickItinerario("Docente")}>
               <Link to={"/cursos"}>Docente</Link>
             </Menu.Item>
-            <Menu.Item key={34} onClick={() => onClickItinerario(4)}>
+            <Menu.Item key={34} onClick={() => onClickItinerario("Gerencial")}>
               <Link to={"/cursos"}>Gerencial</Link>
             </Menu.Item>
-            <Menu.Item key={35} onClick={() => onClickItinerario(5)}>
+            <Menu.Item key={35} onClick={() => onClickItinerario("Preparação")}>
               <Link to={"/cursos"}>Preparação para a aposentadoria</Link>
             </Menu.Item>
           </SubMenu>

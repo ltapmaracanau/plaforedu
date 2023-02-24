@@ -28,10 +28,9 @@ export default function Finder() {
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
 
   const onSearch = (value) => {
-    setFiltro({ ...filtroDefault, buscaInterna: value });
     setFiltro({
       ...filtroDefault,
-      buscaInterna: value,
+      query: value,
       tipoClassificacao: false,
     });
     if (filterCollapsed) {

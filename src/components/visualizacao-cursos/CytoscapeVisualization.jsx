@@ -10,7 +10,7 @@ import CytoscapeComponent from "react-cytoscapejs";
 import { CSVLink } from "react-csv";
 /* import { PDFDownloadLink } from "@react-pdf/renderer"; */
 
-import fundoLegenda from "../../assets/icones/PLAFOREDU_Icones-Legenda.png";
+import fundoLegenda from "../../assets/icon/PLAFOREDU_Icones-Legenda.png";
 
 /* import { Template } from "../pdf-document"; */
 
@@ -19,7 +19,6 @@ import {
   MenuFoldOutlined,
   PlusOutlined,
   MinusOutlined,
-  FileExcelOutlined,
 } from "@ant-design/icons";
 
 import {
@@ -342,14 +341,14 @@ export default function CytoscapeVisualization() {
               label: "data(label)",
               width: "100px",
               height: "100px",
-              padding: "20px",
+              padding: "0px",
               "border-width": "0px",
               "font-family": "Roboto",
-              "border-color": "#0081b3",
+              "border-color": "white",
               color: "data(color)",
               "background-fit": "contain",
               "background-clip": "none",
-              "background-color": "#0081b3",
+              "background-color": "white",
               "text-halign": "right",
               "text-valign": "center",
               "text-margin-x": "10px",
@@ -366,14 +365,16 @@ export default function CytoscapeVisualization() {
               label: "data(label)",
               width: "150px",
               height: "150px",
-              padding: "20px",
+              padding: "0px",
               "border-width": "0px",
               "font-family": "Roboto",
-              "border-color": "#0081b3",
+              "border-color": "white",
               color: "data(color)",
               "background-fit": "contain",
               "background-clip": "none",
-              "background-color": "#0081b3",
+              "background-color": "white",
+              "background-width": "100%",
+              "background-height": "100%",
               "text-halign": "right",
               "text-valign": "center",
               "text-margin-x": "10px",
@@ -390,14 +391,16 @@ export default function CytoscapeVisualization() {
               label: "data(label)",
               width: "120px",
               height: "120px",
-              padding: "20px",
+              padding: "0px",
               "border-width": "0px",
               "font-family": "Roboto",
-              "border-color": "#0081b3",
+              "border-color": "white",
               color: "data(color)",
               "background-fit": "contain",
               "background-clip": "none",
-              "background-color": "#0081b3",
+              "background-color": "white",
+              "background-width": "100%",
+              "background-height": "100%",
               "text-halign": "right",
               "text-valign": "center",
               "text-margin-x": "10px",

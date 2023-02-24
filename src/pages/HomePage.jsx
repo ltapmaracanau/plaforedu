@@ -18,11 +18,15 @@ const { Content } = Layout;
 export default function HomePage() {
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
 
   const onClickItinerario = (itinerario) => {
+    const itinerarioClicado = itinerarios.find((item) =>
+      item.name.toLowerCase().includes(itinerario.toLowerCase())
+    );
     setFilter({
       ...filterDefault,
-      itinerario: itinerario,
+      itinerario: itinerarioClicado.id,
       esquemaDeCores: "categoria",
     });
   };
@@ -52,7 +56,7 @@ export default function HomePage() {
             >
               <Link
                 onClick={() => {
-                  onClickItinerario(1);
+                  onClickItinerario("Iniciação");
                 }}
                 to="/cursos"
               >
@@ -87,7 +91,7 @@ export default function HomePage() {
             >
               <Link
                 onClick={() => {
-                  onClickItinerario(2);
+                  onClickItinerario("Educação");
                 }}
                 to="/cursos"
               >
@@ -122,7 +126,7 @@ export default function HomePage() {
             >
               <Link
                 onClick={() => {
-                  onClickItinerario(3);
+                  onClickItinerario("Docente");
                 }}
                 to="/cursos"
               >
@@ -157,7 +161,7 @@ export default function HomePage() {
             >
               <Link
                 onClick={() => {
-                  onClickItinerario(4);
+                  onClickItinerario("Gerencial");
                 }}
                 to="/cursos"
               >
@@ -192,7 +196,7 @@ export default function HomePage() {
             >
               <Link
                 onClick={() => {
-                  onClickItinerario(5);
+                  onClickItinerario("Preparação");
                 }}
                 to="/cursos"
               >
