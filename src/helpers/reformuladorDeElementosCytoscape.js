@@ -93,7 +93,7 @@ export default function (
         elementos.push({
           group: "nodes",
           data: {
-            id: "curso" + cursoNaTrilha.id,
+            id: "trilha" + trilha.id + "curso" + cursoNaTrilha.id,
             label: cursoNaTrilha.name,
             image: getImageBackground("curso", colorCategoria),
             color: colorCategoria,
@@ -107,8 +107,8 @@ export default function (
             group: "edges",
             data: {
               id: `edge${idCursoAnterior}to${cursoNaTrilha.id}`,
-              source: `curso${idCursoAnterior}`,
-              target: "curso" + cursoNaTrilha.id,
+              source: `trilha${trilha.id}curso${idCursoAnterior}`,
+              target: `trilha${trilha.id}curso${cursoNaTrilha.id}`,
             },
           });
         } else {
@@ -117,7 +117,7 @@ export default function (
             data: {
               id: `edge${trilha.id}to${cursoNaTrilha.id}`,
               source: "trilha" + trilha.id,
-              target: "curso" + cursoNaTrilha.id,
+              target: `trilha${trilha.id}curso${cursoNaTrilha.id}`,
             },
           });
         }

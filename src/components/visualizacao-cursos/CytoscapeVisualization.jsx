@@ -306,8 +306,7 @@ export default function CytoscapeVisualization() {
           cy.on("click", "node", function (event) {
             const element = event.target._private.data;
             if (element.id.includes("curso")) {
-              console.log(element.id.replace(/curso/gi, ""));
-              getUniqueCourse({ id: element.id.replace(/curso/gi, "") });
+              getUniqueCourse({ id: element.id.split("curso")[1] });
               setModalCourseVisible(true);
             }
             if (
