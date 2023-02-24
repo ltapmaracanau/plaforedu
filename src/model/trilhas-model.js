@@ -12,13 +12,15 @@ const trilhasModel = {
     [
       (state) => state.trilhas,
       (_state, storeState) => storeState.courses.filter,
+      (_state, storeState) => storeState.itineraries.itinerarios,
       (_state, storeState) => storeState.competencies.competencias,
     ],
-    (trilhas, filter, competencias) => {
+    (trilhas, filter, itinerarios, competencias) => {
       return reformuladorDeElementosCytoscape(
         trilhas,
         filter,
         competencias,
+        itinerarios,
         true
       );
     }

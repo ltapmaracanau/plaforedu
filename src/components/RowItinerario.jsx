@@ -20,6 +20,7 @@ export default function RowItinerario() {
   const itinerario = useStoreState((state) => state.courses.filter.itinerario);
 
   const filter = useStoreState((state) => state.courses.filter);
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const itinerarioData = useStoreState((state) =>
     state.itineraries.itinerarios.find((obj) => obj.id === itinerario)
@@ -27,11 +28,11 @@ export default function RowItinerario() {
 
   const idsItinerarios = {
     0: undefined,
-    1: "00911570-d01c-4cb3-81e2-721999eab901",
-    2: "357d300e-95a4-4de9-a653-140841e2090a",
-    3: "6f20336b-5519-423a-a708-db9114190e63",
-    4: "35218055-9fa5-4bc3-a4e1-04c07a9c2872",
-    5: "55876032-32c1-432a-a020-9f70c73e7d6b",
+    1: "Iniciação",
+    2: "Educação",
+    3: "Docente",
+    4: "Gerencial",
+    5: "Aposentadoria",
   };
 
   const screens = useBreakpoint();
@@ -250,7 +251,16 @@ export default function RowItinerario() {
   };
 
   const onClick = (area) => {
-    setFilter({ ...filter, itinerario: idsItinerarios[area.name] });
+    const stringClicado = idsItinerarios[area.name];
+
+    setFilter({
+      ...filter,
+      itinerario: stringClicado
+        ? itinerarios.find((item) =>
+            item.name.toLowerCase().includes(stringClicado.toLowerCase())
+          ).id
+        : 0,
+    });
   };
 
   const linha = {
@@ -341,11 +351,12 @@ export default function RowItinerario() {
               marginBottom: "10px",
             }}
           >
-            {itinerarioData?.name}
+            {itinerarioData ? itinerarioData.name : "PlaforEDU"}
           </Title>
           <Text style={{ fontFamily: "Roboto", color: "#444343" }}>
-            Faltou colocar a descrição no banco 😢
-            {/* {itinerarioData.descricao} */}
+            {itinerarioData
+              ? itinerarioData.description
+              : "A PlaforEDU tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar sua atuação na Educação Profissional e Tecnológica, no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT)."}
           </Text>
         </Card>
       </Col>

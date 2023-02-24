@@ -106,7 +106,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           >
             <Controller
               control={register.current.control}
-              name="buscaInterna"
+              name="query"
               render={({ field }) => {
                 return (
                   <Form.Item style={{ marginBottom: "0" }}>
@@ -119,7 +119,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                         field.onChange(value);
                         onSubmitDebounce();
                       }}
-                      onPressEnter={onSubmit}
+                      onPressEnter={onSubmitDebounce}
                     />
                   </Form.Item>
                 );
@@ -213,7 +213,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                     }}
                     style={{ width: "100%" }}
                   >
-                    <Select.Option key={0} value={undefined}>
+                    <Select.Option key={0} value={0}>
                       Todos os Itinerários
                     </Select.Option>
                     {itinerarios.map((itinerario) => (

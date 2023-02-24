@@ -19,20 +19,6 @@ export default function CoursesPage() {
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
-  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
-  const getCompetencias = useStoreActions(
-    (actions) => actions.competencies.getComp
-  );
-  const getTrilhas = useStoreActions((actions) => actions.trilhas.getTrilhas);
-  const getItinerarios = useStoreActions(
-    (actions) => actions.itineraries.getItinerarios
-  );
-  const getInstituicoes = useStoreActions(
-    (actions) => actions.institutions.getInstituicoes
-  );
-  const getSubthemes = useStoreActions(
-    (actions) => actions.themes.getSubthemes
-  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
