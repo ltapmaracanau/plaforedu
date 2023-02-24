@@ -4,8 +4,8 @@ import services from "../services";
 import reformuladorDeElementosCytoscape from "../helpers/reformuladorDeElementosCytoscape";
 
 const initialFilterDefault = {
-  buscaInterna: "",
-  cargaHoraria: [0, 200],
+  query: "",
+  cargaHoraria: [0, 300],
   tipoClassificacao: true, // false: por cursos, true: por trilhas
   categoriasDeCompetencias: [],
   competencias: [],
@@ -13,7 +13,7 @@ const initialFilterDefault = {
   subtemas: [],
   instCertificadora: [],
   esquemaDeCores: "categoria",
-  itinerario: undefined,
+  itinerario: 0,
 };
 
 const coursesModel = {
@@ -32,13 +32,15 @@ const coursesModel = {
     [
       (state) => state.cursos,
       (state) => state.filter,
+      (_state, storeState) => storeState.itineraries.itinerarios,
       (_state, storeState) => storeState.competencies.competencias,
     ],
-    (cursos, filter, competencias) => {
+    (cursos, filter, itineraries, competencias) => {
       return reformuladorDeElementosCytoscape(
         cursos,
         filter,
         competencias,
+        itineraries,
         false
       );
     }
@@ -49,6 +51,7 @@ const coursesModel = {
   filter: initialFilterDefault,
 
   setFilter: action((state, payload) => {
+    // console.log(payload);
     state.filter = { ...state.filter, ...payload };
   }),
 
@@ -67,7 +70,7 @@ const coursesModel = {
         showFiled = false,
         registerLog = false,
         page = 0,
-        buscaInterna = "",
+        query = "",
         cargaHoraria = [],
         instCertificadora = [],
         itinerario,
@@ -80,7 +83,7 @@ const coursesModel = {
         includeFiled: showFiled,
         registerLog: registerLog,
         page: page,
-        search: buscaInterna,
+        search: query,
         hours: cargaHoraria,
         institutions: instCertificadora,
         itineraries: itinerario && itinerario != 0 ? [itinerario] : [],
