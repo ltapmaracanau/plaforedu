@@ -11,41 +11,56 @@ const { Text } = Typography;
 export default function HeaderGov() {
   const screens = useBreakpoint();
 
-  const menu = (
-    <Menu>
-      <Menu.Item key={0}>
+  const items = [
+    {
+      label: (
         <a target={"_blank"} rel="noreferrer" href="https://www.gov.br/pt-br">
           <Text style={{ fontSize: "80%", fontWeight: "bold" }}>
             Simplifique!
           </Text>
         </a>
-      </Menu.Item>
-      <Menu.Item key={1}>
+      ),
+      key: 0,
+    },
+    {
+      label: (
         <a target={"_blank"} rel="noreferrer" href="https://www.gov.br/pt-br">
           <Text style={{ fontSize: "80%", fontWeight: "bold" }}>Participe</Text>
         </a>
-      </Menu.Item>
-      <Menu.Item key={2}>
+      ),
+      key: 1,
+    },
+    {
+      label: (
         <a target={"_blank"} rel="noreferrer" href="https://www.gov.br/pt-br">
           <Text style={{ fontSize: "80%", fontWeight: "bold" }}>
             Acesso à informação
           </Text>
         </a>
-      </Menu.Item>
-      <Menu.Item key={3}>
+      ),
+      key: 2,
+    },
+    {
+      label: (
         <a target={"_blank"} rel="noreferrer" href="https://www.gov.br/pt-br">
           <Text style={{ fontSize: "80%", fontWeight: "bold" }}>
             Legislação
           </Text>
         </a>
-      </Menu.Item>
-      <Menu.Item key={4}>
+      ),
+      key: 3,
+    },
+    {
+      label: (
         <a target={"_blank"} rel="noreferrer" href="https://www.gov.br/pt-br">
           <Text style={{ fontSize: "80%", fontWeight: "bold" }}>Canais</Text>
         </a>
-      </Menu.Item>
-    </Menu>
-  );
+      ),
+      key: 4,
+    },
+  ];
+
+  const menu = <Menu items={items} />;
 
   return (
     <Row
@@ -60,7 +75,7 @@ export default function HeaderGov() {
       wrap={false}
     >
       <Col
-        flex={"70px"}
+        flex={"90px"}
         style={{
           height: "100%",
           display: "flex",
@@ -150,6 +165,9 @@ export default function HeaderGov() {
           target={"_blank"}
           rel="noreferrer"
           href="https://www.gov.br/pt-br"
+          style={{
+            borderRight: "solid 2px #e7e7e7",
+          }}
         >
           <Text style={{ fontSize: "80%", fontWeight: "bold" }}>Canais</Text>
         </a>
@@ -164,7 +182,7 @@ export default function HeaderGov() {
           justifyContent: "flex-end",
         }}
       >
-        <Dropdown overlay={menu} trigger={["click"]}>
+        <Dropdown menu={menu} trigger={["click"]}>
           <DashOutlined />
         </Dropdown>
       </Col>

@@ -47,7 +47,7 @@ export default function UpdatePassword() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -55,7 +55,7 @@ export default function UpdatePassword() {
           padding: "20px",
         }}
       >
-        <Content
+        <div
           style={{
             width: "100%",
             display: "flex",
@@ -145,8 +145,8 @@ export default function UpdatePassword() {
               </div>
             </Form>
           </Card>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

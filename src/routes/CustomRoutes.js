@@ -18,7 +18,7 @@ import SettingsPage from "../pages/SettingsPage.jsx";
 import ResetPassword from "../pages/ResetPassword.jsx";
 import ForgetPassword from "../pages/ForgetPassword.jsx";
 
-export default function CustomRoutes() {
+const CustomRoutes = () => {
   const authenticated = useStoreState((state) => state.adm.isAuthenticated);
 
   const ProtectedRoutes = () => {
@@ -43,4 +43,6 @@ export default function CustomRoutes() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
+
+export default CustomRoutes;

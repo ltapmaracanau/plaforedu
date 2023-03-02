@@ -36,7 +36,7 @@ export default function TemasList() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -44,7 +44,7 @@ export default function TemasList() {
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <Card
             title={"Temas"}
             extra={
@@ -176,8 +176,8 @@ export default function TemasList() {
               }}
             />
           </Modal>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

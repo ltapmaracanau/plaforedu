@@ -23,11 +23,10 @@ import {
   Avatar,
   Space,
   notification,
+  ConfigProvider,
 } from "antd";
 
 const { useBreakpoint } = Grid;
-
-const { SubMenu } = Menu;
 
 export default function HeaderHome() {
   const screens = useBreakpoint();
@@ -49,6 +48,114 @@ export default function HeaderHome() {
       esquemaDeCores: "categoria",
     });
   };
+
+  const items = [
+    {
+      label: <Link to={"/"}>HOME</Link>,
+      key: 1,
+    },
+    {
+      label: <Link to={"/about"}>SOBRE</Link>,
+      key: 2,
+    },
+    {
+      label: "RECURSOS",
+      icon: screens.md ? <DownOutlined /> : null,
+      key: 3,
+      children: [
+        {
+          label: (
+            <div onClick={() => onClickItinerario("Iniciação")}>
+              <Link to={"/cursos"}>Iniciação ao Serviço Público</Link>
+            </div>
+          ),
+          key: 31,
+        },
+        {
+          label: (
+            <div onClick={() => onClickItinerario("Educação")}>
+              <Link to={"/cursos"}>Técnico-Administrativo em Educação</Link>
+            </div>
+          ),
+          key: 32,
+        },
+        {
+          label: (
+            <div onClick={() => onClickItinerario("Docente")}>
+              <Link to={"/cursos"}>Docente</Link>
+            </div>
+          ),
+          key: 33,
+        },
+        {
+          label: (
+            <div onClick={() => onClickItinerario("Gerencial")}>
+              <Link to={"/cursos"}>Gerencial</Link>
+            </div>
+          ),
+          key: 34,
+        },
+        {
+          label: (
+            <div onClick={() => onClickItinerario("Preparação")}>
+              <Link to={"/cursos"}>Preparação para a aposentadoria</Link>
+            </div>
+          ),
+          key: 35,
+        },
+      ],
+    },
+    {
+      label: <Link to={"/faleconosco"}>FALE CONOSCO</Link>,
+      key: 4,
+    },
+    {
+      label: <Link to={"/faq"}>FAQ</Link>,
+      key: 5,
+    },
+    {
+      label: isAuthenticated ? (
+        <Avatar size="default" icon={<UserOutlined />} />
+      ) : (
+        <Link to={"/login"}>
+          <Button shape="round">LOGIN</Button>
+        </Link>
+      ),
+      key: 6,
+      children: isAuthenticated
+        ? [
+            {
+              key: 61,
+              label: (
+                <Space
+                  onClick={() => {
+                    navigate("/settings");
+                  }}
+                >
+                  Configurações <SettingOutlined />
+                </Space>
+              ),
+            },
+            {
+              key: 62,
+              label: (
+                <Space
+                  onClick={() => {
+                    logout();
+                    notification.success({
+                      message: "Logout concluído com sucesso!",
+                    });
+                    navigate("/login");
+                  }}
+                >
+                  Sair <LogoutOutlined />
+                </Space>
+              ),
+            },
+          ]
+        : [],
+    },
+  ];
 
   return (
     <Row
@@ -100,91 +207,31 @@ export default function HeaderHome() {
             : { fontFamily: "Roboto" }
         }
       >
-        <Menu
-          mode="horizontal"
-          selectable={false}
-          overflowedIndicator={<MenuOutlined style={{ fontSize: "20px" }} />}
-          style={{ justifyContent: "right" }}
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#fff",
+            },
+            components: {
+              Menu: {
+                colorSubItemBg: "#1890ff",
+                colorItemBg: "transparent",
+                colorItemText: "#fff",
+                colorItemTextHover: "#fff",
+                colorItemBgSelectedHorizontal: "transparent",
+                colorBgElevated: "#1890ff",
+              },
+            },
+          }}
         >
-          <Menu.Item key={1}>
-            <Link to={"/"}>HOME</Link>
-          </Menu.Item>
-          <Menu.Item key={2}>
-            <Link to={"/about"}>SOBRE</Link>
-          </Menu.Item>
-          {/* <SubMenu icon={<DownOutlined />} key={2} title='SOBRE' >
-            <Menu.Item key={21}><Link to={'/about'}>Sobre</Link></Menu.Item>
-            <Menu.Item key={22}>Termos e Licenças</Menu.Item>
-            <Menu.Item key={23}>Manuais e Guias</Menu.Item>
-            <Menu.Item key={24}>Orientações</Menu.Item>
-          </SubMenu> */}
-          <SubMenu
-            icon={screens.md ? <DownOutlined /> : null}
-            key={3}
-            title="RECURSOS"
-          >
-            <Menu.Item key={31} onClick={() => onClickItinerario("Iniciação")}>
-              <Link to={"/cursos"}>Iniciação ao Serviço Público</Link>
-            </Menu.Item>
-            <Menu.Item key={32} onClick={() => onClickItinerario("Educação")}>
-              <Link to={"/cursos"}>Técnico-Administrativo em Educação</Link>
-            </Menu.Item>
-            <Menu.Item key={33} onClick={() => onClickItinerario("Docente")}>
-              <Link to={"/cursos"}>Docente</Link>
-            </Menu.Item>
-            <Menu.Item key={34} onClick={() => onClickItinerario("Gerencial")}>
-              <Link to={"/cursos"}>Gerencial</Link>
-            </Menu.Item>
-            <Menu.Item key={35} onClick={() => onClickItinerario("Preparação")}>
-              <Link to={"/cursos"}>Preparação para a aposentadoria</Link>
-            </Menu.Item>
-          </SubMenu>
-          <Menu.Item key={4}>
-            <Link to={"/faleconosco"}>FALE CONOSCO</Link>
-          </Menu.Item>
-          <Menu.Item key={5}>
-            <Link to={"/faq"}>FAQ</Link>
-          </Menu.Item>
-          {isAuthenticated ? (
-            <SubMenu
-              key={6}
-              icon={<Avatar size="default" icon={<UserOutlined />} />}
-            >
-              <Menu.Item
-                key={61}
-                onClick={() => {
-                  navigate("/settings");
-                }}
-                icon={
-                  <Space>
-                    Configurações <SettingOutlined />
-                  </Space>
-                }
-              />
-              <Menu.Item
-                key={62}
-                onClick={() => {
-                  logout();
-                  notification.success({
-                    message: "Logout concluído com sucesso!",
-                  });
-                  navigate("/login");
-                }}
-                icon={
-                  <Space>
-                    Sair <LogoutOutlined />
-                  </Space>
-                }
-              />
-            </SubMenu>
-          ) : (
-            <Menu.Item key={6}>
-              <Link to={"/login"}>
-                <Button shape="round">LOGIN</Button>
-              </Link>
-            </Menu.Item>
-          )}
-        </Menu>
+          <Menu
+            mode="horizontal"
+            selectable={false}
+            overflowedIndicator={<MenuOutlined style={{ fontSize: "20px" }} />}
+            style={{ justifyContent: "right" }}
+            items={items}
+          />
+        </ConfigProvider>
       </Col>
     </Row>
   );

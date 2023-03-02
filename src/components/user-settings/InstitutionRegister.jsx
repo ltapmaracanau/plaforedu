@@ -99,8 +99,8 @@ export default function InstitutionRegister(props) {
 
   return (
     <>
-      <Layout>
-        <Content
+      <div>
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -221,8 +221,8 @@ export default function InstitutionRegister(props) {
               </div>
             </Form>
           </Card>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

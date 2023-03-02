@@ -111,10 +111,10 @@ export default function FaleConosco() {
   };
 
   return (
-    <Layout>
+    <div>
       <HeaderHome />
-      <Layout>
-        <Content style={{ backgroundColor: "#fff" }}>
+      <div>
+        <div style={{ backgroundColor: "#fff" }}>
           <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
             <Row style={{ margin: "40px 0px" }}>
               {screens.xl ? (
@@ -139,11 +139,10 @@ export default function FaleConosco() {
               >
                 <Card
                   headStyle={{
-                    fontFamily: "Roboto",
-                    fontSize: "30px",
-                    fontWeight: "bold",
+                    textAlign: "center",
                   }}
-                  style={{ width: "500px", border: "5px solid #ebebeb" }}
+                  type="inner"
+                  style={{ width: "500px" }}
                   title={"Fale Conosco"}
                 >
                   <Controller
@@ -152,7 +151,7 @@ export default function FaleConosco() {
                     render={({ field, fieldState: { error } }) => {
                       return (
                         <Form.Item
-                          style={{ marginBottom: "0", fontFamily: "Roboto" }}
+                          style={{ fontFamily: "Roboto" }}
                           validateStatus={error ? "error" : ""}
                           help={error ? error.message : ""}
                           hasFeedback
@@ -169,7 +168,7 @@ export default function FaleConosco() {
                     render={({ field, fieldState: { error } }) => {
                       return (
                         <Form.Item
-                          style={{ marginBottom: "0", fontFamily: "Roboto" }}
+                          style={{ fontFamily: "Roboto" }}
                           validateStatus={error ? "error" : ""}
                           help={error ? error.message : ""}
                           hasFeedback
@@ -186,7 +185,7 @@ export default function FaleConosco() {
                     render={({ field, fieldState: { error } }) => {
                       return (
                         <Form.Item
-                          style={{ marginBottom: "0", fontFamily: "Roboto" }}
+                          style={{ fontFamily: "Roboto" }}
                           validateStatus={error ? "error" : ""}
                           help={error ? error.message : ""}
                           hasFeedback
@@ -213,7 +212,7 @@ export default function FaleConosco() {
                     render={({ field, fieldState: { error } }) => {
                       return (
                         <Form.Item
-                          style={{ marginBottom: "0", fontFamily: "Roboto" }}
+                          style={{ fontFamily: "Roboto" }}
                           validateStatus={error ? "error" : ""}
                           help={error ? error.message : ""}
                           hasFeedback
@@ -250,8 +249,8 @@ export default function FaleConosco() {
           <Modal open={modalIsVisible} footer={null}>
             {resultado}
           </Modal>
-        </Content>
-      </Layout>
-    </Layout>
+        </div>
+      </div>
+    </div>
   );
 }

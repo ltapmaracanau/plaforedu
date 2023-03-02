@@ -42,7 +42,7 @@ export default function InstitutionList() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -50,7 +50,7 @@ export default function InstitutionList() {
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <Card
             title={"Instituições"}
             extra={
@@ -184,8 +184,8 @@ export default function InstitutionList() {
               }}
             />
           </Modal>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

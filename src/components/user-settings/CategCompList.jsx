@@ -38,7 +38,7 @@ export default function CategCompList() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -46,7 +46,7 @@ export default function CategCompList() {
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <Card
             title={"Categorias de competências"}
             extra={
@@ -177,8 +177,8 @@ export default function CategCompList() {
               }}
             />
           </Modal>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

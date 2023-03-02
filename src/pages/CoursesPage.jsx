@@ -33,13 +33,15 @@ export default function CoursesPage() {
   return (
     <Layout>
       <HeaderHome />
-
       <Layout>
         {screens.lg ? (
           <Sider
             width={300}
             collapsedWidth={0}
             trigger={null}
+            style={{
+              backgroundColor: "#ebebeb",
+            }}
             collapsible
             collapsed={filterCollapsed}
           >

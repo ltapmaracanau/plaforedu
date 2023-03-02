@@ -93,8 +93,8 @@ export default function SubtemaRegister(props) {
 
   return (
     <>
-      <Layout>
-        <Content
+      <div>
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -195,8 +195,8 @@ export default function SubtemaRegister(props) {
               </div>
             </Form>
           </Card>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

@@ -19,6 +19,7 @@ import {
   MenuFoldOutlined,
   PlusOutlined,
   MinusOutlined,
+  CloseCircleOutlined,
 } from "@ant-design/icons";
 
 import {
@@ -436,57 +437,61 @@ export default function CytoscapeVisualization() {
       />
       <Modal
         open={modalCourseVisible}
-        onOk={handleOk}
         key={`modalCurso`}
-        onCancel={handleOk}
-        title={uniqueCourse?.name}
         destroyOnClose={true}
         centered={true}
-        footer={[
-          <Button type="primary" key={"buttonOk"} onClick={handleOk}>
-            Ok
-          </Button>,
-        ]}
-      >
-        {loadingUniqueCourse ? (
-          <Skeleton active />
-        ) : (
-          <Descriptions column={1} bordered>
-            <Descriptions.Item label="Descrição">
-              {uniqueCourse?.description}
-            </Descriptions.Item>
-            <Descriptions.Item label="Carga Horária">
-              {uniqueCourse?.hours}
-            </Descriptions.Item>
-            <Descriptions.Item label="Instituições Certificadoras">
-              {uniqueCourse?.institutions?.map((inst) => (
-                <Card key={inst.institutionId} bordered>
-                  {inst.name}
-                  <br />
-                  <strong>Link: </strong>
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    key={`link${inst.id}`}
-                    href={inst.link}
-                  >
-                    {inst.link}
-                  </a>
-                </Card>
-              ))}
-            </Descriptions.Item>
-            <Descriptions.Item label="Acessibilidades">
-              {uniqueCourse?.accessibilities?.map((ac) => ac.name).join(" | ")}
-            </Descriptions.Item>
-            <Descriptions.Item label="Taxonomia revisada de Bloom">
-              {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
-            </Descriptions.Item>
-            <Descriptions.Item label="Subtemas">
-              {uniqueCourse?.subThemes?.map((sub) => sub.name).join(" | ")}
-            </Descriptions.Item>
-          </Descriptions>
+        modalRender={() => (
+          <Card
+            extra={[
+              <Button
+                key={"closeIcon"}
+                icon={<CloseCircleOutlined />}
+                onClick={handleOk}
+              />,
+            ]}
+            title={uniqueCourse?.name}
+            type="inner"
+            loading={loadingUniqueCourse}
+          >
+            <Descriptions column={1} bordered>
+              <Descriptions.Item label="Descrição">
+                {uniqueCourse?.description}
+              </Descriptions.Item>
+              <Descriptions.Item label="Carga Horária">
+                {uniqueCourse?.hours}
+              </Descriptions.Item>
+              <Descriptions.Item label="Instituições Certificadoras">
+                {uniqueCourse?.institutions?.map((inst) => (
+                  <Card key={inst.institutionId} bordered>
+                    {inst.name}
+                    <br />
+                    <strong>Link: </strong>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      key={`link${inst.id}`}
+                      href={inst.link}
+                    >
+                      {inst.link}
+                    </a>
+                  </Card>
+                ))}
+              </Descriptions.Item>
+              <Descriptions.Item label="Acessibilidades">
+                {uniqueCourse?.accessibilities
+                  ?.map((ac) => ac.name)
+                  .join(" | ")}
+              </Descriptions.Item>
+              <Descriptions.Item label="Taxonomia revisada de Bloom">
+                {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
+              </Descriptions.Item>
+              <Descriptions.Item label="Subtemas">
+                {uniqueCourse?.subThemes?.map((sub) => sub.name).join(" | ")}
+              </Descriptions.Item>
+            </Descriptions>
+          </Card>
         )}
-      </Modal>
+      />
       <Modal // Modal de Competência
         open={modalCompetenciaVisible}
         onOk={handleOk}

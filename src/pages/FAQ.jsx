@@ -19,7 +19,7 @@ export default function FAQ() {
   return (
     <>
       <HeaderHome />
-      <Content>
+      <div>
         <Row
           style={{
             display: "flex",
@@ -338,7 +338,7 @@ export default function FAQ() {
             </Text>
           </Col>
         </Row>
-      </Content>
+      </div>
     </>
   );
 }

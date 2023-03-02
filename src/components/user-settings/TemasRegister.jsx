@@ -69,8 +69,8 @@ export default function TemasRegister(props) {
 
   return (
     <>
-      <Layout>
-        <Content
+      <div>
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -136,8 +136,8 @@ export default function TemasRegister(props) {
               </div>
             </Form>
           </Card>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

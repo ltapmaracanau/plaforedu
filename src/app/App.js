@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
-import "antd/dist/antd.css";
-import "./App.less";
+import "./App.css";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import { ConfigProvider, Image, Spin } from "antd";
 
 import VLibras from "@djpfs/react-vlibras";
-
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 import HeaderGov from "../components/header/HeaderGov.jsx";
 import FooterGov from "../components/footer/FooterGov.jsx";
-
+import CustomRoutes from "../routes/CustomRoutes";
 import LogoPlafor from "../assets/LOGOPLAFORHEADER.svg";
-
-import { Image, Layout, Spin } from "antd";
-import CustomRoutes from "../routes/routes";
-import { useStoreActions, useStoreState } from "easy-peasy";
 
 function App() {
   const init = useStoreActions((actions) => actions.adm.init);
@@ -60,12 +58,34 @@ function App() {
   }
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <HeaderGov />
-      <CustomRoutes />
-      <VLibras />
-      <FooterGov />
-    </Layout>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexFlow: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <ConfigProvider
+        locale={dayjs}
+        theme={{
+          token: {},
+          components: {
+            Card: {
+              colorFillAlter: "linear-gradient(to right, #2C55A1, #35A8E0)",
+              colorTextHeading: "#fff",
+              fontWeight: "bold",
+            },
+            Modal: {},
+          },
+        }}
+      >
+        <HeaderGov />
+        <CustomRoutes />
+        <VLibras />
+        <FooterGov />
+      </ConfigProvider>
+    </div>
   );
 }
 

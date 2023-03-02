@@ -40,7 +40,7 @@ export default function CompList() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -48,7 +48,7 @@ export default function CompList() {
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <Card
             title={"Competências"}
             extra={
@@ -190,8 +190,8 @@ export default function CompList() {
               }}
             />
           </Modal>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

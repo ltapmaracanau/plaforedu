@@ -39,7 +39,7 @@ export default function SubtemasList() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -47,7 +47,7 @@ export default function SubtemasList() {
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <Card
             title={"Subtemas"}
             extra={
@@ -188,8 +188,8 @@ export default function SubtemasList() {
               }}
             />
           </Modal>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

@@ -17,10 +17,17 @@ import {
   DiffOutlined,
   TeamOutlined,
   KeyOutlined,
+  NodeIndexOutlined,
+  DatabaseOutlined,
+  ReadOutlined,
+  BuildOutlined,
+  FlagOutlined,
+  BankOutlined,
+  ScheduleOutlined,
   FileSearchOutlined,
 } from "@ant-design/icons";
 
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Space } from "antd";
 import FormativeTrailsList from "../components/user-settings/FormativeTrailsList";
 import ListSearchLogs from "../components/user-settings/ListSearchLogs";
 
@@ -46,141 +53,191 @@ export default function SettingsPage() {
 
   const [index, setIndex] = useState(0);
 
+  const items = [
+    {
+      label: (
+        <div
+          onClick={() => {
+            setIndex(0);
+          }}
+        >
+          Meu Perfil
+        </div>
+      ),
+      icon: <UserOutlined />,
+      key: 0,
+    },
+    {
+      label: (
+        <div
+          onClick={() => {
+            setIndex(1);
+          }}
+        >
+          Alterar Senha
+        </div>
+      ),
+      icon: <KeyOutlined />,
+      key: 1,
+    },
+    {
+      label: "Cadastros",
+      key: 3,
+      disabled: !(isAdm || isCoord),
+      icon: <DiffOutlined />,
+      children: [
+        {
+          key: 31,
+          icon: <TeamOutlined />,
+          label: (
+            <div
+              onClick={() => {
+                setIndex(2);
+              }}
+            >
+              Usuários
+            </div>
+          ),
+          disabled: !isAdm,
+        },
+        {
+          key: 32,
+          icon: <BuildOutlined />,
+          label: (
+            <div
+              onClick={() => {
+                setIndex(3);
+              }}
+            >
+              Cursos
+            </div>
+          ),
+        },
+        {
+          key: 33,
+          icon: <BankOutlined />,
+          label: (
+            <div
+              onClick={() => {
+                setIndex(4);
+              }}
+            >
+              Instituições
+            </div>
+          ),
+        },
+        {
+          key: 34,
+          icon: <DatabaseOutlined />,
+          label: (
+            <div
+              onClick={() => {
+                setIndex(5);
+              }}
+            >
+              Categorias de competências
+            </div>
+          ),
+        },
+        {
+          key: 35,
+          icon: <FlagOutlined />,
+          label: (
+            <div
+              onClick={() => {
+                setIndex(6);
+              }}
+            >
+              Competências
+            </div>
+          ),
+        },
+        {
+          key: 36,
+          icon: <ReadOutlined />,
+          label: (
+            <div
+              onClick={() => {
+                setIndex(7);
+              }}
+            >
+              Temas
+            </div>
+          ),
+        },
+        {
+          key: 37,
+          icon: <ScheduleOutlined />,
+          label: (
+            <div
+              onClick={() => {
+                setIndex(8);
+              }}
+            >
+              Subtemas
+            </div>
+          ),
+        },
+        {
+          key: 38,
+          icon: <NodeIndexOutlined />,
+          label: (
+            <div
+              onClick={() => {
+                setIndex(9);
+              }}
+            >
+              Trilhas Formativas
+            </div>
+          ),
+        },
+      ],
+    },
+    {
+      key: 4,
+      icon: <FileSearchOutlined />,
+      label: (
+        <div
+          onClick={() => {
+            setIndex(10);
+          }}
+        >
+          Relatório de Buscas
+        </div>
+      ),
+    },
+  ];
+
   return (
-    <Layout>
+    <div>
       <HeaderHome />
-      <Layout>
-        <Sider>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
+        <Sider width={"280px"}>
           <Menu
             mode="inline"
             style={{
               height: "100%",
               borderRight: 0,
+              fontFamily: "Roboto",
             }}
-            theme={"dark"}
+            theme={"light"}
             defaultChecked={"0"}
             defaultSelectedKeys={["0"]}
-          >
-            <Menu.Item
-              style={{ fontFamily: "Roboto" }}
-              icon={<UserOutlined />}
-              key={"0"}
-              onClick={() => {
-                setIndex(0);
-              }}
-            >
-              Meu Perfil
-            </Menu.Item>
-            <Menu.Item
-              style={{ fontFamily: "Roboto" }}
-              key={"1"}
-              icon={<KeyOutlined />}
-              onClick={() => {
-                setIndex(1);
-              }}
-            >
-              Alterar Senha
-            </Menu.Item>
-            {isAdm || isCoord ? (
-              <>
-                <Menu.SubMenu
-                  style={{ fontFamily: "Roboto" }}
-                  icon={<DiffOutlined />}
-                  key={"2"}
-                  title={"Cadastros"}
-                >
-                  {isAdm && (
-                    <Menu.Item
-                      style={{ fontFamily: "Roboto" }}
-                      key={"21"}
-                      icon={<TeamOutlined />}
-                      onClick={() => {
-                        setIndex(2);
-                      }}
-                    >
-                      Usuários
-                    </Menu.Item>
-                  )}
-                  <Menu.Item
-                    style={{ fontFamily: "Roboto" }}
-                    key={"22"}
-                    onClick={() => {
-                      setIndex(3);
-                    }}
-                  >
-                    Cursos
-                  </Menu.Item>
-                  <Menu.Item
-                    style={{ fontFamily: "Roboto" }}
-                    key={"23"}
-                    onClick={() => {
-                      setIndex(4);
-                    }}
-                  >
-                    Instituições
-                  </Menu.Item>
-                  <Menu.Item
-                    style={{ fontFamily: "Roboto" }}
-                    key={"24"}
-                    onClick={() => {
-                      setIndex(5);
-                    }}
-                  >
-                    Categorias de competências
-                  </Menu.Item>
-                  <Menu.Item
-                    style={{ fontFamily: "Roboto" }}
-                    key={"25"}
-                    onClick={() => {
-                      setIndex(6);
-                    }}
-                  >
-                    Competências
-                  </Menu.Item>
-                  <Menu.Item
-                    style={{ fontFamily: "Roboto" }}
-                    key={"26"}
-                    onClick={() => {
-                      setIndex(7);
-                    }}
-                  >
-                    Temas
-                  </Menu.Item>
-                  <Menu.Item
-                    style={{ fontFamily: "Roboto" }}
-                    key={"27"}
-                    onClick={() => {
-                      setIndex(8);
-                    }}
-                  >
-                    Subtemas
-                  </Menu.Item>
-                  <Menu.Item
-                    style={{ fontFamily: "Roboto" }}
-                    key={"28"}
-                    onClick={() => {
-                      setIndex(9);
-                    }}
-                  >
-                    Trilhas Formativas
-                  </Menu.Item>
-                </Menu.SubMenu>
-                <Menu.Item
-                  key={"3"}
-                  style={{ fontFamily: "Roboto" }}
-                  icon={<FileSearchOutlined />}
-                  onClick={() => {
-                    setIndex(10);
-                  }}
-                >
-                  Relatório de Buscas
-                </Menu.Item>
-              </>
-            ) : null}
-          </Menu>
+            items={items}
+          />
         </Sider>
-        {contentArray[index]}
-      </Layout>
-    </Layout>
+        <div
+          style={{
+            width: "100%",
+          }}
+        >
+          {contentArray[index]}
+        </div>
+      </div>
+    </div>
   );
 }
