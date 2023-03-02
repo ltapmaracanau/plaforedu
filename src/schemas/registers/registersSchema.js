@@ -95,7 +95,7 @@ export const registerCourseSchema = yup.object().shape({
     .number()
     .required("Obrigatório!")
     .min(0, "Obrigatório números positivos!"),
-  accessibilities: yup.array(yup.string()).min(1, "Obrigatório!"),
+  //accessibilities: yup.array(yup.string()).min(1, "Obrigatório!"),
   itineraries: yup.array(yup.string()).min(1, "Obrigatório!"),
   competencies: yup.array(yup.string()).min(1, "Obrigatório!"),
   //taxonomies: yup.array(yup.string()).min(1, "Obrigatório!"),
