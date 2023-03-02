@@ -60,7 +60,7 @@ export default function HeaderGov() {
       wrap={false}
     >
       <Col
-        flex={"70px"}
+        flex={"90px"}
         style={{
           height: "100%",
           display: "flex",
