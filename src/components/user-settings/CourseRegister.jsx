@@ -222,8 +222,8 @@ export default function CourseRegister(props) {
   };
 
   const register = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange",
+    mode: "onTouched",
+    reValidateMode: "onTouched",
     defaultValues: cursoDefault,
     resolver: yupResolver(registerCourseSchema),
     context: undefined,
