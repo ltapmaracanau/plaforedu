@@ -44,13 +44,12 @@ export default {
       name: payload.name,
       description: payload.description,
       hours: payload.hours,
-      link: payload.link,
       institutions: payload.institutions,
       accessibilities: payload.accessibilities,
       itineraries: payload.itineraries,
       subThemes: payload.subThemes,
       competencies: payload.competencies,
-      taxonomies: payload.taxonomias,
+      taxonomies: payload.taxonomies,
     })
       .then((response) => response.data)
       .catch((error) => {
