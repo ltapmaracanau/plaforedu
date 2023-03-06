@@ -135,7 +135,7 @@ export default function (
       let colorItinerario = colorDefault;
 
       // Aqui eu defino qual a cor das imagens por categoria de competência
-      if (filtro.competencias.length !== 0) {
+      if (filtro.competencies.length !== 0) {
         filtro.competencias.some((compId) => {
           const compData = competencias.find((comp) => comp.id === compId);
           return compData.categoriesCompetencies.some((cat) => {

@@ -53,6 +53,7 @@ export default function ForgetPassword() {
       <div
         style={{
           flexGrow: 1,
+          height: "100%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -77,7 +78,6 @@ export default function ForgetPassword() {
                 return (
                   <Form.Item
                     label={"Digite seu email"}
-                    style={{ marginBottom: "0" }}
                     validateStatus={error ? "error" : ""}
                     help={error ? error.message : ""}
                     hasFeedback

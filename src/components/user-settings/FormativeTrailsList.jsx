@@ -27,6 +27,9 @@ export default function FormativeTrailsList() {
   const getItinerarios = useStoreActions(
     (actions) => actions.itineraries.getItinerarios
   );
+  const getInstitutions = useStoreActions(
+    (actions) => actions.institutions.getInstituicoes
+  );
   const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
   const [registerVisible, setRegisterVisible] = useState(false);
@@ -43,6 +46,7 @@ export default function FormativeTrailsList() {
     getTrilhas();
     getCompetencies();
     getItinerarios();
+    getInstitutions();
     getCursos();
   }, [getTrilhas]);
 

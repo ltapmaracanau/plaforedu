@@ -68,7 +68,6 @@ export default function UserUpdate(props) {
       .replace(/\)/g, "")
       .replace(" ", "")
       .replace(/-/g, "");
-    console.log(values);
     try {
       await updateUser(values);
       notification.success({
