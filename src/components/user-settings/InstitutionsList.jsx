@@ -52,6 +52,9 @@ export default function InstitutionList() {
       >
         <div style={{ width: "100%" }}>
           <Card
+            headStyle={{
+              fontSize: 20,
+            }}
             title={"Instituições"}
             extra={
               <div

@@ -24,6 +24,7 @@ import {
   Col,
   Image,
   Grid,
+  ConfigProvider,
 } from "antd";
 
 const { useBreakpoint } = Grid;
@@ -113,7 +114,17 @@ export default function FaleConosco() {
   return (
     <div>
       <HeaderHome />
-      <div>
+      <ConfigProvider
+        theme={{
+          token: {},
+          components: {
+            Card: {
+              colorFillAlter: "linear-gradient(to right, #2C55A1, #35A8E0)",
+              colorTextHeading: "#fff",
+            },
+          },
+        }}
+      >
         <div style={{ backgroundColor: "#fff" }}>
           <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
             <Row style={{ margin: "40px 0px" }}>
@@ -250,7 +261,7 @@ export default function FaleConosco() {
             {resultado}
           </Modal>
         </div>
-      </div>
+      </ConfigProvider>
     </div>
   );
 }

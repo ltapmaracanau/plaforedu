@@ -49,7 +49,12 @@ export default function MyProfile() {
         }}
       >
         <div style={{ width: "100%" }}>
-          <Card title={"Meu Perfil"}>
+          <Card
+            headStyle={{
+              fontSize: 20,
+            }}
+            title={"Meu Perfil"}
+          >
             {loading ? (
               <Skeleton active />
             ) : (

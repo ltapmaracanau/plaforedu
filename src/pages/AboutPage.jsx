@@ -5,12 +5,11 @@ import retangulo from "../assets/about/Rectangle.png";
 import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png";
 import { useNavigate } from "react-router-dom";
 
-import { Layout, Row, Col, Card, Typography, Image, Grid } from "antd";
+import { Row, Col, Card, Typography, Image, Grid } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 const { Text, Title, Link } = Typography;
 const { useBreakpoint } = Grid;
-const { Content } = Layout;
 
 export default function AboutPage() {
   const screens = useBreakpoint();
@@ -18,10 +17,17 @@ export default function AboutPage() {
 
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
 
-  const onClickHandler = (itinerario) => {
-    setFilter({ ...filterDefault, itinerario: itinerario });
-    navigate("/cursos");
+  const onClickItinerario = (itinerario) => {
+    const itinerarioClicado = itinerarios.find((item) =>
+      item.name.toLowerCase().includes(itinerario.toLowerCase())
+    );
+    setFilter({
+      ...filterDefault,
+      itinerario: itinerarioClicado.id,
+      esquemaDeCores: "categoria",
+    });
   };
 
   return (
@@ -299,7 +305,7 @@ export default function AboutPage() {
                   marginBottom: "30px",
                 }}
                 onClick={() => {
-                  onClickHandler(1);
+                  onClickItinerario("Iniciação");
                 }}
               >
                 Iniciação ao serviço público
@@ -334,7 +340,7 @@ export default function AboutPage() {
                 marginTop: "5px",
               }}
               onClick={() => {
-                onClickHandler(1);
+                onClickItinerario("Iniciação");
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -373,7 +379,7 @@ export default function AboutPage() {
                   marginBottom: "30px",
                 }}
                 onClick={() => {
-                  onClickHandler(2);
+                  onClickItinerario("Educação");
                 }}
               >
                 Técnico-Administrativo em Educação
@@ -414,7 +420,7 @@ export default function AboutPage() {
                 marginTop: "5px",
               }}
               onClick={() => {
-                onClickHandler(2);
+                onClickItinerario("Educação");
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -453,7 +459,7 @@ export default function AboutPage() {
                   marginBottom: "30px",
                 }}
                 onClick={() => {
-                  onClickHandler(3);
+                  onClickItinerario("Docente");
                 }}
               >
                 Docente
@@ -489,7 +495,7 @@ export default function AboutPage() {
                 marginTop: "5px",
               }}
               onClick={() => {
-                onClickHandler(3);
+                onClickItinerario("Docente");
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -528,7 +534,7 @@ export default function AboutPage() {
                   marginBottom: "30px",
                 }}
                 onClick={() => {
-                  onClickHandler(4);
+                  onClickItinerario("Gerencial");
                 }}
               >
                 Gerencial
@@ -563,7 +569,7 @@ export default function AboutPage() {
                 marginTop: "5px",
               }}
               onClick={() => {
-                onClickHandler(4);
+                onClickItinerario("Gerencial");
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -602,7 +608,7 @@ export default function AboutPage() {
                   marginBottom: "30px",
                 }}
                 onClick={() => {
-                  onClickHandler(5);
+                  onClickItinerario("Aposentadoria");
                 }}
               >
                 Aposentadoria
@@ -654,7 +660,7 @@ export default function AboutPage() {
                 marginTop: "5px",
               }}
               onClick={() => {
-                onClickHandler(5);
+                onClickItinerario("Aposentadoria");
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>

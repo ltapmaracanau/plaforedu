@@ -47,6 +47,9 @@ export default function TemasList() {
         <div style={{ width: "100%" }}>
           <Card
             title={"Temas"}
+            headStyle={{
+              fontSize: 20,
+            }}
             extra={
               <div
                 style={{

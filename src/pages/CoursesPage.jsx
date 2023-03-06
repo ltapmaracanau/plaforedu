@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
-import { Row, Layout, Drawer, Grid } from "antd";
+import { Row, Layout, Drawer, Grid, ConfigProvider } from "antd";
 
 import { CloseOutlined } from "@ant-design/icons";
 
@@ -60,20 +60,32 @@ export default function CoursesPage() {
           </Drawer>
         )}
 
-        <Content style={{ backgroundColor: "#fff" }}>
-          <Row>
-            <RowItinerario />
-          </Row>
-          <Row
-            style={screens.lg ? { maxHeight: 700, overflowY: "scroll" } : {}}
-          >
-            {tipoVisualizacao === false && screens.lg ? (
-              <CytoscapeVisualization />
-            ) : (
-              <CoursesListVisualization />
-            )}
-          </Row>
-        </Content>
+        <ConfigProvider
+          theme={{
+            token: {},
+            components: {
+              Modal: {
+                //colorBgElevated: "#0f40ff",
+                //colorTextHeading: "#fff",
+              },
+            },
+          }}
+        >
+          <Content style={{ backgroundColor: "#fff" }}>
+            <Row>
+              <RowItinerario />
+            </Row>
+            <Row
+              style={screens.lg ? { maxHeight: 700, overflowY: "scroll" } : {}}
+            >
+              {tipoVisualizacao === false && screens.lg ? (
+                <CytoscapeVisualization />
+              ) : (
+                <CoursesListVisualization />
+              )}
+            </Row>
+          </Content>
+        </ConfigProvider>
       </Layout>
     </Layout>
   );

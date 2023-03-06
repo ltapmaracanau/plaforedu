@@ -19,7 +19,7 @@ import {
   MenuFoldOutlined,
   PlusOutlined,
   MinusOutlined,
-  CloseCircleOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 
 import {
@@ -34,6 +34,7 @@ import {
   Select,
   Form,
   Skeleton,
+  Space,
 } from "antd";
 
 const { Text } = Typography;
@@ -440,20 +441,28 @@ export default function CytoscapeVisualization() {
         key={`modalCurso`}
         destroyOnClose={true}
         centered={true}
-        modalRender={() => (
-          <Card
-            extra={[
-              <Button
-                key={"closeIcon"}
-                icon={<CloseCircleOutlined />}
-                onClick={handleOk}
-              />,
-            ]}
-            title={uniqueCourse?.name}
-            type="inner"
-            loading={loadingUniqueCourse}
-          >
-            <Descriptions column={1} bordered>
+        onCancel={handleOk}
+        onOk={handleOk}
+        title={"Sobre o curso"}
+        footer={
+          <Button onClick={handleOk} type={"primary"}>
+            Ok
+          </Button>
+        }
+      >
+        {loadingUniqueCourse ? (
+          <Skeleton active />
+        ) : (
+          <Card>
+            <Descriptions
+              column={1}
+              bordered
+              layout={"vertical"}
+              style={{ backgroundColor: "white" }}
+            >
+              <Descriptions.Item label="Título">
+                {uniqueCourse?.name}
+              </Descriptions.Item>
               <Descriptions.Item label="Descrição">
                 {uniqueCourse?.description}
               </Descriptions.Item>
@@ -462,19 +471,20 @@ export default function CytoscapeVisualization() {
               </Descriptions.Item>
               <Descriptions.Item label="Instituições Certificadoras">
                 {uniqueCourse?.institutions?.map((inst) => (
-                  <Card key={inst.institutionId} bordered>
-                    {inst.name}
-                    <br />
-                    <strong>Link: </strong>
-                    <a
-                      target="_blank"
-                      rel="noreferrer"
-                      key={`link${inst.id}`}
-                      href={inst.link}
-                    >
-                      {inst.link}
-                    </a>
-                  </Card>
+                  <Space key={inst.id} direction={"vertical"}>
+                    <Text>{inst.name}</Text>
+                    <div>
+                      <span>Link: </span>
+                      <a
+                        target="_blank"
+                        rel="noreferrer"
+                        key={`link${inst.id}`}
+                        href={inst.link}
+                      >
+                        {inst.link}
+                      </a>
+                    </div>
+                  </Space>
                 ))}
               </Descriptions.Item>
               <Descriptions.Item label="Acessibilidades">
@@ -491,7 +501,7 @@ export default function CytoscapeVisualization() {
             </Descriptions>
           </Card>
         )}
-      />
+      </Modal>
       <Modal // Modal de Competência
         open={modalCompetenciaVisible}
         onOk={handleOk}

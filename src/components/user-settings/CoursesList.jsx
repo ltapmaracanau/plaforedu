@@ -94,6 +94,9 @@ export default function CoursesList() {
           ) : (
             <Card
               title={"Cursos"}
+              headStyle={{
+                fontSize: 20,
+              }}
               extra={
                 <div
                   style={{

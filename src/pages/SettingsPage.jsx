@@ -209,10 +209,12 @@ export default function SettingsPage() {
   ];
 
   return (
-    <div>
+    <>
       <HeaderHome />
       <div
         style={{
+          flexGrow: 1,
+          height: "100%",
           display: "flex",
         }}
       >
@@ -238,6 +240,6 @@ export default function SettingsPage() {
           {contentArray[index]}
         </div>
       </div>
-    </div>
+    </>
   );
 }

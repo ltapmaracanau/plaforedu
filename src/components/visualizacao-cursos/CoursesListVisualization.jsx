@@ -14,6 +14,7 @@ import {
   Empty,
   Space,
   Skeleton,
+  Spin,
 } from "antd";
 
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
@@ -44,6 +45,8 @@ export default function CoursesListVisualization() {
   const loadingUniqueCourse = useStoreState(
     (state) => state.courses.loadingUniqueCourse
   );
+  const loading = useStoreState((state) => state.courses.loading);
+  const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleOk = () => {
@@ -119,7 +122,8 @@ export default function CoursesListVisualization() {
                             textAlign: "center",
                           }}
                         >
-                          Trilhas Formativas
+                          Trilhas Formativas -{" "}
+                          {getNomeItinerario(filter.itinerario)}
                         </Title>
                       ) : (
                         <Title
@@ -130,66 +134,84 @@ export default function CoursesListVisualization() {
                             textAlign: "center",
                           }}
                         >
-                          Trilhas Formativas -{" "}
-                          {getNomeItinerario(filter.itinerario)}
+                          Trilhas Formativas
                         </Title>
                       )}
                     </Col>
                   </Row>
-                  {trilhas.length !== 0 ? (
-                    <Collapse
+                  {loadingTrilhas ? (
+                    <div
                       style={{
-                        justifyContent: "center",
+                        width: "100%",
+                        height: "100%",
+                        textAlign: "center",
                       }}
                     >
-                      {trilhas.map((trilha) => (
-                        <Panel key={"trilha" + trilha.id} header={trilha.name}>
-                          <List
-                            itemLayout="vertical"
-                            dataSource={trilha.courses}
-                            renderItem={(curso) => {
-                              return (
-                                <List.Item
-                                  key={`trilha${trilha.id}curso${curso.id}`}
-                                  style={{ backgroundColor: "#fff" }}
-                                >
-                                  <Card
-                                    hoverable
-                                    bordered={false}
-                                    onClick={() => {
-                                      getUniqueCourse({ id: curso.id });
-                                      setModalVisible(true);
-                                    }}
-                                  >
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                      }}
+                      <Spin />
+                    </div>
+                  ) : (
+                    <>
+                      {trilhas.length !== 0 ? (
+                        <Collapse
+                          style={{
+                            justifyContent: "center",
+                          }}
+                        >
+                          {trilhas.map((trilha) => (
+                            <Panel
+                              key={"trilha" + trilha.id}
+                              header={trilha.name}
+                            >
+                              <List
+                                itemLayout="vertical"
+                                dataSource={trilha.courses}
+                                renderItem={(curso) => {
+                                  return (
+                                    <List.Item
+                                      key={`trilha${trilha.id}curso${curso.id}`}
+                                      style={{ backgroundColor: "#fff" }}
                                     >
-                                      <Title
-                                        level={4}
-                                        style={{
-                                          color: "#2C55A1",
-                                          fontFamily: "Poppins",
+                                      <Card
+                                        hoverable
+                                        bordered={false}
+                                        onClick={() => {
+                                          getUniqueCourse({ id: curso.id });
+                                          setModalVisible(true);
                                         }}
                                       >
-                                        {curso.name}
-                                      </Title>
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          alignItems: "center",
-                                          justifyContent: "left",
-                                        }}
-                                      >
-                                        <Text style={{ fontFamily: "Roboto" }}>
-                                          Ordem:{" "}
-                                          <Text strong>{curso.sequence}</Text>
-                                        </Text>
-                                      </div>
-                                      {/* <div
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                          }}
+                                        >
+                                          <Title
+                                            level={4}
+                                            style={{
+                                              color: "#2C55A1",
+                                              fontFamily: "Poppins",
+                                            }}
+                                          >
+                                            {curso.name}
+                                          </Title>
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              alignItems: "center",
+                                              justifyContent: "left",
+                                            }}
+                                          >
+                                            <Text
+                                              style={{ fontFamily: "Roboto" }}
+                                            >
+                                              Ordem:{" "}
+                                              <Text strong>
+                                                {curso.sequence}
+                                              </Text>
+                                            </Text>
+                                          </div>
+                                          {/* <div
                                         style={{
                                           display: "flex",
                                           alignItems: "center",
@@ -211,7 +233,7 @@ export default function CoursesListVisualization() {
                                         </Text>
                                       </div> */}
 
-                                      {/* <div
+                                          {/* <div
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -235,26 +257,28 @@ export default function CoursesListVisualization() {
                                           </Text>
                                         </Text>
                                       </div> */}
-                                    </div>
-                                  </Card>
-                                </List.Item>
-                              );
-                            }}
-                          />
-                        </Panel>
-                      ))}
-                    </Collapse>
-                  ) : (
-                    <Empty
-                      style={{
-                        margin: "20px 0px",
-                      }}
-                      image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-                      imageStyle={{
-                        height: 80,
-                      }}
-                      description={<span>Não encontrado</span>}
-                    />
+                                        </div>
+                                      </Card>
+                                    </List.Item>
+                                  );
+                                }}
+                              />
+                            </Panel>
+                          ))}
+                        </Collapse>
+                      ) : (
+                        <Empty
+                          style={{
+                            margin: "20px 0px",
+                          }}
+                          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                          imageStyle={{
+                            height: 80,
+                          }}
+                          description={<span>Não encontrado</span>}
+                        />
+                      )}
+                    </>
                   )}
                 </Card>
               </>
@@ -275,6 +299,7 @@ export default function CoursesListVisualization() {
                   ),
                 }}
                 dataSource={cursos}
+                loading={loading}
                 renderItem={(curso) => (
                   <List.Item key={curso.id} style={{ backgroundColor: "#fff" }}>
                     <Card

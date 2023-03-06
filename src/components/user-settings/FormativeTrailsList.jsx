@@ -72,6 +72,9 @@ export default function FormativeTrailsList() {
           ) : (
             <Card
               title={"Trilhas Formativas"}
+              headStyle={{
+                fontSize: 20,
+              }}
               extra={
                 <div
                   style={{

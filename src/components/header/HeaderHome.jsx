@@ -115,7 +115,11 @@ export default function HeaderHome() {
     },
     {
       label: isAuthenticated ? (
-        <Avatar size="default" icon={<UserOutlined />} />
+        <Avatar
+          style={{ backgroundColor: "#fff" }}
+          src="https://joesch.moe/api/v1/random?key=1"
+          size="default"
+        />
       ) : (
         <Link to={"/login"}>
           <Button shape="round">LOGIN</Button>

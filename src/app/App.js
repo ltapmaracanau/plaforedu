@@ -72,9 +72,8 @@ function App() {
           token: {},
           components: {
             Card: {
-              colorFillAlter: "linear-gradient(to right, #2C55A1, #35A8E0)",
-              colorTextHeading: "#fff",
-              fontWeight: "bold",
+              //colorFillAlter: "linear-gradient(to right, #2C55A1, #35A8E0)",
+              //fontWeight: "bold",
             },
             Modal: {},
           },
