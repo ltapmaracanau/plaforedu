@@ -95,11 +95,11 @@ export const registerCourseSchema = yup.object().shape({
     .number()
     .required("Obrigatório!")
     .min(0, "Obrigatório números positivos!"),
-  accessibilities: yup.array().of(yup.string()).required("Obrigatório!"),
-  itineraries: yup.array().of(yup.string()).required("Obrigatório!"),
-  competencies: yup.array().of(yup.string()).required("Obrigatório!"),
-  taxonomies: yup.array().of(yup.string()).required("Obrigatório!"),
-  subThemes: yup.array().of(yup.string()).required("Obrigatório!"),
+  //accessibilities: yup.array(yup.string()).min(1, "Obrigatório!"),
+  itineraries: yup.array(yup.string()).min(1, "Obrigatório!"),
+  competencies: yup.array(yup.string()).min(1, "Obrigatório!"),
+  //taxonomies: yup.array(yup.string()).min(1, "Obrigatório!"),
+  subThemes: yup.array(yup.string()).min(1, "Obrigatório!"),
 });
 // TRILHAS
 
