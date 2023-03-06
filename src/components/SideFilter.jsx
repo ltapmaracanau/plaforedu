@@ -280,7 +280,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           >
             <Controller
               control={register.current.control}
-              name="competencias"
+              name="competencies"
               render={({ field }) => (
                 <Form.Item
                   style={{ marginBottom: "0" }}
@@ -448,7 +448,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
               >
                 <Controller
                   control={register.current.control}
-                  name="instCertificadora"
+                  name="institutions"
                   render={({ field }) => (
                     <Form.Item
                       style={{ marginBottom: "0" }}

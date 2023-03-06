@@ -8,10 +8,10 @@ const initialFilterDefault = {
   cargaHoraria: [0, 300],
   tipoClassificacao: true, // false: por cursos, true: por trilhas
   categoriasDeCompetencias: [],
-  competencias: [],
+  competencies: [],
   temas: [],
   subtemas: [],
-  instCertificadora: [],
+  institutions: [],
   esquemaDeCores: "categoria",
   itinerario: 0,
 };
@@ -72,23 +72,32 @@ const coursesModel = {
         page = 0,
         query = "",
         cargaHoraria = [],
-        instCertificadora = [],
+        institutions = [],
         itinerario,
+        itineraries = [],
         accessibilities = [],
-        competencias = [],
+        competencies = [],
         subtemas = [],
       } = payload;
       actions.setLoading(true);
+      let newItineraries = [];
+      if (itineraries.length === 0) {
+        if (itinerario && itinerario != 0) {
+          newItineraries = [itinerario];
+        }
+      } else {
+        newItineraries = itineraries;
+      }
       const cursos = await services.courseService.getCursos({
         includeFiled: showFiled,
         registerLog: registerLog,
         page: page,
         search: query,
         hours: cargaHoraria,
-        institutions: instCertificadora,
-        itineraries: itinerario && itinerario != 0 ? [itinerario] : [],
+        institutions: institutions,
+        itineraries: newItineraries,
         accessibilities: accessibilities,
-        competencies: competencias,
+        competencies: competencies,
         subThemes: subtemas,
       });
       if (cursos?.data?.length >= 0) {

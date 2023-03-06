@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 
-import { RollbackOutlined, MenuOutlined } from "@ant-design/icons";
+import {
+  RollbackOutlined,
+  MenuOutlined,
+  FilterFilled,
+  SearchOutlined,
+} from "@ant-design/icons";
 import {
   Button,
-  InputNumber,
   Card,
   Form,
   Input,
-  Layout,
   notification,
   Select,
-  Skeleton,
   Descriptions,
-  Space,
   Typography,
-  Tooltip,
-  Tag,
   Switch,
   Table,
   Modal,
   Transfer,
+  Tag,
+  Tooltip,
+  Empty,
+  Space,
 } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Controller, useForm } from "react-hook-form";
@@ -31,9 +34,9 @@ import {
   SortableHandle,
 } from "react-sortable-hoc";
 import { arrayMoveImmutable } from "array-move";
+import { generateRandomHexColor } from "../../helpers/generateRandomHexColor";
 
-const { Text, Title } = Typography;
-const { Content } = Layout;
+const { Title } = Typography;
 
 const SortableItem = SortableElement((props) => <tr {...props} />);
 const SortableBody = SortableContainer((props) => <tbody {...props} />);
@@ -46,6 +49,13 @@ const DragHandle = SortableHandle(() => (
     }}
   />
 ));
+
+const filterCoursesDefault = {
+  query: "",
+  institutions: [],
+  competencies: [],
+  itineraries: [],
+};
 
 export default function FormativeTrailsRegister(props) {
   const { trilha, title, actionVisible } = props;
@@ -67,12 +77,18 @@ export default function FormativeTrailsRegister(props) {
 
   const registering = useStoreState((state) => state.trilhas.registering);
 
-  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
+  const allItinerarios = useStoreState(
+    (state) => state.itineraries.itinerarios
+  );
+  const allInstitutions = useStoreState(
+    (state) => state.institutions.instituicoes
+  );
 
-  const competencies = useStoreState(
+  const allCompetencias = useStoreState(
     (state) => state.competencies.competencias
   );
 
+  const getCourses = useStoreActions((actions) => actions.courses.getCursos);
   const cursos = useStoreState((state) => state.courses.cursos);
   const loadingCursos = useStoreState((state) => state.courses.loading);
 
@@ -85,6 +101,27 @@ export default function FormativeTrailsRegister(props) {
   const [cursosTrilhaIds, setCursosTrilhaIds] = useState(
     trilha ? trilha.courses.map((curso) => curso.id) : []
   );
+
+  const [filterAddingCourses, setFilterAddingCourses] = useState({
+    query: "",
+    institutions: [],
+    competencies: [],
+    itineraries: [],
+  });
+
+  const [activeColumsFilter, setActiveColumsFilter] = useState({
+    query: false,
+    institutions: false,
+    competencies: false,
+    itineraries: false,
+  });
+
+  const [stringSearchMemo, setStringSearchMemo] = useState({
+    query: "",
+    institutions: [],
+    competencies: [],
+    itineraries: [],
+  });
 
   const register = useForm({
     mode: "onChange",
@@ -128,7 +165,7 @@ export default function FormativeTrailsRegister(props) {
       }
     } else {
       try {
-        if (cursosTrilha.length === 0) {
+        if (cursosTrilhaIds.length === 0) {
           throw new Error("A lista de cursos não pode estar vazia!");
         }
         await registerTrilha({ ...values, courses: cursosTrilhaIds });
@@ -145,6 +182,299 @@ export default function FormativeTrailsRegister(props) {
       }
     }
   };
+
+  // Table adding courses to Trail
+
+  const getColumnSearchProps = (dataIndex, name) => ({
+    filterDropdown: () => (
+      <div
+        style={{
+          padding: 8,
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        <Input
+          placeholder={`Buscar ${name}`}
+          value={filterAddingCourses[`${dataIndex}`]}
+          onChange={(e) => {
+            setFilterAddingCourses((antig) => ({
+              ...antig,
+              [`${dataIndex}`]: e.target.value,
+            }));
+          }}
+          style={{
+            marginBottom: 8,
+            display: "block",
+          }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => {
+              handleSearch(dataIndex);
+            }}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{
+              width: 90,
+            }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => {
+              handleReset(dataIndex);
+            }}
+            size="small"
+            style={{
+              width: 90,
+            }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: () => (
+      <SearchOutlined
+        style={{
+          color: activeColumsFilter[`${dataIndex}`] ? "#1890ff" : undefined,
+        }}
+      />
+    ),
+  });
+
+  const getSelectOptions = (dataIndex) => {
+    if (dataIndex === "competencies") {
+      return (
+        <>
+          {allCompetencias.map((competencie) => (
+            <Select.Option key={competencie.id} value={competencie.id}>
+              {competencie.name}
+            </Select.Option>
+          ))}
+        </>
+      );
+    } else if (dataIndex === "itineraries") {
+      return (
+        <>
+          {allItinerarios.map((itinerario) => (
+            <Select.Option key={itinerario.id} value={itinerario.id}>
+              {itinerario.name}
+            </Select.Option>
+          ))}
+        </>
+      );
+    } else {
+      return (
+        <>
+          {allInstitutions.map((inst) => (
+            <Select.Option
+              key={inst.id}
+              value={inst.id}
+              label={inst.abbreviation}
+            >
+              {inst.abbreviation}
+              <br />
+              {inst.name}
+            </Select.Option>
+          ))}
+        </>
+      );
+    }
+  };
+
+  const getColumnSelectSearchProps = (dataIndex, name) => ({
+    filterDropdown: () => (
+      <div
+        style={{
+          padding: 8,
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        <Select
+          placeholder={`Buscar ${name}`}
+          value={filterAddingCourses[`${dataIndex}`]}
+          onChange={(values) => {
+            setFilterAddingCourses((antig) => ({
+              ...antig,
+              [`${dataIndex}`]: values,
+            }));
+          }}
+          mode={"multiple"}
+          style={{
+            marginBottom: 8,
+            display: "block",
+          }}
+          filterOption={(input, option) => {
+            if (dataIndex === "institutions") {
+              return (
+                option.children[2].toLowerCase().indexOf(input.toLowerCase()) >=
+                  0 ||
+                option.children[0].toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+              );
+            } else {
+              return (
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              );
+            }
+          }}
+        >
+          {getSelectOptions(dataIndex)}
+        </Select>
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => {
+              handleSearch(dataIndex);
+            }}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{
+              width: 90,
+            }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => {
+              handleReset(dataIndex);
+            }}
+            size="small"
+            style={{
+              width: 90,
+            }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: () => (
+      <SearchOutlined
+        style={{
+          color: activeColumsFilter[`${dataIndex}`] ? "#1890ff" : undefined,
+        }}
+      />
+    ),
+  });
+
+  const handleSearch = (dataIndex) => {
+    setActiveColumsFilter((antig) => ({
+      ...antig,
+      [`${dataIndex}`]: true,
+    }));
+    const newSearch = {
+      ...stringSearchMemo,
+      [`${dataIndex}`]: filterAddingCourses[`${dataIndex}`],
+    };
+    setStringSearchMemo(newSearch);
+    getCourses({
+      ...newSearch,
+    });
+  };
+
+  const handleReset = (dataIndex) => {
+    setActiveColumsFilter((antig) => ({
+      ...antig,
+      [`${dataIndex}`]: false,
+    }));
+    const newSearch = {
+      ...filterAddingCourses,
+      [`${dataIndex}`]: filterCoursesDefault[`${dataIndex}`],
+    };
+    setStringSearchMemo(newSearch);
+    setFilterAddingCourses(newSearch);
+    getCourses({
+      ...newSearch,
+    });
+  };
+
+  const columnsAddCoursesTrail = [
+    {
+      title: "Título",
+      key: "name",
+      dataIndex: "name",
+      ...getColumnSearchProps("query", "título"),
+    },
+    {
+      title: "Instituições",
+      key: "institutions",
+      dataIndex: "institutions",
+      render: (institutions) => (
+        <span>
+          {institutions.map((institution) => {
+            return (
+              <Tooltip
+                color={"blue"}
+                title={institution.name}
+                key={institution.institutionId}
+              >
+                <Tag color={"blue"}>
+                  {institution.abbreviation.toUpperCase()}
+                </Tag>
+              </Tooltip>
+            );
+          })}
+        </span>
+      ),
+      ...getColumnSelectSearchProps("institutions", "instituição"),
+    },
+    {
+      title: "Competências",
+      key: "competencies",
+      dataIndex: "competencies",
+      render: (competencias) => (
+        <span>
+          {competencias.map((competencie) => {
+            return (
+              <Tag color={"blue"} key={competencie.id}>
+                {competencie.name.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </span>
+      ),
+      ...getColumnSelectSearchProps("competencies", "competências"),
+    },
+    {
+      title: "Itinerários",
+      key: "itineraries",
+      dataIndex: "itineraries",
+      render: (itineraries) => (
+        <span>
+          {itineraries.map((itinerarie) => {
+            return (
+              <Tag color={itinerarie.color} key={itinerarie.id}>
+                {itinerarie.name.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </span>
+      ),
+      ...getColumnSelectSearchProps("itineraries", "itinerários"),
+    },
+  ];
+
+  const onSelectChange = (newSelectedRowKeys) => {
+    setCursosTrilhaIds(newSelectedRowKeys);
+    const novosCursos = newSelectedRowKeys.map((idCurso, _index) => {
+      const curso = cursos.find((curso) => curso.id === idCurso);
+      return {
+        name: curso.name,
+        id: curso.id,
+      };
+    });
+    setCursosTrilha(novosCursos);
+  };
+
+  const rowSelection = {
+    selectedRowKeys: cursosTrilhaIds,
+    onChange: onSelectChange,
+  };
+
+  // Drag and Sort Table
 
   const columns = [
     {
@@ -191,25 +521,6 @@ export default function FormativeTrailsRegister(props) {
     return <SortableItem index={index} {...restProps} />;
   };
 
-  // Modal de adicionar cursos
-  const [selectedKeys, setSelectedKeys] = useState([]);
-
-  const onChange = (nextTargetKeys) => {
-    setCursosTrilhaIds(nextTargetKeys);
-    const novosCursos = nextTargetKeys.map((idCurso, index) => {
-      const curso = cursos.find((curso) => curso.id === idCurso);
-      return {
-        name: curso.name,
-        id: curso.id,
-      };
-    });
-    setCursosTrilha(novosCursos);
-  };
-
-  const onSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
-    setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
-  };
-
   return (
     <>
       <div>
@@ -247,7 +558,6 @@ export default function FormativeTrailsRegister(props) {
                   {trilha?.id ? <>Salvar</> : <>Cadastrar</>}
                 </Button>
               }
-              loading={loadingCursos}
             >
               <Descriptions
                 bordered
@@ -319,7 +629,7 @@ export default function FormativeTrailsRegister(props) {
                               );
                             }}
                           >
-                            {itinerarios.map((item) => (
+                            {allItinerarios.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
                                 {item.name}
                               </Select.Option>
@@ -355,7 +665,7 @@ export default function FormativeTrailsRegister(props) {
                               );
                             }}
                           >
-                            {competencies.map((item) => (
+                            {allCompetencias.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
                                 {item.name}
                               </Select.Option>
@@ -403,7 +713,7 @@ export default function FormativeTrailsRegister(props) {
                         setAddCourseVisible(true);
                       }}
                     >
-                      Adicionar Curso
+                      Adicionar/Remover Cursos
                     </Button>
                   </div>
                 )}
@@ -413,24 +723,30 @@ export default function FormativeTrailsRegister(props) {
                 onCancel={() => {
                   setAddCourseVisible(false);
                 }}
+                width={"auto"}
                 destroyOnClose={true}
-                width={"700px"}
-                title={"Editar cursos da trilha"}
+                title={"Adicionar/Remover cursos na trilha"}
                 footer={null}
               >
-                <Transfer
-                  listStyle={{
-                    width: 300,
-                    height: 300,
+                <Table
+                  rowKey={"id"}
+                  loading={loadingCursos}
+                  rowSelection={rowSelection}
+                  dataSource={cursos}
+                  columns={columnsAddCoursesTrail}
+                  locale={{
+                    emptyText: (
+                      <Card>
+                        <Empty
+                          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                          imageStyle={{
+                            height: 80,
+                          }}
+                          description={<span>Não encontrado!</span>}
+                        />
+                      </Card>
+                    ),
                   }}
-                  dataSource={cursos.map((item) => ({ ...item, key: item.id }))}
-                  titles={["Todos os cursos", "Cursos na trilha"]}
-                  targetKeys={cursosTrilhaIds}
-                  selectedKeys={selectedKeys}
-                  onChange={onChange}
-                  onSelectChange={onSelectChange}
-                  render={(item) => item.name}
-                  showSearch
                 />
               </Modal>
             </Card>

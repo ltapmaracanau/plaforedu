@@ -1,14 +1,11 @@
 import { thunk, action } from "easy-peasy";
 import services from "../services";
 
-import { instituicoesDefault } from "../services/mockData";
-
 const instituicoesModel = {
   loading: false,
   loadingEstados: false,
   registering: false,
   instituicoes: [],
-  instituicoesSecondary: instituicoesDefault,
   estados: [],
 
   registerNewInstitution: thunk(async (actions, payload) => {
