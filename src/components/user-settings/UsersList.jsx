@@ -59,7 +59,7 @@ export default function UsersList() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -67,9 +67,12 @@ export default function UsersList() {
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <Card
             title={"Usuários"}
+            headStyle={{
+              fontSize: 20,
+            }}
             extra={
               <div
                 style={{
@@ -209,8 +212,8 @@ export default function UsersList() {
               }}
             />
           </Modal>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

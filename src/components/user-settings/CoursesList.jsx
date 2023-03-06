@@ -69,7 +69,7 @@ export default function CoursesList() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -77,7 +77,7 @@ export default function CoursesList() {
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           {registerVisible ? (
             <CourseRegister
               curso={editandoCurso}
@@ -94,6 +94,9 @@ export default function CoursesList() {
           ) : (
             <Card
               title={"Cursos"}
+              headStyle={{
+                fontSize: 20,
+              }}
               extra={
                 <div
                   style={{
@@ -205,8 +208,8 @@ export default function CoursesList() {
               />
             </Card>
           )}
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

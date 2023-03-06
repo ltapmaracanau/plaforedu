@@ -12,9 +12,6 @@ import {
 import { useStoreActions, useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 
-import "moment/locale/pt-br";
-import locale from "antd/es/locale/pt_BR";
-
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
 import AuthAxios from "../../services/authAxios";
 
@@ -193,7 +190,6 @@ export default function ListSearchLogs() {
         >
           <DatePicker
             value={stringSearch.initialDate}
-            locale={locale}
             format={"DD/MM/YYYY"}
             onChange={(e) => {
               setStringSearch((antg) => ({
@@ -206,7 +202,6 @@ export default function ListSearchLogs() {
           <DatePicker
             value={stringSearch.finalDate}
             format={"DD/MM/YYYY"}
-            locale={locale}
             onChange={(e) => {
               setStringSearch((antg) => ({
                 ...antg,
@@ -284,7 +279,7 @@ export default function ListSearchLogs() {
   ];
 
   return (
-    <Layout
+    <div
       style={{
         display: "flex",
         justifyContent: "center",
@@ -292,7 +287,7 @@ export default function ListSearchLogs() {
         padding: "20px",
       }}
     >
-      <Content style={{ width: "100%" }}>
+      <div style={{ width: "100%" }}>
         <Button
           loading={downloadingSearchLogs}
           onClick={async () => {
@@ -351,7 +346,7 @@ export default function ListSearchLogs() {
           }}
           columns={columns}
         />
-      </Content>
-    </Layout>
+      </div>
+    </div>
   );
 }

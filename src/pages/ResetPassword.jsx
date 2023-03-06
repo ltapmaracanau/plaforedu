@@ -58,10 +58,11 @@ export default function ResetPassword() {
   return (
     <>
       <HeaderHome />
-      <Layout>
-        <Content
+      <div>
+        <div
           style={{
             display: "flex",
+            flexGrow: 1,
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -130,8 +131,8 @@ export default function ResetPassword() {
               </div>
             </Form>
           </Card>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

@@ -39,16 +39,22 @@ export default function MyProfile() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
+          width: "100%",
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-start",
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
-          <Card title={"Meu Perfil"}>
+        <div style={{ width: "100%" }}>
+          <Card
+            headStyle={{
+              fontSize: 20,
+            }}
+            title={"Meu Perfil"}
+          >
             {loading ? (
               <Skeleton active />
             ) : (
@@ -92,8 +98,8 @@ export default function MyProfile() {
               </Descriptions>
             )}
           </Card>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }
