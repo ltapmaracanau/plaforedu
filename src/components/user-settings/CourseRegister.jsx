@@ -314,8 +314,8 @@ export default function CourseRegister(props) {
 
   return (
     <>
-      <Layout>
-        <Content
+      <div>
+        <div
           style={{
             width: "100%",
           }}
@@ -653,8 +653,8 @@ export default function CourseRegister(props) {
               />
             </Form>
           </div>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

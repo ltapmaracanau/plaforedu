@@ -4,18 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerCompSchema } from "../../schemas/registers/registersSchema";
 
-import {
-  Button,
-  Card,
-  Form,
-  Input,
-  Layout,
-  notification,
-  Select,
-  Switch,
-} from "antd";
-
-const { Content } = Layout;
+import { Button, Card, Form, Input, notification, Select, Switch } from "antd";
 
 export default function CompRegister(props) {
   const { comp = null, actionVisible } = props;
@@ -105,8 +94,8 @@ export default function CompRegister(props) {
 
   return (
     <>
-      <Layout>
-        <Content
+      <div>
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -224,8 +213,8 @@ export default function CompRegister(props) {
               </div>
             </Form>
           </Card>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

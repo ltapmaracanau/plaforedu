@@ -61,8 +61,8 @@ export default function UserRegister(props) {
 
   return (
     <>
-      <Layout>
-        <Content
+      <div>
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -218,8 +218,8 @@ export default function UserRegister(props) {
               </div>
             </Form>
           </Card>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

@@ -239,7 +239,7 @@ export default function Finder() {
           <Text
             style={{
               fontFamily: "Roboto",
-              fontWeight: "bold",
+              fontWeight: "400",
               fontSize: "20px",
             }}
           >

@@ -48,7 +48,7 @@ export default function FormativeTrailsList() {
 
   return (
     <>
-      <Layout
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -56,7 +56,7 @@ export default function FormativeTrailsList() {
           padding: "20px",
         }}
       >
-        <Content style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           {registerVisible ? (
             <FormativeTrailsRegister
               trilha={editandoTrilha}
@@ -72,6 +72,9 @@ export default function FormativeTrailsList() {
           ) : (
             <Card
               title={"Trilhas Formativas"}
+              headStyle={{
+                fontSize: 20,
+              }}
               extra={
                 <div
                   style={{
@@ -169,8 +172,8 @@ export default function FormativeTrailsList() {
               />
             </Card>
           )}
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

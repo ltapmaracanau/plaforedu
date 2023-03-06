@@ -212,8 +212,8 @@ export default function FormativeTrailsRegister(props) {
 
   return (
     <>
-      <Layout>
-        <Content
+      <div>
+        <div
           style={{
             width: "100%",
           }}
@@ -435,8 +435,8 @@ export default function FormativeTrailsRegister(props) {
               </Modal>
             </Card>
           </Form>
-        </Content>
-      </Layout>
+        </div>
+      </div>
     </>
   );
 }

@@ -13,9 +13,12 @@ export default function FooterGov() {
   return (
     <footer
       style={{
+        flexGrow: 0,
+        flexBasis: "auto",
         backgroundColor: "#404040",
         color: "white",
         backgroundImage: "linear-gradient(to right, #2C55A1, #35A8E0)",
+        width: "100%",
       }}
     >
       <Row

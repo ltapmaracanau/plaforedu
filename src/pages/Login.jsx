@@ -56,89 +56,89 @@ export default function Login() {
   return (
     <>
       <HeaderHome />
-      <Layout>
-        <Content
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+      <div
+        style={{
+          height: "100%",
+          flexGrow: 1,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Card
+          style={{ width: "350px" }}
+          headStyle={{
+            backgroundColor: "#2C55A1",
+            textAlign: "center",
+            color: "#fff",
+            fontFamily: "Poppins",
+            fontSize: "18px",
           }}
+          title={"IDENTIFICAÇÃO"}
         >
-          <Card
-            style={{ width: "350px" }}
-            headStyle={{
-              backgroundColor: "#2C55A1",
-              textAlign: "center",
-              color: "#fff",
-              fontFamily: "Poppins",
-              fontSize: "18px",
-            }}
-            title={"IDENTIFICAÇÃO"}
-          >
-            <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-              <Controller
-                name="username"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Login"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input placeholder="email@exemplo.com" {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="password"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Senha"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input.Password {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Space
-                align="end"
-                style={{
-                  display: "flex",
-                  justifyContent: "right",
-                }}
+          <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+            <Controller
+              name="username"
+              control={register.control}
+              render={({ field, fieldState: { error } }) => {
+                return (
+                  <Form.Item
+                    label={"Login"}
+                    style={{ marginBottom: "0" }}
+                    validateStatus={error ? "error" : ""}
+                    help={error ? error.message : ""}
+                    hasFeedback
+                  >
+                    <Input placeholder="email@exemplo.com" {...field} />
+                  </Form.Item>
+                );
+              }}
+            />
+            <Controller
+              name="password"
+              control={register.control}
+              render={({ field, fieldState: { error } }) => {
+                return (
+                  <Form.Item
+                    label={"Senha"}
+                    style={{ marginBottom: "0" }}
+                    validateStatus={error ? "error" : ""}
+                    help={error ? error.message : ""}
+                    hasFeedback
+                  >
+                    <Input.Password {...field} />
+                  </Form.Item>
+                );
+              }}
+            />
+            <Space
+              align="end"
+              style={{
+                display: "flex",
+                justifyContent: "right",
+              }}
+            >
+              <Link to="/forget">Esqueci a senha</Link>
+            </Space>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "15px",
+              }}
+            >
+              <Button
+                loading={loading}
+                type="primary"
+                htmlType="submit"
+                shape="round"
               >
-                <Link to="/forget">Esqueci a senha</Link>
-              </Space>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "15px",
-                }}
-              >
-                <Button
-                  loading={loading}
-                  type="primary"
-                  htmlType="submit"
-                  shape="round"
-                >
-                  Login
-                </Button>
-              </div>
-            </Form>
-          </Card>
-        </Content>
-      </Layout>
+                Login
+              </Button>
+            </div>
+          </Form>
+        </Card>
+      </div>
     </>
   );
 }

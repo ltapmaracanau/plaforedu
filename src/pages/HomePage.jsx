@@ -9,7 +9,15 @@ import Int5 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Link } from "react-router-dom";
 
-import { Layout, Row, Col, Card, Divider, Typography } from "antd";
+import {
+  Layout,
+  Row,
+  Col,
+  Card,
+  Divider,
+  Typography,
+  ConfigProvider,
+} from "antd";
 
 const { Title } = Typography;
 
@@ -34,198 +42,191 @@ export default function HomePage() {
   return (
     <>
       <HeaderHome />
-      <Layout>
-        <Content style={{ backgroundColor: "white" }}>
-          <Finder />
-
-          <Divider orientation="left">Itinerários Formativos</Divider>
-
-          <Row
+      <div>
+        <Finder />
+        <Divider orientation="left">Itinerários Formativos</Divider>
+        <Row
+          style={{
+            display: "flex",
+            alignItems: "top",
+            justifyContent: "space-evenly",
+            margin: "32px 0",
+          }}
+        >
+          <Col
+            flex={"200px"}
             style={{
-              display: "flex",
-              alignItems: "top",
-              justifyContent: "space-evenly",
-              margin: "32px 0",
+              height: "300px",
             }}
           >
-            <Col
-              flex={"200px"}
-              style={{
-                height: "300px",
+            <Link
+              onClick={() => {
+                onClickItinerario("Iniciação");
               }}
+              to="/cursos"
             >
-              <Link
-                onClick={() => {
-                  onClickItinerario("Iniciação");
+              <Card
+                style={{
+                  width: "180px",
+                  backgroundColor: "#fff",
                 }}
-                to="/cursos"
+                cover={<img alt="example" src={Int2} />}
+                hoverable
               >
-                <Card
+                <Title
                   style={{
-                    width: "180px",
-                    backgroundColor: "#fff",
-                    height: "270px",
+                    color: "#0059b3",
+                    fontFamily: "Poppins",
+                    fontWeight: "bold",
+                    textAlign: "center",
                   }}
-                  cover={<img alt="example" src={Int2} />}
-                  hoverable
+                  level={5}
                 >
-                  <Title
-                    style={{
-                      color: "#0059b3",
-                      fontFamily: "Poppins",
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                    level={5}
-                  >
-                    Iniciação ao Serviço Público
-                  </Title>
-                </Card>
-              </Link>
-            </Col>
-            <Col
-              flex={"200px"}
-              style={{
-                height: "300px",
+                  Iniciação ao Serviço Público
+                </Title>
+              </Card>
+            </Link>
+          </Col>
+          <Col
+            flex={"200px"}
+            style={{
+              height: "300px",
+            }}
+          >
+            <Link
+              onClick={() => {
+                onClickItinerario("Educação");
               }}
+              to="/cursos"
             >
-              <Link
-                onClick={() => {
-                  onClickItinerario("Educação");
+              <Card
+                style={{
+                  width: "180px",
+                  backgroundColor: "#fff",
                 }}
-                to="/cursos"
+                cover={<img alt="example" src={Int5} />}
+                hoverable
               >
-                <Card
+                <Title
                   style={{
-                    width: "180px",
-                    backgroundColor: "#fff",
-                    height: "270px",
+                    color: "#0059b3",
+                    fontFamily: "Poppins",
+                    fontWeight: "bold",
+                    textAlign: "center",
                   }}
-                  cover={<img alt="example" src={Int5} />}
-                  hoverable
+                  level={5}
                 >
-                  <Title
-                    style={{
-                      color: "#0059b3",
-                      fontFamily: "Poppins",
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                    level={5}
-                  >
-                    Técnico-Administrativo em Educação
-                  </Title>
-                </Card>
-              </Link>
-            </Col>
-            <Col
-              flex={"200px"}
-              style={{
-                height: "300px",
+                  Técnico-Administrativo em Educação
+                </Title>
+              </Card>
+            </Link>
+          </Col>
+          <Col
+            flex={"200px"}
+            style={{
+              height: "300px",
+            }}
+          >
+            <Link
+              onClick={() => {
+                onClickItinerario("Docente");
               }}
+              to="/cursos"
             >
-              <Link
-                onClick={() => {
-                  onClickItinerario("Docente");
+              <Card
+                style={{
+                  width: "180px",
+                  backgroundColor: "#fff",
+                  height: "270px",
                 }}
-                to="/cursos"
+                cover={<img alt="example" src={Int1} />}
+                hoverable
               >
-                <Card
+                <Title
                   style={{
-                    width: "180px",
-                    backgroundColor: "#fff",
-                    height: "270px",
+                    color: "#0059b3",
+                    fontFamily: "Poppins",
+                    fontWeight: "bold",
+                    textAlign: "center",
                   }}
-                  cover={<img alt="example" src={Int1} />}
-                  hoverable
+                  level={5}
                 >
-                  <Title
-                    style={{
-                      color: "#0059b3",
-                      fontFamily: "Poppins",
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                    level={5}
-                  >
-                    Docente
-                  </Title>
-                </Card>
-              </Link>
-            </Col>
-            <Col
-              flex={"200px"}
-              style={{
-                height: "300px",
+                  Docente
+                </Title>
+              </Card>
+            </Link>
+          </Col>
+          <Col
+            flex={"200px"}
+            style={{
+              height: "300px",
+            }}
+          >
+            <Link
+              onClick={() => {
+                onClickItinerario("Gerencial");
               }}
+              to="/cursos"
             >
-              <Link
-                onClick={() => {
-                  onClickItinerario("Gerencial");
+              <Card
+                style={{
+                  width: "180px",
+                  backgroundColor: "#fff",
+                  height: "270px",
                 }}
-                to="/cursos"
+                cover={<img alt="example" src={Int3} />}
+                hoverable
               >
-                <Card
+                <Title
                   style={{
-                    width: "180px",
-                    backgroundColor: "#fff",
-                    height: "270px",
+                    color: "#0059b3",
+                    fontFamily: "Poppins",
+                    fontWeight: "bold",
+                    textAlign: "center",
                   }}
-                  cover={<img alt="example" src={Int3} />}
-                  hoverable
+                  level={5}
                 >
-                  <Title
-                    style={{
-                      color: "#0059b3",
-                      fontFamily: "Poppins",
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                    level={5}
-                  >
-                    Gerencial
-                  </Title>
-                </Card>
-              </Link>
-            </Col>
-            <Col
-              flex={"200px"}
-              style={{
-                height: "300px",
+                  Gerencial
+                </Title>
+              </Card>
+            </Link>
+          </Col>
+          <Col
+            flex={"200px"}
+            style={{
+              height: "300px",
+            }}
+          >
+            <Link
+              onClick={() => {
+                onClickItinerario("Preparação");
               }}
+              to="/cursos"
             >
-              <Link
-                onClick={() => {
-                  onClickItinerario("Preparação");
+              <Card
+                style={{
+                  width: "180px",
+                  backgroundColor: "#fff",
                 }}
-                to="/cursos"
+                cover={<img alt="example" src={Int4} />}
+                hoverable
               >
-                <Card
+                <Title
                   style={{
-                    width: "180px",
-                    backgroundColor: "#fff",
-                    height: "270px",
+                    color: "#0059b3",
+                    fontFamily: "Poppins",
+                    fontWeight: "bold",
+                    textAlign: "center",
                   }}
-                  cover={<img alt="example" src={Int4} />}
-                  hoverable
+                  level={5}
                 >
-                  <Title
-                    style={{
-                      color: "#0059b3",
-                      fontFamily: "Poppins",
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                    level={5}
-                  >
-                    Preparação para Aposentadoria
-                  </Title>
-                </Card>
-              </Link>
-            </Col>
-          </Row>
-        </Content>
-      </Layout>
+                  Preparação para Aposentadoria
+                </Title>
+              </Card>
+            </Link>
+          </Col>
+        </Row>
+      </div>
     </>
   );
 }

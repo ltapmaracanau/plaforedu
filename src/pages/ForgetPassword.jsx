@@ -50,63 +50,62 @@ export default function ForgetPassword() {
   return (
     <>
       <HeaderHome />
-      <Layout>
-        <Content
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+      <div
+        style={{
+          flexGrow: 1,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Card
+          style={{ width: "350px" }}
+          headStyle={{
+            backgroundColor: "#2C55A1",
+            textAlign: "center",
+            color: "#fff",
+            fontFamily: "Poppins",
+            fontSize: "18px",
           }}
+          title={"RECUPERAR SENHA"}
         >
-          <Card
-            style={{ width: "350px" }}
-            headStyle={{
-              backgroundColor: "#2C55A1",
-              textAlign: "center",
-              color: "#fff",
-              fontFamily: "Poppins",
-              fontSize: "18px",
-            }}
-            title={"RECUPERAR SENHA"}
-          >
-            <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-              <Controller
-                name="username"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Digite seu email"}
-                      style={{ marginBottom: "0" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input placeholder="email@exemplo.com" {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "15px",
-                }}
+          <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+            <Controller
+              name="username"
+              control={register.control}
+              render={({ field, fieldState: { error } }) => {
+                return (
+                  <Form.Item
+                    label={"Digite seu email"}
+                    style={{ marginBottom: "0" }}
+                    validateStatus={error ? "error" : ""}
+                    help={error ? error.message : ""}
+                    hasFeedback
+                  >
+                    <Input placeholder="email@exemplo.com" {...field} />
+                  </Form.Item>
+                );
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "15px",
+              }}
+            >
+              <Button
+                loading={loading}
+                type="primary"
+                htmlType="submit"
+                shape="round"
               >
-                <Button
-                  loading={loading}
-                  type="primary"
-                  htmlType="submit"
-                  shape="round"
-                >
-                  Confirmar
-                </Button>
-              </div>
-            </Form>
-          </Card>
-        </Content>
-      </Layout>
+                Confirmar
+              </Button>
+            </div>
+          </Form>
+        </Card>
+      </div>
     </>
   );
 }
