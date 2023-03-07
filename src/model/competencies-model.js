@@ -91,11 +91,12 @@ const competenciasModel = {
 
   getComp: thunk(async (actions, payload = { query: "", showFiled: false }) => {
     actions.setLoading(true);
+    const { query = "", showFiled = false } = payload;
     try {
       await services.compService
         .getCompetencias({
-          query: payload.query,
-          showFiled: payload.showFiled,
+          query: query,
+          showFiled: showFiled,
         })
         .then((competencias) => {
           if (competencias?.length >= 0) {

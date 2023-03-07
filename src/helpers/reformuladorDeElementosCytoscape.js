@@ -62,7 +62,7 @@ const colorDefault = "#000";
 export default function (
   dados,
   filtro,
-  competencias,
+  competencies,
   itinerarios = [],
   tipoClassificacao
 ) {
@@ -70,12 +70,33 @@ export default function (
   if (tipoClassificacao) {
     // False: por competências   True: por trilhas
     dados.forEach((trilha) => {
+      // Verificações se devo mostrar a trilha ou não
+
+      // Se todas as competências estiverem arqivadas
+      // Se alguma não estiver arquivada eu não entro na condicional
+
+      if (
+        !trilha.competencies.some((competencie) => {
+          const competenceData = competencies.find(
+            (comp) => comp.id === competencie.id
+          );
+          if (competenceData) {
+            return !competenceData?.filedAt;
+          } else {
+            return false;
+          }
+        }) &&
+        trilha.competencies.length !== 0
+      ) {
+        return;
+      }
+
       // Adiciondo node topo da trilha
-      const competenceData = competencias.find(
+      const competenceData = competencies.find(
         (comp) => comp.id === trilha.competencies[0].id
       );
       const colorCategoria =
-        competenceData.categoriesCompetencies[0].color || colorDefault;
+        competenceData?.categoriesCompetencies[0]?.color || colorDefault;
       elementos.push({
         group: "nodes",
         data: {
@@ -129,15 +150,30 @@ export default function (
     let categoriasAdicionadas = [];
 
     dados.forEach((curso) => {
-      // Adicionando node do curso no grafo
+      // Aqui eu decido se vou mostrar o curso no grafo de acordo com as competências arquivadas
+      if (
+        !curso.competencies.some((competencie) => {
+          const competenceData = competencies.find(
+            (comp) => comp.id === competencie.id
+          );
+          if (competenceData) {
+            return !competenceData?.filedAt;
+          } else {
+            return false;
+          }
+        }) &&
+        curso.competencies.length !== 0
+      ) {
+        return;
+      }
 
       let colorCategoria = colorDefault;
       let colorItinerario = colorDefault;
 
       // Aqui eu defino qual a cor das imagens por categoria de competência
       if (filtro.competencies.length !== 0) {
-        filtro.competencias.some((compId) => {
-          const compData = competencias.find((comp) => comp.id === compId);
+        filtro.competencies.some((compId) => {
+          const compData = competencies.find((comp) => comp.id === compId);
           return compData.categoriesCompetencies.some((cat) => {
             if (cat.color) {
               colorCategoria = cat.color;
@@ -147,10 +183,10 @@ export default function (
         });
       } else {
         curso.competencies.some((competencia) => {
-          const compData = competencias.find(
+          const compData = competencies.find(
             (comp) => comp.id === competencia.id
           );
-          return compData.categoriesCompetencies.some((cat) => {
+          return compData?.categoriesCompetencies?.some((cat) => {
             if (cat.color) {
               colorCategoria = cat.color;
               return true;
@@ -172,6 +208,7 @@ export default function (
             : colorDefault;
       }
 
+      // Adicionando node do curso no grafo
       elementos.push({
         group: "nodes",
         data: {
@@ -191,12 +228,16 @@ export default function (
       });
       // Adicionando Competencia
       curso.competencies.forEach((competencia) => {
+        // Verificação se a competência está arquivada
+        const competenceData = competencies.find(
+          (comp) => comp.id === competencia.id
+        );
+        if (competenceData.filedAt) {
+          return;
+        }
         if (
           !competenciasAdicionadas.some((comp) => comp.id === competencia.id)
         ) {
-          const competenceData = competencias.find(
-            (comp) => comp.id === competencia.id
-          );
           elementos.push({
             group: "nodes",
             data: {

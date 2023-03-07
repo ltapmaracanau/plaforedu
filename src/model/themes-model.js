@@ -14,11 +14,12 @@ const temasModel = {
   getThemes: thunk(
     async (actions, payload = { query: "", showFiled: false }) => {
       actions.setLoading(true);
+      const { query = "", showFiled = false } = payload;
       try {
         await services.themesService
           .getThemes({
-            query: payload.query,
-            showFiled: payload.showFiled,
+            query: query,
+            showFiled: showFiled,
           })
           .then((themes) => {
             if (themes?.length >= 0) {
@@ -95,11 +96,12 @@ const temasModel = {
   getSubthemes: thunk(
     async (actions, payload = { query: "", showFiled: false }) => {
       actions.setLoading(true);
+      const { query = "", showFiled = false } = payload;
       try {
         await services.themesService
           .getSubthemes({
-            query: payload.query,
-            showFiled: payload.showFiled,
+            query: query,
+            showFiled: showFiled,
           })
           .then((subthemes) => {
             if (subthemes?.length >= 0) {

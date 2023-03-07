@@ -44,7 +44,7 @@ const trilhasModel = {
         page: 0,
         registerLog: false,
         itinerario: undefined,
-        competencias: [],
+        competencies: [],
       }
     ) => {
       actions.setLoading(true);
@@ -54,7 +54,7 @@ const trilhasModel = {
         page = 0,
         registerLog = false,
         itinerario = undefined,
-        competencias = [],
+        competencies = [],
       } = payload;
       try {
         await services.trailsService
@@ -64,7 +64,7 @@ const trilhasModel = {
             page: page,
             registerLog: registerLog,
             itineraries: itinerario ? [itinerario] : [],
-            competencies: competencias,
+            competencies: competencies,
           })
           .then((trilhas) => {
             if (trilhas?.data?.length >= 0) {

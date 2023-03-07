@@ -59,7 +59,7 @@ export default function CoursesListVisualization() {
       const competencieData = listCompetencias.find(
         (comp) => comp.id === element.id
       );
-      competencieData.categoriesCompetencies.forEach((categoria) => {
+      competencieData?.categoriesCompetencies?.forEach((categoria) => {
         nomesCategorias.push(categoria.name);
       });
     });
@@ -157,61 +157,79 @@ export default function CoursesListVisualization() {
                             justifyContent: "center",
                           }}
                         >
-                          {trilhas.map((trilha) => (
-                            <Panel
-                              key={"trilha" + trilha.id}
-                              header={trilha.name}
-                            >
-                              <List
-                                itemLayout="vertical"
-                                dataSource={trilha.courses}
-                                renderItem={(curso) => {
-                                  return (
-                                    <List.Item
-                                      key={`trilha${trilha.id}curso${curso.id}`}
-                                      style={{ backgroundColor: "#fff" }}
-                                    >
-                                      <Card
-                                        hoverable
-                                        bordered={false}
-                                        onClick={() => {
-                                          getUniqueCourse({ id: curso.id });
-                                          setModalVisible(true);
-                                        }}
+                          {trilhas.map((trilha) => {
+                            // Aqui eu verifico se devo ou não mostrar a trilha de acordo com as competências arquivadas
+                            if (
+                              !trilha.competencies.some((competencie) => {
+                                const competenceData = listCompetencias.find(
+                                  (comp) => comp.id === competencie.id
+                                );
+                                if (competenceData) {
+                                  return !competenceData?.filedAt;
+                                } else {
+                                  return false;
+                                }
+                              }) &&
+                              trilha.competencies.length !== 0
+                            ) {
+                              return;
+                            }
+
+                            return (
+                              <Panel
+                                key={"trilha" + trilha.id}
+                                header={trilha.name}
+                              >
+                                <List
+                                  itemLayout="vertical"
+                                  dataSource={trilha.courses}
+                                  renderItem={(curso) => {
+                                    return (
+                                      <List.Item
+                                        key={`trilha${trilha.id}curso${curso.id}`}
+                                        style={{ backgroundColor: "#fff" }}
                                       >
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            justifyContent: "center",
+                                        <Card
+                                          hoverable
+                                          bordered={false}
+                                          onClick={() => {
+                                            getUniqueCourse({ id: curso.id });
+                                            setModalVisible(true);
                                           }}
                                         >
-                                          <Title
-                                            level={4}
-                                            style={{
-                                              color: "#2C55A1",
-                                              fontFamily: "Poppins",
-                                            }}
-                                          >
-                                            {curso.name}
-                                          </Title>
                                           <div
                                             style={{
                                               display: "flex",
-                                              alignItems: "center",
-                                              justifyContent: "left",
+                                              flexDirection: "column",
+                                              justifyContent: "center",
                                             }}
                                           >
-                                            <Text
-                                              style={{ fontFamily: "Roboto" }}
+                                            <Title
+                                              level={4}
+                                              style={{
+                                                color: "#2C55A1",
+                                                fontFamily: "Poppins",
+                                              }}
                                             >
-                                              Ordem:{" "}
-                                              <Text strong>
-                                                {curso.sequence}
+                                              {curso.name}
+                                            </Title>
+                                            <div
+                                              style={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "left",
+                                              }}
+                                            >
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Ordem:{" "}
+                                                <Text strong>
+                                                  {curso.sequence}
+                                                </Text>
                                               </Text>
-                                            </Text>
-                                          </div>
-                                          {/* <div
+                                            </div>
+                                            {/* <div
                                         style={{
                                           display: "flex",
                                           alignItems: "center",
@@ -233,7 +251,7 @@ export default function CoursesListVisualization() {
                                         </Text>
                                       </div> */}
 
-                                          {/* <div
+                                            {/* <div
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -257,14 +275,15 @@ export default function CoursesListVisualization() {
                                           </Text>
                                         </Text>
                                       </div> */}
-                                        </div>
-                                      </Card>
-                                    </List.Item>
-                                  );
-                                }}
-                              />
-                            </Panel>
-                          ))}
+                                          </div>
+                                        </Card>
+                                      </List.Item>
+                                    );
+                                  }}
+                                />
+                              </Panel>
+                            );
+                          })}
                         </Collapse>
                       ) : (
                         <Empty
@@ -300,77 +319,99 @@ export default function CoursesListVisualization() {
                 }}
                 dataSource={cursos}
                 loading={loading}
-                renderItem={(curso) => (
-                  <List.Item key={curso.id} style={{ backgroundColor: "#fff" }}>
-                    <Card
-                      hoverable
-                      bordered={false}
-                      onClick={() => {
-                        getUniqueCourse({ id: curso.id });
-                        setModalVisible(true);
-                      }}
+                renderItem={(curso) => {
+                  // Aqui verifico se devo ou não mostrar o curso de acordo com os dados arquivados
+                  if (
+                    !curso.competencies.some((competencie) => {
+                      const competenceData = listCompetencias.find(
+                        (comp) => comp.id === competencie.id
+                      );
+                      if (competenceData) {
+                        return !competenceData?.filedAt;
+                      } else {
+                        return false;
+                      }
+                    }) &&
+                    curso.competencies.length !== 0
+                  ) {
+                    return;
+                  }
+
+                  return (
+                    <List.Item
+                      key={curso.id}
+                      style={{ backgroundColor: "#fff" }}
                     >
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
+                      <Card
+                        hoverable
+                        bordered={false}
+                        onClick={() => {
+                          getUniqueCourse({ id: curso.id });
+                          setModalVisible(true);
                         }}
                       >
-                        <Title
-                          level={4}
-                          style={{ color: "#2C55A1", fontFamily: "Poppins" }}
-                        >
-                          {curso.name}
-                        </Title>
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <Text style={{ fontFamily: "Roboto" }}>
-                            Instituição:{" "}
-                            <Text strong>
-                              {curso.institutions
-                                .map((inst) => inst.name)
-                                .join(" | ")}
-                            </Text>
-                          </Text>
-
-                          <Text style={{ fontFamily: "Roboto" }}>
-                            Carga horária:
-                            <Text strong>{` ${curso.hours}H`}</Text>
-                          </Text>
-                        </div>
-
                         <div
                           style={{
                             display: "flex",
                             flexDirection: "column",
+                            justifyContent: "center",
                           }}
                         >
-                          <Text style={{ fontFamily: "Roboto" }}>
-                            Categorias de competência:{" "}
-                            <Text strong>
-                              {getCategoriasCompetencia(curso.competencies)}
+                          <Title
+                            level={4}
+                            style={{ color: "#2C55A1", fontFamily: "Poppins" }}
+                          >
+                            {curso.name}
+                          </Title>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <Text style={{ fontFamily: "Roboto" }}>
+                              Instituição:{" "}
+                              <Text strong>
+                                {curso.institutions
+                                  .map((inst) => inst.name)
+                                  .join(" | ")}
+                              </Text>
                             </Text>
-                          </Text>
 
-                          <Text style={{ fontFamily: "Roboto" }}>
-                            Competências:{" "}
-                            <Text strong>
-                              {curso.competencies
-                                .map((comp) => comp.name)
-                                .join(" | ")}
+                            <Text style={{ fontFamily: "Roboto" }}>
+                              Carga horária:
+                              <Text strong>{` ${curso.hours}H`}</Text>
                             </Text>
-                          </Text>
+                          </div>
+
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <Text style={{ fontFamily: "Roboto" }}>
+                              Categorias de competência:{" "}
+                              <Text strong>
+                                {getCategoriasCompetencia(curso.competencies)}
+                              </Text>
+                            </Text>
+
+                            <Text style={{ fontFamily: "Roboto" }}>
+                              Competências:{" "}
+                              <Text strong>
+                                {curso.competencies
+                                  .map((comp) => comp.name)
+                                  .join(" | ")}
+                              </Text>
+                            </Text>
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  </List.Item>
-                )}
+                      </Card>
+                    </List.Item>
+                  );
+                }}
               />
             )}
           </Card>
