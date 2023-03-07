@@ -42,12 +42,12 @@ export default function FormativeTrailsList() {
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
-  useEffect(() => {
-    getTrilhas();
-    getCompetencies();
-    getItinerarios();
-    getInstitutions();
-    getCursos();
+  useEffect(async () => {
+    await getCompetencies({ showFiled: true });
+    await getItinerarios();
+    await getInstitutions({ showFiled: true });
+    await getTrilhas();
+    await getCursos({ showFiled: true });
   }, [getTrilhas]);
 
   return (

@@ -397,6 +397,15 @@ export default function FormativeTrailsRegister(props) {
       key: "name",
       dataIndex: "name",
       ...getColumnSearchProps("query", "título"),
+      render: (text, record, _index) => {
+        return record.filedAt ? (
+          <>
+            {text} <Tag color={"orange"}>ARQUIVADO</Tag>
+          </>
+        ) : (
+          <>{text}</>
+        );
+      },
     },
     {
       title: "Instituições",
@@ -488,6 +497,16 @@ export default function FormativeTrailsRegister(props) {
       title: "Curso",
       dataIndex: "name",
       className: "drag-visible",
+      render: (text, record, _index) => {
+        const dataCourse = cursos.find((course) => record.id === course.id);
+        return dataCourse.filedAt ? (
+          <>
+            {text} <Tag color={"orange"}>ARQUIVADO</Tag>
+          </>
+        ) : (
+          <>{text}</>
+        );
+      },
     },
   ];
 
@@ -667,7 +686,16 @@ export default function FormativeTrailsRegister(props) {
                           >
                             {allCompetencias.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
-                                {item.name}
+                                {item.filedAt ? (
+                                  <Tooltip
+                                    color={"orange"}
+                                    title={"Dado arquivado"}
+                                  >
+                                    {item.name} - [ARQUIVADO]
+                                  </Tooltip>
+                                ) : (
+                                  <>{item.name}</>
+                                )}
                               </Select.Option>
                             ))}
                           </Select>

@@ -515,7 +515,16 @@ export default function CourseRegister(props) {
                           >
                             {competencies.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
-                                {item.name}
+                                {item.filedAt ? (
+                                  <Tooltip
+                                    color={"orange"}
+                                    title={"Dado arquivado"}
+                                  >
+                                    {item.name} - [ARQUIVADO]
+                                  </Tooltip>
+                                ) : (
+                                  <>{item.name}</>
+                                )}
                               </Select.Option>
                             ))}
                           </Select>
@@ -587,7 +596,16 @@ export default function CourseRegister(props) {
                           >
                             {subthemes.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
-                                {item.name}
+                                {item.filedAt ? (
+                                  <Tooltip
+                                    color={"orange"}
+                                    title={"Dado arquivado"}
+                                  >
+                                    {item.name} - [ARQUIVADO]
+                                  </Tooltip>
+                                ) : (
+                                  <>{item.name}</>
+                                )}
                               </Select.Option>
                             ))}
                           </Select>
