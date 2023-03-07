@@ -34,7 +34,8 @@ export default function FormativeTrailsList() {
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
-  const loading = useStoreState((state) => state.trilhas.loading);
+  const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
+  const loadingCursos = useStoreState((state) => state.courses.loading);
   const trilhas = useStoreState((state) => state.trilhas.trilhas);
 
   const [editandoTrilha, setEditandoTrilha] = useState(null);
@@ -133,7 +134,7 @@ export default function FormativeTrailsList() {
               }
             >
               <List
-                loading={loading}
+                loading={loadingTrilhas || loadingCursos}
                 dataSource={trilhas}
                 style={{ width: "100%" }}
                 renderItem={(item) => {
