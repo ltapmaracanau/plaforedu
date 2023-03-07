@@ -13,6 +13,7 @@ export default {
       accessibilities: [],
       competencies: [],
       subThemes: [],
+      taxonomies: [],
     }
   ) =>
     AuthAxios.post(
@@ -25,6 +26,7 @@ export default {
         accessibilities: payload.accessibilities,
         competencies: payload.competencies,
         subThemes: payload.subThemes,
+        taxonomies: payload.taxonomies,
       }
     )
       .then((response) => response.data)

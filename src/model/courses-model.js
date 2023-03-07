@@ -78,6 +78,7 @@ const coursesModel = {
         accessibilities = [],
         competencies = [],
         subtemas = [],
+        taxonomies = [],
       } = payload;
       actions.setLoading(true);
       let newItineraries = [];
@@ -98,6 +99,7 @@ const coursesModel = {
         itineraries: newItineraries,
         accessibilities: accessibilities,
         competencies: competencies,
+        taxonomies: taxonomies,
         subThemes: subtemas,
       });
       if (cursos?.data?.length >= 0) {
