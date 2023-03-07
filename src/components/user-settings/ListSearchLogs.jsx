@@ -25,9 +25,6 @@ export default function ListSearchLogs() {
     (state) => state.adm.downloadingSearchLogs
   );
   const getSearchLogs = useStoreActions((actions) => actions.adm.getSearchLogs);
-  const downloadSearchLogs = useStoreActions(
-    (actions) => actions.adm.downloadSearchLogs
-  );
 
   const [page, setPage] = useState(1);
 
@@ -339,7 +336,7 @@ export default function ListSearchLogs() {
                   imageStyle={{
                     height: 80,
                   }}
-                  description={<span>Base de dados de logs vazia!</span>}
+                  description={<span>Não encontrado!</span>}
                 />
               </Card>
             ),

@@ -54,9 +54,9 @@ export default function CoursesList() {
     getCursos();
     getItinerarios();
     getAcessibilidades();
-    getInstituicoes();
-    getComp();
-    getSubthemes();
+    getInstituicoes({ showFiled: true });
+    getComp({ showFiled: true });
+    getSubthemes({ showFiled: true });
     getTaxonomias();
   }, [
     getCursos,

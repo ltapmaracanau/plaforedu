@@ -27,6 +27,9 @@ export default function FormativeTrailsList() {
   const getItinerarios = useStoreActions(
     (actions) => actions.itineraries.getItinerarios
   );
+  const getInstitutions = useStoreActions(
+    (actions) => actions.institutions.getInstituicoes
+  );
   const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
   const [registerVisible, setRegisterVisible] = useState(false);
@@ -39,11 +42,12 @@ export default function FormativeTrailsList() {
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
-  useEffect(() => {
-    getTrilhas();
-    getCompetencies();
-    getItinerarios();
-    getCursos();
+  useEffect(async () => {
+    await getCompetencies({ showFiled: true });
+    await getItinerarios();
+    await getInstitutions({ showFiled: true });
+    await getTrilhas();
+    await getCursos({ showFiled: true });
   }, [getTrilhas]);
 
   return (
