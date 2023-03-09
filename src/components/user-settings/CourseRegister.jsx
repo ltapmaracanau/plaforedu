@@ -43,6 +43,7 @@ export default function CourseRegister(props) {
     taxonomies: curso ? curso.taxonomies.map((item) => item.id) : [],
     competencies: curso ? curso.competencies.map((item) => item.id) : [],
     subThemes: curso ? curso.subThemes.map((item) => item.id) : [],
+    filedAt: curso !== null && curso.filedAt !== null,
   };
 
   const registerNewCourse = useStoreActions(
@@ -51,8 +52,12 @@ export default function CourseRegister(props) {
   const updateCourse = useStoreActions(
     (actions) => actions.courses.updateCourse
   );
+  const setArchivedCourse = useStoreActions(
+    (actions) => actions.courses.setArchivedCourse
+  );
 
   const registering = useStoreState((state) => state.courses.registering);
+  const archiving = useStoreState((state) => state.courses.archiving);
   const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
   const taxonomies = useStoreState((state) => state.courses.taxonomies);
   const acessibilidades = useStoreState(
@@ -66,7 +71,7 @@ export default function CourseRegister(props) {
   );
   const subthemes = useStoreState((state) => state.themes.subthemes);
 
-  const [filed, setFiled] = useState(curso?.filedAt !== null);
+  const [filed, setFiled] = useState(cursoDefault.filedAt);
   const [instituicoesAtuais, setInstituicoesAtuais] = useState(
     cursoDefault.institutions.map((item, index) => ({ ...item, count: index }))
   );
@@ -152,6 +157,20 @@ export default function CourseRegister(props) {
 
   const handleDelete = (count) => {
     setInstituicoesAtuais((antg) => antg.filter((inst) => inst.count != count));
+  };
+
+  const handleArchive = async (value) => {
+    try {
+      await setArchivedCourse({ id: curso.id, filed: value });
+      notification.success({
+        message: "Operação realizada com sucesso!",
+      });
+    } catch (error) {
+      notification.error({
+        message: "Erro ao fazer operação!",
+        description: "Por favor, tente novamente.",
+      });
+    }
   };
 
   const defaultColumns = [
@@ -339,18 +358,34 @@ export default function CourseRegister(props) {
               title={title}
               bordered={false}
               extra={
-                <Button
-                  loading={registering}
-                  disabled={
-                    !register.formState.isValid &&
-                    instituicoesAtuais.length === 0
-                  }
-                  type="primary"
-                  shape="round"
-                  htmlType="submit"
-                >
-                  {curso?.id ? <>Salvar</> : <>Cadastrar</>}
-                </Button>
+                <Space direction="horizontal">
+                  <Tooltip title={"Curso arquivado"}>
+                    <Switch
+                      checked={filed}
+                      loading={archiving}
+                      style={{
+                        marginRight: "15px",
+                      }}
+                      defaultChecked={cursoDefault.filedAt}
+                      onChange={(value) => {
+                        setFiled(value);
+                        handleArchive(value);
+                      }}
+                    />
+                  </Tooltip>
+                  <Button
+                    loading={registering}
+                    disabled={
+                      !register.formState.isValid &&
+                      instituicoesAtuais.length === 0
+                    }
+                    type="primary"
+                    shape="round"
+                    htmlType="submit"
+                  >
+                    {curso?.id ? <>Salvar</> : <>Cadastrar</>}
+                  </Button>
+                </Space>
               }
             >
               <Descriptions
@@ -515,16 +550,7 @@ export default function CourseRegister(props) {
                           >
                             {competencies.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
-                                {item.filedAt ? (
-                                  <Tooltip
-                                    color={"orange"}
-                                    title={"Dado arquivado"}
-                                  >
-                                    {item.name} - [ARQUIVADO]
-                                  </Tooltip>
-                                ) : (
-                                  <>{item.name}</>
-                                )}
+                                {item.name}
                               </Select.Option>
                             ))}
                           </Select>
@@ -596,16 +622,7 @@ export default function CourseRegister(props) {
                           >
                             {subthemes.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
-                                {item.filedAt ? (
-                                  <Tooltip
-                                    color={"orange"}
-                                    title={"Dado arquivado"}
-                                  >
-                                    {item.name} - [ARQUIVADO]
-                                  </Tooltip>
-                                ) : (
-                                  <>{item.name}</>
-                                )}
+                                {item.name}
                               </Select.Option>
                             ))}
                           </Select>
@@ -614,17 +631,6 @@ export default function CourseRegister(props) {
                     }}
                   />
                 </Descriptions.Item>
-                {curso && (
-                  <Descriptions.Item label={"Curso arquivado"}>
-                    <Switch
-                      checked={filed}
-                      defaultChecked={curso.filedAt}
-                      onChange={(value) => {
-                        setFiled(value);
-                      }}
-                    />
-                  </Descriptions.Item>
-                )}
               </Descriptions>
             </Card>
           </Form>

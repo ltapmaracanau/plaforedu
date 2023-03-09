@@ -20,6 +20,7 @@ const coursesModel = {
   loading: false,
   loadingUniqueCourse: false,
   registering: false,
+  archiving: false,
 
   count: 0,
   page: 1,
@@ -150,7 +151,6 @@ const coursesModel = {
       subThemes,
       taxonomies,
       equivalents,
-      filed = undefined,
     } = payload;
     actions.setRegistering(true);
     try {
@@ -186,17 +186,26 @@ const coursesModel = {
         equivalents,
       });
       await services.courseService.updateCourseSubThemes({ id, subThemes });
-      if (filed !== undefined) {
-        if (filed) {
-          await services.courseService.archiveCourse({ id });
-        } else {
-          await services.courseService.unarchiveCourse({ id });
-        }
-      }
     } catch (error) {
       throw new Error(error.message);
     } finally {
       actions.setRegistering(false);
+    }
+  }),
+
+  setArchivedCourse: thunk(async (actions, payload) => {
+    const { filed, id } = payload;
+    actions.setArchiving(true);
+    try {
+      if (filed) {
+        await services.courseService.archiveCourse({ id });
+      } else {
+        await services.courseService.unarchiveCourse({ id });
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setArchiving(false);
     }
   }),
 
@@ -239,6 +248,10 @@ const coursesModel = {
 
   setPage: action((state, payload) => {
     state.page = payload;
+  }),
+
+  setArchiving: action((state, payload) => {
+    state.archiving = payload;
   }),
 };
 
