@@ -83,7 +83,6 @@ export default function UpdatePassword() {
                   return (
                     <Form.Item
                       label={"Senha Antiga"}
-                      style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -100,7 +99,6 @@ export default function UpdatePassword() {
                   return (
                     <Form.Item
                       label={"Nova Senha"}
-                      style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -117,7 +115,6 @@ export default function UpdatePassword() {
                   return (
                     <Form.Item
                       label={"Repita a Nova Senha"}
-                      style={{ marginBottom: "0" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback

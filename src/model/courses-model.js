@@ -149,6 +149,7 @@ const coursesModel = {
       competencies,
       subThemes,
       taxonomies,
+      equivalents,
       filed = undefined,
     } = payload;
     actions.setRegistering(true);
@@ -179,6 +180,10 @@ const coursesModel = {
       await services.courseService.updateCourseCompetencies({
         id,
         competencies,
+      });
+      await services.courseService.updateCourseEquivalents({
+        id,
+        equivalents,
       });
       await services.courseService.updateCourseSubThemes({ id, subThemes });
       if (filed !== undefined) {
