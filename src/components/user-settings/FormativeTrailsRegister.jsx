@@ -686,16 +686,7 @@ export default function FormativeTrailsRegister(props) {
                           >
                             {allCompetencias.map((item) => (
                               <Select.Option key={item.id} value={item.id}>
-                                {item.filedAt ? (
-                                  <Tooltip
-                                    color={"orange"}
-                                    title={"Dado arquivado"}
-                                  >
-                                    {item.name} - [ARQUIVADO]
-                                  </Tooltip>
-                                ) : (
-                                  <>{item.name}</>
-                                )}
+                                {item.name}
                               </Select.Option>
                             ))}
                           </Select>
