@@ -44,11 +44,11 @@ export default function FormativeTrailsList() {
   const [textSearch, setTextSearch] = useState("");
 
   useEffect(async () => {
+    await getTrilhas();
+    await getCursos({ showFiled: true });
     await getCompetencies({ showFiled: true });
     await getItinerarios();
     await getInstitutions({ showFiled: true });
-    await getTrilhas();
-    await getCursos({ showFiled: true });
   }, [getTrilhas]);
 
   return (
