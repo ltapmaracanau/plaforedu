@@ -52,6 +52,7 @@ export default {
       subThemes: payload.subThemes,
       competencies: payload.competencies,
       taxonomies: payload.taxonomies,
+      equivalents: [],
     })
       .then((response) => response.data)
       .catch((error) => {
@@ -132,6 +133,15 @@ export default {
   updateCourseSubThemes: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/update-sub-themes`, {
       subThemes: payload.subThemes,
+    })
+      .then(() => ({}))
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
+  updateCourseEquivalents: (payload) =>
+    AuthAxios.patch(`/courses/${payload.id}/update-equivalents`, {
+      equivalents: [],
     })
       .then(() => ({}))
       .catch((error) => {
