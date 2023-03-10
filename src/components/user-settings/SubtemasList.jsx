@@ -64,6 +64,7 @@ export default function SubtemasList() {
               >
                 <Search
                   allowClear
+                  defaultValue={textSearch}
                   onSearch={(e) => {
                     setTextSearch(e);
                     getSubthemes({

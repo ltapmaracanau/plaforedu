@@ -91,6 +91,7 @@ export default function FormativeTrailsList() {
                 >
                   <Search
                     allowClear
+                    defaultValue={textSearch}
                     onSearch={(e) => {
                       setTextSearch(e);
                       getTrilhas({

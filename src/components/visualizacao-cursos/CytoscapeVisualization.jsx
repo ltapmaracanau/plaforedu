@@ -496,7 +496,10 @@ export default function CytoscapeVisualization() {
                 {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
               </Descriptions.Item>
               <Descriptions.Item label="Subtemas">
-                {uniqueCourse?.subThemes?.map((sub) => sub.name).join(" | ")}
+                {uniqueCourse?.subThemes
+                  ?.filter((sub) => !sub.filedAt)
+                  .map((sub) => sub.name)
+                  .join(" | ")}
               </Descriptions.Item>
             </Descriptions>
           </Card>

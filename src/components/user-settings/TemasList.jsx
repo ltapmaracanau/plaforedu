@@ -61,6 +61,7 @@ export default function TemasList() {
               >
                 <Search
                   allowClear
+                  defaultValue={textSearch}
                   onSearch={(e) => {
                     setTextSearch(e);
                     getThemes({

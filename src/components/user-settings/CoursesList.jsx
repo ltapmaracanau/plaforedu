@@ -108,6 +108,7 @@ export default function CoursesList() {
                 >
                   <Search
                     allowClear
+                    defaultValue={textSearch}
                     onSearch={(e) => {
                       setTextSearch(e);
                       getCursos({
