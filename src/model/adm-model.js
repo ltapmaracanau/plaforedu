@@ -1,3 +1,4 @@
+import dayjs, { Dayjs } from "dayjs";
 import { action, computed, thunk } from "easy-peasy";
 import AuthAxios from "../services/authAxios";
 import { dataService } from "../services/dataService";
@@ -142,29 +143,15 @@ const admModel = {
   }),
 
   getSearchLogs: thunk(async (actions, payload = {}) => {
-    const {
-      page = 1,
-      description = "",
-      user = "",
-      initialDate = "",
-      finalDate = "",
-    } = payload;
-    let newInitialDate = "";
-    let newFinalDate = "";
-    if (initialDate) {
-      newInitialDate = initialDate.toDate().toISOString().split("T")[0];
-    }
-    if (finalDate) {
-      newFinalDate = finalDate.toDate().toISOString().split("T")[0];
-    }
+    const { page = 1, description = "", user = "", date = undefined } = payload;
     actions.setLoadingLogs(true);
     try {
       const logs = await dataService.getSearchLogs({
         page: page,
         description: description,
         userName: user,
-        initialDate: newInitialDate,
-        finalDate: newFinalDate,
+        initialDate: date ? date[0].format("YYYY-MM-DD") : "",
+        finalDate: date ? date[1].format("YYYY-MM-DD") : "",
       });
       actions.setSearchLogs(logs.data);
       actions.setCountLogs(logs.count);

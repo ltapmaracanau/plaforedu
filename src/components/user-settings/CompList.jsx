@@ -65,6 +65,7 @@ export default function CompList() {
               >
                 <Search
                   allowClear
+                  defaultValue={textSearch}
                   onSearch={(e) => {
                     setTextSearch(e);
                     getComp({

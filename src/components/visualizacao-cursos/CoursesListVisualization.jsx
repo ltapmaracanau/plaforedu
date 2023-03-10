@@ -175,6 +175,16 @@ export default function CoursesListVisualization() {
                               return;
                             }
 
+                            // Se todos os cursos estiverem arquivados eu não exibo a trilha
+                            if (
+                              !trilha.courses.some((curso) => {
+                                return !curso?.filedAt;
+                              }) &&
+                              trilha.courses.length !== 0
+                            ) {
+                              return;
+                            }
+
                             return (
                               <Panel
                                 key={"trilha" + trilha.id}
@@ -183,7 +193,10 @@ export default function CoursesListVisualization() {
                                 <List
                                   itemLayout="vertical"
                                   dataSource={trilha.courses}
-                                  renderItem={(curso) => {
+                                  renderItem={(curso, index) => {
+                                    if (curso.filedAt) {
+                                      return;
+                                    }
                                     return (
                                       <List.Item
                                         key={`trilha${trilha.id}curso${curso.id}`}
@@ -224,9 +237,7 @@ export default function CoursesListVisualization() {
                                                 style={{ fontFamily: "Roboto" }}
                                               >
                                                 Ordem:{" "}
-                                                <Text strong>
-                                                  {curso.sequence}
-                                                </Text>
+                                                <Text strong>{index + 1}</Text>
                                               </Text>
                                             </div>
                                             {/* <div
@@ -464,7 +475,10 @@ export default function CoursesListVisualization() {
                   {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
                 </Descriptions.Item>
                 <Descriptions.Item label="Subtemas">
-                  {uniqueCourse?.subThemes?.map((sub) => sub.name).join(" | ")}
+                  {uniqueCourse?.subThemes
+                    ?.filter((sub) => !sub.filedAt)
+                    .map((sub) => sub.name)
+                    .join(" | ")}
                 </Descriptions.Item>
               </Descriptions>
             )}

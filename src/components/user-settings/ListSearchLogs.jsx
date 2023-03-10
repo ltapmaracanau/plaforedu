@@ -16,6 +16,13 @@ import { SearchOutlined, FilterFilled } from "@ant-design/icons";
 import AuthAxios from "../../services/authAxios";
 
 const { Content } = Layout;
+const { RangePicker } = DatePicker;
+
+const defaultValuesFilter = {
+  description: "",
+  user: "",
+  date: ["", ""],
+};
 
 export default function ListSearchLogs() {
   const logs = useStoreState((state) => state.adm.searchLogs);
@@ -31,22 +38,19 @@ export default function ListSearchLogs() {
   const [stringSearch, setStringSearch] = useState({
     description: "",
     user: "",
-    initialDate: "",
-    finalDate: "",
+    date: ["", ""],
   });
 
   const [stringSearchMemo, setStringSearchMemo] = useState({
     description: "",
     user: "",
-    initialDate: "",
-    finalDate: "",
+    date: ["", ""],
   });
 
   const [activeColumsFilter, setActiveColumsFilter] = useState({
     description: false,
     user: false,
-    initialDate: false,
-    finalDate: false,
+    date: false,
   });
 
   const downloadSearchLogsTemp = async () => {
@@ -99,14 +103,16 @@ export default function ListSearchLogs() {
     }));
     const newSearch = {
       ...stringSearchMemo,
-      [`${dataIndex}`]: "",
+      [`${dataIndex}`]: defaultValuesFilter[dataIndex],
     };
     setStringSearchMemo(newSearch);
     setStringSearch(newSearch);
     setPage(1);
     getSearchLogs({
       page: 1,
-      ...newSearch,
+      description: "",
+      user: "",
+      date: undefined,
     });
   };
 
@@ -144,7 +150,7 @@ export default function ListSearchLogs() {
               width: 90,
             }}
           >
-            Search
+            Buscar
           </Button>
           <Button
             onClick={() => {
@@ -155,7 +161,7 @@ export default function ListSearchLogs() {
               width: 90,
             }}
           >
-            Reset
+            Limpar
           </Button>
         </Space>
       </div>
@@ -185,35 +191,22 @@ export default function ListSearchLogs() {
             marginBottom: "5px",
           }}
         >
-          <DatePicker
-            value={stringSearch.initialDate}
+          <RangePicker
+            value={stringSearch.date}
             format={"DD/MM/YYYY"}
             onChange={(e) => {
               setStringSearch((antg) => ({
                 ...antg,
-                initialDate: e,
+                date: e,
               }));
             }}
-            placeholder={"Data Inicial"}
-          />
-          <DatePicker
-            value={stringSearch.finalDate}
-            format={"DD/MM/YYYY"}
-            onChange={(e) => {
-              setStringSearch((antg) => ({
-                ...antg,
-                finalDate: e,
-              }));
-            }}
-            placeholder={"Data Final"}
           />
         </Space>
         <Space direction="horizontal">
           <Button
             type="primary"
             onClick={() => {
-              handleSearch("initialDate");
-              handleSearch("finalDate");
+              handleSearch("date");
             }}
             icon={<SearchOutlined />}
             size="small"
@@ -221,19 +214,18 @@ export default function ListSearchLogs() {
               width: 90,
             }}
           >
-            Search
+            Buscar
           </Button>
           <Button
             onClick={() => {
-              handleReset("initialDate");
-              handleReset("finalDate");
+              handleReset("date");
             }}
             size="small"
             style={{
               width: 90,
             }}
           >
-            Reset
+            Limpar
           </Button>
         </Space>
       </div>
@@ -241,10 +233,7 @@ export default function ListSearchLogs() {
     filterIcon: () => (
       <FilterFilled
         style={{
-          color:
-            activeColumsFilter.initialDate || activeColumsFilter.finalDate
-              ? "#1890ff"
-              : undefined,
+          color: activeColumsFilter.date ? "#1890ff" : undefined,
         }}
       />
     ),

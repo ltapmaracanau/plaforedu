@@ -63,6 +63,7 @@ export default function CategCompList() {
               >
                 <Search
                   allowClear
+                  defaultValue={textSearch}
                   onSearch={(e) => {
                     setTextSearch(e);
                     getCatComp({

@@ -67,6 +67,7 @@ export default function InstitutionList() {
               >
                 <Search
                   allowClear
+                  defaultValue={textSearch}
                   onSearch={(e) => {
                     setTextSearch(e);
                     getInstituicoes({
