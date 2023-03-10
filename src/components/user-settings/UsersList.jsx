@@ -84,6 +84,7 @@ export default function UsersList() {
               >
                 <Search
                   allowClear
+                  defaultValue={textSearch}
                   onSearch={(e) => {
                     setTextSearch(e);
                     getUsers({ query: e, showFiled: showFiled });
