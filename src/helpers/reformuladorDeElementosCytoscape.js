@@ -90,6 +90,15 @@ export default function (
       ) {
         return;
       }
+      // Se todos os cursos estiverem arquivados eu não exibo a trilha
+      if (
+        !trilha.courses.some((curso) => {
+          return !curso?.filedAt;
+        }) &&
+        trilha.courses.length !== 0
+      ) {
+        return;
+      }
 
       // Adiciondo node topo da trilha
       const competenceData = competencies.find(
@@ -111,6 +120,10 @@ export default function (
       // Adicionando os cursos da trilha na sequência correta
       let idCursoAnterior = null;
       trilha.courses.forEach((cursoNaTrilha) => {
+        // Se o curso estiver arquivado eu não mostro ele
+        if (cursoNaTrilha.filedAt) {
+          return;
+        }
         elementos.push({
           group: "nodes",
           data: {
@@ -207,7 +220,6 @@ export default function (
             ? curso.itineraries[0].color
             : colorDefault;
       }
-
       // Adicionando node do curso no grafo
       elementos.push({
         group: "nodes",
