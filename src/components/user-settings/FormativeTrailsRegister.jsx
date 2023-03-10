@@ -508,6 +508,18 @@ export default function FormativeTrailsRegister(props) {
         );
       },
     },
+    {
+      title: "Taxonomias",
+      key: "taxonomies",
+      render: (_, record) => {
+        const dataCourse = cursos.find((course) => record.id === course.id);
+        return dataCourse.taxonomies.map((tax) => (
+          <Tag color={"blue"} key={tax.id}>
+            {tax.name}
+          </Tag>
+        ));
+      },
+    },
   ];
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
