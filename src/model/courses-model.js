@@ -27,6 +27,7 @@ const coursesModel = {
 
   uniqueCourse: {},
   cursos: [],
+  cursosWithFiled: [],
   taxonomies: [],
 
   elements: computed(
@@ -106,6 +107,9 @@ const coursesModel = {
       if (cursos?.data?.length >= 0) {
         actions.setCursos(cursos.data);
         actions.setCount(cursos.count);
+        if (showFiled) {
+          actions.setCursosWithFiled(cursos.data);
+        }
       }
       actions.setLoading(false);
     }
@@ -252,6 +256,10 @@ const coursesModel = {
 
   setArchiving: action((state, payload) => {
     state.archiving = payload;
+  }),
+
+  setCursosWithFiled: action((state, payload) => {
+    state.cursosWithFiled = payload;
   }),
 };
 
