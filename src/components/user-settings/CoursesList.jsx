@@ -51,7 +51,7 @@ export default function CoursesList() {
   const [textSearch, setTextSearch] = useState("");
 
   useEffect(() => {
-    getCursos();
+    getCursos({ memo: true });
     getItinerarios();
     getAcessibilidades();
     getInstituicoes({ showFiled: true });

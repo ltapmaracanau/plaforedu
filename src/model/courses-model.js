@@ -67,8 +67,12 @@ const coursesModel = {
   ),
 
   getCursos: thunk(
-    async (actions, payload = { query: "", showFiled: false, page: null }) => {
+    async (
+      actions,
+      payload = { query: "", showFiled: false, page: null, memo: false }
+    ) => {
       const {
+        memo = false,
         showFiled = false,
         registerLog = false,
         page = 0,
@@ -104,11 +108,28 @@ const coursesModel = {
         taxonomies: taxonomies,
         subThemes: subtemas,
       });
+
+      let cursosMemo = [];
+      if (memo) {
+        cursosMemo = await services.courseService.getCursos({
+          includeFiled: true,
+          registerLog: registerLog,
+          page: 0,
+          search: query,
+          hours: cargaHoraria,
+          institutions: institutions,
+          itineraries: newItineraries,
+          accessibilities: accessibilities,
+          competencies: competencies,
+          taxonomies: taxonomies,
+          subThemes: subtemas,
+        });
+      }
       if (cursos?.data?.length >= 0) {
         actions.setCursos(cursos.data);
         actions.setCount(cursos.count);
-        if (showFiled) {
-          actions.setCursosWithFiled(cursos.data);
+        if (memo) {
+          actions.setCursosWithFiled(cursosMemo.data);
         }
       }
       actions.setLoading(false);

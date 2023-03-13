@@ -141,7 +141,7 @@ export default {
 
   updateCourseEquivalents: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/update-equivalents`, {
-      equivalents: [],
+      equivalents: payload.equivalents,
     })
       .then(() => ({}))
       .catch((error) => {
