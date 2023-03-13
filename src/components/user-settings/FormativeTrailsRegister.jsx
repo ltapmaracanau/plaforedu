@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import {
   RollbackOutlined,
@@ -90,6 +90,9 @@ export default function FormativeTrailsRegister(props) {
 
   const getCourses = useStoreActions((actions) => actions.courses.getCursos);
   const cursos = useStoreState((state) => state.courses.cursos);
+  const cursosWithFiled = useStoreState(
+    (state) => state.courses.cursosWithFiled
+  );
   const loadingCursos = useStoreState((state) => state.courses.loading);
 
   const [filed, setFiled] = useState(trilha?.filedAt !== null);
@@ -372,6 +375,7 @@ export default function FormativeTrailsRegister(props) {
     setStringSearchMemo(newSearch);
     getCourses({
       ...newSearch,
+      showFiled: true,
     });
   };
 
@@ -498,7 +502,9 @@ export default function FormativeTrailsRegister(props) {
       dataIndex: "name",
       className: "drag-visible",
       render: (text, record, _index) => {
-        const dataCourse = cursos.find((course) => record.id === course.id);
+        const dataCourse = cursosWithFiled.find(
+          (course) => record.id === course.id
+        );
         return dataCourse.filedAt ? (
           <>
             {text} <Tag color={"orange"}>ARQUIVADO</Tag>
@@ -512,7 +518,9 @@ export default function FormativeTrailsRegister(props) {
       title: "Taxonomias",
       key: "taxonomies",
       render: (_, record) => {
-        const dataCourse = cursos.find((course) => record.id === course.id);
+        const dataCourse = cursosWithFiled.find(
+          (course) => record.id === course.id
+        );
         return dataCourse.taxonomies.map((tax) => (
           <Tag color={"blue"} key={tax.id}>
             {tax.name}
