@@ -17,7 +17,7 @@ export default {
     }
   ) =>
     AuthAxios.post(
-      `/courses/all?page=${payload.query}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}`,
+      `/courses/all?page=${payload.page}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}`,
       {
         search: payload.search,
         hours: payload.hours,

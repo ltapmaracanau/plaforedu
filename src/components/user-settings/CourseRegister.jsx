@@ -72,8 +72,7 @@ export default function CourseRegister(props) {
     (state) => state.competencies.competencias
   );
   const subthemes = useStoreState((state) => state.themes.subthemes);
-  const cursos = useStoreState((state) => state.courses.cursosWithFiled);
-  const cursosWithFiled = useStoreState((state) => state.courses.cursos);
+  const cursos = useStoreState((state) => state.courses.cursos);
 
   const [filed, setFiled] = useState(cursoDefault.filedAt);
   const [instituicoesAtuais, setInstituicoesAtuais] = useState(
@@ -91,12 +90,6 @@ export default function CourseRegister(props) {
   const [cursosEquivalentes, setCursosEquivalentes] = useState(
     curso ? curso.equivalents : []
   );
-
-  const getCourses = useStoreActions((actions) => actions.courses.getCursos);
-
-  useEffect(async () => {
-    await getCourses({ showFiled: true });
-  }, []);
 
   const [form] = Form.useForm();
 
@@ -133,10 +126,7 @@ export default function CourseRegister(props) {
       title: "Título",
       dataIndex: "name",
       render: (text, record, _index) => {
-        const dataCourse = cursosWithFiled.find(
-          (course) => record.id === course.id
-        );
-        return dataCourse.filedAt ? (
+        return record.filedAt ? (
           <>
             {text} <Tag color={"orange"}>ARQUIVADO</Tag>
           </>
@@ -149,14 +139,12 @@ export default function CourseRegister(props) {
       title: "Taxonomias",
       key: "taxonomies",
       render: (_, record) => {
-        const dataCourse = cursosWithFiled.find(
-          (course) => record.id === course.id
-        );
-        return dataCourse.taxonomies.map((tax) => (
+        return <>Taxonomias</>;
+        /* return dataCourse.taxonomies.map((tax) => (
           <Tag color={"blue"} key={tax.id}>
             {tax.name}
           </Tag>
-        ));
+        )); */
       },
     },
   ];

@@ -23,12 +23,13 @@ const coursesModel = {
   archiving: false,
 
   count: 0,
-  page: 1,
-
   uniqueCourse: {},
   cursos: [],
-  cursosWithFiled: [],
   taxonomies: [],
+
+  cursosSecondary: [],
+  countSecondary: 0,
+  loadingCursosSecondary: false,
 
   elements: computed(
     [
@@ -53,7 +54,6 @@ const coursesModel = {
   filter: initialFilterDefault,
 
   setFilter: action((state, payload) => {
-    // console.log(payload);
     state.filter = { ...state.filter, ...payload };
   }),
 
@@ -69,10 +69,10 @@ const coursesModel = {
   getCursos: thunk(
     async (
       actions,
-      payload = { query: "", showFiled: false, page: null, memo: false }
+      payload = { query: "", showFiled: false, page: 0, secondary: false }
     ) => {
       const {
-        memo = false,
+        secondary = false,
         showFiled = false,
         registerLog = false,
         page = 0,
@@ -86,7 +86,11 @@ const coursesModel = {
         subtemas = [],
         taxonomies = [],
       } = payload;
-      actions.setLoading(true);
+      if (secondary) {
+        actions.setLoadingSecondary(true);
+      } else {
+        actions.setLoading(true);
+      }
       let newItineraries = [];
       if (itineraries.length === 0) {
         if (itinerario && itinerario != 0) {
@@ -108,31 +112,20 @@ const coursesModel = {
         taxonomies: taxonomies,
         subThemes: subtemas,
       });
-
-      let cursosMemo = [];
-      if (memo) {
-        cursosMemo = await services.courseService.getCursos({
-          includeFiled: true,
-          registerLog: registerLog,
-          page: 0,
-          search: query,
-          hours: cargaHoraria,
-          institutions: institutions,
-          itineraries: newItineraries,
-          accessibilities: accessibilities,
-          competencies: competencies,
-          taxonomies: taxonomies,
-          subThemes: subtemas,
-        });
-      }
       if (cursos?.data?.length >= 0) {
-        actions.setCursos(cursos.data);
-        actions.setCount(cursos.count);
-        if (memo) {
-          actions.setCursosWithFiled(cursosMemo.data);
+        if (secondary) {
+          actions.setCursosSecondary(cursos.data);
+          actions.setCountSecondary(cursos.count);
+        } else {
+          actions.setCursos(cursos.data);
+          actions.setCount(cursos.count);
         }
       }
-      actions.setLoading(false);
+      if (secondary) {
+        actions.setLoadingSecondary(false);
+      } else {
+        actions.setLoading(false);
+      }
     }
   ),
 
@@ -247,6 +240,10 @@ const coursesModel = {
     state.loading = payload;
   }),
 
+  setLoadingSecondary: action((state, payload) => {
+    state.loadingCursosSecondary = payload;
+  }),
+
   setLoadingUniqueCourse: action((state, payload) => {
     state.loadingUniqueCourse = payload;
   }),
@@ -257,6 +254,10 @@ const coursesModel = {
 
   setCursos: action((state, payload) => {
     state.cursos = payload;
+  }),
+
+  setCursosSecondary: action((state, payload) => {
+    state.cursosSecondary = payload;
   }),
 
   setTaxonomias: action((state, payload) => {
@@ -271,16 +272,12 @@ const coursesModel = {
     state.count = payload;
   }),
 
-  setPage: action((state, payload) => {
-    state.page = payload;
+  setCountSecondary: action((state, payload) => {
+    state.countSecondary = payload;
   }),
 
   setArchiving: action((state, payload) => {
     state.archiving = payload;
-  }),
-
-  setCursosWithFiled: action((state, payload) => {
-    state.cursosWithFiled = payload;
   }),
 };
 

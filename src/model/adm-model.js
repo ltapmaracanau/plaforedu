@@ -56,12 +56,11 @@ const admModel = {
     try {
       await getStoreActions().competencies.getComp();
       await getStoreActions().itineraries.getItinerarios();
-      await getStoreActions().courses.getCursos();
+      //await getStoreActions().courses.getCursos();
       await getStoreActions().trilhas.getTrilhas();
       await getStoreActions().institutions.getInstituicoes();
       await getStoreActions().themes.getSubthemes();
     } catch (error) {
-      //console.log(error);
     } finally {
       actions.setIniciando(false);
     }

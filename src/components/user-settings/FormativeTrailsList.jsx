@@ -45,7 +45,6 @@ export default function FormativeTrailsList() {
 
   useEffect(async () => {
     await getTrilhas();
-    await getCursos({ memo: true });
     await getCompetencies({ showFiled: true });
     await getItinerarios();
     await getInstitutions({ showFiled: true });

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import {
   RollbackOutlined,
@@ -80,8 +80,8 @@ export default function FormativeTrailsRegister(props) {
   );
 
   const cursos = useStoreState((state) => state.courses.cursos);
-  const cursosWithFiled = useStoreState(
-    (state) => state.courses.cursosWithFiled
+  const cursosSecondary = useStoreState(
+    (state) => state.courses.cursosSecondary
   );
 
   const [filed, setFiled] = useState(trilha?.filedAt !== null);
@@ -159,10 +159,11 @@ export default function FormativeTrailsRegister(props) {
   const onSelectChange = (newSelectedRowKeys) => {
     setCursosTrilhaIds(newSelectedRowKeys);
     const novosCursos = newSelectedRowKeys.map((idCurso, _index) => {
-      const curso = cursos.find((curso) => curso.id === idCurso);
+      const curso = cursosSecondary.find((curso) => curso.id === idCurso);
       return {
         name: curso.name,
         id: curso.id,
+        filedAt: curso.filedAt,
       };
     });
     setCursosTrilha(novosCursos);
@@ -183,10 +184,7 @@ export default function FormativeTrailsRegister(props) {
       dataIndex: "name",
       className: "drag-visible",
       render: (text, record, _index) => {
-        const dataCourse = cursosWithFiled.find(
-          (course) => record.id === course.id
-        );
-        return dataCourse.filedAt ? (
+        return record.filedAt ? (
           <>
             {text} <Tag color={"orange"}>ARQUIVADO</Tag>
           </>
@@ -199,14 +197,12 @@ export default function FormativeTrailsRegister(props) {
       title: "Taxonomias",
       key: "taxonomies",
       render: (_, record) => {
-        const dataCourse = cursosWithFiled.find(
-          (course) => record.id === course.id
-        );
-        return dataCourse.taxonomies.map((tax) => (
+        /* return dataCourse.taxonomies.map((tax) => (
           <Tag color={"blue"} key={tax.id}>
             {tax.name}
           </Tag>
-        ));
+        )); */
+        return <>taxonomias</>;
       },
     },
   ];

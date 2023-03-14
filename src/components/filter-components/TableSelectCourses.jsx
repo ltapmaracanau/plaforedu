@@ -24,19 +24,25 @@ const filterCoursesDefault = {
 export default function TableSelectCourses(props) {
   const { onSelectChange, cursosDefaultSelected, courseToHideId = "" } = props;
 
-  const loadingCursos = useStoreState((state) => state.courses.loading);
+  const loadingCursosSecondary = useStoreState(
+    (state) => state.courses.loadingCursosSecondary
+  );
   const allInstitutions = useStoreState(
     (state) => state.institutions.instituicoes
   );
-  const cursos = useStoreState((state) => state.courses.cursos);
+  const cursosSecondary = useStoreState(
+    (state) => state.courses.cursosSecondary
+  );
+  const countSecondary = useStoreState((state) => state.courses.countSecondary);
   const allItinerarios = useStoreState(
     (state) => state.itineraries.itinerarios
   );
   const allCompetencias = useStoreState(
     (state) => state.competencies.competencias
   );
+  const [pageNumber, setPageNumber] = useState(1);
 
-  const getCourses = useStoreActions((actions) => actions.courses.getCursos);
+  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
   const [filterAddingCourses, setFilterAddingCourses] = useState({
     query: "",
@@ -59,10 +65,8 @@ export default function TableSelectCourses(props) {
     itineraries: [],
   });
 
-  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
-
   useEffect(async () => {
-    await getCursos({ showFiled: true });
+    await getCursos({ secondary: true, page: pageNumber, showFiled: true });
   }, []);
 
   // Table adding courses to Trail
@@ -242,7 +246,7 @@ export default function TableSelectCourses(props) {
     ),
   });
 
-  const handleSearch = (dataIndex) => {
+  const handleSearch = async (dataIndex) => {
     setActiveColumsFilter((antig) => ({
       ...antig,
       [`${dataIndex}`]: true,
@@ -252,13 +256,15 @@ export default function TableSelectCourses(props) {
       [`${dataIndex}`]: filterAddingCourses[`${dataIndex}`],
     };
     setStringSearchMemo(newSearch);
-    getCourses({
+    await getCursos({
       ...newSearch,
+      secondary: true,
       showFiled: true,
+      page: pageNumber,
     });
   };
 
-  const handleReset = (dataIndex) => {
+  const handleReset = async (dataIndex) => {
     setActiveColumsFilter((antig) => ({
       ...antig,
       [`${dataIndex}`]: false,
@@ -269,9 +275,11 @@ export default function TableSelectCourses(props) {
     };
     setStringSearchMemo(newSearch);
     setFilterAddingCourses(newSearch);
-    getCourses({
+    await getCursos({
       ...newSearch,
+      secondary: true,
       showFiled: true,
+      page: pageNumber,
     });
   };
 
@@ -358,9 +366,28 @@ export default function TableSelectCourses(props) {
   return (
     <Table
       rowKey={"id"}
-      loading={loadingCursos}
       rowSelection={rowSelection}
-      dataSource={cursos.filter((curso) => curso.id !== courseToHideId)}
+      dataSource={cursosSecondary.filter(
+        (curso) => curso.id !== courseToHideId
+      )}
+      loading={loadingCursosSecondary}
+      pagination={{
+        onChange: async (page) => {
+          setPageNumber(page);
+          await getCursos({
+            ...stringSearchMemo,
+            page: page,
+            showFiled: true,
+            secondary: true,
+          });
+        },
+        pageSize: 20,
+        total: countSecondary,
+        showSizeChanger: false,
+        current: pageNumber,
+        defaultCurrent: 1,
+        hideOnSinglePage: false,
+      }}
       columns={columnsAddCoursesTrail}
       locale={{
         emptyText: (
