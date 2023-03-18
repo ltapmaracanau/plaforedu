@@ -69,6 +69,9 @@ export default function (
   let elementos = [];
   if (tipoClassificacao) {
     // False: por competências   True: por trilhas
+
+    // Contadores para montar grafo da trilha >>
+    let counterCol = 1;
     dados.forEach((trilha) => {
       // Verificações se devo mostrar a trilha ou não
 
@@ -100,6 +103,8 @@ export default function (
         return;
       }
 
+      let counterRowCourse = 1;
+
       // Adiciondo node topo da trilha
       const competenceData = competencies.find(
         (comp) => comp.id === trilha.competencies[0].id
@@ -113,36 +118,106 @@ export default function (
           label: trilha.name,
           color: colorCategoria,
           image: getImageBackground("categoria", colorCategoria),
+          col: counterCol,
+          row: 0,
         },
         grabbable: true,
         classes: ["categoria"],
       });
       // Adicionando os cursos da trilha na sequência correta
+
       let idCursoAnterior = null;
-      trilha.courses.forEach((cursoNaTrilha) => {
+      let maxEquiv = 0;
+
+      trilha.courses.forEach((cursoNaTrilha, index) => {
         // Se o curso estiver arquivado eu não mostro ele
         if (cursoNaTrilha.filedAt) {
           return;
         }
+        let todosEquivArquiv =
+          !cursoNaTrilha.equivalents.some((curso) => {
+            return !curso?.filedAt;
+          }) && cursoNaTrilha.equivalents.length !== 0;
+        let qtdEquiv = 0;
+
+        if (cursoNaTrilha.equivalents.length !== 0) {
+          elementos.push({
+            group: "nodes",
+            data: {
+              id:
+                "trilha" + trilha.id + "curso" + cursoNaTrilha.id + "container",
+              label: "Cursos Equivalentes",
+              color: colorCategoria,
+              col: counterCol,
+              row: counterRowCourse,
+            },
+            grabbable: true,
+          });
+        }
+
+        // Fim do teste
         elementos.push({
           group: "nodes",
           data: {
             id: "trilha" + trilha.id + "curso" + cursoNaTrilha.id,
             label: cursoNaTrilha.name,
             image: getImageBackground("curso", colorCategoria),
+            parent: !todosEquivArquiv
+              ? "trilha" + trilha.id + "curso" + cursoNaTrilha.id + "container"
+              : undefined,
             color: colorCategoria,
+            col: counterCol,
+            row: counterRowCourse,
           },
           grabbable: true,
           classes: ["curso"],
         });
+
+        if (!todosEquivArquiv) {
+          cursoNaTrilha.equivalents.forEach((equivalent) => {
+            if (equivalent.filedAt) {
+              return;
+            }
+            qtdEquiv++;
+            elementos.push({
+              group: "nodes",
+              data: {
+                id:
+                  "trilha" +
+                  trilha.id +
+                  "curso" +
+                  cursoNaTrilha.id +
+                  "equivalent" +
+                  equivalent.id,
+                label: equivalent.name,
+                image: getImageBackground("curso", colorCategoria),
+                parent:
+                  "trilha" +
+                  trilha.id +
+                  "curso" +
+                  cursoNaTrilha.id +
+                  "container",
+                color: colorCategoria,
+                col: counterCol + qtdEquiv,
+                row: counterRowCourse,
+              },
+              grabbable: true,
+              classes: ["curso"],
+            });
+          });
+        }
+
         // Adicionando a edge deste curso com o curso anterior na sequência
+        let idEdgeCursoAtual = qtdEquiv
+          ? "trilha" + trilha.id + "curso" + cursoNaTrilha.id + "container"
+          : `trilha${trilha.id}curso${cursoNaTrilha.id}`;
         if (idCursoAnterior) {
           elementos.push({
             group: "edges",
             data: {
               id: `edge${idCursoAnterior}to${cursoNaTrilha.id}`,
-              source: `trilha${trilha.id}curso${idCursoAnterior}`,
-              target: `trilha${trilha.id}curso${cursoNaTrilha.id}`,
+              source: idCursoAnterior,
+              target: idEdgeCursoAtual,
             },
           });
         } else {
@@ -151,12 +226,15 @@ export default function (
             data: {
               id: `edge${trilha.id}to${cursoNaTrilha.id}`,
               source: "trilha" + trilha.id,
-              target: `trilha${trilha.id}curso${cursoNaTrilha.id}`,
+              target: idEdgeCursoAtual,
             },
           });
         }
-        idCursoAnterior = cursoNaTrilha.id;
+        maxEquiv = qtdEquiv > maxEquiv ? qtdEquiv : maxEquiv;
+        idCursoAnterior = idEdgeCursoAtual;
+        counterRowCourse++;
       });
+      counterCol = counterCol + maxEquiv + 1;
     });
   } else {
     let competenciasAdicionadas = [];

@@ -36,28 +36,27 @@ export default function CoursesList() {
   const getSubthemes = useStoreActions(
     (actions) => actions.themes.getSubthemes
   );
-  const setPage = useStoreActions((actions) => actions.courses.setPage);
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
   const loading = useStoreState((state) => state.courses.loading);
   const cursos = useStoreState((state) => state.courses.cursos);
-  const pageNumber = useStoreState((state) => state.courses.page);
   const count = useStoreState((state) => state.courses.count);
 
   const [editandoCurso, setEditandoCurso] = useState(null);
   const [modalText, setModalText] = useState("Cadastrar Curso");
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(() => {
-    getCursos();
-    getItinerarios();
-    getAcessibilidades();
-    getInstituicoes({ showFiled: true });
-    getComp({ showFiled: true });
-    getSubthemes({ showFiled: true });
-    getTaxonomias();
+  useEffect(async () => {
+    await getCursos({ page: pageNumber });
+    await getItinerarios();
+    await getAcessibilidades();
+    await getInstituicoes({ showFiled: true });
+    await getComp({ showFiled: true });
+    await getSubthemes({ showFiled: true });
+    await getTaxonomias();
   }, [
     getCursos,
     getItinerarios,
@@ -115,7 +114,7 @@ export default function CoursesList() {
                         query: e,
                         showFiled: showFiled,
                       });
-                      setPage(1);
+                      setPageNumber(1);
                     }}
                     style={{
                       marginRight: "30px",
@@ -131,7 +130,7 @@ export default function CoursesList() {
                       }}
                       onClick={(checked) => {
                         setShowFiled(checked);
-                        setPage(1);
+                        setPageNumber(1);
                         getCursos({
                           query: textSearch,
                           showFiled: checked,
@@ -159,7 +158,7 @@ export default function CoursesList() {
                 dataSource={cursos}
                 pagination={{
                   onChange: (page) => {
-                    setPage(page);
+                    setPageNumber(page);
                     getCursos({
                       page: page,
                       query: textSearch,
