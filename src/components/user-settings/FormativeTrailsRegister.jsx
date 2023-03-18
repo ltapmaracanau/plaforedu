@@ -34,7 +34,6 @@ import {
   SortableHandle,
 } from "react-sortable-hoc";
 import { arrayMoveImmutable } from "array-move";
-import { generateRandomHexColor } from "../../helpers/generateRandomHexColor";
 import TableSelectCourses from "../filter-components/TableSelectCourses";
 
 const { Title } = Typography;

@@ -217,7 +217,7 @@ const itinerariosModel = {
       nestingFactor: 1.2,
 
       // Gravity force (constant)
-      gravity: 1,
+      gravity: 100,
 
       // Maximum number of iterations to perform
       numIter: 1000,
@@ -239,10 +239,10 @@ const itinerariosModel = {
       padding: 30, // padding on fit
       circle: false, // put depths in concentric circles if true, put depths top down if false
       grid: false, // whether to create an even grid into which the DAG is placed (circle:false only)
-      spacingFactor: 1.75, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
+      spacingFactor: 1, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
       boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
       avoidOverlap: true, // prevents node overlap, may overflow boundingBox if not enough space
-      nodeDimensionsIncludeLabels: false, // Excludes the label when calculating node bounding boxes for the layout algorithm
+      nodeDimensionsIncludeLabels: true, // Excludes the label when calculating node bounding boxes for the layout algorithm
       roots: undefined, // the roots of the trees
       maximal: false, // whether to shift nodes down their natural BFS depths in order to avoid upwards edges (DAGS only)
       animate: false, // whether to transition the node positions
@@ -254,7 +254,15 @@ const itinerariosModel = {
       ready: undefined, // callback on layoutready
       stop: undefined, // callback on layoutstop
       transform: function (node, position) {
-        return position;
+        console.log(node, position);
+        /*let y = position.y;
+        if (node.classes().includes("curso")) {
+          //console.log(node.classes().includes("equivalent"), position);
+          if (node.classes().includes("equivalent")) {
+            y = position.y - 262.5;
+          }
+        } */
+        return { x: position.x, y: position.y };
       }, // transform a given node position. Useful for changing flow direction in discrete layouts
     },
 
@@ -291,13 +299,18 @@ const itinerariosModel = {
       padding: 30, // padding used on fit
       boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
       avoidOverlap: true, // prevents node overlap, may overflow boundingBox if not enough space
-      avoidOverlapPadding: 10, // extra spacing around nodes when avoidOverlap: true
+      avoidOverlapPadding: 200, // extra spacing around nodes when avoidOverlap: true
       nodeDimensionsIncludeLabels: false, // Excludes the label when calculating node bounding boxes for the layout algorithm
       spacingFactor: undefined, // Applies a multiplicative factor (>0) to expand or compress the overall area that the nodes take up
       condense: false, // uses all available space on false, uses minimal space on true
       rows: undefined, // force num of rows in the grid
       cols: undefined, // force num of columns in the grid
-      position: function (node) {}, // returns { row, col } for element
+      position: function (node) {
+        const nodeData = node.data();
+        if (nodeData.row !== undefined) {
+          return { row: nodeData.row, col: nodeData.col };
+        }
+      }, // returns { row, col } for element
       sort: undefined, // a sorting function to order the nodes; e.g. function(a, b){ return a.data('weight') - b.data('weight') }
       animate: false, // whether to transition the node positions
       animationDuration: 500, // duration of animation in ms if enabled

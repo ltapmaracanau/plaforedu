@@ -746,7 +746,7 @@ export default function CourseRegister(props) {
                   justifyContent: "space-between",
                 }}
               >
-                <Title level={4}>Cursos equivalentes</Title>
+                <Title level={4}>Cursos Equivalentes</Title>
                 <Button
                   type="primary"
                   onClick={() => {

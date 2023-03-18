@@ -442,7 +442,7 @@ export default function CoursesListVisualization() {
             {loadingUniqueCourse ? (
               <Skeleton active />
             ) : (
-              <Descriptions column={1} bordered>
+              <Descriptions column={1} bordered layout="vertical">
                 <Descriptions.Item label="Descrição">
                   {uniqueCourse?.description}
                 </Descriptions.Item>
@@ -465,6 +465,34 @@ export default function CoursesListVisualization() {
                       </a>
                     </Card>
                   ))}
+                </Descriptions.Item>
+                <Descriptions.Item label="Cursos equivalentes">
+                  <List
+                    locale={{
+                      emptyText: <>Sem equivalentes</>,
+                    }}
+                    bordered
+                    dataSource={uniqueCourse?.equivalents?.filter(
+                      (course) => !course.filedAt
+                    )}
+                    renderItem={(item) => (
+                      <List.Item
+                        actions={[
+                          <Button
+                            key={item.id}
+                            onClick={() => {
+                              getUniqueCourse({ id: item.id });
+                            }}
+                          >
+                            Visualizar
+                          </Button>,
+                        ]}
+                        key={item.id}
+                      >
+                        {item.name}
+                      </List.Item>
+                    )}
+                  />
                 </Descriptions.Item>
                 <Descriptions.Item label="Acessibilidades">
                   {uniqueCourse?.accessibilities
