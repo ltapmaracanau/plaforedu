@@ -196,12 +196,11 @@ export default function FormativeTrailsRegister(props) {
       title: "Taxonomias",
       key: "taxonomies",
       render: (_, record) => {
-        /* return dataCourse.taxonomies.map((tax) => (
+        return record.taxonomies.map((tax) => (
           <Tag color={"blue"} key={tax.id}>
             {tax.name}
           </Tag>
-        )); */
-        return <>taxonomias</>;
+        ));
       },
     },
   ];

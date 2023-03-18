@@ -139,12 +139,11 @@ export default function CourseRegister(props) {
       title: "Taxonomias",
       key: "taxonomies",
       render: (_, record) => {
-        return <>Taxonomias</>;
-        /* return dataCourse.taxonomies.map((tax) => (
+        return record.taxonomies.map((tax) => (
           <Tag color={"blue"} key={tax.id}>
             {tax.name}
           </Tag>
-        )); */
+        ));
       },
     },
   ];
