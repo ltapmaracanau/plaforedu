@@ -35,6 +35,8 @@ import {
   Form,
   Skeleton,
   Space,
+  List,
+  Empty,
 } from "antd";
 
 const { Text } = Typography;
@@ -111,7 +113,7 @@ export default function CytoscapeVisualization() {
   useEffect(() => {
     if (filter.tipoClassificacao) {
       cyRef.current.add(elementsTrails);
-      cyRef.current.layout(layouts["layoutBreadthFirst"]).run();
+      cyRef.current.layout(layouts["layoutGrid"]).run();
     } else {
       cyRef.current.add(elementsCourses);
       cyRef.current.layout(layouts[layoutAtual]).run();
@@ -307,13 +309,22 @@ export default function CytoscapeVisualization() {
           cyRef.current = cy;
           cy.on("click", "node", function (event) {
             const element = event.target._private.data;
-            if (element.id.includes("curso")) {
+            if (
+              element.id.includes("curso") &&
+              !element.id.includes("container") &&
+              !element.id.includes("equivalent")
+            ) {
               getUniqueCourse({ id: element.id.split("curso")[1] });
+              setModalCourseVisible(true);
+            }
+            if (element.id.includes("equivalent")) {
+              getUniqueCourse({ id: element.id.split("equivalent")[1] });
               setModalCourseVisible(true);
             }
             if (
               element.id.includes("competencia") &&
               !element.id.includes("categoria") &&
+              !element.id.includes("container") &&
               !element.id.includes("curso")
             ) {
               setCompetenceOnModal(
@@ -357,6 +368,18 @@ export default function CytoscapeVisualization() {
               "text-wrap": "wrap",
               "text-max-width": "80px",
               "font-weight": "bold",
+            },
+          },
+          {
+            selector: ":parent",
+            css: {
+              padding: "10px",
+              height: "120px",
+              "font-family": "Roboto",
+              label: "data(label)",
+              color: "data(color)",
+              "text-halign": "center",
+              "text-valign": "top",
             },
           },
           {
@@ -471,7 +494,7 @@ export default function CytoscapeVisualization() {
               </Descriptions.Item>
               <Descriptions.Item label="Instituições Certificadoras">
                 {uniqueCourse?.institutions?.map((inst) => (
-                  <Space key={inst.id} direction={"vertical"}>
+                  <Space key={inst.institutionId} direction={"vertical"}>
                     <Text>{inst.name}</Text>
                     <div>
                       <span>Link: </span>
@@ -486,6 +509,34 @@ export default function CytoscapeVisualization() {
                     </div>
                   </Space>
                 ))}
+              </Descriptions.Item>
+              <Descriptions.Item label="Cursos equivalentes">
+                <List
+                  locale={{
+                    emptyText: <>Sem equivalentes</>,
+                  }}
+                  bordered
+                  dataSource={uniqueCourse?.equivalents?.filter(
+                    (course) => !course.filedAt
+                  )}
+                  renderItem={(item) => (
+                    <List.Item
+                      actions={[
+                        <Button
+                          key={item.id}
+                          onClick={() => {
+                            getUniqueCourse({ id: item.id });
+                          }}
+                        >
+                          Visualizar
+                        </Button>,
+                      ]}
+                      key={item.id}
+                    >
+                      {item.name}
+                    </List.Item>
+                  )}
+                />
               </Descriptions.Item>
               <Descriptions.Item label="Acessibilidades">
                 {uniqueCourse?.accessibilities

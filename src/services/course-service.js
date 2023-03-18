@@ -17,7 +17,7 @@ export default {
     }
   ) =>
     AuthAxios.post(
-      `/courses/all?page=${payload.query}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}`,
+      `/courses/all?page=${payload.page}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}`,
       {
         search: payload.search,
         hours: payload.hours,
@@ -141,7 +141,7 @@ export default {
 
   updateCourseEquivalents: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/update-equivalents`, {
-      equivalents: [],
+      equivalents: payload.equivalents,
     })
       .then(() => ({}))
       .catch((error) => {

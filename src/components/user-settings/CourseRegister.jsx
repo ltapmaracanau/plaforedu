@@ -25,7 +25,9 @@ import {
   Table,
   List,
   Popconfirm,
+  Modal,
 } from "antd";
+import TableSelectCourses from "../filter-components/TableSelectCourses";
 
 const { Text, Title } = Typography;
 const { Content } = Layout;
@@ -70,6 +72,7 @@ export default function CourseRegister(props) {
     (state) => state.competencies.competencias
   );
   const subthemes = useStoreState((state) => state.themes.subthemes);
+  const cursos = useStoreState((state) => state.courses.cursos);
 
   const [filed, setFiled] = useState(cursoDefault.filedAt);
   const [instituicoesAtuais, setInstituicoesAtuais] = useState(
@@ -80,7 +83,72 @@ export default function CourseRegister(props) {
     cursoDefault.institutions.length - 1
   );
 
+  const [addCourseVisible, setAddCourseVisible] = useState(false);
+  const [cursosEquivalentesIds, setCursosEquivalentesIds] = useState(
+    curso ? curso.equivalents.map((curso) => curso.id) : []
+  );
+  const [cursosEquivalentes, setCursosEquivalentes] = useState(
+    curso ? curso.equivalents : []
+  );
+
   const [form] = Form.useForm();
+
+  const handleArchive = async (value) => {
+    try {
+      await setArchivedCourse({ id: curso.id, filed: value });
+      notification.success({
+        message: "Operação realizada com sucesso!",
+      });
+    } catch (error) {
+      notification.error({
+        message: "Erro ao fazer operação!",
+        description: "Por favor, tente novamente.",
+      });
+    }
+  };
+
+  // Table add courses equivalents
+
+  const onSelectChange = (newSelectedRowKeys) => {
+    setCursosEquivalentesIds(newSelectedRowKeys);
+    const novosCursos = newSelectedRowKeys.map((idCurso, _index) => {
+      const curso = cursos.find((curso) => curso.id === idCurso);
+      return {
+        name: curso.name,
+        id: curso.id,
+      };
+    });
+    setCursosEquivalentes(novosCursos);
+  };
+
+  const columnsEquivalents = [
+    {
+      title: "Título",
+      dataIndex: "name",
+      render: (text, record, _index) => {
+        return record.filedAt ? (
+          <>
+            {text} <Tag color={"orange"}>ARQUIVADO</Tag>
+          </>
+        ) : (
+          <>{text}</>
+        );
+      },
+    },
+    {
+      title: "Taxonomias",
+      key: "taxonomies",
+      render: (_, record) => {
+        return record.taxonomies.map((tax) => (
+          <Tag color={"blue"} key={tax.id}>
+            {tax.name}
+          </Tag>
+        ));
+      },
+    },
+  ];
+
+  // Instituições certificadoras
 
   const EditableCell = (props) => {
     const {
@@ -157,20 +225,6 @@ export default function CourseRegister(props) {
 
   const handleDelete = (count) => {
     setInstituicoesAtuais((antg) => antg.filter((inst) => inst.count != count));
-  };
-
-  const handleArchive = async (value) => {
-    try {
-      await setArchivedCourse({ id: curso.id, filed: value });
-      notification.success({
-        message: "Operação realizada com sucesso!",
-      });
-    } catch (error) {
-      notification.error({
-        message: "Erro ao fazer operação!",
-        description: "Por favor, tente novamente.",
-      });
-    }
   };
 
   const defaultColumns = [
@@ -253,6 +307,8 @@ export default function CourseRegister(props) {
     delayError: undefined,
   });
 
+  // Submeter alterações do curso
+
   const onSubmit = async (values) => {
     let instituicoesValidadas = false;
     let arrayInstituicoesDoForm = [];
@@ -293,16 +349,16 @@ export default function CourseRegister(props) {
           "Adicione as instituições certificadoras do curso e seus respectivos links.",
       });
     }
-    const newValues = { ...values, institutions: arrayInstituicoesDoForm };
+    const newValues = {
+      ...values,
+      institutions: arrayInstituicoesDoForm,
+      equivalents: cursosEquivalentesIds,
+    };
 
     if (instituicoesValidadas) {
       if (curso) {
         try {
-          if ((curso.filedAt !== null) !== filed) {
-            await updateCourse({ ...newValues, id: curso.id, filed: filed });
-          } else {
-            await updateCourse({ ...newValues, id: curso.id });
-          }
+          await updateCourse({ ...newValues, id: curso.id });
           notification.success({
             message: "Curso alterado com sucesso!",
           });
@@ -677,6 +733,46 @@ export default function CourseRegister(props) {
               />
             </Form>
           </div>
+          <Table
+            columns={columnsEquivalents}
+            dataSource={cursosEquivalentes}
+            pagination={false}
+            rowKey={"id"}
+            title={() => (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Title level={4}>Cursos Equivalentes</Title>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    setAddCourseVisible(true);
+                  }}
+                >
+                  Adicionar/Remover Cursos
+                </Button>
+              </div>
+            )}
+          />
+          <Modal
+            open={addCourseVisible}
+            onCancel={() => {
+              setAddCourseVisible(false);
+            }}
+            width={"auto"}
+            destroyOnClose={true}
+            title={"Adicionar/Remover cursos equivalentes"}
+            footer={null}
+          >
+            <TableSelectCourses
+              courseToHideId={curso ? curso.id : ""}
+              onSelectChange={onSelectChange}
+              cursosDefaultSelected={cursosEquivalentesIds}
+            />
+          </Modal>
         </div>
       </div>
     </>
