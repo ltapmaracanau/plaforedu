@@ -60,6 +60,7 @@ export default function FormativeTrailsRegister(props) {
     competencies: trilha ? trilha.competencies.map((item) => item.id) : [],
     itineraries: trilha ? trilha.itineraries.map((item) => item.id) : [],
     courses: trilha ? trilha.courses.map((item) => item.id) : [],
+    filedAt: trilha !== null && trilha.filedAt !== null,
   };
 
   const updateTrilha = useStoreActions(

@@ -174,7 +174,10 @@ export default function CoursesListVisualization() {
                             ) {
                               return;
                             }
-
+                            // Se a trilha estiver com a lista de cursos vazia
+                            if (trilha.courses.length === 0) {
+                              return;
+                            }
                             // Se todos os cursos estiverem arquivados eu não exibo a trilha
                             if (
                               !trilha.courses.some((curso) => {
