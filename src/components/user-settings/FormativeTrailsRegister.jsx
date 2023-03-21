@@ -23,6 +23,7 @@ import {
   Tooltip,
   Empty,
   Space,
+  Popconfirm,
 } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Controller, useForm } from "react-hook-form";
@@ -59,16 +60,21 @@ export default function FormativeTrailsRegister(props) {
     competencies: trilha ? trilha.competencies.map((item) => item.id) : [],
     itineraries: trilha ? trilha.itineraries.map((item) => item.id) : [],
     courses: trilha ? trilha.courses.map((item) => item.id) : [],
+    filedAt: trilha !== null && trilha.filedAt !== null,
   };
 
   const updateTrilha = useStoreActions(
     (actions) => actions.trilhas.updateTrilha
+  );
+  const setArchivedTrilha = useStoreActions(
+    (actions) => actions.trilhas.setArchivedTrilha
   );
   const registerTrilha = useStoreActions(
     (actions) => actions.trilhas.registerTrilha
   );
 
   const registering = useStoreState((state) => state.trilhas.registering);
+  const archiving = useStoreState((state) => state.trilhas.archiving);
 
   const allItinerarios = useStoreState(
     (state) => state.itineraries.itinerarios
@@ -78,12 +84,7 @@ export default function FormativeTrailsRegister(props) {
     (state) => state.competencies.competencias
   );
 
-  const cursos = useStoreState((state) => state.courses.cursos);
-  const cursosSecondary = useStoreState(
-    (state) => state.courses.cursosSecondary
-  );
-
-  const [filed, setFiled] = useState(trilha?.filedAt !== null);
+  const [filed, setFiled] = useState(trilhaDefault.filedAt);
   const [addCourseVisible, setAddCourseVisible] = useState(false);
 
   const [cursosTrilha, setCursosTrilha] = useState(
@@ -153,19 +154,45 @@ export default function FormativeTrailsRegister(props) {
     }
   };
 
+  const handleArchive = async (value) => {
+    try {
+      await setArchivedTrilha({ id: trilha.id, filed: value });
+      notification.success({
+        message: "Operação realizada com sucesso!",
+      });
+    } catch (error) {
+      notification.error({
+        message: "Erro ao fazer operação!",
+        description: "Por favor, tente novamente.",
+      });
+    }
+  };
+
   // Table add courses to trail
 
-  const onSelectChange = (newSelectedRowKeys) => {
-    setCursosTrilhaIds(newSelectedRowKeys);
-    const novosCursos = newSelectedRowKeys.map((idCurso, _index) => {
-      const curso = cursosSecondary.find((curso) => curso.id === idCurso);
-      return {
-        name: curso.name,
-        id: curso.id,
-        filedAt: curso.filedAt,
-      };
-    });
-    setCursosTrilha(novosCursos);
+  const onSelectChange = (record, selected) => {
+    if (selected) {
+      setCursosTrilhaIds((antig) => [...antig, record.id]);
+      setCursosTrilha((antig) => [
+        ...antig,
+        {
+          name: record.name,
+          id: record.id,
+          filedAt: record.filedAt,
+          taxonomies: record.taxonomies,
+        },
+      ]);
+    } else {
+      setCursosTrilhaIds((antig) => antig.filter((id) => id !== record.id));
+      setCursosTrilha((antig) =>
+        antig.filter((curso) => curso.id !== record.id)
+      );
+    }
+  };
+
+  const handleDeleteTrailCourse = (id) => {
+    setCursosTrilhaIds((antig) => antig.filter((idCourse) => idCourse !== id));
+    setCursosTrilha((antig) => antig.filter((curso) => curso.id !== id));
   };
 
   // Drag and Sort Table
@@ -202,6 +229,21 @@ export default function FormativeTrailsRegister(props) {
           </Tag>
         ));
       },
+    },
+    {
+      title: "",
+      action: true,
+      editable: false,
+      width: "20%",
+      dataIndex: "operation",
+      render: (_, record) => (
+        <Popconfirm
+          title="Tem certeza?"
+          onConfirm={() => handleDeleteTrailCourse(record.id)}
+        >
+          <a>Excluir</a>
+        </Popconfirm>
+      ),
     },
   ];
 
@@ -262,15 +304,31 @@ export default function FormativeTrailsRegister(props) {
               title={title}
               bordered={false}
               extra={
-                <Button
-                  loading={registering}
-                  disabled={!register.formState.isValid}
-                  type="primary"
-                  shape="round"
-                  htmlType="submit"
-                >
-                  {trilha?.id ? <>Salvar</> : <>Cadastrar</>}
-                </Button>
+                <Space direction="horizontal">
+                  <Tooltip title={"Trilha arquivada"}>
+                    <Switch
+                      checked={filed}
+                      loading={archiving}
+                      style={{
+                        marginRight: "15px",
+                      }}
+                      defaultChecked={trilhaDefault.filedAt}
+                      onChange={(value) => {
+                        setFiled(value);
+                        handleArchive(value);
+                      }}
+                    />
+                  </Tooltip>
+                  <Button
+                    loading={registering}
+                    disabled={!register.formState.isValid}
+                    type="primary"
+                    shape="round"
+                    htmlType="submit"
+                  >
+                    {trilha?.id ? <>Salvar</> : <>Cadastrar</>}
+                  </Button>
+                </Space>
               }
             >
               <Descriptions
@@ -390,17 +448,6 @@ export default function FormativeTrailsRegister(props) {
                     }}
                   />
                 </Descriptions.Item>
-                {trilha && (
-                  <Descriptions.Item label={"Trilha arquivada"}>
-                    <Switch
-                      checked={filed}
-                      defaultChecked={trilha.filedAt}
-                      onChange={(value) => {
-                        setFiled(value);
-                      }}
-                    />
-                  </Descriptions.Item>
-                )}
               </Descriptions>
               <Table
                 columns={columns}

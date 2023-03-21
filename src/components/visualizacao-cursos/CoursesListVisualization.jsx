@@ -174,7 +174,10 @@ export default function CoursesListVisualization() {
                             ) {
                               return;
                             }
-
+                            // Se a trilha estiver com a lista de cursos vazia
+                            if (trilha.courses.length === 0) {
+                              return;
+                            }
                             // Se todos os cursos estiverem arquivados eu não exibo a trilha
                             if (
                               !trilha.courses.some((curso) => {
@@ -193,7 +196,7 @@ export default function CoursesListVisualization() {
                                 <List
                                   itemLayout="vertical"
                                   dataSource={trilha.courses}
-                                  renderItem={(curso, index) => {
+                                  renderItem={(curso) => {
                                     if (curso.filedAt) {
                                       return;
                                     }
@@ -218,7 +221,7 @@ export default function CoursesListVisualization() {
                                             }}
                                           >
                                             <Title
-                                              level={4}
+                                              level={5}
                                               style={{
                                                 color: "#2C55A1",
                                                 fontFamily: "Poppins",
@@ -226,66 +229,6 @@ export default function CoursesListVisualization() {
                                             >
                                               {curso.name}
                                             </Title>
-                                            <div
-                                              style={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "left",
-                                              }}
-                                            >
-                                              <Text
-                                                style={{ fontFamily: "Roboto" }}
-                                              >
-                                                Ordem:{" "}
-                                                <Text strong>{index + 1}</Text>
-                                              </Text>
-                                            </div>
-                                            {/* <div
-                                        style={{
-                                          display: "flex",
-                                          alignItems: "center",
-                                          justifyContent: "space-between",
-                                        }}
-                                      >
-                                        <Text style={{ fontFamily: "Roboto" }}>
-                                          Instituição:{" "}
-                                          <Text strong>
-                                            {getInstituicao(curso.instCert)}
-                                          </Text>
-                                        </Text>
-
-                                        <Text style={{ fontFamily: "Roboto" }}>
-                                          Carga horária:
-                                          <Text
-                                            strong
-                                          >{` ${curso.cargaHoraria}H`}</Text>
-                                        </Text>
-                                      </div> */}
-
-                                            {/* <div
-                                        style={{
-                                          display: "flex",
-                                          flexDirection: "column",
-                                        }}
-                                      >
-                                        <Text style={{ fontFamily: "Roboto" }}>
-                                          Categorias de competência:{" "}
-                                          <Text strong>
-                                            {getCategoriasCompetencia(
-                                              curso.filter.competencias
-                                            )}
-                                          </Text>
-                                        </Text>
-
-                                        <Text style={{ fontFamily: "Roboto" }}>
-                                          Competências:{" "}
-                                          <Text strong>
-                                            {getCompetencias(
-                                              curso.filter.competencias
-                                            )}
-                                          </Text>
-                                        </Text>
-                                      </div> */}
                                           </div>
                                         </Card>
                                       </List.Item>

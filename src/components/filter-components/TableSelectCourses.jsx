@@ -66,7 +66,7 @@ export default function TableSelectCourses(props) {
   });
 
   useEffect(async () => {
-    await getCursos({ secondary: true, page: pageNumber, showFiled: true });
+    await getCursos({ secondary: true, page: pageNumber, showFiled: false });
   }, []);
 
   // Table adding courses to Trail
@@ -259,7 +259,7 @@ export default function TableSelectCourses(props) {
     await getCursos({
       ...newSearch,
       secondary: true,
-      showFiled: true,
+      showFiled: false,
       page: pageNumber,
     });
   };
@@ -278,7 +278,7 @@ export default function TableSelectCourses(props) {
     await getCursos({
       ...newSearch,
       secondary: true,
-      showFiled: true,
+      showFiled: false,
       page: pageNumber,
     });
   };
@@ -360,7 +360,9 @@ export default function TableSelectCourses(props) {
 
   const rowSelection = {
     selectedRowKeys: cursosDefaultSelected,
-    onChange: onSelectChange,
+    onSelect: onSelectChange,
+    hideSelectAll: true,
+    preserveSelectedRowKeys: true,
   };
 
   return (
@@ -377,7 +379,7 @@ export default function TableSelectCourses(props) {
           await getCursos({
             ...stringSearchMemo,
             page: page,
-            showFiled: true,
+            showFiled: false,
             secondary: true,
           });
         },
