@@ -72,7 +72,6 @@ export default function CourseRegister(props) {
     (state) => state.competencies.competencias
   );
   const subthemes = useStoreState((state) => state.themes.subthemes);
-  const cursos = useStoreState((state) => state.courses.cursos);
 
   const [filed, setFiled] = useState(cursoDefault.filedAt);
   const [instituicoesAtuais, setInstituicoesAtuais] = useState(
@@ -109,16 +108,33 @@ export default function CourseRegister(props) {
 
   // Table add courses equivalents
 
-  const onSelectChange = (newSelectedRowKeys) => {
-    setCursosEquivalentesIds(newSelectedRowKeys);
-    const novosCursos = newSelectedRowKeys.map((idCurso, _index) => {
-      const curso = cursos.find((curso) => curso.id === idCurso);
-      return {
-        name: curso.name,
-        id: curso.id,
-      };
-    });
-    setCursosEquivalentes(novosCursos);
+  const onSelectChange = (record, selected) => {
+    if (selected) {
+      setCursosEquivalentesIds((antig) => [...antig, record.id]);
+      setCursosEquivalentes((antig) => [
+        ...antig,
+        {
+          name: record.name,
+          id: record.id,
+          filedAt: record.filedAt,
+          taxonomies: record.taxonomies,
+        },
+      ]);
+    } else {
+      setCursosEquivalentesIds((antig) =>
+        antig.filter((id) => id !== record.id)
+      );
+      setCursosEquivalentes((antig) =>
+        antig.filter((curso) => curso.id !== record.id)
+      );
+    }
+  };
+
+  const handleDeleteEquivalent = (id) => {
+    setCursosEquivalentesIds((antig) =>
+      antig.filter((idCourse) => idCourse !== id)
+    );
+    setCursosEquivalentes((antig) => antig.filter((curso) => curso.id !== id));
   };
 
   const columnsEquivalents = [
@@ -145,6 +161,21 @@ export default function CourseRegister(props) {
           </Tag>
         ));
       },
+    },
+    {
+      title: "",
+      action: true,
+      editable: false,
+      width: "20%",
+      dataIndex: "operation",
+      render: (_, record) => (
+        <Popconfirm
+          title="Tem certeza?"
+          onConfirm={() => handleDeleteEquivalent(record.id)}
+        >
+          <a>Excluir</a>
+        </Popconfirm>
+      ),
     },
   ];
 

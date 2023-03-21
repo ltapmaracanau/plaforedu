@@ -5,6 +5,7 @@ import services from "../services";
 const trilhasModel = {
   loading: false,
   registering: false,
+  archiving: false,
 
   trilhas: [],
 
@@ -80,15 +81,8 @@ const trilhasModel = {
   ),
 
   updateTrilha: thunk(async (actions, payload) => {
-    const {
-      id,
-      name,
-      description,
-      itineraries,
-      competencies,
-      courses,
-      filed = undefined,
-    } = payload;
+    const { id, name, description, itineraries, competencies, courses } =
+      payload;
     const coursesRefactored = courses.map((item, index) => ({
       courseId: item,
       sequence: index + 1,
@@ -112,13 +106,6 @@ const trilhasModel = {
         id,
         competencies,
       });
-      if (filed !== undefined) {
-        if (filed) {
-          await services.trailsService.archiveTrilha({ id });
-        } else {
-          await services.trailsService.unarchiveTrilha({ id });
-        }
-      }
     } catch (error) {
       throw new Error(error.message);
     } finally {
@@ -143,12 +130,32 @@ const trilhasModel = {
     }
   }),
 
+  setArchivedTrilha: thunk(async (actions, payload) => {
+    const { filed, id } = payload;
+    actions.setArchiving(true);
+    try {
+      if (filed) {
+        await services.trailsService.archiveTrilha({ id });
+      } else {
+        await services.trailsService.unarchiveTrilha({ id });
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setArchiving(false);
+    }
+  }),
+
   setLoading: action((state, payload) => {
     state.loading = payload;
   }),
 
   setRegistering: action((state, payload) => {
     state.registering = payload;
+  }),
+
+  setArchiving: action((state, payload) => {
+    state.archiving = payload;
   }),
 
   setTrilhas: action((state, payload) => {
