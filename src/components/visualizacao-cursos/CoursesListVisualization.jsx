@@ -56,12 +56,6 @@ export default function CoursesListVisualization() {
     setModalVisible(false);
   };
 
-  useEffect(() => {
-    (async () => {
-      await getCursos({ ...filter, page: 1 });
-    })();
-  }, [getCursos]);
-
   const getCategoriasCompetencia = (competencies) => {
     let nomesCategorias = [];
     competencies.forEach((element) => {
