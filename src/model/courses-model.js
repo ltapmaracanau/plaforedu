@@ -164,6 +164,7 @@ const coursesModel = {
       competencies,
       taxonomies,
       equivalents,
+      setecTerm,
     } = payload;
     try {
       await services.courseService.registerCourse({
@@ -177,6 +178,7 @@ const coursesModel = {
         competencies: competencies,
         taxonomies: taxonomies,
         equivalents: equivalents,
+        setecTerm: setecTerm,
       });
     } catch (error) {
       throw new Error(error.message);
@@ -199,6 +201,7 @@ const coursesModel = {
       subThemes,
       taxonomies,
       equivalents,
+      setecTerm,
     } = payload;
     actions.setRegistering(true);
     try {
@@ -208,6 +211,7 @@ const coursesModel = {
         description,
         hours,
         link,
+        setecTerm,
       });
       await services.courseService.updateCourseInstitutions({
         id,
