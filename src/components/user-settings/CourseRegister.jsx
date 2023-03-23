@@ -47,7 +47,7 @@ export default function CourseRegister(props) {
     competencies: curso ? curso.competencies.map((item) => item.id) : [],
     subThemes: curso ? curso.subThemes.map((item) => item.id) : [],
     filedAt: curso !== null && curso.filedAt !== null,
-    setecTerm: curso.setecTerm,
+    setecTerm: curso ? curso.setecTerm : false,
   };
 
   const registerNewCourse = useStoreActions(
