@@ -258,6 +258,23 @@ export default function (
       ) {
         return;
       }
+      if (
+        !curso.competencies.some((competencie) => {
+          let compData = competencies.find(
+            (comp) => comp.id === competencie.id
+          );
+          if (compData) {
+            return compData.categoriesCompetencies.some(
+              (categorie) => !categorie.filedAt
+            );
+          } else {
+            return false;
+          }
+        }) &&
+        curso.competencies.length !== 0
+      ) {
+        return;
+      }
 
       let colorCategoria = colorDefault;
       let colorItinerario = colorDefault;
@@ -350,6 +367,9 @@ export default function (
           // Adicionando a categoria da competência se não existir
           competenceData.categoriesCompetencies.forEach((categoria) => {
             if (!categoriasAdicionadas.some((cat) => cat.id === categoria.id)) {
+              if (categoria.filedAt) {
+                return;
+              }
               elementos.push({
                 group: "nodes",
                 data: {
@@ -368,20 +388,21 @@ export default function (
                 classes: ["categoria"],
               });
               categoriasAdicionadas.push(categoria);
+
+              // Adicionando a edge entre a categoria e a competência
+              elementos.push({
+                group: "edges",
+                data: {
+                  id:
+                    "edgecategoria" +
+                    categoria.id +
+                    "competencia" +
+                    competencia.id,
+                  source: "categoria" + categoria.id,
+                  target: "competencia" + competencia.id,
+                },
+              });
             }
-            // Adicionando a edge entre a categoria e a competência
-            elementos.push({
-              group: "edges",
-              data: {
-                id:
-                  "edgecategoria" +
-                  categoria.id +
-                  "competencia" +
-                  competencia.id,
-                source: "categoria" + categoria.id,
-                target: "competencia" + competencia.id,
-              },
-            });
           });
         }
         // Edge entre competência e curso

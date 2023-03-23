@@ -238,6 +238,62 @@ export default function CoursesListVisualization() {
                                             >
                                               {curso.name}
                                             </Title>
+                                            <div
+                                              style={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-between",
+                                              }}
+                                            >
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Instituição:{" "}
+                                                <Text strong>
+                                                  {curso.institutions
+                                                    .map((inst) => inst.name)
+                                                    .join(" | ")}
+                                                </Text>
+                                              </Text>
+
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Carga horária:
+                                                <Text
+                                                  strong
+                                                >{` ${curso.hours}H`}</Text>
+                                              </Text>
+                                            </div>
+
+                                            <div
+                                              style={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                              }}
+                                            >
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Categorias de competência:{" "}
+                                                <Text strong>
+                                                  {getCategoriasCompetencia(
+                                                    curso.competencies
+                                                  )}
+                                                </Text>
+                                              </Text>
+
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Competências:{" "}
+                                                <Text strong>
+                                                  {curso.competencies
+                                                    .map((comp) => comp.name)
+                                                    .join(" | ")}
+                                                </Text>
+                                              </Text>
+                                            </div>
                                           </div>
                                         </Card>
                                       </List.Item>
@@ -312,6 +368,23 @@ export default function CoursesListVisualization() {
                       (institution) => !institution?.filedAt
                     ) &&
                     curso.institutions.length !== 0
+                  ) {
+                    return;
+                  }
+                  if (
+                    !curso.competencies.some((competencie) => {
+                      let compData = listCompetencias.find(
+                        (comp) => comp.id === competencie.id
+                      );
+                      if (compData) {
+                        return compData.categoriesCompetencies.some(
+                          (categorie) => !categorie.filedAt
+                        );
+                      } else {
+                        return false;
+                      }
+                    }) &&
+                    curso.competencies.length !== 0
                   ) {
                     return;
                   }
