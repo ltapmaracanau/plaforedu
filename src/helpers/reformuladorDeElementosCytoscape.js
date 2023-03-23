@@ -245,19 +245,16 @@ export default function (
     let categoriasAdicionadas = [];
 
     dados.forEach((curso) => {
-      // Aqui eu decido se vou mostrar o curso no grafo de acordo com as competências arquivadas
+      // Aqui eu decido se vou mostrar o curso no grafo de acordo com os dados arquivados
       if (
-        !curso.competencies.some((competencie) => {
-          const competenceData = competencies.find(
-            (comp) => comp.id === competencie.id
-          );
-          if (competenceData) {
-            return !competenceData?.filedAt;
-          } else {
-            return false;
-          }
-        }) &&
+        !curso.competencies.some((competencie) => !competencie?.filedAt) &&
         curso.competencies.length !== 0
+      ) {
+        return;
+      }
+      if (
+        !curso.institutions.some((institution) => !institution?.filedAt) &&
+        curso.institutions.length !== 0
       ) {
         return;
       }

@@ -61,7 +61,7 @@ const trilhasModel = {
         await services.trailsService
           .getTrilhas({
             includeFiled: showFiled,
-            search: query,
+            search: query.trim(),
             page: page,
             registerLog: registerLog,
             itineraries: itinerario ? [itinerario] : [],
@@ -91,7 +91,7 @@ const trilhasModel = {
     try {
       await services.trailsService.updateTrilha({
         id,
-        name,
+        name: name.trim(),
         description,
       });
       await services.trailsService.updateTrilhaItineraries({
@@ -120,7 +120,13 @@ const trilhasModel = {
       courseId: item,
       sequence: index + 1,
     }));
-    const newPayload = { ...payload, courses: coursesRefactored };
+    const newPayload = {
+      name: payload.name.trim(),
+      description: payload.description,
+      itineraries: payload.itineraries,
+      competencies: payload.competencies,
+      courses: coursesRefactored,
+    };
     try {
       await services.trailsService.registerTrilha(newPayload);
     } catch (error) {

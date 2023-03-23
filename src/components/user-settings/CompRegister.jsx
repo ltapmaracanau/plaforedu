@@ -88,7 +88,7 @@ export default function CompRegister(props) {
 
   useEffect(() => {
     (async () => {
-      await getCatComp();
+      await getCatComp({ showFiled: true });
     })();
   }, [getCatComp]);
 

@@ -103,7 +103,7 @@ const coursesModel = {
         includeFiled: showFiled,
         registerLog: registerLog,
         page: page,
-        search: query,
+        search: query.trim(),
         hours: cargaHoraria,
         institutions: institutions,
         itineraries: newItineraries,
@@ -129,6 +129,15 @@ const coursesModel = {
     }
   ),
 
+  getTaxonomias: thunk(async (actions, _payload) => {
+    actions.setLoading(true);
+    const taxonomias = await services.courseService.getTaxonomias();
+    if (taxonomias?.data?.length >= 0) {
+      actions.setTaxonomias(taxonomias.data);
+    }
+    actions.setLoading(false);
+  }),
+
   getUniqueCourse: thunk(async (actions, payload) => {
     actions.setLoadingUniqueCourse(true);
     const { id = "" } = payload;
@@ -144,9 +153,30 @@ const coursesModel = {
 
   registerNewCourse: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const {
+      name,
+      description,
+      hours,
+      institutions,
+      accessibilities,
+      itineraries,
+      subThemes,
+      competencies,
+      taxonomies,
+      equivalents,
+    } = payload;
     try {
       await services.courseService.registerCourse({
-        ...payload,
+        name: name.trim(),
+        description: description,
+        hours: hours,
+        institutions: institutions,
+        accessibilities: accessibilities,
+        itineraries: itineraries,
+        subThemes: subThemes,
+        competencies: competencies,
+        taxonomies: taxonomies,
+        equivalents: equivalents,
       });
     } catch (error) {
       throw new Error(error.message);
@@ -174,7 +204,7 @@ const coursesModel = {
     try {
       await services.courseService.updateCourse({
         id,
-        name,
+        name: name.trim(),
         description,
         hours,
         link,
@@ -225,15 +255,6 @@ const coursesModel = {
     } finally {
       actions.setArchiving(false);
     }
-  }),
-
-  getTaxonomias: thunk(async (actions, _payload) => {
-    actions.setLoading(true);
-    const taxonomias = await services.courseService.getTaxonomias();
-    if (taxonomias?.data?.length >= 0) {
-      actions.setTaxonomias(taxonomias.data);
-    }
-    actions.setLoading(false);
   }),
 
   setLoading: action((state, payload) => {

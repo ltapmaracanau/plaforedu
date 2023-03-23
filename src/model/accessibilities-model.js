@@ -8,7 +8,7 @@ const accessibilitiesModel = {
   getAcessibilidades: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true);
     const acessibilidades = await dataService.getAcessibilidades({
-      query: payload.query,
+      query: payload.query.trim(),
     });
     if (acessibilidades?.length > 0) {
       actions.setAcessibilidades(acessibilidades);

@@ -147,8 +147,8 @@ const admModel = {
     try {
       const logs = await dataService.getSearchLogs({
         page: page,
-        description: description,
-        userName: user,
+        description: description.trim(),
+        userName: user.trim(),
         initialDate: date ? date[0].format("YYYY-MM-DD") : "",
         finalDate: date ? date[1].format("YYYY-MM-DD") : "",
       });

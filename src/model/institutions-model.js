@@ -10,9 +10,11 @@ const instituicoesModel = {
 
   registerNewInstitution: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { name, abbreviation } = payload;
     try {
       await services.institutionService.registerInstitution({
-        ...payload,
+        name: name.trim(),
+        abbreviation: abbreviation.trim(),
       });
     } catch (error) {
       throw new Error(error.message);
@@ -23,18 +25,21 @@ const instituicoesModel = {
 
   updateInstitution: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { id, name, abbreviation } = payload;
     try {
       await services.institutionService.updateInstitution({
-        ...payload,
+        id,
+        name: name.trim(),
+        abbreviation: abbreviation.trim(),
       });
       if (payload.filed !== undefined) {
         if (payload.filed) {
           await services.institutionService.archiveInstitution({
-            id: payload.id,
+            id,
           });
         } else {
           await services.institutionService.unarchiveInstitution({
-            id: payload.id,
+            id,
           });
         }
       }
@@ -52,7 +57,7 @@ const instituicoesModel = {
       try {
         await services.institutionService
           .getInstituicoes({
-            query,
+            query: query.trim(),
             showFiled,
           })
           .then((instituicoes) => {

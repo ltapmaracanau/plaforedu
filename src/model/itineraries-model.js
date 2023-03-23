@@ -22,7 +22,7 @@ const itinerariosModel = {
   getItinerarios: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true);
     const itinerarios = await dataService.getItinerarios({
-      query: payload.query,
+      query: payload.query.trim(),
     });
     if (itinerarios?.length > 0) {
       actions.setItinerarios(itinerarios);

@@ -7,7 +7,7 @@ const rolesModel = {
 
   getRoles: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true);
-    const roles = await dataService.getRoles({ query: payload.query });
+    const roles = await dataService.getRoles({ query: payload.query.trim() });
     if (roles?.length > 0) {
       actions.setRoles(roles);
     }

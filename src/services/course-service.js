@@ -52,7 +52,7 @@ export default {
       subThemes: payload.subThemes,
       competencies: payload.competencies,
       taxonomies: payload.taxonomies,
-      equivalents: [],
+      equivalents: payload.equivalents,
     })
       .then((response) => response.data)
       .catch((error) => {

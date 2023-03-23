@@ -10,7 +10,7 @@ const usuariosModel = {
     const { query = "", showFiled = false } = payload;
     actions.setLoading(true);
     const users = await dataService.getUsers({
-      query: query,
+      query: query.trim(),
       showFiled: showFiled,
     });
     if (users?.length >= 0) {
@@ -28,8 +28,16 @@ const usuariosModel = {
 
   registerNewUser: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { cpf, email, institution, name, phone, roles } = payload;
     try {
-      newUser = await dataService.createUser({ ...payload });
+      await dataService.createUser({
+        cpf,
+        email: email.trim(),
+        institution: institution.trim(),
+        name: name.trim(),
+        phone,
+        roles,
+      });
     } catch (error) {
       throw new Error(error.message);
     } finally {
@@ -43,10 +51,10 @@ const usuariosModel = {
     try {
       await dataService.updateUser({
         id,
-        name,
-        email,
+        name: name.trim(),
+        email: email.trim(),
         cpf,
-        institution,
+        institution: institution.trim(),
         phone,
       });
       await dataService.updateUserRoles({
