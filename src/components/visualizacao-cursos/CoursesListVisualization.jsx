@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import {
@@ -30,9 +30,11 @@ export default function CoursesListVisualization() {
   const getUniqueCourse = useStoreActions(
     (actions) => actions.courses.getUniqueCourse
   );
+  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
   const cursos = useStoreState((state) => state.courses.cursos);
+  const count = useStoreState((state) => state.courses.count);
   const trilhas = useStoreState((state) => state.trilhas.trilhas);
 
   const listCompetencias = useStoreState(
@@ -48,6 +50,7 @@ export default function CoursesListVisualization() {
   const loading = useStoreState((state) => state.courses.loading);
   const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
   const [modalVisible, setModalVisible] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const handleOk = () => {
     setModalVisible(false);
@@ -229,6 +232,62 @@ export default function CoursesListVisualization() {
                                             >
                                               {curso.name}
                                             </Title>
+                                            <div
+                                              style={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-between",
+                                              }}
+                                            >
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Instituição:{" "}
+                                                <Text strong>
+                                                  {curso.institutions
+                                                    .map((inst) => inst.name)
+                                                    .join(" | ")}
+                                                </Text>
+                                              </Text>
+
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Carga horária:
+                                                <Text
+                                                  strong
+                                                >{` ${curso.hours}H`}</Text>
+                                              </Text>
+                                            </div>
+
+                                            <div
+                                              style={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                              }}
+                                            >
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Categorias de competência:{" "}
+                                                <Text strong>
+                                                  {getCategoriasCompetencia(
+                                                    curso.competencies
+                                                  )}
+                                                </Text>
+                                              </Text>
+
+                                              <Text
+                                                style={{ fontFamily: "Roboto" }}
+                                              >
+                                                Competências:{" "}
+                                                <Text strong>
+                                                  {curso.competencies
+                                                    .map((comp) => comp.name)
+                                                    .join(" | ")}
+                                                </Text>
+                                              </Text>
+                                            </div>
                                           </div>
                                         </Card>
                                       </List.Item>
@@ -271,17 +330,50 @@ export default function CoursesListVisualization() {
                     </Card>
                   ),
                 }}
+                /* pagination={{
+                  onChange: (page) => {
+                    setPageNumber(page);
+                    getCursos({
+                      ...filter,
+                      page: page,
+                    });
+                  },
+                  pageSize: 20,
+                  total: count,
+                  showSizeChanger: false,
+                  current: pageNumber,
+                  defaultCurrent: 1,
+                  hideOnSinglePage: false,
+                }} */
                 dataSource={cursos}
                 loading={loading}
                 renderItem={(curso) => {
                   // Aqui verifico se devo ou não mostrar o curso de acordo com os dados arquivados
                   if (
+                    !curso.competencies.some(
+                      (competencie) => !competencie?.filedAt
+                    ) &&
+                    curso.competencies.length !== 0
+                  ) {
+                    return;
+                  }
+                  if (
+                    !curso.institutions.some(
+                      (institution) => !institution?.filedAt
+                    ) &&
+                    curso.institutions.length !== 0
+                  ) {
+                    return;
+                  }
+                  if (
                     !curso.competencies.some((competencie) => {
-                      const competenceData = listCompetencias.find(
+                      let compData = listCompetencias.find(
                         (comp) => comp.id === competencie.id
                       );
-                      if (competenceData) {
-                        return !competenceData?.filedAt;
+                      if (compData) {
+                        return compData.categoriesCompetencies.some(
+                          (categorie) => !categorie.filedAt
+                        );
                       } else {
                         return false;
                       }

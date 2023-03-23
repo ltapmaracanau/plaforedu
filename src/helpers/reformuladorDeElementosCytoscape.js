@@ -245,14 +245,28 @@ export default function (
     let categoriasAdicionadas = [];
 
     dados.forEach((curso) => {
-      // Aqui eu decido se vou mostrar o curso no grafo de acordo com as competências arquivadas
+      // Aqui eu decido se vou mostrar o curso no grafo de acordo com os dados arquivados
+      if (
+        !curso.competencies.some((competencie) => !competencie?.filedAt) &&
+        curso.competencies.length !== 0
+      ) {
+        return;
+      }
+      if (
+        !curso.institutions.some((institution) => !institution?.filedAt) &&
+        curso.institutions.length !== 0
+      ) {
+        return;
+      }
       if (
         !curso.competencies.some((competencie) => {
-          const competenceData = competencies.find(
+          let compData = competencies.find(
             (comp) => comp.id === competencie.id
           );
-          if (competenceData) {
-            return !competenceData?.filedAt;
+          if (compData) {
+            return compData.categoriesCompetencies.some(
+              (categorie) => !categorie.filedAt
+            );
           } else {
             return false;
           }
@@ -353,6 +367,9 @@ export default function (
           // Adicionando a categoria da competência se não existir
           competenceData.categoriesCompetencies.forEach((categoria) => {
             if (!categoriasAdicionadas.some((cat) => cat.id === categoria.id)) {
+              if (categoria.filedAt) {
+                return;
+              }
               elementos.push({
                 group: "nodes",
                 data: {
@@ -371,20 +388,21 @@ export default function (
                 classes: ["categoria"],
               });
               categoriasAdicionadas.push(categoria);
+
+              // Adicionando a edge entre a categoria e a competência
+              elementos.push({
+                group: "edges",
+                data: {
+                  id:
+                    "edgecategoria" +
+                    categoria.id +
+                    "competencia" +
+                    competencia.id,
+                  source: "categoria" + categoria.id,
+                  target: "competencia" + competencia.id,
+                },
+              });
             }
-            // Adicionando a edge entre a categoria e a competência
-            elementos.push({
-              group: "edges",
-              data: {
-                id:
-                  "edgecategoria" +
-                  categoria.id +
-                  "competencia" +
-                  competencia.id,
-                source: "categoria" + categoria.id,
-                target: "competencia" + competencia.id,
-              },
-            });
           });
         }
         // Edge entre competência e curso

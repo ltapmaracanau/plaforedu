@@ -22,12 +22,8 @@ export default function SideFilter({ debounceTimeout = 800 }) {
   const screens = useBreakpoint();
 
   const subtemas = useStoreState((state) => state.themes.subthemes);
-  const temas = useStoreState((state) => state.themes.themes);
   const competencias = useStoreState(
     (state) => state.competencies.competencias
-  );
-  const categoriasDeCompetencias = useStoreState(
-    (state) => state.competencies.catComp
   );
   const instituicoes = useStoreState(
     (state) => state.institutions.instituicoes
@@ -42,6 +38,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
   const setTipoVisualizacao = useStoreActions(
     (actions) => actions.adm.setTipoVisualizacao
   );
+  const tipoVisualizacao = useStoreState((state) => state.adm.tipoVisualizacao);
 
   const register = useRef(
     useForm({
@@ -145,7 +142,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                       label={"Visualizar em:"}
                     >
                       <Switch
-                        defaultChecked={false}
+                        defaultChecked={tipoVisualizacao}
                         checkedChildren="Lista"
                         unCheckedChildren="Grafo"
                         onChange={(value) => {
@@ -226,50 +223,6 @@ export default function SideFilter({ debounceTimeout = 800 }) {
               )}
             />
           </Card>
-          {/* <Card
-            style={{ borderRadius: "21px", marginBottom: "5px" }}
-            bodyStyle={{
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "15px",
-            }}
-          >
-            <Controller
-              control={register.current.control}
-              name="categoriasDeCompetencias"
-              render={({ field }) => (
-                <Form.Item
-                  style={{ marginBottom: "0" }}
-                  label={"Categorias de Competências:"}
-                >
-                  <Select
-                    {...field}
-                    mode="multiple"
-                    placeholder={"Todas as categorias"}
-                    showArrow
-                    onChange={(value) => {
-                      field.onChange(value);
-                      onSubmit();
-                    }}
-                    style={{ width: "100%" }}
-                    filterOption={(input, option) => {
-                      return (
-                        option.children
-                          .toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      );
-                    }}
-                  >
-                    {categoriasDeCompetencias.map((categoria) => (
-                      <Select.Option key={categoria.id} value={categoria.id}>
-                        {categoria.nome}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              )}
-            />
-          </Card> */}
           <Card
             style={{ borderRadius: "21px", marginBottom: "5px" }}
             bodyStyle={{
@@ -319,47 +272,6 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           </Card>
           {filtroCompleto && (
             <>
-              {/* <Card
-                style={{ borderRadius: "21px", marginBottom: "5px" }}
-                bodyStyle={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "15px",
-                }}
-              >
-                <Controller
-                  control={register.current.control}
-                  name="temas"
-                  render={({ field }) => (
-                    <Form.Item style={{ marginBottom: "0" }} label={"Temas:"}>
-                      <Select
-                        {...field}
-                        mode="multiple"
-                        placeholder={"Todos os temas"}
-                        showArrow
-                        onChange={(value) => {
-                          field.onChange(value);
-                          onSubmit();
-                        }}
-                        filterOption={(input, option) => {
-                          return (
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          );
-                        }}
-                        style={{ width: "100%" }}
-                      >
-                        {temas.map((tema) => (
-                          <Select.Option key={tema.id} value={tema.id}>
-                            {tema.titulo}
-                          </Select.Option>
-                        ))}
-                      </Select>
-                    </Form.Item>
-                  )}
-                />
-              </Card> */}
               <Card
                 style={{ borderRadius: "21px", marginBottom: "5px" }}
                 bodyStyle={{

@@ -26,6 +26,7 @@ import {
   List,
   Popconfirm,
   Modal,
+  Checkbox,
 } from "antd";
 import TableSelectCourses from "../filter-components/TableSelectCourses";
 
@@ -46,6 +47,7 @@ export default function CourseRegister(props) {
     competencies: curso ? curso.competencies.map((item) => item.id) : [],
     subThemes: curso ? curso.subThemes.map((item) => item.id) : [],
     filedAt: curso !== null && curso.filedAt !== null,
+    setecTerm: curso.setecTerm,
   };
 
   const registerNewCourse = useStoreActions(
@@ -713,6 +715,29 @@ export default function CourseRegister(props) {
                               </Select.Option>
                             ))}
                           </Select>
+                        </Form.Item>
+                      );
+                    }}
+                  />
+                </Descriptions.Item>
+                <Descriptions.Item label={"Termo da SETEC"}>
+                  <Controller
+                    key={"setecTerm"}
+                    name="setecTerm"
+                    control={register.control}
+                    render={({ field, fieldState: { error } }) => {
+                      return (
+                        <Form.Item
+                          validateStatus={error ? "error" : ""}
+                          help={error ? error.message : ""}
+                          hasFeedback
+                        >
+                          <Switch
+                            checked={field.value}
+                            onChange={field.onChange}
+                            name={field.name}
+                            ref={field.ref}
+                          />
                         </Form.Item>
                       );
                     }}

@@ -9,8 +9,12 @@ const competenciasModel = {
 
   registerCatComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { name = "", description = "" } = payload;
     try {
-      await services.compService.registerCatComp({ ...payload });
+      await services.compService.registerCatComp({
+        name: name.trim(),
+        description: description,
+      });
     } catch (error) {
       throw new Error(error.message);
     } finally {
@@ -21,11 +25,12 @@ const competenciasModel = {
   getCatComp: thunk(
     async (actions, payload = { query: "", showFiled: false }) => {
       actions.setLoading(true);
+      const { query = "", showFiled = false } = payload;
       try {
         await services.compService
           .getCatComp({
-            query: payload.query,
-            showFiled: payload.showFiled,
+            query: query.trim(),
+            showFiled: showFiled,
           })
           .then((list) => {
             if (list?.length >= 0) {
@@ -42,15 +47,18 @@ const competenciasModel = {
 
   updateCatComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { name, description, id } = payload;
     try {
       await services.compService.updateCatComp({
-        ...payload,
+        name: name.trim(),
+        description,
+        id,
       });
       if (payload.filed !== undefined) {
         if (payload.filed) {
-          await services.compService.archiveCatComp({ id: payload.id });
+          await services.compService.archiveCatComp({ id });
         } else {
-          await services.compService.unarchiveCatComp({ id: payload.id });
+          await services.compService.unarchiveCatComp({ id });
         }
       }
     } catch (error) {
@@ -62,8 +70,13 @@ const competenciasModel = {
 
   registerComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { name, description, competenciesCategoryIds } = payload;
     try {
-      await services.compService.registerComp({ ...payload });
+      await services.compService.registerComp({
+        name: name.trim(),
+        description,
+        competenciesCategoryIds,
+      });
     } catch (error) {
       throw new Error(error.message);
     } finally {
@@ -73,13 +86,19 @@ const competenciasModel = {
 
   updateComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { id, name, description, competenciesCategoryIds } = payload;
     try {
-      await services.compService.updateComp({ ...payload });
+      await services.compService.updateComp({
+        id,
+        name: name.trim(),
+        description,
+        competenciesCategoryIds,
+      });
       if (payload.filed !== undefined) {
         if (payload.filed) {
-          await services.compService.archiveComp({ id: payload.id });
+          await services.compService.archiveComp({ id });
         } else {
-          await services.compService.unarchiveComp({ id: payload.id });
+          await services.compService.unarchiveComp({ id });
         }
       }
     } catch (error) {
@@ -95,7 +114,7 @@ const competenciasModel = {
     try {
       await services.compService
         .getCompetencias({
-          query: query,
+          query: query.trim(),
           showFiled: showFiled,
         })
         .then((competencias) => {

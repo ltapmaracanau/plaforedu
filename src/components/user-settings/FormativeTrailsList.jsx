@@ -30,8 +30,6 @@ export default function FormativeTrailsList() {
   const getInstitutions = useStoreActions(
     (actions) => actions.institutions.getInstituicoes
   );
-  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
-
   const [registerVisible, setRegisterVisible] = useState(false);
 
   const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
