@@ -52,7 +52,8 @@ export default {
       subThemes: payload.subThemes,
       competencies: payload.competencies,
       taxonomies: payload.taxonomies,
-      equivalents: [],
+      equivalents: payload.equivalents,
+      setecTerm: payload.setecTerm,
     })
       .then((response) => response.data)
       .catch((error) => {
@@ -65,6 +66,7 @@ export default {
       description: payload.description,
       hours: payload.hours,
       link: payload.link,
+      setecTerm: payload.setecTerm,
     })
       .then(() => ({}))
       .catch((error) => {

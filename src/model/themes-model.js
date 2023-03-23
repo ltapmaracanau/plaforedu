@@ -18,7 +18,7 @@ const temasModel = {
       try {
         await services.themesService
           .getThemes({
-            query: query,
+            query: query.trim(),
             showFiled: showFiled,
           })
           .then((themes) => {
@@ -36,8 +36,9 @@ const temasModel = {
 
   registerTheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { name } = payload;
     try {
-      await services.themesService.registerTheme({ ...payload });
+      await services.themesService.registerTheme({ name: name.trim() });
     } catch (error) {
       throw new Error(error.message);
     } finally {
@@ -47,18 +48,17 @@ const temasModel = {
 
   updateTheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { name, id } = payload;
     try {
-      await services.themesService.updateTheme({
-        ...payload,
-      });
+      await services.themesService.updateTheme({ name: name.trim(), id });
       if (payload.filed !== undefined) {
         if (payload.filed) {
           await services.themesService.archiveTheme({
-            id: payload.id,
+            id,
           });
         } else {
           await services.themesService.unarchiveTheme({
-            id: payload.id,
+            id,
           });
         }
       }
@@ -71,18 +71,21 @@ const temasModel = {
 
   updateSubtheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { id, name, themeIds } = payload;
     try {
       await services.themesService.updateSubtheme({
-        ...payload,
+        id,
+        name: name.trim(),
+        themeIds,
       });
       if (payload.filed !== undefined) {
         if (payload.filed) {
           await services.themesService.archiveSubtheme({
-            id: payload.id,
+            id,
           });
         } else {
           await services.themesService.unarchiveSubtheme({
-            id: payload.id,
+            id,
           });
         }
       }
@@ -100,7 +103,7 @@ const temasModel = {
       try {
         await services.themesService
           .getSubthemes({
-            query: query,
+            query: query.trim(),
             showFiled: showFiled,
           })
           .then((subthemes) => {
@@ -118,9 +121,11 @@ const temasModel = {
 
   registerSubtheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
+    const { name, themeIds } = payload;
     try {
       await services.themesService.registerSubtheme({
-        ...payload,
+        name: name.trim(),
+        themeIds,
       });
     } catch (error) {
       throw new Error(error.message);
