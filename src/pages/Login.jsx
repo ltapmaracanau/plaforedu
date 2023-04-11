@@ -30,13 +30,8 @@ export default function Login() {
   });
 
   const onSubmit = async (values) => {
-    const tryLogin = await login(values);
-    if (tryLogin.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: tryLogin.message,
-      });
-    } else {
+    try {
+      const tryLogin = await login(values);
       if (tryLogin.user.status === "PENDING") {
         notification.warning({
           message: "Login bem sucedido!",
@@ -50,6 +45,11 @@ export default function Login() {
         });
         navigate(`/`);
       }
+    } catch (error) {
+      notification.error({
+        message: "Algo deu errado!",
+        description: tryLogin.message,
+      });
     }
   };
 

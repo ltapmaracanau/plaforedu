@@ -10,11 +10,13 @@ const admModel = {
   loadingLogs: false,
   iniciando: true,
   downloadingSearchLogs: false,
-  isAuthenticated: true,
+  isAuthenticated: computed((_state) => !!dataService.getToken()),
   searchLogs: [],
   countLogs: 0,
 
   myProfile: {},
+
+  isActive: computed((state) => state.myProfile.status === "ACTIVE"),
 
   isAdm: computed((state) =>
     state.myProfile.UsersRoles?.some(
@@ -39,48 +41,36 @@ const admModel = {
   ),
 
   init: thunk(async (actions, _, { getStoreActions }) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      AuthAxios.defaults.headers.Authorization = `Bearer ${token}`;
-      try {
-        const myUser = await dataService.getMyProfile();
-        actions.setMyProfile(myUser);
-      } catch (error) {
-        localStorage.removeItem("token");
-        AuthAxios.defaults.headers.Authorization = undefined;
-        actions.setIsAuthenticated(false);
-      }
-    } else {
-      actions.setIsAuthenticated(false);
-    }
-    try {
+    /* try {
       await getStoreActions().competencies.getComp();
       await getStoreActions().itineraries.getItinerarios();
       //await getStoreActions().courses.getCursos();
-      await getStoreActions().trilhas.getTrilhas();
+      //await getStoreActions().trilhas.getTrilhas();
       await getStoreActions().institutions.getInstituicoes();
       await getStoreActions().themes.getSubthemes();
-    } catch (error) {
     } finally {
-      actions.setIniciando(false);
-    }
+    } */
+    actions.setIniciando(false);
   }),
 
   login: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    const authentication = await dataService.login({
-      username: payload.username,
-      password: payload.password,
-    });
-    if (authentication.token) {
+    // try login
+    try {
+      const authentication = await dataService.login({
+        username: payload.username,
+        password: payload.password,
+      });
       actions.setMyProfile(authentication.user);
       localStorage.removeItem("token");
       localStorage.setItem("token", authentication.token);
       AuthAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
-      actions.setIsAuthenticated(true);
+      return authentication;
+    } catch (e) {
+      throw new Error(e);
+    } finally {
+      actions.setLoading(false);
     }
-    actions.setLoading(false);
-    return authentication;
   }),
 
   logout: thunk(async (actions, _) => {
@@ -88,7 +78,6 @@ const admModel = {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     AuthAxios.defaults.headers.Authorization = undefined;
-    actions.setIsAuthenticated(false);
     actions.setMyProfile({});
     actions.setLoading(false);
   }),
@@ -126,7 +115,6 @@ const admModel = {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     AuthAxios.defaults.headers.Authorization = undefined;
-    actions.setIsAuthenticated(false);
     actions.setMyProfile({});
     actions.setLoading(false);
   }),
