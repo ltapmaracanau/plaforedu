@@ -5,6 +5,10 @@ export const dataService = {
     return localStorage.getItem("token");
   },
 
+  getLocalStorageUser: () => {
+    return JSON.parse(localStorage.getItem("user"));
+  },
+
   login: (payload = { username: "", password: "" }) =>
     AuthAxios.post("/sessions", {
       email: payload.username,
@@ -148,7 +152,7 @@ export const dataService = {
         throw new Error(error.response?.data?.message || "Algo deu errado!");
       }),
 
-  getMyProfile: () =>
+  getAllDataProfile: () =>
     AuthAxios.get("/profile/me")
       .then((response) => response.data)
       .catch((error) => {

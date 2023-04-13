@@ -4,11 +4,9 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { Button, Card, Form, Input, Space, Layout, notification } from "antd";
+import { Button, Card, Form, Input, Space, notification } from "antd";
 import HeaderHome from "../components/header/HeaderHome";
 import { Link, useNavigate } from "react-router-dom";
-
-const { Content } = Layout;
 
 export default function Login() {
   const login = useStoreActions((actions) => actions.adm.login);
@@ -30,26 +28,17 @@ export default function Login() {
   });
 
   const onSubmit = async (values) => {
-    const tryLogin = await login(values);
-    if (tryLogin.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: tryLogin.message,
+    try {
+      await login(values);
+      notification.success({
+        message: "Login bem sucedido!",
       });
-    } else {
-      if (tryLogin.user.status === "PENDING") {
-        notification.warning({
-          message: "Login bem sucedido!",
-          description:
-            "Antes do acesso total ao sistema você precisa alterar sua senha!",
-        });
-        navigate("/settings");
-      } else {
-        notification.success({
-          message: "Login bem sucedido!",
-        });
-        navigate(`/`);
-      }
+      navigate(`/`);
+    } catch (error) {
+      notification.error({
+        message: "Erro!",
+        description: error.message,
+      });
     }
   };
 

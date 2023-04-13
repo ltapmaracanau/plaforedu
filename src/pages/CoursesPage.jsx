@@ -19,8 +19,18 @@ export default function CoursesPage() {
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
+  const getComp = useStoreActions((actions) => actions.competencies.getComp);
+  const getInstituicoes = useStoreActions(
+    (actions) => actions.institutions.getInstituicoes
+  );
+  const getSubthemes = useStoreActions(
+    (actions) => actions.themes.getSubthemes
+  );
 
-  useEffect(() => {
+  useEffect(async () => {
+    await getComp();
+    await getInstituicoes();
+    await getSubthemes();
     window.scrollTo(0, 0);
   }, []);
 

@@ -36,6 +36,7 @@ const { Sider } = Layout;
 export default function SettingsPage() {
   const isAdm = useStoreState((state) => state.adm.isAdm);
   const isCoord = useStoreState((state) => state.adm.isCoord);
+  const isActive = useStoreState((state) => state.adm.isActive);
 
   const contentArray = [
     <MyProfile key={"my-profile"} />,
@@ -83,7 +84,7 @@ export default function SettingsPage() {
     {
       label: "Cadastros",
       key: 3,
-      disabled: !(isAdm || isCoord),
+      disabled: !(isAdm || isCoord || isActive),
       icon: <DiffOutlined />,
       children: [
         {
@@ -196,6 +197,7 @@ export default function SettingsPage() {
     {
       key: 4,
       icon: <FileSearchOutlined />,
+      disabled: !(isAdm || isCoord || isActive),
       label: (
         <div
           onClick={() => {
