@@ -2,6 +2,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { action, computed, thunk } from "easy-peasy";
 import AuthAxios from "../services/authAxios";
 import { dataService } from "../services/dataService";
+import { notification } from "antd";
 
 const admModel = {
   tipoVisualizacao: false, // false: grafo, true: lista
@@ -14,58 +15,51 @@ const admModel = {
   searchLogs: [],
   countLogs: 0,
 
-  myProfile: {},
+  myProfile: computed((_state) => dataService.getLocalStorageUser()),
+  allDataProfile: {},
 
-  isActive: computed((state) => state.myProfile.status === "ACTIVE"),
+  isActive: computed((state) => state.myProfile?.status === "ACTIVE"),
 
   isAdm: computed((state) =>
-    state.myProfile.UsersRoles?.some(
-      (item) => item.role.name === "ADMINISTRADOR"
-    )
+    state.myProfile?.roles?.some((item) => item === "ADMINISTRADOR")
   ),
 
   isCoord: computed((state) =>
-    state.myProfile.UsersRoles?.some((item) => item.role.name === "COORDENADOR")
+    state.myProfile?.roles?.some((item) => item === "COORDENADOR")
   ),
 
   isCoordAVA: computed((state) =>
-    state.myProfile.UsersRoles?.some(
-      (item) => item.role.name === "COORDENADOR AVA"
-    )
+    state.myProfile?.roles?.some((item) => item === "COORDENADOR AVA")
   ),
 
   isAnalDados: computed((state) =>
-    state.myProfile.UsersRoles?.some(
-      (item) => item.role.name === "ANALISTA DE DADOS"
-    )
+    state.myProfile?.roles?.some((item) => item === "ANALISTA DE DADOS")
   ),
 
   init: thunk(async (actions, _, { getStoreActions }) => {
-    /* try {
-      await getStoreActions().competencies.getComp();
+    try {
       await getStoreActions().itineraries.getItinerarios();
-      //await getStoreActions().courses.getCursos();
-      //await getStoreActions().trilhas.getTrilhas();
-      await getStoreActions().institutions.getInstituicoes();
-      await getStoreActions().themes.getSubthemes();
     } finally {
-    } */
-    actions.setIniciando(false);
+      actions.setIniciando(false);
+    }
   }),
 
   login: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    // try login
     try {
       const authentication = await dataService.login({
         username: payload.username,
         password: payload.password,
       });
-      actions.setMyProfile(authentication.user);
-      localStorage.removeItem("token");
+      if (authentication.user.status === "PENDING") {
+        notification.warning({
+          message: "Aviso!",
+          description:
+            "Antes do acesso total ao sistema você precisa alterar sua senha!",
+        });
+      }
       localStorage.setItem("token", authentication.token);
-      AuthAxios.defaults.headers.Authorization = `Bearer ${authentication.token}`;
-      return authentication;
+      localStorage.setItem("user", JSON.stringify(authentication.user));
     } catch (e) {
       throw new Error(e);
     } finally {
@@ -78,7 +72,7 @@ const admModel = {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     AuthAxios.defaults.headers.Authorization = undefined;
-    actions.setMyProfile({});
+    actions.setAllDataProfile({});
     actions.setLoading(false);
   }),
 
@@ -104,8 +98,18 @@ const admModel = {
   updatePassword: thunk(async (actions, payload) => {
     actions.setLoading(true);
     const tryUpdatePassword = await dataService.updatePassword({ ...payload });
-    const newUser = await dataService.getMyProfile();
-    actions.setMyProfile(newUser);
+    const newUser = await dataService.getAllDataProfile();
+    actions.setAllDataProfile(newUser);
+    // set user in local storage
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        name: newUser.name,
+        email: newUser.email,
+        roles: newUser.roles.map((role) => role.name),
+        status: newUser.status,
+      })
+    );
     actions.setLoading(false);
     return tryUpdatePassword;
   }),
@@ -114,19 +118,20 @@ const admModel = {
     actions.setLoading(true);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    AuthAxios.defaults.headers.Authorization = undefined;
-    actions.setMyProfile({});
+    actions.setAllDataProfile({});
     actions.setLoading(false);
   }),
 
-  getMyProfile: thunk(async (actions, _) => {
+  getAllDataProfile: thunk(async (actions, _) => {
     actions.setLoading(true);
-    const myProfile = await dataService.getMyProfile();
-    if (!myProfile.error) {
-      actions.setMyProfile(myProfile);
+    try {
+      const allDataProfile = await dataService.getAllDataProfile();
+      actions.setAllDataProfile(allDataProfile);
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setLoading(false);
     }
-    actions.setLoading(false);
-    return myProfile;
   }),
 
   getSearchLogs: thunk(async (actions, payload = {}) => {
@@ -182,8 +187,8 @@ const admModel = {
     state.iniciando = payload;
   }),
 
-  setMyProfile: action((state, payload) => {
-    state.myProfile = payload;
+  setAllDataProfile: action((state, payload) => {
+    state.allDataProfile = payload;
   }),
 
   setSearchLogs: action((state, payload) => {
