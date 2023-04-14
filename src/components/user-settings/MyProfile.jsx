@@ -5,16 +5,18 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 const { Content } = Layout;
 
-export default function MyProfile() {
-  const getMyProfile = useStoreActions((actions) => actions.adm.getMyProfile);
-  const myProfile = useStoreState((state) => state.adm.myProfile);
+export default function allDataProfile() {
+  const getAllDataProfile = useStoreActions(
+    (actions) => actions.adm.getAllDataProfile
+  );
+  const allDataProfile = useStoreState((state) => state.adm.allDataProfile);
   const loading = useStoreState((state) => state.adm.loading);
 
   useEffect(() => {
     (async () => {
-      await getMyProfile();
+      await getAllDataProfile();
     })();
-  }, [getMyProfile]);
+  }, [getAllDataProfile]);
 
   const colorStatus = (status) => {
     switch (status) {
@@ -66,27 +68,27 @@ export default function MyProfile() {
                 column={1}
               >
                 <Descriptions.Item label={"Nome"}>
-                  {myProfile.name}
+                  {allDataProfile.name}
                 </Descriptions.Item>
                 <Descriptions.Item label={"Email"}>
-                  {myProfile.email}
+                  {allDataProfile.email}
                 </Descriptions.Item>
                 <Descriptions.Item label={"CPF"}>
-                  {myProfile.cpf}
+                  {allDataProfile.cpf}
                 </Descriptions.Item>
                 <Descriptions.Item label={"Celular"}>
-                  {myProfile.phone}
+                  {allDataProfile.phone}
                 </Descriptions.Item>
                 <Descriptions.Item label={"Instituição"}>
-                  {myProfile.institution}
+                  {allDataProfile.institution}
                 </Descriptions.Item>
                 <Descriptions.Item label={"Status"}>
-                  <Tag color={colorStatus(myProfile.status)}>
-                    {myProfile.status}
+                  <Tag color={colorStatus(allDataProfile.status)}>
+                    {allDataProfile.status}
                   </Tag>
                 </Descriptions.Item>
                 <Descriptions.Item label={"Cargos"}>
-                  {myProfile?.UsersRoles?.map((element) => (
+                  {allDataProfile?.UsersRoles?.map((element) => (
                     <Tag
                       color={colorStatus(element.role.name)}
                       key={element.role.id}
