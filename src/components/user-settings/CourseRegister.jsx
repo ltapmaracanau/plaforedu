@@ -4,7 +4,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerCourseSchema } from "../../schemas/registers/registersSchema";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { RollbackOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  RollbackOutlined,
+  PlusOutlined,
+  FilePdfOutlined,
+} from "@ant-design/icons";
 
 import {
   Button,
@@ -27,6 +31,7 @@ import {
   Popconfirm,
   Modal,
   Checkbox,
+  Upload,
 } from "antd";
 import TableSelectCourses from "../filter-components/TableSelectCourses";
 
@@ -48,6 +53,7 @@ export default function CourseRegister(props) {
     subThemes: curso ? curso.subThemes.map((item) => item.id) : [],
     filedAt: curso !== null && curso.filedAt !== null,
     setecTerm: curso ? curso.setecTerm : false,
+    filelist: curso ? [] : [],
   };
 
   const registerNewCourse = useStoreActions(
@@ -92,7 +98,37 @@ export default function CourseRegister(props) {
     curso ? curso.equivalents : []
   );
 
+  const [filelist, setFileList] = useState(cursoDefault.filelist);
+
   const [form] = Form.useForm();
+
+  const propsUpload = {
+    onRemove: (file) => {
+      // Se existe o arquivo no servidor, deleta
+      if (cursoDefault.filelist.map((item) => item.id).includes(file.id)) {
+        // TODO: Implementar a deleção do arquivo no servidor
+        setFileList([]);
+      } else {
+        setFileList([]);
+      }
+    },
+    beforeUpload: (file) => {
+      if (filelist.length >= 1) {
+        message.error("Você só pode enviar um arquivo");
+        return false;
+      }
+      setFileList([file]);
+      return false;
+    },
+    fileList: filelist,
+    // TODO: Mudar para o endereço do servidor
+    defaultFileList: [...filelist].map((file) => ({
+      uid: file.id,
+      name: file.name,
+      status: "done",
+      url: `urldeletar/${file.id}`,
+    })),
+  };
 
   const handleArchive = async (value) => {
     try {
@@ -387,7 +423,10 @@ export default function CourseRegister(props) {
       institutions: arrayInstituicoesDoForm,
       equivalents: cursosEquivalentesIds,
     };
-
+    if (filelist.length > 0) {
+      const formData = new FormData();
+      formData.append("file", filelist[0]);
+    }
     if (instituicoesValidadas) {
       if (curso) {
         try {
@@ -742,6 +781,11 @@ export default function CourseRegister(props) {
                       );
                     }}
                   />
+                </Descriptions.Item>
+                <Descriptions.Item label={"Certificado"}>
+                  <Upload {...propsUpload}>
+                    <Button icon={<FilePdfOutlined />}>Upload</Button>
+                  </Upload>
                 </Descriptions.Item>
               </Descriptions>
             </Card>

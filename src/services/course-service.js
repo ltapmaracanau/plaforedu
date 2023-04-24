@@ -54,6 +54,7 @@ export default {
       taxonomies: payload.taxonomies,
       equivalents: payload.equivalents,
       setecTerm: payload.setecTerm,
+      termPdf: payload.termPdf,
     })
       .then((response) => response.data)
       .catch((error) => {
@@ -144,6 +145,15 @@ export default {
   updateCourseEquivalents: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/update-equivalents`, {
       equivalents: payload.equivalents,
+    })
+      .then(() => ({}))
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
+  updateCourseTermPdf: (payload) =>
+    AuthAxios.patch(`/courses/${payload.id}/update-term-pdf`, {
+      termPdf: payload.termPdf,
     })
       .then(() => ({}))
       .catch((error) => {
