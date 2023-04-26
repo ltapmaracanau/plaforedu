@@ -767,7 +767,7 @@ export default function CourseRegister(props) {
                   />
                 </Descriptions.Item>
                 {/* Upload aparece apenas no update de curso */}
-                {cursoDefault.id && (
+                {curso && (
                   <Descriptions.Item label={"Termo da SETEC"}>
                     <Upload {...propsUpload}>
                       <Button icon={<FilePdfOutlined />}>Upload</Button>
