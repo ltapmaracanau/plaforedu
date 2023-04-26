@@ -53,8 +53,6 @@ export default {
       competencies: payload.competencies,
       taxonomies: payload.taxonomies,
       equivalents: payload.equivalents,
-      setecTerm: payload.setecTerm,
-      termPdf: payload.termPdf,
     })
       .then((response) => response.data)
       .catch((error) => {
@@ -67,7 +65,6 @@ export default {
       description: payload.description,
       hours: payload.hours,
       link: payload.link,
-      setecTerm: payload.setecTerm,
     })
       .then(() => ({}))
       .catch((error) => {
@@ -152,8 +149,10 @@ export default {
       }),
 
   updateCourseTermPdf: (payload) =>
-    AuthAxios.patch(`/courses/${payload.id}/update-term-pdf`, {
-      termPdf: payload.termPdf,
+    AuthAxios.patch(`/courses/${payload.id}/upload-term`, payload.term, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     })
       .then(() => ({}))
       .catch((error) => {

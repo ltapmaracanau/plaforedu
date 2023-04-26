@@ -155,7 +155,6 @@ const coursesModel = {
     actions.setRegistering(true);
     const {
       name,
-      termPdf = undefined,
       description,
       hours,
       institutions,
@@ -165,7 +164,6 @@ const coursesModel = {
       competencies,
       taxonomies,
       equivalents,
-      setecTerm,
     } = payload;
     try {
       await services.courseService.registerCourse({
@@ -179,8 +177,6 @@ const coursesModel = {
         competencies: competencies,
         taxonomies: taxonomies,
         equivalents: equivalents,
-        setecTerm: setecTerm,
-        termPdf: termPdf,
       });
     } catch (error) {
       throw new Error(error.message);
@@ -192,7 +188,7 @@ const coursesModel = {
   updateCourse: thunk(async (actions, payload) => {
     const {
       id,
-      termPdf = undefined,
+      term = undefined,
       name,
       description,
       hours,
@@ -204,7 +200,6 @@ const coursesModel = {
       subThemes,
       taxonomies,
       equivalents,
-      setecTerm,
     } = payload;
     actions.setRegistering(true);
     try {
@@ -214,7 +209,6 @@ const coursesModel = {
         description,
         hours,
         link,
-        setecTerm,
       });
       await services.courseService.updateCourseInstitutions({
         id,
@@ -241,10 +235,10 @@ const coursesModel = {
         equivalents,
       });
       // Send the file if it exists
-      if (termPdf) {
+      if (term) {
         await services.courseService.updateCourseTermPdf({
           id,
-          termPdf,
+          term,
         });
       }
       await services.courseService.updateCourseSubThemes({ id, subThemes });

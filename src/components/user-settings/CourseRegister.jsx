@@ -52,8 +52,7 @@ export default function CourseRegister(props) {
     competencies: curso ? curso.competencies.map((item) => item.id) : [],
     subThemes: curso ? curso.subThemes.map((item) => item.id) : [],
     filedAt: curso !== null && curso.filedAt !== null,
-    setecTerm: curso ? curso.setecTerm : false,
-    filelist: curso ? [] : [],
+    setecTerm: curso ? curso.setecTerm : null,
   };
 
   const registerNewCourse = useStoreActions(
@@ -98,36 +97,43 @@ export default function CourseRegister(props) {
     curso ? curso.equivalents : []
   );
 
-  const [filelist, setFileList] = useState(cursoDefault.filelist);
+  const [setecTerm, setSetecTerm] = useState(
+    cursoDefault.setecTerm
+      ? [
+          {
+            uid: cursoDefault.setecTerm,
+            name: "Termo Setec",
+            status: "done",
+            url: cursoDefault.setecTerm,
+          },
+        ]
+      : []
+  );
 
   const [form] = Form.useForm();
 
   const propsUpload = {
     onRemove: (file) => {
-      // Se existe o arquivo no servidor, deleta
-      if (cursoDefault.filelist.map((item) => item.id).includes(file.id)) {
-        // TODO: Implementar a deleção do arquivo no servidor
-        setFileList([]);
-      } else {
-        setFileList([]);
-      }
+      // Remover arquivos setec
+      // Se houvesse arquivo no servidor, não removeria
+      // Apenas atualiza
+      setSetecTerm([]);
     },
     beforeUpload: (file) => {
-      if (filelist.length >= 1) {
-        message.error("Você só pode enviar um arquivo");
+      if (setecTerm.length >= 1) {
+        notification.error({
+          message: "Erro ao fazer upload!",
+          description:
+            "O curso já possui um termo. Caso queira atualizar, exclua o atual e faça o upload novamente.",
+        });
         return false;
       }
-      setFileList([file]);
+      setSetecTerm([file]);
       return false;
     },
-    fileList: filelist,
+    fileList: setecTerm,
     // TODO: Mudar para o endereço do servidor
-    defaultFileList: [...filelist].map((file) => ({
-      uid: file.id,
-      name: file.name,
-      status: "done",
-      url: `urldeletar/${file.id}`,
-    })),
+    defaultFileList: setecTerm,
   };
 
   const handleArchive = async (value) => {
@@ -423,9 +429,10 @@ export default function CourseRegister(props) {
       institutions: arrayInstituicoesDoForm,
       equivalents: cursosEquivalentesIds,
     };
-    if (filelist.length > 0) {
+    if (setecTerm.length > 0) {
       const formData = new FormData();
-      formData.append("file", filelist[0]);
+      formData.append("term", setecTerm[0]);
+      newValues.term = formData;
     }
     if (instituicoesValidadas) {
       if (curso) {
@@ -759,34 +766,14 @@ export default function CourseRegister(props) {
                     }}
                   />
                 </Descriptions.Item>
-                <Descriptions.Item label={"Termo da SETEC"}>
-                  <Controller
-                    key={"setecTerm"}
-                    name="setecTerm"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Switch
-                            checked={field.value}
-                            onChange={field.onChange}
-                            name={field.name}
-                            ref={field.ref}
-                          />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Certificado"}>
-                  <Upload {...propsUpload}>
-                    <Button icon={<FilePdfOutlined />}>Upload</Button>
-                  </Upload>
-                </Descriptions.Item>
+                {/* Upload aparece apenas no update de curso */}
+                {cursoDefault.id && (
+                  <Descriptions.Item label={"Termo da SETEC"}>
+                    <Upload {...propsUpload}>
+                      <Button icon={<FilePdfOutlined />}>Upload</Button>
+                    </Upload>
+                  </Descriptions.Item>
+                )}
               </Descriptions>
             </Card>
           </Form>

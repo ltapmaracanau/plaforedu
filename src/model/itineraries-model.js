@@ -254,14 +254,6 @@ const itinerariosModel = {
       ready: undefined, // callback on layoutready
       stop: undefined, // callback on layoutstop
       transform: function (node, position) {
-        console.log(node, position);
-        /*let y = position.y;
-        if (node.classes().includes("curso")) {
-          //console.log(node.classes().includes("equivalent"), position);
-          if (node.classes().includes("equivalent")) {
-            y = position.y - 262.5;
-          }
-        } */
         return { x: position.x, y: position.y };
       }, // transform a given node position. Useful for changing flow direction in discrete layouts
     },
