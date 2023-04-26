@@ -3,6 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import LogoPlafor from "../../assets/LOGOPLAFORHEADER.svg";
+import PLAFORLOGO from "../../assets/PLAFOR_smart.png";
 
 import { useStoreActions, useStoreState } from "easy-peasy";
 import {
@@ -117,7 +118,7 @@ export default function HeaderHome() {
       label: isAuthenticated ? (
         <Avatar
           style={{ backgroundColor: "#fff" }}
-          src="https://joesch.moe/api/v1/random?key=1"
+          src={<img src={PLAFORLOGO} />}
           size="default"
         />
       ) : (

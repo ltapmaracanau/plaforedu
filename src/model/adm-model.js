@@ -5,7 +5,7 @@ import { dataService } from "../services/dataService";
 import { notification } from "antd";
 
 const admModel = {
-  tipoVisualizacao: false, // false: grafo, true: lista
+  tipoVisualizacao: true, // false: grafo, true: lista
   filterCollapsed: true, // true: filtro escondido, false: filtro visível
   loading: false,
   loadingLogs: false,
