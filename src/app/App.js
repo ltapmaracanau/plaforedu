@@ -21,10 +21,8 @@ function App() {
   document.body.appendChild(s);
 
   useEffect(() => {
-    (async () => {
-      await init();
-    })();
-  }, [init]);
+    init();
+  }, []);
 
   if (iniciando) {
     return (
@@ -66,19 +64,7 @@ function App() {
         minHeight: "100vh",
       }}
     >
-      <ConfigProvider
-        locale={dayjs}
-        theme={{
-          token: {},
-          components: {
-            Card: {
-              //colorFillAlter: "linear-gradient(to right, #2C55A1, #35A8E0)",
-              //fontWeight: "bold",
-            },
-            Modal: {},
-          },
-        }}
-      >
+      <ConfigProvider locale={dayjs}>
         <HeaderGov />
         <CustomRoutes />
         <VLibras />
