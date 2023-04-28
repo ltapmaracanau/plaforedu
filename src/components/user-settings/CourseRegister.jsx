@@ -4,7 +4,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerCourseSchema } from "../../schemas/registers/registersSchema";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { RollbackOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  RollbackOutlined,
+  PlusOutlined,
+  FilePdfOutlined,
+} from "@ant-design/icons";
 
 import {
   Button,
@@ -27,6 +31,7 @@ import {
   Popconfirm,
   Modal,
   Checkbox,
+  Upload,
 } from "antd";
 import TableSelectCourses from "../filter-components/TableSelectCourses";
 
@@ -47,7 +52,7 @@ export default function CourseRegister(props) {
     competencies: curso ? curso.competencies.map((item) => item.id) : [],
     subThemes: curso ? curso.subThemes.map((item) => item.id) : [],
     filedAt: curso !== null && curso.filedAt !== null,
-    setecTerm: curso ? curso.setecTerm : false,
+    setecTerm: curso ? curso.setecTerm : null,
   };
 
   const registerNewCourse = useStoreActions(
@@ -92,7 +97,44 @@ export default function CourseRegister(props) {
     curso ? curso.equivalents : []
   );
 
+  const [setecTerm, setSetecTerm] = useState(
+    cursoDefault.setecTerm
+      ? [
+          {
+            uid: cursoDefault.setecTerm,
+            name: "Termo Setec",
+            status: "done",
+            url: cursoDefault.setecTerm,
+          },
+        ]
+      : []
+  );
+
   const [form] = Form.useForm();
+
+  const propsUpload = {
+    onRemove: (file) => {
+      // Remover arquivos setec
+      // Se houvesse arquivo no servidor, não removeria
+      // Apenas atualiza
+      setSetecTerm([]);
+    },
+    beforeUpload: (file) => {
+      if (setecTerm.length >= 1) {
+        notification.error({
+          message: "Erro ao fazer upload!",
+          description:
+            "O curso já possui um termo. Caso queira atualizar, exclua o atual e faça o upload novamente.",
+        });
+        return false;
+      }
+      setSetecTerm([file]);
+      return false;
+    },
+    fileList: setecTerm,
+    // TODO: Mudar para o endereço do servidor
+    defaultFileList: setecTerm,
+  };
 
   const handleArchive = async (value) => {
     try {
@@ -387,7 +429,11 @@ export default function CourseRegister(props) {
       institutions: arrayInstituicoesDoForm,
       equivalents: cursosEquivalentesIds,
     };
-
+    if (setecTerm.length > 0) {
+      const formData = new FormData();
+      formData.append("term", setecTerm[0]);
+      newValues.term = formData;
+    }
     if (instituicoesValidadas) {
       if (curso) {
         try {
@@ -720,29 +766,14 @@ export default function CourseRegister(props) {
                     }}
                   />
                 </Descriptions.Item>
-                <Descriptions.Item label={"Termo da SETEC"}>
-                  <Controller
-                    key={"setecTerm"}
-                    name="setecTerm"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Switch
-                            checked={field.value}
-                            onChange={field.onChange}
-                            name={field.name}
-                            ref={field.ref}
-                          />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
+                {/* Upload aparece apenas no update de curso */}
+                {curso && (
+                  <Descriptions.Item label={"Termo da SETEC"}>
+                    <Upload {...propsUpload}>
+                      <Button icon={<FilePdfOutlined />}>Upload</Button>
+                    </Upload>
+                  </Descriptions.Item>
+                )}
               </Descriptions>
             </Card>
           </Form>
