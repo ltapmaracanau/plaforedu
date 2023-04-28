@@ -35,18 +35,19 @@ export default function FormativeTrailsList() {
   const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
   const loadingCursos = useStoreState((state) => state.courses.loading);
   const trilhas = useStoreState((state) => state.trilhas.trilhas);
+  const count = useStoreState((state) => state.trilhas.count);
 
   const [editandoTrilha, setEditandoTrilha] = useState(null);
   const [modalText, setModalText] = useState("Cadastrar Trilha");
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(async () => {
-    await getTrilhas();
-    await getCompetencies({ showFiled: true });
-    await getItinerarios();
-    await getInstitutions({ showFiled: true });
-  }, [getTrilhas]);
+  useEffect(() => {
+    getTrilhas({ page: pageNumber });
+    getCompetencies({ showFiled: true });
+    getInstitutions({ showFiled: true });
+  }, []);
 
   return (
     <>
@@ -68,6 +69,7 @@ export default function FormativeTrailsList() {
                 getTrilhas({
                   query: textSearch,
                   showFiled: showFiled,
+                  page: pageNumber,
                 });
               }}
             />
@@ -91,9 +93,11 @@ export default function FormativeTrailsList() {
                     defaultValue={textSearch}
                     onSearch={(e) => {
                       setTextSearch(e);
+                      setPageNumber(1);
                       getTrilhas({
                         query: e,
                         showFiled: showFiled,
+                        page: 1,
                       });
                     }}
                     style={{
@@ -110,9 +114,11 @@ export default function FormativeTrailsList() {
                       }}
                       onClick={(checked) => {
                         setShowFiled(checked);
+                        setPageNumber(1);
                         getTrilhas({
                           query: textSearch,
                           showFiled: checked,
+                          page: 1,
                         });
                       }}
                     />
@@ -135,6 +141,22 @@ export default function FormativeTrailsList() {
                 loading={loadingTrilhas || loadingCursos}
                 dataSource={trilhas}
                 style={{ width: "100%" }}
+                pagination={{
+                  onChange: (page) => {
+                    setPageNumber(page);
+                    getTrilhas({
+                      page: page,
+                      query: textSearch,
+                      showFiled: showFiled,
+                    });
+                  },
+                  pageSize: 20,
+                  total: count,
+                  showSizeChanger: false,
+                  current: pageNumber,
+                  defaultCurrent: 1,
+                  hideOnSinglePage: false,
+                }}
                 renderItem={(item) => {
                   return (
                     <List.Item
