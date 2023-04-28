@@ -8,6 +8,7 @@ const trilhasModel = {
   archiving: false,
 
   trilhas: [],
+  count: 0,
 
   elements: computed(
     [
@@ -57,21 +58,21 @@ const trilhasModel = {
         itinerario = undefined,
         competencies = [],
       } = payload;
+      const request = {
+        includeFiled: showFiled,
+        search: query.trim(),
+        page: page,
+        registerLog: registerLog,
+        itineraries: itinerario ? [itinerario] : [],
+        competencies: competencies,
+      };
       try {
-        await services.trailsService
-          .getTrilhas({
-            includeFiled: showFiled,
-            search: query.trim(),
-            page: page,
-            registerLog: registerLog,
-            itineraries: itinerario ? [itinerario] : [],
-            competencies: competencies,
-          })
-          .then((trilhas) => {
-            if (trilhas?.data?.length >= 0) {
-              actions.setTrilhas(trilhas.data);
-            }
-          });
+        await services.trailsService.getTrilhas(request).then((trilhas) => {
+          if (trilhas?.data?.length >= 0) {
+            actions.setCount(trilhas.count);
+            actions.setTrilhas(trilhas.data);
+          }
+        });
       } catch (error) {
         throw new Error(error.message);
       } finally {
@@ -166,6 +167,10 @@ const trilhasModel = {
 
   setTrilhas: action((state, payload) => {
     state.trilhas = payload;
+  }),
+
+  setCount: action((state, payload) => {
+    state.count = payload;
   }),
 };
 
