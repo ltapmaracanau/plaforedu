@@ -6,10 +6,8 @@ import store from "./store";
 import "antd/dist/reset.css";
 
 ReactDOM.render(
-  <StrictMode>
-    <StoreProvider store={store}>
-      <App />
-    </StoreProvider>
-  </StrictMode>,
+  <StoreProvider store={store}>
+    <App />
+  </StoreProvider>,
   document.getElementById("root")
 );

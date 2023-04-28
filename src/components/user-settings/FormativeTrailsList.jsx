@@ -93,10 +93,11 @@ export default function FormativeTrailsList() {
                     defaultValue={textSearch}
                     onSearch={(e) => {
                       setTextSearch(e);
+                      setPageNumber(1);
                       getTrilhas({
                         query: e,
                         showFiled: showFiled,
-                        page: pageNumber,
+                        page: 1,
                       });
                     }}
                     style={{
