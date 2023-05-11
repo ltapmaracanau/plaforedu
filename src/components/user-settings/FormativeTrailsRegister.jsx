@@ -110,20 +110,14 @@ export default function FormativeTrailsRegister(props) {
   const onSubmit = async (values) => {
     if (trilha) {
       try {
-        if ((trilha.filedAt !== null) !== filed) {
-          await updateTrilha({
-            ...values,
-            id: trilha.id,
-            filed: filed,
-            courses: cursosTrilhaIds,
-          });
-        } else {
-          await updateTrilha({
-            ...values,
-            id: trilha.id,
-            courses: cursosTrilhaIds,
-          });
+        if (cursosTrilhaIds.length === 0) {
+          throw new Error("A lista de cursos não pode estar vazia!");
         }
+        await updateTrilha({
+          ...values,
+          id: trilha.id,
+          courses: cursosTrilhaIds,
+        });
         notification.success({
           message: "Trilha alterada com sucesso!",
         });
@@ -305,20 +299,22 @@ export default function FormativeTrailsRegister(props) {
               bordered={false}
               extra={
                 <Space direction="horizontal">
-                  <Tooltip title={"Trilha arquivada"}>
-                    <Switch
-                      checked={filed}
-                      loading={archiving}
-                      style={{
-                        marginRight: "15px",
-                      }}
-                      defaultChecked={trilhaDefault.filedAt}
-                      onChange={(value) => {
-                        setFiled(value);
-                        handleArchive(value);
-                      }}
-                    />
-                  </Tooltip>
+                  {trilha && (
+                    <Tooltip title={"Trilha arquivada"}>
+                      <Switch
+                        checked={filed}
+                        loading={archiving}
+                        style={{
+                          marginRight: "15px",
+                        }}
+                        defaultChecked={trilhaDefault.filedAt}
+                        onChange={(value) => {
+                          setFiled(value);
+                          handleArchive(value);
+                        }}
+                      />
+                    </Tooltip>
+                  )}
                   <Button
                     loading={registering}
                     disabled={!register.formState.isValid}
