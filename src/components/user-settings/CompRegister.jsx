@@ -134,7 +134,7 @@ export default function CompRegister(props) {
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label={"Descrição da categoria"}
+                      label={"Descrição da competência"}
                       style={{ marginBottom: "20px" }}
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
