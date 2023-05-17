@@ -8,11 +8,11 @@ import Img3 from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Docen
 import Img4 from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Gerencial_CLICADO.png';
 import Img5 from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_PrepAposenta_CLICADO.png';
 
-import itinerarioDocente from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png';
-import itinerarioGerencial from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.png';
-import itinerarioServPublico from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png';
-import itinerarioPrepAposenta from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png';
-import itinerarioTecAdmEdu from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.png';
+import itinerarioDocente from '../assets/itinerarios/icon-docente.png';
+import itinerarioGerencial from '../assets/itinerarios/icon-gerencial.png';
+import itinerarioServPublico from '../assets/itinerarios/icon-iniciacao.svg';
+import itinerarioPrepAposenta from '../assets/itinerarios/icon-aposentadoria.png';
+import itinerarioTecAdmEdu from '../assets/itinerarios/icon-adm-edu.png';
 
 import logoSvg from '../assets/PLAFOR.svg';
 
@@ -415,45 +415,84 @@ export default function RowItinerario() {
           maxWidth: '800px',
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)',
-          minHeight: '30px',
           margin: '0 auto',
         }}
       >
-        <div onClick={onClick2}>
+        <div
+          onClick={onClick2}
+          style={{
+            background: '#66CC33',
+            borderBottomLeftRadius: '10px',
+            height: '100%',
+          }}
+        >
           <img
-            style={{ width: '100%', borderBottomLeftRadius: '10px' }}
+            style={{
+              width: '60%',
+              padding: '16px 0',
+              display: 'block',
+              margin: '0 auto',
+            }}
             src={itinerarioGerencial}
             name="4"
             alt=""
           />
         </div>
-        <div onClick={onClick2}>
+        <div onClick={onClick2} style={{ background: '#9999FF' }}>
           <img
-            style={{ width: '100%' }}
+            style={{
+              width: '60%',
+              padding: '16px 0',
+              display: 'block',
+              margin: '0 auto',
+            }}
             src={itinerarioPrepAposenta}
             name="5"
             alt=""
           />
         </div>
-        <div onClick={onClick2}>
+        <div onClick={onClick2} style={{ background: '#0099CC' }}>
           <img
-            style={{ width: '100%' }}
+            style={{
+              width: '50%',
+              padding: '16px 0',
+              display: 'block',
+              margin: '0 auto',
+            }}
             src={itinerarioServPublico}
             name="1"
             alt=""
           />
         </div>
-        <div onClick={onClick2}>
+        <div onClick={onClick2} style={{ background: '#FF9900' }}>
           <img
-            style={{ width: '100%' }}
+            style={{
+              width: '70%',
+              padding: '16px 0',
+              display: 'block',
+              margin: '0 auto',
+            }}
             src={itinerarioTecAdmEdu}
             name="2"
             alt=""
           />
         </div>
-        <div onClick={onClick2}>
+        <div
+          onClick={onClick2}
+          style={{
+            background: '#990099',
+            display: 'flex',
+            alignItems: 'center',
+            borderBottomRightRadius: '10px',
+          }}
+        >
           <img
-            style={{ width: '100%', borderBottomRightRadius: '10px' }}
+            style={{
+              width: '70%',
+              display: 'block',
+              margin: '0 auto',
+              padding: '16px 0',
+            }}
             src={itinerarioDocente}
             name="3"
             alt=""
