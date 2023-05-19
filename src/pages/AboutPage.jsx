@@ -1,15 +1,19 @@
-import React from "react";
-import HeaderHome from "../components/header/HeaderHome";
-import mandala from "../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png";
-import retangulo from "../assets/about/Rectangle.png";
-import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import HeaderHome from '../components/header/HeaderHome';
+import mandala from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png';
+import retangulo from '../assets/about/Rectangle.png';
+import infografico from '../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png';
+import { useNavigate } from 'react-router-dom';
 
-import { Row, Col, Card, Typography, Image, Grid } from "antd";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { Row, Col, Card, Typography, Image, Grid } from 'antd';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+
+import iniciacao from '../assets/itinerarios/icon-iniciacao.svg';
 
 const { Text, Title, Link } = Typography;
 const { useBreakpoint } = Grid;
+
+import styles from './AboutPage.module.css';
 
 export default function AboutPage() {
   const screens = useBreakpoint();
@@ -21,162 +25,109 @@ export default function AboutPage() {
 
   const onClickItinerario = (itinerario) => {
     const itinerarioClicado = itinerarios.find((item) =>
-      item.name.toLowerCase().includes(itinerario.toLowerCase())
+      item.name.toLowerCase().includes(itinerario.toLowerCase()),
     );
     setFilter({
       ...filterDefault,
       itinerario: itinerarioClicado.id,
-      esquemaDeCores: "categoria",
+      esquemaDeCores: 'categoria',
     });
   };
 
   return (
     <>
       <HeaderHome />
-      <div
-        style={{
-          backgroundColor: "#3291CF4D",
-        }}
-      >
+      <div>
         <Row
           align="middle"
           wrap={!screens.lg}
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  padding: "40px 50px 0px 50px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  backgroundColor: '#fff',
+                  padding: '40px 50px 0px 50px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  padding: "40px 10px 0px 10px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  backgroundColor: '#fff',
+                  padding: '40px 10px 0px 10px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }
           }
         >
+          <h1 className={styles.titulo}>O que é a PlaforEDU</h1>
+
           <Row>
-            <Title
+            <iframe
               style={{
-                fontFamily: "Poppins",
-                fontSize: "30px",
-                color: "#2C55A1",
+                borderRadius: '20px',
+                border: '5px solid #FFF',
+                filter:
+                  'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))',
               }}
-            >
-              Apresentação SETEC
-            </Title>
-          </Row>
-          <Row>
-            <iframe
-              title="Apresentação SETEC"
-              src="https://www.youtube.com/embed/s4hchxxjuRo"
-              height={screens.md ? "449" : "250"}
-              width={screens.md ? "740" : "300"}
-            />
-          </Row>
-        </Row>
-        <Row
-          align="middle"
-          wrap={!screens.lg}
-          style={
-            screens.lg
-              ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
-                }
-              : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
-                }
-          }
-        >
-          <Col order={screens.lg ? 0 : 1}>
-            <iframe
               title="Apresentação PlaforEDU"
               src="https://www.youtube.com/embed/XJS8nvbW754"
-              height={screens.md ? "310" : "250"}
-              width={screens.md ? "534" : "300"}
+              height={screens.md ? '449' : '250'}
+              width={screens.md ? '740' : '300'}
             />
-          </Col>
-          <Col
-            style={screens.lg ? { padding: "40px" } : { padding: "20px" }}
-            order={screens.lg ? 1 : 0}
-          >
-            <Title
-              style={{
-                fontFamily: "Poppins",
-                fontSize: "30px",
-                color: "#2C55A1",
-              }}
-            >
-              Apresentação PlaforEDU
-            </Title>
-            <Text
-              style={{
-                fontFamily: "Roboto",
-                fontSize: "20px",
-              }}
-            >
-              A PlaforEDU tem como objetivo proporcionar um espaço onde os
-              servidores podem encontrar capacitações com a finalidade de
-              potencializar sua atuação na Educação Profissional e Tecnológica,
-              no âmbito da Rede Federal de Educação Profissional, Científica e
-              Tecnológica (RFEPCT).
-            </Text>
-          </Col>
+          </Row>
         </Row>
+
+        <Row
+          style={{
+            margin: '120px 0',
+            padding: '64px 10px',
+            background: 'var(--bg-menos-claro)',
+          }}
+        >
+          <p
+            className={styles.texto}
+            style={{
+              maxWidth: '690px',
+              margin: '0 auto',
+              textAlign: 'center',
+            }}
+          >
+            A PlaforEDU tem como objetivo proporcionar um espaço onde os
+            servidores podem encontrar capacitações com a finalidade de
+            potencializar sua atuação na Educação Profissional e Tecnológica, no
+            âmbito da Rede Federal de Educação Profissional, Científica e
+            Tecnológica (RFEPCT).
+          </p>
+        </Row>
+
         <Row
           align="middle"
           wrap={!screens.lg}
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  maxWidth: '1160px',
+                  display: 'grid',
+                  gridTemplateColumns: '2fr 1fr',
+                  margin: '0 auto',
+                  justifyContent: 'space-between',
+                  gap: '40px',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
+                  gap: '10px',
+                  justifyContent: 'center',
                 }
           }
         >
           <Col
-            style={screens.lg ? { padding: "40px" } : { padding: "20px" }}
+            style={screens.lg ? { padding: '40px' } : { padding: '0 20px' }}
             id="apresentacao"
           >
-            <Title
-              style={{
-                fontFamily: "Poppins",
-                fontSize: "24px",
-                color: "#2C55A1",
-              }}
-            >
-              Organização da PlaforEDU
-            </Title>
-            <Text
-              style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
-              }}
-            >
+            <h1 className={styles.titulo}>Como tudo é organizado</h1>
+            <p className={styles.texto}>
               A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
               ofertados por diversas instituições de ensino, entre outras, da
               RFEPCT, que dão suporte ao desenvolvimento das competências
@@ -185,94 +136,89 @@ export default function AboutPage() {
               competências associadas ao seu perfil profissional, a partir de
               uma busca simples, e ter acesso a todos os cursos relacionados
               àquelas competências.
-            </Text>
-            {/* <br /><br /> */}
-            {/* <Text
-                                style={{
-                                    fontFamily: 'Roboto',
-                                    fontSize: '18px',
-                                }}
-                            >
-                                Para conhecer a PlaforEDU, consulte o <Link>Guia do Usuário</Link>.
-                            </Text> */}
+            </p>
           </Col>
           <Col
             style={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
-            <Card
-              style={
-                screens.lg
-                  ? {
-                      borderRadius: "30px",
-                      boxShadow: "0px 11px 15px 0px rgba(0,0,0,0.38)",
-                      backgroundColor: "#E7F0FF",
-                      width: "484px",
-                    }
-                  : {
-                      borderRadius: "30px",
-                      boxShadow: "0px 11px 15px 0px rgba(0,0,0,0.38)",
-                      backgroundColor: "#E7F0FF",
-                      maxWidth: "484px",
-                    }
-              }
-              bodyStyle={{
-                padding: "30px",
-              }}
-            >
-              <Text style={{ fontFamily: "Roboto", fontSize: "18px" }}>
-                A PlaforEDU apresenta os perfis de servidores da RFEPCT em cinco
-                Itinerários Formativos. São eles:{" "}
-              </Text>
-              <br />
-              <br />
-              <ul>
-                <a href={"#iniciacao"}>
-                  <li style={{ color: "#2C55A1", fontSize: "23px" }}>
-                    <Text style={{ fontFamily: "Roboto", fontSize: "18px" }}>
-                      Iniciação ao serviço público
-                    </Text>
-                  </li>
-                </a>
-                <a href={"#tae"}>
-                  <li style={{ color: "#2C55A1", fontSize: "23px" }}>
-                    <Text style={{ fontFamily: "Roboto", fontSize: "18px" }}>
-                      Técnico-Administrativo em Educação
-                    </Text>
-                  </li>
-                </a>
-                <a href={"#docente"}>
-                  <li style={{ color: "#2C55A1", fontSize: "23px" }}>
-                    <Text style={{ fontFamily: "Roboto", fontSize: "18px" }}>
-                      Docente
-                    </Text>
-                  </li>
-                </a>
-                <a href={"#gerencial"}>
-                  <li style={{ color: "#2C55A1", fontSize: "23px" }}>
-                    <Text style={{ fontFamily: "Roboto", fontSize: "18px" }}>
-                      Gerencial
-                    </Text>
-                  </li>
-                </a>
-                <a href={"#aposentadoria"}>
-                  <li style={{ color: "#2C55A1", fontSize: "23px" }}>
-                    <Text style={{ fontFamily: "Roboto", fontSize: "18px" }}>
-                      Aposentadoria
-                    </Text>
-                  </li>
-                </a>
-              </ul>
-              <Text style={{ fontFamily: "Roboto", fontSize: "18px" }}>
-                Veja abaixo a descrição dos itinerários.
-              </Text>
-              <br />
-              <br />
-            </Card>
+            <div>
+              <Image
+                src={mandala}
+                preview={false}
+                width={!screens.xs ? 375 : 250}
+              />
+            </div>
           </Col>
         </Row>
+
+        <div style={{ background: 'var(--bg-azul)', padding: '60px 0' }}>
+          <h1
+            className={styles.titulo}
+            style={{
+              color: 'var(--bg-site)',
+              textAlign: 'center',
+            }}
+          >
+            5 Itinerários formativos
+          </h1>
+          <p
+            className={styles.texto}
+            style={{
+              display: 'block',
+              color: 'var(--bg-site)',
+              textAlign: 'center',
+            }}
+          >
+            São destinados à diferentes perfis de servidores da RFEPCT, sendo
+            eles:
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '10px',
+              padding: '40px 0',
+            }}
+          >
+            <div style={{ background: 'var(--iniciacao)' }}>
+              <img src={iniciacao} alt="" />
+              <p className={styles.subTitulo}>Iniciação ao Serviço Público</p>
+            </div>
+            <div style={{ background: 'var(--iniciacao)' }}>
+              <img src={iniciacao} alt="" />
+              <p>Iniciação ao Serviço Público</p>
+            </div>
+            <div style={{ background: 'var(--iniciacao)' }}>
+              <img src={iniciacao} alt="" />
+              <p>Iniciação ao Serviço Público</p>
+            </div>
+            <div style={{ background: 'var(--iniciacao)' }}>
+              <img src={iniciacao} alt="" />
+              <p>Iniciação ao Serviço Público</p>
+            </div>
+            <div style={{ background: 'var(--iniciacao)' }}>
+              <img src={iniciacao} alt="" />
+              <p>Iniciação ao Serviço Público</p>
+            </div>
+          </div>
+
+          <div>
+            <p
+              className={styles.subTitulo}
+              style={{
+                color: 'var(--bg-site)',
+                display: 'block',
+                textAlign: 'center',
+              }}
+            >
+              Explicamos melhor cada um abaixo
+            </p>
+          </div>
+        </div>
+
         <Row
           align="middle"
           wrap={!screens.lg}
@@ -280,32 +226,32 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 50px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 10px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
           }
         >
-          <Col style={{ padding: "40px" }}>
+          <Col style={{ padding: '40px' }}>
             <Link>
               <Title
                 style={{
-                  fontFamily: "Poppins",
-                  fontSize: "24px",
-                  color: "#2C55A1",
-                  marginBottom: "30px",
+                  fontFamily: 'Poppins',
+                  fontSize: '24px',
+                  color: '#2C55A1',
+                  marginBottom: '30px',
                 }}
                 onClick={() => {
-                  onClickItinerario("Iniciação");
+                  onClickItinerario('Iniciação');
                 }}
               >
                 Iniciação ao serviço público
@@ -313,8 +259,8 @@ export default function AboutPage() {
             </Link>
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
               }}
             >
               Este Itinerário Formativo pretende integrar o servidor
@@ -328,19 +274,19 @@ export default function AboutPage() {
             <iframe
               title="Iniciação ao Serviço Público"
               src="https://www.youtube.com/embed/FCSD3x-a8KA"
-              height={screens.md ? "310" : "250"}
-              width={screens.md ? "534" : "300"}
+              height={screens.md ? '310' : '250'}
+              width={screens.md ? '534' : '300'}
             />
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "5px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '5px',
               }}
               onClick={() => {
-                onClickItinerario("Iniciação");
+                onClickItinerario('Iniciação');
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -354,32 +300,32 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 50px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 10px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
           }
         >
-          <Col style={{ padding: "40px" }}>
+          <Col style={{ padding: '40px' }}>
             <Link>
               <Title
                 style={{
-                  fontFamily: "Poppins",
-                  fontSize: "24px",
-                  color: "#2C55A1",
-                  marginBottom: "30px",
+                  fontFamily: 'Poppins',
+                  fontSize: '24px',
+                  color: '#2C55A1',
+                  marginBottom: '30px',
                 }}
                 onClick={() => {
-                  onClickItinerario("Educação");
+                  onClickItinerario('Educação');
                 }}
               >
                 Técnico-Administrativo em Educação
@@ -387,8 +333,8 @@ export default function AboutPage() {
             </Link>
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
               }}
             >
               Este Itinerário formativo visa capacitar profissionais alinhados
@@ -402,25 +348,25 @@ export default function AboutPage() {
           </Col>
           <Col
             style={{
-              justifyContent: "center",
+              justifyContent: 'center',
             }}
           >
             <iframe
               title="Técnico-Administrativo em Educação"
               src="https://www.youtube.com/embed/dalwDRu-KMA"
-              height={screens.md ? "310" : "250"}
-              width={screens.md ? "534" : "300"}
+              height={screens.md ? '310' : '250'}
+              width={screens.md ? '534' : '300'}
             />
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "5px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '5px',
               }}
               onClick={() => {
-                onClickItinerario("Educação");
+                onClickItinerario('Educação');
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -434,32 +380,32 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 50px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 10px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
           }
         >
-          <Col style={{ padding: "40px" }}>
+          <Col style={{ padding: '40px' }}>
             <Link>
               <Title
                 style={{
-                  fontFamily: "Poppins",
-                  fontSize: "24px",
-                  color: "#2C55A1",
-                  marginBottom: "30px",
+                  fontFamily: 'Poppins',
+                  fontSize: '24px',
+                  color: '#2C55A1',
+                  marginBottom: '30px',
                 }}
                 onClick={() => {
-                  onClickItinerario("Docente");
+                  onClickItinerario('Docente');
                 }}
               >
                 Docente
@@ -467,8 +413,8 @@ export default function AboutPage() {
             </Link>
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
               }}
             >
               Este itinerário é um processo formativo interativo e reflexivo,
@@ -483,19 +429,19 @@ export default function AboutPage() {
             <iframe
               title="Docente"
               src="https://www.youtube.com/embed/QB0Gf_wwGn8"
-              height={screens.md ? "310" : "250"}
-              width={screens.md ? "534" : "300"}
+              height={screens.md ? '310' : '250'}
+              width={screens.md ? '534' : '300'}
             />
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "5px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '5px',
               }}
               onClick={() => {
-                onClickItinerario("Docente");
+                onClickItinerario('Docente');
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -509,32 +455,32 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 50px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 10px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
           }
         >
-          <Col style={{ padding: "40px" }}>
+          <Col style={{ padding: '40px' }}>
             <Link>
               <Title
                 style={{
-                  fontFamily: "Poppins",
-                  fontSize: "24px",
-                  color: "#2C55A1",
-                  marginBottom: "30px",
+                  fontFamily: 'Poppins',
+                  fontSize: '24px',
+                  color: '#2C55A1',
+                  marginBottom: '30px',
                 }}
                 onClick={() => {
-                  onClickItinerario("Gerencial");
+                  onClickItinerario('Gerencial');
                 }}
               >
                 Gerencial
@@ -542,8 +488,8 @@ export default function AboutPage() {
             </Link>
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
               }}
             >
               O itinerário formativo gerencial pode ser percorrido por
@@ -557,19 +503,19 @@ export default function AboutPage() {
             <iframe
               title="Gerencial"
               src="https://www.youtube.com/embed/SHo-7vJLWn8"
-              height={screens.md ? "310" : "250"}
-              width={screens.md ? "534" : "300"}
+              height={screens.md ? '310' : '250'}
+              width={screens.md ? '534' : '300'}
             />
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "5px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '5px',
               }}
               onClick={() => {
-                onClickItinerario("Gerencial");
+                onClickItinerario('Gerencial');
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -583,32 +529,32 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 50px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 10px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
           }
         >
-          <Col style={{ padding: "40px" }}>
+          <Col style={{ padding: '40px' }}>
             <Link>
               <Title
                 style={{
-                  fontFamily: "Poppins",
-                  fontSize: "24px",
-                  color: "#2C55A1",
-                  marginBottom: "30px",
+                  fontFamily: 'Poppins',
+                  fontSize: '24px',
+                  color: '#2C55A1',
+                  marginBottom: '30px',
                 }}
                 onClick={() => {
-                  onClickItinerario("Aposentadoria");
+                  onClickItinerario('Aposentadoria');
                 }}
               >
                 Aposentadoria
@@ -616,8 +562,8 @@ export default function AboutPage() {
             </Link>
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
               }}
             >
               A aposentadoria já é realidade na Rede Federal EPCT, o itinerário
@@ -648,19 +594,19 @@ export default function AboutPage() {
             <iframe
               title="Aposentadoria"
               src="https://www.youtube.com/embed/mCFeSDFQWzk"
-              height={screens.md ? "310" : "250"}
-              width={screens.md ? "534" : "300"}
+              height={screens.md ? '310' : '250'}
+              width={screens.md ? '534' : '300'}
             />
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "5px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '5px',
               }}
               onClick={() => {
-                onClickItinerario("Aposentadoria");
+                onClickItinerario('Aposentadoria');
               }}
             >
               <Link>Clique aqui para ir para o itinerário.</Link>
@@ -674,36 +620,36 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 50px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 10px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
           }
         >
-          <Col style={{ padding: "40px" }}>
+          <Col style={{ padding: '40px' }}>
             <Title
               style={{
-                fontFamily: "Poppins",
-                fontSize: "24px",
-                color: "#2C55A1",
-                marginBottom: "30px",
+                fontFamily: 'Poppins',
+                fontSize: '24px',
+                color: '#2C55A1',
+                marginBottom: '30px',
               }}
             >
               Itinerários Formativos
             </Title>
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
               }}
             >
               A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
@@ -730,22 +676,22 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  flexDirection: "row-reverse",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 50px',
+                  display: 'flex',
+                  flexDirection: 'row-reverse',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  flexDirection: "row-reverse",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 10px',
+                  display: 'flex',
+                  flexDirection: 'row-reverse',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }
           }
         >
@@ -756,21 +702,21 @@ export default function AboutPage() {
               width={!screens.xs ? 350 : 250}
             />
           </Col>
-          <Col style={{ padding: "40px" }} order={screens.lg ? 1 : 0}>
+          <Col style={{ padding: '40px' }} order={screens.lg ? 1 : 0}>
             <Title
               style={{
-                fontFamily: "Poppins",
-                fontSize: "24px",
-                color: "#2C55A1",
-                marginBottom: "30px",
+                fontFamily: 'Poppins',
+                fontSize: '24px',
+                color: '#2C55A1',
+                marginBottom: '30px',
               }}
             >
               Trilhas Formativas
             </Title>
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
               }}
             >
               São percursos formativos propostos a partir do encadeamento de
@@ -784,37 +730,37 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 50px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 50px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
               : {
-                  backgroundColor: "#fff",
-                  marginBottom: "5px",
-                  padding: "40px 10px",
-                  display: "flex",
-                  justifyContent: "center",
+                  backgroundColor: '#fff',
+                  marginBottom: '5px',
+                  padding: '40px 10px',
+                  display: 'flex',
+                  justifyContent: 'center',
                 }
           }
           id="mandala"
         >
-          <Col span={24} style={{ padding: "40px" }}>
+          <Col span={24} style={{ padding: '40px' }}>
             <Title
               style={{
-                fontFamily: "Poppins",
-                fontSize: "24px",
-                color: "#2C55A1",
-                marginBottom: "30px",
+                fontFamily: 'Poppins',
+                fontSize: '24px',
+                color: '#2C55A1',
+                marginBottom: '30px',
               }}
             >
               Mandala de Competências
             </Title>
             <Text
               style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
+                fontFamily: 'Roboto',
+                fontSize: '18px',
               }}
             >
               As competências são a mobilização de conhecimentos, habilidades e
@@ -833,10 +779,10 @@ export default function AboutPage() {
           <Col
             span={24}
             style={
-              screens.lg ? { padding: "40px 80px" } : { padding: "20px 40px" }
+              screens.lg ? { padding: '40px 80px' } : { padding: '20px 40px' }
             }
           >
-            <Image preview={false} src={infografico} width={"100%"} />
+            <Image preview={false} src={infografico} width={'100%'} />
           </Col>
         </Row>
       </div>
