@@ -7,8 +7,8 @@
 }
 
 .subTitulo {
-  font-size: 1.375rem;
-  font-weight: 500px;
+  font-size: 1.25rem;
+  font-weight: 500;
   line-height: 28px;
 }
 
@@ -18,4 +18,23 @@
   font-size: 1rem;
   line-height: 24px;
   letter-spacing: 0.5px;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1160px;
+  gap: 32px;
+  padding: 40px 0px;
+  margin: 0 auto;
+}
+
+.cardItinerarios {
+  background: var(--iniciacao);
+  display: flex;
+  align-items: center;
+  padding: 12px 28px;
+  gap: 20px;
+  border-radius: 10px;
 }

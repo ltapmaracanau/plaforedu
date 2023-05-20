@@ -144,17 +144,21 @@ export default function AboutPage() {
               justifyContent: 'center',
             }}
           >
-            <div>
-              <Image
-                src={mandala}
-                preview={false}
-                width={!screens.xs ? 375 : 250}
-              />
-            </div>
+            <Image
+              src={mandala}
+              preview={false}
+              width={!screens.xs ? 375 : 250}
+            />
           </Col>
         </Row>
 
-        <div style={{ background: 'var(--bg-azul)', padding: '60px 0' }}>
+        <div
+          style={{
+            background: 'var(--bg-azul)',
+            padding: '60px 0',
+            margin: '120px 0',
+          }}
+        >
           <h1
             className={styles.titulo}
             style={{
@@ -176,32 +180,78 @@ export default function AboutPage() {
             eles:
           </p>
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '10px',
-              padding: '40px 0',
-            }}
+            className={styles.cardsContainer}
+            style={
+              screens.xs
+                ? {
+                    flexFlow: 'column',
+                    padding: '0px 20px',
+                    gap: '20px',
+                    justifyContent: 'left',
+                  }
+                : null
+            }
           >
-            <div style={{ background: 'var(--iniciacao)' }}>
+            <div className={styles.cardItinerarios}>
               <img src={iniciacao} alt="" />
-              <p className={styles.subTitulo}>Iniciação ao Serviço Público</p>
+              <p
+                className={styles.texto}
+                style={{
+                  color: '#FFF',
+                  margin: '0px', //estava com uma margem-bottom de 20px
+                }}
+              >
+                Iniciação ao Serviço Público
+              </p>
             </div>
-            <div style={{ background: 'var(--iniciacao)' }}>
+
+            <div className={styles.cardItinerarios}>
               <img src={iniciacao} alt="" />
-              <p>Iniciação ao Serviço Público</p>
+              <p
+                className={styles.texto}
+                style={{
+                  color: '#FFF',
+                  margin: '0px', //estava com uma margem-bottom de 20px
+                }}
+              >
+                Técnico-Administrativo em Educação
+              </p>
             </div>
-            <div style={{ background: 'var(--iniciacao)' }}>
+            <div className={styles.cardItinerarios}>
               <img src={iniciacao} alt="" />
-              <p>Iniciação ao Serviço Público</p>
+              <p
+                className={styles.texto}
+                style={{
+                  color: '#FFF',
+                  margin: '0px', //estava com uma margem-bottom de 20px
+                }}
+              >
+                Docente
+              </p>
             </div>
-            <div style={{ background: 'var(--iniciacao)' }}>
+            <div className={styles.cardItinerarios}>
               <img src={iniciacao} alt="" />
-              <p>Iniciação ao Serviço Público</p>
+              <p
+                className={styles.texto}
+                style={{
+                  color: '#FFF',
+                  margin: '0px', //estava com uma margem-bottom de 20px
+                }}
+              >
+                Gerencial
+              </p>
             </div>
-            <div style={{ background: 'var(--iniciacao)' }}>
+            <div className={styles.cardItinerarios}>
               <img src={iniciacao} alt="" />
-              <p>Iniciação ao Serviço Público</p>
+              <p
+                className={styles.texto}
+                style={{
+                  color: '#FFF',
+                  margin: '0px', //estava com uma margem-bottom de 20px
+                }}
+              >
+                Preparação para aposentadoria
+              </p>
             </div>
           </div>
 
