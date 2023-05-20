@@ -82,7 +82,7 @@ export default function AboutPage() {
         <Row
           style={{
             margin: '120px 0',
-            padding: '64px 10px',
+            padding: '60px 10px',
             background: 'var(--bg-menos-claro)',
           }}
         >
@@ -185,7 +185,7 @@ export default function AboutPage() {
               screens.xs
                 ? {
                     flexFlow: 'column',
-                    padding: '0px 20px',
+                    padding: '20px 20px',
                     gap: '20px',
                     justifyContent: 'left',
                   }
@@ -198,7 +198,6 @@ export default function AboutPage() {
                 className={styles.texto}
                 style={{
                   color: '#FFF',
-                  margin: '0px', //estava com uma margem-bottom de 20px
                 }}
               >
                 Iniciação ao Serviço Público
@@ -211,7 +210,6 @@ export default function AboutPage() {
                 className={styles.texto}
                 style={{
                   color: '#FFF',
-                  margin: '0px', //estava com uma margem-bottom de 20px
                 }}
               >
                 Técnico-Administrativo em Educação
@@ -223,7 +221,6 @@ export default function AboutPage() {
                 className={styles.texto}
                 style={{
                   color: '#FFF',
-                  margin: '0px', //estava com uma margem-bottom de 20px
                 }}
               >
                 Docente
@@ -235,7 +232,6 @@ export default function AboutPage() {
                 className={styles.texto}
                 style={{
                   color: '#FFF',
-                  margin: '0px', //estava com uma margem-bottom de 20px
                 }}
               >
                 Gerencial
@@ -247,7 +243,6 @@ export default function AboutPage() {
                 className={styles.texto}
                 style={{
                   color: '#FFF',
-                  margin: '0px', //estava com uma margem-bottom de 20px
                 }}
               >
                 Preparação para aposentadoria
@@ -273,75 +268,64 @@ export default function AboutPage() {
           align="middle"
           wrap={!screens.lg}
           id="iniciacao"
-          style={
-            screens.lg
-              ? {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 50px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-              : {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-          }
+          className={styles.itinerarioContainer}
+          style={screens.xl ? { padding: '0' } : null}
         >
-          <Col style={{ padding: '40px' }}>
-            <Link>
-              <Title
-                style={{
-                  fontFamily: 'Poppins',
-                  fontSize: '24px',
-                  color: '#2C55A1',
-                  marginBottom: '30px',
-                }}
-                onClick={() => {
-                  onClickItinerario('Iniciação');
-                }}
-              >
-                Iniciação ao serviço público
-              </Title>
-            </Link>
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-              }}
-            >
+          <div
+            style={
+              !screens.lg
+                ? {
+                    display: 'grid',
+                    gap: '12px',
+                    maxWidth: '560px',
+                  }
+                : {
+                    display: 'grid',
+                    gap: '24px',
+                    maxWidth: '560px',
+                  }
+            }
+          >
+            <h2 className={styles.titulo}>Iniciação ao serviço público</h2>
+
+            <p className={styles.texto}>
               Este Itinerário Formativo pretende integrar o servidor
               recém-empossado ao ambiente institucional ao qual terá exercício,
               preparando-o para o desempenho de atividades vinculadas ao
               ambiente organizacional em que atuará e ao cargo que ocupa na
               instituição.
-            </Text>
-          </Col>
-          <Col>
-            <iframe
-              title="Iniciação ao Serviço Público"
-              src="https://www.youtube.com/embed/FCSD3x-a8KA"
-              height={screens.md ? '310' : '250'}
-              width={screens.md ? '534' : '300'}
-            />
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '5px',
-              }}
-              onClick={() => {
-                onClickItinerario('Iniciação');
-              }}
-            >
-              <Link>Clique aqui para ir para o itinerário.</Link>
-            </Text>
-          </Col>
+            </p>
+            <div>
+              <button
+                style={{
+                  background: 'var(--azul-super-claro)',
+                  color: 'var(--bg-azul)',
+                }}
+                className={styles.botaoItinerario}
+                onClick={() => {
+                  onClickItinerario('Iniciação');
+                }}
+              >
+                Acessar itinerário
+              </button>
+            </div>
+          </div>
+
+          <iframe
+            style={{
+              flexGrow: '1',
+              borderRadius: '20px',
+              borderStyle: 'none',
+              width: '100%',
+              maxWidth: '560px',
+              minHeight: '300px',
+              margin: '0 auto',
+            }}
+            title="Iniciação ao Serviço Público"
+            src="https://www.youtube.com/embed/FCSD3x-a8KA"
+            // maxHeight={screens.md ? '310' : '250'}
+            // maxWidth={screens.md ? '534' : '300'}
+          />
         </Row>
         <Row
           id="tae"

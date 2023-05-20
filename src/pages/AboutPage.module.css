@@ -1,15 +1,17 @@
 .titulo {
   font-family: 'Roboto', sans-serif;
+  color: var(--titulos);
   font-weight: 500;
   font-size: 2rem;
   line-height: 40px;
-  color: var(--titulos);
+  margin: 0;
 }
 
 .subTitulo {
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 28px;
+  margin: 0;
 }
 
 .texto {
@@ -18,6 +20,16 @@
   font-size: 1rem;
   line-height: 24px;
   letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.botaoTexto,  .botaoItinerario{
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 0.875rem;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
 }
 
 .cardsContainer {
@@ -36,5 +48,22 @@
   align-items: center;
   padding: 12px 28px;
   gap: 20px;
+  border-radius: 10px;
+}
+
+.itinerarioContainer {
+  position: relative;
+  display: flex;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 24px;
+}
+
+.botaoItinerario {
+  padding: 14px 28px;
+  border-style: none;
   border-radius: 10px;
 }
