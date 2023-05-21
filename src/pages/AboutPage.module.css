@@ -67,3 +67,11 @@
   border-style: none;
   border-radius: 10px;
 }
+
+.trilhaContainer {
+  background-color: var(--bg-azul);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}

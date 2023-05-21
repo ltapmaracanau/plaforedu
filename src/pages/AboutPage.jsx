@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderHome from '../components/header/HeaderHome';
+import trilhaIlustracao from '../assets/about/ilustracao-trilha.svg';
 import mandala from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png';
 import retangulo from '../assets/about/Rectangle.png';
 import infografico from '../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png';
@@ -45,19 +46,21 @@ export default function AboutPage() {
             screens.lg
               ? {
                   backgroundColor: '#fff',
-                  padding: '40px 50px 0px 50px',
+                  padding: '60px 50px 0px 50px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  gap: '20px',
                 }
               : {
                   backgroundColor: '#fff',
-                  padding: '40px 10px 0px 10px',
+                  padding: '60px 10px 0px 10px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  gap: '12px',
                 }
           }
         >
@@ -74,7 +77,7 @@ export default function AboutPage() {
               title="Apresentação PlaforEDU"
               src="https://www.youtube.com/embed/XJS8nvbW754"
               height={screens.md ? '449' : '250'}
-              width={screens.md ? '740' : '300'}
+              width={screens.md ? '740' : '350'}
             />
           </Row>
         </Row>
@@ -647,6 +650,7 @@ export default function AboutPage() {
             </Text>
           </Col>
         </Row>
+
         <Row
           id="itinerarios"
           align="middle"
@@ -704,61 +708,61 @@ export default function AboutPage() {
             />
           </Col>
         </Row>
+
         <Row
           align="middle"
-          wrap={!screens.lg}
+          className={styles.trilhaContainer}
           style={
-            screens.lg
+            screens.md
               ? {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 50px',
-                  display: 'flex',
-                  flexDirection: 'row-reverse',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  height: '420px',
+                  padding: '60px 50px',
                 }
-              : {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 10px',
-                  display: 'flex',
-                  flexDirection: 'row-reverse',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }
+              : null
           }
         >
-          <Col order={screens.lg ? 0 : 1}>
-            <Image
-              src={retangulo}
-              preview={false}
-              width={!screens.xs ? 350 : 250}
-            />
-          </Col>
-          <Col style={{ padding: '40px' }} order={screens.lg ? 1 : 0}>
-            <Title
-              style={{
-                fontFamily: 'Poppins',
-                fontSize: '24px',
-                color: '#2C55A1',
-                marginBottom: '30px',
-              }}
-            >
-              Trilhas Formativas
-            </Title>
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-              }}
-            >
-              São percursos formativos propostos a partir do encadeamento de
-              cursos ordenados, com o objetivo de desenvolver competências por
-              meio da capacitação e qualificação profissional.
-            </Text>
-          </Col>
+          <Row
+            style={
+              screens.md
+                ? {
+                    maxWidth: '1160px',
+                    height: '100%',
+                    justifyContent: 'right',
+                    backgroundImage: `url(${trilhaIlustracao})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }
+                : {
+                    maxWidth: '1160px',
+                    height: '100%',
+                    justifyContent: 'right',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }
+            }
+          >
+            <Col style={{ width: '100%' }} span={screens.md ? 16 : 24}>
+              <h1
+                className={styles.titulo}
+                style={{
+                  color: 'white',
+                  marginBottom: '28px',
+                }}
+              >
+                Trilhas Formativas
+              </h1>
+              <p className={styles.texto} style={{ color: 'white' }}>
+                São percursos formativos propostos a partir do encadeamento de
+                cursos ordenados, com o objetivo de desenvolver competências por
+                meio da capacitação e qualificação profissional.
+              </p>
+            </Col>
+          </Row>
         </Row>
+
+        {/* MANDALA */}
         <Row
           align="middle"
           style={
