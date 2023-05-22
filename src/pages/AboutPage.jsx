@@ -6,11 +6,12 @@ import retangulo from '../assets/about/Rectangle.png';
 import infografico from '../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png';
 import { useNavigate } from 'react-router-dom';
 
-import { Row, Col, Card, Typography, Image, Grid } from 'antd';
+import { Row, Col, Typography, Image, Grid, Collapse } from 'antd';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import iniciacao from '../assets/itinerarios/icon-iniciacao.svg';
 
+const { Panel } = Collapse;
 const { Text, Title, Link } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -45,7 +46,6 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: '#fff',
                   padding: '60px 50px 0px 50px',
                   display: 'flex',
                   flexDirection: 'column',
@@ -54,7 +54,6 @@ export default function AboutPage() {
                   gap: '20px',
                 }
               : {
-                  backgroundColor: '#fff',
                   padding: '60px 10px 0px 10px',
                   display: 'flex',
                   flexDirection: 'column',
@@ -66,20 +65,18 @@ export default function AboutPage() {
         >
           <h1 className={styles.titulo}>O que é a PlaforEDU</h1>
 
-          <Row>
-            <iframe
-              style={{
-                borderRadius: '20px',
-                border: '5px solid #FFF',
-                filter:
-                  'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))',
-              }}
-              title="Apresentação PlaforEDU"
-              src="https://www.youtube.com/embed/XJS8nvbW754"
-              height={screens.md ? '449' : '250'}
-              width={screens.md ? '740' : '350'}
-            />
-          </Row>
+          <iframe
+            className={styles.videoItinerario}
+            height={!screens.xs ? '433px' : null}
+            style={{
+              maxWidth: '760px',
+              border: '5px solid #FFF',
+              filter:
+                'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))',
+            }}
+            title="Apresentação PlaforEDU"
+            src="https://www.youtube.com/embed/XJS8nvbW754"
+          />
         </Row>
 
         <Row
@@ -105,6 +102,7 @@ export default function AboutPage() {
           </p>
         </Row>
 
+        {/* Como tudo é organizado */}
         <Row
           align="middle"
           wrap={!screens.lg}
@@ -129,7 +127,9 @@ export default function AboutPage() {
             style={screens.lg ? { padding: '40px' } : { padding: '0 20px' }}
             id="apresentacao"
           >
-            <h1 className={styles.titulo}>Como tudo é organizado</h1>
+            <h1 className={styles.titulo} style={{ marginBottom: '20px' }}>
+              Como tudo é organizado
+            </h1>
             <p className={styles.texto}>
               A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
               ofertados por diversas instituições de ensino, entre outras, da
@@ -167,6 +167,7 @@ export default function AboutPage() {
             style={{
               color: 'var(--bg-site)',
               textAlign: 'center',
+              marginBottom: '20px',
             }}
           >
             5 Itinerários formativos
@@ -207,7 +208,10 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className={styles.cardItinerarios}>
+            <div
+              className={styles.cardItinerarios}
+              style={{ background: 'var(--administrativo)' }}
+            >
               <img src={iniciacao} alt="" />
               <p
                 className={styles.texto}
@@ -218,7 +222,10 @@ export default function AboutPage() {
                 Técnico-Administrativo em Educação
               </p>
             </div>
-            <div className={styles.cardItinerarios}>
+            <div
+              className={styles.cardItinerarios}
+              style={{ background: 'var(--docente)' }}
+            >
               <img src={iniciacao} alt="" />
               <p
                 className={styles.texto}
@@ -229,7 +236,10 @@ export default function AboutPage() {
                 Docente
               </p>
             </div>
-            <div className={styles.cardItinerarios}>
+            <div
+              className={styles.cardItinerarios}
+              style={{ background: 'var(--gerencial)' }}
+            >
               <img src={iniciacao} alt="" />
               <p
                 className={styles.texto}
@@ -240,7 +250,10 @@ export default function AboutPage() {
                 Gerencial
               </p>
             </div>
-            <div className={styles.cardItinerarios}>
+            <div
+              className={styles.cardItinerarios}
+              style={{ background: 'var(--aposentadoria)' }}
+            >
               <img src={iniciacao} alt="" />
               <p
                 className={styles.texto}
@@ -252,7 +265,6 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-
           <div>
             <p
               className={styles.subTitulo}
@@ -267,447 +279,318 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <Row
-          align="middle"
-          wrap={!screens.lg}
-          id="iniciacao"
-          className={styles.itinerarioContainer}
-          style={screens.xl ? { padding: '0' } : null}
-        >
-          <div
-            style={
-              !screens.lg
-                ? {
-                    display: 'grid',
-                    gap: '12px',
-                    maxWidth: '560px',
-                  }
-                : {
-                    display: 'grid',
-                    gap: '24px',
-                    maxWidth: '560px',
-                  }
-            }
+        <div>
+          <Row
+            align="middle"
+            wrap={!screens.lg}
+            id="iniciacao"
+            className={styles.itinerarioContainer}
+            style={{ flexDirection: 'row-reverse' }}
           >
-            <h2 className={styles.titulo}>Iniciação ao serviço público</h2>
-
-            <p className={styles.texto}>
-              Este Itinerário Formativo pretende integrar o servidor
-              recém-empossado ao ambiente institucional ao qual terá exercício,
-              preparando-o para o desempenho de atividades vinculadas ao
-              ambiente organizacional em que atuará e ao cargo que ocupa na
-              instituição.
-            </p>
-            <div>
-              <button
-                style={{
-                  background: 'var(--azul-super-claro)',
-                  color: 'var(--bg-azul)',
-                }}
-                className={styles.botaoItinerario}
-                onClick={() => {
-                  onClickItinerario('Iniciação');
-                }}
-              >
-                Acessar itinerário
-              </button>
-            </div>
-          </div>
-
-          <iframe
-            style={{
-              flexGrow: '1',
-              borderRadius: '20px',
-              borderStyle: 'none',
-              width: '100%',
-              maxWidth: '560px',
-              minHeight: '300px',
-              margin: '0 auto',
-            }}
-            title="Iniciação ao Serviço Público"
-            src="https://www.youtube.com/embed/FCSD3x-a8KA"
-            // maxHeight={screens.md ? '310' : '250'}
-            // maxWidth={screens.md ? '534' : '300'}
-          />
-        </Row>
-        <Row
-          id="tae"
-          align="middle"
-          wrap={!screens.lg}
-          style={
-            screens.lg
-              ? {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 50px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-              : {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-          }
-        >
-          <Col style={{ padding: '40px' }}>
-            <Link>
-              <Title
-                style={{
-                  fontFamily: 'Poppins',
-                  fontSize: '24px',
-                  color: '#2C55A1',
-                  marginBottom: '30px',
-                }}
-                onClick={() => {
-                  onClickItinerario('Educação');
-                }}
-              >
-                Técnico-Administrativo em Educação
-              </Title>
-            </Link>
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-              }}
+            <div
+              style={
+                !screens.lg
+                  ? {
+                      display: 'grid',
+                      gap: '12px',
+                      maxWidth: '560px',
+                    }
+                  : {
+                      display: 'grid',
+                      gap: '24px',
+                      maxWidth: '560px',
+                    }
+              }
             >
-              Este Itinerário formativo visa capacitar profissionais alinhados
-              com as políticas institucionais. Nesse sentido, o itinerário
-              apresentará inicialmente aos Técnicos-Administrativos em Educação
-              o Plano de Carreira, suas atribuições e responsabilidades para o
-              desempenho do cargo ao qual foi nomeado. Os outros cursos do
-              itinerário pretendem qualificar os servidores nas diversas áreas
-              de atuação - educacional e administrativa.
-            </Text>
-          </Col>
-          <Col
-            style={{
-              justifyContent: 'center',
-            }}
-          >
+              <h2 className={styles.titulo}>Iniciação ao serviço público</h2>
+              <p className={styles.texto}>
+                Este Itinerário Formativo pretende integrar o servidor
+                recém-empossado ao ambiente institucional ao qual terá
+                exercício, preparando-o para o desempenho de atividades
+                vinculadas ao ambiente organizacional em que atuará e ao cargo
+                que ocupa na instituição.
+              </p>
+              <div>
+                <button
+                  style={{
+                    background: 'var(--azul-super-claro)',
+                    color: 'var(--bg-azul)',
+                  }}
+                  className={styles.botaoItinerario}
+                  onClick={() => {
+                    onClickItinerario('Iniciação');
+                  }}
+                >
+                  Acessar itinerário
+                </button>
+              </div>
+            </div>
             <iframe
+              className={styles.videoItinerario}
+              title="Iniciação ao Serviço Público"
+              src="https://www.youtube.com/embed/FCSD3x-a8KA"
+            />
+          </Row>
+          <Row className={styles.linha}></Row>
+          <Row
+            align="middle"
+            wrap={!screens.lg}
+            id="tae"
+            className={styles.itinerarioContainer}
+            style={{}}
+          >
+            <div
+              style={
+                !screens.lg
+                  ? {
+                      display: 'grid',
+                      gap: '12px',
+                      maxWidth: '560px',
+                    }
+                  : {
+                      display: 'grid',
+                      gap: '24px',
+                      maxWidth: '560px',
+                    }
+              }
+            >
+              <h2 className={styles.titulo}>
+                Técnico-Administrativo em Educação
+              </h2>
+              <p className={styles.texto}>
+                Este Itinerário formativo visa capacitar profissionais alinhados
+                com as políticas institucionais. Nesse sentido, o itinerário
+                apresentará inicialmente aos Técnicos-Administrativos em
+                Educação o Plano de Carreira, suas atribuições e
+                responsabilidades para o desempenho do cargo ao qual foi
+                nomeado. Os outros cursos do itinerário pretendem qualificar os
+                servidores nas diversas áreas de atuação - educacional e
+                administrativa.
+              </p>
+              <div>
+                <button
+                  style={{
+                    background: 'var(--azul-super-claro)',
+                    color: 'var(--bg-azul)',
+                  }}
+                  className={styles.botaoItinerario}
+                  onClick={() => {
+                    onClickItinerario('Educação');
+                  }}
+                >
+                  Acessar itinerário
+                </button>
+              </div>
+            </div>
+            <iframe
+              className={styles.videoItinerario}
               title="Técnico-Administrativo em Educação"
               src="https://www.youtube.com/embed/dalwDRu-KMA"
-              height={screens.md ? '310' : '250'}
-              width={screens.md ? '534' : '300'}
             />
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '5px',
-              }}
-              onClick={() => {
-                onClickItinerario('Educação');
-              }}
+          </Row>
+          <Row className={styles.linha}></Row>
+          <Row
+            align="middle"
+            wrap={!screens.lg}
+            id="docente"
+            className={styles.itinerarioContainer}
+            style={{ flexDirection: 'row-reverse' }}
+          >
+            <div
+              style={
+                !screens.lg
+                  ? {
+                      display: 'grid',
+                      gap: '12px',
+                      maxWidth: '560px',
+                    }
+                  : {
+                      display: 'grid',
+                      gap: '24px',
+                      maxWidth: '560px',
+                    }
+              }
             >
-              <Link>Clique aqui para ir para o itinerário.</Link>
-            </Text>
-          </Col>
-        </Row>
-        <Row
-          id="docente"
-          align="middle"
-          wrap={!screens.lg}
-          style={
-            screens.lg
-              ? {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 50px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-              : {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-          }
-        >
-          <Col style={{ padding: '40px' }}>
-            <Link>
-              <Title
-                style={{
-                  fontFamily: 'Poppins',
-                  fontSize: '24px',
-                  color: '#2C55A1',
-                  marginBottom: '30px',
-                }}
-                onClick={() => {
-                  onClickItinerario('Docente');
-                }}
-              >
-                Docente
-              </Title>
-            </Link>
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-              }}
-            >
-              Este itinerário é um processo formativo interativo e reflexivo,
-              proporcionando ao docente a resolução dos problemas enfrentados
-              nas práticas educativas em um contexto pedagógico. A metodologia
-              adotada é dinâmica, proporcionando a construção de novos saberes
-              por intermédio das trilhas vinculadas à teoria e às práticas
-              docentes.
-            </Text>
-          </Col>
-          <Col>
+              <h2 className={styles.titulo}>Docente</h2>
+              <p className={styles.texto}>
+                Este itinerário é um processo formativo interativo e reflexivo,
+                proporcionando ao docente a resolução dos problemas enfrentados
+                nas práticas educativas em um contexto pedagógico. A metodologia
+                adotada é dinâmica, proporcionando a construção de novos saberes
+                por intermédio das trilhas vinculadas à teoria e às práticas
+                docentes.
+              </p>
+              <div>
+                <button
+                  style={{
+                    background: 'var(--azul-super-claro)',
+                    color: 'var(--bg-azul)',
+                  }}
+                  className={styles.botaoItinerario}
+                  onClick={() => {
+                    onClickItinerario('Educação');
+                  }}
+                >
+                  Acessar itinerário
+                </button>
+              </div>
+            </div>
             <iframe
+              className={styles.videoItinerario}
               title="Docente"
               src="https://www.youtube.com/embed/QB0Gf_wwGn8"
-              height={screens.md ? '310' : '250'}
-              width={screens.md ? '534' : '300'}
             />
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '5px',
-              }}
-              onClick={() => {
-                onClickItinerario('Docente');
-              }}
+          </Row>
+          <Row className={styles.linha}></Row>
+          <Row
+            align="middle"
+            wrap={!screens.lg}
+            id="gerencial"
+            className={styles.itinerarioContainer}
+            style={{}}
+          >
+            <div
+              style={
+                !screens.lg
+                  ? {
+                      display: 'grid',
+                      gap: '12px',
+                      maxWidth: '560px',
+                    }
+                  : {
+                      display: 'grid',
+                      gap: '24px',
+                      maxWidth: '560px',
+                    }
+              }
             >
-              <Link>Clique aqui para ir para o itinerário.</Link>
-            </Text>
-          </Col>
-        </Row>
-        <Row
-          id="gerencial"
-          align="middle"
-          wrap={!screens.lg}
-          style={
-            screens.lg
-              ? {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 50px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-              : {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-          }
-        >
-          <Col style={{ padding: '40px' }}>
-            <Link>
-              <Title
-                style={{
-                  fontFamily: 'Poppins',
-                  fontSize: '24px',
-                  color: '#2C55A1',
-                  marginBottom: '30px',
-                }}
-                onClick={() => {
-                  onClickItinerario('Gerencial');
-                }}
-              >
-                Gerencial
-              </Title>
-            </Link>
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-              }}
-            >
-              O itinerário formativo gerencial pode ser percorrido por
-              servidores técnicos-administrativos ou docentes que estejam em
-              cargos/funções de gestão ou que desejem se capacitar para tal, com
-              metodologias modernas, abarcando temáticas tradicionais e
-              contemporâneas.
-            </Text>
-          </Col>
-          <Col>
+              <h2 className={styles.titulo}>Gerencial</h2>
+              <p className={styles.texto}>
+                O itinerário formativo gerencial pode ser percorrido por
+                servidores técnicos-administrativos ou docentes que estejam em
+                cargos/funções de gestão ou que desejem se capacitar para tal,
+                com metodologias modernas, abarcando temáticas tradicionais e
+                contemporâneas.
+              </p>
+              <div>
+                <button
+                  style={{
+                    background: 'var(--azul-super-claro)',
+                    color: 'var(--bg-azul)',
+                  }}
+                  className={styles.botaoItinerario}
+                  onClick={() => {
+                    onClickItinerario('Educação');
+                  }}
+                >
+                  Acessar itinerário
+                </button>
+              </div>
+            </div>
             <iframe
+              className={styles.videoItinerario}
               title="Gerencial"
               src="https://www.youtube.com/embed/SHo-7vJLWn8"
-              height={screens.md ? '310' : '250'}
-              width={screens.md ? '534' : '300'}
             />
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '5px',
-              }}
-              onClick={() => {
-                onClickItinerario('Gerencial');
-              }}
+          </Row>
+          <Row className={styles.linha}></Row>
+          <Row
+            align="middle"
+            wrap={!screens.lg}
+            id="aposentadoria"
+            className={styles.itinerarioContainer}
+            style={{ flexDirection: 'row-reverse' }}
+          >
+            <div
+              style={
+                !screens.lg
+                  ? {
+                      display: 'grid',
+                      gap: '12px',
+                      maxWidth: '560px',
+                    }
+                  : {
+                      display: 'grid',
+                      gap: '24px',
+                      maxWidth: '560px',
+                    }
+              }
             >
-              <Link>Clique aqui para ir para o itinerário.</Link>
-            </Text>
-          </Col>
-        </Row>
-        <Row
-          id="aposentadoria"
-          align="middle"
-          wrap={!screens.lg}
-          style={
-            screens.lg
-              ? {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 50px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-              : {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-          }
-        >
-          <Col style={{ padding: '40px' }}>
-            <Link>
-              <Title
+              <h2 className={styles.titulo}>Aposentadoria</h2>
+              <p className={styles.texto}>
+                A aposentadoria já é realidade na Rede Federal EPCT, o
+                itinerário que se apresenta traz o enfoque para um novo
+                encarreiramento. O itinerário foi elaborado a partir de 3
+                pilares:
+              </p>
+              <Collapse
                 style={{
-                  fontFamily: 'Poppins',
-                  fontSize: '24px',
-                  color: '#2C55A1',
-                  marginBottom: '30px',
+                  display: 'grid',
+                  gap: '20px',
+                  background: 'none',
+                  border: 'none',
                 }}
-                onClick={() => {
-                  onClickItinerario('Aposentadoria');
-                }}
+                expandIconPosition="end"
               >
-                Aposentadoria
-              </Title>
-            </Link>
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-              }}
-            >
-              A aposentadoria já é realidade na Rede Federal EPCT, o itinerário
-              que se apresenta traz o enfoque para um novo encarreiramento.
-              <br />
-              O itinerário foi elaborado a partir de 3 pilares:
-              <br />
-              <br />
-              <b>Formação no contexto psicológico:</b> preparando-se para esta
-              nova realidade, em que as demandas de trabalho e rotina anteriores
-              não existirão mais.
-              <br />
-              <br />
-              <b>Atividades futuras:</b> o aposentado deve pensar no seu perfil,
-              fazer análise de suas características pessoais, habilidades e
-              preferências para descobrir o que irá fazer depois. Pode se
-              associar a ONGs, empreender etc.
-              <br />
-              <br />
-              <b>Financeiro:</b> se este aspecto não estiver bem equacionado,
-              dificilmente o aposentado conseguirá realizar as outras coisas. É
-              fundamental o planejamento financeiro, saber o quanto vai gastar
-              do momento do desligamento para frente e fazer uma análise de
-              expectativa de vida.
-            </Text>
-          </Col>
-          <Col>
+                <Panel
+                  className={`${styles.panel} ${styles.texto}`}
+                  style={{}}
+                  header="Formação no contexto psicológico"
+                  key="1"
+                >
+                  <p className={styles.texto}>
+                    preparando-se para esta nova realidade, em que as demandas
+                    de trabalho e rotina anteriores não existirão mais.
+                  </p>
+                </Panel>
+                <Panel
+                  className={`${styles.panel} ${styles.texto}`}
+                  header="Atividades futuras"
+                  key="2"
+                >
+                  <p className={styles.texto}>
+                    o aposentado deve pensar no seu perfil, fazer análise de
+                    suas características pessoais, habilidades e preferências
+                    para descobrir o que irá fazer depois. Pode se associar a
+                    ONGs, empreender etc.
+                  </p>
+                </Panel>
+                <Panel
+                  className={`${styles.panel} ${styles.texto}`}
+                  header="Financeiro"
+                  key="3"
+                >
+                  <p className={styles.texto}>
+                    se este aspecto não estiver bem equacionado, dificilmente o
+                    aposentado conseguirá realizar as outras coisas. É
+                    fundamental o planejamento financeiro, saber o quanto vai
+                    gastar do momento do desligamento para frente e fazer uma
+                    análise de expectativa de vida.
+                  </p>
+                </Panel>
+              </Collapse>
+              <div>
+                <button
+                  style={{
+                    background: 'var(--azul-super-claro)',
+                    color: 'var(--bg-azul)',
+                  }}
+                  className={styles.botaoItinerario}
+                  onClick={() => {
+                    onClickItinerario('Educação');
+                  }}
+                >
+                  Acessar itinerário
+                </button>
+              </div>
+            </div>
             <iframe
+              className={styles.videoItinerario}
               title="Aposentadoria"
               src="https://www.youtube.com/embed/mCFeSDFQWzk"
-              height={screens.md ? '310' : '250'}
-              width={screens.md ? '534' : '300'}
             />
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '5px',
-              }}
-              onClick={() => {
-                onClickItinerario('Aposentadoria');
-              }}
-            >
-              <Link>Clique aqui para ir para o itinerário.</Link>
-            </Text>
-          </Col>
-        </Row>
-
-        <Row
-          id="itinerarios"
-          align="middle"
-          wrap={!screens.lg}
-          style={
-            screens.lg
-              ? {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 50px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-              : {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-          }
-        >
-          <Col style={{ padding: '40px' }}>
-            <Title
-              style={{
-                fontFamily: 'Poppins',
-                fontSize: '24px',
-                color: '#2C55A1',
-                marginBottom: '30px',
-              }}
-            >
-              Itinerários Formativos
-            </Title>
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-              }}
-            >
-              A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
-              ofertados por diversas instituições de ensino, entre outras, da
-              RFEPCT, que dão suporte ao desenvolvimento das competências
-              recomendadas para um setor público de alto desempenho por meio de
-              Itinerários Formativos. Na PlaforEDU você pode buscar as
-              competências associadas ao seu perfil profissional, a partir de
-              uma busca simples, e ter acesso a todos os cursos relacionados
-              àquelas competências.
-            </Text>
-          </Col>
-          <Col>
-            <Image
-              src={mandala}
-              preview={false}
-              width={!screens.xs ? 375 : 250}
-            />
-          </Col>
-        </Row>
+          </Row>
+        </div>
 
         <Row
           align="middle"
@@ -764,43 +647,21 @@ export default function AboutPage() {
 
         {/* MANDALA */}
         <Row
+          className={styles.mandalaContainer}
           align="middle"
-          style={
-            screens.lg
-              ? {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 50px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-              : {
-                  backgroundColor: '#fff',
-                  marginBottom: '5px',
-                  padding: '40px 10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }
-          }
+          style={{}}
           id="mandala"
         >
-          <Col span={24} style={{ padding: '40px' }}>
-            <Title
+          <Col style={{ paddingBottom: '40px' }}>
+            <h1
+              className={styles.titulo}
               style={{
-                fontFamily: 'Poppins',
-                fontSize: '24px',
-                color: '#2C55A1',
-                marginBottom: '30px',
+                marginBottom: '20px',
               }}
             >
               Mandala de Competências
-            </Title>
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontSize: '18px',
-              }}
-            >
+            </h1>
+            <p className={styles.texto} style={{}}>
               As competências são a mobilização de conhecimentos, habilidades e
               atitudes para solucionar problemas e lidar com situações
               cotidianas profissionais. Essas competências estão associadas e
@@ -812,15 +673,24 @@ export default function AboutPage() {
               melhoria, Transversais. Abaixo é apresentado o infográfico com a
               Mandala de Competências organizada pelas competências associadas
               em categorias.
-            </Text>
+            </p>
           </Col>
           <Col
-            span={24}
             style={
-              screens.lg ? { padding: '40px 80px' } : { padding: '20px 40px' }
+              screens.lg ? { padding: '40px 0px' } : { padding: '20px 0px' }
             }
           >
-            <Image preview={false} src={infografico} width={'100%'} />
+            <Image
+              src={infografico}
+              preview={
+                screens.xs
+                  ? {
+                      src: infografico,
+                    }
+                  : false
+              }
+              width={'100%'}
+            />
           </Col>
         </Row>
       </div>

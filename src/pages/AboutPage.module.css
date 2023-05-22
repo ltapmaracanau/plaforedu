@@ -18,6 +18,7 @@
   font-family: 'Roboto', sans-serif;
   color: var(--texto-corpo);
   font-size: 1rem;
+  font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.5px;
   margin: 0;
@@ -57,7 +58,6 @@
   max-width: 1160px;
   margin: 0 auto;
   padding: 0 20px;
-  flex-direction: row-reverse;
   justify-content: center;
   gap: 24px;
 }
@@ -68,10 +68,43 @@
   border-radius: 10px;
 }
 
+.videoItinerario {
+  flex-grow: 1;
+  border-radius: 20px;
+  border-style: none;
+  width: 100%;
+  max-width: 560px;
+  min-height: 300px;
+  margin: 0 auto;
+}
+
+.linha {
+  background: var(--azul-super-claro);
+  height: 3px;
+  max-width: 1160px;
+  margin: 48px auto;
+}
+
+.panel {
+  background: white;
+  border-radius: 5px 5px 0px 0px;
+  border-style: none;
+  box-shadow: 0px 5px 10px rgba(44, 86, 162, 0.05);
+}
+
 .trilhaContainer {
   background-color: var(--bg-azul);
   padding: 60px 20px;
+  margin-top: 120px;
+  margin-bottom: 120px;
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
+}
+
+.mandalaContainer {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+  margin-bottom: 80px;
 }
