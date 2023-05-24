@@ -1,6 +1,13 @@
 import AuthAxios from "./authAxios";
 
 export const dataService = {
+  getInfo: () =>
+    AuthAxios.get("/statistics/home")
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      }),
+
   getToken: () => {
     return localStorage.getItem("token");
   },
