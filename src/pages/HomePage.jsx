@@ -15,6 +15,7 @@ import icon3 from "../assets/HomepageIcon3.svg";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Link } from "react-router-dom";
 import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png";
+import infografico_fundo_branco from "../assets/about/mandala_fundo_branco.png";
 
 import {
   ArrowRightOutlined,
@@ -41,7 +42,14 @@ const { Title, Text } = Typography;
 
 export default function HomePage() {
   const screens = useBreakpoint();
-  console.log(screens);
+
+  const info = useStoreState((state) => state.adm.info);
+  //const loadingInfo = useStoreState((state) => state.adm.loadingInfo);
+  const getInfo = useStoreActions((actions) => actions.adm.getInfo);
+
+  React.useEffect(() => {
+    getInfo();
+  }, [getInfo]);
 
   return (
     <>
@@ -117,7 +125,11 @@ export default function HomePage() {
             <div>
               <Title
                 level={screens.xs ? 4 : 3}
-                style={{ marginBottom: "20px", textAlign: "left" }}
+                style={{
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                  textAlign: "left",
+                }}
               >
                 Cursos acessados por você recentemente:
               </Title>
@@ -167,7 +179,8 @@ export default function HomePage() {
           </div>
           <div
             style={{
-              margin: "50px 0px",
+              marginTop: "50px",
+              marginBottom: "50px",
               display: "flex",
               gap: "30px",
               flexDirection: screens.lg ? "row" : "column",
@@ -186,6 +199,7 @@ export default function HomePage() {
                 style={{
                   maxWidth: "460px",
                   marginRight: screens.lg ? "20px" : "0px",
+                  marginLeft: screens.lg ? "20px" : "0px",
                 }}
               >
                 <Title level={screens.xs ? 4 : 3}>
@@ -199,6 +213,7 @@ export default function HomePage() {
                   style={{
                     backgroundColor: "#E2FCFF",
                     marginTop: "20px",
+                    marginBottom: "20px",
                     color: "#2F4C84",
                     fontWeight: 700,
                   }}
@@ -254,6 +269,7 @@ export default function HomePage() {
             </Text>
             <Row
               style={{
+                marginTop: "50px",
                 marginBottom: "50px",
               }}
               gutter={[40, 40]}
@@ -361,7 +377,8 @@ export default function HomePage() {
       <Row
         justify={"space-around"}
         style={{
-          margin: "50px 0px",
+          marginTop: "50px",
+          marginBottom: "50px",
         }}
         gutter={[40, 40]}
         align={"middle"}
@@ -376,11 +393,13 @@ export default function HomePage() {
           <div
             style={{
               maxWidth: "560px",
+              margin: "30px",
             }}
           >
             <Title
               style={{
-                margin: "20px 0px",
+                marginTop: "20px",
+                marginBottom: "20px",
               }}
               level={screens.xs ? 4 : 3}
             >
@@ -539,42 +558,46 @@ export default function HomePage() {
           </div>
         </Col>
       </Row>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          textAlign: "center",
-          backgroundColor: "#F5F5F5",
-          padding: "50px 0px",
-        }}
-      >
-        <div>
-          <Title level={1} style={{ margin: 0 }}>
-            240
-          </Title>
-          <Title level={3} style={{ margin: 0 }}>
-            Cursos
-          </Title>
-        </div>
-        <Title
-          level={3}
+      {info?.courses && (
+        <div
           style={{
-            color: "#A8A8A8",
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-evenly",
+            flexDirection: screens.xs ? "column" : "row",
+            alignItems: "center",
+            textAlign: "center",
+            backgroundColor: "#F5F5F5",
+            padding: "50px 0px",
           }}
         >
-          ofertados por
-        </Title>
-        <div>
-          <Title level={1} style={{ margin: 0 }}>
-            40
+          <div>
+            <Title level={1} style={{ margin: 0 }}>
+              {info.courses}
+            </Title>
+            <Title level={3} style={{ margin: 0 }}>
+              Cursos
+            </Title>
+          </div>
+          <Title
+            level={3}
+            style={{
+              color: "#A8A8A8",
+              margin: "20px",
+            }}
+          >
+            ofertados por
           </Title>
-          <Title level={3} style={{ margin: 0 }}>
-            Instituições
-          </Title>
+          <div>
+            <Title level={1} style={{ margin: 0 }}>
+              {info.institutions}
+            </Title>
+            <Title level={3} style={{ margin: 0 }}>
+              Instituições
+            </Title>
+          </div>
         </div>
-      </div>
+      )}
       <Row
         justify={"space-around"}
         style={{
@@ -589,7 +612,11 @@ export default function HomePage() {
             justifyContent: "center",
           }}
         >
-          <Image src={infografico} width={screens.lg ? 300 : 200} />
+          <Image
+            src={infografico}
+            preview={{ src: infografico_fundo_branco }}
+            width={screens.lg ? 300 : 200}
+          />
         </Col>
         <Col
           flex={12}
@@ -598,13 +625,13 @@ export default function HomePage() {
             alignItems: "center",
             justifyContent: "center",
             textAlign: screens.md ? "end" : "left",
+            margin: "50px",
           }}
         >
           <Space
             direction="vertical"
             style={{
               maxWidth: "560px",
-              marginTop: screens.md ? 0 : "50px",
             }}
           >
             <Title level={3}>Mandala das Competências</Title>
@@ -627,6 +654,7 @@ export default function HomePage() {
           <Title
             level={4}
             style={{
+              marginTop: "20px",
               marginBottom: "20px",
               color: "#90EBFF",
             }}
@@ -641,8 +669,3 @@ export default function HomePage() {
     </>
   );
 }
-
-/* 
-        
-
-*/
