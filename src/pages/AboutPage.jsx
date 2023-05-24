@@ -81,8 +81,8 @@ export default function AboutPage() {
 
         <Row
           style={{
-            margin: '120px 0',
-            padding: '60px 10px',
+            margin: `${!screens.xs ? '120px 0' : '60px 0'}`,
+            padding: '60px 20px',
             background: 'var(--bg-menos-claro)',
           }}
         >
@@ -91,7 +91,7 @@ export default function AboutPage() {
             style={{
               maxWidth: '690px',
               margin: '0 auto',
-              textAlign: 'center',
+              textAlign: `${!screens.xs ? 'center' : 'left'}`,
             }}
           >
             A PlaforEDU tem como objetivo proporcionar um espaço onde os
@@ -118,7 +118,7 @@ export default function AboutPage() {
                   gap: '40px',
                 }
               : {
-                  gap: '10px',
+                  gap: '20px',
                   justifyContent: 'center',
                 }
           }
@@ -141,12 +141,7 @@ export default function AboutPage() {
               àquelas competências.
             </p>
           </Col>
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
+          <Col>
             <Image
               src={mandala}
               preview={false}
@@ -159,7 +154,7 @@ export default function AboutPage() {
           style={{
             background: 'var(--bg-azul)',
             padding: '60px 0',
-            margin: '120px 0',
+            margin: `${!screens.xs ? '120px 0' : '60px 0'}`,
           }}
         >
           <h1
@@ -196,7 +191,7 @@ export default function AboutPage() {
                 : null
             }
           >
-            <div className={styles.cardItinerarios}>
+            <a href="#iniciacao" className={styles.cardItinerarios}>
               <img src={iniciacao} alt="" />
               <p
                 className={styles.texto}
@@ -206,9 +201,10 @@ export default function AboutPage() {
               >
                 Iniciação ao Serviço Público
               </p>
-            </div>
+            </a>
 
-            <div
+            <a
+              href="#tae"
               className={styles.cardItinerarios}
               style={{ background: 'var(--administrativo)' }}
             >
@@ -221,8 +217,9 @@ export default function AboutPage() {
               >
                 Técnico-Administrativo em Educação
               </p>
-            </div>
-            <div
+            </a>
+            <a
+              href="#docente"
               className={styles.cardItinerarios}
               style={{ background: 'var(--docente)' }}
             >
@@ -235,8 +232,9 @@ export default function AboutPage() {
               >
                 Docente
               </p>
-            </div>
-            <div
+            </a>
+            <a
+              href="#gerencial"
               className={styles.cardItinerarios}
               style={{ background: 'var(--gerencial)' }}
             >
@@ -249,8 +247,9 @@ export default function AboutPage() {
               >
                 Gerencial
               </p>
-            </div>
-            <div
+            </a>
+            <a
+              href="#aposentadoria"
               className={styles.cardItinerarios}
               style={{ background: 'var(--aposentadoria)' }}
             >
@@ -263,7 +262,7 @@ export default function AboutPage() {
               >
                 Preparação para aposentadoria
               </p>
-            </div>
+            </a>
           </div>
           <div>
             <p
@@ -370,8 +369,8 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: 'var(--azul-super-claro)',
-                    color: 'var(--bg-azul)',
+                    background: '#FEE6CE',
+                    color: '#79543B',
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
@@ -423,12 +422,12 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: 'var(--azul-super-claro)',
-                    color: 'var(--bg-azul)',
+                    background: '#D3AFD3',
+                    color: '#4F2150',
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
-                    onClickItinerario('Educação');
+                    onClickItinerario('Docente');
                   }}
                 >
                   Acessar itinerário
@@ -475,12 +474,12 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: 'var(--azul-super-claro)',
-                    color: 'var(--bg-azul)',
+                    background: '#E6FADF',
+                    color: '#4A7040',
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
-                    onClickItinerario('Educação');
+                    onClickItinerario('Gerencial');
                   }}
                 >
                   Acessar itinerário
@@ -539,7 +538,7 @@ export default function AboutPage() {
                   key="1"
                 >
                   <p className={styles.texto}>
-                    preparando-se para esta nova realidade, em que as demandas
+                    Preparando-se para esta nova realidade, em que as demandas
                     de trabalho e rotina anteriores não existirão mais.
                   </p>
                 </Panel>
@@ -549,7 +548,7 @@ export default function AboutPage() {
                   key="2"
                 >
                   <p className={styles.texto}>
-                    o aposentado deve pensar no seu perfil, fazer análise de
+                    O aposentado deve pensar no seu perfil, fazer análise de
                     suas características pessoais, habilidades e preferências
                     para descobrir o que irá fazer depois. Pode se associar a
                     ONGs, empreender etc.
@@ -561,7 +560,7 @@ export default function AboutPage() {
                   key="3"
                 >
                   <p className={styles.texto}>
-                    se este aspecto não estiver bem equacionado, dificilmente o
+                    Se este aspecto não estiver bem equacionado, dificilmente o
                     aposentado conseguirá realizar as outras coisas. É
                     fundamental o planejamento financeiro, saber o quanto vai
                     gastar do momento do desligamento para frente e fazer uma
@@ -572,12 +571,12 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: 'var(--azul-super-claro)',
-                    color: 'var(--bg-azul)',
+                    background: '#CECCFB',
+                    color: '#2D267F',
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
-                    onClickItinerario('Educação');
+                    onClickItinerario('Aposentadoria');
                   }}
                 >
                   Acessar itinerário
@@ -594,36 +593,23 @@ export default function AboutPage() {
 
         <Row
           align="middle"
-          className={styles.trilhaContainer}
-          style={
-            screens.md
-              ? {
-                  height: '420px',
-                  padding: '60px 50px',
-                }
-              : null
-          }
+          style={{
+            backgroundColor: 'var(--bg-azul)',
+            height: `${screens.md ? '420px' : 'auto'}`,
+            padding: '60px 20px',
+            margin: `${!screens.xs ? '120px 0' : '60px 0'}`,
+          }}
         >
           <Row
+            className={styles.trilhaContainer}
             style={
               screens.md
                 ? {
-                    maxWidth: '1160px',
-                    height: '100%',
-                    justifyContent: 'right',
                     backgroundImage: `url(${trilhaIlustracao})`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'contain',
-                    display: 'flex',
-                    alignItems: 'center',
                   }
-                : {
-                    maxWidth: '1160px',
-                    height: '100%',
-                    justifyContent: 'right',
-                    display: 'flex',
-                    alignItems: 'center',
-                  }
+                : null
             }
           >
             <Col style={{ width: '100%' }} span={screens.md ? 16 : 24}>
@@ -649,10 +635,10 @@ export default function AboutPage() {
         <Row
           className={styles.mandalaContainer}
           align="middle"
-          style={{}}
+          style={{ marginBottom: `${!screens.xs ? '80px' : '40px'}` }}
           id="mandala"
         >
-          <Col style={{ paddingBottom: '40px' }}>
+          <Col style={{ paddingBottom: `${!screens.xs ? '40px' : '20px'}` }}>
             <h1
               className={styles.titulo}
               style={{
