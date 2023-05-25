@@ -8,11 +8,11 @@ import Img3 from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Docen
 import Img4 from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Gerencial_CLICADO.png';
 import Img5 from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_PrepAposenta_CLICADO.png';
 
-import itinerarioDocente from '../assets/itinerarios/icon-docente.png';
-import itinerarioGerencial from '../assets/itinerarios/icon-gerencial.png';
-import itinerarioServPublico from '../assets/itinerarios/icon-iniciacao.svg';
-import itinerarioPrepAposenta from '../assets/itinerarios/icon-aposentadoria.png';
-import itinerarioTecAdmEdu from '../assets/itinerarios/icon-adm-edu.png';
+import itinerarioDocente from '../assets/itinerarios/iconEducacao.svg';
+import itinerarioGerencial from '../assets/itinerarios/iconGerencial.svg';
+import itinerarioServPublico from '../assets/itinerarios/iconIniciacao.svg';
+import itinerarioPrepAposenta from '../assets/itinerarios/iconAposentadoria.svg';
+import itinerarioTecAdmEdu from '../assets/itinerarios/iconAdministrativo.svg';
 
 import logoSvg from '../assets/PLAFOR.svg';
 

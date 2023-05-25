@@ -9,7 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import { Row, Col, Typography, Image, Grid, Collapse } from 'antd';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import iniciacao from '../assets/itinerarios/icon-iniciacao.svg';
+import iniciacao from '../assets/itinerarios/iconIniciacao.svg'
+import aposentadoria from '../assets/itinerarios/iconAposentadoria.svg'
+import educacao from '../assets/itinerarios/iconEducacao.svg'
+import administrativo from '../assets/itinerarios/iconAdministrativo.svg'
+import gerencial from '../assets/itinerarios/iconGerencial.svg'
+import setabaixo from '../assets/icon/setabaixo.svg'
 
 const { Panel } = Collapse;
 const { Text, Title, Link } = Typography;
@@ -208,7 +213,7 @@ export default function AboutPage() {
               className={styles.cardItinerarios}
               style={{ background: 'var(--administrativo)' }}
             >
-              <img src={iniciacao} alt="" />
+              <img src={administrativo} alt="" />
               <p
                 className={styles.texto}
                 style={{
@@ -223,7 +228,7 @@ export default function AboutPage() {
               className={styles.cardItinerarios}
               style={{ background: 'var(--docente)' }}
             >
-              <img src={iniciacao} alt="" />
+              <img src={educacao} alt="" />
               <p
                 className={styles.texto}
                 style={{
@@ -238,7 +243,7 @@ export default function AboutPage() {
               className={styles.cardItinerarios}
               style={{ background: 'var(--gerencial)' }}
             >
-              <img src={iniciacao} alt="" />
+              <img src={gerencial} alt="" />
               <p
                 className={styles.texto}
                 style={{
@@ -253,7 +258,7 @@ export default function AboutPage() {
               className={styles.cardItinerarios}
               style={{ background: 'var(--aposentadoria)' }}
             >
-              <img src={iniciacao} alt="" />
+              <img src={aposentadoria} alt="" />
               <p
                 className={styles.texto}
                 style={{
@@ -264,17 +269,19 @@ export default function AboutPage() {
               </p>
             </a>
           </div>
-          <div>
+          <div style={{display:"grid",justifyContent:"center"}}>
             <p
               className={styles.subTitulo}
               style={{
                 color: 'var(--bg-site)',
-                display: 'block',
                 textAlign: 'center',
               }}
             >
               Explicamos melhor cada um abaixo
             </p>
+            <div style={{width:"100%",display:"flex",justifyContent:"center"}}>
+            <img src={setabaixo} style = {{color:"#fff",marginTop:"24px"}}/>
+            </div>
           </div>
         </div>
 
