@@ -5,7 +5,7 @@ import { dataService } from "../services/dataService";
 import { notification } from "antd";
 
 const admModel = {
-  tipoVisualizacao: false, // false: grafo, true: lista
+  tipoVisualizacao: true, // false: grafo, true: lista
   filterCollapsed: true, // true: filtro escondido, false: filtro visível
   loading: false,
   loadingLogs: false,
@@ -14,6 +14,9 @@ const admModel = {
   isAuthenticated: computed((_state) => !!dataService.getToken()),
   searchLogs: [],
   countLogs: 0,
+
+  info: {},
+  loadingInfo: false,
 
   myProfile: computed((_state) => dataService.getLocalStorageUser()),
   allDataProfile: {},
@@ -165,7 +168,27 @@ const admModel = {
     }
   }),
 
+  getInfo: thunk(async (actions, _) => {
+    actions.setLoadingInfo(true);
+    try {
+      const info = await dataService.getInfo();
+      actions.setInfo(info);
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      actions.setLoadingInfo(false);
+    }
+  }),
+
   // Setters
+
+  setInfo: action((state, payload) => {
+    state.info = payload;
+  }),
+
+  setLoadingInfo: action((state, payload) => {
+    state.loadingInfo = payload;
+  }),
 
   setFilterCollapsed: action((state, _) => {
     state.filterCollapsed = !state.filterCollapsed;

@@ -12,6 +12,7 @@ import {
   Input,
   Tooltip,
   Switch,
+  Space,
 } from "antd";
 import CourseRegister from "./CourseRegister";
 
@@ -195,11 +196,18 @@ export default function CoursesList() {
                         style={{ fontFamily: "Roboto" }}
                         title={item.name}
                         description={
-                          <>
-                            {item.institutions
-                              .map((item) => item.name)
-                              .join(", ")}
-                          </>
+                          <Space direction="vertical">
+                            <>
+                              {item.institutions
+                                .map((item) => item.name)
+                                .join(", ")}
+                            </>
+                            {item.equivalents.length > 0 && (
+                              <>
+                                <b>{item.equivalents.length} Equivalência(s)</b>
+                              </>
+                            )}
+                          </Space>
                         }
                       />
                     </List.Item>

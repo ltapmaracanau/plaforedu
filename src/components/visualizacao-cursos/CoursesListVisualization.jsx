@@ -99,7 +99,7 @@ export default function CoursesListVisualization() {
       </Row>
       <Row>
         <Col flex={"auto"}>
-          <Card bordered={false} style={{ background: "#eee" }}>
+          <Card bordered={false} style={{ background: "#fff" }}>
             {filter.tipoClassificacao ? ( // False: por cursos   True: por trilhas
               <>
                 <Card
@@ -200,6 +200,7 @@ export default function CoursesListVisualization() {
                                   itemLayout="vertical"
                                   dataSource={trilha.courses}
                                   renderItem={(curso) => {
+                                    // Se o curso estiver arquivado eu não exibo
                                     if (curso.filedAt) {
                                       return;
                                     }
@@ -266,6 +267,18 @@ export default function CoursesListVisualization() {
                                                 flexDirection: "column",
                                               }}
                                             >
+                                              {curso.equivalents.length > 0 && (
+                                                <Text
+                                                  style={{
+                                                    fontFamily: "Roboto",
+                                                  }}
+                                                >
+                                                  Cursos equivalentes:{" "}
+                                                  <Text strong>
+                                                    {curso.equivalents.length}
+                                                  </Text>
+                                                </Text>
+                                              )}
                                               <Text
                                                 style={{ fontFamily: "Roboto" }}
                                               >
@@ -437,6 +450,16 @@ export default function CoursesListVisualization() {
                               flexDirection: "column",
                             }}
                           >
+                            {curso.equivalents.length > 0 && (
+                              <Text
+                                style={{
+                                  fontFamily: "Roboto",
+                                }}
+                              >
+                                Cursos equivalentes:{" "}
+                                <Text strong>{curso.equivalents.length}</Text>
+                              </Text>
+                            )}
                             <Text style={{ fontFamily: "Roboto" }}>
                               Categorias de competência:{" "}
                               <Text strong>

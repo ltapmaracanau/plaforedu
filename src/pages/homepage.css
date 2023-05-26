@@ -1,0 +1,9 @@
+.containerTitle {
+  background: rgb(226, 252, 255);
+  background: linear-gradient(180deg, rgba(226, 252, 255, 1) 42%, rgba(38, 147, 170, 0) 100%);
+}
+
+.containerTitle .texts {
+  text-align: center;
+  padding: 80px 0;
+}
