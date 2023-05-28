@@ -9,12 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import { Row, Col, Typography, Image, Grid, Collapse } from 'antd';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import iniciacao from '../assets/itinerarios/iconIniciacao.svg'
-import aposentadoria from '../assets/itinerarios/iconAposentadoria.svg'
-import educacao from '../assets/itinerarios/iconEducacao.svg'
-import administrativo from '../assets/itinerarios/iconAdministrativo.svg'
-import gerencial from '../assets/itinerarios/iconGerencial.svg'
-import setabaixo from '../assets/icon/setabaixo.svg'
+import iniciacao from '../assets/itinerarios/iconIniciacao.svg';
+import aposentadoria from '../assets/itinerarios/iconAposentadoria.svg';
+import educacao from '../assets/itinerarios/iconEducacao.svg';
+import administrativo from '../assets/itinerarios/iconAdministrativo.svg';
+import gerencial from '../assets/itinerarios/iconGerencial.svg';
+import setabaixo from '../assets/icon/setabaixo.svg';
 
 const { Panel } = Collapse;
 const { Text, Title, Link } = Typography;
@@ -269,7 +269,7 @@ export default function AboutPage() {
               </p>
             </a>
           </div>
-          <div style={{display:"grid",justifyContent:"center"}}>
+          <div style={{ display: 'grid', justifyContent: 'center' }}>
             <p
               className={styles.subTitulo}
               style={{
@@ -279,8 +279,17 @@ export default function AboutPage() {
             >
               Explicamos melhor cada um abaixo
             </p>
-            <div style={{width:"100%",display:"flex",justifyContent:"center"}}>
-            <img src={setabaixo} style = {{color:"#fff",marginTop:"24px"}}/>
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <img
+                src={setabaixo}
+                style={{ color: '#fff', marginTop: '24px' }}
+              />
             </div>
           </div>
         </div>

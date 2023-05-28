@@ -7,6 +7,48 @@ body {
   margin: 0;
 }
 
+
+.titulo {
+  font-family: 'Roboto', sans-serif;
+  color: var(--titulos);
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 40px;
+  margin: 0;
+}
+
+.subTitulo {
+  font-family: 'Roboto', sans-serif;
+  color: var(--texto-corpo);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 28px;
+  margin: 0;
+}
+
+.texto {
+  font-family: 'Roboto', sans-serif;
+  color: var(--texto-corpo);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.botaoTexto{
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 0.875rem;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-style: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 .linkHeader {
   height: 100%;
   display: flex;
