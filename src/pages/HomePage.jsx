@@ -92,9 +92,6 @@ export default function HomePage() {
                 display: 'block',
                 margin: '0 auto',
                 marginBottom: screens.xs ? '16px' : '24px',
-                padding: '12px 28px',
-                borderRadius: '10px',
-                borderStyle: 'none',
                 background: 'var(--bg-azul)',
                 color: 'white',
               }}
@@ -175,7 +172,6 @@ export default function HomePage() {
                   style={{
                     maxWidth: screens.xs ? '100%' : '360px',
                     cursor: 'pointer',
-                    // boxShadow: '5px 5px 10px 0px rgba(0,0,0,0.15)',
                     boxShadow:
                       '0px 4px 4px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(44, 86, 162, 0.1)',
                   }}
@@ -566,74 +562,112 @@ export default function HomePage() {
           </div>
         </Col>
       </Row>
+
       {info?.courses && (
         <div
           style={{
             width: '100%',
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            flexDirection: screens.xs ? 'column' : 'row',
-            alignItems: 'center',
-            textAlign: 'center',
             backgroundColor: '#F5F5F5',
-            padding: '50px 0px',
+            // padding: screens.xl ? '60px 0px' : '60px 20px',
+            padding: '60px 0',
+            margin: '120px 0',
           }}
         >
-          <div>
-            <Title level={1} style={{ margin: 0 }}>
-              {info.courses}
-            </Title>
-            <Title level={3} style={{ margin: 0 }}>
-              Cursos
-            </Title>
-          </div>
-          <Title
-            level={3}
+          <div
             style={{
-              color: '#A8A8A8',
-              margin: '20px',
+              maxWidth: '800px',
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              flexDirection: screens.xs ? 'column' : 'row',
+              alignItems: 'center',
+              textAlign: 'center',
+              margin: '0 auto',
             }}
           >
-            ofertados por
-          </Title>
-          <div>
-            <Title level={1} style={{ margin: 0 }}>
-              {info.institutions}
-            </Title>
-            <Title level={3} style={{ margin: 0 }}>
-              Instituições
-            </Title>
+            <div>
+              <Title
+                // level={1}
+                style={{
+                  fontFamily: 'Roboto',
+                  fontSize: '4.5rem',
+                  fontWeight: 'bold',
+                  letterSpacing: '-0.25',
+                  lineHeight: '4rem',
+                  color: 'var(--titulos)',
+                  margin: 0,
+                }}
+              >
+                {info.courses}
+              </Title>
+              <p
+                className="titulo"
+                style={{ color: 'var(--texto-corpo)', margin: 0 }}
+              >
+                Cursos
+              </p>
+            </div>
+            <span
+              // level={3}
+              className="titulo"
+              style={{
+                color: 'var(--texto-baixo-contraste)',
+                margin: '24px',
+              }}
+            >
+              ofertados por
+            </span>
+            <div>
+              <Title
+                level={1}
+                style={{
+                  fontFamily: 'Roboto',
+                  fontSize: '4.5rem',
+                  fontWeight: 'bold',
+                  letterSpacing: '-0.25',
+                  lineHeight: '4rem',
+                  color: 'var(--titulos)',
+                  margin: 0,
+                }}
+              >
+                {info.institutions}
+              </Title>
+              <span
+                className="titulo"
+                // level={3}
+                style={{ color: 'var(--texto-corpo)', margin: 0 }}
+              >
+                Instituições
+              </span>
+            </div>
           </div>
         </div>
       )}
+
       <Row
-        justify={'space-around'}
+        // justify={'space-between'}
+        align="middle"
         style={{
-          margin: '50px 0px',
+          maxWidth: '1160px',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row-reverse',
+          flexWrap: screens.md ? 'nowrap' : 'wrap',
+          justifyContent: screens.md ? 'space-between' : 'center',
+          padding: screens.xl ? '0' : '0 20px',
+          // margin: '50px 0px',
+          margin: '0 auto',
+          marginBottom: '120px',
+          gap: '24px',
         }}
       >
         <Col
-          flex={12}
+          // flex={12}
           style={{
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Image
-            src={infografico}
-            preview={{ src: infografico_fundo_branco }}
-            width={screens.lg ? 300 : 200}
-          />
-        </Col>
-        <Col
-          flex={12}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            // alignItems: 'center',
+            // justifyContent: 'center',
             textAlign: screens.md ? 'end' : 'left',
-            margin: '50px',
+            // margin: '50px',
           }}
         >
           <Space
@@ -641,35 +675,52 @@ export default function HomePage() {
             style={{
               maxWidth: '560px',
             }}
+            size={24}
           >
-            <Title level={3}>Mandala das Competências</Title>
-            <Text>
+            <h1 className="titulo">Mandala das Competências</h1>
+            <Text className="texto">
               As competências são a mobilização de conhecimentos, habilidades e
               atitudes para solucionar problemas e lidar com situações
               cotidianas profissionais
             </Text>
-            <Button type="primary">Entenda Melhor</Button>
+            <button
+              style={{ background: 'var(--bg-azul)', color: 'white' }}
+              className="botaoTexto"
+              // type="primary"
+            >
+              Entenda Melhor
+            </button>
           </Space>
         </Col>
+        <Image
+          style={{ width: '100%', maxWidth: '480px' }}
+          src={infografico}
+          preview={{ src: infografico_fundo_branco }}
+        />
       </Row>
+
       <Row
         style={{
-          padding: '50px 0px',
-          backgroundColor: '#2F4C84',
+          padding: '60px 0px',
+          backgroundColor: 'var(--bg-azul)',
         }}
       >
         <Col offset={2} span={18}>
-          <Title
-            level={4}
+          <h1
+            className="subTitulo"
+            // level={4}
             style={{
-              marginTop: '20px',
+              // marginTop: '20px',
               marginBottom: '20px',
-              color: '#90EBFF',
+              color: 'var(--azul-claro)',
             }}
           >
             Gostaria de entrar em contato com a gente?
-          </Title>
-          <Link style={{ textDecoration: 'underline', color: '#FDFDFD' }}>
+          </h1>
+          <Link
+            className="texto"
+            style={{ textDecoration: 'underline', color: '#FDFDFD' }}
+          >
             Preencher formulário de contato
           </Link>
         </Col>
