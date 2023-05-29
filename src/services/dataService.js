@@ -13,6 +13,7 @@ export const dataService = {
   },
 
   getLocalStorageUser: () => {
+    if (!localStorage.getItem("user")) return null;
     return JSON.parse(localStorage.getItem("user"));
   },
 
@@ -22,12 +23,11 @@ export const dataService = {
       password: payload.password,
     })
       .then((response) => response.data)
-      .catch((error) => ({
-        error: true,
-        message: error.response.data
-          ? error.response.data.message
-          : "Usuário e/ou senha incorretos!",
-      })),
+      .catch((error) => {
+        throw new Error(
+          error.response?.data?.message || "Usuário e/ou senha incorretos!"
+        );
+      }),
 
   createUser: (payload) =>
     AuthAxios.post("/users/new", {

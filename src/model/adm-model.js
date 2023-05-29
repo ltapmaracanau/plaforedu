@@ -54,7 +54,8 @@ const admModel = {
         username: payload.username,
         password: payload.password,
       });
-      if (authentication.user.status === "PENDING") {
+      console.log("authentication", authentication);
+      if (authentication?.user?.status === "PENDING") {
         notification.warning({
           message: "Aviso!",
           description:
@@ -64,6 +65,7 @@ const admModel = {
       localStorage.setItem("token", authentication.token);
       localStorage.setItem("user", JSON.stringify(authentication.user));
     } catch (e) {
+      actions.setLoading(false);
       throw new Error(e);
     } finally {
       actions.setLoading(false);
