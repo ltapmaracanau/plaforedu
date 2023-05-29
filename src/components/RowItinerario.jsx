@@ -350,13 +350,21 @@ export default function RowItinerario() {
   };
 
   const linha2 = {
-    0: <img src={logoSvg} />,
-    '00911570-d01c-4cb3-81e2-721999eab901': <img src={itinerarioServPublico} />,
-    '357d300e-95a4-4de9-a653-140841e2090a': <img src={itinerarioTecAdmEdu} />,
-    '6f20336b-5519-423a-a708-db9114190e63': <img src={itinerarioDocente} />,
-    '35218055-9fa5-4bc3-a4e1-04c07a9c2872': <img src={itinerarioGerencial} />,
+    0: <img style={{ height: '72px' }} src={logoSvg} />,
+    '00911570-d01c-4cb3-81e2-721999eab901': (
+      <img style={{ height: '72px' }} src={itinerarioServPublico} />
+    ),
+    '357d300e-95a4-4de9-a653-140841e2090a': (
+      <img style={{ height: '72px' }} src={itinerarioTecAdmEdu} />
+    ),
+    '6f20336b-5519-423a-a708-db9114190e63': (
+      <img style={{ height: '72px' }} src={itinerarioDocente} />
+    ),
+    '35218055-9fa5-4bc3-a4e1-04c07a9c2872': (
+      <img style={{ height: '72px' }} src={itinerarioGerencial} />
+    ),
     '55876032-32c1-432a-a020-9f70c73e7d6b': (
-      <img src={itinerarioPrepAposenta} />
+      <img style={{ height: '72px' }} src={itinerarioPrepAposenta} />
     ),
   };
 
@@ -371,18 +379,20 @@ export default function RowItinerario() {
         style={{
           background:
             'linear-gradient(88.74deg, #2D56A1 11.86%, #34A5DE 94.24%)',
-          padding: '20px 60px',
+          padding: '20px 20px',
         }}
       >
         <div
           style={{
             display: 'flex',
+            flexWrap: screens.xs ? 'wrap' : 'nowrap',
             alignItems: 'center',
             maxWidth: '900px',
             margin: '32px auto',
+            gap: '28px',
           }}
         >
-          <Col style={{ marginRight: 24 }}>
+          <Col style={{}}>
             {/* {linha[itinerario] ? linha[itinerario] : linha[0]} */}
             {linha2[itinerario] ? linha2[itinerario] : linha2[0]}
           </Col>
@@ -393,7 +403,7 @@ export default function RowItinerario() {
               style={{
                 fontFamily: 'Roboto',
                 fontWeight: '700',
-                marginBottom: '10px',
+                marginBottom: '12px',
                 color: '#FFF',
               }}
             >
