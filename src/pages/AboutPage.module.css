@@ -1,0 +1,116 @@
+.titulo {
+  font-family: 'Roboto', sans-serif;
+  color: var(--titulos);
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 40px;
+  margin: 0;
+}
+
+.subTitulo {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 28px;
+  margin: 0;
+}
+
+.texto {
+  font-family: 'Roboto', sans-serif;
+  color: var(--texto-corpo);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.botaoTexto,  .botaoItinerario{
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 0.875rem;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1160px;
+  gap: 32px;
+  padding: 40px 0px;
+  margin: 0 auto;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+.cardItinerarios {
+  background: var(--iniciacao);
+  display: flex;
+  align-items: center;
+  padding: 12px 28px;
+  gap: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.itinerarioContainer {
+  position: relative;
+  display: flex;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  justify-content: center;
+  gap: 24px;
+}
+
+.botaoItinerario {
+  padding: 14px 28px;
+  border-style: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.videoItinerario {
+  flex-grow: 1;
+  border-radius: 20px;
+  border-style: none;
+  width: 100%;
+  max-width: 560px;
+  min-height: 300px;
+  margin: 0 auto;
+}
+
+.linha {
+  background: var(--azul-super-claro);
+  height: 3px;
+  max-width: 1160px;
+  margin: 48px auto;
+}
+
+.panel {
+  background: white;
+  border-radius: 5px 5px 0px 0px;
+  border-style: none;
+  box-shadow: 0px 5px 10px rgba(44, 86, 162, 0.05);
+}
+
+.trilhaContainer {
+  display: flex;
+  align-items: center;
+  max-width: 1120px;
+  margin: 0 auto;
+  height: 100%;
+  justify-content: right;
+}
+
+.mandalaContainer {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+  
+}

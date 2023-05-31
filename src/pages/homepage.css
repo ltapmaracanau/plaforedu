@@ -1,9 +1,99 @@
 .containerTitle {
-  background: rgb(226, 252, 255);
-  background: linear-gradient(180deg, rgba(226, 252, 255, 1) 42%, rgba(38, 147, 170, 0) 100%);
+  background: linear-gradient(180deg, #E2FCFF 0%, rgba(231, 244, 251, 0) 100%);
+  padding-top: 80px;
+  text-align: center;
+  padding-bottom: 120px;
 }
 
-.containerTitle .texts {
-  text-align: center;
-  padding: 80px 0;
+.botao {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 0.875rem;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.botaoPrincipal {
+  padding: 10px 26px;
+  border: 2px solid var(--bg-azul);
+  background: var(--bg-azul);
+  color: white;
+  transition: background 0.2s ease-in;
+}
+.botaoPrincipal:hover {
+  background: none;
+  color: var(--bg-azul);
+}
+
+.botaoSecundario {
+    background: var(--azul-super-claro);
+    color: var(--bg-azul);
+    transition: background 0.2s ease-in;
+}
+.botaoSecundario:hover {
+  background: var(--azul-claro);
+}
+
+.botaoLink{
+  color: var(--texto-corpo);
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+  position: relative;
+}
+
+.botaoLink::after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 1px;
+  background: var(--texto-corpo);
+  bottom: -2px;
+  left: 0px;
+  transition: width 0.3s ease;
+}
+
+.botaoLink:hover::after {
+  width: 100%;
+}
+
+.cardRecente {
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+.cardRecente:hover {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(44, 86, 162, 0.1);
+}
+
+.cardTrilha {
+  display: flex;
+  max-width: 360px;
+  justify-content: space-between;
+  align-items: space-beetwen;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(44, 86, 162, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.acessarTrilha {
+  background: var(--azul-super-claro);
+  color: var(--bg-azul);
+  position: relative;
+  right: 0;
+  width: 70px;
+  min-width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  transition: background .3s ease;
+  cursor: pointer;
+}
+.acessarTrilha:hover {
+  background: var(--azul-claro);
 }

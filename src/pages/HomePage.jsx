@@ -1,27 +1,27 @@
-import React from "react";
-import "./homepage.css";
-import HeaderHome from "../components/header/HeaderHome";
-import Finder from "../components/Finder";
-import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
-import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
-import Int3 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.png";
-import Int4 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png";
-import Int5 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.png";
+import React from 'react';
+import './homepage.css';
+import HeaderHome from '../components/header/HeaderHome';
+import Finder from '../components/Finder';
+import Int1 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png';
+import Int2 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png';
+import Int3 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.png';
+import Int4 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png';
+import Int5 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.png';
 
-import icon1 from "../assets/HomepageIcon1.svg";
-import icon2 from "../assets/HomepageIcon2.svg";
-import icon3 from "../assets/HomepageIcon3.svg";
+import icon1 from '../assets/HomepageIcon1.svg';
+import icon2 from '../assets/HomepageIcon2.svg';
+import icon3 from '../assets/HomepageIcon3.svg';
 
-import { useStoreActions, useStoreState } from "easy-peasy";
-import { Link } from "react-router-dom";
-import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png";
-import infografico_fundo_branco from "../assets/about/mandala_fundo_branco.png";
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Link } from 'react-router-dom';
+import infografico from '../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png';
+import infografico_fundo_branco from '../assets/about/mandala_fundo_branco.png';
 
 import {
   ArrowRightOutlined,
   DownOutlined,
   RightOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
 import {
   Row,
@@ -33,9 +33,9 @@ import {
   Card,
   List,
   Image,
-} from "antd";
-import VideoPlayer from "../components/VideoPlayer";
-import HomepageItineario from "../components/HomepageItineario";
+} from 'antd';
+import VideoPlayer from '../components/VideoPlayer';
+import HomepageItineario from '../components/HomepageItineario';
 
 const { useBreakpoint } = Grid;
 const { Title, Text } = Typography;
@@ -54,614 +54,572 @@ export default function HomePage() {
   return (
     <>
       <HeaderHome />
-      <Row className="containerTitle" align={"middle"}>
-        <Col span={12} offset={6} className="texts">
-          <Space direction="vertical" size={"large"}>
-            <Title
+      <Row className="containerTitle" align={'middle'}>
+        <Col
+          style={{
+            maxWidth: '681px',
+            margin: screens.xs ? '0 20px' : '0 auto',
+            display: 'grid',
+            gap: screens.xs ? '24px' : '48px',
+          }}
+        >
+          <Title
+            style={{
+              fontFamily: 'Roboto',
+              fontSize: screens.xs ? '2rem' : '3.5625rem',
+              fontWeight: 500,
+              lineHeight: screens.xs ? '40px' : '64px',
+              letterSpacing: '-0.25px',
+              color: 'var(--titulos)',
+              marginBottom: '0',
+            }}
+          >
+            Aprenda novas habilidades e amplie seus horizontes
+          </Title>
+          <Text
+            style={{ fontSize: screens.xs ? '1.125rem' : null }}
+            className="subTitulo"
+          >
+            Capacitações para aprimorar a atuação de servidores da Rede Federal
+            de Educação Profissional, Científica e Tecnológica.
+          </Text>
+          <div>
+            <button
+              className="botao botaoPrincipal"
               style={{
-                fontFamily: "Roboto",
-                fontSize: screens.xs ? "35px" : "55px",
-                fontWeight: 550,
-                color: "#303030",
+                display: 'block',
+                margin: '0 auto',
+                marginBottom: screens.xs ? '16px' : '24px',
               }}
-            >
-              Aprenda novas habilidades e amplie seus horizontes
-            </Title>
-            <Text
-              style={{
-                fontFamily: "Roboto",
-                fontSize: screens.xs ? "18px" : "22px",
-                fontWeight: 500,
-                color: "#4B4B4B",
-              }}
-            >
-              Capacitações para aprimorar a atuação de servidores da Rede
-              Federal de Educação Profissional, Científica e Tecnológica.
-            </Text>
-            <Button
               onClick={() => {
-                console.log("Acessar cursos!");
+                console.log('Acessar cursos!');
               }}
-              type="primary"
             >
               ACESSAR CURSOS
-            </Button>
+            </button>
             <Link
+              className="botaoLink"
               style={{
-                color: "#4B4B4B",
-                fontFamily: "Roboto",
-                fontSize: "16px",
-                textDecoration: "none",
+                color: '#4B4B4B',
+                fontFamily: 'Roboto',
+                fontSize: '16px',
+                textDecoration: 'none',
               }}
             >
               Saiba mais <ArrowRightOutlined />
             </Link>
-          </Space>
+          </div>
         </Col>
       </Row>
+
       <div
         style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
+          maxWidth: '1160px',
+          width: '100%',
+          margin: '0 auto',
+          padding: screens.xl ? '0' : '0 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: screens.xs ? '60px' : '120px',
         }}
       >
+        <div>
+          <h2
+            // level={screens.xs ? 4 : 3}
+            className="titulo"
+            style={{
+              marginBottom: '20px',
+            }}
+          >
+            Cursos acessados por você recentemente:
+          </h2>
+          <List
+            style={{}}
+            grid={{
+              gutter: 16,
+              xs: 1,
+              sm: 2,
+              md: 3,
+              lg: 3,
+              xl: 3,
+            }}
+            dataSource={[
+              {
+                id: 1,
+                title: 'Educação Especial: histórico, políticas e práticas',
+                description: 'PoCA - UFSCar',
+              },
+              {
+                id: 2,
+                title:
+                  'Gerenciamento de Projetos e Portfólios de Projetos - Guia',
+                description: 'IFRN',
+              },
+              {
+                id: 3,
+                title: 'Teletrabalho e Educação a Distância',
+                description: 'PoCA - UFSCar',
+              },
+            ]}
+            renderItem={(item) => (
+              <List.Item key={item.id}>
+                <Card
+                  bordered={true}
+                  className="cardRecente"
+                  style={{
+                    maxWidth: screens.xs ? '100%' : '360px',
+                  }}
+                >
+                  <Title level={5}>{item.title}</Title>
+                  {item.description}
+                </Card>
+              </List.Item>
+            )}
+          />
+        </div>
+
         <div
           style={{
-            width: "90%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            display: 'flex',
+            gap: '30px',
+            flexDirection: screens.md ? 'row' : 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '24px',
+              maxWidth: '460px',
+            }}
+          >
+            <h2 className="titulo">
+              Cursos voltados para o seu perfil profissional
+            </h2>
+            <Text className="texto">
+              A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
+              ofertados por diversas instituições de ensino.
+            </Text>
+            <button className="botao botaoSecundario" style={{}}>
+              COMO FUNCIONA
+            </button>
+          </div>
+          <iframe
+            style={{
+              borderRadius: '20px',
+              borderStyle: 'none',
+              border: '5px solid #FFF',
+              width: '100%',
+              maxWidth: screens.md ? '650px' : '460px',
+              minHeight: screens.md ? '390px' : '300px',
+              filter:
+                'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))',
+            }}
+            title={'Äpresentação SETEC'}
+            src={'https://www.youtube.com/embed/s4hchxxjuRo'}
+          />
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            textAlign: 'center',
+          }}
+        >
+          <h1 className="titulo" style={{ marginBottom: '16px' }}>
+            Qual o seu perfil profissional?
+          </h1>
+          <Text className="subTitulo">
+            A PlaforEDU apresenta os perfis de servidores da RFEPCT em cinco
+            Itinerários Formativos
+          </Text>
+          <Row
+            style={{
+              marginTop: '40px',
+            }}
+            gutter={[40, 40]}
+            align={'middle'}
+            justify={'space-evenly'}
+          >
+            <HomepageItineario
+              imgItinerario={Int2}
+              nameItinerario={'Iniciação'}
+              itinerario={'Iniciação ao Serviço Público'}
+            />
+            <HomepageItineario
+              imgItinerario={Int5}
+              nameItinerario={'Educação'}
+              itinerario={'Técnico Administrativo em Educação'}
+            />
+            <HomepageItineario
+              imgItinerario={Int1}
+              nameItinerario={'Docente'}
+              itinerario={'Docente'}
+            />
+            <HomepageItineario
+              imgItinerario={Int3}
+              nameItinerario={'Gerencial'}
+              itinerario={'Gerencial'}
+            />
+            <HomepageItineario
+              imgItinerario={Int4}
+              nameItinerario={'Preparação'}
+              itinerario={'Preparação para a Aposentadoria'}
+            />
+          </Row>
+        </div>
+      </div>
+
+      <div
+        style={{
+          backgroundColor: 'var(--bg-azul)',
+          margin: screens.xs ? '60px 0' : '120px 0',
+          padding: '80px 0px',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            maxWidth: '1160px',
+            margin: screens.xl ? '0 auto' : '0 20px',
+            flexWrap: screens.md ? 'nowrap' : 'wrap',
+            justifyContent: 'center',
+            textAlign: 'center',
+            gap: '40px',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '300px',
+            }}
+          >
+            <img
+              style={{
+                display: 'block',
+                margin: '0 auto',
+                paddingBottom: screens.xs ? '12px' : '32px',
+              }}
+              src={icon1}
+            />
+            <p
+              className="subTitulo"
+              style={{
+                color: '#FDFDFD',
+              }}
+            >
+              Todos os cursos na PlaforEDU são gratuitos
+            </p>
+          </div>
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '300px',
+            }}
+            direction="vertical"
+          >
+            <img
+              style={{
+                display: 'block',
+                margin: '0 auto',
+                paddingBottom: screens.xs ? '12px' : '32px',
+              }}
+              src={icon2}
+            />
+            <p
+              className="subTitulo"
+              style={{
+                color: '#FDFDFD',
+              }}
+            >
+              Organizados para melhor atender seu perfil profissional
+            </p>
+          </div>
+          <div style={{ maxWidth: '300px', width: '100%' }}>
+            <img
+              style={{
+                display: 'block',
+                margin: '0 auto',
+                paddingBottom: screens.xs ? '12px' : '32px',
+              }}
+              src={icon3}
+            />
+            <p
+              className="subTitulo"
+              style={{
+                color: '#FDFDFD',
+              }}
+            >
+              Certificado emitido pela instituição de ensino ofertante
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <Row
+        style={{
+          display: 'flex',
+          maxWidth: '1160px',
+          flexWrap: screens.md ? 'nowrap' : 'wrap',
+          width: '100%',
+          justifyContent: screens.xl ? 'space-between' : 'center',
+          margin: '0 auto',
+          padding: screens.xl ? '0' : '0 20px',
+          alignItems: 'center',
+          gap: '24px',
+        }}
+      >
+        <Col
+          style={{
+            maxWidth: '560px',
+          }}
+        >
+          <h2
+            className="titulo"
+            style={{
+              marginBottom: '20px',
+            }}
+          >
+            Aprenda uma nova competência através das nossas trilhas
+          </h2>
+          <Text className="texto">
+            Plataforma Digital de Formação onde os servidores podem encontrar
+            capacitações com a finalidade de potencializar sua atuação na
+            Educação Profissional e Tecnológica, no âmbito da Rede Federal de
+            Educação Profissional, Científica e Tecnológica.
+          </Text>
+        </Col>
+
+        <Col
+          style={{
+            display: 'grid',
+            justifyContent: 'center',
+            alignItems: 'baseline',
+            gap: '32px',
+            minWidth: screens.xs ? '100%' : '330px',
+          }}
+        >
+          <div className="cardTrilha">
+            <div
+              style={{
+                margin: '28px',
+                maxWidth: '280px',
+              }}
+            >
+              <Title level={5}>Criação e Modificação</Title>
+              <Link
+                style={{
+                  textDecoration: 'underline',
+                  color: 'black',
+                }}
+              >
+                Ver cursos <DownOutlined />
+              </Link>
+            </div>
+            <div className="acessarTrilha">
+              <RightOutlined />
+            </div>
+          </div>
+          <div className="cardTrilha">
+            <div
+              style={{
+                margin: '28px',
+                maxWidth: '280px',
+              }}
+            >
+              <Title level={5}>Criação e Modificação</Title>
+              <Link
+                style={{
+                  textDecoration: 'underline',
+                  color: 'black',
+                }}
+              >
+                Ver cursos <DownOutlined />
+              </Link>
+            </div>
+            <div className="acessarTrilha">
+              <RightOutlined />
+            </div>
+          </div>
+          <div className="cardTrilha">
+            <div
+              style={{
+                // height: '100%',
+                margin: '28px',
+                maxWidth: '280px',
+              }}
+            >
+              <Title level={5}>
+                Criação e Modificação Modificação Modificação
+              </Title>
+              <Link
+                style={{
+                  textDecoration: 'underline',
+                  color: 'black',
+                }}
+              >
+                Ver cursos <DownOutlined />
+              </Link>
+            </div>
+            <div className="acessarTrilha">
+              <RightOutlined />
+            </div>
+          </div>
+        </Col>
+      </Row>
+
+      {info?.courses && (
+        <div
+          style={{
+            width: '100%',
+            backgroundColor: '#F5F5F5',
+            // padding: screens.xl ? '60px 0px' : '60px 20px',
+            padding: '60px 0',
+            margin: screens.xs ? '60px 0' : '120px 0',
+          }}
+        >
+          <div
+            style={{
+              maxWidth: '800px',
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              flexDirection: screens.xs ? 'column' : 'row',
+              alignItems: 'center',
+              textAlign: 'center',
+              margin: '0 auto',
             }}
           >
             <div>
               <Title
-                level={screens.xs ? 4 : 3}
+                // level={1}
                 style={{
-                  marginTop: "20px",
-                  marginBottom: "20px",
-                  textAlign: "left",
+                  fontFamily: 'Roboto',
+                  fontSize: '4.5rem',
+                  fontWeight: 'bold',
+                  letterSpacing: '-0.25',
+                  lineHeight: '4rem',
+                  color: 'var(--titulos)',
+                  margin: 0,
                 }}
               >
-                Cursos acessados por você recentemente:
+                {info.courses}
               </Title>
-              <List
-                grid={{
-                  gutter: 16,
-                  xs: 1,
-                  sm: 2,
-                  md: 3,
-                  lg: 3,
-                  xl: 3,
-                }}
-                dataSource={[
-                  {
-                    id: 1,
-                    title: "Educação Especial: histórico, políticas e práticas",
-                    description: "PoCA - UFSCar",
-                  },
-                  {
-                    id: 2,
-                    title:
-                      "Gerenciamento de Projetos e Portfólios de Projetos - Guia",
-                    description: "IFRN",
-                  },
-                  {
-                    id: 3,
-                    title: "Teletrabalho e Educação a Distância",
-                    description: "PoCA - UFSCar",
-                  },
-                ]}
-                renderItem={(item) => (
-                  <List.Item key={item.id}>
-                    <Card
-                      bordered={true}
-                      style={{
-                        //maxWidth: 400,
-                        boxShadow: "5px 5px 10px 0px rgba(0,0,0,0.15)",
-                      }}
-                    >
-                      <Title level={5}>{item.title}</Title>
-                      {item.description}
-                    </Card>
-                  </List.Item>
-                )}
-              />
+              <p
+                className="titulo"
+                style={{ color: 'var(--texto-corpo)', margin: 0 }}
+              >
+                Cursos
+              </p>
             </div>
-          </div>
-          <div
-            style={{
-              marginTop: "50px",
-              marginBottom: "50px",
-              display: "flex",
-              gap: "30px",
-              flexDirection: screens.lg ? "row" : "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <div
+            <span
+              // level={3}
+              className="titulo"
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "left",
+                color: 'var(--texto-baixo-contraste)',
+                margin: '24px',
               }}
             >
-              <Space
-                direction="vertical"
+              ofertados por
+            </span>
+            <div>
+              <Title
+                level={1}
                 style={{
-                  maxWidth: "460px",
-                  marginRight: screens.lg ? "20px" : "0px",
-                  marginLeft: screens.lg ? "20px" : "0px",
+                  fontFamily: 'Roboto',
+                  fontSize: '4.5rem',
+                  fontWeight: 'bold',
+                  letterSpacing: '-0.25',
+                  lineHeight: '4rem',
+                  color: 'var(--titulos)',
+                  margin: 0,
                 }}
               >
-                <Title level={screens.xs ? 4 : 3}>
-                  Cursos voltados para o seu perfil profissional
-                </Title>
-                <Text>
-                  A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
-                  ofertados por diversas instituições de ensino.
-                </Text>
-                <Button
-                  style={{
-                    backgroundColor: "#E2FCFF",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    color: "#2F4C84",
-                    fontWeight: 700,
-                  }}
-                  type="primary"
-                >
-                  COMO FUNCIONA
-                </Button>
-              </Space>
+                {info.institutions}
+              </Title>
+              <span
+                className="titulo"
+                // level={3}
+                style={{ color: 'var(--texto-corpo)', margin: 0 }}
+              >
+                Instituições
+              </span>
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Card
-                style={{
-                  boxShadow: "5px 5px 10px 0px rgba(0,0,0,0.15)",
-                }}
-                bodyStyle={{
-                  padding: "5px",
-                }}
-              >
-                <VideoPlayer
-                  title={"Äpresentação SETEC"}
-                  src={"https://www.youtube.com/embed/s4hchxxjuRo"}
-                  screens={screens}
-                />
-              </Card>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              gap: "30px",
-              flexDirection: "column",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <Title level={screens.xs ? 4 : 3}>
-              Qual o seu perfil profissional?
-            </Title>
-            <Text
-              style={{
-                fontFamily: "Roboto",
-                fontSize: "18px",
-              }}
-            >
-              A PlaforEDU apresenta os perfis de servidores da RFEPCT em cinco
-              Itinerários Formativos
-            </Text>
-            <Row
-              style={{
-                marginTop: "50px",
-                marginBottom: "50px",
-              }}
-              gutter={[40, 40]}
-              align={"middle"}
-              justify={"space-evenly"}
-            >
-              <HomepageItineario
-                imgItinerario={Int2}
-                nameItinerario={"Iniciação"}
-                itinerario={"Iniciação ao Serviço Público"}
-              />
-              <HomepageItineario
-                imgItinerario={Int5}
-                nameItinerario={"Educação"}
-                itinerario={"Técnico Administrativo em Educação"}
-              />
-              <HomepageItineario
-                imgItinerario={Int1}
-                nameItinerario={"Docente"}
-                itinerario={"Docente"}
-              />
-              <HomepageItineario
-                imgItinerario={Int3}
-                nameItinerario={"Gerencial"}
-                itinerario={"Gerencial"}
-              />
-              <HomepageItineario
-                imgItinerario={Int4}
-                nameItinerario={"Preparação"}
-                itinerario={"Preparação para a Aposentadoria"}
-              />
-            </Row>
-          </div>
-        </div>
-      </div>
-      <div
-        style={{
-          backgroundColor: "#2F4C84",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignItems: "stretch",
-          padding: "50px 0px",
-          textAlign: "center",
-        }}
-      >
-        <Space
-          style={{
-            maxWidth: "320px",
-            margin: "30px",
-          }}
-          direction="vertical"
-        >
-          <img src={icon1} />
-          <Text
-            style={{
-              fontSize: "20px",
-              color: "#FDFDFD",
-              fontWeight: 500,
-              lineHeight: "28px",
-            }}
-          >
-            Todos os cursos na PlaforEDU são gratuitos
-          </Text>
-        </Space>
-        <Space
-          style={{
-            maxWidth: "320px",
-            margin: "30px",
-          }}
-          direction="vertical"
-        >
-          <img src={icon2} />
-          <Text
-            style={{
-              fontSize: "20px",
-              color: "#FDFDFD",
-              fontWeight: 500,
-              lineHeight: "28PX",
-            }}
-          >
-            Organizados para melhor atender seu perfil profissional
-          </Text>
-        </Space>
-        <Space
-          style={{
-            maxWidth: "320px",
-            margin: "30px",
-          }}
-          direction="vertical"
-        >
-          <img src={icon3} />
-          <Text
-            style={{
-              fontSize: "20px",
-              color: "#FDFDFD",
-              fontWeight: 500,
-              lineHeight: "28PX",
-            }}
-          >
-            Certificado emitido pela instituição de ensino ofertante
-          </Text>
-        </Space>
-      </div>
-      <Row
-        justify={"space-around"}
-        style={{
-          marginTop: "50px",
-          marginBottom: "50px",
-        }}
-        gutter={[40, 40]}
-        align={"middle"}
-      >
-        <Col
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "560px",
-              margin: "30px",
-            }}
-          >
-            <Title
-              style={{
-                marginTop: "20px",
-                marginBottom: "20px",
-              }}
-              level={screens.xs ? 4 : 3}
-            >
-              Aprenda uma nova competência através das nossas trilhas
-            </Title>
-            <Text
-              style={{
-                fontFamily: "Roboto",
-                fontSize: "16px",
-                fontWeight: 400,
-              }}
-            >
-              Plataforma Digital de Formação onde os servidores podem encontrar
-              capacitações com a finalidade de potencializar sua atuação na
-              Educação Profissional e Tecnológica, no âmbito da Rede Federal de
-              Educação Profissional, Científica e Tecnológica.
-            </Text>
-          </div>
-        </Col>
-        <Col>
-          <div
-            style={{
-              maxWidth: "360px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                boxShadow: "5px 5px 10px 0px rgba(0,0,0,0.15)",
-                borderRadius: "10px",
-                overflow: "hidden",
-                margin: "20px",
-              }}
-            >
-              <div
-                style={{
-                  height: "100%",
-                  margin: "27px",
-                  maxWidth: "200px",
-                }}
-              >
-                <Title level={5}>Criação e Modificação</Title>
-                <Link
-                  style={{
-                    textDecoration: "underline",
-                    color: "black",
-                  }}
-                >
-                  Ver cursos <DownOutlined />
-                </Link>
-              </div>
-              <div
-                style={{
-                  backgroundColor: "#E2FCFF",
-                  color: "#2C55A1",
-                  position: "relative",
-                  right: 0,
-                  width: "70px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "30px",
-                }}
-              >
-                <RightOutlined />
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                boxShadow: "5px 5px 10px 0px rgba(0,0,0,0.15)",
-                borderRadius: "10px",
-                overflow: "hidden",
-                margin: "20px",
-              }}
-            >
-              <div
-                style={{
-                  height: "100%",
-                  margin: "27px",
-                  maxWidth: "200px",
-                }}
-              >
-                <Title level={5}>Criação e Modificação</Title>
-                <Link
-                  style={{
-                    textDecoration: "underline",
-                    color: "black",
-                  }}
-                >
-                  Ver cursos <DownOutlined />
-                </Link>
-              </div>
-              <div
-                style={{
-                  backgroundColor: "#E2FCFF",
-                  color: "#2C55A1",
-                  position: "relative",
-                  right: 0,
-                  width: "70px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "30px",
-                }}
-              >
-                <RightOutlined />
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                boxShadow: "5px 5px 10px 0px rgba(0,0,0,0.15)",
-                borderRadius: "10px",
-                overflow: "hidden",
-                margin: "20px",
-              }}
-            >
-              <div
-                style={{
-                  height: "100%",
-                  margin: "27px",
-                  maxWidth: "200px",
-                }}
-              >
-                <Title level={5}>Criação e Modificação</Title>
-                <Link
-                  style={{
-                    textDecoration: "underline",
-                    color: "black",
-                  }}
-                >
-                  Ver cursos <DownOutlined />
-                </Link>
-              </div>
-              <div
-                style={{
-                  backgroundColor: "#E2FCFF",
-                  color: "#2C55A1",
-                  position: "relative",
-                  right: 0,
-                  width: "70px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "30px",
-                }}
-              >
-                <RightOutlined />
-              </div>
-            </div>
-          </div>
-        </Col>
-      </Row>
-      {info?.courses && (
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-evenly",
-            flexDirection: screens.xs ? "column" : "row",
-            alignItems: "center",
-            textAlign: "center",
-            backgroundColor: "#F5F5F5",
-            padding: "50px 0px",
-          }}
-        >
-          <div>
-            <Title level={1} style={{ margin: 0 }}>
-              {info.courses}
-            </Title>
-            <Title level={3} style={{ margin: 0 }}>
-              Cursos
-            </Title>
-          </div>
-          <Title
-            level={3}
-            style={{
-              color: "#A8A8A8",
-              margin: "20px",
-            }}
-          >
-            ofertados por
-          </Title>
-          <div>
-            <Title level={1} style={{ margin: 0 }}>
-              {info.institutions}
-            </Title>
-            <Title level={3} style={{ margin: 0 }}>
-              Instituições
-            </Title>
           </div>
         </div>
       )}
+
       <Row
-        justify={"space-around"}
+        // justify={'space-between'}
+        align="middle"
         style={{
-          margin: "50px 0px",
+          maxWidth: '1160px',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row-reverse',
+          flexWrap: screens.md ? 'nowrap' : 'wrap',
+          justifyContent: screens.md ? 'space-between' : 'center',
+          padding: screens.xl ? '0' : '0 20px',
+          margin: '0 auto',
+          marginBottom: screens.xs ? '60px' : '120px',
+          gap: '24px',
         }}
       >
         <Col
-          flex={12}
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Image
-            src={infografico}
-            preview={{ src: infografico_fundo_branco }}
-            width={screens.lg ? 300 : 200}
-          />
-        </Col>
-        <Col
-          flex={12}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: screens.md ? "end" : "left",
-            margin: "50px",
+            display: 'flex',
+            textAlign: screens.md ? 'end' : 'left',
           }}
         >
           <Space
             direction="vertical"
             style={{
-              maxWidth: "560px",
+              maxWidth: '560px',
             }}
+            size={24}
           >
-            <Title level={3}>Mandala das Competências</Title>
-            <Text>
+            <h1 className="titulo">Mandala das Competências</h1>
+            <Text className="texto">
               As competências são a mobilização de conhecimentos, habilidades e
               atitudes para solucionar problemas e lidar com situações
               cotidianas profissionais
             </Text>
-            <Button type="primary">Entenda Melhor</Button>
+            <button className="botao botaoPrincipal">Entenda Melhor</button>
           </Space>
         </Col>
+        <Image
+          style={{ width: '100%', maxWidth: '480px' }}
+          src={infografico}
+          preview={{ src: infografico_fundo_branco }}
+        />
       </Row>
+
       <Row
         style={{
-          padding: "50px 0px",
-          backgroundColor: "#2F4C84",
+          padding: '60px 0px',
+          backgroundColor: 'var(--bg-azul)',
         }}
       >
         <Col offset={2} span={18}>
-          <Title
-            level={4}
+          <h1
+            className="subTitulo"
+            // level={4}
             style={{
-              marginTop: "20px",
-              marginBottom: "20px",
-              color: "#90EBFF",
+              // marginTop: '20px',
+              marginBottom: '20px',
+              color: 'var(--azul-claro)',
             }}
           >
             Gostaria de entrar em contato com a gente?
-          </Title>
-          <Link style={{ textDecoration: "underline", color: "#FDFDFD" }}>
+          </h1>
+          <Link
+            className="texto"
+            style={{ textDecoration: 'underline', color: '#FDFDFD' }}
+          >
             Preencher formulário de contato
           </Link>
         </Col>
