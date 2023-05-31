@@ -1,8 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 html,
 body {
+  font-family: 'Roboto', sans-serif;
   height: 100vh;
   margin: 0;
 }
+
+
+.titulo {
+  font-family: 'Roboto', sans-serif;
+  color: var(--titulos);
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 40px;
+  margin: 0;
+}
+
+.subTitulo {
+  font-family: 'Roboto', sans-serif;
+  color: var(--texto-corpo);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 28px;
+  margin: 0;
+}
+
+.texto {
+  font-family: 'Roboto', sans-serif;
+  color: var(--texto-corpo);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
 
 .linkHeader {
   height: 100%;
@@ -66,4 +99,23 @@ h4.ant-typography,
 
 .row-dragging .drag-visible {
   visibility: visible;
+}
+
+:root {
+  --titulos: #303030;
+  --texto-corpo: #4B4B4B;
+  --texto-baixo-contraste: #A8A8A8;
+
+  --bg-site: #FDFDFD;
+  --bg-menos-claro: #F5F5F5;
+  --bg-azul:#2F4C84;
+
+  --azul-claro: #90EBFF;
+  --azul-super-claro: #E2FCFF;
+
+  --iniciacao:#0099CC;
+  --gerencial: #66CC33;
+  --aposentadoria:#9999FF;
+  --docente:#990099;
+  --administrativo:#FF9900;
 }
