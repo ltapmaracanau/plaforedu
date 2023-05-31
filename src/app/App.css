@@ -36,18 +36,6 @@ body {
   margin: 0;
 }
 
-.botaoTexto{
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 0.875rem;
-  letter-spacing: 0.1px;
-  text-transform: uppercase;
-  padding: 12px 28px;
-  border-style: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
 
 .linkHeader {
   height: 100%;

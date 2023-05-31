@@ -4,6 +4,7 @@ import trilhaIlustracao from '../assets/about/ilustracao-trilha.svg';
 import mandala from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png';
 import retangulo from '../assets/about/Rectangle.png';
 import infografico from '../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png';
+import infografico_fundo_branco from '../assets/about/mandala_fundo_branco.png';
 import { useNavigate } from 'react-router-dom';
 
 import { Row, Col, Typography, Image, Grid, Collapse } from 'antd';
@@ -687,7 +688,7 @@ export default function AboutPage() {
               preview={
                 screens.xs
                   ? {
-                      src: infografico,
+                      src: infografico_fundo_branco,
                     }
                   : false
               }

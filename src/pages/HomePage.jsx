@@ -62,13 +62,11 @@ export default function HomePage() {
             display: 'grid',
             gap: screens.xs ? '24px' : '48px',
           }}
-          className="texts"
         >
-          {/* <Space direction="vertical" size={'large'}> */}
           <Title
             style={{
               fontFamily: 'Roboto',
-              fontSize: screens.xs ? '32px' : '57px',
+              fontSize: screens.xs ? '2rem' : '3.5625rem',
               fontWeight: 500,
               lineHeight: screens.xs ? '40px' : '64px',
               letterSpacing: '-0.25px',
@@ -87,13 +85,11 @@ export default function HomePage() {
           </Text>
           <div>
             <button
-              className="botaoTexto"
+              className="botao botaoPrincipal"
               style={{
                 display: 'block',
                 margin: '0 auto',
                 marginBottom: screens.xs ? '16px' : '24px',
-                background: 'var(--bg-azul)',
-                color: 'white',
               }}
               onClick={() => {
                 console.log('Acessar cursos!');
@@ -102,6 +98,7 @@ export default function HomePage() {
               ACESSAR CURSOS
             </button>
             <Link
+              className="botaoLink"
               style={{
                 color: '#4B4B4B',
                 fontFamily: 'Roboto',
@@ -112,7 +109,6 @@ export default function HomePage() {
               Saiba mais <ArrowRightOutlined />
             </Link>
           </div>
-          {/* </Space> */}
         </Col>
       </Row>
 
@@ -124,11 +120,11 @@ export default function HomePage() {
           padding: screens.xl ? '0' : '0 20px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '120px',
+          gap: screens.xs ? '60px' : '120px',
         }}
       >
         <div>
-          <h1
+          <h2
             // level={screens.xs ? 4 : 3}
             className="titulo"
             style={{
@@ -136,7 +132,7 @@ export default function HomePage() {
             }}
           >
             Cursos acessados por você recentemente:
-          </h1>
+          </h2>
           <List
             style={{}}
             grid={{
@@ -169,11 +165,9 @@ export default function HomePage() {
               <List.Item key={item.id}>
                 <Card
                   bordered={true}
+                  className="cardRecente"
                   style={{
                     maxWidth: screens.xs ? '100%' : '360px',
-                    cursor: 'pointer',
-                    boxShadow:
-                      '0px 4px 4px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(44, 86, 162, 0.1)',
                   }}
                 >
                   <Title level={5}>{item.title}</Title>
@@ -186,7 +180,6 @@ export default function HomePage() {
 
         <div
           style={{
-            marginBottom: '50px',
             display: 'flex',
             gap: '30px',
             flexDirection: screens.md ? 'row' : 'column',
@@ -203,20 +196,14 @@ export default function HomePage() {
               maxWidth: '460px',
             }}
           >
-            <h1 className="titulo">
+            <h2 className="titulo">
               Cursos voltados para o seu perfil profissional
-            </h1>
+            </h2>
             <Text className="texto">
               A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
               ofertados por diversas instituições de ensino.
             </Text>
-            <button
-              className="botaoTexto"
-              style={{
-                background: 'var(--azul-super-claro)',
-                color: 'var(--bg-azul)',
-              }}
-            >
+            <button className="botao botaoSecundario" style={{}}>
               COMO FUNCIONA
             </button>
           </div>
@@ -228,7 +215,6 @@ export default function HomePage() {
               width: '100%',
               maxWidth: screens.md ? '650px' : '460px',
               minHeight: screens.md ? '390px' : '300px',
-              // margin: screens.sm ? '0' : '0 auto',
               filter:
                 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))',
             }}
@@ -292,19 +278,17 @@ export default function HomePage() {
       <div
         style={{
           backgroundColor: 'var(--bg-azul)',
-          marginTop: '120px',
-          marginBottom: '120px',
+          margin: screens.xs ? '60px 0' : '120px 0',
           padding: '80px 0px',
         }}
       >
         <div
           style={{
             display: 'flex',
-            maxWidth: '1060px',
-            margin: '0 auto',
-            flexWrap: 'wrap',
+            maxWidth: '1160px',
+            margin: screens.xl ? '0 auto' : '0 20px',
+            flexWrap: screens.md ? 'nowrap' : 'wrap',
             justifyContent: 'center',
-            // alignItems: 'stretch',
             textAlign: 'center',
             gap: '40px',
           }}
@@ -378,10 +362,10 @@ export default function HomePage() {
       </div>
 
       <Row
-        // justify={'space-between'}
         style={{
           display: 'flex',
           maxWidth: '1160px',
+          flexWrap: screens.md ? 'nowrap' : 'wrap',
           width: '100%',
           justifyContent: screens.xl ? 'space-between' : 'center',
           margin: '0 auto',
@@ -389,25 +373,21 @@ export default function HomePage() {
           alignItems: 'center',
           gap: '24px',
         }}
-        // gutter={[40, 40]}
       >
         <Col
           style={{
-            // display: 'flex',
-            // alignItems: 'center',
-            // justifyContent: 'center',
             maxWidth: '560px',
           }}
         >
-          <h1
+          <h2
             className="titulo"
             style={{
               marginBottom: '20px',
             }}
           >
             Aprenda uma nova competência através das nossas trilhas
-          </h1>
-          <Text className="texto" style={{}}>
+          </h2>
+          <Text className="texto">
             Plataforma Digital de Formação onde os servidores podem encontrar
             capacitações com a finalidade de potencializar sua atuação na
             Educação Profissional e Tecnológica, no âmbito da Rede Federal de
@@ -418,26 +398,15 @@ export default function HomePage() {
         <Col
           style={{
             display: 'grid',
-            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'baseline',
             gap: '32px',
+            minWidth: screens.xs ? '100%' : '330px',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'space-beetwen',
-              boxShadow:
-                '0px 4px 4px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(44, 86, 162, 0.1)',
-              borderRadius: '10px',
-              overflow: 'hidden',
-            }}
-          >
+          <div className="cardTrilha">
             <div
               style={{
-                // height: '100%',
                 margin: '28px',
                 maxWidth: '280px',
               }}
@@ -452,36 +421,13 @@ export default function HomePage() {
                 Ver cursos <DownOutlined />
               </Link>
             </div>
-            <div
-              style={{
-                backgroundColor: 'var(--azul-super-claro)',
-                color: 'var(--bg-azul)',
-                position: 'relative',
-                right: 0,
-                width: '70px',
-                minWidth: '70px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '30px',
-              }}
-            >
+            <div className="acessarTrilha">
               <RightOutlined />
             </div>
           </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              boxShadow:
-                '0px 4px 4px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(44, 86, 162, 0.1)',
-              borderRadius: '10px',
-              overflow: 'hidden',
-            }}
-          >
+          <div className="cardTrilha">
             <div
               style={{
-                // height: '100%',
                 margin: '28px',
                 maxWidth: '280px',
               }}
@@ -496,34 +442,11 @@ export default function HomePage() {
                 Ver cursos <DownOutlined />
               </Link>
             </div>
-            <div
-              style={{
-                backgroundColor: 'var(--azul-super-claro)',
-                color: 'var(--bg-azul)',
-                position: 'relative',
-                right: 0,
-                width: '70px',
-                minWidth: '70px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '30px',
-              }}
-            >
+            <div className="acessarTrilha">
               <RightOutlined />
             </div>
           </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'space-between',
-              boxShadow:
-                '0px 4px 4px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(44, 86, 162, 0.1)',
-              borderRadius: '10px',
-              overflow: 'hidden',
-            }}
-          >
+          <div className="cardTrilha">
             <div
               style={{
                 // height: '100%',
@@ -543,20 +466,7 @@ export default function HomePage() {
                 Ver cursos <DownOutlined />
               </Link>
             </div>
-            <div
-              style={{
-                backgroundColor: 'var(--azul-super-claro)',
-                color: 'var(--bg-azul)',
-                position: 'relative',
-                right: 0,
-                width: '70px',
-                minWidth: '70px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '30px',
-              }}
-            >
+            <div className="acessarTrilha">
               <RightOutlined />
             </div>
           </div>
@@ -570,7 +480,7 @@ export default function HomePage() {
             backgroundColor: '#F5F5F5',
             // padding: screens.xl ? '60px 0px' : '60px 20px',
             padding: '60px 0',
-            margin: '120px 0',
+            margin: screens.xs ? '60px 0' : '120px 0',
           }}
         >
           <div
@@ -654,20 +564,15 @@ export default function HomePage() {
           flexWrap: screens.md ? 'nowrap' : 'wrap',
           justifyContent: screens.md ? 'space-between' : 'center',
           padding: screens.xl ? '0' : '0 20px',
-          // margin: '50px 0px',
           margin: '0 auto',
-          marginBottom: '120px',
+          marginBottom: screens.xs ? '60px' : '120px',
           gap: '24px',
         }}
       >
         <Col
-          // flex={12}
           style={{
             display: 'flex',
-            // alignItems: 'center',
-            // justifyContent: 'center',
             textAlign: screens.md ? 'end' : 'left',
-            // margin: '50px',
           }}
         >
           <Space
@@ -683,13 +588,7 @@ export default function HomePage() {
               atitudes para solucionar problemas e lidar com situações
               cotidianas profissionais
             </Text>
-            <button
-              style={{ background: 'var(--bg-azul)', color: 'white' }}
-              className="botaoTexto"
-              // type="primary"
-            >
-              Entenda Melhor
-            </button>
+            <button className="botao botaoPrincipal">Entenda Melhor</button>
           </Space>
         </Col>
         <Image
