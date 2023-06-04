@@ -41,6 +41,20 @@ const { useBreakpoint } = Grid;
 const { Title, Text } = Typography;
 
 export default function HomePage() {
+  const listaRecentes = [
+    {
+      titulo: 'Educação Especial: histórico, políticas e práticas',
+      instituicao: 'PoCA - UFSCar',
+    },
+    {
+      titulo: 'Gerenciamento de Projetos e Portfólios de Projetos - Guia',
+      instituicao: 'IFRN',
+    },
+    {
+      titulo: 'Teletrabalho e Educação a Distância',
+      instituicao: 'PoCA - UFSCar',
+    },
+  ];
   const screens = useBreakpoint();
 
   const info = useStoreState((state) => state.adm.info);
@@ -123,61 +137,40 @@ export default function HomePage() {
           gap: screens.xs ? '60px' : '120px',
         }}
       >
-        <div>
+        <div
+          style={{
+            display: 'grid',
+            justifyContent: 'center',
+          }}
+        >
           <h2
-            // level={screens.xs ? 4 : 3}
             className="titulo"
             style={{
               marginBottom: '20px',
             }}
           >
-            Cursos acessados por você recentemente:
+            Cursos acessados recentemente por você:
           </h2>
-          <List
-            style={{}}
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 2,
-              md: 3,
-              lg: 3,
-              xl: 3,
+          <ul
+            style={{
+              padding: '0',
+              display: 'flex',
+              gap: '20px',
+              flexWrap: screens.xl ? 'nowrap' : 'wrap',
             }}
-            dataSource={[
-              {
-                id: 1,
-                title: 'Educação Especial: histórico, políticas e práticas',
-                description: 'PoCA - UFSCar',
-              },
-              {
-                id: 2,
-                title:
-                  'Gerenciamento de Projetos e Portfólios de Projetos - Guia',
-                description: 'IFRN',
-              },
-              {
-                id: 3,
-                title: 'Teletrabalho e Educação a Distância',
-                description: 'PoCA - UFSCar',
-              },
-            ]}
-            renderItem={(item) => (
-              <List.Item key={item.id}>
-                <Card
-                  bordered={true}
-                  className="cardRecente"
-                  style={{
-                    maxWidth: screens.xs ? '100%' : '360px',
-                  }}
-                >
-                  <Title level={5}>{item.title}</Title>
-                  {item.description}
-                </Card>
-              </List.Item>
-            )}
-          />
+          >
+            {listaRecentes.map((curso) => (
+              <li
+                className="cardRecente"
+                style={{ maxWidth: screens.xl ? null : '350px' }}
+                key={curso.titulo}
+              >
+                <h3 className="subtitulo">{curso.titulo}</h3>
+                <p className="label">{curso.instituicao}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-
         <div
           style={{
             display: 'flex',
@@ -222,7 +215,6 @@ export default function HomePage() {
             src={'https://www.youtube.com/embed/s4hchxxjuRo'}
           />
         </div>
-
         <div
           style={{
             display: 'flex',
@@ -598,18 +590,17 @@ export default function HomePage() {
         />
       </Row>
 
-      <Row
+      <div
         style={{
-          padding: '60px 0px',
+          boxSizing: 'border-box',
+          padding: '60px 20px',
           backgroundColor: 'var(--bg-azul)',
         }}
       >
-        <Col offset={2} span={18}>
+        <div style={{ maxWidth: '1160px', margin: '0 auto' }}>
           <h1
             className="subTitulo"
-            // level={4}
             style={{
-              // marginTop: '20px',
               marginBottom: '20px',
               color: 'var(--azul-claro)',
             }}
@@ -622,8 +613,8 @@ export default function HomePage() {
           >
             Preencher formulário de contato
           </Link>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 }
