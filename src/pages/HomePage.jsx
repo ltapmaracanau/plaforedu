@@ -8,6 +8,12 @@ import Int3 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.
 import Int4 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png';
 import Int5 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.png';
 
+import iniciacaoIcon from '../assets/itinerarios/iconIniciacao.svg';
+import aposentadoriaIcon from '../assets/itinerarios/iconAposentadoria.svg';
+import docenteIcon from '../assets/itinerarios/iconEducacao.svg';
+import administrativoIcon from '../assets/itinerarios/iconAdministrativo.svg';
+import gerencialIcon from '../assets/itinerarios/iconGerencial.svg';
+
 import icon1 from '../assets/HomepageIcon1.svg';
 import icon2 from '../assets/HomepageIcon2.svg';
 import icon3 from '../assets/HomepageIcon3.svg';
@@ -157,6 +163,7 @@ export default function HomePage() {
               display: 'flex',
               gap: '20px',
               flexWrap: screens.xl ? 'nowrap' : 'wrap',
+              justifyContent: 'center',
             }}
           >
             {listaRecentes.map((curso) => (
@@ -215,6 +222,7 @@ export default function HomePage() {
             src={'https://www.youtube.com/embed/s4hchxxjuRo'}
           />
         </div>
+
         <div
           style={{
             display: 'flex',
@@ -232,36 +240,41 @@ export default function HomePage() {
           </Text>
           <Row
             style={{
-              marginTop: '40px',
+              marginTop: screens.xs ? '24px' : '40px',
             }}
-            gutter={[40, 40]}
+            gutter={screens.xs ? [20, 20] : [40, 40]}
             align={'middle'}
             justify={'space-evenly'}
           >
             <HomepageItineario
-              imgItinerario={Int2}
+              imgItinerario={screens.xs ? iniciacaoIcon : Int2}
               nameItinerario={'Iniciação'}
               itinerario={'Iniciação ao Serviço Público'}
+              colorItinerario={'var(--iniciacao)'}
             />
             <HomepageItineario
-              imgItinerario={Int5}
+              imgItinerario={screens.xs ? administrativoIcon : Int5}
               nameItinerario={'Educação'}
               itinerario={'Técnico Administrativo em Educação'}
+              colorItinerario={'var(--administrativo)'}
             />
             <HomepageItineario
-              imgItinerario={Int1}
+              imgItinerario={screens.xs ? docenteIcon : Int1}
               nameItinerario={'Docente'}
               itinerario={'Docente'}
+              colorItinerario={'var(--docente)'}
             />
             <HomepageItineario
-              imgItinerario={Int3}
+              imgItinerario={screens.xs ? gerencialIcon : Int3}
               nameItinerario={'Gerencial'}
               itinerario={'Gerencial'}
+              colorItinerario={'var(--gerencial)'}
             />
             <HomepageItineario
-              imgItinerario={Int4}
+              imgItinerario={screens.xs ? aposentadoriaIcon : Int4}
               nameItinerario={'Preparação'}
               itinerario={'Preparação para a Aposentadoria'}
+              colorItinerario={'var(--aposentadoria)'}
             />
           </Row>
         </div>
