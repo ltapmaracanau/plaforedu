@@ -59,6 +59,10 @@ export default function HeaderHome() {
       key: 2,
     },
     {
+      label: <Link to={"/history"}>HISTÓRICO PLAFOR</Link>,
+      key: 80,
+    },
+    {
       label: "RECURSOS",
       icon: screens.md ? <DownOutlined /> : null,
       key: 3,
