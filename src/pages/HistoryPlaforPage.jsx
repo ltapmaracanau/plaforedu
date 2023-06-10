@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import HeaderHome from "../components/header/HeaderHome";
-import { Button, Grid, Modal } from "antd";
+import {Button, Grid, Modal, Typography } from "antd";
+
+const { Text, Title, Link } = Typography;
+
 function Icon() {
   const { useBreakpoint } = Grid;
   const screens = useBreakpoint();
@@ -34,7 +37,7 @@ function Icon() {
         </text>
       </g>
 
-      <g id="1">
+      <g id="1" onClick={() => {setModalCriacaoIsVisible(true)}} style={{cursor: "pointer"}} >
         <text fontFamily="Roboto,Roboto_MSFontService,sans-serif" fontSize="14" fontWeight="700" transform="translate(84.438 89)">
           Dezembro
         </text>
@@ -56,30 +59,84 @@ function Icon() {
 
         {/* haste 1 */}
         <path fill="none" stroke="#4A696C" strokeLinejoin="round" strokeMiterlimit="10" d="M118.5 237.482V212.5z"></path>
-        <Modal
-          open={modalCriacao}
-          destroyOnClose={true}
-          closable={false}
-          title={<h2>Criação da RFEPCT</h2>}
-          footer={[
-            <Button
-              type="primary"
-              key={"back"}
-              onClick={() => {
-                setModalCriacaoIsVisible(false);
-              }}
-            >
-              Fechar
-            </Button>,
-          ]}
-        >
-          <text>Em 2008, ...
-            <a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11892.htm">Lei n° 11.892</a>
-          </text>
-        </Modal>
       </g>
 
-      <g id="2">
+      {/*modal 1*/}
+      <Modal
+        open={modalCriacao}
+        destroyOnClose={true}
+        closable={false}
+        title={<h2>Criação da RFEPCT</h2>}
+        footer={[
+          <Button
+            type="primary"
+            key={"back"}
+            onClick={() => {
+              setModalCriacaoIsVisible(false);
+            }}
+          >
+            Fechar
+          </Button>,
+        ]}
+      >
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          A criação da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT), se deu através
+          da <a target="blank" href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11892.htm">
+          Lei nº 11.892, de 29 de dezembro de 2008
+        </a>.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Essa mesma lei definiu que os Centros Federais de Educação Tecnológica (Cefets) passariam a se chamar
+          Institutos Federais de Educação, Ciência e Tecnologia (IFs), sendo declarados como instituições de
+          educação superior, básica e profissional equiparados às universidades federais.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          A Lei nº 11.892/ 2008, estabeleceu que para a composição das entidades da RFEPCT, além dos IFs,
+          seriam vinculadas as seguintes instituições: a Universidade Tecnológica Federal do Paraná (UTFPR);
+          o Centro Federal de Educação Tecnológica Celso Suckow da Fonseca do Rio de Janeiro (Cefet-RJ),
+          o Centro Federal de Educação Tecnológica de Minas Gerais (Cefet-MG); as Escolas Técnicas vinculadas às
+          Universidades Federais; e o Colégio Pedro II (BRASIL, 2008).
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          As instituições pertencentes a RFEPCT (Institutos Federais, UTFPR, Cefet-RJ, Cefet-MG e Escolas Técnicas das
+          Universidades Federais) têm como objetivo principal a oferta de educação profissional técnica de nível médio,
+          prioritariamente na forma de cursos integrados, para os concluintes do ensino fundamental e para o público
+          da educação de jovens e adultos. Contudo, promover a integração e a verticalização da educação básica à
+          educação profissional, e educação superior é uma de suas finalidades desde sua criação.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          O § 5º do Art. 3º
+          da <a target="blank" href="https://www.planalto.gov.br/ccivil_03/leis/l8948.htm#:~:text=LEI%20No%208.948%2C%20DE%208%20DE%20DEZEMBRO%20DE%201994.&text=Disp%C3%B5e%20sobre%20a%20institui%C3%A7%C3%A3o%20do,Tecnol%C3%B3gica%20e%20d%C3%A1%20outras%20provid%C3%AAncias.">
+          Lei nº 8.948, de 8 de dezembro de 1994,
+        </a>
+          proibia a criação de novas unidades de ensino
+          profissional federais, e graças a Lei nº 11.195 de 18 de novembro de 2005, que revogou essa definição, foi
+          reestabelecida a expansão da oferta de ensino profissional mediante a criação de novas unidades. Atualmente,
+          a RFEPCT está presente em todos estados do Brasil, sendo referência em ensino profissional de qualidade,
+          além de ter muita visibilidade também em pesquisa e extensão.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Em consequência da expansão houve o aumento do quadro de servidores, tanto de técnicos-administrativos em
+          Educação (TAE), como professores da Educação Básica, Técnica e Tecnológica (EBTT), essa velocidade de
+          expansão trouxe à tona a necessidade de preparação e capacitação inicial e continuada específica para
+          atuação na área de educação profissional.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Como as instituições da RFEPCT são autarquias autogerenciadas, a composição de seus dirigentes é
+          majoritariamente de docentes (técnicos-administrativos também podem exercer essa função) indicados aos
+          cargos administrativos (obedecendo alguns critérios). Isso torna a necessidade de capacitação constante
+          para o desempenho de funções administrativas, além da necessidade de atualização de conhecimentos técnicos
+          de sua área de atuação e formação para o desenvolvimento de atividades de ensino, pesquisa e extensão na
+          perspectiva das relações entre educação e trabalho segundo a proposta institucional de formação humana
+          integral.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          E essa foi a necessidade que iniciou o pleito pela inserção na agenda política de um plano de formação
+          continuada para os servidores da RFEPCT.
+        </p>
+      </Modal>
+
+      <g id="2" onClick={() => {setModalForgepIsVisible(true)}} style={{cursor: "pointer"}}>
         <text fontFamily="Roboto,Roboto_MSFontService,sans-serif" fontSize="14" fontWeight="700" transform="translate(243.119 144)">
           Março/Agosto
         </text>
@@ -100,30 +157,85 @@ function Icon() {
         {/* icon 2*/}
         <path onClick={() => {setModalForgepIsVisible(true)}} style={{cursor: "pointer"}} fill="#FFF" fillRule="evenodd" d="M298.388 226l-3.377 1.625.612 1.375 3.377-1.625-.612-1.375zM295.623 237.01l-.612 1.354 3.377 1.636.612-1.354-3.377-1.636zM296.01 232.012V234H299v-1.988zM273.853 226l-.842 1.375 3.41 1.625.568-1.375-3.136-1.625zM276.421 237.01l-3.41 1.636.842 1.354 3.136-1.636-.568-1.354zM272.01 232.012V234H275v-1.988zM283 250v.994h4.989V250zM285.361 233.716c.557 0 .825.296.825.867 0 .275-.268.571-.825.571-.289 0-.558-.296-.558-.571 0-.571.269-.867.558-.867zm0-8.003c3.912 0 7.256 3.161 7.256 7.157 0 2.855-1.672 5.414-4.469 6.556l-.289.296v3.425h-1.673v-6.576c.847-.275 1.673-1.142 1.673-1.988 0-1.438-1.115-2.579-2.498-2.579-1.115 0-2.23 1.141-2.23 2.579 0 .846.558 1.713 1.672 1.988v6.576h-1.672v-3.425l-.557-.296c-2.519-1.142-4.191-3.701-4.191-6.556 0-3.996 3.344-7.157 6.978-7.157zm2.498 19.147v1.713h-4.728v-1.713zM285.361 224c-4.748 0-8.361 3.996-8.361 8.87 0 3.426 1.672 6.281 4.459 7.697v2.58h-1.404v1.713h1.404v3.129h7.814v-3.129h1.672v-1.713h-1.672v-2.58c3.055-1.416 4.727-4.271 4.727-7.697 0-4.874-3.912-8.87-8.639-8.87z"></path>
 
-        <Modal
-          open={modalForgep}
-          destroyOnClose={true}
-          closable={false}
-          title={<h2>Primeiras Discussões no FORGEP sobre formação dos Servidores da RFEPCT</h2>}
-          footer={[
-            <Button
-              type="primary"
-              key={"back"}
-              onClick={() => {
-                setModalForgepIsVisible(false);
-              }}
-            >
-              Fechar
-            </Button>,
-          ]}
-        >
-          <text>Em 2008, ...
-            <a href="https://forgep.wixsite.com/forgep/noticias">Noticias Forgep</a>
-          </text>
-        </Modal>
       </g>
 
-      <g id="3">
+      {/*modal 2*/}
+      <Modal
+        open={modalForgep}
+        destroyOnClose={true}
+        closable={false}
+        title={<h2>Primeiras Discussões no FORGEP sobre formação dos Servidores da RFEPCT</h2>}
+        footer={[
+          <Button
+            type="primary"
+            key={"back"}
+            onClick={() => {
+              setModalForgepIsVisible(false);
+            }}
+          >
+            Fechar
+          </Button>,
+        ]}
+      >
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          As propostas de elaboração desse plano se deram no ambiente do Conselho Nacional das Instituições da
+          Rede Federal de Educação Profissional, Científica e Tecnológica (CONIF), que
+          “[...] é uma instância de discussão, proposição e promoção de políticas de desenvolvimento da formação
+          profissional e tecnológica, pesquisa e inovação. Atua no debate e na defesa da educação pública, gratuita e
+          de excelência” (CONIF, s.d.).
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Foi no CONIF que se originou o Fórum de Dirigentes de Gestão de Pessoas das Instituições Federais de Ensino
+          Técnico, Científico e Tecnológico (FORGEP), em 2010, “[...] vislumbrando a possibilidade de um trabalho em
+          rede, promovendo a uniformização de procedimentos, principalmente para garantir o tratamento isonômico aos
+          servidores, concentrando os entendimentos exclusivos referentes aos Institutos Federais, otimizando os
+          recursos e permitindo a troca de experiências” (FORGEP, s.d.).
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          As primeiras informações dos movimentos das instituições da RFEPCT para a definição da agenda e o
+          encaminhamento para formulação do PLAFOR, são datadas do ano de 2014, em reuniões
+          do <a target="blank" href="https://forgep.wixsite.com/forgep/noticias">FORGEP</a>. No website da página de notícias do
+          FORGEP é divulgado os seguintes informativos:
+        </p>
+
+        <div style={{margin: "0 0 0 30%"}}>
+          <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%",  fontWeight: "bold", fontSize: "12px"}}>
+            RSC e Progressão para Professor Titular e Plano de Formação Continuada serão temas importantes a
+            serem tratados na Décima Segunda reunião ordinária do FORGEP
+          </p>
+          <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%", fontSize: "12px"}}>
+            No período de 27 de março de 2014 a 28 de março de 2014, será realizada no Instituto Federal de Educação,
+            Ciência e Tecnologia de Sergipe (IFS) em Aracaju-SE a décima segunda reunião do FORGEP, entre os assuntos
+            a serem tratados está o Reconhecimento de Saberes e Competências (RSC) cujas diretrizes gerais foram
+            publicadas recentemente, a progressão para professor titular também será abordada na reunião, o SIGEPE,
+            novo sistema informatizado de gestão de pessoas que está sendo criado pelo governo federal e o Plano de
+            Formação Continuada para Servidores (PLAFOR). Serão compartilhadas experiências pelas áreas de pessoal
+            de algumas instituições federais e serão tratados outros assuntos referentes à área de pessoal. Serão
+            convidados para reunião além dos integrantes das Instituições federais, os representantes(s) do Ministério
+            da Educação (MEC) e do CONIF (<a target="blank" href="https://forgep.wixsite.com/forgep/noticias">FORGEP</a>, s.d).
+          </p>
+          <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%",  fontWeight: "bold", fontSize: "12px"}}>
+            Pontos principais da décima terceira reunião do FORGEP foram divulgados
+          </p>
+          <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%", fontSize: "12px"}}>
+            No período de 21 de agosto de 2014 a 22 de agosto de 2014, será realizada no Instituto Federal de Educação,
+            Ciência e Tecnologia de Brasília (IFB) em Brasília-DF a décima terceira reunião do FORGEP, entre os assuntos
+            a serem tratados está o PLAFOR, Professor Visitante lei 12998/2014, gestão estratégica de pessoas e os
+            grupos de trabalho solicitados pelo CONIF. Serão compartilhadas experiências pelas áreas de pessoal de
+            algumas instituições federais e serão tratados outros assuntos referentes à área de pessoal. Serão
+            convidados para reunião além dos integrantes das Instituições federais, os representante(s) do Ministério
+            da Educação (MEC) e do CONIF (<a target="blank" href="https://forgep.wixsite.com/forgep/noticias">FORGEP</a>, s.d).
+          </p>
+        </div>
+
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          As notícias indicam uma considerável movimentação entorno da necessidade de formação dos servidores da
+          RFEPCT, uma vez que entre os temas discutidos em ambos os encontros apenas o PLAFOR se repetiu.
+          Concluídas as argumentações para a entrada na agenda teve início a fase de formulação.
+        </p>
+      </Modal>
+
+      <g id="3" onClick={() => {setModalGTIsVisible(true)}} style={{cursor: "pointer"}} >
         <text fontFamily="Roboto,Roboto_MSFontService,sans-serif" fontSize="14" fontWeight="700" transform="translate(408.123 181)">
           Agosto de 2015
         </text>
@@ -143,36 +255,89 @@ function Icon() {
         {/* haste 3 */}
         <path fill="none" stroke="#4A696C" strokeLinejoin="round" strokeMiterlimit="10" d="M459.5 311.5v-34.982z"></path>
         <path fill="#FFF" fillRule="evenodd" d="M458.297 240.584v1.584h-1.85v-1.584zm-.787 3.451c5.846 0 10.64 4.751 10.64 10.559 0 6.061-4.794 10.812-10.64 10.812-6.122 0-10.906-4.751-10.906-10.812 0-5.808 4.784-10.559 10.906-10.559zM453.258 239v1.584h1.594v1.857c-1.594.528-3.189 1.056-4.783 2.122l-1.339-1.34 1.063-1.31-1.063-1.055-3.445 3.421 1.063 1.34 1.063-1.34 1.319 1.34c-2.382 2.366-3.72 5.533-3.72 8.975 0 6.863 5.59 12.396 12.5 12.396 6.634 0 12.49-5.533 12.49-12.396 0-3.168-1.319-6.609-3.976-8.975l1.309-1.34 1.073 1.34 1.338-1.34-3.72-3.421-1.073 1.055 1.073 1.31-1.349 1.34c-1.319-1.066-2.913-1.594-4.783-2.122v-1.857h1.594V239z"></path>
-
-        <Modal
-          open={modalGT}
-          destroyOnClose={true}
-          closable={false}
-          title={<h2>Criação da GT PLAFOR </h2>}
-          footer={[
-            <Button
-              type="primary"
-              key={"back"}
-              onClick={() => {
-                setModalGTIsVisible(false);
-              }}
-            >
-              Fechar
-            </Button>,
-          ]}
-        >
-          <text>Em 2015, ...
-            <a href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=22011-portaria-n28-2015-setec-pdf&category_slug=setembro-2015-pdf&Itemid=30192">
-              Portaria nº 28, de 26 de agosto de 2015
-            </a>
-            <a href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=40981-nt-67-setec-12maio2016-pdf&category_slug=maio-2016-pdf&Itemid=30192">
-              Nota Técnica nº 67/2016/CGDP/DDR/SETEC/SETEC
-            </a>
-          </text>
-        </Modal>
       </g>
 
-      <g id="4">
+      {/*modal 3*/}
+      <Modal
+        open={modalGT}
+        destroyOnClose={true}
+        closable={false}
+        title={<h2>Criação da GT PLAFOR </h2>}
+        footer={[
+          <Button
+            type="primary"
+            key={"back"}
+            onClick={() => {
+              setModalGTIsVisible(false);
+            }}
+          >
+            Fechar
+          </Button>,
+        ]}
+      >
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Para o desenvolvimento do PLAFOR, foi instituído, por meio
+          da <a target="blank" href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=22011-portaria-n28-2015-setec-pdf&category_slug=setembro-2015-pdf&Itemid=30192">
+          Portaria SETEC/MEC  nº 28, de 26 de agosto de 2015</a>, um Grupo de Trabalho (GT) que foi constituído por
+          um representante da SETEC/MEC, e 12 representantes de Institutos Federais, e teria 180 dias para conclusão
+          de seus trabalhos, podendo ser prorrogado por mais 90 dias, segundo decisão do Secretário da SETEC.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Para a formulação do PLAFOR, o GT elaborou
+          a <a target="blank" href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=40981-nt-67-setec-12maio2016-pdf&category_slug=maio-2016-pdf&Itemid=30192">
+          Nota Técnica nº 67/2016/CGDP/DDR/SETEC/SETEC</a>, no qual em seu tópico 1, nomeado de Sumário Executivo,
+          expõe o plano, e no tópico 2, com nome de Análise, apresenta a RFEPCT, em que contextualiza sua expansão
+          mediante criação de novas unidades, e consequentemente a ampliação de seu quadro de pessoal,
+          “[...] passando de 36.005 em 2010 para 61.298 em 2015, sendo 33.036 docentes e 28.262
+          técnico‐administrativos em educação (TAE), tendo um aumento percentual na ordem de 70%.” (BRASIL, 2016)
+          que justifica a criação do plano com a finalidade de:
+        </p>
+        <div style={{margin: "0 0 0 30%"}}>
+          <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%", fontSize: "12px"}}>
+            [...] de preparar os recém‐chegados ao serviço público, e especialmente na Educação Profissional e
+            Tecnológica (EPT), e capacitar aos servidores remanescentes visando o fortalecimento e aprimoramento das
+            competências do servidor público para atuar, promover e proporcionar o desenvolvimento de trabalhos com
+            qualidade, atendendo às demandas e propiciando um diferencial no serviço prestado à sociedade no âmbito da
+            RFEPCT. Soma‐se a esse fato a importância de preservar a identidade, missão e visão da Rede Federal, bem
+            como fortalecer a relação ensino/aprendizagem e a formação profissional dos educandos na EPT (<a target="blank" href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=40981-nt-67-setec-12maio2016-pdf&category_slug=maio-2016-pdf&Itemid=30192">
+            BRASIL</a>, 2016).
+          </p>
+        </div>
+
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Ainda no tópico 2 da Nota Técnica nº 67/2016, em seu subtópico 2.5, é informado que a Coordenação‐Geral de
+          Desenvolvimento de Pessoal promoveu algumas ações voltadas a capacitação dos servidores da RFEPCT entre os
+          anos de 2013 e 2015, ações estas que podem ser consideradas protótipos,com vistas a embasar os argumentos
+          utilizados para a entrada do PLAFOR na agenda política e para sua formulação. São elas:
+        </p>
+
+        <ul style={{listStyle: "lower-roman"}}>
+          <li>Curso de Capacitação de Gestores;</li>
+          <li>PRONATEC Serviços Públicos;</li>
+          <li>Curso de Aulas Práticas;</li>
+          <li>Capacitação em Tecnologia da Informação;</li>
+          <li>Idioma sem Fronteira:</li>
+          <ul  style={{listStyle: "lower-alpha"}}>
+            <li>Capacitação em Língua inglesa</li>
+            <li>O curso My English Online</li>
+            <li>Teste de Proficiência em inglês (teste TOEFL)</li>
+          </ul>
+          <li>Especialização em Educação Profissional e Tecnológica;</li>
+          <li>Programas de Mestrado:</li>
+          <ul style={{listStyle: "lower-alpha"}}>
+            <li>Mestrado Profissional em Educação;</li>
+            <li>Mestrado Profissional em Gestão Pública;</li>
+            <li>Mestrado Profissional em Tecnologia da Informação (<a target="blank" href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=40981-nt-67-setec-12maio2016-pdf&category_slug=maio-2016-pdf&Itemid=30192">
+              BRASIL</a>, 2016).</li>
+          </ul>
+        </ul>
+
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Essas ações serviram de base para a estruturação da política PLAFOR.
+        </p>
+      </Modal>
+
+      <g id="4" onClick={() => {setModalPlaforIsVisible(true)}} style={{cursor: "pointer"}} >
         <text fontFamily="Roboto,Roboto_MSFontService,sans-serif" fontSize="14" fontWeight="700" transform="translate(586.471 124)">
           Maio de 2016
         </text>
@@ -192,35 +357,44 @@ function Icon() {
 
         {/* haste 4*/}
         <path fill="none" stroke="#4A696C" strokeLinejoin="round" strokeMiterlimit="10" d="M630.5 261.482v-34.964z"></path>
-
-        <Modal
-          open={modalPlafor}
-          destroyOnClose={true}
-          closable={false}
-          title={<h2>Instituição do PLAFOR</h2>}
-          footer={[
-            <Button
-              type="primary"
-              key={"back"}
-              onClick={() => {
-                setModalPlaforIsVisible(false);
-              }}
-            >
-              Fechar
-            </Button>,
-          ]}
-        >
-
-          <text>Em 2016, ...
-            <a href="http://portal.mec.gov.br/apresentacao-plafor">Apresentação</a>
-            <a href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=40991-portaria-15-2016-setec-12maio-pdf&Itemid=30192">
-              Portaria nº 15/2016, de 11 de maio de 2016
-            </a>
-          </text>
-        </Modal>
       </g>
 
-      <g id="5">
+      {/*modal 4*/}
+      <Modal
+        open={modalPlafor}
+        destroyOnClose={true}
+        closable={false}
+        title={<h2>Instituição do PLAFOR</h2>}
+        footer={[
+          <Button
+            type="primary"
+            key={"back"}
+            onClick={() => {
+              setModalPlaforIsVisible(false);
+            }}
+          >
+            Fechar
+          </Button>,
+        ]}
+      >
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Em de 11 de maio de 2016, a Secretaria de Educação Profissional e Tecnológica (SETEC) junto com o MEC,
+          instituiu o Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional, Científica e
+          Tecnológica (<a target="blank" href="http://portal.mec.gov.br/apresentacao-plafor">PLAFOR</a>), através
+          da  <a target="blank" href="http://portal.mec.gov.br/index.php?option=com_docman&view=download&alias=40991-portaria-15-2016-setec-12maio-pdf&Itemid=30192">
+          Portaria nº 15/2016, de 11 de maio de 2016</a>.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Essa política visa potencializar a formação contiuada dos servidores da RFEPFCT para a construção de suas
+          competências relativas aos processos educacionais dentro da realidade institucional que envolve atividades de
+          ensino, pesquisa, extensão e inovação, além das atividades de autogestão caracteristica de entidades autarquicas,
+          respeitando a proposta institucional de educação integral, inclusiva, ambientalmente consciente e de aceitação
+          a diversidade. Fomentar política de acesso a eventos de capacitação/qualificação (internos e externos) e promover capacitação
+          no exterior, também estão entre as finalidades do PLAFOR.
+        </p>
+      </Modal>
+
+      <g id="5" onClick={() => {setModalPlaforeduIsVisible(true)}} style={{cursor: "pointer"}}>
         <text fontFamily="Roboto,Roboto_MSFontService,sans-serif" fontSize="14" fontWeight="700" transform="translate(758.902 288)">
           Abril de 2022
         </text>
@@ -242,29 +416,44 @@ function Icon() {
 
         {/* haste 5 */}
         <path fill="none" stroke="#4A696C" strokeLinejoin="round" strokeMiterlimit="10" d="M802.5 429.482V375.5z"></path>
-
-        <Modal
-          open={modalPlaforedu}
-          destroyOnClose={true}
-          closable={false}
-          title={<h2>Criação da plataforma PlaforEDU </h2>}
-          footer={[
-            <Button
-              type="primary"
-              key={"back"}
-              onClick={() => {
-                setModalPlaforeduIsVisible(false);
-              }}
-            >
-              Fechar
-            </Button>,
-          ]}
-        >
-          <text>Em 2022, ...
-            <a href="https://plaforedu.mec.gov.br/">PlaforEdu</a>
-          </text>
-        </Modal>
       </g>
+
+      {/*modal 5*/}
+      <Modal
+        open={modalPlaforedu}
+        destroyOnClose={true}
+        closable={false}
+        title={<h2>Criação da plataforma PlaforEDU </h2>}
+        footer={[
+          <Button
+            type="primary"
+            key={"back"}
+            onClick={() => {
+              setModalPlaforeduIsVisible(false);
+            }}
+          >
+            Fechar
+          </Button>,
+        ]}
+      >
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          Lançada pelo MEC, em cerimônia transmitida pelo youtube, no dia 13 de abril de 2022, sua criação foi
+          possibilitada através de um projeto executado entre o IFRN, o IFCE e o IFSul, tendo como envolvidos a
+          coordenadora-geral de Desenvolvimento de Pessoas, Silvilene Silva e o coordenador
+          da <a target="blank" href="https://plaforedu.mec.gov.br/">PlaforEdu</a>, Fábio
+          Ribeiro, ambos do MEC; coordenadora-geral do PLAFOR, professora Patrícia de Albuquerque Maia, do Campus
+          Lajes do IFRN. O desenvolvimento da plataforma digital foi realizado pelo IFRN, com a coordenação do
+          professor Thiago Medeiros, do Campus Natal-Zona Leste, e pelo IFSul, com a coordenação do professor Raymundo
+          Carlos Machado.
+        </p>
+        <p style={{textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"}}>
+          “Feito na Rede, pela Rede, com a Rede e para a Rede” (IFRN, 2022), embora a PlaforEDU seja a plataformização
+          do PLAFOR, que é destinado a formação inicial e continuada dos servidores da RFEPCT, qualquer pessoa, de
+          qualquer lugar do mundo, pode usufruir dos 283 cursos gratuitos ofertados no site. Esses cursos são
+          divididos por competências e distribuídos em 5 itinerários formativos, sendo eles Iniciação ao Serviço
+          Público; Técnico-Administrativo em Educação; Docente; Gerencial; e Preparação para Aposentadoria.
+        </p>
+      </Modal>
 
     </svg>
   );
@@ -277,10 +466,74 @@ export default function HistoryPlaforPage() {
     <>
       <HeaderHome />
 
-      <div style={{ display: 'grid', justifyContent: 'center', margin: "2% 0 3% 0", }}>
+      <div style={{display: 'grid', justifyContent: 'center', margin: "2% 0 3% 0", }}>
         <Icon/>
-      </div>
+        <div
+          style={{
+            backgroundColor: "#3183C4",
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "78px",
+            padding: "10px, 0px",
+          }}
+        >
+          <Title
+            level={3}
+            style={{
+              margin: "0px",
+              fontFamily: "Roboto",
+              fontWeight: 500,
+              fontSize: "25px",
+              textAlign: "center",
+              color: "#FFFFFF",
+              width: "70%",
+            }}
+          >
+            Plano de Formação Continuada dos Servidores da Rede Federal de
+            Educação Profissional, Científica e Tecnológica
+          </Title>
+        </div>
 
+        <div style={{display: 'grid', justifyContent: 'center', margin: "5% 10% 0 10%", }}>
+          <Text
+            style={{
+              fontFamily: "Roboto",
+              fontSize: "20px",
+              textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"
+            }}
+          >
+            O Plano de Formação Continuada dos Servidores da Rede Federal de Educação Profissional e Tecnológica (PLAFOR)
+            consiste na promoção e fomento de ações de capacitação dos servidores, bem como na motivação e mobilização para
+            a formação continuada com a finalidade de potencializar a atuação da Educação Profissional no âmbito da Rede
+            Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Roboto",
+              fontSize: "20px",
+              textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"
+            }}
+          >
+            O Plano objetiva contribuir com o aprimoramento das competências do servidor público para atuar, promover e
+            proporcionar o desenvolvimento de trabalhos com qualidade, atendendo às demandas e propiciando um diferencial
+            no serviço prestado à sociedade no âmbito da RFEPCT.
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Roboto",
+              fontSize: "20px",
+              textAlign: "justify", textJustify: 'inter-word', textIndent: "8%"
+            }}
+          >
+            Entre seus objetivos estão a contribuição para a construção de competências dos servidores relativas aos
+            processos educacionais, o provimento a ações de capacitação do servidor para atuar em funções de planejamento,
+            de gestão e de liderança, o fomento a capacitação nas diversas áreas do conhecimento a fim de aprimorar o
+            ensino, a pesquisa, a extensão e a inovação na educação profissional e a capacitação no exterior.
+          </Text>
+        </div>
+      </div>
     </>
   );
 }
