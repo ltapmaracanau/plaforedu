@@ -1,0 +1,28 @@
+h1, h2, h3, p, ul, li {
+  margin: 0;
+}
+
+.pergunta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 12px 20px;
+}
+
+.conteudo {
+  max-height: 0;
+  overflow: hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: all 0.5s cubic-bezier(0,1,0,1);
+}
+.ativo {
+  padding-bottom: 12px;
+  height: auto;
+  max-height: 9999px;
+  transition: all 0.5s cubic-bezier(1,0,1,0);
+}
+
+/* falta colocar a imagem da interrogação, trocar + por -, linha embaixo de 'entrar em contato' */
