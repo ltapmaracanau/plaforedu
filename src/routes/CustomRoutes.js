@@ -12,6 +12,7 @@ import FAQ from "../pages/FAQ.jsx";
 import Login from "../pages/Login.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import AboutPage from "../pages/AboutPage.jsx";
+import HistoryPlaforPage from "../pages/HistoryPlaforPage.jsx";
 import CoursesPage from "../pages/CoursesPage.jsx";
 import FaleConosco from "../pages/FaleConosco.jsx";
 import SettingsPage from "../pages/SettingsPage.jsx";
@@ -35,6 +36,7 @@ const CustomRoutes = () => {
         <Route path="/cursos" element={<CoursesPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/history" element={<HistoryPlaforPage />} />
         <Route path="/faleconosco" element={<FaleConosco />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/login" element={<Login />} />
