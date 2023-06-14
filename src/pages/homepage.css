@@ -63,11 +63,25 @@
 }
 
 .cardRecente {
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 300px;
+  padding: 28px 32px;
+  border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 .cardRecente:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 20px 30px rgba(44, 86, 162, 0.1);
+}
+
+.cardRecente p{
+  margin: 0;
+}
+
+.cardRecente h3 {
+  flex: 1;
 }
 
 .cardTrilha {
