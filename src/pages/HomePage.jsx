@@ -8,6 +8,12 @@ import Int3 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.
 import Int4 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png';
 import Int5 from '../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.png';
 
+import iniciacaoIcon from '../assets/itinerarios/iconIniciacao.svg';
+import aposentadoriaIcon from '../assets/itinerarios/iconAposentadoria.svg';
+import docenteIcon from '../assets/itinerarios/iconEducacao.svg';
+import administrativoIcon from '../assets/itinerarios/iconAdministrativo.svg';
+import gerencialIcon from '../assets/itinerarios/iconGerencial.svg';
+
 import icon1 from '../assets/HomepageIcon1.svg';
 import icon2 from '../assets/HomepageIcon2.svg';
 import icon3 from '../assets/HomepageIcon3.svg';
@@ -41,6 +47,20 @@ const { useBreakpoint } = Grid;
 const { Title, Text } = Typography;
 
 export default function HomePage() {
+  const listaRecentes = [
+    {
+      titulo: 'Educação Especial: histórico, políticas e práticas',
+      instituicao: 'PoCA - UFSCar',
+    },
+    {
+      titulo: 'Gerenciamento de Projetos e Portfólios de Projetos - Guia',
+      instituicao: 'IFRN',
+    },
+    {
+      titulo: 'Teletrabalho e Educação a Distância',
+      instituicao: 'PoCA - UFSCar',
+    },
+  ];
   const screens = useBreakpoint();
 
   const info = useStoreState((state) => state.adm.info);
@@ -123,61 +143,41 @@ export default function HomePage() {
           gap: screens.xs ? '60px' : '120px',
         }}
       >
-        <div>
+        <div
+          style={{
+            display: 'grid',
+            justifyContent: 'center',
+          }}
+        >
           <h2
-            // level={screens.xs ? 4 : 3}
             className="titulo"
             style={{
               marginBottom: '20px',
             }}
           >
-            Cursos acessados por você recentemente:
+            Cursos acessados recentemente por você:
           </h2>
-          <List
-            style={{}}
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 2,
-              md: 3,
-              lg: 3,
-              xl: 3,
+          <ul
+            style={{
+              padding: '0',
+              display: 'flex',
+              gap: '20px',
+              flexWrap: screens.xl ? 'nowrap' : 'wrap',
+              justifyContent: 'center',
             }}
-            dataSource={[
-              {
-                id: 1,
-                title: 'Educação Especial: histórico, políticas e práticas',
-                description: 'PoCA - UFSCar',
-              },
-              {
-                id: 2,
-                title:
-                  'Gerenciamento de Projetos e Portfólios de Projetos - Guia',
-                description: 'IFRN',
-              },
-              {
-                id: 3,
-                title: 'Teletrabalho e Educação a Distância',
-                description: 'PoCA - UFSCar',
-              },
-            ]}
-            renderItem={(item) => (
-              <List.Item key={item.id}>
-                <Card
-                  bordered={true}
-                  className="cardRecente"
-                  style={{
-                    maxWidth: screens.xs ? '100%' : '360px',
-                  }}
-                >
-                  <Title level={5}>{item.title}</Title>
-                  {item.description}
-                </Card>
-              </List.Item>
-            )}
-          />
+          >
+            {listaRecentes.map((curso) => (
+              <li
+                className="cardRecente"
+                style={{ maxWidth: screens.xl ? null : '350px' }}
+                key={curso.titulo}
+              >
+                <h3 className="subtitulo">{curso.titulo}</h3>
+                <p className="label">{curso.instituicao}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-
         <div
           style={{
             display: 'flex',
@@ -240,36 +240,41 @@ export default function HomePage() {
           </Text>
           <Row
             style={{
-              marginTop: '40px',
+              marginTop: screens.xs ? '24px' : '40px',
             }}
-            gutter={[40, 40]}
+            gutter={screens.xs ? [20, 20] : [40, 40]}
             align={'middle'}
             justify={'space-evenly'}
           >
             <HomepageItineario
-              imgItinerario={Int2}
+              imgItinerario={screens.xs ? iniciacaoIcon : Int2}
               nameItinerario={'Iniciação'}
               itinerario={'Iniciação ao Serviço Público'}
+              colorItinerario={'var(--iniciacao)'}
             />
             <HomepageItineario
-              imgItinerario={Int5}
+              imgItinerario={screens.xs ? administrativoIcon : Int5}
               nameItinerario={'Educação'}
               itinerario={'Técnico Administrativo em Educação'}
+              colorItinerario={'var(--administrativo)'}
             />
             <HomepageItineario
-              imgItinerario={Int1}
+              imgItinerario={screens.xs ? docenteIcon : Int1}
               nameItinerario={'Docente'}
               itinerario={'Docente'}
+              colorItinerario={'var(--docente)'}
             />
             <HomepageItineario
-              imgItinerario={Int3}
+              imgItinerario={screens.xs ? gerencialIcon : Int3}
               nameItinerario={'Gerencial'}
               itinerario={'Gerencial'}
+              colorItinerario={'var(--gerencial)'}
             />
             <HomepageItineario
-              imgItinerario={Int4}
+              imgItinerario={screens.xs ? aposentadoriaIcon : Int4}
               nameItinerario={'Preparação'}
               itinerario={'Preparação para a Aposentadoria'}
+              colorItinerario={'var(--aposentadoria)'}
             />
           </Row>
         </div>
@@ -598,18 +603,17 @@ export default function HomePage() {
         />
       </Row>
 
-      <Row
+      <div
         style={{
-          padding: '60px 0px',
+          boxSizing: 'border-box',
+          padding: '60px 20px',
           backgroundColor: 'var(--bg-azul)',
         }}
       >
-        <Col offset={2} span={18}>
+        <div style={{ maxWidth: '1160px', margin: '0 auto' }}>
           <h1
             className="subTitulo"
-            // level={4}
             style={{
-              // marginTop: '20px',
               marginBottom: '20px',
               color: 'var(--azul-claro)',
             }}
@@ -622,8 +626,8 @@ export default function HomePage() {
           >
             Preencher formulário de contato
           </Link>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 }

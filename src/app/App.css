@@ -22,7 +22,7 @@ body {
   color: var(--texto-corpo);
   font-size: 1.25rem;
   font-weight: 500;
-  line-height: 28px;
+  line-height: 1.27;
   margin: 0;
 }
 
@@ -36,6 +36,14 @@ body {
   margin: 0;
 }
 
+.label {
+  font-family: 'Roboto', sans-serif;
+  color: var(--texto-corpo);
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
 
 .linkHeader {
   height: 100%;
@@ -43,6 +51,16 @@ body {
   align-items: center;
   padding: 0px 8px;
   border-left: 2px solid #e7e7e7;
+}
+
+/* Componentes */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 h4.ant-typography,
