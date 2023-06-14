@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderHome from '../components/header/HeaderHome';
+import questionVector from '../assets/icon/questions.svg';
 import './faq.css';
 
 import LogoFaq from '../assets/FAQ.svg';
@@ -173,6 +174,14 @@ export default function FAQ() {
         }}
       >
         <div>
+          <img
+            style={{
+              display: screens.md ? 'block' : 'none',
+              marginBottom: '28px',
+            }}
+            src={questionVector}
+            alt=""
+          />
           <span>FAQ</span>
           <h1
             style={{
@@ -186,16 +195,7 @@ export default function FAQ() {
             Dúvidas Frequentes
           </h1>
           <h2 className="subTitulo">Ainda precisa de ajuda?</h2>
-          <Link
-            style={{
-              textDecoration: 'none',
-              color: 'var(--texto-corpo)',
-              marginTop: '4px',
-              marginBottom: '20px',
-              display: 'inline-block',
-            }}
-            to={'/faleconosco'}
-          >
+          <Link className="linkContato" to={'/faleconosco'}>
             Entrar em contato
           </Link>
         </div>
@@ -209,22 +209,12 @@ export default function FAQ() {
           }}
         >
           {perguntas.map((pergunta, i) => (
-            <div
-              style={{
-                background: 'white',
-                borderRadius: '5px 5px 0px 0px',
-                borderStyle: 'none',
-                filter:
-                  'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 5px 10px rgba(44, 86, 162, 0.05))',
-              }}
-              // header={pergunta.titulo}
-              key={pergunta.titulo}
-            >
+            <div className="cardDuvida" key={pergunta.titulo}>
               <div className="pergunta" onClick={() => toggleAccordion(i)}>
                 <h3 style={{ marginBottom: 0 }} className="subtitulo">
                   {pergunta.titulo}
                 </h3>
-                <span>+</span>
+                <span>{selected === i ? '—' : '+'}</span>
               </div>
               <div className={selected === i ? 'conteudo ativo' : 'conteudo'}>
                 <p className="texto">{pergunta.texto}</p>
