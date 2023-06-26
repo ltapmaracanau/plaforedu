@@ -1,27 +1,27 @@
-import React from 'react';
-import HeaderHome from '../components/header/HeaderHome';
-import trilhaIlustracao from '../assets/about/ilustracao-trilha.svg';
-import mandala from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png';
-import retangulo from '../assets/about/Rectangle.png';
-import infografico from '../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png';
-import infografico_fundo_branco from '../assets/about/mandala_fundo_branco.png';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import HeaderHome from "../components/header/HeaderHome";
+import trilhaIlustracao from "../assets/about/ilustracao-trilha.svg";
+import mandala from "../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png";
+import retangulo from "../assets/about/Rectangle.png";
+import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png";
+import infografico_fundo_branco from "../assets/about/mandala_fundo_branco.png";
+import { useNavigate } from "react-router-dom";
 
-import { Row, Col, Typography, Image, Grid, Collapse } from 'antd';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Row, Col, Typography, Image, Grid, Collapse } from "antd";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
-import iniciacao from '../assets/itinerarios/iconIniciacao.svg';
-import aposentadoria from '../assets/itinerarios/iconAposentadoria.svg';
-import educacao from '../assets/itinerarios/iconEducacao.svg';
-import administrativo from '../assets/itinerarios/iconAdministrativo.svg';
-import gerencial from '../assets/itinerarios/iconGerencial.svg';
-import setabaixo from '../assets/icon/setabaixo.svg';
+import iniciacao from "../assets/itinerarios/iconIniciacao.svg";
+import aposentadoria from "../assets/itinerarios/iconAposentadoria.svg";
+import educacao from "../assets/itinerarios/iconEducacao.svg";
+import administrativo from "../assets/itinerarios/iconAdministrativo.svg";
+import gerencial from "../assets/itinerarios/iconGerencial.svg";
+import setabaixo from "../assets/icon/setabaixo.svg";
 
 const { Panel } = Collapse;
 const { Text, Title, Link } = Typography;
 const { useBreakpoint } = Grid;
 
-import styles from './AboutPage.module.css';
+import styles from "./AboutPage.module.css";
 
 export default function AboutPage() {
   const screens = useBreakpoint();
@@ -33,14 +33,18 @@ export default function AboutPage() {
 
   const onClickItinerario = (itinerario) => {
     const itinerarioClicado = itinerarios.find((item) =>
-      item.name.toLowerCase().includes(itinerario.toLowerCase()),
+      item.name.toLowerCase().includes(itinerario.toLowerCase())
     );
     setFilter({
       ...filterDefault,
       itinerario: itinerarioClicado.id,
-      esquemaDeCores: 'categoria',
+      esquemaDeCores: "categoria",
     });
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -52,20 +56,20 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  padding: '60px 50px 0px 50px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '20px',
+                  padding: "60px 50px 0px 50px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "20px",
                 }
               : {
-                  padding: '60px 10px 0px 10px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '12px',
+                  padding: "60px 10px 0px 10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "12px",
                 }
           }
         >
@@ -73,12 +77,12 @@ export default function AboutPage() {
 
           <iframe
             className={styles.videoItinerario}
-            height={!screens.xs ? '433px' : null}
+            height={!screens.xs ? "433px" : null}
             style={{
-              maxWidth: '760px',
-              border: '5px solid #FFF',
+              maxWidth: "760px",
+              border: "5px solid #FFF",
               filter:
-                'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))',
+                "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))",
             }}
             title="Apresentação PlaforEDU"
             src="https://www.youtube.com/embed/XJS8nvbW754"
@@ -87,17 +91,17 @@ export default function AboutPage() {
 
         <Row
           style={{
-            margin: `${!screens.xs ? '120px 0' : '60px 0'}`,
-            padding: '60px 20px',
-            background: 'var(--bg-menos-claro)',
+            margin: `${!screens.xs ? "120px 0" : "60px 0"}`,
+            padding: "60px 20px",
+            background: "var(--bg-menos-claro)",
           }}
         >
           <p
             className={styles.texto}
             style={{
-              maxWidth: '690px',
-              margin: '0 auto',
-              textAlign: `${!screens.xs ? 'center' : 'left'}`,
+              maxWidth: "690px",
+              margin: "0 auto",
+              textAlign: `${!screens.xs ? "center" : "left"}`,
             }}
           >
             A PlaforEDU tem como objetivo proporcionar um espaço onde os
@@ -115,25 +119,25 @@ export default function AboutPage() {
           style={
             screens.lg
               ? {
-                  backgroundColor: '#fff',
-                  maxWidth: '1160px',
-                  display: 'grid',
-                  gridTemplateColumns: '2fr 1fr',
-                  margin: '0 auto',
-                  justifyContent: 'space-between',
-                  gap: '40px',
+                  backgroundColor: "#fff",
+                  maxWidth: "1160px",
+                  display: "grid",
+                  gridTemplateColumns: "2fr 1fr",
+                  margin: "0 auto",
+                  justifyContent: "space-between",
+                  gap: "40px",
                 }
               : {
-                  gap: '20px',
-                  justifyContent: 'center',
+                  gap: "20px",
+                  justifyContent: "center",
                 }
           }
         >
           <Col
-            style={screens.lg ? { padding: '40px' } : { padding: '0 20px' }}
+            style={screens.lg ? { padding: "40px" } : { padding: "0 20px" }}
             id="apresentacao"
           >
-            <h1 className={styles.titulo} style={{ marginBottom: '20px' }}>
+            <h1 className={styles.titulo} style={{ marginBottom: "20px" }}>
               Como tudo é organizado
             </h1>
             <p className={styles.texto}>
@@ -158,17 +162,17 @@ export default function AboutPage() {
 
         <div
           style={{
-            background: 'var(--bg-azul)',
-            padding: '60px 0',
-            margin: `${!screens.xs ? '120px 0' : '60px 0'}`,
+            background: "var(--bg-azul)",
+            padding: "60px 0",
+            margin: `${!screens.xs ? "120px 0" : "60px 0"}`,
           }}
         >
           <h1
             className={styles.titulo}
             style={{
-              color: 'var(--bg-site)',
-              textAlign: 'center',
-              marginBottom: '20px',
+              color: "var(--bg-site)",
+              textAlign: "center",
+              marginBottom: "20px",
             }}
           >
             5 Itinerários formativos
@@ -176,9 +180,9 @@ export default function AboutPage() {
           <p
             className={styles.texto}
             style={{
-              display: 'block',
-              color: 'var(--bg-site)',
-              textAlign: 'center',
+              display: "block",
+              color: "var(--bg-site)",
+              textAlign: "center",
             }}
           >
             São destinados à diferentes perfis de servidores da RFEPCT, sendo
@@ -189,10 +193,10 @@ export default function AboutPage() {
             style={
               screens.xs
                 ? {
-                    flexFlow: 'column',
-                    padding: '20px 20px',
-                    gap: '20px',
-                    justifyContent: 'left',
+                    flexFlow: "column",
+                    padding: "20px 20px",
+                    gap: "20px",
+                    justifyContent: "left",
                   }
                 : null
             }
@@ -202,7 +206,7 @@ export default function AboutPage() {
               <p
                 className={styles.texto}
                 style={{
-                  color: '#FFF',
+                  color: "#FFF",
                 }}
               >
                 Iniciação ao Serviço Público
@@ -212,13 +216,13 @@ export default function AboutPage() {
             <a
               href="#tae"
               className={styles.cardItinerarios}
-              style={{ background: 'var(--administrativo)' }}
+              style={{ background: "var(--administrativo)" }}
             >
               <img src={administrativo} alt="" />
               <p
                 className={styles.texto}
                 style={{
-                  color: '#FFF',
+                  color: "#FFF",
                 }}
               >
                 Técnico-Administrativo em Educação
@@ -227,13 +231,13 @@ export default function AboutPage() {
             <a
               href="#docente"
               className={styles.cardItinerarios}
-              style={{ background: 'var(--docente)' }}
+              style={{ background: "var(--docente)" }}
             >
               <img src={educacao} alt="" />
               <p
                 className={styles.texto}
                 style={{
-                  color: '#FFF',
+                  color: "#FFF",
                 }}
               >
                 Docente
@@ -242,13 +246,13 @@ export default function AboutPage() {
             <a
               href="#gerencial"
               className={styles.cardItinerarios}
-              style={{ background: 'var(--gerencial)' }}
+              style={{ background: "var(--gerencial)" }}
             >
               <img src={gerencial} alt="" />
               <p
                 className={styles.texto}
                 style={{
-                  color: '#FFF',
+                  color: "#FFF",
                 }}
               >
                 Gerencial
@@ -257,39 +261,39 @@ export default function AboutPage() {
             <a
               href="#aposentadoria"
               className={styles.cardItinerarios}
-              style={{ background: 'var(--aposentadoria)' }}
+              style={{ background: "var(--aposentadoria)" }}
             >
               <img src={aposentadoria} alt="" />
               <p
                 className={styles.texto}
                 style={{
-                  color: '#FFF',
+                  color: "#FFF",
                 }}
               >
                 Preparação para aposentadoria
               </p>
             </a>
           </div>
-          <div style={{ display: 'grid', justifyContent: 'center' }}>
+          <div style={{ display: "grid", justifyContent: "center" }}>
             <p
               className={styles.subTitulo}
               style={{
-                color: 'var(--bg-site)',
-                textAlign: 'center',
+                color: "var(--bg-site)",
+                textAlign: "center",
               }}
             >
               Explicamos melhor cada um abaixo
             </p>
             <div
               style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
               }}
             >
               <img
                 src={setabaixo}
-                style={{ color: '#fff', marginTop: '24px' }}
+                style={{ color: "#fff", marginTop: "24px" }}
               />
             </div>
           </div>
@@ -301,20 +305,20 @@ export default function AboutPage() {
             wrap={!screens.lg}
             id="iniciacao"
             className={styles.itinerarioContainer}
-            style={{ flexDirection: 'row-reverse' }}
+            style={{ flexDirection: "row-reverse" }}
           >
             <div
               style={
                 !screens.lg
                   ? {
-                      display: 'grid',
-                      gap: '12px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "12px",
+                      maxWidth: "560px",
                     }
                   : {
-                      display: 'grid',
-                      gap: '24px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "24px",
+                      maxWidth: "560px",
                     }
               }
             >
@@ -329,12 +333,12 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: 'var(--azul-super-claro)',
-                    color: 'var(--bg-azul)',
+                    background: "var(--azul-super-claro)",
+                    color: "var(--bg-azul)",
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
-                    onClickItinerario('Iniciação');
+                    onClickItinerario("Iniciação");
                   }}
                 >
                   Acessar itinerário
@@ -359,14 +363,14 @@ export default function AboutPage() {
               style={
                 !screens.lg
                   ? {
-                      display: 'grid',
-                      gap: '12px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "12px",
+                      maxWidth: "560px",
                     }
                   : {
-                      display: 'grid',
-                      gap: '24px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "24px",
+                      maxWidth: "560px",
                     }
               }
             >
@@ -386,12 +390,12 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: '#FEE6CE',
-                    color: '#79543B',
+                    background: "#FEE6CE",
+                    color: "#79543B",
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
-                    onClickItinerario('Educação');
+                    onClickItinerario("Educação");
                   }}
                 >
                   Acessar itinerário
@@ -410,20 +414,20 @@ export default function AboutPage() {
             wrap={!screens.lg}
             id="docente"
             className={styles.itinerarioContainer}
-            style={{ flexDirection: 'row-reverse' }}
+            style={{ flexDirection: "row-reverse" }}
           >
             <div
               style={
                 !screens.lg
                   ? {
-                      display: 'grid',
-                      gap: '12px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "12px",
+                      maxWidth: "560px",
                     }
                   : {
-                      display: 'grid',
-                      gap: '24px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "24px",
+                      maxWidth: "560px",
                     }
               }
             >
@@ -439,12 +443,12 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: '#D3AFD3',
-                    color: '#4F2150',
+                    background: "#D3AFD3",
+                    color: "#4F2150",
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
-                    onClickItinerario('Docente');
+                    onClickItinerario("Docente");
                   }}
                 >
                   Acessar itinerário
@@ -469,14 +473,14 @@ export default function AboutPage() {
               style={
                 !screens.lg
                   ? {
-                      display: 'grid',
-                      gap: '12px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "12px",
+                      maxWidth: "560px",
                     }
                   : {
-                      display: 'grid',
-                      gap: '24px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "24px",
+                      maxWidth: "560px",
                     }
               }
             >
@@ -491,12 +495,12 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: '#E6FADF',
-                    color: '#4A7040',
+                    background: "#E6FADF",
+                    color: "#4A7040",
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
-                    onClickItinerario('Gerencial');
+                    onClickItinerario("Gerencial");
                   }}
                 >
                   Acessar itinerário
@@ -515,20 +519,20 @@ export default function AboutPage() {
             wrap={!screens.lg}
             id="aposentadoria"
             className={styles.itinerarioContainer}
-            style={{ flexDirection: 'row-reverse' }}
+            style={{ flexDirection: "row-reverse" }}
           >
             <div
               style={
                 !screens.lg
                   ? {
-                      display: 'grid',
-                      gap: '12px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "12px",
+                      maxWidth: "560px",
                     }
                   : {
-                      display: 'grid',
-                      gap: '24px',
-                      maxWidth: '560px',
+                      display: "grid",
+                      gap: "24px",
+                      maxWidth: "560px",
                     }
               }
             >
@@ -541,10 +545,10 @@ export default function AboutPage() {
               </p>
               <Collapse
                 style={{
-                  display: 'grid',
-                  gap: '20px',
-                  background: 'none',
-                  border: 'none',
+                  display: "grid",
+                  gap: "20px",
+                  background: "none",
+                  border: "none",
                 }}
                 expandIconPosition="end"
               >
@@ -588,12 +592,12 @@ export default function AboutPage() {
               <div>
                 <button
                   style={{
-                    background: '#CECCFB',
-                    color: '#2D267F',
+                    background: "#CECCFB",
+                    color: "#2D267F",
                   }}
                   className={styles.botaoItinerario}
                   onClick={() => {
-                    onClickItinerario('Aposentadoria');
+                    onClickItinerario("Aposentadoria");
                   }}
                 >
                   Acessar itinerário
@@ -611,10 +615,10 @@ export default function AboutPage() {
         <Row
           align="middle"
           style={{
-            backgroundColor: 'var(--bg-azul)',
-            height: `${screens.md ? '420px' : 'auto'}`,
-            padding: '60px 20px',
-            margin: `${!screens.xs ? '120px 0' : '60px 0'}`,
+            backgroundColor: "var(--bg-azul)",
+            height: `${screens.md ? "420px" : "auto"}`,
+            padding: "60px 20px",
+            margin: `${!screens.xs ? "120px 0" : "60px 0"}`,
           }}
         >
           <Row
@@ -623,23 +627,23 @@ export default function AboutPage() {
               screens.md
                 ? {
                     backgroundImage: `url(${trilhaIlustracao})`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'contain',
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
                   }
                 : null
             }
           >
-            <Col style={{ width: '100%' }} span={screens.md ? 16 : 24}>
+            <Col style={{ width: "100%" }} span={screens.md ? 16 : 24}>
               <h1
                 className={styles.titulo}
                 style={{
-                  color: 'white',
-                  marginBottom: '28px',
+                  color: "white",
+                  marginBottom: "28px",
                 }}
               >
                 Trilhas Formativas
               </h1>
-              <p className={styles.texto} style={{ color: 'white' }}>
+              <p className={styles.texto} style={{ color: "white" }}>
                 São percursos formativos propostos a partir do encadeamento de
                 cursos ordenados, com o objetivo de desenvolver competências por
                 meio da capacitação e qualificação profissional.
@@ -652,14 +656,14 @@ export default function AboutPage() {
         <Row
           className={styles.mandalaContainer}
           align="middle"
-          style={{ marginBottom: `${!screens.xs ? '80px' : '40px'}` }}
+          style={{ marginBottom: `${!screens.xs ? "80px" : "40px"}` }}
           id="mandala"
         >
-          <Col style={{ paddingBottom: `${!screens.xs ? '40px' : '20px'}` }}>
+          <Col style={{ paddingBottom: `${!screens.xs ? "40px" : "20px"}` }}>
             <h1
               className={styles.titulo}
               style={{
-                marginBottom: '20px',
+                marginBottom: "20px",
               }}
             >
               Mandala de Competências
@@ -680,7 +684,7 @@ export default function AboutPage() {
           </Col>
           <Col
             style={
-              screens.lg ? { padding: '40px 0px' } : { padding: '20px 0px' }
+              screens.lg ? { padding: "40px 0px" } : { padding: "20px 0px" }
             }
           >
             <Image
@@ -692,7 +696,7 @@ export default function AboutPage() {
                     }
                   : false
               }
-              width={'100%'}
+              width={"100%"}
             />
           </Col>
         </Row>

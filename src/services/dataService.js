@@ -17,6 +17,27 @@ export const dataService = {
     return JSON.parse(localStorage.getItem("user"));
   },
 
+  setLastViewedCourses: (curso = { titulo: "", id: "", institution: "" }) => {
+    const lastViewedCourses = dataService.getLastViewedCourses();
+    const index = lastViewedCourses.findIndex((item) => item.id === curso.id);
+    lastViewedCourses.unshift(curso);
+    if (index !== -1) {
+      lastViewedCourses.splice(index, 1);
+    }
+    while (lastViewedCourses.length > 3) {
+      lastViewedCourses.pop();
+    }
+    localStorage.setItem(
+      "lastViewedCourses",
+      JSON.stringify(lastViewedCourses)
+    );
+  },
+
+  getLastViewedCourses: () => {
+    if (!localStorage.getItem("lastViewedCourses")) return [];
+    return JSON.parse(localStorage.getItem("lastViewedCourses"));
+  },
+
   login: (payload = { username: "", password: "" }) =>
     AuthAxios.post("/sessions", {
       email: payload.username,
