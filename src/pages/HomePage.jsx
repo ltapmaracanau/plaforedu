@@ -41,6 +41,7 @@ import {
   Modal,
   Skeleton,
   Descriptions,
+  notification,
 } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
 import { dataService } from "../services/dataService";
@@ -179,9 +180,17 @@ export default function HomePage() {
                   className="cardRecente"
                   style={{ maxWidth: screens.xl ? null : "350px" }}
                   key={curso.titulo}
-                  onClick={() => {
+                  onClick={async () => {
                     setModalVisible(true);
-                    getUniqueCourse({ id: curso.id });
+                    try {
+                      await getUniqueCourse({ id: curso.id });
+                    } catch (error) {
+                      notification.error({
+                        message: "Erro",
+                        description: error.message,
+                      });
+                      setModalVisible(false);
+                    }
                   }}
                 >
                   <h3 className="subtitulo">{curso.titulo}</h3>
