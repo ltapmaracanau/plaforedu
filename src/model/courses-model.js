@@ -2,6 +2,7 @@ import { action, computed, thunk, thunkOn } from "easy-peasy";
 import services from "../services";
 
 import reformuladorDeElementosCytoscape from "../helpers/reformuladorDeElementosCytoscape";
+import { dataService } from "../services/dataService";
 
 const initialFilterDefault = {
   query: "",
@@ -143,6 +144,13 @@ const coursesModel = {
     const { id = "" } = payload;
     try {
       const course = await services.courseService.getUniqueCourse({ id: id });
+      dataService.setLastViewedCourses({
+        titulo: course.name,
+        id: course.id,
+        institution: course.institutions
+          .map((institution) => institution.abbreviation)
+          .join(", "),
+      });
       actions.setUniqueCourse(course);
     } catch (error) {
       throw new Error(error.message);

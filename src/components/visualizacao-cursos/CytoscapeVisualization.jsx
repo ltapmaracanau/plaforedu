@@ -38,6 +38,7 @@ import {
   List,
   Empty,
 } from "antd";
+import { dataService } from "../../services/dataService";
 
 const { Text } = Typography;
 
@@ -279,22 +280,22 @@ export default function CytoscapeVisualization() {
             </Card>
           </Col> */}
           {/* <Col
-                        style={{ margin: '5px' }}
-                    >
-                        <Card style={{ width: '100%' }}>
-                            <PDFDownloadLink document={<Template sourceImage={() => cyRef?.current.jpg()} />} fileName="plaforedu.pdf">
-                                {({ loading, error }) => loading ? (
-                                    <Button icon={<LoadingOutlined />}>
-                                        <Text>{error?.message}</Text>
-                                    </Button>
-                                ) : (
-                                    <Button icon={<FilePdfOutlined />}>
-                                        <Text style={{ fontFamily: 'Roboto' }}>Exportar .pdf</Text>
-                                    </Button>
-                                )}
-                            </PDFDownloadLink>
-                        </Card>
-                    </Col> */}
+              style={{ margin: '5px' }}
+          >
+              <Card style={{ width: '100%' }}>
+                  <PDFDownloadLink document={<Template sourceImage={() => cyRef?.current.jpg()} />} fileName="plaforedu.pdf">
+                      {({ loading, error }) => loading ? (
+                          <Button icon={<LoadingOutlined />}>
+                              <Text>{error?.message}</Text>
+                          </Button>
+                      ) : (
+                          <Button icon={<FilePdfOutlined />}>
+                              <Text style={{ fontFamily: 'Roboto' }}>Exportar .pdf</Text>
+                          </Button>
+                      )}
+                  </PDFDownloadLink>
+              </Card>
+          </Col> */}
         </Row>
       </Form>
       {/* Canvas Cytoscape */}
