@@ -20,10 +20,10 @@ export const dataService = {
   setLastViewedCourses: (curso = { titulo: "", id: "", institution: "" }) => {
     const lastViewedCourses = dataService.getLastViewedCourses();
     const index = lastViewedCourses.findIndex((item) => item.id === curso.id);
-    lastViewedCourses.unshift(curso);
     if (index !== -1) {
       lastViewedCourses.splice(index, 1);
     }
+    lastViewedCourses.unshift(curso);
     while (lastViewedCourses.length > 3) {
       lastViewedCourses.pop();
     }
@@ -37,6 +37,15 @@ export const dataService = {
     if (!localStorage.getItem("lastViewedCourses")) return [];
     return JSON.parse(localStorage.getItem("lastViewedCourses"));
   },
+
+  getRandomTrailsHomepage: () =>
+    AuthAxios.get("/statistics/trails")
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(
+          error.response?.data?.message || "Algo deu errado ao buscar trilhas!"
+        );
+      }),
 
   login: (payload = { username: "", password: "" }) =>
     AuthAxios.post("/sessions", {

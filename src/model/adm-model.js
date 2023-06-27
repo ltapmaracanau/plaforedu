@@ -13,6 +13,7 @@ const admModel = {
   downloadingSearchLogs: false,
   isAuthenticated: computed((_state) => !!dataService.getToken()),
   searchLogs: [],
+  randomTrails: [],
   countLogs: 0,
 
   info: {},
@@ -79,6 +80,15 @@ const admModel = {
     AuthAxios.defaults.headers.Authorization = undefined;
     actions.setAllDataProfile({});
     actions.setLoading(false);
+  }),
+
+  getRandomTrails: thunk(async (actions, _) => {
+    try {
+      const trails = await dataService.getRandomTrailsHomepage();
+      actions.setRandomTrails(trails.formativeTrails);
+    } catch (e) {
+      throw new Error(e);
+    }
   }),
 
   forgetPassword: thunk(async (actions, payload) => {
@@ -214,6 +224,10 @@ const admModel = {
 
   setAllDataProfile: action((state, payload) => {
     state.allDataProfile = payload;
+  }),
+
+  setRandomTrails: action((state, payload) => {
+    state.randomTrails = payload;
   }),
 
   setSearchLogs: action((state, payload) => {
