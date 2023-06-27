@@ -61,6 +61,10 @@ export default function HomePage() {
   const info = useStoreState((state) => state.adm.info);
   //const loadingInfo = useStoreState((state) => state.adm.loadingInfo);
   const getInfo = useStoreActions((actions) => actions.adm.getInfo);
+  const randomTrails = useStoreState((state) => state.adm.randomTrails);
+  const getRandomTrails = useStoreActions(
+    (actions) => actions.adm.getRandomTrails
+  );
   const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
@@ -73,7 +77,8 @@ export default function HomePage() {
 
   React.useEffect(() => {
     getInfo();
-  }, [getInfo]);
+    getRandomTrails();
+  }, []);
 
   return (
     <>
@@ -518,82 +523,57 @@ export default function HomePage() {
           </Text>
         </Col>
 
-        <Col
-          style={{
-            display: "grid",
-            justifyContent: "center",
-            alignItems: "baseline",
-            gap: "32px",
-            minWidth: screens.xs ? "100%" : "330px",
-          }}
-        >
-          <div className="cardTrilha">
-            <div
-              style={{
-                margin: "28px",
-                maxWidth: "280px",
-              }}
-            >
-              <Title level={5}>Criação e Modificação</Title>
-              <Link
-                style={{
-                  textDecoration: "underline",
-                  color: "black",
-                }}
-              >
-                Ver cursos <DownOutlined />
-              </Link>
-            </div>
-            <div className="acessarTrilha">
-              <RightOutlined />
-            </div>
-          </div>
-          <div className="cardTrilha">
-            <div
-              style={{
-                margin: "28px",
-                maxWidth: "280px",
-              }}
-            >
-              <Title level={5}>Criação e Modificação</Title>
-              <Link
-                style={{
-                  textDecoration: "underline",
-                  color: "black",
-                }}
-              >
-                Ver cursos <DownOutlined />
-              </Link>
-            </div>
-            <div className="acessarTrilha">
-              <RightOutlined />
-            </div>
-          </div>
-          <div className="cardTrilha">
-            <div
-              style={{
-                // height: '100%',
-                margin: "28px",
-                maxWidth: "280px",
-              }}
-            >
-              <Title level={5}>
-                Criação e Modificação Modificação Modificação
-              </Title>
-              <Link
-                style={{
-                  textDecoration: "underline",
-                  color: "black",
-                }}
-              >
-                Ver cursos <DownOutlined />
-              </Link>
-            </div>
-            <div className="acessarTrilha">
-              <RightOutlined />
-            </div>
-          </div>
-        </Col>
+        {randomTrails.length > 0 && (
+          <Col
+            style={{
+              display: "grid",
+              justifyContent: "center",
+              alignItems: "baseline",
+              gap: "32px",
+              minWidth: screens.xs ? "100%" : "330px",
+            }}
+          >
+            {randomTrails.map((trail) => (
+              <div className="cardTrilha" key={trail.id}>
+                <div
+                  style={{
+                    margin: "28px",
+                    maxWidth: "280px",
+                  }}
+                >
+                  <Title level={5}>{trail.name}</Title>
+                  <Link
+                    style={{
+                      textDecoration: "underline",
+                      color: "black",
+                    }}
+                    to={"/cursos"}
+                    onClick={() => {
+                      setFilter({
+                        ...filterDefault,
+                        query: trail.name,
+                      });
+                    }}
+                  >
+                    Ver cursos <DownOutlined />
+                  </Link>
+                </div>
+                <div
+                  className="acessarTrilha"
+                  onClick={() => {
+                    setFilter({
+                      ...filterDefault,
+                      query: trail.name,
+                    });
+                    navigate("/cursos");
+                  }}
+                >
+                  <RightOutlined />
+                </div>
+              </div>
+            ))}
+          </Col>
+        )}
       </Row>
 
       {info?.courses && (
