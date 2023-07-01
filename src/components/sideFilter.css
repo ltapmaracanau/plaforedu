@@ -1,0 +1,16 @@
+.ant-form-item-label {
+  padding-bottom: 4px !important;
+}
+
+.headerFilter {
+  background: var(--bg-azul);
+  padding: 12px 16px;
+  overflow: hidden;
+}
+
+
+
+/* .ant-radio-button.ant-radio-button-checked {
+  background: var(--bg-azul);
+  border-color: #FFF;
+} */

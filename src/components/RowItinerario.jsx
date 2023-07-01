@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import './rowitinerario.css';
 
 import Img0 from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png';
 import Img1 from '../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_InicServPublico_CLICADO.png';
@@ -350,21 +351,21 @@ export default function RowItinerario() {
   };
 
   const linha2 = {
-    0: <img style={{ height: '72px' }} src={logoSvg} />,
+    0: <img style={{ height: '74px' }} src={logoSvg} />,
     '00911570-d01c-4cb3-81e2-721999eab901': (
-      <img style={{ height: '72px' }} src={itinerarioServPublico} />
+      <img style={{ height: '74px' }} src={itinerarioServPublico} />
     ),
     '357d300e-95a4-4de9-a653-140841e2090a': (
-      <img style={{ height: '72px' }} src={itinerarioTecAdmEdu} />
+      <img style={{ height: '74px' }} src={itinerarioTecAdmEdu} />
     ),
     '6f20336b-5519-423a-a708-db9114190e63': (
-      <img style={{ height: '72px' }} src={itinerarioDocente} />
+      <img style={{ height: '74px' }} src={itinerarioDocente} />
     ),
     '35218055-9fa5-4bc3-a4e1-04c07a9c2872': (
-      <img style={{ height: '72px' }} src={itinerarioGerencial} />
+      <img style={{ height: '74px' }} src={itinerarioGerencial} />
     ),
     '55876032-32c1-432a-a020-9f70c73e7d6b': (
-      <img style={{ height: '72px' }} src={itinerarioPrepAposenta} />
+      <img style={{ height: '74px' }} src={itinerarioPrepAposenta} />
     ),
   };
 
@@ -372,6 +373,7 @@ export default function RowItinerario() {
     <div
       style={{
         width: '100%',
+        background: 'var(--bg-site)',
       }}
     >
       <div
@@ -379,7 +381,7 @@ export default function RowItinerario() {
         style={{
           background:
             'linear-gradient(88.74deg, #2D56A1 11.86%, #34A5DE 94.24%)',
-          padding: '20px 20px',
+          padding: '20px',
         }}
       >
         <div
@@ -387,9 +389,10 @@ export default function RowItinerario() {
             display: 'flex',
             flexWrap: screens.xs ? 'wrap' : 'nowrap',
             alignItems: 'center',
-            maxWidth: '900px',
+            maxWidth: '700px',
             margin: '32px auto',
             gap: '28px',
+            // background: 'red',
           }}
         >
           <Col style={{}}>
@@ -409,11 +412,11 @@ export default function RowItinerario() {
             >
               {itinerarioData ? itinerarioData.name : 'PlaforEDU'}
             </Title>
-            <Text style={{ fontFamily: 'Roboto', color: '#FFF' }}>
+            <p className="texto" style={{ color: '#FFF' }}>
               {itinerarioData
                 ? itinerarioData.description
                 : 'A PlaforEDU tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar sua atuação na Educação Profissional e Tecnológica, no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).'}
-            </Text>
+            </p>
           </Col>
         </div>
       </div>
@@ -422,7 +425,7 @@ export default function RowItinerario() {
       {/* <div>{linha2[itinerario] ? linha2[itinerario] : linha2[0]}</div> */}
       <div
         style={{
-          maxWidth: '800px',
+          maxWidth: '500px',
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)',
           margin: '0 auto',
@@ -430,82 +433,68 @@ export default function RowItinerario() {
       >
         <div
           onClick={onClick2}
+          className="acessarIti"
           style={{
             background: '#66CC33',
             borderBottomLeftRadius: '10px',
-            height: '100%',
           }}
         >
           <img
-            style={{
-              width: '60%',
-              padding: '16px 0',
-              display: 'block',
-              margin: '0 auto',
-            }}
+            className="iconeItinerario"
             src={itinerarioGerencial}
             name="4"
-            alt=""
-          />
-        </div>
-        <div onClick={onClick2} style={{ background: '#9999FF' }}>
-          <img
-            style={{
-              width: '60%',
-              padding: '16px 0',
-              display: 'block',
-              margin: '0 auto',
-            }}
-            src={itinerarioPrepAposenta}
-            name="5"
-            alt=""
-          />
-        </div>
-        <div onClick={onClick2} style={{ background: '#0099CC' }}>
-          <img
-            style={{
-              width: '50%',
-              padding: '16px 0',
-              display: 'block',
-              margin: '0 auto',
-            }}
-            src={itinerarioServPublico}
-            name="1"
-            alt=""
-          />
-        </div>
-        <div onClick={onClick2} style={{ background: '#FF9900' }}>
-          <img
-            style={{
-              width: '70%',
-              padding: '16px 0',
-              display: 'block',
-              margin: '0 auto',
-            }}
-            src={itinerarioTecAdmEdu}
-            name="2"
-            alt=""
+            alt="Acessar itinerário Gerencial"
           />
         </div>
         <div
           onClick={onClick2}
+          className="acessarIti"
+          style={{ background: '#9999FF' }}
+        >
+          <img
+            className="iconeItinerario"
+            src={itinerarioPrepAposenta}
+            name="5"
+            alt="Acessar itinerário Aposentadoria"
+          />
+        </div>
+        <div
+          onClick={onClick2}
+          className="acessarIti"
+          style={{ background: '#0099CC' }}
+        >
+          <img
+            className="iconeItinerario"
+            src={itinerarioServPublico}
+            name="1"
+            alt="Acessar itinerário Iniciação ao Serviço Público"
+          />
+        </div>
+        <div
+          onClick={onClick2}
+          className="acessarIti"
+          style={{ background: '#FF9900' }}
+        >
+          <img
+            className="iconeItinerario"
+            src={itinerarioTecAdmEdu}
+            name="2"
+            alt="Acessar Técnico-Administrativo em Educação"
+          />
+        </div>
+        <div
+          onClick={onClick2}
+          className="acessarIti"
           style={{
             background: '#990099',
-            display: 'flex',
-            alignItems: 'center',
             borderBottomRightRadius: '10px',
           }}
         >
           <img
-            style={{
-              width: '70%',
-              display: 'block',
-              margin: '0 auto',
-              padding: '16px 0',
-            }}
+            className="iconeItinerario"
             src={itinerarioDocente}
             name="3"
-            alt=""
+            alt="Acessar itinerário docente"
           />
         </div>
       </div>

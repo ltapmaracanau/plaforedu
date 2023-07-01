@@ -43,14 +43,19 @@ export default function CoursesPage() {
   return (
     <div>
       <HeaderHome />
+
+      <RowItinerario />
+
       <Layout>
         {screens.lg ? (
           <Sider
-            width={300}
+            width={324}
             collapsedWidth={0}
             trigger={null}
             style={{
-              backgroundColor: '#ebebeb',
+              backgroundColor: 'var(--bg-site)',
+              // background: 'blue',
+              paddingRight: '24px',
             }}
             collapsible
             collapsed={filterCollapsed}
@@ -58,16 +63,39 @@ export default function CoursesPage() {
             <SideFilter />
           </Sider>
         ) : (
-          <Drawer
-            title={'Filtros'}
-            open={!filterCollapsed}
-            closeIcon={<CloseOutlined style={{ color: '#000' }} />}
-            placement="left"
-            onClose={onClose}
-            width={screens.xs ? '100%' : 400}
+          <ConfigProvider
+            theme={{
+              components: {
+                Drawer: {
+                  colorText: '#FFF',
+                  colorIcon: '#FFF',
+                },
+              },
+            }}
           >
-            <SideFilter />
-          </Drawer>
+            <Drawer
+              title={'FILTROS'}
+              open={!filterCollapsed}
+              closeIcon={<CloseOutlined style={{ color: '#000' }} />}
+              placement="left"
+              onClose={onClose}
+              width={screens.xs ? '100%' : 400}
+              headerStyle={{
+                color: '#FFF',
+                background: 'var(--bg-azul)',
+              }}
+              bodyStyle={{
+                padding: '0',
+                background: 'none',
+              }}
+              style={{
+                paddingTop: '48px',
+                background: 'none',
+              }}
+            >
+              <SideFilter />
+            </Drawer>
+          </ConfigProvider>
         )}
 
         <ConfigProvider
@@ -81,10 +109,7 @@ export default function CoursesPage() {
             },
           }}
         >
-          <Content style={{ backgroundColor: '#fff' }}>
-            <Row>
-              <RowItinerario />
-            </Row>
+          <Content style={{ backgroundColor: 'var(--bg-site)' }}>
             <Row
               style={screens.lg ? { maxHeight: 700, overflowY: 'scroll' } : {}}
             >

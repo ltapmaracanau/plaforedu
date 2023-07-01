@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import React, { useEffect, useState } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import {
   List,
@@ -15,9 +15,9 @@ import {
   Space,
   Skeleton,
   Spin,
-} from "antd";
+} from 'antd';
 
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 
 const { Text, Title } = Typography;
 
@@ -25,10 +25,10 @@ const { Panel } = Collapse;
 
 export default function CoursesListVisualization() {
   const setFilterCollapsed = useStoreActions(
-    (actions) => actions.adm.setFilterCollapsed
+    (actions) => actions.adm.setFilterCollapsed,
   );
   const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
+    (actions) => actions.courses.getUniqueCourse,
   );
   const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
@@ -38,14 +38,14 @@ export default function CoursesListVisualization() {
   const trilhas = useStoreState((state) => state.trilhas.trilhas);
 
   const listCompetencias = useStoreState(
-    (state) => state.competencies.competencias
+    (state) => state.competencies.competencias,
   );
   const filter = useStoreState((state) => state.courses.filter);
   const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
 
   const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
   const loadingUniqueCourse = useStoreState(
-    (state) => state.courses.loadingUniqueCourse
+    (state) => state.courses.loadingUniqueCourse,
   );
   const loading = useStoreState((state) => state.courses.loading);
   const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
@@ -60,19 +60,19 @@ export default function CoursesListVisualization() {
     let nomesCategorias = [];
     competencies.forEach((element) => {
       const competencieData = listCompetencias.find(
-        (comp) => comp.id === element.id
+        (comp) => comp.id === element.id,
       );
       competencieData?.categoriesCompetencies?.forEach((categoria) => {
         nomesCategorias.push(categoria.name);
       });
     });
     const nomes_categorias_sem_repeticao = [...new Set(nomesCategorias)];
-    return nomes_categorias_sem_repeticao.join(" | ");
+    return nomes_categorias_sem_repeticao.join(' | ');
   };
 
   const getNomeItinerario = (id_itinerario) => {
     const nome_itinerario = itinerarios.find(
-      (itinerario) => itinerario.id === id_itinerario
+      (itinerario) => itinerario.id === id_itinerario,
     )?.name;
 
     return nome_itinerario;
@@ -82,12 +82,12 @@ export default function CoursesListVisualization() {
     <Col flex={1}>
       <Row
         style={{
-          backgroundColor: "#EBEBEB",
+          backgroundColor: 'var(--bg-site)',
         }}
       >
         <Col>
           <Button
-            style={{ margin: "5px 10px" }}
+            style={{ margin: '5px 10px' }}
             onClick={() => {
               setFilterCollapsed();
             }}
@@ -98,20 +98,20 @@ export default function CoursesListVisualization() {
         </Col>
       </Row>
       <Row>
-        <Col flex={"auto"}>
-          <Card bordered={false} style={{ background: "#fff" }}>
+        <Col flex={'auto'}>
+          <Card bordered={false} style={{ background: '#fff' }}>
             {filter.tipoClassificacao ? ( // False: por cursos   True: por trilhas
               <>
                 <Card
                   style={{
-                    padding: "30px",
+                    padding: '30px',
                   }}
                 >
-                  <Row
+                  {/* <Row
                     align="middle"
                     style={{
-                      display: "flex",
-                      justifyContent: "left",
+                      display: 'flex',
+                      justifyContent: 'left',
                     }}
                     gutter={[20, 10]}
                   >
@@ -119,35 +119,35 @@ export default function CoursesListVisualization() {
                       {filter.itinerario ? (
                         <Title
                           style={{
-                            fontFamily: "Poppins",
-                            fontSize: "24px",
-                            color: "#2C55A1",
-                            textAlign: "center",
+                            fontFamily: 'Poppins',
+                            fontSize: '24px',
+                            color: '#2C55A1',
+                            textAlign: 'center',
                           }}
                         >
-                          Trilhas Formativas -{" "}
+                          Trilhas Formativas -{' '}
                           {getNomeItinerario(filter.itinerario)}
                         </Title>
                       ) : (
                         <Title
                           style={{
-                            fontFamily: "Poppins",
-                            fontSize: "24px",
-                            color: "#2C55A1",
-                            textAlign: "center",
+                            fontFamily: 'Poppins',
+                            fontSize: '24px',
+                            color: '#2C55A1',
+                            textAlign: 'center',
                           }}
                         >
                           Trilhas Formativas
                         </Title>
                       )}
                     </Col>
-                  </Row>
+                  </Row> */}
                   {loadingTrilhas ? (
                     <div
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        textAlign: "center",
+                        width: '100%',
+                        height: '100%',
+                        textAlign: 'center',
                       }}
                     >
                       <Spin />
@@ -157,7 +157,9 @@ export default function CoursesListVisualization() {
                       {trilhas.length !== 0 ? (
                         <Collapse
                           style={{
-                            justifyContent: "center",
+                            justifyContent: 'center',
+                            margin: '0 auto',
+                            maxWidth: '800px',
                           }}
                         >
                           {trilhas.map((trilha) => {
@@ -165,7 +167,7 @@ export default function CoursesListVisualization() {
                             if (
                               !trilha.competencies.some((competencie) => {
                                 const competenceData = listCompetencias.find(
-                                  (comp) => comp.id === competencie.id
+                                  (comp) => comp.id === competencie.id,
                                 );
                                 if (competenceData) {
                                   return !competenceData?.filedAt;
@@ -193,7 +195,7 @@ export default function CoursesListVisualization() {
 
                             return (
                               <Panel
-                                key={"trilha" + trilha.id}
+                                key={'trilha' + trilha.id}
                                 header={trilha.name}
                               >
                                 <List
@@ -207,7 +209,7 @@ export default function CoursesListVisualization() {
                                     return (
                                       <List.Item
                                         key={`trilha${trilha.id}curso${curso.id}`}
-                                        style={{ backgroundColor: "#fff" }}
+                                        style={{ backgroundColor: '#fff' }}
                                       >
                                         <Card
                                           hoverable
@@ -219,40 +221,40 @@ export default function CoursesListVisualization() {
                                         >
                                           <div
                                             style={{
-                                              display: "flex",
-                                              flexDirection: "column",
-                                              justifyContent: "center",
+                                              display: 'flex',
+                                              flexDirection: 'column',
+                                              justifyContent: 'center',
                                             }}
                                           >
                                             <Title
                                               level={5}
                                               style={{
-                                                color: "#2C55A1",
-                                                fontFamily: "Poppins",
+                                                color: '#2C55A1',
+                                                fontFamily: 'Poppins',
                                               }}
                                             >
                                               {curso.name}
                                             </Title>
                                             <div
                                               style={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "space-between",
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'space-between',
                                               }}
                                             >
                                               <Text
-                                                style={{ fontFamily: "Roboto" }}
+                                                style={{ fontFamily: 'Roboto' }}
                                               >
-                                                Instituição:{" "}
+                                                Instituição:{' '}
                                                 <Text strong>
                                                   {curso.institutions
                                                     .map((inst) => inst.name)
-                                                    .join(" | ")}
+                                                    .join(' | ')}
                                                 </Text>
                                               </Text>
 
                                               <Text
-                                                style={{ fontFamily: "Roboto" }}
+                                                style={{ fontFamily: 'Roboto' }}
                                               >
                                                 Carga horária:
                                                 <Text
@@ -263,41 +265,41 @@ export default function CoursesListVisualization() {
 
                                             <div
                                               style={{
-                                                display: "flex",
-                                                flexDirection: "column",
+                                                display: 'flex',
+                                                flexDirection: 'column',
                                               }}
                                             >
                                               {curso.equivalents.length > 0 && (
                                                 <Text
                                                   style={{
-                                                    fontFamily: "Roboto",
+                                                    fontFamily: 'Roboto',
                                                   }}
                                                 >
-                                                  Cursos equivalentes:{" "}
+                                                  Cursos equivalentes:{' '}
                                                   <Text strong>
                                                     {curso.equivalents.length}
                                                   </Text>
                                                 </Text>
                                               )}
                                               <Text
-                                                style={{ fontFamily: "Roboto" }}
+                                                style={{ fontFamily: 'Roboto' }}
                                               >
-                                                Categorias de competência:{" "}
+                                                Categorias de competência:{' '}
                                                 <Text strong>
                                                   {getCategoriasCompetencia(
-                                                    curso.competencies
+                                                    curso.competencies,
                                                   )}
                                                 </Text>
                                               </Text>
 
                                               <Text
-                                                style={{ fontFamily: "Roboto" }}
+                                                style={{ fontFamily: 'Roboto' }}
                                               >
-                                                Competências:{" "}
+                                                Competências:{' '}
                                                 <Text strong>
                                                   {curso.competencies
                                                     .map((comp) => comp.name)
-                                                    .join(" | ")}
+                                                    .join(' | ')}
                                                 </Text>
                                               </Text>
                                             </div>
@@ -314,7 +316,7 @@ export default function CoursesListVisualization() {
                       ) : (
                         <Empty
                           style={{
-                            margin: "20px 0px",
+                            margin: '20px 0px',
                           }}
                           image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
                           imageStyle={{
@@ -364,7 +366,7 @@ export default function CoursesListVisualization() {
                   // Aqui verifico se devo ou não mostrar o curso de acordo com os dados arquivados
                   if (
                     !curso.competencies.some(
-                      (competencie) => !competencie?.filedAt
+                      (competencie) => !competencie?.filedAt,
                     ) &&
                     curso.competencies.length !== 0
                   ) {
@@ -372,7 +374,7 @@ export default function CoursesListVisualization() {
                   }
                   if (
                     !curso.institutions.some(
-                      (institution) => !institution?.filedAt
+                      (institution) => !institution?.filedAt,
                     ) &&
                     curso.institutions.length !== 0
                   ) {
@@ -381,11 +383,11 @@ export default function CoursesListVisualization() {
                   if (
                     !curso.competencies.some((competencie) => {
                       let compData = listCompetencias.find(
-                        (comp) => comp.id === competencie.id
+                        (comp) => comp.id === competencie.id,
                       );
                       if (compData) {
                         return compData.categoriesCompetencies.some(
-                          (categorie) => !categorie.filedAt
+                          (categorie) => !categorie.filedAt,
                         );
                       } else {
                         return false;
@@ -399,7 +401,7 @@ export default function CoursesListVisualization() {
                   return (
                     <List.Item
                       key={curso.id}
-                      style={{ backgroundColor: "#fff" }}
+                      style={{ backgroundColor: '#fff' }}
                     >
                       <Card
                         hoverable
@@ -411,34 +413,34 @@ export default function CoursesListVisualization() {
                       >
                         <div
                           style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
                           }}
                         >
                           <Title
                             level={4}
-                            style={{ color: "#2C55A1", fontFamily: "Poppins" }}
+                            style={{ color: '#2C55A1', fontFamily: 'Poppins' }}
                           >
                             {curso.name}
                           </Title>
                           <div
                             style={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "space-between",
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
                             }}
                           >
-                            <Text style={{ fontFamily: "Roboto" }}>
-                              Instituição:{" "}
+                            <Text style={{ fontFamily: 'Roboto' }}>
+                              Instituição:{' '}
                               <Text strong>
                                 {curso.institutions
                                   .map((inst) => inst.name)
-                                  .join(" | ")}
+                                  .join(' | ')}
                               </Text>
                             </Text>
 
-                            <Text style={{ fontFamily: "Roboto" }}>
+                            <Text style={{ fontFamily: 'Roboto' }}>
                               Carga horária:
                               <Text strong>{` ${curso.hours}H`}</Text>
                             </Text>
@@ -446,33 +448,33 @@ export default function CoursesListVisualization() {
 
                           <div
                             style={{
-                              display: "flex",
-                              flexDirection: "column",
+                              display: 'flex',
+                              flexDirection: 'column',
                             }}
                           >
                             {curso.equivalents.length > 0 && (
                               <Text
                                 style={{
-                                  fontFamily: "Roboto",
+                                  fontFamily: 'Roboto',
                                 }}
                               >
-                                Cursos equivalentes:{" "}
+                                Cursos equivalentes:{' '}
                                 <Text strong>{curso.equivalents.length}</Text>
                               </Text>
                             )}
-                            <Text style={{ fontFamily: "Roboto" }}>
-                              Categorias de competência:{" "}
+                            <Text style={{ fontFamily: 'Roboto' }}>
+                              Categorias de competência:{' '}
                               <Text strong>
                                 {getCategoriasCompetencia(curso.competencies)}
                               </Text>
                             </Text>
 
-                            <Text style={{ fontFamily: "Roboto" }}>
-                              Competências:{" "}
+                            <Text style={{ fontFamily: 'Roboto' }}>
+                              Competências:{' '}
                               <Text strong>
                                 {curso.competencies
                                   .map((comp) => comp.name)
-                                  .join(" | ")}
+                                  .join(' | ')}
                               </Text>
                             </Text>
                           </div>
@@ -492,7 +494,7 @@ export default function CoursesListVisualization() {
             title={uniqueCourse?.name}
             centered={true}
             footer={[
-              <Button type="primary" key={"buttonOk"} onClick={handleOk}>
+              <Button type="primary" key={'buttonOk'} onClick={handleOk}>
                 Ok
               </Button>,
             ]}
@@ -531,7 +533,7 @@ export default function CoursesListVisualization() {
                     }}
                     bordered
                     dataSource={uniqueCourse?.equivalents?.filter(
-                      (course) => !course.filedAt
+                      (course) => !course.filedAt,
                     )}
                     renderItem={(item) => (
                       <List.Item
@@ -555,16 +557,16 @@ export default function CoursesListVisualization() {
                 <Descriptions.Item label="Acessibilidades">
                   {uniqueCourse?.accessibilities
                     ?.map((ac) => ac.name)
-                    .join(" | ")}
+                    .join(' | ')}
                 </Descriptions.Item>
                 <Descriptions.Item label="Taxonomia revisada de Bloom">
-                  {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
+                  {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(' | ')}
                 </Descriptions.Item>
                 <Descriptions.Item label="Subtemas">
                   {uniqueCourse?.subThemes
                     ?.filter((sub) => !sub.filedAt)
                     .map((sub) => sub.name)
-                    .join(" | ")}
+                    .join(' | ')}
                 </Descriptions.Item>
               </Descriptions>
             )}
