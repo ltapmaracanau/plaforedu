@@ -4,6 +4,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm, FormProvider, Controller } from 'react-hook-form';
 
 import { SearchOutlined } from '@ant-design/icons';
+import closeIcon from '../assets/icon/close.svg';
 
 import {
   Col,
@@ -97,6 +98,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
         components: {
           Radio: {
             colorText: '#A8A8A8',
+            fontWeight: 'bold',
           },
         },
       }}
@@ -108,17 +110,22 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           background: '#FFF',
           borderRadius: '0 30px 30px 0',
           marginBottom: '32px',
+          marginLeft: '0px',
           boxShadow:
             '0px 20px 30px 0px rgba(44, 86, 162, 0.10), 0px 4px 4px 0px rgba(0, 0, 0, 0.20)',
         }}
       >
-        {screens.lg && (
-          <div className="headerFilter">
-            <h2 style={{ color: '#FFF' }} className="subTitulo">
-              FILTROS
-            </h2>
-          </div>
-        )}
+        <div className="headerFilter">
+          <h2 style={{ color: '#FFF' }} className="subTitulo">
+            FILTROS
+          </h2>
+          {!screens.md && (
+            <a href="">
+              <img src={closeIcon} alt="Fechar filtros" />
+            </a>
+          )}
+        </div>
+
         <FormProvider {...register.current}>
           <Form
             style={{ padding: '8px 20px' }}
@@ -130,7 +137,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
               name="query"
               render={({ field }) => {
                 return (
-                  <Form.Item style={{ marginBottom: '20px' }}>
+                  <Form.Item style={{ margin: '20px 5px' }}>
                     <Input
                       allowClear={true}
                       {...field}
@@ -192,7 +199,8 @@ export default function SideFilter({ debounceTimeout = 800 }) {
               render={({ field }) => {
                 return (
                   <Form.Item
-                    style={{ marginBottom: '20px' }}
+                    style={{ marginBottom: '20px', fontWeight: 'bold' }}
+                    className="texto"
                     label={'Classificar por:'}
                   >
                     <Radio.Group
@@ -202,8 +210,8 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                         setTipoVisualizacao(value);
                       }}
                     >
-                      <Radio.Button value="Trilhas">Trilhas</Radio.Button>
-                      <Radio.Button value="Cursos">Cursos</Radio.Button>
+                      <Radio.Button value="Trilhas">TRILHAS</Radio.Button>
+                      <Radio.Button value="Cursos">CURSOS</Radio.Button>
                     </Radio.Group>
                     {/* <Switch
                     checkedChildren="Trilhas"

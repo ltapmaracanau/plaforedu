@@ -10,6 +10,12 @@ import RowItinerario from '../components/RowItinerario';
 import CytoscapeVisualization from '../components/visualizacao-cursos/CytoscapeVisualization';
 import CoursesListVisualization from '../components/visualizacao-cursos/CoursesListVisualization';
 
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import filterOpen from '../assets/icon/filterOpen.svg';
+import filterClose from '../assets/icon/filterClose.svg';
+
+import './CoursesPage.css';
+
 const { useBreakpoint } = Grid;
 const { Sider, Content } = Layout;
 
@@ -43,72 +49,44 @@ export default function CoursesPage() {
   return (
     <div>
       <HeaderHome />
-
       <RowItinerario />
 
-      <Layout>
-        {screens.lg ? (
+      <ConfigProvider
+        theme={{
+          token: {},
+          components: {
+            Layout: {
+              colorBgLayout: 'red',
+            },
+          },
+        }}
+      >
+        <Layout>
           <Sider
             width={324}
             collapsedWidth={0}
-            trigger={null}
+            trigger={
+              filterCollapsed ? (
+                <img src={filterOpen} alt="" />
+              ) : (
+                <img src={filterClose} alt="" />
+              )
+            }
+            defaultCollapsed={true}
+            onCollapse={(collapsed, type) => {
+              setFilterCollapsed(collapsed);
+            }}
             style={{
-              backgroundColor: 'var(--bg-site)',
-              // background: 'blue',
-              paddingRight: '24px',
+              zIndex: '99',
+              background: screens.lg ? 'var(--bg-site)' : 'none',
+              position: !screens.lg && 'absolute',
             }}
             collapsible
-            collapsed={filterCollapsed}
+            // collapsed={filterCollapsed}
           >
             <SideFilter />
           </Sider>
-        ) : (
-          <ConfigProvider
-            theme={{
-              components: {
-                Drawer: {
-                  colorText: '#FFF',
-                  colorIcon: '#FFF',
-                },
-              },
-            }}
-          >
-            <Drawer
-              title={'FILTROS'}
-              open={!filterCollapsed}
-              closeIcon={<CloseOutlined style={{ color: '#000' }} />}
-              placement="left"
-              onClose={onClose}
-              width={screens.xs ? '100%' : 400}
-              headerStyle={{
-                color: '#FFF',
-                background: 'var(--bg-azul)',
-              }}
-              bodyStyle={{
-                padding: '0',
-                background: 'none',
-              }}
-              style={{
-                paddingTop: '48px',
-                background: 'none',
-              }}
-            >
-              <SideFilter />
-            </Drawer>
-          </ConfigProvider>
-        )}
 
-        <ConfigProvider
-          theme={{
-            token: {},
-            components: {
-              Modal: {
-                // colorBgElevated: '#0f40ff',
-                // colorTextHeading: '#fff',
-              },
-            },
-          }}
-        >
           <Content style={{ backgroundColor: 'var(--bg-site)' }}>
             <Row
               style={screens.lg ? { maxHeight: 700, overflowY: 'scroll' } : {}}
@@ -120,8 +98,8 @@ export default function CoursesPage() {
               )}
             </Row>
           </Content>
-        </ConfigProvider>
-      </Layout>
+        </Layout>
+      </ConfigProvider>
     </div>
   );
 }

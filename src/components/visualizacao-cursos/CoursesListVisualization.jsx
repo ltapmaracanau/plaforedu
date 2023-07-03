@@ -80,23 +80,6 @@ export default function CoursesListVisualization() {
 
   return (
     <Col flex={1}>
-      <Row
-        style={{
-          backgroundColor: 'var(--bg-site)',
-        }}
-      >
-        <Col>
-          <Button
-            style={{ margin: '5px 10px' }}
-            onClick={() => {
-              setFilterCollapsed();
-            }}
-            icon={
-              filterCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />
-            }
-          />
-        </Col>
-      </Row>
       <Row>
         <Col flex={'auto'}>
           <Card bordered={false} style={{ background: '#fff' }}>
