@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import {
@@ -15,10 +15,17 @@ import {
   Space,
   Skeleton,
   Spin,
+  Tooltip,
 } from "antd";
 
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  FileExcelOutlined,
+  DownloadOutlined,
+} from "@ant-design/icons";
 import { dataService } from "../../services/dataService";
+import { CSVLink } from "react-csv";
 
 const { Text, Title } = Typography;
 
@@ -79,6 +86,51 @@ export default function CoursesListVisualization() {
     return nome_itinerario;
   };
 
+  const csvCursosHeaders = [
+    { label: "Título", key: "title" },
+    { label: "Carga horária", key: "cargaHoraria" },
+    { label: "Instituições Certificadoras", key: "instCert" },
+    { label: "Acessibilidades", key: "acessibilidades" },
+    { label: "Link", key: "link" },
+    { label: "Itinerários", key: "itineraries" },
+    { label: "Competências", key: "competencias" },
+    { label: "Subtemas", key: "subtemas" },
+    { label: "Taxonomia revisada de Bloom", key: "taxonomias" },
+    { label: "Cursos equivalentes", key: "equivalents" },
+    { label: "Descrição", key: "descricao" },
+  ];
+
+  const csvTrilhasHeaders = [
+    { label: "Trilha", key: "trilha" },
+    { label: "Descrição trilha", key: "descTrilha" },
+    { label: "Título", key: "titulo" },
+    { label: "Descrição", key: "descricao" },
+    { label: "Carga horária", key: "cargaHoraria" },
+    { label: "Instituição Certificadora", key: "instCert" },
+    { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
+    { label: "Link", key: "link" },
+  ];
+
+  const data = useMemo(() => {
+    return cursos.map((course) => {
+      return {
+        title: course.name,
+        cargaHoraria: `${course.hours}H`,
+        instCert: course.institutions.map((inst) => inst.name).join(" | "),
+        acessibilidades: course.accessibilities
+          .map((ac) => ac.name)
+          .join(" | "),
+        link: course.institutions.map((inst) => inst.link).join(" | "),
+        itineraries: course.itineraries.map((it) => it.name).join(" | "),
+        competencias: course.competencies.map((comp) => comp.name).join(" | "),
+        subtemas: course.subThemes.map((sub) => sub.name).join(" | "),
+        taxonomias: course.taxonomies.map((tx) => tx.name).join(" | "),
+        equivalents: course.equivalents.map((eq) => eq.name).join(" | "),
+        descricao: course.description,
+      };
+    });
+  }, [cursos]);
+
   return (
     <Col flex={1}>
       <Row
@@ -97,6 +149,24 @@ export default function CoursesListVisualization() {
             }
           />
         </Col>
+        {!filter.tipoClassificacao && (
+          <Col style={{ margin: "5px" }}>
+            <CSVLink
+              filename="plaforedu"
+              headers={csvCursosHeaders}
+              data={data}
+              target="_blank"
+            >
+              <Tooltip title={"Exportar para CSV"}>
+                <Button
+                  type="text"
+                  shape="circle"
+                  icon={<DownloadOutlined />}
+                />
+              </Tooltip>
+            </CSVLink>
+          </Col>
+        )}
       </Row>
       <Row>
         <Col flex={"auto"}>
