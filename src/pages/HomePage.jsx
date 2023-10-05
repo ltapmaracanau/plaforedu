@@ -19,7 +19,7 @@ import icon3 from "../assets/HomepageIcon3.svg";
 
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Link, useNavigate } from "react-router-dom";
-import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png";
+import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v7.png";
 import infografico_fundo_branco from "../assets/about/mandala_fundo_branco.png";
 
 import {

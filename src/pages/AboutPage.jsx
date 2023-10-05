@@ -3,7 +3,7 @@ import HeaderHome from "../components/header/HeaderHome";
 import trilhaIlustracao from "../assets/about/ilustracao-trilha.svg";
 import mandala from "../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Completa.png";
 import retangulo from "../assets/about/Rectangle.png";
-import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v6.png";
+import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v7.png";
 import infografico_fundo_branco from "../assets/about/mandala_fundo_branco.png";
 import { useNavigate } from "react-router-dom";
 
