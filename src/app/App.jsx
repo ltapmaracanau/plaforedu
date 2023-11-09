@@ -15,14 +15,9 @@ function App() {
   const init = useStoreActions((actions) => actions.adm.init);
   const iniciando = useStoreState((state) => state.adm.iniciando);
 
-  var s = document.createElement("script");
-  s.setAttribute("data-account", "yPtwRHQcX8");
-  s.setAttribute("src", "https://cdn.userway.org/widget.js");
-  document.body.appendChild(s);
-
   useEffect(() => {
     init();
-  }, []);
+  }, [init]);
 
   if (iniciando) {
     return (
@@ -50,7 +45,7 @@ function App() {
             src={LogoPlafor}
           />
         </div>
-        <Spin size="large" tip={"Carregando..."} />
+        <Spin size="large" />
       </div>
     );
   }
@@ -61,7 +56,6 @@ function App() {
         minHeight: "100vh",
         display: "flex",
         flexFlow: "column",
-        minHeight: "100vh",
       }}
     >
       <ConfigProvider locale={dayjs}>

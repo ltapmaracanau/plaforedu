@@ -1,12 +1,19 @@
 import { notification } from "antd";
 import axios from "axios";
 
-const AuthAxios = axios.create({
-  baseURL: "http://plaforedu.iticdigital.com.br",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+const AuthAxios = import.meta.env.PROD
+  ? axios.create({
+      baseURL: import.meta.env.VITE_PRODUCTION_API_URL,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  : axios.create({
+      baseURL: import.meta.env.VITE_DEVELOPMENT_API_URL,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
 // Set token to all requests
 AuthAxios.interceptors.request.use(

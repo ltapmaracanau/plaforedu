@@ -1,10 +1,19 @@
 {
-  "name": "plaforedu",
-  "version": "0.1.0",
+  "name": "new-plafor",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "format": "prettier --write \"src/**/*.{js,jsx}\""
+  },
   "dependencies": {
-    "@craco/craco": "^6.4.0",
-    "@djpfs/react-vlibras": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@djpfs/react-vlibras": "^2.0.2",
     "@hookform/resolvers": "^2.8.8",
     "@react-pdf/renderer": "^2.1.1",
     "@testing-library/jest-dom": "^5.11.4",
@@ -21,10 +30,8 @@
     "dayjs": "^1.11.7",
     "easy-peasy": "^5.0.4",
     "emailjs-com": "^3.2.0",
-    "react": "^17.0.2",
     "react-csv": "^2.2.2",
     "react-cytoscapejs": "^1.2.1",
-    "react-dom": "^17.0.2",
     "react-hook-form": "^7.31.1",
     "react-image-mapper": "^0.0.15",
     "react-input-mask": "^2.0.4",
@@ -36,40 +43,18 @@
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject",
-    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "format": "prettier --write \"src/**/*.{js,jsx}\""
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
-    "eslint": "^7.11.0",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "vite": "^4.4.5",
     "eslint-config-prettier": "^8.5.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "prettier": "^2.7.1"
-  },
-  "rules": {
-    "no-unused-vars": "off"
   }
 }

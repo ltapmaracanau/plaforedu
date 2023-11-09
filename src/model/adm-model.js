@@ -42,7 +42,7 @@ const admModel = {
 
   init: thunk(async (actions, _, { getStoreActions }) => {
     try {
-      await getStoreActions().itineraries.getItinerarios();
+      //await getStoreActions().itineraries.getItinerarios();
     } finally {
       actions.setIniciando(false);
     }
@@ -127,14 +127,6 @@ const admModel = {
     );
     actions.setLoading(false);
     return tryUpdatePassword;
-  }),
-
-  logout: thunk(async (actions, _) => {
-    actions.setLoading(true);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    actions.setAllDataProfile({});
-    actions.setLoading(false);
   }),
 
   getAllDataProfile: thunk(async (actions, _) => {

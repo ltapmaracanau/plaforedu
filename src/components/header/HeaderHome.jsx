@@ -227,7 +227,7 @@ export default function HeaderHome() {
                 colorItemBg: "transparent",
                 colorItemText: "#fff",
                 colorItemTextHover: "#fff",
-                colorItemBgSelectedHorizontal: "transparent",
+                horizontalItemSelectedBg: "transparent",
                 colorBgElevated: "#1890ff",
               },
             },
