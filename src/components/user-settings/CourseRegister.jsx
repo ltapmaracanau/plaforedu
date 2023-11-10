@@ -132,7 +132,6 @@ export default function CourseRegister(props) {
       return false;
     },
     fileList: setecTerm,
-    // TODO: Mudar para o endereço do servidor
     defaultFileList: setecTerm,
   };
 
@@ -467,364 +466,330 @@ export default function CourseRegister(props) {
   };
 
   return (
-    <>
-      <div>
-        <div
-          style={{
-            width: "100%",
+    <div
+      style={{
+        width: "100%",
+      }}
+    >
+      <Button
+        onClick={() => {
+          actionVisible();
+        }}
+        style={{
+          marginBottom: "10px",
+        }}
+      >
+        <RollbackOutlined /> Voltar
+      </Button>
+      <Form layout="horizontal" onFinish={register.handleSubmit(onSubmit)}>
+        <Card
+          style={{ margin: "0px 0px" }}
+          bodyStyle={{
+            fontFamily: "Roboto",
           }}
-        >
-          <Button
-            onClick={() => {
-              actionVisible();
-            }}
-            style={{
-              marginBottom: "10px",
-            }}
-          >
-            <RollbackOutlined /> Voltar
-          </Button>
-          <Form layout="horizontal" onFinish={register.handleSubmit(onSubmit)}>
-            <Card
-              style={{ margin: "0px 0px" }}
-              bodyStyle={{
-                fontFamily: "Roboto",
-              }}
-              title={title}
-              bordered={false}
-              extra={
-                <Space direction="horizontal">
-                  <Tooltip title={"Curso arquivado"}>
-                    <Switch
-                      checked={filed}
-                      loading={archiving}
-                      style={{
-                        marginRight: "15px",
-                      }}
-                      defaultChecked={cursoDefault.filedAt}
-                      onChange={(value) => {
-                        setFiled(value);
-                        handleArchive(value);
-                      }}
-                    />
-                  </Tooltip>
-                  <Button
-                    loading={registering}
-                    disabled={
-                      !register.formState.isValid &&
-                      instituicoesAtuais.length === 0
-                    }
-                    type="primary"
-                    shape="round"
-                    htmlType="submit"
-                  >
-                    {curso?.id ? <>Salvar</> : <>Cadastrar</>}
-                  </Button>
-                </Space>
-              }
-            >
-              <Descriptions
-                bordered
-                layout="horizontal"
-                size="small"
-                column={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }}
-              >
-                <Descriptions.Item label={"Título do curso"}>
-                  <Controller
-                    key={"name"}
-                    name="name"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Input placeholder="Título" {...field} />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Descrição do curso"}>
-                  <Controller
-                    key={"description"}
-                    name="description"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Input.TextArea
-                            placeholder="Digite aqui a descrição..."
-                            {...field}
-                          />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Carga Horária"}>
-                  <Controller
-                    key={"hours"}
-                    name="hours"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <InputNumber min={0} {...field} />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Acessibilidades"}>
-                  <Controller
-                    key={"accessibilities"}
-                    name="accessibilities"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Select
-                            mode="multiple"
-                            showSearch
-                            placeholder="Acessibilidades"
-                            filterOption={(input, option) => {
-                              return (
-                                option.children
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                              );
-                            }}
-                            {...field}
-                          >
-                            {acessibilidades.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Itinerários"}>
-                  <Controller
-                    key={"itineraries"}
-                    name="itineraries"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Select
-                            mode="multiple"
-                            placeholder="Itinerários"
-                            {...field}
-                            showSearch
-                            filterOption={(input, option) => {
-                              return (
-                                option.children
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                              );
-                            }}
-                          >
-                            {itinerarios.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Competências"}>
-                  <Controller
-                    key={"competencies"}
-                    name="competencies"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Select
-                            mode="multiple"
-                            showSearch
-                            placeholder="Competências"
-                            {...field}
-                            filterOption={(input, option) => {
-                              return (
-                                option.children
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                              );
-                            }}
-                          >
-                            {competencies.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Taxonomias de Bloom"}>
-                  <Controller
-                    key={"taxonomias"}
-                    name="taxonomies"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Select
-                            mode="multiple"
-                            showSearch
-                            placeholder="Taxonomias"
-                            {...field}
-                            filterOption={(input, option) => {
-                              return (
-                                option.children
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                              );
-                            }}
-                          >
-                            {taxonomies.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Sub-temas"}>
-                  <Controller
-                    key={"subThemes"}
-                    name="subThemes"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Select
-                            mode="multiple"
-                            showSearch
-                            placeholder="Sub-temas"
-                            {...field}
-                            filterOption={(input, option) => {
-                              return (
-                                option.children
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                              );
-                            }}
-                          >
-                            {subthemes.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                {/* Upload aparece apenas no update de curso */}
-                {curso && (
-                  <Descriptions.Item label={"Termo da SETEC"}>
-                    <Upload {...propsUpload}>
-                      <Button icon={<FilePdfOutlined />}>Upload</Button>
-                    </Upload>
-                  </Descriptions.Item>
-                )}
-              </Descriptions>
-            </Card>
-          </Form>
-          <div>
-            <Form
-              form={form}
-              initialValues={Object.fromEntries([
-                ...cursoDefault.institutions.map((item, index) => [
-                  `name${index}`,
-                  item.institutionId,
-                ]),
-                ...cursoDefault.institutions.map((item, index) => [
-                  `link${index}`,
-                  item.link,
-                ]),
-              ])}
-            >
-              <Table
-                title={() => (
-                  <div
+          title={title}
+          bordered={false}
+          extra={
+            <Space direction="horizontal">
+              {curso && (
+                <Tooltip title={"Curso arquivado"}>
+                  <Switch
+                    checked={filed}
+                    loading={archiving}
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
+                      marginRight: "15px",
                     }}
-                  >
-                    <Title level={4}>Instituições Certificadoras</Title>
-                    <Button
-                      onClick={handleAdd}
-                      type="primary"
-                      style={{
-                        margin: "0px 20px",
-                      }}
+                    defaultChecked={cursoDefault.filedAt}
+                    onChange={(value) => {
+                      setFiled(value);
+                      handleArchive(value);
+                    }}
+                  />
+                </Tooltip>
+              )}
+              <Button
+                loading={registering}
+                disabled={
+                  !register.formState.isValid && instituicoesAtuais.length === 0
+                }
+                type="primary"
+                shape="round"
+                htmlType="submit"
+              >
+                {curso?.id ? <>Salvar</> : <>Cadastrar</>}
+              </Button>
+            </Space>
+          }
+        >
+          <Descriptions
+            bordered
+            layout="horizontal"
+            size="small"
+            column={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }}
+          >
+            <Descriptions.Item label={"Título do curso"}>
+              <Controller
+                key={"name"}
+                name="name"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
                     >
-                      Adicionar <PlusOutlined />
-                    </Button>
-                  </div>
-                )}
-                pagination={false}
-                components={components}
-                rowKey={"count"}
-                bordered
-                dataSource={instituicoesAtuais}
-                columns={columns}
+                      <Input placeholder="Título" {...field} />
+                    </Form.Item>
+                  );
+                }}
               />
-            </Form>
-          </div>
+            </Descriptions.Item>
+            <Descriptions.Item label={"Descrição do curso"}>
+              <Controller
+                key={"description"}
+                name="description"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input.TextArea
+                        placeholder="Digite aqui a descrição..."
+                        {...field}
+                      />
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label={"Carga Horária"}>
+              <Controller
+                key={"hours"}
+                name="hours"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <InputNumber min={0} {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label={"Acessibilidades"}>
+              <Controller
+                key={"accessibilities"}
+                name="accessibilities"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Select
+                        mode="multiple"
+                        showSearch
+                        placeholder="Acessibilidades"
+                        filterOption={(input, option) => {
+                          return (
+                            option.children
+                              .toLowerCase()
+                              .indexOf(input.toLowerCase()) >= 0
+                          );
+                        }}
+                        {...field}
+                      >
+                        {acessibilidades.map((item) => (
+                          <Select.Option key={item.id} value={item.id}>
+                            {item.name}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label={"Itinerários"}>
+              <Controller
+                key={"itineraries"}
+                name="itineraries"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Select
+                        mode="multiple"
+                        placeholder="Itinerários"
+                        {...field}
+                        showSearch
+                        filterOption={(input, option) => {
+                          return (
+                            option.children
+                              .toLowerCase()
+                              .indexOf(input.toLowerCase()) >= 0
+                          );
+                        }}
+                      >
+                        {itinerarios.map((item) => (
+                          <Select.Option key={item.id} value={item.id}>
+                            {item.name}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label={"Competências"}>
+              <Controller
+                key={"competencies"}
+                name="competencies"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Select
+                        mode="multiple"
+                        showSearch
+                        placeholder="Competências"
+                        {...field}
+                        filterOption={(input, option) => {
+                          return (
+                            option.children
+                              .toLowerCase()
+                              .indexOf(input.toLowerCase()) >= 0
+                          );
+                        }}
+                      >
+                        {competencies.map((item) => (
+                          <Select.Option key={item.id} value={item.id}>
+                            {item.name}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label={"Taxonomias de Bloom"}>
+              <Controller
+                key={"taxonomias"}
+                name="taxonomies"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Select
+                        mode="multiple"
+                        showSearch
+                        placeholder="Taxonomias"
+                        {...field}
+                        filterOption={(input, option) => {
+                          return (
+                            option.children
+                              .toLowerCase()
+                              .indexOf(input.toLowerCase()) >= 0
+                          );
+                        }}
+                      >
+                        {taxonomies.map((item) => (
+                          <Select.Option key={item.id} value={item.id}>
+                            {item.name}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label={"Sub-temas"}>
+              <Controller
+                key={"subThemes"}
+                name="subThemes"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Select
+                        mode="multiple"
+                        showSearch
+                        placeholder="Sub-temas"
+                        {...field}
+                        filterOption={(input, option) => {
+                          return (
+                            option.children
+                              .toLowerCase()
+                              .indexOf(input.toLowerCase()) >= 0
+                          );
+                        }}
+                      >
+                        {subthemes.map((item) => (
+                          <Select.Option key={item.id} value={item.id}>
+                            {item.name}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+            {/* Upload aparece apenas no update de curso */}
+            {curso && (
+              <Descriptions.Item label={"Termo da SETEC"}>
+                <Upload {...propsUpload}>
+                  <Button icon={<FilePdfOutlined />}>Upload</Button>
+                </Upload>
+              </Descriptions.Item>
+            )}
+          </Descriptions>
+        </Card>
+      </Form>
+      <div>
+        <Form
+          form={form}
+          initialValues={Object.fromEntries([
+            ...cursoDefault.institutions.map((item, index) => [
+              `name${index}`,
+              item.institutionId,
+            ]),
+            ...cursoDefault.institutions.map((item, index) => [
+              `link${index}`,
+              item.link,
+            ]),
+          ])}
+        >
           <Table
-            columns={columnsEquivalents}
-            dataSource={cursosEquivalentes}
-            pagination={false}
-            rowKey={"id"}
             title={() => (
               <div
                 style={{
@@ -832,36 +797,67 @@ export default function CourseRegister(props) {
                   justifyContent: "space-between",
                 }}
               >
-                <Title level={4}>Cursos Equivalentes</Title>
+                <Title level={4}>Instituições Certificadoras</Title>
                 <Button
+                  onClick={handleAdd}
                   type="primary"
-                  onClick={() => {
-                    setAddCourseVisible(true);
+                  style={{
+                    margin: "0px 20px",
                   }}
                 >
-                  Adicionar/Remover Cursos
+                  Adicionar <PlusOutlined />
                 </Button>
               </div>
             )}
+            pagination={false}
+            components={components}
+            rowKey={"count"}
+            bordered
+            dataSource={instituicoesAtuais}
+            columns={columns}
           />
-          <Modal
-            open={addCourseVisible}
-            onCancel={() => {
-              setAddCourseVisible(false);
-            }}
-            width={"auto"}
-            destroyOnClose={true}
-            title={"Adicionar/Remover cursos equivalentes"}
-            footer={null}
-          >
-            <TableSelectCourses
-              courseToHideId={curso ? curso.id : ""}
-              onSelectChange={onSelectChange}
-              cursosDefaultSelected={cursosEquivalentesIds}
-            />
-          </Modal>
-        </div>
+        </Form>
       </div>
-    </>
+      <Table
+        columns={columnsEquivalents}
+        dataSource={cursosEquivalentes}
+        pagination={false}
+        rowKey={"id"}
+        title={() => (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Title level={4}>Cursos Equivalentes</Title>
+            <Button
+              type="primary"
+              onClick={() => {
+                setAddCourseVisible(true);
+              }}
+            >
+              Adicionar/Remover Cursos
+            </Button>
+          </div>
+        )}
+      />
+      <Modal
+        open={addCourseVisible}
+        onCancel={() => {
+          setAddCourseVisible(false);
+        }}
+        width={"auto"}
+        destroyOnClose={true}
+        title={"Adicionar/Remover cursos equivalentes"}
+        footer={null}
+      >
+        <TableSelectCourses
+          courseToHideId={curso ? curso.id : ""}
+          onSelectChange={onSelectChange}
+          cursosDefaultSelected={cursosEquivalentesIds}
+        />
+      </Modal>
+    </div>
   );
 }

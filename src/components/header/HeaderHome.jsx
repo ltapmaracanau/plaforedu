@@ -223,10 +223,10 @@ export default function HeaderHome() {
             },
             components: {
               Menu: {
-                colorSubItemBg: "#1890ff",
-                colorItemBg: "transparent",
-                colorItemText: "#fff",
-                colorItemTextHover: "#fff",
+                subMenuItemBg: "#1890ff",
+                itemBg: "transparent",
+                itemColor: "#fff",
+                itemHoverColor: "#fff",
                 horizontalItemSelectedBg: "transparent",
                 colorBgElevated: "#1890ff",
               },

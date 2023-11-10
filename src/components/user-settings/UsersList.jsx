@@ -161,7 +161,6 @@ export default function UsersList() {
               getUsers({ query: textSearch, showFiled: showFiled });
               setRegisterVisible(false);
             }}
-            bodyStyle={{ backgroundColor: "#f8f8f8" }}
             footer={[
               <Button
                 type="primary"
@@ -191,7 +190,6 @@ export default function UsersList() {
               setEditVisible(false);
             }}
             width={"1000px"}
-            bodyStyle={{ backgroundColor: "#f8f8f8" }}
             footer={[
               <Button
                 type="primary"

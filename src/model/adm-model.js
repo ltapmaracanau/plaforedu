@@ -42,7 +42,7 @@ const admModel = {
 
   init: thunk(async (actions, _, { getStoreActions }) => {
     try {
-      //await getStoreActions().itineraries.getItinerarios();
+      await getStoreActions().itineraries.getItinerarios();
     } finally {
       actions.setIniciando(false);
     }
