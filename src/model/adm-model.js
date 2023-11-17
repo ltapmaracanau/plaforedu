@@ -129,14 +129,6 @@ const admModel = {
     return tryUpdatePassword;
   }),
 
-  logout: thunk(async (actions, _) => {
-    actions.setLoading(true);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    actions.setAllDataProfile({});
-    actions.setLoading(false);
-  }),
-
   getAllDataProfile: thunk(async (actions, _) => {
     actions.setLoading(true);
     try {

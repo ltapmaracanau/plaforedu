@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import {
@@ -55,7 +55,7 @@ export default function CoursesList() {
   const [textSearch, setTextSearch] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(async () => {
+  const init = useCallback(async () => {
     await getCursos({ page: pageNumber });
     await getItinerarios();
     await getAcessibilidades();
@@ -64,13 +64,19 @@ export default function CoursesList() {
     await getSubthemes({ showFiled: true });
     await getTaxonomias();
   }, [
-    getCursos,
-    getItinerarios,
     getAcessibilidades,
-    getInstituicoes,
     getComp,
+    getCursos,
+    getInstituicoes,
+    getItinerarios,
     getSubthemes,
+    getTaxonomias,
+    pageNumber,
   ]);
+
+  useEffect(() => {
+    init();
+  }, [init]);
 
   const csvCursosHeaders = [
     { label: "Título", key: "title" },

@@ -160,7 +160,7 @@ export default function InstitutionList() {
               });
               setRegisterVisible(false);
             }}
-            bodyStyle={{ backgroundColor: "#f8f8f8" }}
+            styles={{ body: { backgroundColor: "#f8f8f8" } }}
             footer={[
               <Button
                 type="primary"
