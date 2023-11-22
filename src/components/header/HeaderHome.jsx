@@ -205,6 +205,7 @@ export default function HeaderHome() {
             height="55px"
             style={{ padding: "5px" }}
             src={LogoPlafor}
+            alt = "Logo PlaforEDU"
           />
         </Link>
       </Col>

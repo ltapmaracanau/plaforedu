@@ -434,6 +434,7 @@ export default function HomePage() {
                 paddingBottom: screens.xs ? "12px" : "32px",
               }}
               src={icon1}
+              alt ="Ícone preço"
             />
             <p
               className="subTitulo"
@@ -458,6 +459,7 @@ export default function HomePage() {
                 paddingBottom: screens.xs ? "12px" : "32px",
               }}
               src={icon2}
+              alt ="Ícone Perfil"
             />
             <p
               className="subTitulo"
@@ -476,6 +478,7 @@ export default function HomePage() {
                 paddingBottom: screens.xs ? "12px" : "32px",
               }}
               src={icon3}
+              alt = "Ícone certificado"
             />
             <p
               className="subTitulo"
@@ -705,6 +708,7 @@ export default function HomePage() {
           style={{ width: "100%", maxWidth: "480px" }}
           src={infografico}
           preview={{ src: infografico_fundo_branco }}
+          alt = "Infográfico de competências"
         />
       </Row>
 
