@@ -172,7 +172,7 @@ export default function HeaderHome() {
       align="middle"
       style={{
         height: "70px",
-        backgroundImage: "linear-gradient(to right, #2C55A1, #35A8E0)",
+        backgroundImage: "linear-gradient(to right, #2C55A1, #229EDC)",
       }}
     >
       <Col
