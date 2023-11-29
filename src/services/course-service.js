@@ -14,10 +14,12 @@ export default {
       competencies: [],
       subThemes: [],
       taxonomies: [],
+      sortByCreatedAt: false,
+      sortByUpdatedAt: false,
     }
   ) =>
     AuthAxios.post(
-      `/courses/all?page=${payload.page}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}`,
+      `/courses/all?page=${payload.page}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}&orderByCreated=${payload.sortByCreatedAt}&orderByUpdated=${payload.sortByUpdatedAt}`,
       {
         search: payload.search,
         hours: payload.hours,

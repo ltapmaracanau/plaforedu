@@ -86,6 +86,10 @@ const coursesModel = {
         competencies = [],
         subtemas = [],
         taxonomies = [],
+        sort = {
+          createdAt: undefined,
+          updatedAt: undefined,
+        },
       } = payload;
       if (secondary) {
         actions.setLoadingSecondary(true);
@@ -112,6 +116,8 @@ const coursesModel = {
         competencies: competencies,
         taxonomies: taxonomies,
         subThemes: subtemas,
+        sortByCreatedAt: !!sort.createdAt,
+        sortByUpdatedAt: !!sort.updatedAt,
       });
       if (cursos?.data?.length >= 0) {
         if (secondary) {

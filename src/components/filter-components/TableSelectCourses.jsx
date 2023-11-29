@@ -65,9 +65,12 @@ export default function TableSelectCourses(props) {
     itineraries: [],
   });
 
-  useEffect(async () => {
-    await getCursos({ secondary: true, page: pageNumber, showFiled: false });
-  }, []);
+  useEffect(() => {
+    async function init() {
+      await getCursos({ secondary: true, page: pageNumber, showFiled: false });
+    }
+    init();
+  }, [getCursos, pageNumber]);
 
   // Table adding courses to Trail
 
@@ -190,6 +193,7 @@ export default function TableSelectCourses(props) {
           mode={"multiple"}
           style={{
             marginBottom: 8,
+            width: 300,
             display: "block",
           }}
           filterOption={(input, option) => {
