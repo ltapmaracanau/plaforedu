@@ -27,12 +27,15 @@ export default function CoursesPage() {
     (actions) => actions.themes.getSubthemes
   );
 
-  useEffect(async () => {
-    await getComp();
-    await getInstituicoes();
-    await getSubthemes();
+  useEffect(() => {
+    async function init() {
+      await getComp();
+      await getInstituicoes();
+      await getSubthemes();
+    }
+    init();
     window.scrollTo(0, 0);
-  }, []);
+  }, [getComp, getInstituicoes, getSubthemes]);
 
   const screens = useBreakpoint();
 

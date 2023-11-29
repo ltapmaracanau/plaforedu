@@ -203,7 +203,6 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                   <Select
                     {...field}
                     placeholder={"Itinerário"}
-                    showArrow
                     onChange={(value) => {
                       field.onChange(value);
                       onSubmit();
@@ -243,7 +242,6 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                     {...field}
                     mode="multiple"
                     placeholder={"Todas as competências"}
-                    showArrow
                     onChange={(value) => {
                       field.onChange(value);
                       onSubmit();
@@ -292,7 +290,6 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                         {...field}
                         placeholder={"Todos os Subtemas"}
                         mode="multiple"
-                        showArrow
                         onChange={(value) => {
                           field.onChange(value);
                           onSubmit();
@@ -370,7 +367,6 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                         {...field}
                         placeholder={"Todas as Instituições"}
                         mode="multiple"
-                        showArrow
                         onChange={(value) => {
                           field.onChange(value);
                           onSubmit();
