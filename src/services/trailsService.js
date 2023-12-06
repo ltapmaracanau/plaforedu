@@ -22,10 +22,14 @@ export default {
       registerLog: false,
       itineraries: [],
       competencies: [],
+      sort: {
+        createdAt: undefined,
+        updatedAt: undefined,
+      },
     }
   ) =>
     AuthAxios.post(
-      `/formative-trails/all?includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}&page=${payload.page}`,
+      `/formative-trails/all?includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}&page=${payload.page}&orderByCreated=${payload.sortByCreatedAt}&orderByUpdated=${payload.sortByUpdatedAt}`,
       {
         search: payload.search,
         itineraries: payload.itineraries,

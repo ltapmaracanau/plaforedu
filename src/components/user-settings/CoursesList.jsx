@@ -17,6 +17,7 @@ import {
   Tooltip,
   Switch,
   Space,
+  Table,
 } from "antd";
 import CourseRegister from "./CourseRegister";
 import { CSVLink } from "react-csv";
@@ -112,6 +113,59 @@ export default function CoursesList() {
     });
   }, [cursos]);
 
+  const [sort, setSort] = useState({
+    createdAt: null,
+    updatedAt: null,
+  });
+
+  const onChangeTable = useCallback(
+    (pagination, _filters, sorter) => {
+      let sortByCreatedAt = undefined;
+      let sortByUpdatedAt = undefined;
+      //console.log(sorter);
+      if (Array.isArray(sorter)) {
+        if (sorter[1].columnKey === "createdAt") {
+          sortByCreatedAt = sorter[1].order;
+          sortByUpdatedAt = undefined;
+        } else {
+          sortByCreatedAt = undefined;
+          sortByUpdatedAt = sorter[1].order;
+        }
+        setSort({
+          createdAt: sortByCreatedAt,
+          updatedAt: sortByUpdatedAt,
+        });
+      } else {
+        if (sorter.columnKey === "createdAt") {
+          sortByCreatedAt = sorter.order;
+          sortByUpdatedAt = undefined;
+        } else {
+          sortByCreatedAt = undefined;
+          sortByUpdatedAt = sorter.order;
+        }
+        setSort({
+          createdAt: sortByCreatedAt,
+          updatedAt: sortByUpdatedAt,
+        });
+      }
+      setPageNumber(pagination.current);
+      console.log({
+        sortByCreatedAt,
+        sortByUpdatedAt,
+      });
+      getCursos({
+        page: pagination.current,
+        query: textSearch,
+        showFiled: showFiled,
+        sort: {
+          createdAt: sortByCreatedAt,
+          updatedAt: sortByUpdatedAt,
+        },
+      });
+    },
+    [getCursos, showFiled, textSearch]
+  );
+
   return (
     <>
       <div
@@ -133,6 +187,10 @@ export default function CoursesList() {
                   query: textSearch,
                   showFiled: showFiled,
                   page: pageNumber,
+                  sort: {
+                    createdAt: sort.createdAt,
+                    updatedAt: sort.updatedAt,
+                  },
                 });
               }}
             />
@@ -141,6 +199,10 @@ export default function CoursesList() {
               title={"Cursos"}
               headStyle={{
                 fontSize: 20,
+                padding: "10px",
+              }}
+              bodyStyle={{
+                padding: "0px",
               }}
               extra={
                 <Space
@@ -159,6 +221,10 @@ export default function CoursesList() {
                       getCursos({
                         query: e,
                         showFiled: showFiled,
+                        sort: {
+                          createdAt: sort.createdAt,
+                          updatedAt: sort.updatedAt,
+                        },
                       });
                       setPageNumber(1);
                     }}
@@ -178,6 +244,10 @@ export default function CoursesList() {
                           query: textSearch,
                           showFiled: checked,
                           page: 1,
+                          sort: {
+                            createdAt: sort.createdAt,
+                            updatedAt: sort.updatedAt,
+                          },
                         });
                       }}
                     />
@@ -210,18 +280,10 @@ export default function CoursesList() {
                 </Space>
               }
             >
-              <List
+              <Table
                 loading={loading}
                 dataSource={cursos}
                 pagination={{
-                  onChange: (page) => {
-                    setPageNumber(page);
-                    getCursos({
-                      page: page,
-                      query: textSearch,
-                      showFiled: showFiled,
-                    });
-                  },
                   pageSize: 20,
                   total: count,
                   showSizeChanger: false,
@@ -229,46 +291,83 @@ export default function CoursesList() {
                   defaultCurrent: 1,
                   hideOnSinglePage: false,
                 }}
+                size="small"
                 style={{ width: "100%" }}
-                renderItem={(item) => {
-                  return (
-                    <List.Item
-                      actions={[
+                rowKey={(record) => record.id}
+                onChange={onChangeTable}
+                columns={[
+                  {
+                    title: "Título",
+                    dataIndex: "name",
+                    key: "name",
+                  },
+                  {
+                    title: "Equivalências",
+                    dataIndex: "equivalents",
+                    key: "equivalents",
+                    render: (equivalents) => {
+                      return equivalents.length;
+                    },
+                  },
+                  {
+                    title: "Instituições",
+                    dataIndex: "institutions",
+                    key: "institutions",
+                    render: (institutions) => {
+                      return institutions
+                        .map((item) => item.abbreviation)
+                        .join(", ");
+                    },
+                  },
+                  {
+                    title: "Criado em",
+                    dataIndex: "createdAt",
+                    key: "createdAt",
+                    render: (createdAt) => {
+                      return new Date(createdAt).toLocaleString("pt-BR", {
+                        timeZone: "UTC",
+                      });
+                    },
+                    sorter: {
+                      multiple: 1,
+                    },
+                    sortDirections: ["descend"],
+                    sortOrder: sort.createdAt,
+                  },
+                  {
+                    title: "Atualizado em",
+                    dataIndex: "updatedAt",
+                    key: "updatedAt",
+                    render: (updatedAt) => {
+                      return new Date(updatedAt).toLocaleString("pt-BR", {
+                        timeZone: "UTC",
+                      });
+                    },
+                    sorter: {
+                      multiple: 2,
+                    },
+                    sortDirections: ["descend"],
+                    sortOrder: sort.updatedAt,
+                  },
+                  {
+                    key: "action",
+                    render: (text, record) => (
+                      <Space size="middle">
                         <Button
-                          key={item.id}
+                          key={record.id}
                           onClick={() => {
-                            setEditandoCurso(item);
+                            setEditandoCurso(record);
                             setModalText("Editar Curso");
                             setRegisterVisible(true);
                           }}
                           icon={<EditOutlined />}
                         >
                           Editar
-                        </Button>,
-                      ]}
-                      key={item.id}
-                    >
-                      <List.Item.Meta
-                        style={{ fontFamily: "Roboto" }}
-                        title={item.name}
-                        description={
-                          <Space direction="vertical">
-                            <>
-                              {item.institutions
-                                .map((item) => item.name)
-                                .join(", ")}
-                            </>
-                            {item.equivalents.length > 0 && (
-                              <>
-                                <b>{item.equivalents.length} Equivalência(s)</b>
-                              </>
-                            )}
-                          </Space>
-                        }
-                      />
-                    </List.Item>
-                  );
-                }}
+                        </Button>
+                      </Space>
+                    ),
+                  },
+                ]}
               />
             </Card>
           )}

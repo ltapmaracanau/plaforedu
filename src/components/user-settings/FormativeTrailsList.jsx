@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
@@ -14,6 +14,7 @@ import {
   Switch,
   Space,
   Tag,
+  Table,
 } from "antd";
 import FormativeTrailsRegister from "./FormativeTrailsRegister";
 
@@ -49,6 +50,55 @@ export default function FormativeTrailsList() {
     getInstitutions({ showFiled: true });
   }, []);
 
+  const [sort, setSort] = useState({
+    createdAt: null,
+    updatedAt: null,
+  });
+
+  const onChangeTable = useCallback(
+    (pagination, _filters, sorter) => {
+      let sortByCreatedAt = undefined;
+      let sortByUpdatedAt = undefined;
+      //console.log(sorter);
+      if (Array.isArray(sorter)) {
+        if (sorter[1].columnKey === "createdAt") {
+          sortByCreatedAt = sorter[1].order;
+          sortByUpdatedAt = undefined;
+        } else {
+          sortByCreatedAt = undefined;
+          sortByUpdatedAt = sorter[1].order;
+        }
+        setSort({
+          createdAt: sortByCreatedAt,
+          updatedAt: sortByUpdatedAt,
+        });
+      } else {
+        if (sorter.columnKey === "createdAt") {
+          sortByCreatedAt = sorter.order;
+          sortByUpdatedAt = undefined;
+        } else {
+          sortByCreatedAt = undefined;
+          sortByUpdatedAt = sorter.order;
+        }
+        setSort({
+          createdAt: sortByCreatedAt,
+          updatedAt: sortByUpdatedAt,
+        });
+      }
+      setPageNumber(pagination.current);
+      getTrilhas({
+        page: pagination.current,
+        query: textSearch,
+        showFiled: showFiled,
+        sort: {
+          createdAt: sortByCreatedAt,
+          updatedAt: sortByUpdatedAt,
+        },
+      });
+    },
+    [getTrilhas, showFiled, textSearch]
+  );
+
   return (
     <>
       <div
@@ -70,6 +120,10 @@ export default function FormativeTrailsList() {
                   query: textSearch,
                   showFiled: showFiled,
                   page: pageNumber,
+                  sort: {
+                    createdAt: sort.createdAt,
+                    updatedAt: sort.updatedAt,
+                  },
                 });
               }}
             />
@@ -78,6 +132,10 @@ export default function FormativeTrailsList() {
               title={"Trilhas Formativas"}
               headStyle={{
                 fontSize: 20,
+                padding: "10px",
+              }}
+              bodyStyle={{
+                padding: "0px",
               }}
               extra={
                 <div
@@ -98,6 +156,10 @@ export default function FormativeTrailsList() {
                         query: e,
                         showFiled: showFiled,
                         page: 1,
+                        sort: {
+                          createdAt: sort.createdAt,
+                          updatedAt: sort.updatedAt,
+                        },
                       });
                     }}
                     style={{
@@ -119,6 +181,10 @@ export default function FormativeTrailsList() {
                           query: textSearch,
                           showFiled: checked,
                           page: 1,
+                          sort: {
+                            createdAt: sort.createdAt,
+                            updatedAt: sort.updatedAt,
+                          },
                         });
                       }}
                     />
@@ -137,19 +203,11 @@ export default function FormativeTrailsList() {
                 </div>
               }
             >
-              <List
+              <Table
                 loading={loadingTrilhas || loadingCursos}
                 dataSource={trilhas}
                 style={{ width: "100%" }}
                 pagination={{
-                  onChange: (page) => {
-                    setPageNumber(page);
-                    getTrilhas({
-                      page: page,
-                      query: textSearch,
-                      showFiled: showFiled,
-                    });
-                  },
                   pageSize: 20,
                   total: count,
                   showSizeChanger: false,
@@ -157,43 +215,72 @@ export default function FormativeTrailsList() {
                   defaultCurrent: 1,
                   hideOnSinglePage: false,
                 }}
-                renderItem={(item) => {
-                  return (
-                    <List.Item
-                      actions={[
-                        <Button
-                          key={item.id}
-                          onClick={() => {
-                            setEditandoTrilha(item);
-                            setModalText("Editar Trilha");
-                            setRegisterVisible(true);
-                          }}
-                          icon={<EditOutlined />}
-                        >
-                          Editar
-                        </Button>,
-                      ]}
-                      key={item.id}
-                    >
-                      <List.Item.Meta
-                        style={{ fontFamily: "Roboto" }}
-                        title={item.name}
-                        description={
-                          <Space direction="vertical">
-                            {item.description}
-                            <Space direction="horizontal">
-                              {item.competencies.map((competencia) => (
-                                <Tag key={competencia.id} color={"#108ee9"}>
-                                  {competencia.name}
-                                </Tag>
-                              ))}
-                            </Space>
-                          </Space>
-                        }
-                      />
-                    </List.Item>
-                  );
-                }}
+                size="small"
+                rowKey="id"
+                onChange={onChangeTable}
+                columns={[
+                  {
+                    title: "Nome",
+                    dataIndex: "name",
+                    key: "name",
+                  },
+                  {
+                    title: "Descrição",
+                    dataIndex: "description",
+                    key: "description",
+                  },
+                  {
+                    title: "Criado em",
+                    dataIndex: "createdAt",
+                    key: "createdAt",
+                    render: (createdAt) => {
+                      return new Date(createdAt).toLocaleString("pt-BR", {
+                        timeZone: "UTC",
+                      });
+                    },
+                    sorter: {
+                      multiple: 1,
+                    },
+                    sortDirections: ["descend"],
+                    sortOrder: sort.createdAt,
+                  },
+                  {
+                    title: "Atualizado em",
+                    dataIndex: "updatedAt",
+                    key: "updatedAt",
+                    render: (updatedAt) => {
+                      return new Date(updatedAt).toLocaleString("pt-BR", {
+                        timeZone: "UTC",
+                      });
+                    },
+                    sorter: {
+                      multiple: 2,
+                    },
+                    sortDirections: ["descend"],
+                    sortOrder: sort.updatedAt,
+                  },
+                  {
+                    dataIndex: "actions",
+                    key: "actions",
+                    render: (text, record) => {
+                      return (
+                        <Space direction="horizontal">
+                          <Button
+                            key={record.id}
+                            onClick={() => {
+                              setEditandoTrilha(record);
+                              setModalText("Editar Trilha");
+                              setRegisterVisible(true);
+                            }}
+                            icon={<EditOutlined />}
+                          >
+                            Editar
+                          </Button>
+                        </Space>
+                      );
+                    },
+                  },
+                ]}
               />
             </Card>
           )}
