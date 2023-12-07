@@ -1,14 +1,10 @@
-import React from "react";
 import { forgetPasswordSchema } from "../schemas/forgetPasswordSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { Button, Card, Form, Input, Layout, notification } from "antd";
-import HeaderHome from "../components/header/HeaderHome";
+import { Button, Card, Form, Input, notification } from "antd";
 import { useNavigate } from "react-router-dom";
-
-const { Content } = Layout;
 
 export default function ForgetPassword() {
   const forgetPassword = useStoreActions(
@@ -48,64 +44,61 @@ export default function ForgetPassword() {
   };
 
   return (
-    <>
-      <HeaderHome />
-      <div
-        style={{
-          flexGrow: 1,
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+    <div
+      style={{
+        flexGrow: 1,
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card
+        style={{ width: "350px" }}
+        headStyle={{
+          backgroundColor: "#2C55A1",
+          textAlign: "center",
+          color: "#fff",
+          fontFamily: "Poppins",
+          fontSize: "18px",
         }}
+        title={"RECUPERAR SENHA"}
       >
-        <Card
-          style={{ width: "350px" }}
-          headStyle={{
-            backgroundColor: "#2C55A1",
-            textAlign: "center",
-            color: "#fff",
-            fontFamily: "Poppins",
-            fontSize: "18px",
-          }}
-          title={"RECUPERAR SENHA"}
-        >
-          <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-            <Controller
-              name="username"
-              control={register.control}
-              render={({ field, fieldState: { error } }) => {
-                return (
-                  <Form.Item
-                    label={"Digite seu email"}
-                    validateStatus={error ? "error" : ""}
-                    help={error ? error.message : ""}
-                    hasFeedback
-                  >
-                    <Input placeholder="email@exemplo.com" {...field} />
-                  </Form.Item>
-                );
-              }}
-            />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "15px",
-              }}
+        <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+          <Controller
+            name="username"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Digite seu email"}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input placeholder="email@exemplo.com" {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "15px",
+            }}
+          >
+            <Button
+              loading={loading}
+              type="primary"
+              htmlType="submit"
+              shape="round"
             >
-              <Button
-                loading={loading}
-                type="primary"
-                htmlType="submit"
-                shape="round"
-              >
-                Confirmar
-              </Button>
-            </div>
-          </Form>
-        </Card>
-      </div>
-    </>
+              Confirmar
+            </Button>
+          </div>
+        </Form>
+      </Card>
+    </div>
   );
 }

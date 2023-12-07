@@ -58,7 +58,6 @@ export default function HeaderHome() {
   };
 
   const onClickMenu = ({ key }) => {
-    console.log(key);
     if (key.startsWith("/")) {
       navigate(key);
     } else if (key === "recursos") {

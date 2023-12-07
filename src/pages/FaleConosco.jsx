@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -7,13 +7,11 @@ import teamSVG from "../assets/ITteam.jpg";
 import { faleConoscoSchema } from "../schemas/faleConoscoSchema";
 
 import { sendEmail } from "../services/sendEmailService";
-import HeaderHome from "../components/header/HeaderHome";
 
 import { SendOutlined, WarningOutlined } from "@ant-design/icons";
 
 import {
   Form,
-  Layout,
   Input,
   Button,
   Select,
@@ -28,8 +26,6 @@ import {
 } from "antd";
 
 const { useBreakpoint } = Grid;
-
-const { Content } = Layout;
 
 export default function FaleConosco() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -113,7 +109,6 @@ export default function FaleConosco() {
 
   return (
     <div>
-      <HeaderHome />
       <ConfigProvider
         theme={{
           token: {},
