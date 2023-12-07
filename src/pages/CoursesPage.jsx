@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
-import { Row, Layout, Drawer, Grid, ConfigProvider } from "antd";
+import { Row, Layout, Drawer, Grid } from "antd";
 
 import { CloseOutlined } from "@ant-design/icons";
 
-import HeaderHome from "../components/header/HeaderHome";
 import SideFilter from "../components/SideFilter";
 import RowItinerario from "../components/RowItinerario";
 import CytoscapeVisualization from "../components/visualizacao-cursos/CytoscapeVisualization";
@@ -45,7 +44,6 @@ export default function CoursesPage() {
 
   return (
     <div>
-      <HeaderHome />
       <Layout>
         {screens.lg ? (
           <Sider

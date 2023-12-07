@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { ConfigProvider, Image, Spin } from "antd";
+import { Image, Spin } from "antd";
 
-import VLibras from "@djpfs/react-vlibras";
-import dayjs from "dayjs";
-import "dayjs/locale/pt-br";
-import HeaderGov from "../components/header/HeaderGov.jsx";
-import FooterGov from "../components/footer/FooterGov.jsx";
 import CustomRoutes from "../routes/CustomRoutes";
 import LogoPlafor from "../assets/LOGOPLAFORHEADER.svg";
 
@@ -50,22 +45,7 @@ function App() {
     );
   }
 
-  return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexFlow: "column",
-      }}
-    >
-      <ConfigProvider locale={dayjs}>
-        <HeaderGov />
-        <CustomRoutes />
-        <VLibras />
-        <FooterGov />
-      </ConfigProvider>
-    </div>
-  );
+  return <CustomRoutes />;
 }
 
 export default App;
