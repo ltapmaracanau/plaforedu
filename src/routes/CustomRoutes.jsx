@@ -37,6 +37,7 @@ import CompList from "../components/user-settings/CompList.jsx";
 import SubtemasList from "../components/user-settings/SubtemasList.jsx";
 import FormativeTrailsList from "../components/user-settings/FormativeTrailsList.jsx";
 import ListSearchLogs from "../components/user-settings/ListSearchLogs.jsx";
+import StudyPlans from "../components/user-settings/StudyPlans.jsx";
 
 const Layout = () => {
   return (
@@ -87,6 +88,7 @@ const CustomRoutes = () => {
                 path="/settings/update-password"
                 element={<UpdatePassword />}
               />
+              <Route path="/settings/study-plans" element={<StudyPlans />} />
               <Route
                 path="/settings/users"
                 element={isAdm ? <UsersList /> : <Navigate to="/denied" />}
