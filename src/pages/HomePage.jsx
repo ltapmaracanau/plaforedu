@@ -370,30 +370,35 @@ export default function HomePage() {
               nameItinerario={"Iniciação"}
               itinerario={"Iniciação ao Serviço Público"}
               colorItinerario={"var(--iniciacao)"}
+              tabindex = "1"
             />
             <HomepageItineario
               imgItinerario={screens.xs ? administrativoIcon : Int5}
               nameItinerario={"Educação"}
               itinerario={"Técnico Administrativo em Educação"}
               colorItinerario={"var(--administrativo)"}
+              tabindex = "2"
             />
             <HomepageItineario
               imgItinerario={screens.xs ? docenteIcon : Int1}
               nameItinerario={"Docente"}
               itinerario={"Docente"}
               colorItinerario={"var(--docente)"}
+              tabindex = "3"
             />
             <HomepageItineario
               imgItinerario={screens.xs ? gerencialIcon : Int3}
               nameItinerario={"Gerencial"}
               itinerario={"Gerencial"}
               colorItinerario={"var(--gerencial)"}
+              tabindex = "4"
             />
             <HomepageItineario
               imgItinerario={screens.xs ? aposentadoriaIcon : Int4}
               nameItinerario={"Preparação"}
               itinerario={"Preparação para a Aposentadoria"}
               colorItinerario={"var(--aposentadoria)"}
+              tabindex = "5"
             />
           </Row>
         </div>
