@@ -476,7 +476,7 @@ export default function AboutPage() {
             <h2 className={styles.titulo}>Gerencial</h2>
             <p className={styles.texto}>
               O itinerário formativo gerencial pode ser percorrido por
-              servidores técnicos-administrativos ou docentes que estejam em
+              servidores técnico-administrativos ou docentes que estejam em
               cargos/funções de gestão ou que desejem se capacitar para tal, com
               metodologias modernas, abarcando temáticas tradicionais e
               contemporâneas.
