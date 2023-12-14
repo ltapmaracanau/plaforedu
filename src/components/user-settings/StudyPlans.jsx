@@ -4,18 +4,12 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import { Button, Card, List, Input, notification, Popconfirm } from "antd";
-import StudyPlanRegister from "./StudyPlanRegister";
+import { useNavigate } from "react-router-dom";
 
 const { Search } = Input;
 
-// TODO: Adicionar filtro por carga horária ao adicionar cursos em um plano de estudo
-// TODO: Adicionar rotina de adicionar uma trilha formativa em um plano de estudo
-// TODO: Adicionar rota de visualização de um plano de estudo
-// func prevista:
-// TODO: Adicionar botão 'Adicionar ao plano de estudo' no modal de visualização de um curso em
-//  	   qualquer lugar do sistema (necessário aplicar reutilização de componente neste caso)
-
 export default function StudyPlans() {
+  const navigate = useNavigate();
   const getStudyPlans = useStoreActions(
     (actions) => actions.studyPlans.getStudyPlans
   );
@@ -23,8 +17,6 @@ export default function StudyPlans() {
     (actions) => actions.studyPlans.deleteStudyPlan
   );
 
-  const [registerVisible, setRegisterVisible] = useState(false);
-  const [editingPlan, setEditingPlan] = useState(null);
   const [textSearch, setTextSearch] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -74,122 +66,119 @@ export default function StudyPlans() {
       }}
     >
       <div style={{ width: "100%" }}>
-        {registerVisible ? (
-          <StudyPlanRegister
-            planId={editingPlan}
-            actionVisible={() => {
-              setRegisterVisible(false);
-              setEditingPlan(null);
-              getStudyPlans({
-                textSearch: textSearch,
-                pageNumber: pageNumber,
-              });
-            }}
-          />
-        ) : (
-          <Card
-            title={"Planos de Estudo"}
-            headStyle={{
-              fontSize: 20,
-            }}
-            extra={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "450px",
-                }}
-              >
-                <Search
-                  allowClear
-                  defaultValue={textSearch}
-                  onSearch={(e) => {
-                    setTextSearch(e);
-                    getStudyPlans({
-                      pageNumber: pageNumber,
-                      textSearch: e,
-                    });
-                  }}
-                  style={{
-                    marginRight: "10px",
-                  }}
-                  placeholder={"Buscar planos de estudo..."}
-                />
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={() => {
-                    setEditingPlan(null);
-                    setRegisterVisible(true);
-                  }}
-                >
-                  Adicionar
-                </Button>
-              </div>
-            }
-          >
-            <List
-              loading={loading}
-              dataSource={studyPlans}
-              style={{ width: "100%" }}
-              pagination={{
-                onChange: (page) => {
-                  setPageNumber(page);
+        <Card
+          title={"Planos de Estudo"}
+          headStyle={{
+            fontSize: 20,
+          }}
+          extra={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "450px",
+              }}
+            >
+              <Search
+                allowClear
+                defaultValue={textSearch}
+                onSearch={(e) => {
+                  setTextSearch(e);
                   getStudyPlans({
                     pageNumber: pageNumber,
-                    textSearch: textSearch,
+                    textSearch: e,
                   });
-                },
-                pageSize: 20,
-                total: count,
-                showSizeChanger: false,
-                current: pageNumber,
-                defaultCurrent: 1,
-                hideOnSinglePage: false,
-              }}
-              renderItem={(item) => {
-                return (
-                  <List.Item
-                    key={item.id}
-                    actions={[
-                      <Popconfirm
-                        key={item.id}
-                        title="Tem certeza?"
-                        onConfirm={() => deleteStudyPlanSubmit(item.id)}
-                        onCancel={() => {}}
-                        okText="Sim"
-                        cancelText="Não"
-                      >
-                        <Button
-                          shape="circle"
-                          danger
-                          icon={<DeleteOutlined />}
-                        />
-                      </Popconfirm>,
+                }}
+                style={{
+                  marginRight: "10px",
+                }}
+                placeholder={"Buscar planos de estudo..."}
+              />
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={() => {
+                  navigate("/settings/study-plans/new");
+                }}
+              >
+                Adicionar
+              </Button>
+            </div>
+          }
+        >
+          <List
+            loading={loading}
+            dataSource={studyPlans}
+            style={{ width: "100%" }}
+            pagination={{
+              onChange: (page) => {
+                setPageNumber(page);
+                getStudyPlans({
+                  pageNumber: pageNumber,
+                  textSearch: textSearch,
+                });
+              },
+              pageSize: 20,
+              total: count,
+              showSizeChanger: false,
+              current: pageNumber,
+              defaultCurrent: 1,
+              hideOnSinglePage: false,
+            }}
+            renderItem={(item) => {
+              return (
+                <List.Item
+                  key={item.id}
+                  actions={[
+                    <Popconfirm
+                      key={item.id}
+                      title="Tem certeza?"
+                      onConfirm={() => deleteStudyPlanSubmit(item.id)}
+                      onCancel={() => {}}
+                      okText="Sim"
+                      cancelText="Não"
+                    >
+                      <Button shape="circle" danger icon={<DeleteOutlined />} />
+                    </Popconfirm>,
+                    <Button
+                      key={item.id}
+                      onClick={() => {
+                        navigate(`/settings/study-plans/edit/${item.id}`);
+                      }}
+                      icon={<EditOutlined />}
+                    >
+                      Editar
+                    </Button>,
+                  ]}
+                >
+                  <List.Item.Meta
+                    style={{ fontFamily: "Roboto" }}
+                    title={
                       <Button
-                        key={item.id}
                         onClick={() => {
-                          setEditingPlan(item.id);
-                          setRegisterVisible(true);
+                          navigate(`/settings/study-plans/${item.id}`);
                         }}
-                        icon={<EditOutlined />}
+                        type="text"
                       >
-                        Editar
-                      </Button>,
-                    ]}
-                  >
-                    <List.Item.Meta
-                      style={{ fontFamily: "Roboto" }}
-                      title={item.name}
-                      description={item.description}
-                    />
-                  </List.Item>
-                );
-              }}
-            />
-          </Card>
-        )}
+                        {item.name}
+                      </Button>
+                    }
+                    description={
+                      <div
+                        style={{
+                          marginLeft: "15px",
+                        }}
+                      >
+                        {item.description}
+                      </div>
+                    }
+                  />
+                </List.Item>
+              );
+            }}
+          />
+        </Card>
       </div>
     </div>
   );

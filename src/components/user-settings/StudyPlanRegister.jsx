@@ -14,6 +14,7 @@ import {
   Tag,
   Space,
   Popconfirm,
+  Empty,
 } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Controller, useForm } from "react-hook-form";
@@ -30,6 +31,8 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useNavigate, useParams } from "react-router-dom";
+import TableAddTrailStudyPlan from "../filter-components/TableAddTrailStudyPlan";
 const { Title } = Typography;
 
 const Row = ({ children, ...props }) => {
@@ -56,7 +59,7 @@ const Row = ({ children, ...props }) => {
     ...(isDragging
       ? {
           position: "relative",
-          zIndex: 9999,
+          zIndex: 5,
         }
       : {}),
   };
@@ -83,8 +86,10 @@ const Row = ({ children, ...props }) => {
   );
 };
 
-export default function StudyPlanRegister(props) {
-  const { planId, actionVisible } = props;
+export default function StudyPlanRegister() {
+  const { planId = null } = useParams();
+
+  const navigate = useNavigate();
 
   const updateStudyPlan = useStoreActions(
     (actions) => actions.studyPlans.updateStudyPlan
@@ -104,6 +109,7 @@ export default function StudyPlanRegister(props) {
     courses: [],
   });
   const [addCourseVisible, setAddCourseVisible] = useState(false);
+  const [addTrailVisible, setAddTrailVisible] = useState(false);
 
   const [coursesPlan, setCoursesPlan] = useState([]);
 
@@ -175,7 +181,7 @@ export default function StudyPlanRegister(props) {
         notification.success({
           message: "Trilha alterada com sucesso!",
         });
-        actionVisible();
+        navigate("settings/study-plans")();
       } catch (error) {
         notification.error({
           message: "Erro!",
@@ -207,7 +213,7 @@ export default function StudyPlanRegister(props) {
           message: "Trilha cadastrada com sucesso!",
         });
         register.reset();
-        actionVisible();
+        navigate("settings/study-plans")();
       } catch (error) {
         notification.error({
           message: "Algo deu errado!",
@@ -215,6 +221,19 @@ export default function StudyPlanRegister(props) {
         });
       }
     }
+  };
+
+  const addTrail = (trail) => {
+    const coursesToAdd = trail.courses.filter((course) => {
+      return !coursesPlanIds.includes(course.id);
+    });
+    setCoursesPlan((last) => [
+      ...last,
+      ...coursesToAdd.map((course) => ({
+        courseId: course.id,
+        name: course.name,
+      })),
+    ]);
   };
 
   // Table add courses to trail
@@ -253,7 +272,7 @@ export default function StudyPlanRegister(props) {
       title: "Curso",
       dataIndex: "name",
       className: "drag-visible",
-      render: (text, record, _index) => {
+      render: (text, record) => {
         return record.filedAt ? (
           <>
             {text} <Tag color={"orange"}>ARQUIVADO</Tag>
@@ -291,156 +310,188 @@ export default function StudyPlanRegister(props) {
   };
 
   return (
-    <>
-      <div>
-        <div
-          style={{
-            width: "100%",
+    <div
+      style={{
+        width: "100%",
+        padding: "1rem",
+      }}
+    >
+      <Button
+        onClick={() => {
+          navigate("/settings/study-plans");
+        }}
+        style={{
+          marginBottom: "10px",
+        }}
+      >
+        <RollbackOutlined /> Voltar
+      </Button>
+      <Form layout="horizontal" onFinish={register.handleSubmit(onSubmit)}>
+        <Card
+          style={{ margin: "0px 0px" }}
+          bodyStyle={{
+            fontFamily: "Roboto",
           }}
+          title={
+            planId ? <>Editar Plano de Estudo</> : <>Criar Plano de Estudo</>
+          }
+          bordered={false}
+          extra={
+            <Space direction="horizontal">
+              <Button
+                loading={loading}
+                disabled={!register.formState.isValid}
+                type="primary"
+                shape="round"
+                htmlType="submit"
+              >
+                {planId ? <>Salvar</> : <>Cadastrar</>}
+              </Button>
+            </Space>
+          }
         >
-          <Button
-            onClick={() => {
-              actionVisible();
-            }}
-            style={{
-              marginBottom: "10px",
-            }}
+          <Descriptions
+            bordered
+            layout="horizontal"
+            size="small"
+            column={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }}
           >
-            <RollbackOutlined /> Voltar
-          </Button>
-          <Form layout="horizontal" onFinish={register.handleSubmit(onSubmit)}>
-            <Card
-              style={{ margin: "0px 0px" }}
-              bodyStyle={{
-                fontFamily: "Roboto",
-              }}
-              title={
-                planId ? (
-                  <>Editar Plano de Estudo</>
-                ) : (
-                  <>Criar Plano de Estudo</>
-                )
-              }
-              bordered={false}
-              extra={
-                <Space direction="horizontal">
-                  <Button
-                    loading={loading}
-                    disabled={!register.formState.isValid}
-                    type="primary"
-                    shape="round"
-                    htmlType="submit"
-                  >
-                    {planId ? <>Salvar</> : <>Cadastrar</>}
-                  </Button>
-                </Space>
-              }
+            <Descriptions.Item label={"Título do Plano"}>
+              <Controller
+                key={"name"}
+                name="name"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input placeholder="Título" {...field} />
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+            <Descriptions.Item label={"Descrição do Plano"}>
+              <Controller
+                key={"description"}
+                name="description"
+                control={register.control}
+                render={({ field, fieldState: { error } }) => {
+                  return (
+                    <Form.Item
+                      validateStatus={error ? "error" : ""}
+                      help={error ? error.message : ""}
+                      hasFeedback
+                    >
+                      <Input.TextArea
+                        placeholder="Digite aqui a descrição..."
+                        {...field}
+                      />
+                    </Form.Item>
+                  );
+                }}
+              />
+            </Descriptions.Item>
+          </Descriptions>
+          <DndContext
+            modifiers={[restrictToVerticalAxis]}
+            onDragEnd={onDragEnd}
+          >
+            <SortableContext
+              // rowKey array
+              items={coursesPlan.map((i) => i.courseId)}
+              strategy={verticalListSortingStrategy}
             >
-              <Descriptions
-                bordered
-                layout="horizontal"
-                size="small"
-                column={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }}
-              >
-                <Descriptions.Item label={"Título do Plano"}>
-                  <Controller
-                    key={"name"}
-                    name="name"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Input placeholder="Título" {...field} />
-                        </Form.Item>
-                      );
+              <Table
+                columns={columns}
+                dataSource={coursesPlan}
+                pagination={false}
+                rowKey={"courseId"}
+                // empty
+                locale={{
+                  emptyText: (
+                    <Empty
+                      description={
+                        <span>
+                          Não há cursos adicionados ao plano de estudo
+                        </span>
+                      }
+                    />
+                  ),
+                }}
+                components={{
+                  body: {
+                    row: Row,
+                  },
+                }}
+                title={() => (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
                     }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Descrição do Plano"}>
-                  <Controller
-                    key={"description"}
-                    name="description"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Input.TextArea
-                            placeholder="Digite aqui a descrição..."
-                            {...field}
-                          />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-              </Descriptions>
-              <DndContext
-                modifiers={[restrictToVerticalAxis]}
-                onDragEnd={onDragEnd}
-              >
-                <SortableContext
-                  // rowKey array
-                  items={coursesPlan.map((i) => i.courseId)}
-                  strategy={verticalListSortingStrategy}
-                >
-                  <Table
-                    columns={columns}
-                    dataSource={coursesPlan}
-                    pagination={false}
-                    rowKey={"courseId"}
-                    components={{
-                      body: {
-                        row: Row,
-                      },
-                    }}
-                    title={() => (
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
+                  >
+                    <Title level={4}>Cursos no Plano</Title>
+                    <div>
+                      <Button
+                        type="primary"
+                        style={{ marginRight: "10px" }}
+                        onClick={() => {
+                          setAddTrailVisible(true);
                         }}
                       >
-                        <Title level={4}>Cursos no Plano</Title>
-                        <Button
-                          type="primary"
-                          onClick={() => {
-                            setAddCourseVisible(true);
-                          }}
-                        >
-                          Adicionar/Remover Cursos
-                        </Button>
-                      </div>
-                    )}
-                  />
-                </SortableContext>
-              </DndContext>
-              <Modal
-                open={addCourseVisible}
-                onCancel={() => {
-                  setAddCourseVisible(false);
-                }}
-                width={"auto"}
-                destroyOnClose={true}
-                title={"Adicionar/Remover cursos no plano"}
-                footer={null}
-              >
-                <TableSelectCourses
-                  onSelectChange={onSelectChange}
-                  cursosDefaultSelected={coursesPlanIds}
-                />
-              </Modal>
-            </Card>
-          </Form>
-        </div>
-      </div>
-    </>
+                        Adicionar Trilha Formativa
+                      </Button>
+                      <Button
+                        type="primary"
+                        onClick={() => {
+                          setAddCourseVisible(true);
+                        }}
+                      >
+                        Adicionar/Remover Cursos
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              />
+            </SortableContext>
+          </DndContext>
+          <Modal
+            open={addCourseVisible}
+            onCancel={() => {
+              setAddCourseVisible(false);
+            }}
+            width={"auto"}
+            destroyOnClose={true}
+            title={"Adicionar/Remover cursos no plano"}
+            footer={null}
+          >
+            <TableSelectCourses
+              onSelectChange={onSelectChange}
+              cursosDefaultSelected={coursesPlanIds}
+            />
+          </Modal>
+          <Modal
+            open={addTrailVisible}
+            onCancel={() => {
+              setAddTrailVisible(false);
+            }}
+            width={"auto"}
+            destroyOnClose={true}
+            title={"Adicionar Trilha Formativa"}
+            footer={null}
+          >
+            <TableAddTrailStudyPlan
+              onAdd={(trail) => {
+                addTrail(trail);
+              }}
+            />
+          </Modal>
+        </Card>
+      </Form>
+    </div>
   );
 }

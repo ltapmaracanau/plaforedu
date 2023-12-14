@@ -158,6 +158,7 @@ const coursesModel = {
           .join(", "),
       });
       actions.setUniqueCourse(course);
+      return course;
     } catch (error) {
       throw new Error(error.message);
     } finally {

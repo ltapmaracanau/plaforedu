@@ -38,6 +38,8 @@ import SubtemasList from "../components/user-settings/SubtemasList.jsx";
 import FormativeTrailsList from "../components/user-settings/FormativeTrailsList.jsx";
 import ListSearchLogs from "../components/user-settings/ListSearchLogs.jsx";
 import StudyPlans from "../components/user-settings/StudyPlans.jsx";
+import StudyPlanView from "../components/user-settings/StudyPlanView.jsx";
+import StudyPlanRegister from "../components/user-settings/StudyPlanRegister.jsx";
 
 const Layout = () => {
   return (
@@ -89,6 +91,18 @@ const CustomRoutes = () => {
                 element={<UpdatePassword />}
               />
               <Route path="/settings/study-plans" element={<StudyPlans />} />
+              <Route
+                path="/settings/study-plans/:id"
+                element={<StudyPlanView />}
+              />
+              <Route
+                path="/settings/study-plans/edit/:planId"
+                element={<StudyPlanRegister />}
+              />
+              <Route
+                path="/settings/study-plans/new"
+                element={<StudyPlanRegister />}
+              />
               <Route
                 path="/settings/users"
                 element={isAdm ? <UsersList /> : <Navigate to="/denied" />}
