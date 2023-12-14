@@ -1,84 +1,81 @@
 import {
   Button,
   Card,
+  Divider,
   Empty,
   Input,
+  List,
   Select,
-  Slider,
   Space,
   Table,
   Tag,
   Tooltip,
-  Typography,
 } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { SearchOutlined } from "@ant-design/icons";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 const filterCoursesDefault = {
   query: "",
-  cargaHoraria: [0, 1000],
-  institutions: [],
   competencies: [],
   itineraries: [],
 };
 
-export default function TableSelectCourses(props) {
-  const { onSelectChange, cursosDefaultSelected, courseToHideId = "" } = props;
+export default function TableAddTrailStudyPlan(props) {
+  const { onAdd } = props;
 
-  const loadingCursosSecondary = useStoreState(
-    (state) => state.courses.loadingCursosSecondary
+  const [pageNumber, setPageNumber] = useState(1);
+  const trails = useStoreState((state) => state.trilhas.trilhas);
+  const loading = useStoreState((state) => state.trilhas.loading);
+  const count = useStoreState((state) => state.trilhas.count);
+
+  const getItinerarios = useStoreActions(
+    (actions) => actions.itineraries.getItinerarios
   );
-  const allInstitutions = useStoreState(
-    (state) => state.institutions.instituicoes
-  );
-  const cursosSecondary = useStoreState(
-    (state) => state.courses.cursosSecondary
-  );
-  const countSecondary = useStoreState((state) => state.courses.countSecondary);
+  const getComp = useStoreActions((actions) => actions.competencies.getComp);
   const allItinerarios = useStoreState(
     (state) => state.itineraries.itinerarios
   );
   const allCompetencias = useStoreState(
     (state) => state.competencies.competencias
   );
-  const [pageNumber, setPageNumber] = useState(1);
 
-  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
+  const getTrails = useStoreActions((actions) => actions.trilhas.getTrilhas);
 
-  const [filterAddingCourses, setFilterAddingCourses] = useState({
+  const [filterAddingTrail, setFilterAddingTrail] = useState({
     query: "",
-    cargaHoraria: [0, 1000],
-    institutions: [],
-    competencies: [],
     itineraries: [],
+    competencies: [],
   });
 
   const [activeColumsFilter, setActiveColumsFilter] = useState({
     query: false,
-    cargaHoraria: false,
-    institutions: false,
-    competencies: false,
     itineraries: false,
+    competencies: false,
   });
 
   const [stringSearchMemo, setStringSearchMemo] = useState({
     query: "",
-    cargaHoraria: [0, 1000],
-    institutions: [],
-    competencies: [],
     itineraries: [],
+    competencies: [],
   });
 
   useEffect(() => {
     async function init() {
-      await getCursos({ secondary: true, page: pageNumber, showFiled: false });
+      getItinerarios();
+      getComp();
+      await getTrails({
+        query: "",
+        showFiled: false,
+        page: pageNumber,
+        registerLog: false,
+      });
     }
     init();
-  }, [getCursos, pageNumber]);
+  }, [getTrails, pageNumber, getItinerarios, getComp]);
 
-  // Table adding courses to Trail
+  // Table adding trail to Plan
 
   const getColumnSearchProps = (dataIndex, name) => ({
     filterDropdown: () => (
@@ -90,9 +87,9 @@ export default function TableSelectCourses(props) {
       >
         <Input
           placeholder={`Buscar ${name}`}
-          value={filterAddingCourses[`${dataIndex}`]}
+          value={filterAddingTrail[`${dataIndex}`]}
           onChange={(e) => {
-            setFilterAddingCourses((antig) => ({
+            setFilterAddingTrail((antig) => ({
               ...antig,
               [`${dataIndex}`]: e.target.value,
             }));
@@ -161,21 +158,7 @@ export default function TableSelectCourses(props) {
         </>
       );
     } else {
-      return (
-        <>
-          {allInstitutions.map((inst) => (
-            <Select.Option
-              key={inst.id}
-              value={inst.id}
-              label={inst.abbreviation}
-            >
-              {inst.abbreviation}
-              <br />
-              {inst.name}
-            </Select.Option>
-          ))}
-        </>
-      );
+      return <></>;
     }
   };
 
@@ -189,9 +172,9 @@ export default function TableSelectCourses(props) {
       >
         <Select
           placeholder={`Buscar ${name}`}
-          value={filterAddingCourses[`${dataIndex}`]}
+          value={filterAddingTrail[`${dataIndex}`]}
           onChange={(values) => {
-            setFilterAddingCourses((antig) => ({
+            setFilterAddingTrail((antig) => ({
               ...antig,
               [`${dataIndex}`]: values,
             }));
@@ -203,88 +186,13 @@ export default function TableSelectCourses(props) {
             display: "block",
           }}
           filterOption={(input, option) => {
-            if (dataIndex === "institutions") {
-              return (
-                option.children[2].toLowerCase().indexOf(input.toLowerCase()) >=
-                  0 ||
-                option.children[0].toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-              );
-            } else {
-              return (
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              );
-            }
+            return (
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            );
           }}
         >
           {getSelectOptions(dataIndex)}
         </Select>
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => {
-              handleSearch(dataIndex);
-            }}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={() => {
-              handleReset(dataIndex);
-            }}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: () => (
-      <SearchOutlined
-        style={{
-          color: activeColumsFilter[`${dataIndex}`] ? "#1890ff" : undefined,
-        }}
-      />
-    ),
-  });
-
-  const getColumnSliderSearchProps = (dataIndex, name) => ({
-    filterDropdown: () => (
-      <div
-        style={{
-          padding: 8,
-        }}
-        onKeyDown={(e) => e.stopPropagation()}
-      >
-        <Typography.Text>{name}</Typography.Text>
-        <Slider
-          style={{
-            margin: "5px 10px 30px 10px",
-            display: "block",
-          }}
-          range
-          marks={{
-            0: "0h",
-            500: "500h",
-          }}
-          value={filterAddingCourses[`${dataIndex}`]}
-          step={10}
-          max={500}
-          onChange={(value) => {
-            setFilterAddingCourses((antig) => ({
-              ...antig,
-              [`${dataIndex}`]: value,
-            }));
-          }}
-        />
         <Space>
           <Button
             type="primary"
@@ -329,12 +237,11 @@ export default function TableSelectCourses(props) {
     }));
     const newSearch = {
       ...stringSearchMemo,
-      [`${dataIndex}`]: filterAddingCourses[`${dataIndex}`],
+      [`${dataIndex}`]: filterAddingTrail[`${dataIndex}`],
     };
     setStringSearchMemo(newSearch);
-    await getCursos({
+    await getTrails({
       ...newSearch,
-      secondary: true,
       showFiled: false,
       page: pageNumber,
     });
@@ -346,26 +253,45 @@ export default function TableSelectCourses(props) {
       [`${dataIndex}`]: false,
     }));
     const newSearch = {
-      ...filterAddingCourses,
+      ...filterAddingTrail,
       [`${dataIndex}`]: filterCoursesDefault[`${dataIndex}`],
     };
     setStringSearchMemo(newSearch);
-    setFilterAddingCourses(newSearch);
-    await getCursos({
+    setFilterAddingTrail(newSearch);
+    await getTrails({
       ...newSearch,
-      secondary: true,
       showFiled: false,
       page: pageNumber,
     });
   };
 
-  const columnsAddCoursesTrail = [
+  const renderTrailCourses = (record) => {
+    // Render list of courses of trail
+    return (
+      <Card>
+        <Card.Meta title={record.name} description={record.description} />
+        <Divider>Cursos</Divider>
+        <List
+          size="small"
+          dataSource={record.courses}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta title={item.name} />
+            </List.Item>
+          )}
+        />
+      </Card>
+    );
+  };
+
+  const columns = [
     {
       title: "Título",
+      width: "25%",
       key: "name",
       dataIndex: "name",
       ...getColumnSearchProps("query", "título"),
-      render: (text, record, _index) => {
+      render: (text, record) => {
         return record.filedAt ? (
           <>
             {text} <Tag color={"orange"}>ARQUIVADO</Tag>
@@ -376,108 +302,104 @@ export default function TableSelectCourses(props) {
       },
     },
     {
-      title: "CH",
-      key: "hours",
-      dataIndex: "hours",
-      render: (hours) => (
-        <span>
-          {hours} <span style={{ fontSize: "10px" }}>h</span>
-        </span>
-      ),
-      ...getColumnSliderSearchProps("cargaHoraria", "Carga Horária"),
-    },
-    {
-      title: "Instituições",
-      key: "institutions",
-      dataIndex: "institutions",
-      render: (institutions) => (
-        <span>
-          {institutions.map((institution) => {
-            return (
-              <Tooltip
-                color={"blue"}
-                title={institution.name}
-                key={institution.institutionId}
-              >
-                <Tag color={"blue"}>
-                  {institution.abbreviation.toUpperCase()}
-                </Tag>
-              </Tooltip>
-            );
-          })}
-        </span>
-      ),
-      ...getColumnSelectSearchProps("institutions", "instituição"),
-    },
-    {
       title: "Competências",
+      width: "25%",
       key: "competencies",
       dataIndex: "competencies",
-      render: (competencias) => (
-        <span>
-          {competencias.map((competencie) => {
-            return (
-              <Tag color={"blue"} key={competencie.id}>
-                {competencie.name.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </span>
-      ),
       ...getColumnSelectSearchProps("competencies", "competências"),
+      render: (text, record) => {
+        return record.filedAt ? (
+          <>
+            {text.map((competencie) => (
+              <Tag key={competencie.id} color={"orange"}>
+                {competencie.name}
+              </Tag>
+            ))}
+            <Tag color={"orange"}>ARQUIVADO</Tag>
+          </>
+        ) : (
+          <>
+            {text.map((competencie) => (
+              <Tag key={competencie.id}>{competencie.name}</Tag>
+            ))}
+          </>
+        );
+      },
     },
     {
       title: "Itinerários",
+      width: "25%",
       key: "itineraries",
       dataIndex: "itineraries",
-      render: (itineraries) => (
-        <span>
-          {itineraries.map((itinerarie) => {
-            return (
-              <Tag color={itinerarie.color} key={itinerarie.id}>
-                {itinerarie.name.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </span>
-      ),
       ...getColumnSelectSearchProps("itineraries", "itinerários"),
+      render: (text, record) => {
+        return record.filedAt ? (
+          <>
+            {text.map((itinerario) => (
+              <Tag key={itinerario.id} color={"orange"}>
+                {itinerario.name}
+              </Tag>
+            ))}
+            <Tag color={"orange"}>ARQUIVADO</Tag>
+          </>
+        ) : (
+          <>
+            {text.map((itinerario) => (
+              <Tag key={itinerario.id}>{itinerario.name}</Tag>
+            ))}
+          </>
+        );
+      },
+    },
+    {
+      title: "",
+      width: "25%",
+      key: "action",
+      render: (text, record) => {
+        return (
+          <>
+            <Tooltip title="Adicionar todos os cursos da trilha ao plano de estudo">
+              <Button
+                type="primary"
+                onClick={() => {
+                  onAdd(record);
+                }}
+                disabled={record.filedAt}
+              >
+                Adicionar
+              </Button>
+            </Tooltip>
+          </>
+        );
+      },
     },
   ];
-
-  const rowSelection = {
-    selectedRowKeys: cursosDefaultSelected,
-    onSelect: onSelectChange,
-    hideSelectAll: true,
-    preserveSelectedRowKeys: true,
-  };
 
   return (
     <Table
       rowKey={"id"}
-      rowSelection={rowSelection}
-      dataSource={cursosSecondary.filter(
-        (curso) => curso.id !== courseToHideId
-      )}
-      loading={loadingCursosSecondary}
+      dataSource={trails}
+      loading={loading}
       pagination={{
         onChange: async (page) => {
           setPageNumber(page);
-          await getCursos({
+          await getTrails({
             ...stringSearchMemo,
             page: page,
             showFiled: false,
-            secondary: true,
           });
         },
         pageSize: 20,
-        total: countSecondary,
+        total: count,
         showSizeChanger: false,
         current: pageNumber,
         defaultCurrent: 1,
         hideOnSinglePage: false,
       }}
-      columns={columnsAddCoursesTrail}
+      expandable={{
+        expandedRowRender: renderTrailCourses,
+      }}
+      columns={columns}
       locale={{
         emptyText: (
           <Card>

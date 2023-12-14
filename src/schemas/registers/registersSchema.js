@@ -112,3 +112,13 @@ export const registerTrilhaSchema = yup.object().shape({
   itineraries: yup.array().of(yup.string()).required("Obrigatório!"),
   competencies: yup.array().of(yup.string()).required("Obrigatório!"),
 });
+
+// PLANOS DE ESTUDO
+
+export const registerStudyPlanSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Obrigatório!")
+    .max(256, "256 caracteres no máximo!"),
+  description: yup.string().required("Obrigatório!"),
+});

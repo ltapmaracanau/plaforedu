@@ -39,6 +39,11 @@ export default function SettingsPage() {
       icon: <KeyOutlined />,
     },
     {
+      label: "Planos de Estudo",
+      key: "/settings/study-plans",
+      icon: <NodeIndexOutlined />,
+    },
+    {
       label: "Cadastros",
       key: "registers",
       disabled: !(isAdm || isCoord || isAnalDados || isActive),
