@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./homepage.css";
-import HeaderHome from "../components/header/HeaderHome";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
 import Int3 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.png";
@@ -53,9 +52,7 @@ export default function HomePage() {
   const screens = useBreakpoint();
   let navigate = useNavigate();
 
-  const [recentCourses, _setRecentCourses] = useState(
-    dataService.getLastViewedCourses()
-  );
+  const recentCourses = dataService.getLastViewedCourses();
   const [modalVisible, setModalVisible] = useState(false);
 
   const info = useStoreState((state) => state.adm.info);
@@ -78,11 +75,10 @@ export default function HomePage() {
   React.useEffect(() => {
     getInfo();
     getRandomTrails();
-  }, []);
+  }, [getInfo, getRandomTrails]);
 
   return (
     <>
-      <HeaderHome />
       <Row className="containerTitle" align={"middle"}>
         <Col
           style={{
@@ -434,6 +430,7 @@ export default function HomePage() {
                 paddingBottom: screens.xs ? "12px" : "32px",
               }}
               src={icon1}
+              alt="Ícone preço"
             />
             <p
               className="subTitulo"
@@ -458,6 +455,7 @@ export default function HomePage() {
                 paddingBottom: screens.xs ? "12px" : "32px",
               }}
               src={icon2}
+              alt="Ícone Perfil"
             />
             <p
               className="subTitulo"
@@ -476,6 +474,7 @@ export default function HomePage() {
                 paddingBottom: screens.xs ? "12px" : "32px",
               }}
               src={icon3}
+              alt="Ícone certificado"
             />
             <p
               className="subTitulo"
@@ -705,6 +704,7 @@ export default function HomePage() {
           style={{ width: "100%", maxWidth: "480px" }}
           src={infografico}
           preview={{ src: infografico_fundo_branco }}
+          alt="Infográfico de competências"
         />
       </Row>
 

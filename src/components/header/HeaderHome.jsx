@@ -43,80 +43,93 @@ export default function HeaderHome() {
     const itinerarioClicado = itinerarios.find((item) =>
       item.name.toLowerCase().includes(itinerario.toLowerCase())
     );
+    if (!itinerarioClicado) {
+      notification.error({
+        message: "Itinerário não encontrado!",
+      });
+      return;
+    }
     setFilter({
       ...filterDefault,
       itinerario: itinerarioClicado.id,
       esquemaDeCores: "categoria",
     });
+    navigate("/cursos");
+  };
+
+  const onClickMenu = ({ key }) => {
+    if (key.startsWith("/")) {
+      navigate(key);
+    } else if (key === "recursos") {
+      return;
+    } else if (key === "logout") {
+      logOut();
+    } else {
+      onClickItinerario(key);
+    }
+  };
+
+  const logOut = () => {
+    try {
+      logout();
+      notification.success({
+        message: "Logout concluído com sucesso!",
+      });
+      navigate("/login");
+    } catch (error) {
+      notification.error({
+        message: "Erro ao fazer logout!",
+      });
+    }
   };
 
   const items = [
     {
-      label: <Link to={"/"}>HOME</Link>,
-      key: 1,
+      label: "HOME",
+      key: "/",
     },
     {
-      label: <Link to={"/about"}>SOBRE</Link>,
-      key: 2,
+      label: "SOBRE",
+      key: "/about",
     },
     {
-      label: <Link to={"/history"}>HISTÓRICO PLAFOR</Link>,
-      key: 80,
+      label: "HISTÓRICO PLAFOR",
+      key: "/history",
     },
     {
       label: "RECURSOS",
       icon: screens.md ? <DownOutlined /> : null,
-      key: 3,
+      key: "recursos",
       children: [
         {
-          label: (
-            <div onClick={() => onClickItinerario("Iniciação")}>
-              <Link to={"/cursos"}>Iniciação ao Serviço Público</Link>
-            </div>
-          ),
-          key: 31,
+          label: "Iniciação ao Serviço Público",
+          key: "Iniciação",
         },
         {
-          label: (
-            <div onClick={() => onClickItinerario("Educação")}>
-              <Link to={"/cursos"}>Técnico-Administrativo em Educação</Link>
-            </div>
-          ),
-          key: 32,
+          label: "Técnico-Administrativo em Educação",
+          key: "Educação",
         },
         {
-          label: (
-            <div onClick={() => onClickItinerario("Docente")}>
-              <Link to={"/cursos"}>Docente</Link>
-            </div>
-          ),
-          key: 33,
+          label: "Docente",
+          key: "Docente",
         },
         {
-          label: (
-            <div onClick={() => onClickItinerario("Gerencial")}>
-              <Link to={"/cursos"}>Gerencial</Link>
-            </div>
-          ),
-          key: 34,
+          label: "Gerencial",
+          key: "Gerencial",
         },
         {
-          label: (
-            <div onClick={() => onClickItinerario("Preparação")}>
-              <Link to={"/cursos"}>Preparação para a aposentadoria</Link>
-            </div>
-          ),
-          key: 35,
+          label: "Preparação para a aposentadoria",
+          key: "Preparação",
         },
       ],
     },
     {
-      label: <Link to={"/faleconosco"}>FALE CONOSCO</Link>,
-      key: 4,
+      label: "FALE CONOSCO",
+      key: "/faleconosco",
     },
     {
-      label: <Link to={"/faq"}>FAQ</Link>,
-      key: 5,
+      label: "FAQ",
+      key: "/faq",
     },
     {
       label: isAuthenticated ? (
@@ -130,36 +143,18 @@ export default function HeaderHome() {
           <Button shape="round">LOGIN</Button>
         </Link>
       ),
-      key: 6,
+      key: 7,
       children: isAuthenticated
         ? [
             {
-              key: 61,
-              label: (
-                <Space
-                  onClick={() => {
-                    navigate("/settings");
-                  }}
-                >
-                  Configurações <SettingOutlined />
-                </Space>
-              ),
+              key: "/settings",
+              label: "Configurações",
+              icon: <SettingOutlined />,
             },
             {
-              key: 62,
-              label: (
-                <Space
-                  onClick={() => {
-                    logout();
-                    notification.success({
-                      message: "Logout concluído com sucesso!",
-                    });
-                    navigate("/login");
-                  }}
-                >
-                  Sair <LogoutOutlined />
-                </Space>
-              ),
+              key: "logout",
+              label: "Sair",
+              icon: <LogoutOutlined />,
             },
           ]
         : [],
@@ -172,7 +167,7 @@ export default function HeaderHome() {
       align="middle"
       style={{
         height: "70px",
-        backgroundImage: "linear-gradient(to right, #2C55A1, #35A8E0)",
+        backgroundImage: "linear-gradient(to right, #2C55A1, #229EDC)",
       }}
     >
       <Col
@@ -205,6 +200,7 @@ export default function HeaderHome() {
             height="55px"
             style={{ padding: "5px" }}
             src={LogoPlafor}
+            alt="Logo PlaforEDU"
           />
         </Link>
       </Col>
@@ -223,12 +219,13 @@ export default function HeaderHome() {
             },
             components: {
               Menu: {
-                colorSubItemBg: "#1890ff",
-                colorItemBg: "transparent",
-                colorItemText: "#fff",
-                colorItemTextHover: "#fff",
-                colorItemBgSelectedHorizontal: "transparent",
+                subMenuItemBg: "#1890ff",
+                itemBg: "transparent",
+                itemColor: "#fff",
+                itemHoverColor: "#fff",
+                horizontalItemSelectedBg: "transparent",
                 colorBgElevated: "#1890ff",
+                colorPrimaryBorder: "#fff",
               },
             },
           }}
@@ -239,6 +236,7 @@ export default function HeaderHome() {
             overflowedIndicator={<MenuOutlined style={{ fontSize: "20px" }} />}
             style={{ justifyContent: "right" }}
             items={items}
+            onClick={onClickMenu}
           />
         </ConfigProvider>
       </Col>

@@ -4,11 +4,8 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { Button, Card, Form, Input, Layout, notification } from "antd";
-import HeaderHome from "../components/header/HeaderHome";
+import { Button, Card, Form, Input, notification } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const { Content } = Layout;
 
 function useQuery() {
   const { search } = useLocation();
@@ -56,80 +53,77 @@ export default function ResetPassword() {
   };
 
   return (
-    <>
-      <HeaderHome />
-      <div
-        style={{
-          height: "100%",
-          flexGrow: 1,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+    <div
+      style={{
+        height: "100%",
+        flexGrow: 1,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card
+        style={{ width: "350px" }}
+        headStyle={{
+          backgroundColor: "#2C55A1",
+          textAlign: "center",
+          color: "#fff",
+          fontFamily: "Poppins",
+          fontSize: "18px",
         }}
+        title={"ALTERAÇÃO DE SENHA"}
       >
-        <Card
-          style={{ width: "350px" }}
-          headStyle={{
-            backgroundColor: "#2C55A1",
-            textAlign: "center",
-            color: "#fff",
-            fontFamily: "Poppins",
-            fontSize: "18px",
-          }}
-          title={"ALTERAÇÃO DE SENHA"}
-        >
-          <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-            <Controller
-              name="password1"
-              control={register.control}
-              render={({ field, fieldState: { error } }) => {
-                return (
-                  <Form.Item
-                    label={"Nova Senha"}
-                    validateStatus={error ? "error" : ""}
-                    help={error ? error.message : ""}
-                    hasFeedback
-                  >
-                    <Input.Password {...field} />
-                  </Form.Item>
-                );
-              }}
-            />
-            <Controller
-              name="password2"
-              control={register.control}
-              render={({ field, fieldState: { error } }) => {
-                return (
-                  <Form.Item
-                    label={"Repita a Nova Senha"}
-                    validateStatus={error ? "error" : ""}
-                    help={error ? error.message : ""}
-                    hasFeedback
-                  >
-                    <Input.Password {...field} />
-                  </Form.Item>
-                );
-              }}
-            />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginBottom: "15px",
-              }}
+        <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+          <Controller
+            name="password1"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Nova Senha"}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input.Password {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <Controller
+            name="password2"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Repita a Nova Senha"}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input.Password {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "15px",
+            }}
+          >
+            <Button
+              loading={loading}
+              type="primary"
+              htmlType="submit"
+              shape="round"
             >
-              <Button
-                loading={loading}
-                type="primary"
-                htmlType="submit"
-                shape="round"
-              >
-                Enviar
-              </Button>
-            </div>
-          </Form>
-        </Card>
-      </div>
-    </>
+              Enviar
+            </Button>
+          </div>
+        </Form>
+      </Card>
+    </div>
   );
 }

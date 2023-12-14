@@ -47,6 +47,10 @@ const trilhasModel = {
         registerLog: false,
         itinerario: undefined,
         competencies: [],
+        sort: {
+          createdAt: undefined,
+          updatedAt: undefined,
+        },
       }
     ) => {
       actions.setLoading(true);
@@ -57,6 +61,10 @@ const trilhasModel = {
         registerLog = false,
         itinerario = undefined,
         competencies = [],
+        sort = {
+          createdAt: undefined,
+          updatedAt: undefined,
+        },
       } = payload;
       const request = {
         includeFiled: showFiled,
@@ -65,6 +73,8 @@ const trilhasModel = {
         registerLog: registerLog,
         itineraries: itinerario ? [itinerario] : [],
         competencies: competencies,
+        sortByCreatedAt: !!sort.createdAt,
+        sortByUpdatedAt: !!sort.updatedAt,
       };
       try {
         await services.trailsService.getTrilhas(request).then((trilhas) => {

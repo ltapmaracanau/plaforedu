@@ -1,16 +1,4 @@
-import React, { useState } from "react";
 import { useStoreState } from "easy-peasy";
-
-import HeaderHome from "../components/header/HeaderHome";
-import CompList from "../components/user-settings/CompList";
-import MyProfile from "../components/user-settings/MyProfile";
-import TemasList from "../components/user-settings/TemasList";
-import UsersList from "../components/user-settings/UsersList";
-import CoursesList from "../components/user-settings/CoursesList";
-import SubtemasList from "../components/user-settings/SubtemasList";
-import CategCompList from "../components/user-settings/CategCompList";
-import UpdatePassword from "../components/user-settings/UpdatePassword";
-import InstitutionList from "../components/user-settings/InstitutionsList";
 
 import {
   UserOutlined,
@@ -27,221 +15,117 @@ import {
   FileSearchOutlined,
 } from "@ant-design/icons";
 
-import { Layout, Menu, Space } from "antd";
-import FormativeTrailsList from "../components/user-settings/FormativeTrailsList";
-import ListSearchLogs from "../components/user-settings/ListSearchLogs";
+import { Layout, Menu } from "antd";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
 
 export default function SettingsPage() {
+  const navigate = useNavigate();
   const isAdm = useStoreState((state) => state.adm.isAdm);
   const isCoord = useStoreState((state) => state.adm.isCoord);
   const isActive = useStoreState((state) => state.adm.isActive);
-
-  const contentArray = [
-    <MyProfile key={"my-profile"} />,
-    <UpdatePassword key={"my-password"} />,
-    <UsersList key={"users-list"} />,
-    <CoursesList key={"courses-list"} />,
-    <InstitutionList key={"institution-list"} />,
-    <CategCompList key={"categ-comp-list"} />,
-    <CompList key={"comp-list"} />,
-    <TemasList key={"temas-list"} />,
-    <SubtemasList key={"subtemas-list"} />,
-    <FormativeTrailsList key={"trails-list"} />,
-    <ListSearchLogs key={"search-list"} />,
-  ];
-
-  const [index, setIndex] = useState(0);
+  const isAnalDados = useStoreState((state) => state.adm.isAnalDados);
 
   const items = [
     {
-      label: (
-        <div
-          onClick={() => {
-            setIndex(0);
-          }}
-        >
-          Meu Perfil
-        </div>
-      ),
+      label: "Meu Perfil",
       icon: <UserOutlined />,
-      key: 0,
+      key: "/settings",
     },
     {
-      label: (
-        <div
-          onClick={() => {
-            setIndex(1);
-          }}
-        >
-          Alterar Senha
-        </div>
-      ),
+      label: "Alterar Senha",
+      key: "/settings/update-password",
       icon: <KeyOutlined />,
-      key: 1,
     },
     {
       label: "Cadastros",
-      key: 3,
-      disabled: !(isAdm || isCoord || isActive),
+      key: "registers",
+      disabled: !(isAdm || isCoord || isAnalDados || isActive),
       icon: <DiffOutlined />,
       children: [
         {
-          key: 31,
+          key: "/settings/users",
           icon: <TeamOutlined />,
-          label: (
-            <div
-              onClick={() => {
-                setIndex(2);
-              }}
-            >
-              Usuários
-            </div>
-          ),
+          label: "Usuários",
           disabled: !isAdm,
         },
         {
-          key: 32,
+          key: "/settings/courses",
           icon: <BuildOutlined />,
-          label: (
-            <div
-              onClick={() => {
-                setIndex(3);
-              }}
-            >
-              Cursos
-            </div>
-          ),
+          label: "Cursos",
         },
         {
-          key: 33,
+          key: "/settings/institutions",
           icon: <BankOutlined />,
-          label: (
-            <div
-              onClick={() => {
-                setIndex(4);
-              }}
-            >
-              Instituições
-            </div>
-          ),
+          label: "Instituições",
         },
         {
-          key: 34,
+          key: "/settings/categ-comp",
           icon: <DatabaseOutlined />,
-          label: (
-            <div
-              onClick={() => {
-                setIndex(5);
-              }}
-            >
-              Categorias de competências
-            </div>
-          ),
+          label: "Categorias de competências",
         },
         {
-          key: 35,
+          key: "/settings/competences",
           icon: <FlagOutlined />,
-          label: (
-            <div
-              onClick={() => {
-                setIndex(6);
-              }}
-            >
-              Competências
-            </div>
-          ),
+          label: "Competências",
         },
         {
-          key: 36,
+          key: "/settings/themes",
           icon: <ReadOutlined />,
-          label: (
-            <div
-              onClick={() => {
-                setIndex(7);
-              }}
-            >
-              Temas
-            </div>
-          ),
+          label: "Temas",
         },
         {
-          key: 37,
+          key: "/settings/subthemes",
           icon: <ScheduleOutlined />,
-          label: (
-            <div
-              onClick={() => {
-                setIndex(8);
-              }}
-            >
-              Subtemas
-            </div>
-          ),
+          label: "Subtemas",
         },
         {
-          key: 38,
+          key: "/settings/formative-trails",
           icon: <NodeIndexOutlined />,
-          label: (
-            <div
-              onClick={() => {
-                setIndex(9);
-              }}
-            >
-              Trilhas Formativas
-            </div>
-          ),
+          label: "Trilhas Formativas",
         },
       ],
     },
     {
-      key: 4,
+      key: "/settings/logs",
       icon: <FileSearchOutlined />,
       disabled: !(isAdm || isCoord || isActive),
-      label: (
-        <div
-          onClick={() => {
-            setIndex(10);
-          }}
-        >
-          Relatório de Buscas
-        </div>
-      ),
+      label: "Relatório de Buscas",
     },
   ];
 
   return (
-    <>
-      <HeaderHome />
+    <div
+      style={{
+        flexGrow: 1,
+        height: "100%",
+        display: "flex",
+      }}
+    >
+      <Sider width={"280px"}>
+        <Menu
+          mode="inline"
+          style={{
+            height: "100%",
+            borderRight: 0,
+            fontFamily: "Roboto",
+          }}
+          theme={"light"}
+          defaultChecked={"/"}
+          onClick={(e) => {
+            navigate(`${e.key}`);
+          }}
+          items={items}
+        />
+      </Sider>
       <div
         style={{
-          flexGrow: 1,
-          height: "100%",
-          display: "flex",
+          width: "100%",
         }}
       >
-        <Sider width={"280px"}>
-          <Menu
-            mode="inline"
-            style={{
-              height: "100%",
-              borderRight: 0,
-              fontFamily: "Roboto",
-            }}
-            theme={"light"}
-            defaultChecked={"0"}
-            defaultSelectedKeys={["0"]}
-            items={items}
-          />
-        </Sider>
-        <div
-          style={{
-            width: "100%",
-          }}
-        >
-          {contentArray[index]}
-        </div>
+        <Outlet />
       </div>
-    </>
+    </div>
   );
 }
