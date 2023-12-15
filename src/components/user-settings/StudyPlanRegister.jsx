@@ -181,7 +181,7 @@ export default function StudyPlanRegister() {
         notification.success({
           message: "Trilha alterada com sucesso!",
         });
-        navigate("settings/study-plans")();
+        navigate("/settings/study-plans");
       } catch (error) {
         notification.error({
           message: "Erro!",
@@ -213,7 +213,7 @@ export default function StudyPlanRegister() {
           message: "Trilha cadastrada com sucesso!",
         });
         register.reset();
-        navigate("settings/study-plans")();
+        navigate("/settings/study-plans");
       } catch (error) {
         notification.error({
           message: "Algo deu errado!",
