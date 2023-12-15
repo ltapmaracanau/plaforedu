@@ -60,6 +60,7 @@ const trilhasModel = {
         page = 0,
         registerLog = false,
         itinerario = undefined,
+        itineraries = [],
         competencies = [],
         sort = {
           createdAt: undefined,
@@ -71,7 +72,7 @@ const trilhasModel = {
         search: query.trim(),
         page: page,
         registerLog: registerLog,
-        itineraries: itinerario ? [itinerario] : [],
+        itineraries: itinerario ? [itinerario] : itineraries,
         competencies: competencies,
         sortByCreatedAt: !!sort.createdAt,
         sortByUpdatedAt: !!sort.updatedAt,

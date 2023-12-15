@@ -37,6 +37,9 @@ export default function HomepageItineario({
   const handleMouseLeave = () => {
     setIsHover(false);
   };
+  const handleFocusEnter = () => {
+    setIsHover(true);
+  };
 
   const cardStyle = {
     width: screens.xs ? '300px' : '200px',
@@ -62,6 +65,7 @@ export default function HomepageItineario({
         to="/cursos"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onFocus={handleFocusEnter}
         style={cardStyle}
       >
         <div
