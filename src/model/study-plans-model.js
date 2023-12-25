@@ -120,6 +120,21 @@ const studyPlansModel = {
         actions.setLoading(false);
       });
   }),
+
+  downloadStudyPlansCourses: thunk(async (actions, payload) => {
+    const { id } = payload;
+    return await services.studyPlansService
+      .downloadStudyPlansCourses({ id })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        throw new Error(error.response?.data?.message || "Algo deu errado!");
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
+  }),
 };
 
 export default studyPlansModel;

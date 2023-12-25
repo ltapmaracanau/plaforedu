@@ -13,8 +13,13 @@ import {
 import { useStoreActions } from "easy-peasy";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { EditOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  ArrowLeftOutlined,
+  DownloadOutlined,
+} from "@ant-design/icons";
 import CourseModalVisualization from "../CourseModalVisualization";
+import downloadBlob from "../../helpers/downloadBlob";
 
 export default function StudyPlanView() {
   const { id } = useParams();
@@ -23,6 +28,7 @@ export default function StudyPlanView() {
 
   const [studyPlan, setStudyPlan] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
   const [courseModalVisualizationVisible, setCourseModalVisualizationVisible] =
     useState(false);
   const [courseModalVisualizationId, setCourseModalVisualizationId] =
@@ -31,6 +37,24 @@ export default function StudyPlanView() {
   const getUniqueStudyPlan = useStoreActions(
     (actions) => actions.studyPlans.getUniqueStudyPlan
   );
+  const downloadStudyPlansCourses = useStoreActions(
+    (actions) => actions.studyPlans.downloadStudyPlansCourses
+  );
+
+  const onDownloadCSV = async ({ id }) => {
+    setDownloading(true);
+    try {
+      const data = await downloadStudyPlansCourses({ id });
+      downloadBlob(data, "CursosPlanoDeEstudoPlafor.csv");
+    } catch (error) {
+      notification.error({
+        message: "Erro ao exportar CSV",
+        description: error.message,
+      });
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   useEffect(() => {
     async function init() {
@@ -87,14 +111,33 @@ export default function StudyPlanView() {
               }}
             >
               {studyPlan?.name}
-              <Button
-                icon={<EditOutlined />}
-                onClick={() => {
-                  navigate(`/settings/study-plans/edit/${studyPlan.id}`);
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: "1rem",
                 }}
               >
-                Editar
-              </Button>
+                <Button
+                  icon={<DownloadOutlined />}
+                  loading={downloading}
+                  onClick={async () => {
+                    await onDownloadCSV({ id });
+                  }}
+                >
+                  Exportar CSV
+                </Button>
+                <Button
+                  type="primary"
+                  icon={<EditOutlined />}
+                  onClick={() => {
+                    navigate(`/settings/study-plans/edit/${studyPlan.id}`);
+                  }}
+                >
+                  Editar
+                </Button>
+              </div>
             </div>
           }
           avatar={
