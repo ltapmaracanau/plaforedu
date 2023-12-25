@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import {
@@ -12,7 +12,6 @@ import {
   Typography,
   Collapse,
   Empty,
-  Space,
   Skeleton,
   Spin,
   Tooltip,
@@ -21,10 +20,8 @@ import {
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  FileExcelOutlined,
   DownloadOutlined,
 } from "@ant-design/icons";
-import { dataService } from "../../services/dataService";
 import { CSVLink } from "react-csv";
 
 const { Text, Title } = Typography;
@@ -38,11 +35,9 @@ export default function CoursesListVisualization() {
   const getUniqueCourse = useStoreActions(
     (actions) => actions.courses.getUniqueCourse
   );
-  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
   const cursos = useStoreState((state) => state.courses.cursos);
-  const count = useStoreState((state) => state.courses.count);
   const trilhas = useStoreState((state) => state.trilhas.trilhas);
 
   const listCompetencias = useStoreState(
@@ -58,7 +53,6 @@ export default function CoursesListVisualization() {
   const loading = useStoreState((state) => state.courses.loading);
   const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
   const [modalVisible, setModalVisible] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
 
   const handleOk = () => {
     setModalVisible(false);
@@ -100,7 +94,7 @@ export default function CoursesListVisualization() {
     { label: "Descrição", key: "descricao" },
   ];
 
-  const csvTrilhasHeaders = [
+  /* const csvTrilhasHeaders = [
     { label: "Trilha", key: "trilha" },
     { label: "Descrição trilha", key: "descTrilha" },
     { label: "Título", key: "titulo" },
@@ -109,7 +103,7 @@ export default function CoursesListVisualization() {
     { label: "Instituição Certificadora", key: "instCert" },
     { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
     { label: "Link", key: "link" },
-  ];
+  ]; */
 
   const data = useMemo(() => {
     return cursos.map((course) => {

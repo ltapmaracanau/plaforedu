@@ -1,4 +1,4 @@
-import { forgetPasswordSchema } from "../schemas/forgetPasswordSchema";
+import { forgotPasswordSchema } from "../schemas/forgotPasswordSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -6,9 +6,9 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { Button, Card, Form, Input, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
-export default function ForgetPassword() {
-  const forgetPassword = useStoreActions(
-    (actions) => actions.adm.forgetPassword
+export default function ForgotPassword() {
+  const forgotPassword = useStoreActions(
+    (actions) => actions.adm.forgotPassword
   );
   const loading = useStoreState((state) => state.adm.loading);
 
@@ -18,7 +18,7 @@ export default function ForgetPassword() {
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {},
-    resolver: yupResolver(forgetPasswordSchema),
+    resolver: yupResolver(forgotPasswordSchema),
     context: undefined,
     criteriaMode: "firstError",
     shouldFocusError: true,
@@ -28,11 +28,11 @@ export default function ForgetPassword() {
   });
 
   const onSubmit = async (values) => {
-    const forget = await forgetPassword(values);
-    if (forget.error) {
+    const forgot = await forgotPassword(values);
+    if (forgot.error) {
       notification.error({
         message: "Algo deu errado!",
-        description: forget.message,
+        description: forgot.message,
       });
     } else {
       notification.success({

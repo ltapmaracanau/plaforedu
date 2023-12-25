@@ -77,18 +77,18 @@ const trilhasModel = {
         sortByCreatedAt: !!sort.createdAt,
         sortByUpdatedAt: !!sort.updatedAt,
       };
-      try {
-        await services.trailsService.getTrilhas(request).then((trilhas) => {
-          if (trilhas?.data?.length >= 0) {
-            actions.setCount(trilhas.count);
-            actions.setTrilhas(trilhas.data);
-          }
+      return await services.trailsService
+        .getTrilhas(request)
+        .then((response) => {
+          actions.setCount(response.data.count);
+          actions.setTrilhas(response.data.data);
+        })
+        .catch((error) => {
+          throw new Error(error);
+        })
+        .finally(() => {
+          actions.setLoading(false);
         });
-      } catch (error) {
-        throw new Error(error.message);
-      } finally {
-        actions.setLoading(false);
-      }
     }
   ),
 
@@ -119,7 +119,7 @@ const trilhasModel = {
         competencies,
       });
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     } finally {
       actions.setRegistering(false);
     }
@@ -132,20 +132,21 @@ const trilhasModel = {
       courseId: item,
       sequence: index + 1,
     }));
-    const newPayload = {
+    const dataService = {
       name: payload.name.trim(),
       description: payload.description,
       itineraries: payload.itineraries,
       competencies: payload.competencies,
       courses: coursesRefactored,
     };
-    try {
-      await services.trailsService.registerTrilha(newPayload);
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setRegistering(false);
-    }
+    return await services.trailsService
+      .registerTrilha(dataService)
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setRegistering(false);
+      });
   }),
 
   setArchivedTrilha: thunk(async (actions, payload) => {
@@ -158,7 +159,7 @@ const trilhasModel = {
         await services.trailsService.unarchiveTrilha({ id });
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     } finally {
       actions.setArchiving(false);
     }

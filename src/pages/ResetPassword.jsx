@@ -34,21 +34,21 @@ export default function ResetPassword() {
   });
 
   const onSubmit = async (values) => {
-    const tryReset = await resetPassword({
-      token: query.get("token").replace('"', ""),
-      password: values.password1,
-    });
-    if (tryReset.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: tryReset.message,
+    try {
+      await resetPassword({
+        token: query.get("token").replace('"', ""),
+        password: values.password1,
       });
-    } else {
       notification.success({
         message: "Alteração bem sucedida!",
         description: "Agora você pode fazer login!",
       });
       navigate(`/`);
+    } catch (error) {
+      notification.error({
+        message: "Algo deu errado!",
+        description: error.message,
+      });
     }
   };
 

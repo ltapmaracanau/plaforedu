@@ -6,7 +6,7 @@ import teamSVG from "../assets/ITteam.jpg";
 
 import { faleConoscoSchema } from "../schemas/faleConoscoSchema";
 
-import { sendEmail } from "../services/sendEmailService";
+import { sendEmail } from "../services/email-service";
 
 import { SendOutlined, WarningOutlined } from "@ant-design/icons";
 

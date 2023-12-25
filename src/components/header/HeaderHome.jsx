@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Link, useNavigate } from "react-router-dom";
 
 import LogoPlafor from "../../assets/LOGOPLAFORHEADER.svg";
@@ -11,7 +9,6 @@ import {
   MenuOutlined,
   LogoutOutlined,
   SettingOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 
 import {
@@ -22,7 +19,6 @@ import {
   Image,
   Button,
   Avatar,
-  Space,
   notification,
   ConfigProvider,
 } from "antd";
@@ -64,6 +60,8 @@ export default function HeaderHome() {
       return;
     } else if (key === "logout") {
       logOut();
+    } else if (key === "login") {
+      return;
     } else {
       onClickItinerario(key);
     }
@@ -72,9 +70,6 @@ export default function HeaderHome() {
   const logOut = () => {
     try {
       logout();
-      notification.success({
-        message: "Logout concluído com sucesso!",
-      });
       navigate("/login");
     } catch (error) {
       notification.error({
@@ -143,7 +138,7 @@ export default function HeaderHome() {
           <Button shape="round">LOGIN</Button>
         </Link>
       ),
-      key: 7,
+      key: "login",
       children: isAuthenticated
         ? [
             {
@@ -157,7 +152,7 @@ export default function HeaderHome() {
               icon: <LogoutOutlined />,
             },
           ]
-        : [],
+        : undefined,
     },
   ];
 

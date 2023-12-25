@@ -20,7 +20,7 @@ const studyPlansModel = {
 
   getStudyPlans: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    await services.studyPlansService
+    return await services.studyPlansService
       .getStudyPlans({
         page: payload.pageNumber,
         search: payload.textSearch,
@@ -30,7 +30,7 @@ const studyPlansModel = {
         actions.setCount(response.data.count);
       })
       .catch((error) => {
-        throw new Error(error.response?.data?.message || "Algo deu errado!");
+        throw new Error(error);
       })
       .finally(() => {
         actions.setLoading(false);
@@ -46,7 +46,7 @@ const studyPlansModel = {
         return response.data;
       })
       .catch((error) => {
-        throw new Error(error.response?.data?.message || "Algo deu errado!");
+        throw new Error(error);
       })
       .finally(() => {
         actions.setLoading(false);
@@ -56,7 +56,7 @@ const studyPlansModel = {
   updateStudyPlan: thunk(async (actions, payload) => {
     actions.setLoading(true);
     const { id, name, description, courses } = payload;
-    await services.studyPlansService
+    return await services.studyPlansService
       .updateStudyPlan({
         id,
         name,
@@ -78,7 +78,7 @@ const studyPlansModel = {
           });
       })
       .catch((error) => {
-        throw new Error(error.response?.data?.message || "Algo deu errado!");
+        throw new Error(error);
       })
       .finally(() => {
         actions.setLoading(false);
@@ -87,7 +87,7 @@ const studyPlansModel = {
 
   createStudyPlan: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    await services.studyPlansService
+    return await services.studyPlansService
       .createStudyPlan({
         name: payload.name,
         description: payload.description,
@@ -97,7 +97,7 @@ const studyPlansModel = {
         return;
       })
       .catch((error) => {
-        throw new Error(error.response?.data?.message || "Algo deu errado!");
+        throw new Error(error);
       })
       .finally(() => {
         actions.setLoading(false);
@@ -106,7 +106,7 @@ const studyPlansModel = {
 
   deleteStudyPlan: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    await services.studyPlansService
+    return await services.studyPlansService
       .deleteStudyPlan({
         id: payload.id,
       })
@@ -114,7 +114,7 @@ const studyPlansModel = {
         return;
       })
       .catch((error) => {
-        throw new Error(error.response?.data?.message || "Algo deu errado!");
+        throw new Error(error);
       })
       .finally(() => {
         actions.setLoading(false);
@@ -129,10 +129,7 @@ const studyPlansModel = {
         return response.data;
       })
       .catch((error) => {
-        throw new Error(error.response?.data?.message || "Algo deu errado!");
-      })
-      .finally(() => {
-        actions.setLoading(false);
+        throw new Error(error);
       });
   }),
 };
