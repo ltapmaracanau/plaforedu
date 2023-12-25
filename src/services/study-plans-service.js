@@ -27,4 +27,7 @@ export default {
     }),
 
   deleteStudyPlan: (payload) => AuthAxios.delete(`/study-plans/${payload.id}`),
+
+  downloadStudyPlansCourses: (payload) =>
+    AuthAxios.get(`/study-plans/${payload.id}/export-csv`),
 };

@@ -14,6 +14,7 @@ import React, { useEffect, useState } from "react";
 
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
 import AuthAxios from "../../services/authAxios";
+import downloadBlob from "../../helpers/downloadBlob";
 
 const { Content } = Layout;
 const { RangePicker } = DatePicker;
@@ -59,14 +60,7 @@ export default function ListSearchLogs() {
         responseType: "blob",
       });
 
-      const downloadURL = window.URL.createObjectURL(new Blob([data]));
-
-      const linkElement = document.createElement("a");
-      linkElement.href = downloadURL;
-      linkElement.setAttribute("download", "PLAFOR_logs.csv");
-      document.body.appendChild(linkElement);
-      linkElement.click();
-      linkElement.remove();
+      downloadBlob(data, "PLAFOR_logs.csv");
     } catch (error) {
       notification.error({
         message: "Algo deu errado!",
