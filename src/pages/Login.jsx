@@ -28,9 +28,6 @@ export default function Login() {
   const onSubmit = async (values) => {
     try {
       await login(values);
-      notification.success({
-        message: "Login bem sucedido!",
-      });
       navigate(`/`);
     } catch (error) {
       notification.error({

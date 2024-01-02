@@ -1,5 +1,8 @@
 import { notification } from "antd";
 import axios from "axios";
+import services from ".";
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const AuthAxios = import.meta.env.PROD
   ? axios.create({
@@ -18,7 +21,7 @@ const AuthAxios = import.meta.env.PROD
 // Set token to all requests
 AuthAxios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = services.loginService.getProfile()?.token;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -32,20 +35,21 @@ AuthAxios.interceptors.request.use(
 // Catch of 401 errors
 AuthAxios.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    console.log(error);
     if (error.response.status === 401) {
       notification.error({
-        message: "Erro",
+        message: "Atenção!",
         description:
-          "Sua sessão expirou, faça login novamente, você está sendo redirecionado.",
-        onClose: () => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("user");
-          window.location.href = "/login";
-        },
+          "Sua sessão expirou, faça login novamente, você está sendo redirecionado...",
       });
+      await wait(3000);
+      localStorage.removeItem("profile");
+      window.location.href = "/login";
     }
-    return Promise.reject(error);
+    return Promise.reject(
+      error.response?.data?.message || error.message || "Erro Desconhecido"
+    );
   }
 );
 

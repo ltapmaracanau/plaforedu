@@ -1,25 +1,18 @@
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import { useRef, useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import CytoscapeComponent from "react-cytoscapejs";
-import { CSVLink } from "react-csv";
-/* import { PDFDownloadLink } from "@react-pdf/renderer"; */
+// import { CSVLink } from "react-csv";
+// import { PDFDownloadLink } from "@react-pdf/renderer";
 
 import fundoLegenda from "../../assets/icon/PLAFOREDU_Icones-Legenda.png";
 
-/* import { Template } from "../pdf-document"; */
+// import { Template } from "../pdf-document";
 
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   PlusOutlined,
   MinusOutlined,
-  CloseOutlined,
 } from "@ant-design/icons";
 
 import {
@@ -36,9 +29,7 @@ import {
   Skeleton,
   Space,
   List,
-  Empty,
 } from "antd";
-import { dataService } from "../../services/dataService";
 
 const { Text } = Typography;
 
@@ -84,7 +75,7 @@ export default function CytoscapeVisualization() {
   const [modalCourseVisible, setModalCourseVisible] = useState(false);
   const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
 
-  const csvCursosHeaders = [
+  /* const csvCursosHeaders = [
     { label: "Título", key: "titulo" },
     { label: "Descrição", key: "descricao" },
     { label: "Carga horária", key: "cargaHoraria" },
@@ -102,7 +93,7 @@ export default function CytoscapeVisualization() {
     { label: "Instituição Certificadora", key: "instCert" },
     { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
     { label: "Link", key: "link" },
-  ];
+  ]; */
 
   const handleOk = () => {
     setCompetenceOnModal(undefined);

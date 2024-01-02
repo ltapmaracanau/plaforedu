@@ -1,4 +1,4 @@
-import AuthAxios from "./authAxios";
+import AuthAxios from "./auth-axios";
 
 export default {
   getStudyPlans: (payload) =>

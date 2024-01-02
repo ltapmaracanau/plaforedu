@@ -28,20 +28,20 @@ export default function UpdatePassword() {
   });
 
   const onSubmit = async (values) => {
-    const tryReset = await updatePassword({
-      oldPassword: values.oldPassword,
-      newPassword: values.password1,
-    });
-    if (tryReset.error) {
-      notification.error({
-        message: "Algo deu errado!",
-        description: tryReset.message,
+    try {
+      await updatePassword({
+        oldPassword: values.oldPassword,
+        newPassword: values.password1,
       });
-    } else {
       notification.success({
         message: "A senha foi alterada com sucesso!",
       });
       register.reset();
+    } catch (error) {
+      notification.error({
+        message: "Algo deu errado!",
+        description: error.message,
+      });
     }
   };
 

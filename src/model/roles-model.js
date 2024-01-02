@@ -1,5 +1,5 @@
 import { action, thunk } from "easy-peasy";
-import { dataService } from "../services/dataService";
+import services from "../services";
 
 const rolesModel = {
   loading: false,
@@ -7,11 +7,19 @@ const rolesModel = {
 
   getRoles: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true);
-    const roles = await dataService.getRoles({ query: payload.query.trim() });
-    if (roles?.length > 0) {
-      actions.setRoles(roles);
-    }
-    actions.setLoading(false);
+    return await services.admService
+      .getRoles({
+        query: payload.query.trim(),
+      })
+      .then((response) => {
+        actions.setRoles(response.data);
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
   setRoles: action((state, payload) => {

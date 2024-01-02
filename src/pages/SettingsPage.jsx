@@ -42,11 +42,12 @@ export default function SettingsPage() {
       label: "Planos de Estudo",
       key: "/settings/study-plans",
       icon: <NodeIndexOutlined />,
+      disabled: !isActive,
     },
     {
       label: "Cadastros",
       key: "registers",
-      disabled: !(isAdm || isCoord || isAnalDados || isActive),
+      disabled: !isActive || !(isAdm || isCoord || isAnalDados),
       icon: <DiffOutlined />,
       children: [
         {
@@ -95,7 +96,7 @@ export default function SettingsPage() {
     {
       key: "/settings/logs",
       icon: <FileSearchOutlined />,
-      disabled: !(isAdm || isCoord || isActive),
+      disabled: !isActive || !(isAdm || isCoord || isAnalDados),
       label: "Relatório de Buscas",
     },
   ];

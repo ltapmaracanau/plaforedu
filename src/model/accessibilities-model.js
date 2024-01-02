@@ -1,5 +1,5 @@
 import { action, thunk } from "easy-peasy";
-import { dataService } from "../services/dataService";
+import services from "../services";
 
 const accessibilitiesModel = {
   loading: false,
@@ -7,13 +7,23 @@ const accessibilitiesModel = {
 
   getAcessibilidades: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true);
-    const acessibilidades = await dataService.getAcessibilidades({
-      query: payload.query.trim(),
-    });
-    if (acessibilidades?.length > 0) {
-      actions.setAcessibilidades(acessibilidades);
-    }
-    actions.setLoading(false);
+    await services.admService
+      .getAcessibilidades({
+        query: payload.query.trim(),
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          actions.setAcessibilidades(response.data);
+        }
+      })
+      .catch((error) => {
+        throw new Error(
+          error.response?.data?.message || "Erro ao buscar acessibilidades"
+        );
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
   setLoading: action((state, payload) => {

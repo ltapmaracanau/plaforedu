@@ -1,25 +1,24 @@
-import dayjs, { Dayjs } from "dayjs";
 import { action, computed, thunk } from "easy-peasy";
-import AuthAxios from "../services/authAxios";
-import { dataService } from "../services/dataService";
+import AuthAxios from "../services/auth-axios";
+import services from "../services";
 import { notification } from "antd";
 
 const admModel = {
   tipoVisualizacao: true, // false: grafo, true: lista
   filterCollapsed: true, // true: filtro escondido, false: filtro visível
   loading: false,
-  loadingLogs: false,
+  loadingStatistics: false,
   iniciando: true,
   downloadingSearchLogs: false,
-  isAuthenticated: computed((_state) => !!dataService.getToken()),
+  isAuthenticated: computed(() => !!services.loginService.getProfile()?.token),
   searchLogs: [],
   randomTrails: [],
   countLogs: 0,
 
-  info: {},
+  statistics: {},
   loadingInfo: false,
 
-  myProfile: computed((_state) => dataService.getLocalStorageUser()),
+  myProfile: computed(() => services.loginService.getProfile()),
   allDataProfile: {},
 
   isActive: computed((state) => state.myProfile?.status === "ACTIVE"),
@@ -43,6 +42,15 @@ const admModel = {
   init: thunk(async (actions, _, { getStoreActions }) => {
     try {
       await getStoreActions().itineraries.getItinerarios();
+      await actions.getRandomTrails();
+      await actions.getStatistics();
+      if (services.loginService.getProfile()?.status === "PENDING") {
+        notification.warning({
+          message: "Aviso!",
+          description:
+            "Antes do acesso total ao sistema você precisa alterar sua senha!",
+        });
+      }
     } finally {
       actions.setIniciando(false);
     }
@@ -50,151 +58,195 @@ const admModel = {
 
   login: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    try {
-      const authentication = await dataService.login({
+    return await services.loginService
+      .login({
         username: payload.username,
         password: payload.password,
+      })
+      .then((response) => {
+        console.log("authentication", response.data);
+        if (response.data?.user?.status === "PENDING") {
+          notification.warning({
+            message: "Aviso!",
+            description:
+              "Antes do acesso total ao sistema você precisa alterar sua senha!",
+          });
+        }
+        localStorage.setItem(
+          "profile",
+          JSON.stringify({
+            token: response.data.token,
+            roles: response.data.user.roles,
+            status: response.data.user.status,
+          })
+        );
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoading(false);
       });
-      console.log("authentication", authentication);
-      if (authentication?.user?.status === "PENDING") {
-        notification.warning({
-          message: "Aviso!",
-          description:
-            "Antes do acesso total ao sistema você precisa alterar sua senha!",
-        });
-      }
-      localStorage.setItem("token", authentication.token);
-      localStorage.setItem("user", JSON.stringify(authentication.user));
-    } catch (e) {
-      actions.setLoading(false);
-      throw new Error(e);
-    } finally {
-      actions.setLoading(false);
-    }
   }),
 
-  logout: thunk(async (actions, _) => {
-    actions.setLoading(true);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+  logout: thunk(async (actions) => {
+    localStorage.removeItem("profile");
     AuthAxios.defaults.headers.Authorization = undefined;
     actions.setAllDataProfile({});
-    actions.setLoading(false);
+    actions.setIsAuthenticated(false);
   }),
 
-  getRandomTrails: thunk(async (actions, _) => {
-    try {
-      const trails = await dataService.getRandomTrailsHomepage();
-      actions.setRandomTrails(trails.formativeTrails);
-    } catch (e) {
-      throw new Error(e);
-    }
-  }),
-
-  forgetPassword: thunk(async (actions, payload) => {
+  getRandomTrails: thunk(async (actions) => {
     actions.setLoading(true);
-    const tryForgetPassword = await dataService.forgetPassword({
-      username: payload.username,
-    });
-    actions.setLoading(false);
-    return tryForgetPassword;
+    return await services.admService
+      .getRandomTrailsHomepage()
+      .then((response) => {
+        if (response.status === 200) {
+          actions.setRandomTrails(response.data.formativeTrails);
+        }
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
+  }),
+
+  forgotPassword: thunk(async (actions, payload) => {
+    actions.setLoading(true);
+    return await services.loginService
+      .forgotPassword({
+        username: payload.username,
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
   resetPassword: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    const tryResetPassword = await dataService.resetPassword({
-      token: payload.token,
-      password: payload.password,
-    });
-    actions.setLoading(false);
-    return tryResetPassword;
+    await services.loginService
+      .resetPassword({
+        token: payload.token,
+        password: payload.password,
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
   updatePassword: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    const tryUpdatePassword = await dataService.updatePassword({ ...payload });
-    const newUser = await dataService.getAllDataProfile();
-    actions.setAllDataProfile(newUser);
-    // set user in local storage
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        name: newUser.name,
-        email: newUser.email,
-        roles: newUser.roles.map((role) => role.name),
-        status: newUser.status,
+    return await services.loginService
+      .updatePassword({
+        ...payload,
       })
-    );
-    actions.setLoading(false);
-    return tryUpdatePassword;
+      .then(async () => {
+        const { data } = await services.loginService.getAllDataProfile();
+        actions.setAllDataProfile(data);
+        // set user in local storage
+        const oldLocalUser = services.loginService.getProfile();
+        localStorage.setItem(
+          "profile",
+          JSON.stringify({
+            token: oldLocalUser.token,
+            roles: data.UsersRoles.map((item) => item.role.name),
+            status: data.status,
+          })
+        );
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
-  getAllDataProfile: thunk(async (actions, _) => {
+  getAllDataProfile: thunk(async (actions) => {
     actions.setLoading(true);
-    try {
-      const allDataProfile = await dataService.getAllDataProfile();
-      actions.setAllDataProfile(allDataProfile);
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setLoading(false);
-    }
+    return await services.loginService
+      .getAllDataProfile()
+      .then((response) => {
+        actions.setAllDataProfile(response.data);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
   getSearchLogs: thunk(async (actions, payload = {}) => {
     const { page = 1, description = "", user = "", date = undefined } = payload;
     actions.setLoadingLogs(true);
-    try {
-      const logs = await dataService.getSearchLogs({
+    return await services.admService
+      .getSearchLogs({
         page: page,
         description: description.trim(),
         userName: user.trim(),
         initialDate: date ? date[0].format("YYYY-MM-DD") : "",
         finalDate: date ? date[1].format("YYYY-MM-DD") : "",
+      })
+      .then((response) => {
+        actions.setSearchLogs(response.data.data);
+        actions.setCountLogs(response.data.count);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoadingLogs(false);
       });
-      actions.setSearchLogs(logs.data);
-      actions.setCountLogs(logs.count);
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setLoadingLogs(false);
-    }
   }),
 
-  downloadSearchLogs: thunk(async (actions, payload) => {
+  downloadSearchLogs: thunk(async (actions) => {
     actions.setDownloadingSearchLogs(true);
-    try {
-      await dataService.downloadListLogs();
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setDownloadingSearchLogs(false);
-    }
+    return await services.admService
+      .downloadListLogs()
+      .then((response) => response.data)
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setDownloadingSearchLogs(false);
+      });
   }),
 
-  getInfo: thunk(async (actions, _) => {
-    actions.setLoadingInfo(true);
-    try {
-      const info = await dataService.getInfo();
-      actions.setInfo(info);
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setLoadingInfo(false);
-    }
+  getStatistics: thunk(async (actions) => {
+    actions.setLoadingStatistics(true);
+    return await services.admService
+      .getStatistics()
+      .then((response) => {
+        actions.setStatistics(response.data);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoadingStatistics(false);
+      });
   }),
 
   // Setters
 
-  setInfo: action((state, payload) => {
-    state.info = payload;
+  setStatistics: action((state, payload) => {
+    state.statistics = payload;
   }),
 
-  setLoadingInfo: action((state, payload) => {
-    state.loadingInfo = payload;
+  setLoadingStatistics: action((state, payload) => {
+    state.loadingStatistics = payload;
   }),
 
-  setFilterCollapsed: action((state, _) => {
+  setFilterCollapsed: action((state) => {
     state.filterCollapsed = !state.filterCollapsed;
   }),
 
