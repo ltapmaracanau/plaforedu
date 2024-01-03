@@ -13,7 +13,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
-import AuthAxios from "../../services/authAxios";
+import AuthAxios from "../../services/auth-axios";
 import downloadBlob from "../../helpers/downloadBlob";
 
 const { Content } = Layout;

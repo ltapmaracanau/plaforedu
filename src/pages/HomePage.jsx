@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import "./homepage.css";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -43,7 +43,7 @@ import {
   notification,
 } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
-import { dataService } from "../services/dataService";
+import services from "../services";
 
 const { useBreakpoint } = Grid;
 const { Title, Text } = Typography;
@@ -52,12 +52,12 @@ export default function HomePage() {
   const screens = useBreakpoint();
   let navigate = useNavigate();
 
-  const recentCourses = dataService.getLastViewedCourses();
+  const recentCourses = services.admService.getLastViewedCourses();
   const [modalVisible, setModalVisible] = useState(false);
 
-  const info = useStoreState((state) => state.adm.info);
-  //const loadingInfo = useStoreState((state) => state.adm.loadingInfo);
-  const getInfo = useStoreActions((actions) => actions.adm.getInfo);
+  const statistics = useStoreState((state) => state.adm.statistics);
+  //const loadingStatistics = useStoreState((state) => state.adm.loadingStatistics);
+  const getStatistics = useStoreActions((actions) => actions.adm.getStatistics);
   const randomTrails = useStoreState((state) => state.adm.randomTrails);
   const getRandomTrails = useStoreActions(
     (actions) => actions.adm.getRandomTrails
@@ -71,11 +71,6 @@ export default function HomePage() {
   const getUniqueCourse = useStoreActions(
     (actions) => actions.courses.getUniqueCourse
   );
-
-  React.useEffect(() => {
-    getInfo();
-    getRandomTrails();
-  }, [getInfo, getRandomTrails]);
 
   return (
     <>
@@ -370,35 +365,35 @@ export default function HomePage() {
               nameItinerario={"Iniciação"}
               itinerario={"Iniciação ao Serviço Público"}
               colorItinerario={"var(--iniciacao)"}
-              tabindex = "1"
+              tabindex="1"
             />
             <HomepageItineario
               imgItinerario={screens.xs ? administrativoIcon : Int5}
               nameItinerario={"Educação"}
               itinerario={"Técnico Administrativo em Educação"}
               colorItinerario={"var(--administrativo)"}
-              tabindex = "2"
+              tabindex="2"
             />
             <HomepageItineario
               imgItinerario={screens.xs ? docenteIcon : Int1}
               nameItinerario={"Docente"}
               itinerario={"Docente"}
               colorItinerario={"var(--docente)"}
-              tabindex = "3"
+              tabindex="3"
             />
             <HomepageItineario
               imgItinerario={screens.xs ? gerencialIcon : Int3}
               nameItinerario={"Gerencial"}
               itinerario={"Gerencial"}
               colorItinerario={"var(--gerencial)"}
-              tabindex = "4"
+              tabindex="4"
             />
             <HomepageItineario
               imgItinerario={screens.xs ? aposentadoriaIcon : Int4}
               nameItinerario={"Preparação"}
               itinerario={"Preparação para a Aposentadoria"}
               colorItinerario={"var(--aposentadoria)"}
-              tabindex = "5"
+              tabindex="5"
             />
           </Row>
         </div>
@@ -580,7 +575,7 @@ export default function HomePage() {
         )}
       </Row>
 
-      {info?.courses && (
+      {statistics?.courses && (
         <div
           style={{
             width: "100%",
@@ -614,7 +609,7 @@ export default function HomePage() {
                   margin: 0,
                 }}
               >
-                {info.courses}
+                {statistics.courses}
               </Title>
               <p
                 className="titulo"
@@ -646,7 +641,7 @@ export default function HomePage() {
                   margin: 0,
                 }}
               >
-                {info.institutions}
+                {statistics.institutions}
               </Title>
               <span
                 className="titulo"

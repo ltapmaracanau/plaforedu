@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const forgetPasswordSchema = yup.object().shape({
+export const forgotPasswordSchema = yup.object().shape({
   username: yup
     .string()
     .required("Obrigatório!")

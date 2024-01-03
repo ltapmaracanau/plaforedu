@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Controller, useForm } from "react-hook-form";
@@ -12,7 +12,6 @@ import {
   Card,
   Form,
   Input,
-  Layout,
   Select,
   Skeleton,
   notification,
@@ -21,8 +20,6 @@ import {
   Switch,
   Space,
 } from "antd";
-
-const { Content } = Layout;
 
 export default function UserUpdate(props) {
   const { id, actionVisible } = props;
@@ -288,7 +285,7 @@ export default function UserUpdate(props) {
                 }}
               >
                 <Button
-                  loading={loading}
+                  loading={registering || loading}
                   disabled={!register.formState.isValid}
                   type="primary"
                   shape="round"
@@ -297,7 +294,7 @@ export default function UserUpdate(props) {
                   Salvar
                 </Button>
                 <Button
-                  loading={registering}
+                  loading={registering || loading}
                   disabled={user.status !== "PENDING"}
                   type="primary"
                   shape="round"

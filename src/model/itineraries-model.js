@@ -1,12 +1,5 @@
 import { action, thunk } from "easy-peasy";
-
-import Banner0 from "../assets/PLAFOR.png";
-import Banner1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
-import Banner2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_TecAdmEdu.png";
-import Banner3 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
-import Banner4 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Gerencial.png";
-import Banner5 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_PrepAposenta.png";
-import { dataService } from "../services/dataService";
+import services from "../services";
 
 const itinerariosModel = {
   loading: false,
@@ -21,13 +14,19 @@ const itinerariosModel = {
 
   getItinerarios: thunk(async (actions, payload = { query: "" }) => {
     actions.setLoading(true);
-    const itinerarios = await dataService.getItinerarios({
-      query: payload.query.trim(),
-    });
-    if (itinerarios?.length > 0) {
-      actions.setItinerarios(itinerarios);
-    }
-    actions.setLoading(false);
+    return await services.admService
+      .getItinerarios({
+        query: payload.query.trim(),
+      })
+      .then((response) => {
+        actions.setItinerarios(response.data);
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
   setLoading: action((state, payload) => {
@@ -37,111 +36,6 @@ const itinerariosModel = {
   setItinerarios: action((state, payload) => {
     state.itinerarios = payload;
   }),
-
-  itinerariosSecondary: [
-    // PlaforEDU
-    {
-      dados_gerais: {
-        id: 0,
-        titulo: "PlaforEDU",
-        publico: "",
-        descricao:
-          "A PlaforEDU tem como objetivo proporcionar um espaço onde os servidores podem encontrar capacitações com a finalidade de potencializar sua atuação na Educação Profissional e Tecnológica, no âmbito da Rede Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).",
-      },
-
-      banner: Banner0,
-
-      grafo_publicado: {
-        trilhas: [],
-        elementos: [],
-      },
-    },
-    // Iniciação ao Serviçõ Púlico
-    {
-      dados_gerais: {
-        id: 1,
-        titulo: "Iniciação ao Serviço Público",
-        publico: "",
-        descricao:
-          "Este Itinerário Formativo pretende integrar o servidor recém-empossado ao ambiente institucional ao qual terá exercício, preparando-o para o desempenho de atividades vinculadas ao ambiente organizacional em que atuará e ao cargo que ocupa na instituição.",
-      },
-
-      banner: Banner1,
-
-      grafo_publicado: {
-        trilhas: [],
-        elementos: [],
-      },
-    },
-    // TAE
-    {
-      dados_gerais: {
-        id: 2,
-        titulo: "Técnico-Administrativo em Educação",
-        publico: "",
-        descricao:
-          "Este Itinerário formativo visa capacitar profissionais alinhados com as políticas institucionais. Nesse sentido, o itinerário apresentará inicialmente aos Técnicos-Administrativos em Educação o Plano de Carreira, suas atribuições e responsabilidades para o desempenho do cargo ao qual foi nomeado. Os outros cursos do itinerário pretendem qualificar os servidores nas diversas áreas de atuação - educacional e administrativa.",
-      },
-
-      banner: Banner2,
-
-      grafo_publicado: {
-        trilhas: [],
-        elementos: [],
-      },
-    },
-    // Docente
-    {
-      dados_gerais: {
-        id: 3,
-        titulo: "Docente", // NOME DO ITINERARIO
-        publico: "",
-        descricao:
-          "Este itinerário é um processo formativo interativo e reflexivo, proporcionando ao docente a resolução dos problemas enfrentados nas práticas educativas em um contexto pedagógico. A metodologia adotada é dinâmica, proporcionando a construção de novos saberes por intermédio das trilhas vinculadas à teoria e às práticas docentes.",
-      },
-
-      banner: Banner3,
-
-      grafo_publicado: {
-        trilhas: [], // ids das trilhas
-        elementos: [],
-      },
-    },
-    // Gerencial
-    {
-      dados_gerais: {
-        id: 4,
-        titulo: "Gerencial",
-        publico: "",
-        descricao:
-          "O itinerário formativo gerencial pode ser percorrido por servidores técnicos-administrativos ou docentes que estejam em cargos/funções de gestão ou que desejem se capacitar para tal, com metodologias modernas, abarcando temáticas tradicionais e contemporâneas.",
-      },
-
-      banner: Banner4,
-
-      grafo_publicado: {
-        trilhas: [],
-        elementos: [],
-      },
-    },
-    // Preparação para a Aposentadoria
-    {
-      dados_gerais: {
-        id: 5,
-        titulo: "Preparação para a aposentadoria",
-        publico: "",
-        descricao:
-          "A aposentadoria já é realidade na Rede Federal EPCT, o itinerário que se apresenta traz o enfoque para um novo encarreiramento. O itinerário foi elaborado a partir de 3 pilares: Formação no contexto  psicológico preparando-se para esta nova realidade, em que as demandas de trabalho e rotina anteriores não existirão mais. Atividades futuras: o aposentado deve pensar no seu perfil, fazer análise de suas características pessoais, habilidades e preferências para descobrir o que irá fazer depois. Pode se associar a ONGs, empreender etc. Financeiro: se este aspecto não estiver bem equacionado, dificilmente o aposentado conseguirá realizar as outras coisas. É fundamental o planejamento financeiro, saber o quanto vai gastar do momento do desligamento para frente e fazer uma análise de expectativa de vida.",
-      },
-
-      banner: Banner5,
-
-      grafo_publicado: {
-        trilhas: [],
-        elementos: [],
-      },
-    },
-  ],
 
   // Layouts de organização do grafo da Cytoscape
   layouts: {

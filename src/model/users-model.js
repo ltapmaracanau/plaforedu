@@ -1,5 +1,5 @@
 import { action, thunk } from "easy-peasy";
-import { dataService } from "../services/dataService";
+import services from "../services";
 
 const usuariosModel = {
   loading: false,
@@ -9,96 +9,125 @@ const usuariosModel = {
   getUsers: thunk(async (actions, payload = { query: "", showFiled: "" }) => {
     const { query = "", showFiled = false } = payload;
     actions.setLoading(true);
-    const users = await dataService.getUsers({
-      query: query.trim(),
-      showFiled: showFiled,
-    });
-    if (users?.length >= 0) {
-      actions.setUsers(users);
-    }
-    actions.setLoading(false);
+    return await services.usersService
+      .getUsers({
+        query: query.trim(),
+        showFiled: showFiled,
+      })
+      .then((response) => {
+        actions.setUsers(response.data);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
   getUniqueUser: thunk(async (actions, payload = { id: "" }) => {
-    const user = await dataService.getUniqueUser({ id: payload.id });
-    if (user) {
-      return user;
-    }
+    return await services.usersService
+      .getUniqueUser({ id: payload.id })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   }),
 
   registerNewUser: thunk(async (actions, payload) => {
     actions.setRegistering(true);
     const { cpf, email, institution, name, phone, roles } = payload;
-    try {
-      await dataService.createUser({
+    return await services.usersService
+      .createUser({
         cpf,
         email: email.trim(),
         institution: institution.trim(),
         name: name.trim(),
         phone,
         roles,
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setRegistering(false);
       });
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setRegistering(false);
-    }
   }),
 
   updateUser: thunk(async (actions, payload) => {
     actions.setRegistering(true);
     const { id, name, email, cpf, institution, phone, roles } = payload;
-    try {
-      await dataService.updateUser({
+    return await services.usersService
+      .updateUser({
         id,
         name: name.trim(),
         email: email.trim(),
         cpf,
         institution: institution.trim(),
         phone,
+      })
+      .then(async () => {
+        await services.usersService.updateUserRoles({
+          id,
+          roles,
+        });
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setRegistering(false);
       });
-      await dataService.updateUserRoles({
-        id,
-        roles,
-      });
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setRegistering(false);
-    }
   }),
 
   blockUser: thunk(async (actions, payload = { id: "" }) => {
     actions.setRegistering(true);
-    try {
-      await dataService.blockUser({ id: payload.id });
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setRegistering(false);
-    }
+    return await services.usersService
+      .blockUser({ id: payload.id })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setRegistering(false);
+      });
   }),
 
   archiveUser: thunk(async (actions, payload = { id: "" }) => {
     actions.setRegistering(true);
-    try {
-      await dataService.archiveUser({ id: payload.id });
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setRegistering(false);
-    }
+    return await services.usersService
+      .archiveUser({ id: payload.id })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setRegistering(false);
+      });
   }),
 
   activeUser: thunk(async (actions, payload = { id: "" }) => {
     actions.setRegistering(true);
-    try {
-      await dataService.activeUser({ id: payload.id });
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setRegistering(false);
-    }
+    return await services.usersService
+      .activeUser({ id: payload.id })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setRegistering(false);
+      });
+  }),
+
+  resendCredentials: thunk(async (actions, payload = { id: "" }) => {
+    actions.setRegistering(true);
+    return await services.usersService
+      .resendCredentials({ id: payload.id })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setRegistering(false);
+      });
   }),
 
   setLoading: action((state, payload) => {

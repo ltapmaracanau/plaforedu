@@ -2,7 +2,6 @@ import { action, computed, thunk, thunkOn } from "easy-peasy";
 import services from "../services";
 
 import reformuladorDeElementosCytoscape from "../helpers/reformuladorDeElementosCytoscape";
-import { dataService } from "../services/dataService";
 
 const initialFilterDefault = {
   query: "",
@@ -104,66 +103,80 @@ const coursesModel = {
       } else {
         newItineraries = itineraries;
       }
-      const cursos = await services.courseService.getCursos({
-        includeFiled: showFiled,
-        registerLog: registerLog,
-        page: page,
-        search: query.trim(),
-        hours: cargaHoraria,
-        institutions: institutions,
-        itineraries: newItineraries,
-        accessibilities: accessibilities,
-        competencies: competencies,
-        taxonomies: taxonomies,
-        subThemes: subtemas,
-        sortByCreatedAt: !!sort.createdAt,
-        sortByUpdatedAt: !!sort.updatedAt,
-      });
-      if (cursos?.data?.length >= 0) {
-        if (secondary) {
-          actions.setCursosSecondary(cursos.data);
-          actions.setCountSecondary(cursos.count);
-        } else {
-          actions.setCursos(cursos.data);
-          actions.setCount(cursos.count);
-        }
-      }
-      if (secondary) {
-        actions.setLoadingSecondary(false);
-      } else {
-        actions.setLoading(false);
-      }
+      return await services.courseService
+        .getCursos({
+          includeFiled: showFiled,
+          registerLog: registerLog,
+          page: page,
+          search: query.trim(),
+          hours: cargaHoraria,
+          institutions: institutions,
+          itineraries: newItineraries,
+          accessibilities: accessibilities,
+          competencies: competencies,
+          taxonomies: taxonomies,
+          subThemes: subtemas,
+          sortByCreatedAt: !!sort.createdAt,
+          sortByUpdatedAt: !!sort.updatedAt,
+        })
+        .then(({ data }) => {
+          if (secondary) {
+            actions.setCursosSecondary(data.data);
+            actions.setCountSecondary(data.count);
+          } else {
+            actions.setCursos(data.data);
+            actions.setCount(data.count);
+          }
+        })
+        .catch((error) => {
+          throw new Error(error);
+        })
+        .finally(() => {
+          if (secondary) {
+            actions.setLoadingSecondary(false);
+          } else {
+            actions.setLoading(false);
+          }
+        });
     }
   ),
 
-  getTaxonomias: thunk(async (actions, _payload) => {
+  getTaxonomias: thunk(async (actions) => {
     actions.setLoading(true);
-    const taxonomias = await services.courseService.getTaxonomias();
-    if (taxonomias?.data?.length >= 0) {
-      actions.setTaxonomias(taxonomias.data);
-    }
-    actions.setLoading(false);
+    services.courseService
+      .getTaxonomias()
+      .then(({ data }) => {
+        actions.setTaxonomias(data);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoading(false);
+      });
   }),
 
   getUniqueCourse: thunk(async (actions, payload) => {
     actions.setLoadingUniqueCourse(true);
     const { id = "" } = payload;
-    try {
-      const course = await services.courseService.getUniqueCourse({ id: id });
-      dataService.setLastViewedCourses({
-        titulo: course.name,
-        id: course.id,
-        institution: course.institutions
-          .map((institution) => institution.abbreviation)
-          .join(", "),
+    return await services.courseService
+      .getUniqueCourse({ id: id })
+      .then(({ data }) => {
+        actions.setUniqueCourse(data);
+        services.admService.setLastViewedCourses({
+          titulo: data.name,
+          id: data.id,
+          institution: data.institutions
+            .map((institution) => institution.abbreviation)
+            .join(", "),
+        });
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoadingUniqueCourse(false);
       });
-      actions.setUniqueCourse(course);
-      return course;
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setLoadingUniqueCourse(false);
-    }
   }),
 
   registerNewCourse: thunk(async (actions, payload) => {
@@ -180,8 +193,8 @@ const coursesModel = {
       taxonomies,
       equivalents,
     } = payload;
-    try {
-      await services.courseService.registerCourse({
+    return await services.courseService
+      .registerCourse({
         name: name.trim(),
         description: description,
         hours: hours,
@@ -192,12 +205,13 @@ const coursesModel = {
         competencies: competencies,
         taxonomies: taxonomies,
         equivalents: equivalents,
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setRegistering(false);
       });
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setRegistering(false);
-    }
   }),
 
   updateCourse: thunk(async (actions, payload) => {
@@ -258,7 +272,7 @@ const coursesModel = {
       }
       await services.courseService.updateCourseSubThemes({ id, subThemes });
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error);
     } finally {
       actions.setRegistering(false);
     }
@@ -267,16 +281,24 @@ const coursesModel = {
   setArchivedCourse: thunk(async (actions, payload) => {
     const { filed, id } = payload;
     actions.setArchiving(true);
-    try {
-      if (filed) {
-        await services.courseService.archiveCourse({ id });
-      } else {
-        await services.courseService.unarchiveCourse({ id });
-      }
-    } catch (error) {
-      throw new Error(error.message);
-    } finally {
-      actions.setArchiving(false);
+    if (filed) {
+      await services.courseService
+        .archiveCourse({ id })
+        .catch((error) => {
+          throw new Error(error);
+        })
+        .finally(() => {
+          actions.setArchiving(false);
+        });
+    } else {
+      await services.courseService
+        .unarchiveCourse({ id })
+        .catch((error) => {
+          throw new Error(error);
+        })
+        .finally(() => {
+          actions.setArchiving(false);
+        });
     }
   }),
 

@@ -1,51 +1,42 @@
 import { notification } from "antd";
 import axios from "axios";
 
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const AuthAxios = import.meta.env.PROD
   ? axios.create({
       baseURL: import.meta.env.VITE_PRODUCTION_API_URL,
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     })
   : axios.create({
       baseURL: import.meta.env.VITE_DEVELOPMENT_API_URL,
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     });
-
-// Set token to all requests
-AuthAxios.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
 
 // Catch of 401 errors
 AuthAxios.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    console.log(error);
     if (error.response.status === 401) {
+      localStorage.removeItem("profile");
       notification.error({
-        message: "Erro",
+        message: "Atenção!",
         description:
-          "Sua sessão expirou, faça login novamente, você está sendo redirecionado.",
-        onClose: () => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("user");
-          window.location.href = "/login";
-        },
+          "Sua sessão expirou, faça login novamente, você está sendo redirecionado...",
       });
+      await wait(3000);
+      window.location.href = "/login";
     }
-    return Promise.reject(error);
+    return Promise.reject(
+      error.response?.data?.message || error.message || "Erro Desconhecido"
+    );
   }
 );
 
