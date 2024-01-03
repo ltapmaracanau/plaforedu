@@ -12,6 +12,8 @@ export default {
       password: payload.password,
     }),
 
+  logout: () => AuthAxios.post("/sign-out"),
+
   forgotPassword: (payload = { username: "" }) =>
     AuthAxios.post("/password/forgot", {
       email: payload.username,
