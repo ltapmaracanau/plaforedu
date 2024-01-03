@@ -67,9 +67,9 @@ export default function HeaderHome() {
     }
   };
 
-  const logOut = () => {
+  const logOut = async () => {
     try {
-      logout();
+      await logout();
       navigate("/login");
     } catch (error) {
       notification.error({

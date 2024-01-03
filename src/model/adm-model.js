@@ -1,5 +1,4 @@
 import { action, computed, thunk } from "easy-peasy";
-import AuthAxios from "../services/auth-axios";
 import services from "../services";
 import { notification } from "antd";
 
@@ -10,7 +9,7 @@ const admModel = {
   loadingStatistics: false,
   iniciando: true,
   downloadingSearchLogs: false,
-  isAuthenticated: computed(() => !!services.loginService.getProfile()?.token),
+  isAuthenticated: computed(() => !!services.loginService.getProfile()),
   searchLogs: [],
   randomTrails: [],
   countLogs: 0,
@@ -64,8 +63,7 @@ const admModel = {
         password: payload.password,
       })
       .then((response) => {
-        console.log("authentication", response.data);
-        if (response.data?.user?.status === "PENDING") {
+        if (response.data?.status === "PENDING") {
           notification.warning({
             message: "Aviso!",
             description:
@@ -75,9 +73,8 @@ const admModel = {
         localStorage.setItem(
           "profile",
           JSON.stringify({
-            token: response.data.token,
-            roles: response.data.user.roles,
-            status: response.data.user.status,
+            roles: response.data.roles,
+            status: response.data.status,
           })
         );
       })
@@ -90,10 +87,16 @@ const admModel = {
   }),
 
   logout: thunk(async (actions) => {
-    localStorage.removeItem("profile");
-    AuthAxios.defaults.headers.Authorization = undefined;
-    actions.setAllDataProfile({});
-    actions.setIsAuthenticated(false);
+    await services.loginService
+      .logout()
+      .then(() => {
+        localStorage.removeItem("profile");
+        actions.setAllDataProfile({});
+        actions.setIsAuthenticated(false);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   }),
 
   getRandomTrails: thunk(async (actions) => {
