@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import {
-  Button,
-  Card,
-  Layout,
-  List,
-  Modal,
-  Input,
-  Tag,
-  Tooltip,
-  Switch,
-} from "antd";
+import { Button, Card, List, Modal, Input, Tag, Tooltip, Switch } from "antd";
 import SubtemaRegister from "./SubtemaRegister";
 
-const { Content } = Layout;
 const { Search } = Input;
 
 export default function SubtemasList() {
@@ -26,11 +15,13 @@ export default function SubtemasList() {
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Subtema");
-  const [editandoSubtema, setEditandoSubtema] = useState({});
+  const [editandoSubtema, setEditandoSubtema] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
-  const loading = useStoreState((state) => state.themes.loading);
+  const loadingSubthemes = useStoreState(
+    (state) => state.themes.loadingSubthemes
+  );
   const subthemes = useStoreState((state) => state.themes.subthemes);
 
   useEffect(() => {
@@ -97,7 +88,7 @@ export default function SubtemasList() {
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => {
-                    setEditandoSubtema({});
+                    setEditandoSubtema(null);
                     setModalText("Cadastrar Subtema");
                     setRegisterVisible(true);
                   }}
@@ -108,7 +99,7 @@ export default function SubtemasList() {
             }
           >
             <List
-              loading={loading}
+              loading={loadingSubthemes}
               dataSource={subthemes}
               style={{ width: "100%" }}
               renderItem={(item) => {
@@ -156,11 +147,11 @@ export default function SubtemasList() {
                 query: textSearch,
                 showFiled: showFiled,
               });
-              setEditandoSubtema({});
+              setEditandoSubtema(null);
               setModalText("Cadastrar Subtema");
               setRegisterVisible(false);
             }}
-            bodyStyle={{ backgroundColor: "#f8f8f8" }}
+            styles={{ body: { backgroundColor: "#f8f8f8" } }}
             footer={[
               <Button
                 type="primary"
@@ -170,7 +161,7 @@ export default function SubtemasList() {
                     query: textSearch,
                     showFiled: showFiled,
                   });
-                  setEditandoSubtema({});
+                  setEditandoSubtema(null);
                   setModalText("Cadastrar Subtema");
                   setRegisterVisible(false);
                 }}
@@ -183,8 +174,7 @@ export default function SubtemasList() {
               subtheme={editandoSubtema}
               actionVisible={() => {
                 setRegisterVisible(false);
-                setEditandoSubtema({});
-                setModalText("Cadastrar Subtema");
+                setEditandoSubtema(null);
                 getSubthemes({
                   query: textSearch,
                   showFiled: showFiled,

@@ -3,7 +3,6 @@ import services from "../services";
 
 const instituicoesModel = {
   loading: false,
-  loadingEstados: false,
   registering: false,
   instituicoes: [],
   estados: [],
@@ -26,16 +25,17 @@ const instituicoesModel = {
 
   updateInstitution: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const { id, name, abbreviation } = payload;
+    const { id, name, abbreviation, uf, filed } = payload;
     return await services.institutionService
       .updateInstitution({
         id,
         name: name.trim(),
         abbreviation: abbreviation.trim(),
+        uf,
       })
       .then(async () => {
-        if (payload.filed !== undefined) {
-          if (payload.filed) {
+        if (filed !== undefined) {
+          if (filed) {
             await services.institutionService.archiveInstitution({
               id,
             });
@@ -65,6 +65,7 @@ const instituicoesModel = {
         })
         .then((response) => {
           actions.setInstituicoes(response.data);
+          return response.data;
         })
         .catch((error) => {
           throw new Error(error.message);
@@ -75,27 +76,20 @@ const instituicoesModel = {
     }
   ),
 
-  getEstados: thunk(async (actions, _) => {
-    actions.setLoadingEstados(true);
+  getStates: thunk(async (actions) => {
     return await services.institutionService
-      .getEstados()
+      .getStates()
       .then((response) => {
         actions.setEstados(response.data);
+        return response.data;
       })
       .catch((error) => {
         throw new Error(error.message);
-      })
-      .finally(() => {
-        actions.setLoadingEstados(false);
       });
   }),
 
   setLoading: action((state, payload) => {
     state.loading = payload;
-  }),
-
-  setLoadingEstados: action((state, payload) => {
-    state.loadingEstados = payload;
   }),
 
   setRegistering: action((state, payload) => {

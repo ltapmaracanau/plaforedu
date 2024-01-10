@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./homepage.css";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -57,11 +57,7 @@ export default function HomePage() {
 
   const statistics = useStoreState((state) => state.adm.statistics);
   //const loadingStatistics = useStoreState((state) => state.adm.loadingStatistics);
-  const getStatistics = useStoreActions((actions) => actions.adm.getStatistics);
   const randomTrails = useStoreState((state) => state.adm.randomTrails);
-  const getRandomTrails = useStoreActions(
-    (actions) => actions.adm.getRandomTrails
-  );
   const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const filterDefault = useStoreState((state) => state.courses.filterDefault);

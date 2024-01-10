@@ -1,12 +1,9 @@
-import React from "react";
 import { updatePasswordSchema } from "../../schemas/registers/updatePasswordSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { Button, Card, Form, Input, notification, Layout } from "antd";
-
-const { Content } = Layout;
+import { Button, Card, Form, Input, notification } from "antd";
 
 export default function UpdatePassword() {
   const updatePassword = useStoreActions(
@@ -39,111 +36,111 @@ export default function UpdatePassword() {
       register.reset();
     } catch (error) {
       notification.error({
-        message: "Algo deu errado!",
+        message: "Erro ao alterar a senha!",
         description: error.message,
       });
     }
   };
 
   return (
-    <>
-      <div
-        style={{
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
+      }}
+    >
+      <Card
+        style={{ width: "100%" }}
+        headStyle={{
+          fontSize: 20,
+          textAlign: "center",
+        }}
+        bodyStyle={{
+          paddingLeft: "40px",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
-          padding: "20px",
         }}
+        bordered={false}
+        title={"Alterar Senha"}
       >
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          <Card
-            style={{ width: "350px" }}
-            headStyle={{
-              backgroundColor: "#2C55A1",
-              textAlign: "center",
-              color: "#fff",
-              fontFamily: "Poppins",
-              fontSize: "18px",
-            }}
-            title={"ALTERAÇÃO DE SENHA"}
-          >
-            <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-              <Controller
-                name="oldPassword"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Senha Antiga"}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input.Password {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="password1"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Nova Senha"}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input.Password {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <Controller
-                name="password2"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Repita a Nova Senha"}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input.Password {...field} />
-                    </Form.Item>
-                  );
-                }}
-              />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "15px",
-                }}
-              >
-                <Button
-                  loading={loading}
-                  type="primary"
-                  htmlType="submit"
-                  shape="round"
+        <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+          <Controller
+            name="oldPassword"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Senha Antiga"}
+                  style={{
+                    width: "300px",
+                  }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
                 >
-                  Enviar
-                </Button>
-              </div>
-            </Form>
-          </Card>
-        </div>
-      </div>
-    </>
+                  <Input.Password {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <Controller
+            name="password1"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Nova Senha"}
+                  style={{
+                    width: "300px",
+                  }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input.Password {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <Controller
+            name="password2"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Repita a Nova Senha"}
+                  style={{
+                    width: "300px",
+                  }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input.Password {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "15px",
+            }}
+          >
+            <Button
+              loading={loading}
+              type="primary"
+              htmlType="submit"
+              shape="round"
+            >
+              Salvar
+            </Button>
+          </div>
+        </Form>
+      </Card>
+    </div>
   );
 }

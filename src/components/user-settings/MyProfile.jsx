@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import PLAFORLOGO from "../../assets/PLAFOR.png";
 
-import { Card, Descriptions, Layout, Skeleton, Tag } from "antd";
+import { Avatar, Card, Descriptions, Skeleton, Space, Tag } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-const { Content } = Layout;
-
-export default function allDataProfile() {
+export default function MyProfile() {
   const getAllDataProfile = useStoreActions(
     (actions) => actions.adm.getAllDataProfile
   );
@@ -13,9 +12,7 @@ export default function allDataProfile() {
   const loading = useStoreState((state) => state.adm.loading);
 
   useEffect(() => {
-    (async () => {
-      await getAllDataProfile();
-    })();
+    getAllDataProfile();
   }, [getAllDataProfile]);
 
   const colorStatus = (status) => {
@@ -40,68 +37,80 @@ export default function allDataProfile() {
   };
 
   return (
-    <>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          padding: "20px",
-        }}
-      >
-        <div style={{ width: "100%" }}>
-          <Card
-            headStyle={{
-              fontSize: 20,
-            }}
-            title={"Meu Perfil"}
-          >
-            {loading ? (
-              <Skeleton active />
-            ) : (
-              <Descriptions
-                bordered
-                style={{
-                  fontFamily: "Roboto",
-                }}
-                column={1}
-              >
-                <Descriptions.Item label={"Nome"}>
-                  {allDataProfile.name}
-                </Descriptions.Item>
-                <Descriptions.Item label={"Email"}>
-                  {allDataProfile.email}
-                </Descriptions.Item>
-                <Descriptions.Item label={"CPF"}>
-                  {allDataProfile.cpf}
-                </Descriptions.Item>
-                <Descriptions.Item label={"Celular"}>
-                  {allDataProfile.phone}
-                </Descriptions.Item>
-                <Descriptions.Item label={"Instituição"}>
-                  {allDataProfile.institution}
-                </Descriptions.Item>
-                <Descriptions.Item label={"Status"}>
-                  <Tag color={colorStatus(allDataProfile.status)}>
-                    {allDataProfile.status}
-                  </Tag>
-                </Descriptions.Item>
-                <Descriptions.Item label={"Cargos"}>
-                  {allDataProfile?.UsersRoles?.map((element) => (
-                    <Tag
-                      color={colorStatus(element.role.name)}
-                      key={element.role.id}
-                    >
-                      {element.role.name}
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        padding: "20px",
+      }}
+    >
+      <div style={{ width: "100%" }}>
+        <Card>
+          {loading ? (
+            <Skeleton active />
+          ) : (
+            <>
+              <Card.Meta
+                avatar={
+                  <Avatar
+                    src={PLAFORLOGO}
+                    alt="avatar"
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                }
+                title={allDataProfile.name}
+                description={
+                  <Space direction="vertical">
+                    <Tag color={colorStatus(allDataProfile.status)}>
+                      {allDataProfile.status}
                     </Tag>
-                  ))}
-                </Descriptions.Item>
-              </Descriptions>
-            )}
-          </Card>
-        </div>
+                    <div>
+                      {allDataProfile?.UsersRoles?.map((element) => (
+                        <Tag
+                          color={colorStatus(element.role.name)}
+                          key={element.role.id}
+                        >
+                          {element.role.name}
+                        </Tag>
+                      ))}
+                    </div>
+                    <Descriptions
+                      style={{
+                        marginTop: "10px",
+                      }}
+                      column={1}
+                      items={[
+                        {
+                          label: "Email",
+                          children: allDataProfile.email,
+                        },
+                        {
+                          label: "CPF",
+                          children: allDataProfile.cpf,
+                        },
+                        {
+                          label: "Celular",
+                          children: allDataProfile.phone,
+                        },
+                        {
+                          label: "Instituição",
+                          children: allDataProfile.institution,
+                        },
+                      ]}
+                    />
+                  </Space>
+                }
+              />
+            </>
+          )}
+        </Card>
       </div>
-    </>
+    </div>
   );
 }

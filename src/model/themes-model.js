@@ -2,14 +2,15 @@ import { action, thunk } from "easy-peasy";
 import services from "../services";
 
 const temasModel = {
-  loading: false,
+  loadingThemes: false,
+  loadingSubthemes: false,
   registering: false,
   themes: [],
   subthemes: [],
 
   getThemes: thunk(
     async (actions, payload = { query: "", showFiled: false }) => {
-      actions.setLoading(true);
+      actions.setLoadingThemes(true);
       const { query = "", showFiled = false } = payload;
       return await services.themesService
         .getThemes({
@@ -18,12 +19,13 @@ const temasModel = {
         })
         .then((response) => {
           actions.setThemes(response.data);
+          return response.data;
         })
         .catch((error) => {
           throw new Error(error);
         })
         .finally(() => {
-          actions.setLoading(false);
+          actions.setLoadingThemes(false);
         });
     }
   ),
@@ -43,12 +45,12 @@ const temasModel = {
 
   updateTheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const { name, id } = payload;
+    const { name, id, filed } = payload;
     return await services.themesService
       .updateTheme({ name: name.trim(), id })
       .then(async () => {
-        if (payload.filed !== undefined) {
-          if (payload.filed) {
+        if (filed !== undefined) {
+          if (filed) {
             await services.themesService.archiveTheme({
               id,
             });
@@ -69,7 +71,7 @@ const temasModel = {
 
   updateSubtheme: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const { id, name, themeIds } = payload;
+    const { id, name, themeIds, filed } = payload;
     return await services.themesService
       .updateSubtheme({
         id,
@@ -77,8 +79,8 @@ const temasModel = {
         themeIds,
       })
       .then(async () => {
-        if (payload.filed !== undefined) {
-          if (payload.filed) {
+        if (filed !== undefined) {
+          if (filed) {
             await services.themesService.archiveSubtheme({
               id,
             });
@@ -99,7 +101,7 @@ const temasModel = {
 
   getSubthemes: thunk(
     async (actions, payload = { query: "", showFiled: false }) => {
-      actions.setLoading(true);
+      actions.setLoadingSubthemes(true);
       const { query = "", showFiled = false } = payload;
       return await services.themesService
         .getSubthemes({
@@ -108,12 +110,13 @@ const temasModel = {
         })
         .then((response) => {
           actions.setSubthemes(response.data);
+          return response.data;
         })
         .catch((error) => {
           throw new Error(error);
         })
         .finally(() => {
-          actions.setLoading(false);
+          actions.setLoadingSubthemes(false);
         });
     }
   ),
@@ -134,8 +137,12 @@ const temasModel = {
       });
   }),
 
-  setLoading: action((state, payload) => {
-    state.loading = payload;
+  setLoadingThemes: action((state, payload) => {
+    state.loadingThemes = payload;
+  }),
+
+  setLoadingSubthemes: action((state, payload) => {
+    state.loadingSubthemes = payload;
   }),
 
   setRegistering: action((state, payload) => {

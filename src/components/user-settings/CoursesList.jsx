@@ -1,28 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import {
-  EditOutlined,
-  PlusOutlined,
-  DownloadOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import {
-  Button,
-  Card,
-  Layout,
-  List,
-  Modal,
-  Input,
-  Tooltip,
-  Switch,
-  Space,
-  Table,
-} from "antd";
+import { Button, Card, Input, Tooltip, Switch, Space, Table } from "antd";
 import CourseRegister from "./CourseRegister";
-import { CSVLink } from "react-csv";
+//import { CSVLink } from "react-csv";
 
-const { Content } = Layout;
 const { Search } = Input;
 
 export default function CoursesList() {
