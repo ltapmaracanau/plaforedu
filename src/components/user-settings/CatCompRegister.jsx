@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerCatCompSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification, Switch } from "antd";
-
-const { Content } = Layout;
+import { Button, Form, Input, notification, Switch } from "antd";
 
 export default function CatCompRegister(props) {
   const { catComp = null, actionVisible } = props;
@@ -20,7 +18,7 @@ export default function CatCompRegister(props) {
   );
   const registering = useStoreState((state) => state.competencies.registering);
 
-  const [filed, setFiled] = useState(catComp?.filedAt !== null);
+  const [filed, setFiled] = useState(!!catComp?.filedAt);
 
   const register = useForm({
     mode: "onChange",
@@ -38,15 +36,15 @@ export default function CatCompRegister(props) {
   const onSubmit = async (values) => {
     if (catComp) {
       try {
-        if ((catComp.filedAt !== null) !== filed) {
+        if (!!catComp.filedAt !== filed) {
           await updateCatComp({
-            ...values,
+            name: values.name,
             id: catComp.id,
             filed: filed,
           });
         } else {
           await updateCatComp({
-            ...values,
+            name: values.name,
             id: catComp.id,
           });
         }
@@ -56,7 +54,7 @@ export default function CatCompRegister(props) {
         actionVisible();
       } catch (error) {
         notification.error({
-          message: "Erro!",
+          message: "Erro ao alterar categoria!",
           description: error.message,
         });
       }
@@ -70,7 +68,7 @@ export default function CatCompRegister(props) {
         actionVisible();
       } catch (error) {
         notification.error({
-          message: "Algo deu errado!",
+          message: "Erro ao cadastrar categoria!",
           description: error.message,
         });
       }
@@ -78,91 +76,89 @@ export default function CatCompRegister(props) {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          width: "350px",
+          margin: "30px 0px",
+          backgroundColor: "#f8f8f8",
+          fontFamily: "Roboto",
         }}
       >
-        <Card
-          style={{ width: "350px", margin: "30px 0px" }}
-          bodyStyle={{
-            backgroundColor: "#f8f8f8",
-            fontFamily: "Roboto",
-          }}
-          bordered={false}
-        >
-          <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-            <Controller
-              name="name"
-              control={register.control}
-              render={({ field, fieldState: { error } }) => {
-                return (
-                  <Form.Item
-                    label={"Nome da categoria"}
-                    style={{ marginBottom: "20px" }}
-                    validateStatus={error ? "error" : ""}
-                    help={error ? error.message : ""}
-                    hasFeedback
-                  >
-                    <Input placeholder="Nome" {...field} />
-                  </Form.Item>
-                );
-              }}
-            />
-            <Controller
-              name="description"
-              control={register.control}
-              render={({ field, fieldState: { error } }) => {
-                return (
-                  <Form.Item
-                    label={"Descrição da categoria"}
-                    style={{ marginBottom: "20px" }}
-                    validateStatus={error ? "error" : ""}
-                    help={error ? error.message : ""}
-                    hasFeedback
-                  >
-                    <Input.TextArea placeholder="Descrição" {...field} />
-                  </Form.Item>
-                );
-              }}
-            />
-            {catComp && (
-              <Form.Item
-                label={"Categoria arquivada"}
-                style={{ marginBottom: "20px" }}
-              >
-                <Switch
-                  checked={filed}
-                  defaultChecked={catComp.filedAt}
-                  onChange={(value) => {
-                    setFiled(value);
-                  }}
-                />
-              </Form.Item>
-            )}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "15px 0px",
-              }}
+        <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+          <Controller
+            name="name"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Nome da categoria"}
+                  style={{ marginBottom: "20px" }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input placeholder="Nome" {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <Controller
+            name="description"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Descrição da categoria"}
+                  style={{ marginBottom: "20px" }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input.TextArea placeholder="Descrição" {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          {catComp && (
+            <Form.Item
+              label={"Categoria arquivada"}
+              style={{ marginBottom: "20px" }}
             >
-              <Button
-                loading={registering}
-                disabled={!register.formState.isValid}
-                type="primary"
-                shape="round"
-                htmlType="submit"
-              >
-                {catComp?.id ? <>Alterar</> : <>Cadastrar</>}
-              </Button>
-            </div>
-          </Form>
-        </Card>
+              <Switch
+                checked={filed}
+                defaultChecked={catComp.filedAt}
+                onChange={(value) => {
+                  setFiled(value);
+                }}
+              />
+            </Form.Item>
+          )}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "15px 0px",
+            }}
+          >
+            <Button
+              loading={registering}
+              disabled={!register.formState.isValid}
+              type="primary"
+              shape="round"
+              htmlType="submit"
+            >
+              {catComp?.id ? <>Alterar</> : <>Cadastrar</>}
+            </Button>
+          </div>
+        </Form>
       </div>
-    </>
+    </div>
   );
 }
