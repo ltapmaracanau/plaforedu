@@ -68,6 +68,7 @@ const Layout = () => {
 };
 
 const CustomRoutes = () => {
+  //Definição dos estados controladores de usuários e permissões
   const authenticated = useStoreState((state) => state.adm.isAuthenticated);
   const isAdm = useStoreState((state) => state.adm.isAdm);
   const isCoord = useStoreState((state) => state.adm.isCoord);

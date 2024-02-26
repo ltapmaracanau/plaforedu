@@ -61,7 +61,7 @@ export default function HomePage() {
   const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
-  const loadingUniqueCourse = useStoreState(
+  const loadingUniqueCourse = useStoreState(  
     (state) => state.courses.loadingUniqueCourse
   );
   const getUniqueCourse = useStoreActions(
@@ -101,6 +101,7 @@ export default function HomePage() {
           </Text>
           <div>
             <button
+              //classname em português
               className="botao botaoPrincipal"
               style={{
                 display: "block",
@@ -118,6 +119,7 @@ export default function HomePage() {
             </button>
             <Link
               to={"/about"}
+              //classname em português
               className="botaoLink"
               style={{
                 color: "#4B4B4B",
@@ -151,6 +153,7 @@ export default function HomePage() {
             }}
           >
             <h2
+            //classname em português
               className="titulo"
               style={{
                 marginBottom: "20px",
@@ -171,6 +174,7 @@ export default function HomePage() {
                 <li
                   className="cardRecente"
                   style={{ maxWidth: screens.xl ? null : "350px" }}
+                  //variavel em português
                   key={curso.titulo}
                   onClick={async () => {
                     setModalVisible(true);
@@ -301,15 +305,16 @@ export default function HomePage() {
               maxWidth: "460px",
             }}
           >
-            <h2 className="titulo">
+            
+            <h2 className="titulo" /*Classname em portugues*/>
               Cursos voltados para o seu perfil profissional
             </h2>
-            <Text className="texto">
+            <Text className="texto" /*Classname em portugues*/>
               A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
               ofertados por diversas instituições de ensino.
             </Text>
             <button
-              className="botao botaoSecundario"
+              className="botao botaoSecundario" /*Classname em portugues*/
               onClick={() => {
                 navigate("/about");
               }}
@@ -344,7 +349,7 @@ export default function HomePage() {
           <h1 className="titulo" style={{ marginBottom: "16px" }}>
             Qual o seu perfil profissional?
           </h1>
-          <Text className="subTitulo">
+          <Text className="subTitulo" /*Classname em portugues*/>
             A PlaforEDU apresenta os perfis de servidores da RFEPCT em cinco
             Itinerários Formativos
           </Text>
@@ -519,6 +524,8 @@ export default function HomePage() {
         </Col>
 
         {randomTrails.length > 0 && (
+          /*renderização condicional avaliando a
+          existência e o tamanho do array de trilhas aleatórias */
           <Col
             style={{
               display: "grid",
@@ -527,8 +534,11 @@ export default function HomePage() {
               gap: "32px",
               minWidth: screens.xs ? "100%" : "330px",
             }}
-          >
+          > 
             {randomTrails.map((trail) => (
+              /*mapeamento do estado das trilhas 
+              em itens renderizados que direcionam
+              para suas respectivas páginas */ 
               <div className="cardTrilha" key={trail.id}>
                 <div
                   style={{
@@ -543,6 +553,8 @@ export default function HomePage() {
                       color: "black",
                     }}
                     to={"/cursos"}
+                    /*Usando a ação para definir o filtro 
+                    em função da respectiva trilha sendo renderizada*/
                     onClick={() => {
                       setFilter({
                         ...filterDefault,
@@ -572,6 +584,8 @@ export default function HomePage() {
       </Row>
 
       {statistics?.courses && (
+        /*Renderização condicional avaliando o requerimento  
+        por estatísticas dos cursos ou não */
         <div
           style={{
             width: "100%",
@@ -687,7 +701,7 @@ export default function HomePage() {
               cotidianas profissionais
             </Text>
             <button
-              className="botao botaoPrincipal"
+              className="botao botaoPrincipal" /*Classname em portugues*/
               onClick={() => {
                 navigate("/about");
               }}

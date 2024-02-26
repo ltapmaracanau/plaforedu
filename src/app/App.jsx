@@ -7,6 +7,13 @@ import CustomRoutes from "../routes/CustomRoutes";
 import LogoPlafor from "../assets/LOGOPLAFORHEADER.svg";
 
 function App() {
+  /**
+   * Armazenando estado para controlar a inicialização do sistema
+   * a partir da ação armazenada init
+   * useStoreActions e useStoreState funcionam para abstrair os 
+   * parâmetros passados e facilitar o uso de suas funções ao longo 
+   * do código para dominuir a verbosidade
+   */
   const init = useStoreActions((actions) => actions.adm.init);
   const iniciando = useStoreState((state) => state.adm.iniciando);
 
@@ -14,6 +21,10 @@ function App() {
     init();
   }, [init]);
 
+  /**
+   * Retornar spinner ao esperar o carregamento das rotas
+   * em função do estado iniciando
+   */
   if (iniciando) {
     return (
       <div
@@ -45,6 +56,7 @@ function App() {
     );
   }
 
+  // Puxando o controle de rotas e layout do site após carregamento  
   return <CustomRoutes />;
 }
 

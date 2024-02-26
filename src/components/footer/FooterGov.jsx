@@ -41,7 +41,7 @@ export default function FooterGov() {
           <Text
             style={{ color: "white", fontSize: "16px", textAlign: "center" }}
           >
-            Copyright © 2023 PlaforEDU. Todos os direitos reservados.
+            Copyright © 2024 PlaforEDU. Todos os direitos reservados.
           </Text>
         </Col>
         <Col
