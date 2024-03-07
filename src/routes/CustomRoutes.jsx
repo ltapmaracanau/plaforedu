@@ -60,7 +60,11 @@ const Layout = () => {
         }),
         {
           path: "/",
+          secure: true,
+          httpOnly: false,
+          sameSite: "none",
           maxAge: 60 * 60 * 24 * 365, // expires in 1 year
+          domain: import.meta.env.PROD ? "plaforedu-dev.vercel.app" : "",
         }
       );
       return;
@@ -73,7 +77,11 @@ const Layout = () => {
       }),
       {
         path: "/",
+        secure: true,
+        httpOnly: false,
+        sameSite: "none",
         maxAge: 60 * 60 * 24 * 365, // expires in 1 year
+        domain: import.meta.env.PROD ? "plaforedu-dev.vercel.app" : "",
       }
     );
   };
