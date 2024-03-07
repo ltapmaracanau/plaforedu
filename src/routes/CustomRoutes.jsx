@@ -1,4 +1,4 @@
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import {
   Routes,
   Route,
@@ -6,6 +6,8 @@ import {
   BrowserRouter,
   Outlet,
 } from "react-router-dom";
+
+import { CloseOutlined } from "@ant-design/icons";
 
 import FAQ from "../pages/FAQ.jsx";
 import Login from "../pages/Login.jsx";
@@ -26,7 +28,7 @@ import HeaderHome from "../components/header/HeaderHome.jsx";
 import VLibras from "@djpfs/react-vlibras";
 import FooterGov from "../components/footer/FooterGov.jsx";
 import HeaderGov from "../components/header/HeaderGov.jsx";
-import { ConfigProvider } from "antd";
+import { Button, ConfigProvider, Space, Typography } from "antd";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import NotFound from "../pages/NotFound.jsx";
@@ -40,8 +42,130 @@ import StudyPlans from "../components/user-settings/StudyPlans.jsx";
 import StudyPlanView from "../components/user-settings/StudyPlanView.jsx";
 import StudyPlanRegister from "../components/user-settings/StudyPlanRegister.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 const Layout = () => {
+  const [cookies, setCookie] = useCookies(["cookieConsent"]);
+  const logout = useStoreActions((actions) => actions.adm.logout);
+
+  const giveConsent = (type = "all") => {
+    // all or essential
+    if (type === "all") {
+      setCookie(
+        "cookieConsent",
+        JSON.stringify({
+          consentType: type,
+          date: new Date(),
+        }),
+        {
+          path: "/",
+          maxAge: 60 * 60 * 24 * 365, // expires in 1 year
+        }
+      );
+      return;
+    }
+    setCookie(
+      "cookieConsent",
+      JSON.stringify({
+        consentType: type,
+        date: new Date(),
+      }),
+      {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365, // expires in 1 year
+      }
+    );
+  };
+
+  const CookieConsentModal = () => {
+    const visible = useStoreState(
+      (state) => state.adm.cookieConsentModalVisible
+    );
+    const setVisible = useStoreActions(
+      (actions) => actions.adm.setCookieConsentModalVisible
+    );
+
+    useEffect(() => {
+      setVisible(!cookies.cookieConsent);
+    }, [setVisible]);
+
+    return visible ? (
+      <div
+        style={{
+          position: "fixed",
+          padding: "20px 24px",
+          left: 5,
+          bottom: 5,
+          backgroundColor: "white",
+          borderRadius: "5px",
+          maxWidth: "520px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "10px",
+          }}
+        >
+          <Typography.Title level={5}>
+            Diga-nos se concorda com o uso de cookies
+          </Typography.Title>
+          <Button
+            type="text"
+            shape="circle"
+            icon={<CloseOutlined />}
+            onClick={() => {
+              setVisible(false);
+            }}
+          />
+        </div>
+        <Typography.Paragraph>
+          Este site utiliza cookies para melhorar a experiência do usuário.
+          Diga-nos se concorda com o uso de Cookies.
+        </Typography.Paragraph>
+        <Typography.Link>Política de privacidade</Typography.Link>
+        <Space
+          size={10}
+          direction="horizontal"
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            justifyContent: "end",
+            width: "100%",
+          }}
+        >
+          <Button
+            type="primary"
+            onClick={() => {
+              giveConsent("all");
+            }}
+          >
+            Aceitar
+          </Button>
+          <Button
+            type="default"
+            onClick={() => {
+              giveConsent("essential");
+            }}
+          >
+            Aceitar apenas essenciais
+          </Button>
+          <Button
+            type="default"
+            onClick={() => {
+              logout();
+              setVisible(false);
+            }}
+          >
+            Recusar
+          </Button>
+        </Space>
+      </div>
+    ) : null;
+  };
+
   return (
     <div
       style={{
@@ -62,6 +186,7 @@ const Layout = () => {
         </div>
         <VLibras />
         <FooterGov />
+        <CookieConsentModal />
       </ConfigProvider>
     </div>
   );
