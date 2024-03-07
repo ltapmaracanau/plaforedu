@@ -10,8 +10,8 @@ function App() {
   /**
    * Armazenando estado para controlar a inicialização do sistema
    * a partir da ação armazenada init
-   * useStoreActions e useStoreState funcionam para abstrair os 
-   * parâmetros passados e facilitar o uso de suas funções ao longo 
+   * useStoreActions e useStoreState funcionam para abstrair os
+   * parâmetros passados e facilitar o uso de suas funções ao longo
    * do código para dominuir a verbosidade
    */
   const init = useStoreActions((actions) => actions.adm.init);
@@ -56,7 +56,7 @@ function App() {
     );
   }
 
-  // Puxando o controle de rotas e layout do site após carregamento  
+  // Puxando o controle de rotas e layout do site após carregamento
   return <CustomRoutes />;
 }
 

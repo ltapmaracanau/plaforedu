@@ -5,10 +5,16 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { Button, Card, Form, Input, Space, notification } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const login = useStoreActions((actions) => actions.adm.login);
   const loading = useStoreState((state) => state.adm.loading);
+  const [cookies, setCookie] = useCookies(["cookieConsent"]);
+
+  const setVisible = useStoreActions(
+    (actions) => actions.adm.setCookieConsentModalVisible
+  );
 
   let navigate = useNavigate();
 
@@ -27,6 +33,14 @@ export default function Login() {
 
   const onSubmit = async (values) => {
     try {
+      if (!cookies.cookieConsent) {
+        setVisible(true);
+        notification.warning({
+          message: "Aviso!",
+          description: "Você precisa aceitar os cookies para continuar!",
+        });
+        return;
+      }
       await login(values);
       navigate(`/`);
     } catch (error) {

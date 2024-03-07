@@ -10,6 +10,7 @@ const admModel = {
   iniciando: true,
   downloadingSearchLogs: false,
   isAuthenticated: computed(() => !!services.loginService.getProfile()),
+  cookieConsentModalVisible: false,
   searchLogs: [],
   randomTrails: [],
   countLogs: 0,
@@ -155,11 +156,9 @@ const admModel = {
         const { data } = await services.loginService.getAllDataProfile();
         actions.setAllDataProfile(data);
         // set user in local storage
-        const oldLocalUser = services.loginService.getProfile();
         localStorage.setItem(
           "profile",
           JSON.stringify({
-            token: oldLocalUser.token,
             roles: data.UsersRoles.map((item) => item.role.name),
             status: data.status,
           })
@@ -259,6 +258,10 @@ const admModel = {
 
   setIsAuthenticated: action((state, payload) => {
     state.isAuthenticated = payload;
+  }),
+
+  setCookieConsentModalVisible: action((state, payload) => {
+    state.cookieConsentModalVisible = payload;
   }),
 
   setLoading: action((state, payload) => {
