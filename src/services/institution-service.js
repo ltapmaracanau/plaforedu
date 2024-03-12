@@ -1,3 +1,4 @@
+import axios from "axios";
 import AuthAxios from "./auth-axios";
 
 export default {
@@ -5,6 +6,7 @@ export default {
     AuthAxios.post("/institutions/new", {
       name: payload.name,
       abbreviation: payload.abbreviation,
+      uf: payload.uf,
     }),
 
   updateInstitution: (payload) =>
@@ -19,10 +21,8 @@ export default {
       `/institutions/all?search=${payload.query}&includeFiled=${payload.showFiled}`
     ),
 
-  getEstados: () =>
-    AuthAxios.get(
-      `https://servicodados.ibge.gov.br/api/v1/localidades/estados`
-    ),
+  getStates: () =>
+    axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados`),
 
   archiveInstitution: (payload) =>
     AuthAxios.patch(`/institutions/${payload.id}/archive`),

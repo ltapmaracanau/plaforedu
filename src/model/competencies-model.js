@@ -2,7 +2,8 @@ import { action, thunk } from "easy-peasy";
 import services from "../services";
 
 const competenciasModel = {
-  loading: false,
+  loadingCompetencies: false,
+  loadingCategCompetencies: false,
   registering: false,
   competencias: [],
   catComp: [],
@@ -25,7 +26,7 @@ const competenciasModel = {
 
   getCatComp: thunk(
     async (actions, payload = { query: "", showFiled: false }) => {
-      actions.setLoading(true);
+      actions.setLoadingCategCompetencies(true);
       const { query = "", showFiled = false } = payload;
       return await services.compService
         .getCatComp({
@@ -39,7 +40,7 @@ const competenciasModel = {
           throw new Error(error);
         })
         .finally(() => {
-          actions.setLoading(false);
+          actions.setLoadingCategCompetencies(false);
         });
     }
   ),
@@ -89,7 +90,7 @@ const competenciasModel = {
 
   updateComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const { id, name, description, competenciesCategoryIds } = payload;
+    const { id, name, description, competenciesCategoryIds, filed } = payload;
     return await services.compService
       .updateComp({
         id,
@@ -98,8 +99,8 @@ const competenciasModel = {
         competenciesCategoryIds,
       })
       .then(async () => {
-        if (payload.filed !== undefined) {
-          if (payload.filed) {
+        if (filed !== undefined) {
+          if (filed) {
             await services.compService.archiveComp({ id });
           } else {
             await services.compService.unarchiveComp({ id });
@@ -115,7 +116,7 @@ const competenciasModel = {
   }),
 
   getComp: thunk(async (actions, payload = { query: "", showFiled: false }) => {
-    actions.setLoading(true);
+    actions.setLoadingCompetencies(true);
     const { query = "", showFiled = false } = payload;
     return await services.compService
       .getCompetencias({
@@ -129,12 +130,16 @@ const competenciasModel = {
         throw new Error(error);
       })
       .finally(() => {
-        actions.setLoading(false);
+        actions.setLoadingCompetencies(false);
       });
   }),
 
-  setLoading: action((state, payload) => {
-    state.loading = payload;
+  setLoadingCompetencies: action((state, payload) => {
+    state.loadingCompetencies = payload;
+  }),
+
+  setLoadingCategCompetencies: action((state, payload) => {
+    state.loadingCategCompetencies = payload;
   }),
 
   setRegistering: action((state, payload) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
@@ -6,7 +6,6 @@ import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 import {
   Button,
   Card,
-  Layout,
   List,
   Modal,
   Input,
@@ -17,7 +16,6 @@ import {
 } from "antd";
 import CompRegister from "./CompRegister";
 
-const { Content } = Layout;
 const { Search } = Input;
 
 export default function CompList() {
@@ -29,7 +27,9 @@ export default function CompList() {
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
-  const loading = useStoreState((state) => state.competencies.loading);
+  const loadingCompetencies = useStoreState(
+    (state) => state.competencies.loadingCompetencies
+  );
   const competencias = useStoreState(
     (state) => state.competencies.competencias
   );
@@ -109,7 +109,7 @@ export default function CompList() {
             }
           >
             <List
-              loading={loading}
+              loading={loadingCompetencies}
               dataSource={competencias}
               style={{ width: "100%" }}
               renderItem={(item) => {
@@ -164,7 +164,7 @@ export default function CompList() {
               setModalText("Cadastrar Competência");
               setRegisterVisible(false);
             }}
-            bodyStyle={{ backgroundColor: "#f8f8f8" }}
+            styles={{ body: { backgroundColor: "#f8f8f8" } }}
             footer={[
               <Button
                 type="primary"

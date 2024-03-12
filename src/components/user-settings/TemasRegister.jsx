@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerThemeSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Card, Form, Input, Layout, notification, Switch } from "antd";
-
-const { Content } = Layout;
+import { Button, Form, Input, notification, Switch } from "antd";
 
 export default function TemasRegister(props) {
   const { theme = null, actionVisible } = props;
@@ -17,7 +15,7 @@ export default function TemasRegister(props) {
   const updateTheme = useStoreActions((actions) => actions.themes.updateTheme);
   const registering = useStoreState((state) => state.themes.registering);
 
-  const [filed, setFiled] = useState(theme?.filedAt !== null);
+  const [filed, setFiled] = useState(!!theme?.filedAt);
 
   const register = useForm({
     mode: "onChange",
@@ -35,10 +33,10 @@ export default function TemasRegister(props) {
   const onSubmit = async (values) => {
     if (theme) {
       try {
-        if ((theme.filedAt !== null) !== filed) {
-          await updateTheme({ ...values, id: theme.id, filed: filed });
+        if (!!theme.filedAt !== filed) {
+          await updateTheme({ id: theme.id, name: values.name, filed: filed });
         } else {
-          await updateTheme({ ...values, id: theme.id });
+          await updateTheme({ name: values.name, id: theme.id });
         }
         notification.success({
           message: "Tema alterado com sucesso!",
@@ -68,76 +66,72 @@ export default function TemasRegister(props) {
   };
 
   return (
-    <>
-      <div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Card
-            style={{ width: "350px", margin: "30px 0px" }}
-            bodyStyle={{
-              backgroundColor: "#f8f8f8",
-              fontFamily: "Roboto",
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          width: "350px",
+          margin: "30px 0px",
+          backgroundColor: "#f8f8f8",
+          fontFamily: "Roboto",
+        }}
+      >
+        <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+          <Controller
+            name="name"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Nome do tema"}
+                  style={{ marginBottom: "20px" }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input placeholder="Nome" {...field} />
+                </Form.Item>
+              );
             }}
-            bordered={false}
-          >
-            <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-              <Controller
-                name="name"
-                control={register.control}
-                render={({ field, fieldState: { error } }) => {
-                  return (
-                    <Form.Item
-                      label={"Nome do tema"}
-                      style={{ marginBottom: "20px" }}
-                      validateStatus={error ? "error" : ""}
-                      help={error ? error.message : ""}
-                      hasFeedback
-                    >
-                      <Input placeholder="Nome" {...field} />
-                    </Form.Item>
-                  );
+          />
+          {theme && (
+            <Form.Item
+              label={"Tema arquivado"}
+              style={{ marginBottom: "20px" }}
+            >
+              <Switch
+                checked={filed}
+                defaultChecked={theme.filedAt}
+                onChange={(value) => {
+                  setFiled(value);
                 }}
               />
-              {theme && (
-                <Form.Item
-                  label={"Tema arquivado"}
-                  style={{ marginBottom: "20px" }}
-                >
-                  <Switch
-                    checked={filed}
-                    defaultChecked={theme.filedAt}
-                    onChange={(value) => {
-                      setFiled(value);
-                    }}
-                  />
-                </Form.Item>
-              )}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  margin: "15px 0px",
-                }}
-              >
-                <Button
-                  loading={registering}
-                  disabled={!register.formState.isValid}
-                  type="primary"
-                  shape="round"
-                  htmlType="submit"
-                >
-                  {theme ? <>Alterar</> : <>Cadastrar</>}
-                </Button>
-              </div>
-            </Form>
-          </Card>
-        </div>
+            </Form.Item>
+          )}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "15px 0px",
+            }}
+          >
+            <Button
+              loading={registering}
+              disabled={!register.formState.isValid}
+              type="primary"
+              shape="round"
+              htmlType="submit"
+            >
+              {theme ? <>Alterar</> : <>Cadastrar</>}
+            </Button>
+          </div>
+        </Form>
       </div>
-    </>
+    </div>
   );
 }

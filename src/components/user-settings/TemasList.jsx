@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import {
-  Button,
-  Card,
-  Layout,
-  List,
-  Modal,
-  Input,
-  Tooltip,
-  Switch,
-} from "antd";
+import { Button, Card, List, Modal, Input, Tooltip, Switch } from "antd";
 import TemasRegister from "./TemasRegister";
 
-const { Content } = Layout;
 const { Search } = Input;
 
 export default function TemasList() {
@@ -27,7 +17,7 @@ export default function TemasList() {
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
 
-  const loading = useStoreState((state) => state.themes.loading);
+  const loadingThemes = useStoreState((state) => state.themes.loadingThemes);
   const themes = useStoreState((state) => state.themes.themes);
 
   useEffect(() => {
@@ -105,7 +95,7 @@ export default function TemasList() {
             }
           >
             <List
-              loading={loading}
+              loading={loadingThemes}
               dataSource={themes}
               style={{ width: "100%" }}
               renderItem={(item) => {
@@ -148,7 +138,7 @@ export default function TemasList() {
               setModalText("Cadastrar Tema");
               setRegisterVisible(false);
             }}
-            bodyStyle={{ backgroundColor: "#f8f8f8" }}
+            styles={{ body: { backgroundColor: "#f8f8f8" } }}
             footer={[
               <Button
                 type="primary"
@@ -176,7 +166,6 @@ export default function TemasList() {
                   showFiled: showFiled,
                 });
                 setEditandoTema(null);
-                setModalText("Cadastrar Tema");
               }}
             />
           </Modal>

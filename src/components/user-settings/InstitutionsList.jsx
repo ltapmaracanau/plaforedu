@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
@@ -7,7 +7,6 @@ import {
   Button,
   Card,
   Input,
-  Layout,
   List,
   Modal,
   Space,
@@ -17,7 +16,6 @@ import {
 } from "antd";
 import InstitutionRegister from "./InstitutionRegister";
 
-const { Content } = Layout;
 const { Search } = Input;
 
 export default function InstitutionList() {
@@ -134,9 +132,20 @@ export default function InstitutionList() {
                       style={{ fontFamily: "Roboto" }}
                       title={item.abbreviation}
                       description={
-                        <Space direction="horizontal">
+                        <Space direction="vertical">
                           {item.name}
-                          {item.uf && <Tag color="blue">{item.uf}</Tag>}
+                          {item.uf && (
+                            <Tooltip title={"Estado da instituição"}>
+                              <Tag
+                                style={{
+                                  cursor: "pointer",
+                                }}
+                                color="blue"
+                              >
+                                {item.uf}
+                              </Tag>
+                            </Tooltip>
+                          )}
                         </Space>
                       }
                     />

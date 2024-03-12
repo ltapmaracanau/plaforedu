@@ -62,7 +62,11 @@ const coursesModel = {
     (actions) => actions.setFilter,
     // handler:
     async (actions, target) => {
-      await actions.getCursos(target.payload);
+      await actions.getCursos({
+        ...target.payload,
+        registerLog:
+          target.payload.query && target.payload.query !== "" ? true : false,
+      });
     }
   ),
 
@@ -106,7 +110,7 @@ const coursesModel = {
       return await services.courseService
         .getCursos({
           includeFiled: showFiled,
-          registerLog: registerLog,
+          registerLog: import.meta.env.PROD ? registerLog : false,
           page: page,
           search: query.trim(),
           hours: cargaHoraria,
@@ -170,6 +174,7 @@ const coursesModel = {
             .map((institution) => institution.abbreviation)
             .join(", "),
         });
+        return data;
       })
       .catch((error) => {
         throw new Error(error);
