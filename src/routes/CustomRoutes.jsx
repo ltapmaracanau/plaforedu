@@ -64,9 +64,7 @@ const Layout = () => {
           httpOnly: false,
           sameSite: "none",
           maxAge: 60 * 60 * 24 * 365, // expires in 1 year
-          domain: import.meta.env.PROD
-            ? import.meta.env.VITE_PRODUCTION_URL
-            : undefined,
+          domain: import.meta.env.PROD ? import.meta.env.VITE_URL : undefined,
         }
       );
       return;
@@ -83,9 +81,7 @@ const Layout = () => {
         httpOnly: false,
         sameSite: "none",
         maxAge: 60 * 60 * 24 * 365, // expires in 1 year
-        domain: import.meta.env.PROD
-          ? import.meta.env.VITE_PRODUCTION_URL
-          : undefined,
+        domain: import.meta.env.PROD ? import.meta.env.VITE_URL : undefined,
       }
     );
   };
