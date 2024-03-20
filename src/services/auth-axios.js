@@ -5,14 +5,14 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const AuthAxios = import.meta.env.PROD
   ? axios.create({
-      baseURL: import.meta.env.VITE_PRODUCTION_API_URL,
+      baseURL: import.meta.env.VITE_API_URL,
       headers: {
         "Content-Type": "application/json",
       },
       withCredentials: true,
     })
   : axios.create({
-      baseURL: import.meta.env.VITE_DEVELOPMENT_API_URL,
+      baseURL: "http://localhost:3333",
       headers: {
         "Content-Type": "application/json",
       },
