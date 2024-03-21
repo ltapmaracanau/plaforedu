@@ -8,8 +8,10 @@ import { Button, Card, Form, Input, notification } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function useQuery() {
+  // pega a string de consulta da URL
   const { search } = useLocation();
 
+  // cria um novo objeto URLSearchParams apenas quando search mudar
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
