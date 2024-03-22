@@ -9,13 +9,13 @@
 <h1 align="center">Plaforedu</h1>
 
 <p align="center">
-  <img alt="Principal linguagem do projeto" src="https://img.shields.io/github/languages/top/SteveNascimento/plaforedu?color=56BEB8">
+  <img alt="Principal linguagem do projeto" src="https://img.shields.io/github/languages/top/ltapmaracanau/plaforedu?color=56BEB8">
 
-  <img alt="Quantidade de linguagens utilizadas" src="https://img.shields.io/github/languages/count/SteveNascimento/plaforedu?color=56BEB8">
+  <img alt="Quantidade de linguagens utilizadas" src="https://img.shields.io/github/languages/count/ltapmaracanau/plaforedu?color=56BEB8">
 
-  <img alt="Tamanho do repositório" src="https://img.shields.io/github/repo-size/SteveNascimento/plaforedu?color=56BEB8">
+  <img alt="Tamanho do repositório" src="https://img.shields.io/github/repo-size/ltapmaracanau/plaforedu?color=56BEB8">
 
-  <img alt="Licença" src="https://img.shields.io/github/license/SteveNascimento/plaforedu?color=56BEB8">
+  <img alt="Licença" src="https://img.shields.io/github/license/ltapmaracanau/plaforedu?color=56BEB8">
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/SteveNascimento/plaforedu?color=56BEB8" /> -->
 
@@ -72,7 +72,7 @@ Antes de começar :checkered_flag:, você precisa ter o [Git](https://git-scm.co
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/SteveNascimento/plaforedu
+$ git clone https://github.com/ltapmaracanau/plaforedu
 
 # Entre na pasta
 $ cd plaforedu
