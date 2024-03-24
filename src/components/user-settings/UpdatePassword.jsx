@@ -53,14 +53,16 @@ export default function UpdatePassword() {
     >
       <Card
         style={{ width: "100%" }}
-        headStyle={{
-          fontSize: 20,
-          textAlign: "center",
-        }}
-        bodyStyle={{
-          paddingLeft: "40px",
-          display: "flex",
-          justifyContent: "center",
+        styles={{
+          header: {
+            fontSize: 20,
+            textAlign: "center",
+          },
+          body: {
+            paddingLeft: "40px",
+            display: "flex",
+            justifyContent: "center",
+          },
         }}
         bordered={false}
         title={"Alterar Senha"}

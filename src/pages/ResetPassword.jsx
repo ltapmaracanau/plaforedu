@@ -66,12 +66,14 @@ export default function ResetPassword() {
     >
       <Card
         style={{ width: "350px" }}
-        headStyle={{
-          backgroundColor: "#2C55A1",
-          textAlign: "center",
-          color: "#fff",
-          fontFamily: "Poppins",
-          fontSize: "18px",
+        styles={{
+          header: {
+            backgroundColor: "#2C55A1",
+            textAlign: "center",
+            color: "#fff",
+            fontFamily: "Poppins",
+            fontSize: "18px",
+          },
         }}
         title={"ALTERAÇÃO DE SENHA"}
       >

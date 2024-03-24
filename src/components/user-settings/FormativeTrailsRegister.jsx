@@ -292,8 +292,10 @@ export default function FormativeTrailsRegister(props) {
           <Form layout="horizontal" onFinish={register.handleSubmit(onSubmit)}>
             <Card
               style={{ margin: "0px 0px" }}
-              bodyStyle={{
-                fontFamily: "Roboto",
+              styles={{
+                body: {
+                  fontFamily: "Roboto",
+                },
               }}
               title={title}
               bordered={false}

@@ -329,8 +329,10 @@ export default function StudyPlanRegister() {
       <Form layout="horizontal" onFinish={register.handleSubmit(onSubmit)}>
         <Card
           style={{ margin: "0px 0px" }}
-          bodyStyle={{
-            fontFamily: "Roboto",
+          styles={{
+            body: {
+              fontFamily: "Roboto",
+            },
           }}
           title={
             planId ? <>Editar Plano de Estudo</> : <>Criar Plano de Estudo</>

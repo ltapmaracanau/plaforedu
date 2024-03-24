@@ -1,12 +1,12 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Plaforedu" />
+  <img src="./.github/app.gif" alt="New Plafor" />
 
-&#xa0;
+  &#xa0;
 
-  <!-- <a href="https://plaforedu.netlify.com">Demo</a> -->
+  <!-- <a href="https://newplafor.netlify.app">Demo</a> -->
 </div>
 
-<h1 align="center">Plaforedu</h1>
+<h1 align="center">PlaforEDU</h1>
 
 <p align="center">
   <img alt="Principal linguagem do projeto" src="https://img.shields.io/github/languages/top/ltapmaracanau/plaforedu?color=56BEB8">
@@ -17,46 +17,46 @@
 
   <img alt="Licença" src="https://img.shields.io/github/license/ltapmaracanau/plaforedu?color=56BEB8">
 
-  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/SteveNascimento/plaforedu?color=56BEB8" /> -->
+  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/new-plafor?color=56BEB8" /> -->
 
-  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/SteveNascimento/plaforedu?color=56BEB8" /> -->
+  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/{{YOUR_GITHUB_USERNAME}}/new-plafor?color=56BEB8" /> -->
 
-  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/SteveNascimento/plaforedu?color=56BEB8" /> -->
+  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/{{YOUR_GITHUB_USERNAME}}/new-plafor?color=56BEB8" /> -->
 </p>
 
 <!-- Status -->
 
-<!-- <h4 align="center">
-	🚧  Plaforedu 🚀 Em construção...  🚧
-</h4>
+<!-- <h4 align="center"> 
+	🚧  New Plafor 🚀 Under construction...  🚧
+</h4> 
 
 <hr> -->
 
 <p align="center">
-  <a href="#dart-sobre">Sobre</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-funcionalidades">Funcionalidades</a> &#xa0; | &#xa0;
-  <a href="#rocket-tecnologias">Tecnologias</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-pré-requisitos">Pré requisitos</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-começando">Começando</a> &#xa0; | &#xa0;
-  <a href="#memo-licença">Licença</a> &#xa0; | &#xa0;
-  <a href="https://github.com/SteveNascimento" target="_blank">Autor</a>
+  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
+  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a> &#xa0; | &#xa0;
+  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
 </p>
 
 <br>
 
-## :dart: Sobre
+## :dart: About ##
 
-Sobre o seu projeto
+Describe your project
 
-## :sparkles: Funcionalidades
+## :sparkles: Features ##
 
-:heavy_check_mark: Funcionalidade 1;\
-:heavy_check_mark: Funcionalidade 2;\
-:heavy_check_mark: Funcionalidade 3;
+:heavy_check_mark: Feature 1;\
+:heavy_check_mark: Feature 2;\
+:heavy_check_mark: Feature 3;
 
-## :rocket: Tecnologias
+## :rocket: Technologies ##
 
-As seguintes ferramentas foram usadas na construção do projeto:
+The following tools were used in this project:
 
 - [Expo](https://expo.io/)
 - [Node.js](https://nodejs.org/en/)
@@ -64,34 +64,35 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [React Native](https://reactnative.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## :white_check_mark: Pré requisitos
+## :white_check_mark: Requirements ##
 
-Antes de começar :checkered_flag:, você precisa ter o [Git](https://git-scm.com) e o [Node](https://nodejs.org/en/) instalados em sua maquina.
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
-## :checkered_flag: Começando
+## :checkered_flag: Starting ##
 
 ```bash
 # Clone este repositório
 $ git clone https://github.com/ltapmaracanau/plaforedu
 
-# Entre na pasta
-$ cd plaforedu
+# Access
+$ cd new-plafor
 
-# Instale as dependências
+# Install dependencies
 $ yarn
 
-# Para iniciar o projeto
+# Run the project
 $ yarn start
 
-# O app vai inicializar em <http://localhost:3000>
+# The server will initialize in the <http://localhost:3000>
 ```
 
-## :memo: Licença
+## :memo: License ##
 
-Este projeto está sob licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
-Feito com :heart: por <a href="https://github.com/SteveNascimento" target="_blank">Steve</a>
+
+Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
 
 &#xa0;
 
-<a href="#top">Voltar para o topo</a>
+<a href="#top">Back to top</a>
