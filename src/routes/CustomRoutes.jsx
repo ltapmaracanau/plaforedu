@@ -25,7 +25,6 @@ import TemasList from "../components/user-settings/TemasList.jsx";
 import CoursesList from "../components/user-settings/CoursesList.jsx";
 import Denied from "../pages/Denied.jsx";
 import HeaderHome from "../components/header/HeaderHome.jsx";
-import VLibras from "@djpfs/react-vlibras";
 import FooterGov from "../components/footer/FooterGov.jsx";
 import HeaderGov from "../components/header/HeaderGov.jsx";
 import { Button, ConfigProvider, Space, Typography } from "antd";
@@ -192,7 +191,6 @@ const Layout = () => {
         >
           <Outlet />
         </div>
-        <VLibras />
         <FooterGov />
         <CookieConsentModal />
       </ConfigProvider>

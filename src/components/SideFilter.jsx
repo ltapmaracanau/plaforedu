@@ -95,10 +95,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
         >
           <Card
             style={{ borderRadius: "21px", marginBottom: "5px" }}
-            bodyStyle={{
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "15px",
+            styles={{
+              body: {
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "15px",
+              },
             }}
           >
             <Controller
@@ -126,10 +128,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           {screens.lg && (
             <Card
               style={{ borderRadius: "21px", marginBottom: "5px" }}
-              bodyStyle={{
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "15px",
+              styles={{
+                body: {
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "15px",
+                },
               }}
             >
               <Controller
@@ -157,10 +161,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           )}
           <Card
             style={{ borderRadius: "21px", marginBottom: "5px" }}
-            bodyStyle={{
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "15px",
+            styles={{
+              body: {
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "15px",
+              },
             }}
           >
             <Controller
@@ -189,10 +195,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           </Card>
           <Card
             style={{ borderRadius: "21px", marginBottom: "5px" }}
-            bodyStyle={{
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "15px",
+            styles={{
+              body: {
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "15px",
+              },
             }}
           >
             <Controller
@@ -224,10 +232,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
           </Card>
           <Card
             style={{ borderRadius: "21px", marginBottom: "5px" }}
-            bodyStyle={{
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "15px",
+            styles={{
+              body: {
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "15px",
+              },
             }}
           >
             <Controller
@@ -272,10 +282,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
             <>
               <Card
                 style={{ borderRadius: "21px", marginBottom: "5px" }}
-                bodyStyle={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "15px",
+                styles={{
+                  body: {
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "15px",
+                  },
                 }}
               >
                 <Controller
@@ -315,10 +327,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
               </Card>
               <Card
                 style={{ borderRadius: "21px", marginBottom: "5px" }}
-                bodyStyle={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "15px",
+                styles={{
+                  body: {
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "15px",
+                  },
                 }}
               >
                 <Controller
@@ -349,10 +363,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
               </Card>
               <Card
                 style={{ borderRadius: "21px", marginBottom: "5px" }}
-                bodyStyle={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "15px",
+                styles={{
+                  body: {
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "15px",
+                  },
                 }}
               >
                 <Controller
@@ -397,7 +413,12 @@ export default function SideFilter({ debounceTimeout = 800 }) {
               borderColor: "transparent",
               backgroundColor: "transparent",
             }}
-            bodyStyle={{ display: "flex", justifyContent: "space-evenly" }}
+            styles={{
+              body: {
+                display: "flex",
+                justifyContent: "space-evenly",
+              },
+            }}
           >
             <Button
               type="primary"

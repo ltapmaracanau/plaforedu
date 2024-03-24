@@ -144,8 +144,10 @@ export default function FaleConosco() {
                 }}
               >
                 <Card
-                  headStyle={{
-                    textAlign: "center",
+                  styles={{
+                    header: {
+                      textAlign: "center",
+                    },
                   }}
                   type="inner"
                   style={{ width: "500px" }}

@@ -71,9 +71,11 @@ export default function UserRegister(props) {
         >
           <Card
             style={{ width: "100%", margin: "30px 0px" }}
-            bodyStyle={{
-              backgroundColor: "#f8f8f8",
-              fontFamily: "Roboto",
+            styles={{
+              body: {
+                backgroundColor: "#f8f8f8",
+                fontFamily: "Roboto",
+              },
             }}
             bordered={false}
           >

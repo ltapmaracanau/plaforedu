@@ -39,8 +39,10 @@ export default function CategCompList() {
     >
       <div style={{ width: "100%" }}>
         <Card
-          headStyle={{
-            fontSize: 20,
+          styles={{
+            header: {
+              fontSize: 20,
+            },
           }}
           title={"Categorias de competências"}
           extra={
