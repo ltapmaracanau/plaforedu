@@ -34,7 +34,6 @@
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.0.2",
     "react-router-hash-link": "^2.4.3",
-    "react-sortable-hoc": "^2.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
