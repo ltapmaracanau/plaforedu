@@ -526,7 +526,7 @@ export default function HomePage() {
           </Text>
         </Col>
 
-        {randomTrails.length > 0 && (
+        {randomTrails?.length > 0 && (
           /*renderização condicional avaliando a
           existência e o tamanho do array de trilhas aleatórias */
           <Col
