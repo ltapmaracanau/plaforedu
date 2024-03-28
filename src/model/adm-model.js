@@ -110,7 +110,6 @@ const admModel = {
     return await services.admService
       .getRandomTrailsHomepage()
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           actions.setRandomTrails(response.data.formativeTrails);
         }
