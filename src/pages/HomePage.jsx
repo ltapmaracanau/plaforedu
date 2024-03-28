@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./homepage.css";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -52,7 +52,11 @@ export default function HomePage() {
   const screens = useBreakpoint();
   let navigate = useNavigate();
 
-  const recentCourses = services.admService.getLastViewedCourses();
+  const recentCourses = useMemo(
+    async () => await services.admService.getLastViewedCourses(),
+    []
+  );
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const statistics = useStoreState((state) => state.adm.statistics);
@@ -61,7 +65,7 @@ export default function HomePage() {
   const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
-  const loadingUniqueCourse = useStoreState(  
+  const loadingUniqueCourse = useStoreState(
     (state) => state.courses.loadingUniqueCourse
   );
   const getUniqueCourse = useStoreActions(
@@ -145,7 +149,7 @@ export default function HomePage() {
           gap: screens.xs ? "60px" : "120px",
         }}
       >
-        {recentCourses.length > 0 && (
+        {recentCourses && recentCourses.length > 0 && (
           <div
             style={{
               display: "grid",
@@ -153,7 +157,7 @@ export default function HomePage() {
             }}
           >
             <h2
-            //classname em português
+              //classname em português
               className="titulo"
               style={{
                 marginBottom: "20px",
@@ -305,7 +309,6 @@ export default function HomePage() {
               maxWidth: "460px",
             }}
           >
-            
             <h2 className="titulo" /*Classname em portugues*/>
               Cursos voltados para o seu perfil profissional
             </h2>
@@ -534,11 +537,11 @@ export default function HomePage() {
               gap: "32px",
               minWidth: screens.xs ? "100%" : "330px",
             }}
-          > 
+          >
             {randomTrails.map((trail) => (
               /*mapeamento do estado das trilhas 
               em itens renderizados que direcionam
-              para suas respectivas páginas */ 
+              para suas respectivas páginas */
               <div className="cardTrilha" key={trail.id}>
                 <div
                   style={{
