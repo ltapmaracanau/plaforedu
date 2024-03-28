@@ -51,6 +51,11 @@ const admModel = {
             "Antes do acesso total ao sistema você precisa alterar sua senha!",
         });
       }
+    } catch (error) {
+      notification.error({
+        message: "Erro!",
+        description: error.message,
+      });
     } finally {
       actions.setIniciando(false);
     }
