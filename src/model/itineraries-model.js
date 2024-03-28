@@ -12,17 +12,15 @@ const itinerariosModel = {
     state.layoutAtual = payload;
   }),
 
-  getItinerarios: thunk(async (actions, payload = { query: "" }) => {
+  getItinerarios: thunk(async (actions, _payload) => {
     actions.setLoading(true);
     return await services.admService
-      .getItinerarios({
-        query: payload.query.trim(),
-      })
+      .getItinerarios()
       .then((response) => {
         actions.setItinerarios(response.data);
       })
       .catch((error) => {
-        throw new Error(error.message);
+        throw new Error(error.message || error);
       })
       .finally(() => {
         actions.setLoading(false);

@@ -23,8 +23,7 @@ const AuthAxios = import.meta.env.PROD
 AuthAxios.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log(error);
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       localStorage.removeItem("profile");
       notification.error({
         message: "Atenção!",
@@ -33,6 +32,9 @@ AuthAxios.interceptors.response.use(
       });
       await wait(3000);
       window.location.href = "/login";
+    }
+    if (error.code && error.code === "ERR_NETWORK") {
+      return Promise.reject("Sem conexão com o servidor");
     }
     return Promise.reject(
       error.response?.data?.message || error.message || "Erro Desconhecido"
