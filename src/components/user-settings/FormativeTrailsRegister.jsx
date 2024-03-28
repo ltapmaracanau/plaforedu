@@ -1,11 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
-  RollbackOutlined,
-  MenuOutlined,
-  FilterFilled,
-  SearchOutlined,
-} from "@ant-design/icons";
+  DndContext,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import {
+  SortableContext,
+  arrayMove,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
+import { RollbackOutlined } from "@ant-design/icons";
 import {
   Button,
   Card,
@@ -18,10 +28,8 @@ import {
   Switch,
   Table,
   Modal,
-  Transfer,
   Tag,
   Tooltip,
-  Empty,
   Space,
   Popconfirm,
 } from "antd";
@@ -29,27 +37,48 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { Controller, useForm } from "react-hook-form";
 import { registerTrilhaSchema } from "../../schemas/registers/registersSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  SortableContainer,
-  SortableElement,
-  SortableHandle,
-} from "react-sortable-hoc";
-import { arrayMoveImmutable } from "array-move";
 import TableSelectCourses from "../filter-components/TableSelectCourses";
 
 const { Title } = Typography;
 
-const SortableItem = SortableElement((props) => <tr {...props} />);
-const SortableBody = SortableContainer((props) => <tbody {...props} />);
-
-const DragHandle = SortableHandle(() => (
-  <MenuOutlined
-    style={{
-      cursor: "grab",
-      color: "#999",
-    }}
-  />
-));
+const Row = (props) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: props["data-row-key"],
+  });
+  const style = {
+    ...props.style,
+    transform: CSS.Transform.toString(
+      transform && {
+        ...transform,
+        scaleY: 1,
+      }
+    ),
+    transition,
+    cursor: "move",
+    ...(isDragging
+      ? {
+          position: "relative",
+          zIndex: 9999,
+        }
+      : {}),
+  };
+  return (
+    <tr
+      {...props}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+    />
+  );
+};
 
 export default function FormativeTrailsRegister(props) {
   const { trilha, title, actionVisible } = props;
@@ -90,9 +119,6 @@ export default function FormativeTrailsRegister(props) {
   const [cursosTrilha, setCursosTrilha] = useState(
     trilha ? trilha.courses.sort((a, b) => a.sequence - b.sequence) : []
   );
-  const [cursosTrilhaIds, setCursosTrilhaIds] = useState(
-    trilha ? trilha.courses.map((curso) => curso.id) : []
-  );
 
   const register = useForm({
     mode: "onChange",
@@ -107,6 +133,14 @@ export default function FormativeTrailsRegister(props) {
     delayError: undefined,
   });
 
+  const cursosTrilhaIds = useMemo(() => {
+    register.setValue(
+      "courses",
+      cursosTrilha.map((course) => course.id)
+    );
+    return cursosTrilha.map((course) => course.id);
+  }, [cursosTrilha, register]);
+
   const onSubmit = async (values) => {
     if (trilha) {
       try {
@@ -116,7 +150,6 @@ export default function FormativeTrailsRegister(props) {
         await updateTrilha({
           ...values,
           id: trilha.id,
-          courses: cursosTrilhaIds,
         });
         notification.success({
           message: "Trilha alterada com sucesso!",
@@ -133,7 +166,7 @@ export default function FormativeTrailsRegister(props) {
         if (cursosTrilhaIds.length === 0) {
           throw new Error("A lista de cursos não pode estar vazia!");
         }
-        await registerTrilha({ ...values, courses: cursosTrilhaIds });
+        await registerTrilha({ ...values });
         notification.success({
           message: "Trilha cadastrada com sucesso!",
         });
@@ -166,7 +199,6 @@ export default function FormativeTrailsRegister(props) {
 
   const onSelectChange = (record, selected) => {
     if (selected) {
-      setCursosTrilhaIds((antig) => [...antig, record.id]);
       setCursosTrilha((antig) => [
         ...antig,
         {
@@ -177,7 +209,6 @@ export default function FormativeTrailsRegister(props) {
         },
       ]);
     } else {
-      setCursosTrilhaIds((antig) => antig.filter((id) => id !== record.id));
       setCursosTrilha((antig) =>
         antig.filter((curso) => curso.id !== record.id)
       );
@@ -185,7 +216,6 @@ export default function FormativeTrailsRegister(props) {
   };
 
   const handleDeleteTrailCourse = (id) => {
-    setCursosTrilhaIds((antig) => antig.filter((idCourse) => idCourse !== id));
     setCursosTrilha((antig) => antig.filter((curso) => curso.id !== id));
   };
 
@@ -193,16 +223,8 @@ export default function FormativeTrailsRegister(props) {
 
   const columns = [
     {
-      title: "Ordenação",
-      dataIndex: "sort",
-      width: 30,
-      className: "drag-visible",
-      render: () => <DragHandle />,
-    },
-    {
       title: "Curso",
       dataIndex: "name",
-      className: "drag-visible",
       render: (text, record, _index) => {
         return record.filedAt ? (
           <>
@@ -241,34 +263,24 @@ export default function FormativeTrailsRegister(props) {
     },
   ];
 
-  const onSortEnd = ({ oldIndex, newIndex }) => {
-    if (oldIndex !== newIndex) {
-      const newData = arrayMoveImmutable(
-        cursosTrilha.slice(),
-        oldIndex,
-        newIndex
-      ).filter((el) => !!el);
-      setCursosTrilha(newData);
-      setCursosTrilhaIds(newData.map((item) => item.id));
-    }
-  };
-
-  const DraggableContainer = (props) => (
-    <SortableBody
-      useDragHandle
-      disableAutoscroll
-      helperClass="row-dragging"
-      onSortEnd={onSortEnd}
-      {...props}
-    />
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        // https://docs.dndkit.com/api-documentation/sensors/pointer#activation-constraints
+        distance: 1,
+      },
+    })
   );
 
-  const DraggableBodyRow = ({ className, style, ...restProps }) => {
-    // function findIndex base on Table rowKey props and should always be a right array index
-    const index = cursosTrilha.findIndex(
-      (x) => x.id === restProps["data-row-key"]
-    );
-    return <SortableItem index={index} {...restProps} />;
+  const onDragEnd = ({ active, over }) => {
+    if (active.id !== over?.id) {
+      setCursosTrilha((prev) => {
+        console.log(prev);
+        const activeIndex = prev.findIndex((i) => i.id === active.id);
+        const overIndex = prev.findIndex((i) => i.id === over?.id);
+        return arrayMove(prev, activeIndex, overIndex);
+      });
+    }
   };
 
   return (
@@ -292,8 +304,10 @@ export default function FormativeTrailsRegister(props) {
           <Form layout="horizontal" onFinish={register.handleSubmit(onSubmit)}>
             <Card
               style={{ margin: "0px 0px" }}
-              bodyStyle={{
-                fontFamily: "Roboto",
+              styles={{
+                body: {
+                  fontFamily: "Roboto",
+                },
               }}
               title={title}
               bordered={false}
@@ -445,36 +459,47 @@ export default function FormativeTrailsRegister(props) {
                   />
                 </Descriptions.Item>
               </Descriptions>
-              <Table
-                columns={columns}
-                dataSource={cursosTrilha}
-                pagination={false}
-                rowKey={"id"}
-                components={{
-                  body: {
-                    wrapper: DraggableContainer,
-                    row: DraggableBodyRow,
-                  },
-                }}
-                title={() => (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
+              <DndContext
+                sensors={sensors}
+                modifiers={[restrictToVerticalAxis]}
+                onDragEnd={onDragEnd}
+              >
+                <SortableContext
+                  // rowKey array
+                  items={cursosTrilha.map((i) => i.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  <Table
+                    components={{
+                      body: {
+                        row: Row,
+                      },
                     }}
-                  >
-                    <Title level={4}>Cursos na trilha</Title>
-                    <Button
-                      type="primary"
-                      onClick={() => {
-                        setAddCourseVisible(true);
-                      }}
-                    >
-                      Adicionar/Remover Cursos
-                    </Button>
-                  </div>
-                )}
-              />
+                    columns={columns}
+                    dataSource={cursosTrilha}
+                    pagination={false}
+                    rowKey={"id"}
+                    title={() => (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Title level={4}>Cursos na trilha</Title>
+                        <Button
+                          type="primary"
+                          onClick={() => {
+                            setAddCourseVisible(true);
+                          }}
+                        >
+                          Adicionar/Remover Cursos
+                        </Button>
+                      </div>
+                    )}
+                  />
+                </SortableContext>
+              </DndContext>
               <Modal
                 open={addCourseVisible}
                 onCancel={() => {

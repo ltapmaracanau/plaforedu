@@ -41,8 +41,10 @@ export default function SubtemasList() {
         <div style={{ width: "100%" }}>
           <Card
             title={"Subtemas"}
-            headStyle={{
-              fontSize: 20,
+            styles={{
+              header: {
+                fontSize: 20,
+              },
             }}
             extra={
               <div

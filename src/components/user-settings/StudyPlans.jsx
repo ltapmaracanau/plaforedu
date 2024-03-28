@@ -68,8 +68,10 @@ export default function StudyPlans() {
       <div style={{ width: "100%" }}>
         <Card
           title={"Planos de Estudo"}
-          headStyle={{
-            fontSize: 20,
+          styles={{
+            header: {
+              fontSize: 20,
+            },
           }}
           extra={
             <div

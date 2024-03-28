@@ -51,8 +51,10 @@ export default function CompList() {
         <div style={{ width: "100%" }}>
           <Card
             title={"Competências"}
-            headStyle={{
-              fontSize: 20,
+            styles={{
+              header: {
+                fontSize: 20,
+              },
             }}
             extra={
               <div

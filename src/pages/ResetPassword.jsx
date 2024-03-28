@@ -8,8 +8,10 @@ import { Button, Card, Form, Input, notification } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function useQuery() {
+  // pega a string de consulta da URL
   const { search } = useLocation();
 
+  // cria um novo objeto URLSearchParams apenas quando search mudar
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
@@ -64,12 +66,14 @@ export default function ResetPassword() {
     >
       <Card
         style={{ width: "350px" }}
-        headStyle={{
-          backgroundColor: "#2C55A1",
-          textAlign: "center",
-          color: "#fff",
-          fontFamily: "Poppins",
-          fontSize: "18px",
+        styles={{
+          header: {
+            backgroundColor: "#2C55A1",
+            textAlign: "center",
+            color: "#fff",
+            fontFamily: "Poppins",
+            fontSize: "18px",
+          },
         }}
         title={"ALTERAÇÃO DE SENHA"}
       >

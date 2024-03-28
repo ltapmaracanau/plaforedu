@@ -181,12 +181,14 @@ export default function CoursesList() {
           ) : (
             <Card
               title={"Cursos"}
-              headStyle={{
-                fontSize: 20,
-                padding: "10px",
-              }}
-              bodyStyle={{
-                padding: "0px",
+              styles={{
+                header: {
+                  fontSize: 20,
+                  padding: "10px",
+                },
+                body: {
+                  padding: "0px",
+                },
               }}
               extra={
                 <Space

@@ -70,8 +70,10 @@ export default function UsersList() {
         <div style={{ width: "100%" }}>
           <Card
             title={"Usuários"}
-            headStyle={{
-              fontSize: 20,
+            styles={{
+              header: {
+                fontSize: 20,
+              },
             }}
             extra={
               <div
