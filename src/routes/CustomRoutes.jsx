@@ -270,6 +270,10 @@ const CustomRoutes = () => {
                     path="/settings/formative-trails"
                     element={<FormativeTrailsList />}
                   />
+                  <Route
+                    path="/settings/log-courses-trails"
+                    element={isAdm || isCoord ? "" : <Navigate to="/denied" />}
+                  />
                   <Route path="/settings/logs" element={<ListSearchLogs />} />
                 </Route>
               </Route>

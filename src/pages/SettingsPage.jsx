@@ -91,6 +91,12 @@ export default function SettingsPage() {
           icon: <NodeIndexOutlined />,
           label: "Trilhas Formativas",
         },
+        {
+          key: "/settings/log-courses-trails",
+          icon: <FileSearchOutlined />,
+          label: "Log do Sistema",
+          disabled: !(isAdm || isCoord),
+        },
       ],
     },
     {

@@ -18,6 +18,41 @@ const admModel = {
   statistics: {},
   loadingInfo: false,
 
+  lastCoursesTrailsChanges: [],
+
+  getLastCoursesTrailsChanges: thunk(async (actions) => {
+    const course = {
+      name: "asd",
+      createdAt: "2022-05-08-20-30",
+      createdBy: "Ricardin",
+      updatedAt: "2023-01-01-19-03",
+      updatedBy: "Ricardin",
+      filedAt: "",
+      filedBy: "",
+      publishedAt: "2022-01-01-20-20",
+      publishedBy: "Ricardin",
+    };
+    const trail = {
+      name: "asd",
+      createdAt: "2022-05-08-20-30",
+      createdBy: "Ricardin",
+      updatedAt: "2023-01-01-19-03",
+      updatedBy: "Ricardin",
+      filedAt: "",
+      filedBy: "",
+    };
+
+    let data = [course, trail];
+
+    setTimeout(() => {
+      actions.setLastCoursesTrailsChanges(data);
+    }, 2000);
+  }),
+
+  setLastCoursesTrailsChanges: action((state, payload) => {
+    state.lastCoursesTrailsChanges = payload;
+  }),
+
   myProfile: computed(() => services.loginService.getProfile()),
   allDataProfile: {},
 
