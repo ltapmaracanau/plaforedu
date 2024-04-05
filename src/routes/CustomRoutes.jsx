@@ -41,6 +41,7 @@ import StudyPlans from "../components/user-settings/StudyPlans.jsx";
 import StudyPlanView from "../components/user-settings/StudyPlanView.jsx";
 import StudyPlanRegister from "../components/user-settings/StudyPlanRegister.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
+import SystemLog from "../components/user-settings/SystemLog.jsx"
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 
@@ -272,7 +273,7 @@ const CustomRoutes = () => {
                   />
                   <Route
                     path="/settings/log-courses-trails"
-                    element={isAdm || isCoord ? "" : <Navigate to="/denied" />}
+                    element={isAdm || isCoord ? <SystemLog /> : <Navigate to="/denied" />}
                   />
                   <Route path="/settings/logs" element={<ListSearchLogs />} />
                 </Route>
