@@ -92,7 +92,7 @@ export default function SystemLog() {
     setPageNumber(page)
   }
 
-  useEffect(async ()=> {
+  useEffect(()=> {
     getLastCoursesTrailsChanges();
   }, [])
 
