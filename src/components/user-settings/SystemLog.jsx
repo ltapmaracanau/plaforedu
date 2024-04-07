@@ -3,10 +3,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 // import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Input, Tooltip, Switch, Space, Table, Select } from "antd";
-// import CourseRegister from "./CourseRegister";
-
-const { Search } = Input;
+import { Card, Input, Tooltip, Switch, Space, Table, Select, Modal } from "antd";
 
 export default function SystemLog() {
   
@@ -18,9 +15,6 @@ export default function SystemLog() {
   const countLastCourses = useStoreState( state => state.adm.countLastCourses )
   const countLastTrails = useStoreState( state => state.adm.countLastTrails )
 
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pagesCount, setPagesCount] = useState(countLastCourses)
- 
   const categoriaOptions = [
     { value: "cursos", label: "Cursos"},
     { value: "trilhas_formativas", label: "Trilhas Formativas" },
@@ -66,22 +60,16 @@ export default function SystemLog() {
     },
   ]
 
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pagesCount, setPagesCount] = useState(countLastCourses)
+  const [modalTitle, setModalTitle] = useState()
   const [categoria, setCategoria] = useState(categoriaOptions[0].value);
   const [status, setStatus] = useState(statusOptions[0].value);
-  const [dataSource, setDataSource] = useState()
+  const [dataSource, setDataSource] = useState();
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const handleCategoriaChange = (value) => {
     setCategoria(value);
-    setPagesCount(
-      value === categoriaOptions[0].value ?
-                countLastCourses :
-                countLastTrails )
-
-      setDataSource(
-        value === categoriaOptions[0].value ?
-                  lastCoursesChanges :
-                  lastTrailsChanges
-      )
   };
 
   const handleStatusChange = (value) => {
@@ -92,6 +80,10 @@ export default function SystemLog() {
     setPageNumber(page)
   }
 
+  const handleClickOnItem = (record) => {
+    setSelectedItem(record);
+  };
+
   useEffect(()=> {
     getLastCoursesTrailsChanges();
   }, [])
@@ -99,6 +91,18 @@ export default function SystemLog() {
   useEffect(() => {
   if (!loadingLastChanges) {
     setDataSource(categoria === categoriaOptions[0].value ? lastCoursesChanges : lastTrailsChanges);
+
+    setPagesCount(
+      categoria === categoriaOptions[0].value ?
+                countLastCourses :
+                countLastTrails 
+    )
+    
+    setModalTitle(
+      categoria === categoriaOptions[0].value ?
+                    "Detalhes do curso" :
+                    "Detalhes da trilha"
+      )
   }
   }, [loadingLastChanges, categoria, lastCoursesChanges, lastTrailsChanges]);
 
@@ -167,10 +171,33 @@ export default function SystemLog() {
                 }}
                 columns={columnsTable}
                 dataSource={dataSource}
+                onRow={(record, rowIndex) => {
+                return {
+                  onClick: (event) => {
+                    handleClickOnItem(record);
+                  },
+                };
+              }}
               />
             </Card>
         </div>
       </div>
+
+      <Modal
+        title={modalTitle}
+        open={!!selectedItem}
+        onCancel={() => setSelectedItem(null)}
+        footer={null}
+      >
+        {selectedItem && (
+          <div>
+            <p>Nome: {selectedItem.name}</p>
+            <p>Criado em: {selectedItem.createdAt}</p>
+            <p>Atualizado em: {selectedItem.updatedAt}</p>
+            <p>Arquivado em: {selectedItem.filedAt}</p>
+          </div>
+        )}
+      </Modal>
     </>
   );
 }
