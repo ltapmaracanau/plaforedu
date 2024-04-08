@@ -3,7 +3,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 // import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { Card, Input, Tooltip, Switch, Space, Table, Select, Modal } from "antd";
+import { Card, Input, Tooltip, Switch, Space, Table, Select, Modal, Descriptions } from "antd";
 
 export default function SystemLog() {
   
@@ -41,22 +41,22 @@ export default function SystemLog() {
     {
       title: 'Nome',
       dataIndex: 'name',
-      key: 'name',
+      key: 'columnsTable1',
     },
     {
       title: 'Criado em',
       dataIndex: 'createdAt',
-      key: 'createdAt',
+      key: 'columnsTable2',
     },
     {
       title: 'Atualizado em',
       dataIndex: 'updatedAt',
-      key: 'updatedAt',
+      key: 'columnsTable3',
     },
     {
       title: 'Arquivado em',
       dataIndex: 'filedAt',
-      key: 'filedAt',
+      key: 'columnsTable4',
     },
   ]
 
@@ -67,6 +67,9 @@ export default function SystemLog() {
   const [status, setStatus] = useState(statusOptions[0].value);
   const [dataSource, setDataSource] = useState();
   const [selectedItem, setSelectedItem] = useState(null);
+  const [descriptionItems, setDescriptionItems] = useState([]);
+
+
 
   const handleCategoriaChange = (value) => {
     setCategoria(value);
@@ -89,22 +92,46 @@ export default function SystemLog() {
   }, [])
 
   useEffect(() => {
-  if (!loadingLastChanges) {
-    setDataSource(categoria === categoriaOptions[0].value ? lastCoursesChanges : lastTrailsChanges);
+    if (!loadingLastChanges) {
+      setDataSource(categoria === categoriaOptions[0].value ? lastCoursesChanges : lastTrailsChanges);
 
-    setPagesCount(
-      categoria === categoriaOptions[0].value ?
-                countLastCourses :
-                countLastTrails 
-    )
-    
-    setModalTitle(
-      categoria === categoriaOptions[0].value ?
-                    "Detalhes do curso" :
-                    "Detalhes da trilha"
+      setPagesCount(
+        categoria === categoriaOptions[0].value ?
+                  countLastCourses :
+                  countLastTrails 
       )
-  }
-  }, [loadingLastChanges, categoria, lastCoursesChanges, lastTrailsChanges]);
+      
+      setModalTitle(
+        categoria === categoriaOptions[0].value ?
+                      "Detalhes do curso" :
+                      "Detalhes da trilha"
+      )
+
+      if (selectedItem) {
+        setDescriptionItems(
+          categoria === categoriaOptions[0].value ?  [
+            { key: 'descriptionItemsCursos1', label: 'Nome', children: selectedItem.name },
+            { key: 'descriptionItemsCursos2', label: 'Criado em', children: selectedItem.createdBy },
+            { key: 'descriptionItemsCursos3', label: 'Criado por', children: selectedItem.updatedBy },
+            { key: 'descriptionItemsCursos4', label: 'Atualizado em', children: selectedItem.updatedat },
+            { key: 'descriptionItemsCursos5', label: 'Atualizado por', children: selectedItem.updatedBy },
+            { key: 'descriptionItemsCursos6', label: 'Arquivado em', children: selectedItem.filledAt },
+            { key: 'descriptionItemsCursos7', label: 'Arquivado por', children: selectedItem.filedBy },
+            { key: 'descriptionItemsCursos8', label: 'Publicado em', children: selectedItem.publishedAt },
+            { key: 'descriptionItemsCursos9', label: 'Publicado por', children: selectedItem.publishedBy },
+          ] : [
+            { key: 'descriptionItemsTrilhas1', label: 'Nome', children: selectedItem.name },
+            { key: 'descriptionItemsTrilhas2', label: 'Criado em', children: selectedItem.createdBy },
+            { key: 'descriptionItemsTrilhas3', label: 'Criado por', children: selectedItem.updatedBy },
+            { key: 'descriptionItemsTrilhas4', label: 'Atualizado em', children: selectedItem.updatedat },
+            { key: 'descriptionItemsTrilhas5', label: 'Atualizado por', children: selectedItem.updatedBy },
+            { key: 'descriptionItemsTrilhas6', label: 'Arquivado em', children: selectedItem.filledAt },
+            { key: 'descriptionItemsTrilhas7', label: 'Arquivado por', children: selectedItem.filedBy },
+          ]
+        )
+      }
+    }      
+  }, [loadingLastChanges, categoria, lastCoursesChanges, lastTrailsChanges, selectedItem]);
 
   return (
     <>
@@ -171,13 +198,15 @@ export default function SystemLog() {
                 }}
                 columns={columnsTable}
                 dataSource={dataSource}
-                onRow={(record, rowIndex) => {
-                return {
-                  onClick: (event) => {
-                    handleClickOnItem(record);
-                  },
-                };
-              }}
+                onRow={(record) => {
+                  // record: o objeto da lista que está selecionado, ou seja, o curso/trilha selecionado
+                  return {
+                    onClick: () => {
+                      handleClickOnItem(record);
+                    },
+                    style: { cursor: 'pointer' }
+                  };
+                }}
               />
             </Card>
         </div>
@@ -190,14 +219,9 @@ export default function SystemLog() {
         footer={null}
       >
         {selectedItem && (
-          <div>
-            <p>Nome: {selectedItem.name}</p>
-            <p>Criado em: {selectedItem.createdAt}</p>
-            <p>Atualizado em: {selectedItem.updatedAt}</p>
-            <p>Arquivado em: {selectedItem.filedAt}</p>
-          </div>
+            <Descriptions column={1} bordered={true} layout="horizontal" items={descriptionItems}/>
         )}
       </Modal>
     </>
   );
-}
+} 
