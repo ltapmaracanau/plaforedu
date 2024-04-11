@@ -4,7 +4,7 @@ import mandala from "../assets/mandala/PLAFOREDU_Mandala-Itinerarios_CORES_v5_Co
 import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v7.png";
 import infografico_fundo_branco from "../assets/about/mandala_fundo_branco.png";
 
-import { Row, Col, Image, Grid, Collapse } from "antd";
+import { Row, Col, Image, Grid, Collapse, Typography } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import iniciacao from "../assets/itinerarios/iconIniciacao.svg";
@@ -77,6 +77,38 @@ export default function AboutPage() {
             filter:
               "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))",
           }}
+          title={"Apresentação SETEC"}
+          src={"https://www.youtube.com/embed/s4hchxxjuRo"}
+        />
+      </Row>
+
+      <Row className={styles.linha}></Row>
+
+      <Row
+        align="middle"
+        wrap={!screens.lg}
+        className={styles.itinerarioContainer}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            gap: "24px",
+            maxWidth: "460px",
+          }}
+        >
+          <h2 className={styles.titulo} /*Classname em portugues*/>
+            Cursos voltados para o seu perfil profissional
+          </h2>
+          <Typography.Text className={styles.texto} /*Classname em portugues*/>
+            A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
+            ofertados por diversas instituições de ensino.
+          </Typography.Text>
+        </div>
+
+        <iframe
+          className={styles.videoItinerario}
           title="Apresentação PlaforEDU"
           src="https://www.youtube.com/embed/XJS8nvbW754"
         />
