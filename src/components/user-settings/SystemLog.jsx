@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
-
-// import { EditOutlined, PlusOutlined } from "@ant-design/icons";
-
-import { Card, Input, Tooltip, Switch, Space, Table, Select, Modal, Descriptions } from "antd";
+import { Card, Space, Table, Select, Modal, Descriptions } from "antd";
 
 export default function SystemLog() {
   
@@ -61,28 +58,26 @@ export default function SystemLog() {
   ]
 
   const [pageNumber, setPageNumber] = useState(1);
-  const [pagesCount, setPagesCount] = useState(countLastCourses)
-  const [modalTitle, setModalTitle] = useState()
   const [categoria, setCategoria] = useState(categoriaOptions[0].value);
   const [status, setStatus] = useState(statusOptions[0].value);
-  const [dataSource, setDataSource] = useState();
   const [selectedItem, setSelectedItem] = useState(null);
-  const [descriptionItems, setDescriptionItems] = useState([]);
-
-
-
+  
+  // quando o usuário troca de curso pra trilha
   const handleCategoriaChange = (value) => {
     setCategoria(value);
   };
 
+  // quando o usuário troca de criado pra modificado, arquivado
   const handleStatusChange = (value) => {
     setStatus(value);
   };
 
+  // quando o usuário muda a página
   const handlePages = (page) => {
     setPageNumber(page)
   }
 
+  // quando o usuário clica em algum curso/trilha da lista
   const handleClickOnItem = (record) => {
     setSelectedItem(record);
   };
@@ -91,47 +86,52 @@ export default function SystemLog() {
     getLastCoursesTrailsChanges();
   }, [])
 
-  useEffect(() => {
+  // troca entre cursos e trilhas que aparecem dependendo da opção do usuário 
+  const dataSource = useMemo(() => {
     if (!loadingLastChanges) {
-      setDataSource(categoria === categoriaOptions[0].value ? lastCoursesChanges : lastTrailsChanges);
+      return categoria === categoriaOptions[0].value ? lastCoursesChanges : lastTrailsChanges;
+    }
+  }, [loadingLastChanges, categoria, lastCoursesChanges, lastTrailsChanges]);
 
-      setPagesCount(
-        categoria === categoriaOptions[0].value ?
-                  countLastCourses :
-                  countLastTrails 
-      )
-      
-      setModalTitle(
-        categoria === categoriaOptions[0].value ?
-                      "Detalhes do curso" :
-                      "Detalhes da trilha"
-      )
-
-      if (selectedItem) {
-        setDescriptionItems(
-          categoria === categoriaOptions[0].value ?  [
-            { key: 'descriptionItemsCursos1', label: 'Nome', children: selectedItem.name },
-            { key: 'descriptionItemsCursos2', label: 'Criado em', children: selectedItem.createdBy },
-            { key: 'descriptionItemsCursos3', label: 'Criado por', children: selectedItem.updatedBy },
-            { key: 'descriptionItemsCursos4', label: 'Atualizado em', children: selectedItem.updatedat },
-            { key: 'descriptionItemsCursos5', label: 'Atualizado por', children: selectedItem.updatedBy },
-            { key: 'descriptionItemsCursos6', label: 'Arquivado em', children: selectedItem.filledAt },
-            { key: 'descriptionItemsCursos7', label: 'Arquivado por', children: selectedItem.filedBy },
-            { key: 'descriptionItemsCursos8', label: 'Publicado em', children: selectedItem.publishedAt },
-            { key: 'descriptionItemsCursos9', label: 'Publicado por', children: selectedItem.publishedBy },
-          ] : [
-            { key: 'descriptionItemsTrilhas1', label: 'Nome', children: selectedItem.name },
-            { key: 'descriptionItemsTrilhas2', label: 'Criado em', children: selectedItem.createdBy },
-            { key: 'descriptionItemsTrilhas3', label: 'Criado por', children: selectedItem.updatedBy },
-            { key: 'descriptionItemsTrilhas4', label: 'Atualizado em', children: selectedItem.updatedat },
-            { key: 'descriptionItemsTrilhas5', label: 'Atualizado por', children: selectedItem.updatedBy },
-            { key: 'descriptionItemsTrilhas6', label: 'Arquivado em', children: selectedItem.filledAt },
-            { key: 'descriptionItemsTrilhas7', label: 'Arquivado por', children: selectedItem.filedBy },
-          ]
-        )
+  // contagem de itens na página (número de cursos ou de trilhas)
+  const pagesCount = useMemo(() => {
+      if (!loadingLastChanges) {
+        return categoria === categoriaOptions[0].value ? countLastCourses : countLastTrails;
       }
-    }      
-  }, [loadingLastChanges, categoria, lastCoursesChanges, lastTrailsChanges, selectedItem]);
+  }, [loadingLastChanges, categoria, countLastCourses, countLastTrails]);
+
+  // título do modal (muda se o usuário selecionou cursos ou trilhas)
+  const modalTitle = useMemo(() => {
+      if (!loadingLastChanges) {
+        return categoria === categoriaOptions[0].value ? "Detalhes do curso" : "Detalhes da trilha";
+      }
+  }, [loadingLastChanges, categoria]);
+
+  // campos que aparecem ao clicar em um curso / trilha (muda se é curso ou trilha)
+  const descriptionItems = useMemo(() => {
+    if (!loadingLastChanges && selectedItem) {
+      return categoria === categoriaOptions[0].value ? [
+        { key: 'descriptionItemsCursos1', label: 'Nome', children: selectedItem.name },
+        { key: 'descriptionItemsCursos2', label: 'Criado em', children: selectedItem.createdBy },
+        { key: 'descriptionItemsCursos3', label: 'Criado por', children: selectedItem.updatedBy },
+        { key: 'descriptionItemsCursos4', label: 'Atualizado em', children: selectedItem.updatedat },
+        { key: 'descriptionItemsCursos5', label: 'Atualizado por', children: selectedItem.updatedBy },
+        { key: 'descriptionItemsCursos6', label: 'Arquivado em', children: selectedItem.filledAt },
+        { key: 'descriptionItemsCursos7', label: 'Arquivado por', children: selectedItem.filedBy },
+        { key: 'descriptionItemsCursos8', label: 'Publicado em', children: selectedItem.publishedAt },
+        { key: 'descriptionItemsCursos9', label: 'Publicado por', children: selectedItem.publishedBy },
+      ] : [
+        { key: 'descriptionItemsTrilhas1', label: 'Nome', children: selectedItem.name },
+        { key: 'descriptionItemsTrilhas2', label: 'Criado em', children: selectedItem.createdBy },
+        { key: 'descriptionItemsTrilhas3', label: 'Criado por', children: selectedItem.updatedBy },
+        { key: 'descriptionItemsTrilhas4', label: 'Atualizado em', children: selectedItem.updatedat },
+        { key: 'descriptionItemsTrilhas5', label: 'Atualizado por', children: selectedItem.updatedBy },
+        { key: 'descriptionItemsTrilhas6', label: 'Arquivado em', children: selectedItem.filledAt },
+        { key: 'descriptionItemsTrilhas7', label: 'Arquivado por', children: selectedItem.filedBy },
+      ];
+    }
+  }, [loadingLastChanges, categoria, selectedItem]);
+
 
   return (
     <>
