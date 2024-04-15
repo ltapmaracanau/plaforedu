@@ -291,55 +291,6 @@ export default function HomePage() {
             </Modal>
           </div>
         )}
-        <div
-          style={{
-            display: "flex",
-            gap: "30px",
-            flexDirection: screens.md ? "row" : "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: "24px",
-              maxWidth: "460px",
-            }}
-          >
-            <h2 className="titulo" /*Classname em portugues*/>
-              Cursos voltados para o seu perfil profissional
-            </h2>
-            <Text className="texto" /*Classname em portugues*/>
-              A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
-              ofertados por diversas instituições de ensino.
-            </Text>
-            <button
-              className="botao botaoSecundario" /*Classname em portugues*/
-              onClick={() => {
-                navigate("/about");
-              }}
-            >
-              COMO FUNCIONA
-            </button>
-          </div>
-          <iframe
-            style={{
-              borderRadius: "20px",
-              borderStyle: "none",
-              border: "5px solid #FFF",
-              width: "100%",
-              maxWidth: screens.md ? "650px" : "460px",
-              minHeight: screens.md ? "390px" : "300px",
-              filter:
-                "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))",
-            }}
-            title={"Äpresentação SETEC"}
-            src={"https://www.youtube.com/embed/s4hchxxjuRo"}
-          />
-        </div>
 
         <div
           style={{

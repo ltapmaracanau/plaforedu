@@ -8,6 +8,7 @@ import {
   DownOutlined,
   MenuOutlined,
   LogoutOutlined,
+  LoginOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 
@@ -17,7 +18,6 @@ import {
   Menu,
   Grid,
   Image,
-  Button,
   Avatar,
   notification,
   ConfigProvider,
@@ -61,6 +61,7 @@ export default function HeaderHome() {
     } else if (key === "logout") {
       logOut();
     } else if (key === "login") {
+      navigate("/login");
       return;
     } else {
       onClickItinerario(key);
@@ -134,10 +135,9 @@ export default function HeaderHome() {
           size="default"
         />
       ) : (
-        <Link to={"/login"}>
-          <Button shape="round">LOGIN</Button>
-        </Link>
+        <>INTRANET</>
       ),
+      icon: isAuthenticated ? null : <LoginOutlined />,
       key: "login",
       children: isAuthenticated
         ? [
