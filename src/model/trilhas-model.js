@@ -33,7 +33,9 @@ const trilhasModel = {
     (_actions, storeActions) => storeActions.courses.setFilter,
     // handler:
     async (actions, target) => {
-      await actions.getTrilhas(target.payload);
+      if (target.payload.tipoClassificacao) {
+        await actions.getTrilhas(target.payload);
+      }
     }
   ),
 
