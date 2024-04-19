@@ -1,4 +1,3 @@
-import React from "react";
 import { Row, Input, Typography, Col, Carousel, Grid, Image } from "antd";
 import { HashLink } from "react-router-hash-link";
 import { useNavigate } from "react-router-dom";
@@ -276,7 +275,7 @@ export default function Finder() {
             boxShadow: "0px 11px 15px 0px rgba(0,0,0,0.38)",
           }}
           prefix={<SearchOutlined style={{ margin: "0 16px" }} />}
-          bordered={false}
+          variant={false}
           placeholder={"Busque aqui"}
           onPressEnter={(e) => {
             onSearch(e.target.value);
