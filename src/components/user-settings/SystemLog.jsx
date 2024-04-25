@@ -60,16 +60,21 @@ export default function SystemLog() {
   const [pageNumber, setPageNumber] = useState(1);
   const [categoria, setCategoria] = useState(categoriaOptions[0].value);
   const [status, setStatus] = useState(statusOptions[0].value);
+  const [usuario, setUsuario] = useState();
   const [selectedItem, setSelectedItem] = useState(null);
   
-  // quando o usuário troca de curso pra trilha
+  // Funções que gerencial o estado de categoria, status e usuário
+  // que são chamadas pelos selects
   const handleCategoriaChange = (value) => {
     setCategoria(value);
   };
-
-  // quando o usuário troca de criado pra modificado, arquivado
+  
   const handleStatusChange = (value) => {
     setStatus(value);
+  };
+  
+  const handleUsuarioChange = (value) => {
+    setUsuario(value)
   };
 
   // quando o usuário muda a página
@@ -86,28 +91,30 @@ export default function SystemLog() {
     getLastCoursesTrailsChanges();
   }, [])
 
-  // troca entre cursos e trilhas que aparecem dependendo da opção do usuário 
+  // Memos que retornam o que deve aparecer com relação à mudança de categoria
+  // ou seja, se for cursos aparece uma opção, se for trilha, outra
   const dataSource = useMemo(() => {
     if (!loadingLastChanges) {
       return categoria === categoriaOptions[0].value ? lastCoursesChanges : lastTrailsChanges;
     }
   }, [loadingLastChanges, categoria, lastCoursesChanges, lastTrailsChanges]);
 
-  // contagem de itens na página (número de cursos ou de trilhas)
   const pagesCount = useMemo(() => {
       if (!loadingLastChanges) {
         return categoria === categoriaOptions[0].value ? countLastCourses : countLastTrails;
       }
   }, [loadingLastChanges, categoria, countLastCourses, countLastTrails]);
 
-  // título do modal (muda se o usuário selecionou cursos ou trilhas)
   const modalTitle = useMemo(() => {
       if (!loadingLastChanges) {
         return categoria === categoriaOptions[0].value ? "Detalhes do curso" : "Detalhes da trilha";
       }
   }, [loadingLastChanges, categoria]);
 
-  // campos que aparecem ao clicar em um curso / trilha (muda se é curso ou trilha)
+  const coursesSelectedItems = () => {
+    return selectedItem.cursos.map(curso => curso.name).join(", ");
+  }
+
   const descriptionItems = useMemo(() => {
     if (!loadingLastChanges && selectedItem) {
       return categoria === categoriaOptions[0].value ? [
@@ -122,16 +129,16 @@ export default function SystemLog() {
         { key: 'descriptionItemsCursos9', label: 'Publicado por', children: selectedItem.publishedBy },
       ] : [
         { key: 'descriptionItemsTrilhas1', label: 'Nome', children: selectedItem.name },
-        { key: 'descriptionItemsTrilhas2', label: 'Criado em', children: selectedItem.createdBy },
-        { key: 'descriptionItemsTrilhas3', label: 'Criado por', children: selectedItem.updatedBy },
-        { key: 'descriptionItemsTrilhas4', label: 'Atualizado em', children: selectedItem.updatedat },
-        { key: 'descriptionItemsTrilhas5', label: 'Atualizado por', children: selectedItem.updatedBy },
-        { key: 'descriptionItemsTrilhas6', label: 'Arquivado em', children: selectedItem.filledAt },
-        { key: 'descriptionItemsTrilhas7', label: 'Arquivado por', children: selectedItem.filedBy },
+        { key: 'descriptionItemsTrilhas2', label: 'Cursos', children: coursesSelectedItems() },
+        { key: 'descriptionItemsTrilhas3', label: 'Criado em', children: selectedItem.createdBy },
+        { key: 'descriptionItemsTrilhas4', label: 'Criado por', children: selectedItem.updatedBy },
+        { key: 'descriptionItemsTrilhas5', label: 'Atualizado em', children: selectedItem.updatedat },
+        { key: 'descriptionItemsTrilhas6', label: 'Atualizado por', children: selectedItem.updatedBy },
+        { key: 'descriptionItemsTrilhas7', label: 'Arquivado em', children: selectedItem.filledAt },
+        { key: 'descriptionItemsTrilhas8', label: 'Arquivado por', children: selectedItem.filedBy },
       ];
     }
   }, [loadingLastChanges, categoria, selectedItem]);
-
 
   return (
     <>
@@ -166,21 +173,28 @@ export default function SystemLog() {
                 >
                   <Select
                     style={{ width: "12em" }}
-                    defaultValue={categoriaOptions[0].value}
                     options={categoriaOptions}
+                    defaultValue={categoriaOptions[0].value}
+                    value={categoria}
                     onChange={handleCategoriaChange}
+                    allowClear={true}
                     />
                   <Select
                     style={{ width: "8em" }}
+                    options={statusOptions}
                     defaultValue={statusOptions[0].value}
-                    options={statusOptions} 
+                    value={status}
                     onChange={handleStatusChange}
+                    allowClear={true}
                   />
                   <Select
                     style={{ width: "15em" }}
+                    options={usuarioOptions}
+                    value={usuario}
+                    onChange={handleUsuarioChange}
                     showSearch={true}
                     placeholder={"usuário"}
-                    options={usuarioOptions}
+                    allowClear={true}
                   />
                 </Space>
               }
@@ -198,8 +212,13 @@ export default function SystemLog() {
                 }}
                 columns={columnsTable}
                 dataSource={dataSource}
-                onRow={(record) => {
-                  // record: o objeto da lista que está selecionado, ou seja, o curso/trilha selecionado
+                rowKey={
+                  // record: o objeto que está sendo exibido na tabela
+                  (record) => { return record.id }
+                }
+                onRow={
+                  (record) => {
+                  // record: o curso/trilha selecionado
                   return {
                     onClick: () => {
                       handleClickOnItem(record);
@@ -219,7 +238,7 @@ export default function SystemLog() {
         footer={null}
       >
         {selectedItem && (
-            <Descriptions column={1} bordered={true} layout="horizontal" items={descriptionItems}/>
+            <Descriptions column={1} bordered={true} layout="horizontal" items={descriptionItems} />
         )}
       </Modal>
     </>

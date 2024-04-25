@@ -32,6 +32,7 @@ const admModel = {
     actions.setLoadingLastChanges(true)
     const courses = [
       {
+        id: "1",
         name: "Curso1",
         createdAt: "2022-05-08-20-30",
         createdBy: "Ricardin",
@@ -43,6 +44,7 @@ const admModel = {
         publishedBy: "Ricardin",
       },
       {
+        id: "2",
         name: "Curso2",
         createdAt: "2022-05-08-20-30",
         createdBy: "Ricardin",
@@ -54,6 +56,7 @@ const admModel = {
         publishedBy: "Ricardin",
       },
       {
+        id: "3",
         name: "Curso3",
         createdAt: "2022-05-08-20-30",
         createdBy: "Ricardin",
@@ -67,6 +70,7 @@ const admModel = {
     ]
     const trails = [
       {
+        id: "101",
         name: "Trilha1",
         createdAt: "2022-05-08-20-30",
         createdBy: "Zezin",
@@ -74,8 +78,13 @@ const admModel = {
         updatedBy: "Ricardin",
         filedAt: "",
         filedBy: "",
+        cursos: [
+          courses[0],
+          courses[1]
+        ]
       },
       {
+        id: "102",
         name: "Trilha2",
         createdAt: "2022-05-08-20-30",
         createdBy: "Zezin",
@@ -83,8 +92,13 @@ const admModel = {
         updatedBy: "Ricardin",
         filedAt: "",
         filedBy: "",
+        cursos: [
+          courses[0],
+          courses[2]
+        ]
       },
       {
+        id: "103",
         name: "Trilha3",
         createdAt: "2022-05-08-20-30",
         createdBy: "Zezin",
@@ -92,6 +106,10 @@ const admModel = {
         updatedBy: "Ricardin",
         filedAt: "",
         filedBy: "",
+        cursos: [
+          courses[1],
+          courses[2]
+        ]
       },
     ]
 
