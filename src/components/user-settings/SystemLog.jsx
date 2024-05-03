@@ -41,18 +41,18 @@ export default function SystemLog() {
       key: 'columnsTable1',
     },
     {
-      title: 'Criado em',
-      dataIndex: 'createdAt',
+      title: 'Ação',
+      dataIndex: 'action',
       key: 'columnsTable2',
     },
     {
-      title: 'Atualizado em',
+      title: 'Data da ação',
       dataIndex: 'updatedAt',
       key: 'columnsTable3',
     },
     {
-      title: 'Arquivado em',
-      dataIndex: 'filedAt',
+      title: 'Usuário',
+      dataIndex: 'user',
       key: 'columnsTable4',
     },
   ]

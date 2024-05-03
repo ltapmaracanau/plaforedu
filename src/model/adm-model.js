@@ -33,6 +33,8 @@ const admModel = {
     const courses = [
       {
         id: "1",
+        action: "Criado",
+        user: "usuario1",
         name: "Curso1",
         createdAt: "2022-05-08-20-30",
         createdBy: "Ricardin",
@@ -45,6 +47,8 @@ const admModel = {
       },
       {
         id: "2",
+        action: "Arquivado",
+        user: "usuario2",
         name: "Curso2",
         createdAt: "2022-05-08-20-30",
         createdBy: "Ricardin",
@@ -57,6 +61,8 @@ const admModel = {
       },
       {
         id: "3",
+        action: "Atualizado",
+        user: "usuario3",
         name: "Curso3",
         createdAt: "2022-05-08-20-30",
         createdBy: "Ricardin",
@@ -71,6 +77,8 @@ const admModel = {
     const trails = [
       {
         id: "101",
+        action: "Criado",
+        user: "usuario1",
         name: "Trilha1",
         createdAt: "2022-05-08-20-30",
         createdBy: "Zezin",
@@ -85,6 +93,8 @@ const admModel = {
       },
       {
         id: "102",
+        action: "Arquivado",
+        user: "usuario7",
         name: "Trilha2",
         createdAt: "2022-05-08-20-30",
         createdBy: "Zezin",
@@ -99,6 +109,8 @@ const admModel = {
       },
       {
         id: "103",
+        action: "Atualizado",
+        user: "usuario8",
         name: "Trilha3",
         createdAt: "2022-05-08-20-30",
         createdBy: "Zezin",
