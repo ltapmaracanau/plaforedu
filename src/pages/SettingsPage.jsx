@@ -13,6 +13,7 @@ import {
   BankOutlined,
   ScheduleOutlined,
   FileSearchOutlined,
+  LineChartOutlined
 } from "@ant-design/icons";
 
 import { Layout, Menu } from "antd";
@@ -91,19 +92,28 @@ export default function SettingsPage() {
           icon: <NodeIndexOutlined />,
           label: "Trilhas Formativas",
         },
+        
+      ],
+    },
+    {
+      key: "logs",
+      icon: <LineChartOutlined />,
+      disabled: !isActive || !(isAdm || isCoord || isAnalDados),
+      label: "Relatórios",
+      children: [
+        {
+          key: "/settings/logs",
+          icon: <FileSearchOutlined />,
+          label: "Relatório de buscas",
+          disabled: !isActive || !(isAdm || isCoord || isAnalDados),
+        },
         {
           key: "/settings/log-courses-trails",
           icon: <FileSearchOutlined />,
           label: "Log do Sistema",
           disabled: !(isAdm || isCoord),
         },
-      ],
-    },
-    {
-      key: "/settings/logs",
-      icon: <FileSearchOutlined />,
-      disabled: !isActive || !(isAdm || isCoord || isAnalDados),
-      label: "Relatório de Buscas",
+      ]
     },
   ];
 
