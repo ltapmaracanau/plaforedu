@@ -134,6 +134,7 @@ export default function SettingsPage() {
             fontFamily: "Roboto",
           }}
           theme={"light"}
+          defaultSelectedKeys={items[0].key}
           defaultChecked={"/"}
           onClick={(e) => {
             navigate(`${e.key}`);

@@ -209,6 +209,9 @@ export default function FaleConosco() {
                             <Select.Option value={"Reclamação"}>
                               Reclamação
                             </Select.Option>
+                            <Select.Option value={"Dúvida"}>
+                              Dúvida
+                            </Select.Option>
                           </Select>
                         </Form.Item>
                       );

@@ -51,24 +51,6 @@ const Layout = () => {
 
   const giveConsent = (type = "all") => {
     // all or essential
-    if (type === "all") {
-      setCookie(
-        "cookieConsent",
-        JSON.stringify({
-          consentType: type,
-          date: new Date(),
-        }),
-        {
-          path: "/",
-          secure: true,
-          httpOnly: false,
-          sameSite: "none",
-          maxAge: 60 * 60 * 24 * 365, // expires in 1 year
-          domain: import.meta.env.PROD ? import.meta.env.VITE_URL : undefined,
-        }
-      );
-      return;
-    }
     setCookie(
       "cookieConsent",
       JSON.stringify({
@@ -81,7 +63,9 @@ const Layout = () => {
         httpOnly: false,
         sameSite: "none",
         maxAge: 60 * 60 * 24 * 365, // expires in 1 year
-        domain: import.meta.env.PROD ? import.meta.env.VITE_URL : undefined,
+        domain: import.meta.env.PROD
+          ? import.meta.env.VITE_DOMAIN_URL
+          : undefined,
       }
     );
   };
