@@ -1,146 +1,270 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { Card, Space, Table, Select, Modal, Descriptions } from "antd";
+import { Card, Space, Table, Select, Modal, Descriptions, Button } from "antd";
+import { FileSyncOutlined } from "@ant-design/icons";
+import HistoricoItens from "./HistoricoItens";
 
 export default function SystemLog() {
-  
-  const getLastCoursesTrailsChanges = useStoreActions( actions => actions.adm.getLastCoursesTrailsChanges )
-  const lastCoursesChanges = useStoreState( state => state.adm.lastCoursesChanges )
-  const lastTrailsChanges = useStoreState( state => state.adm.lastTrailsChanges )
-  const loadingLastChanges = useStoreState( state => state.adm.loadingLastChanges )
+  const getLastCoursesTrailsChanges = useStoreActions(
+    (actions) => actions.adm.getLastCoursesTrailsChanges
+  );
+  const lastCoursesChanges = useStoreState(
+    (state) => state.adm.lastCoursesChanges
+  );
+  const lastTrailsChanges = useStoreState(
+    (state) => state.adm.lastTrailsChanges
+  );
+  const loadingLastChanges = useStoreState(
+    (state) => state.adm.loadingLastChanges
+  );
 
-  const countLastCourses = useStoreState( state => state.adm.countLastCourses )
-  const countLastTrails = useStoreState( state => state.adm.countLastTrails )
+  const countLastCourses = useStoreState((state) => state.adm.countLastCourses);
+  const countLastTrails = useStoreState((state) => state.adm.countLastTrails);
 
-  const categoriaOptions = [
-    { value: "cursos", label: "Cursos"},
-    { value: "trilhas_formativas", label: "Trilhas Formativas" },
-  ]
+  const categoriaOptions = useMemo(() => {
+    return [
+      { value: "cursos", label: "Cursos" },
+      { value: "trilhas_formativas", label: "Trilhas Formativas" },
+    ];
+  }, []);
+
   const statusOptions = [
-    { 
+    {
       value: "criado",
-      label: "Criado"
+      label: "Criado",
     },
     {
       value: "atualizado",
-      label: "Atualizado"
-    },
-    { 
-      value: "arquivado", 
-      label: "Arquivado"
-    }
-  ]
-  const usuarioOptions = [
-    { value: "a", label: "a"},
-    { value: "b", label: "b" },
-  ]
-  const columnsTable = [
-    {
-      title: 'Nome',
-      dataIndex: 'name',
-      key: 'columnsTable1',
+      label: "Atualizado",
     },
     {
-      title: 'Ação',
-      dataIndex: 'action',
-      key: 'columnsTable2',
+      value: "arquivado",
+      label: "Arquivado",
     },
-    {
-      title: 'Data da ação',
-      dataIndex: 'updatedAt',
-      key: 'columnsTable3',
-    },
-    {
-      title: 'Usuário',
-      dataIndex: 'user',
-      key: 'columnsTable4',
-    },
-  ]
+  ];
 
   const [pageNumber, setPageNumber] = useState(1);
   const [categoria, setCategoria] = useState(categoriaOptions[0].value);
   const [status, setStatus] = useState(statusOptions[0].value);
   const [usuario, setUsuario] = useState();
-  const [selectedItem, setSelectedItem] = useState(null);
-  
-  // Funções que gerencial o estado de categoria, status e usuário
-  // que são chamadas pelos selects
-  const handleCategoriaChange = (value) => {
-    setCategoria(value);
-  };
-  
-  const handleStatusChange = (value) => {
-    setStatus(value);
-  };
-  
-  const handleUsuarioChange = (value) => {
-    setUsuario(value)
-  };
+  const [selectedItem, setSelectedItem] = useState();
+  const [activeClickRow, setActiveClickRow] = useState(true);
+  const [itemHistorico, setItemHistorico] = useState("");
 
-  // quando o usuário muda a página
-  const handlePages = (page) => {
-    setPageNumber(page)
-  }
+  const columnsTable = [
+    {
+      title: "Nome",
+      dataIndex: "name",
+      key: "nameColumn",
+    },
+    {
+      title: "Ação",
+      dataIndex: "action",
+      key: "actionColumn",
+    },
+    {
+      title: "Data da ação",
+      dataIndex: "updatedAt",
+      key: "actionDateColumn",
+    },
+    {
+      title: "Usuário",
+      dataIndex: "user",
+      key: "userColumn",
+    },
+    {
+      key: "seeHistory",
+      render: (text) => (
+        <Space size="middle">
+          <Button
+            key={text.id}
+            onMouseEnter={() => {
+              setActiveClickRow(false);
+            }}
+            onMouseLeave={() => {
+              setActiveClickRow(true);
+            }}
+            onClick={() => {
+              console.log(text.id);
+              setItemHistorico(text.id);
+            }}
+            icon={<FileSyncOutlined />}
+          >
+            Histórico
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
-  // quando o usuário clica em algum curso/trilha da lista
-  const handleClickOnItem = (record) => {
-    setSelectedItem(record);
-  };
-
-  useEffect(()=> {
+  useEffect(() => {
     getLastCoursesTrailsChanges();
-  }, [])
+  }, [getLastCoursesTrailsChanges]);
 
-  // Memos que retornam o que deve aparecer com relação à mudança de categoria
+  // memos que retornam o que deve aparecer com relação à mudança de categoria
   // ou seja, se for cursos aparece uma opção, se for trilha, outra
   const dataSource = useMemo(() => {
     if (!loadingLastChanges) {
-      return categoria === categoriaOptions[0].value ? lastCoursesChanges : lastTrailsChanges;
+      return categoria === categoriaOptions[0].value
+        ? lastCoursesChanges
+        : lastTrailsChanges;
     }
-  }, [loadingLastChanges, categoria, lastCoursesChanges, lastTrailsChanges]);
+  }, [
+    loadingLastChanges,
+    categoria,
+    lastCoursesChanges,
+    lastTrailsChanges,
+    categoriaOptions,
+  ]);
+
+  const usuarioOptions = useMemo(() => {
+    let usersList = [];
+    if (dataSource) {
+      dataSource.map((item) => {
+        usersList.push({
+          label: item.user,
+          value: item.user,
+        });
+      });
+    }
+    return usersList;
+  }, [dataSource]);
 
   const pagesCount = useMemo(() => {
-      if (!loadingLastChanges) {
-        return categoria === categoriaOptions[0].value ? countLastCourses : countLastTrails;
-      }
-  }, [loadingLastChanges, categoria, countLastCourses, countLastTrails]);
+    if (!loadingLastChanges) {
+      return categoria === categoriaOptions[0].value
+        ? countLastCourses
+        : countLastTrails;
+    }
+  }, [
+    loadingLastChanges,
+    categoria,
+    countLastCourses,
+    countLastTrails,
+    categoriaOptions,
+  ]);
 
   const modalTitle = useMemo(() => {
-      if (!loadingLastChanges) {
-        return categoria === categoriaOptions[0].value ? "Detalhes do curso" : "Detalhes da trilha";
-      }
-  }, [loadingLastChanges, categoria]);
+    if (!loadingLastChanges) {
+      return categoria === categoriaOptions[0].value
+        ? "Detalhes do curso"
+        : "Detalhes da trilha";
+    }
+  }, [loadingLastChanges, categoria, categoriaOptions]);
 
-  const coursesSelectedItems = () => {
-    return selectedItem.cursos.map(curso => curso.name).join(", ");
-  }
+  const coursesSelectedItems = useCallback(() => {
+    return selectedItem.cursos.map((curso) => curso.name).join(", ");
+  }, [selectedItem]);
 
   const descriptionItems = useMemo(() => {
     if (!loadingLastChanges && selectedItem) {
-      return categoria === categoriaOptions[0].value ? [
-        { key: 'descriptionItemsCursos1', label: 'Nome', children: selectedItem.name },
-        { key: 'descriptionItemsCursos2', label: 'Criado em', children: selectedItem.createdBy },
-        { key: 'descriptionItemsCursos3', label: 'Criado por', children: selectedItem.updatedBy },
-        { key: 'descriptionItemsCursos4', label: 'Atualizado em', children: selectedItem.updatedat },
-        { key: 'descriptionItemsCursos5', label: 'Atualizado por', children: selectedItem.updatedBy },
-        { key: 'descriptionItemsCursos6', label: 'Arquivado em', children: selectedItem.filledAt },
-        { key: 'descriptionItemsCursos7', label: 'Arquivado por', children: selectedItem.filedBy },
-        { key: 'descriptionItemsCursos8', label: 'Publicado em', children: selectedItem.publishedAt },
-        { key: 'descriptionItemsCursos9', label: 'Publicado por', children: selectedItem.publishedBy },
-      ] : [
-        { key: 'descriptionItemsTrilhas1', label: 'Nome', children: selectedItem.name },
-        { key: 'descriptionItemsTrilhas2', label: 'Cursos', children: coursesSelectedItems() },
-        { key: 'descriptionItemsTrilhas3', label: 'Criado em', children: selectedItem.createdBy },
-        { key: 'descriptionItemsTrilhas4', label: 'Criado por', children: selectedItem.updatedBy },
-        { key: 'descriptionItemsTrilhas5', label: 'Atualizado em', children: selectedItem.updatedat },
-        { key: 'descriptionItemsTrilhas6', label: 'Atualizado por', children: selectedItem.updatedBy },
-        { key: 'descriptionItemsTrilhas7', label: 'Arquivado em', children: selectedItem.filledAt },
-        { key: 'descriptionItemsTrilhas8', label: 'Arquivado por', children: selectedItem.filedBy },
-      ];
+      return categoria === categoriaOptions[0].value
+        ? [
+            {
+              key: "descriptionItemsName",
+              label: "Nome",
+              children: selectedItem.name,
+            },
+            {
+              key: "descriptionItemsCreatedBy",
+              label: "Criado em",
+              children: selectedItem.createdAt,
+            },
+            {
+              key: "descriptionItemsUpdatedBy",
+              label: "Criado por",
+              children: selectedItem.createdBy,
+            },
+            {
+              key: "descriptionItemsUpdatedAt",
+              label: "Atualizado em",
+              children: selectedItem.updatedAt,
+            },
+            {
+              key: "descriptionItemsUpdatedBy",
+              label: "Atualizado por",
+              children: selectedItem.updatedBy,
+            },
+            {
+              key: "descriptionItemsFilledAt",
+              label: "Arquivado em",
+              children: selectedItem.filledAt,
+            },
+            {
+              key: "descriptionItemsFilledBy",
+              label: "Arquivado por",
+              children: selectedItem.filedBy,
+            },
+            {
+              key: "descriptionItemsPublishedAt",
+              label: "Publicado em",
+              children: selectedItem.publishedAt,
+            },
+            {
+              key: "descriptionItemsPublishedBy",
+              label: "Publicado por",
+              children: selectedItem.publishedBy,
+            },
+          ]
+        : [
+            {
+              key: "descriptionItemsName",
+              label: "Nome",
+              children: selectedItem.name,
+            },
+            {
+              key: "descriptionItemsCourses",
+              label: "Cursos",
+              children: coursesSelectedItems(),
+            },
+            {
+              key: "descriptionItemsCreatedAt",
+              label: "Criado em",
+              children: selectedItem.createdAt,
+            },
+            {
+              key: "descriptionItemsCreatedBy",
+              label: "Criado por",
+              children: selectedItem.createdBy,
+            },
+            {
+              key: "descriptionItemsUpdatedat",
+              label: "Atualizado em",
+              children: selectedItem.updatedat,
+            },
+            {
+              key: "descriptionItemsUpdatedby",
+              label: "Atualizado por",
+              children: selectedItem.updatedBy,
+            },
+            {
+              key: "descriptionItemsFilledAt",
+              label: "Arquivado em",
+              children: selectedItem.filledAt,
+            },
+            {
+              key: "descriptionItemsFilledBy",
+              label: "Arquivado por",
+              children: selectedItem.filedBy,
+            },
+          ];
     }
-  }, [loadingLastChanges, categoria, selectedItem]);
+  }, [
+    loadingLastChanges,
+    categoria,
+    selectedItem,
+    categoriaOptions,
+    coursesSelectedItems,
+  ]);
 
-  return (
+  return itemHistorico != "" ? (
+    <HistoricoItens
+      itemHistorico={itemHistorico}
+      back={() => {
+        setItemHistorico("");
+      }}
+    />
+  ) : (
     <>
       <div
         style={{
@@ -152,95 +276,101 @@ export default function SystemLog() {
       >
         <div style={{ width: "100%" }}>
           <Card
-              title={"Log do sistema"}
-              styles={{
-                header: {
-                  fontSize: 20,
-                  padding: "10px",
-                },
-                body: {
-                  padding: "0px",
-                },
+            title={"Log do sistema"}
+            styles={{
+              header: {
+                fontSize: 20,
+                padding: "10px",
+              },
+              body: {
+                padding: "0px",
+              },
+            }}
+            extra={
+              <Space
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <Select
+                  style={{ width: "12em" }}
+                  options={categoriaOptions}
+                  defaultValue={categoriaOptions[0].value}
+                  value={categoria}
+                  onChange={(value) => setCategoria(value)}
+                  placeholder="Categoria"
+                  allowClear={true}
+                />
+                <Select
+                  style={{ width: "8em" }}
+                  options={statusOptions}
+                  defaultValue={statusOptions[0].value}
+                  value={status}
+                  onChange={(value) => setStatus(value)}
+                  placeholder="Status"
+                  allowClear={true}
+                />
+                <Select
+                  style={{ width: "15em" }}
+                  options={usuarioOptions}
+                  value={usuario}
+                  onChange={(value) => setUsuario(value)}
+                  showSearch={true}
+                  placeholder={"Usuário"}
+                  allowClear={true}
+                />
+              </Space>
+            }
+          >
+            <Table
+              loading={loadingLastChanges}
+              pagination={{
+                pageSize: 30,
+                total: pagesCount,
+                showSizeChanger: false,
+                current: pageNumber,
+                defaultCurrent: 1,
+                hideOnSinglePage: true,
+                onChange: (page) => setPageNumber(page),
               }}
-              extra={
-                <Space
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: "10px",
-                  }}
-                >
-                  <Select
-                    style={{ width: "12em" }}
-                    options={categoriaOptions}
-                    defaultValue={categoriaOptions[0].value}
-                    value={categoria}
-                    onChange={handleCategoriaChange}
-                    allowClear={true}
-                    />
-                  <Select
-                    style={{ width: "8em" }}
-                    options={statusOptions}
-                    defaultValue={statusOptions[0].value}
-                    value={status}
-                    onChange={handleStatusChange}
-                    allowClear={true}
-                  />
-                  <Select
-                    style={{ width: "15em" }}
-                    options={usuarioOptions}
-                    value={usuario}
-                    onChange={handleUsuarioChange}
-                    showSearch={true}
-                    placeholder={"usuário"}
-                    allowClear={true}
-                  />
-                </Space>
-              }
-            >
-              <Table
-                loading={loadingLastChanges}
-                pagination={{
-                  pageSize: 30,
-                  total: pagesCount,
-                  showSizeChanger: false,
-                  current: pageNumber,
-                  defaultCurrent: 1,
-                  hideOnSinglePage: true,
-                  onChange: {handlePages}
-                }}
-                columns={columnsTable}
-                dataSource={dataSource}
-                rowKey={
-                  // record: o objeto que está sendo exibido na tabela
-                  (record) => { return record.id }
-                }
-                onRow={
-                  (record) => {
-                  // record: o curso/trilha selecionado
-                  return {
-                    onClick: () => {
-                      handleClickOnItem(record);
-                    },
-                    style: { cursor: 'pointer' }
-                  };
-                }}
-              />
-            </Card>
+              columns={columnsTable}
+              dataSource={dataSource}
+              rowKey={(record) => {
+                return record.id;
+              }}
+              onRow={(record) => {
+                return {
+                  onClick: () => {
+                    if (activeClickRow) {
+                      setSelectedItem(record);
+                    }
+                  },
+                  style: { cursor: "pointer" },
+                };
+              }}
+            />
+          </Card>
         </div>
       </div>
 
       <Modal
         title={modalTitle}
-        open={!!selectedItem}
+        open={!!selectedItem && activeClickRow}
         onCancel={() => setSelectedItem(null)}
         footer={null}
       >
-        {selectedItem && (
-            <Descriptions column={1} bordered={true} layout="horizontal" items={descriptionItems} />
+        {selectedItem && activeClickRow && (
+          <Descriptions
+            column={1}
+            bordered={true}
+            layout="horizontal"
+            items={descriptionItems}
+          />
         )}
       </Modal>
     </>
   );
-} 
+}

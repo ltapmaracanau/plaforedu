@@ -18,10 +18,6 @@ const admModel = {
   statistics: {},
   loadingInfo: false,
 
-
-
-  
-  
   lastCoursesChanges: [],
   lastTrailsChanges: [],
   countLastCourses: 0,
@@ -29,7 +25,7 @@ const admModel = {
   loadingLastChanges: false,
 
   getLastCoursesTrailsChanges: thunk(async (actions) => {
-    actions.setLoadingLastChanges(true)
+    actions.setLoadingLastChanges(true);
     const courses = [
       {
         id: "1",
@@ -73,7 +69,7 @@ const admModel = {
         publishedAt: "2022-01-01-20-20",
         publishedBy: "Ricardin",
       },
-    ]
+    ];
     const trails = [
       {
         id: "101",
@@ -86,10 +82,7 @@ const admModel = {
         updatedBy: "Ricardin",
         filedAt: "",
         filedBy: "",
-        cursos: [
-          courses[0],
-          courses[1]
-        ]
+        cursos: [courses[0], courses[1]],
       },
       {
         id: "102",
@@ -102,10 +95,7 @@ const admModel = {
         updatedBy: "Ricardin",
         filedAt: "",
         filedBy: "",
-        cursos: [
-          courses[0],
-          courses[2]
-        ]
+        cursos: [courses[0], courses[2]],
       },
       {
         id: "103",
@@ -118,22 +108,18 @@ const admModel = {
         updatedBy: "Ricardin",
         filedAt: "",
         filedBy: "",
-        cursos: [
-          courses[1],
-          courses[2]
-        ]
+        cursos: [courses[1], courses[2]],
       },
-    ]
+    ];
 
-    actions.setCountLastCourses(courses.length)
-    actions.setCountLastTrails(courses.length)
+    actions.setCountLastCourses(courses.length);
+    actions.setCountLastTrails(courses.length);
 
-    setTimeout(async () => {
+    setTimeout(() => {
       actions.setLastCoursesChanges(courses);
       actions.setLastTrailsChanges(trails);
-      actions.setLoadingLastChanges(false)
+      actions.setLoadingLastChanges(false);
     }, 2000);
-
   }),
 
   setLastCoursesChanges: action((state, payload) => {
@@ -144,24 +130,16 @@ const admModel = {
   }),
 
   setCountLastCourses: action((state, payload) => {
-    state.countLastCourses = payload
+    state.countLastCourses = payload;
   }),
 
   setCountLastTrails: action((state, payload) => {
-    state.countLastTrails = payload
+    state.countLastTrails = payload;
   }),
 
   setLoadingLastChanges: action((state, payload) => {
-    state.loadingLastChanges = payload
+    state.loadingLastChanges = payload;
   }),
-
-
-
-
-
-
-
-
 
   myProfile: computed(() => services.loginService.getProfile()),
   allDataProfile: {},
