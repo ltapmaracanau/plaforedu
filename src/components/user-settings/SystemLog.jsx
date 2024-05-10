@@ -85,7 +85,6 @@ export default function SystemLog() {
               setActiveClickRow(true);
             }}
             onClick={() => {
-              console.log(text.id);
               setItemHistorico(text.id);
             }}
             icon={<FileSyncOutlined />}
@@ -261,6 +260,7 @@ export default function SystemLog() {
     <HistoricoItens
       itemHistorico={itemHistorico}
       back={() => {
+        setActiveClickRow(true);
         setItemHistorico("");
       }}
     />

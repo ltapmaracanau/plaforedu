@@ -40,8 +40,6 @@ export default function HistoricoItens(props) {
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "flex-start",
         padding: "20px",
       }}
     >
