@@ -33,11 +33,11 @@ export const admService = {
   getAcessibilidades: () => AuthAxios.get("/accessibilities/list"),
 
   getSearchLogs: (payload) =>
-    AuthAxios.get(`/logs/all`, {
+    AuthAxios.get(`/logs/course-search`, {
       params: {
         ...payload,
       },
     }),
 
-  downloadListLogs: () => AuthAxios.get("/logs/export-csv"),
+  downloadListLogs: () => AuthAxios.get("/logs/course-search-export-csv"),
 };
