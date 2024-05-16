@@ -1,10 +1,9 @@
 import { useStoreActions, useStoreState } from "easy-peasy";
 import {
-  Routes,
-  Route,
   Navigate,
-  BrowserRouter,
   Outlet,
+  createBrowserRouter,
+  RouterProvider,
 } from "react-router-dom";
 
 import { CloseOutlined } from "@ant-design/icons";
@@ -41,7 +40,7 @@ import StudyPlans from "../components/user-settings/StudyPlans.jsx";
 import StudyPlanView from "../components/user-settings/StudyPlanView.jsx";
 import StudyPlanRegister from "../components/user-settings/StudyPlanRegister.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
-import SystemLog from "../components/user-settings/SystemLog.jsx"
+import SystemLog from "../components/user-settings/SystemLog.jsx";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 
@@ -192,94 +191,157 @@ const CustomRoutes = () => {
   //const isCoordAVA = useStoreState((state) => state.adm.isCoordAVA);
   const isActive = useStoreState((state) => state.adm.isActive);
 
-  const ProtectedRoutes = () => {
-    return authenticated ? <Outlet /> : <Navigate to="/login" />;
-  };
-
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/settings" element={<SettingsPage />}>
-              <Route index element={<MyProfile />} />
-              <Route
-                path="/settings/update-password"
-                element={<UpdatePassword />}
-              />
-              <Route
-                element={isActive ? <Outlet /> : <Navigate to="/denied" />}
-              >
-                <Route path="/settings/study-plans" element={<StudyPlans />} />
-                <Route
-                  path="/settings/study-plans/:id"
-                  element={<StudyPlanView />}
-                />
-                <Route
-                  path="/settings/study-plans/edit/:planId"
-                  element={<StudyPlanRegister />}
-                />
-                <Route
-                  path="/settings/study-plans/new"
-                  element={<StudyPlanRegister />}
-                />
-                <Route
-                  path="/settings/users"
-                  element={isAdm ? <UsersList /> : <Navigate to="/denied" />}
-                />
-                <Route
-                  element={
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      errorElement: <NotFound />,
+      children: [
+        {
+          path: "/",
+          element: <HomePage />,
+        },
+        {
+          path: "/about",
+          element: <AboutPage />,
+        },
+        {
+          path: "/cursos",
+          element: <CoursesPage />,
+        },
+        {
+          path: "/history",
+          element: <HistoryPlaforPage />,
+        },
+        {
+          path: "/faleconosco",
+          element: <FaleConosco />,
+        },
+        {
+          path: "/faq",
+          element: <FAQ />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/forget",
+          element: <ForgotPassword />,
+        },
+        {
+          path: "/reset-password",
+          element: <ResetPassword />,
+        },
+        {
+          path: "/denied",
+          element: <Denied />,
+        },
+        {
+          path: "/settings",
+          element: authenticated ? <SettingsPage /> : <Navigate to="/login" />,
+          children: [
+            {
+              path: "/settings",
+              element: <MyProfile />,
+            },
+            {
+              path: "/settings/update-password",
+              element: <UpdatePassword />,
+            },
+            {
+              element: isActive ? <Outlet /> : <Navigate to="/denied" />,
+              children: [
+                {
+                  path: "/settings/study-plans",
+                  element: <StudyPlans />,
+                },
+                {
+                  path: "/settings/study-plans/:id",
+                  element: <StudyPlanView />,
+                },
+                {
+                  path: "/settings/study-plans/edit/:planId",
+                  element: <StudyPlanRegister />,
+                },
+                {
+                  path: "/settings/study-plans/new",
+                  element: <StudyPlanRegister />,
+                },
+                {
+                  path: "/settings/users",
+                  element: isAdm ? <UsersList /> : <Navigate to="/denied" />,
+                },
+                {
+                  element:
                     isAdm || isAnalDados || isCoord ? (
                       <Outlet />
                     ) : (
                       <Navigate to="/denied" />
-                    )
-                  }
-                >
-                  <Route path="/settings/courses" element={<CoursesList />} />
-                  <Route
-                    path="/settings/institutions"
-                    element={<InstitutionList />}
-                  />
-                  <Route
-                    path="/settings/categ-comp"
-                    element={<CategCompList />}
-                  />
-                  <Route path="/settings/competences" element={<CompList />} />
-                  <Route path="/settings/themes" element={<TemasList />} />
-                  <Route
-                    path="/settings/subthemes"
-                    element={<SubtemasList />}
-                  />
-                  <Route
-                    path="/settings/formative-trails"
-                    element={<FormativeTrailsList />}
-                  />
-                  <Route
-                    path="/settings/log-courses-trails"
-                    element={isAdm || isCoord ? <SystemLog /> : <Navigate to="/denied" />}
-                  />
-                  <Route path="/settings/logs" element={<ListSearchLogs />} />
-                </Route>
-              </Route>
-            </Route>
-          </Route>
+                    ),
+                  children: [
+                    {
+                      path: "/settings/courses",
+                      element: <CoursesList />,
+                    },
+                    {
+                      path: "/settings/institutions",
+                      element: <InstitutionList />,
+                    },
+                    {
+                      path: "/settings/categ-comp",
+                      element: <CategCompList />,
+                    },
+                    {
+                      path: "/settings/competences",
+                      element: <CompList />,
+                    },
+                    {
+                      path: "/settings/themes",
+                      element: <TemasList />,
+                    },
+                    {
+                      path: "/settings/subthemes",
+                      element: <SubtemasList />,
+                    },
+                    {
+                      path: "/settings/formative-trails",
+                      element: <FormativeTrailsList />,
+                    },
 
-          <Route path="/cursos" element={<CoursesPage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/history" element={<HistoryPlaforPage />} />
-          <Route path="/faleconosco" element={<FaleConosco />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forget" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/denied" element={<Denied />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+                    {
+                      path: "/settings/logs",
+                      element: <ListSearchLogs />,
+                    },
+                  ],
+                },
+                {
+                  element:
+                    isAdm || isCoord ? <Outlet /> : <Navigate to="/denied" />,
+                  children: [
+                    {
+                      path: "/settings/logs",
+                      element: <ListSearchLogs />,
+                    },
+                    {
+                      path: "/settings/log-courses-trails",
+                      element: <SystemLog />,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 };
 
 export default CustomRoutes;
