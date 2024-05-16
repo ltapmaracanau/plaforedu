@@ -18,6 +18,129 @@ const admModel = {
   statistics: {},
   loadingInfo: false,
 
+  lastCoursesChanges: [],
+  lastTrailsChanges: [],
+  countLastCourses: 0,
+  countLastTrails: 0,
+  loadingLastChanges: false,
+
+  getLastCoursesTrailsChanges: thunk(async (actions) => {
+    actions.setLoadingLastChanges(true);
+    const courses = [
+      {
+        id: "1",
+        action: "Criado",
+        user: "usuario1",
+        name: "Curso1",
+        createdAt: "2022-05-08-20-30",
+        createdBy: "Ricardin",
+        updatedAt: "2023-01-01-19-03",
+        updatedBy: "Ricardin",
+        filedAt: "",
+        filedBy: "",
+        publishedAt: "2022-01-01-20-20",
+        publishedBy: "Ricardin",
+      },
+      {
+        id: "2",
+        action: "Arquivado",
+        user: "usuario2",
+        name: "Curso2",
+        createdAt: "2022-05-08-20-30",
+        createdBy: "Ricardin",
+        updatedAt: "2023-01-01-19-03",
+        updatedBy: "Ricardin",
+        filedAt: "",
+        filedBy: "",
+        publishedAt: "2022-01-01-20-20",
+        publishedBy: "Ricardin",
+      },
+      {
+        id: "3",
+        action: "Atualizado",
+        user: "usuario3",
+        name: "Curso3",
+        createdAt: "2022-05-08-20-30",
+        createdBy: "Ricardin",
+        updatedAt: "2023-01-01-19-03",
+        updatedBy: "Ricardin",
+        filedAt: "",
+        filedBy: "",
+        publishedAt: "2022-01-01-20-20",
+        publishedBy: "Ricardin",
+      },
+    ];
+    const trails = [
+      {
+        id: "101",
+        action: "Criado",
+        user: "usuario1",
+        name: "Trilha1",
+        createdAt: "2022-05-08-20-30",
+        createdBy: "Zezin",
+        updatedAt: "2023-01-01-19-03",
+        updatedBy: "Ricardin",
+        filedAt: "",
+        filedBy: "",
+        cursos: [courses[0], courses[1]],
+      },
+      {
+        id: "102",
+        action: "Arquivado",
+        user: "usuario7",
+        name: "Trilha2",
+        createdAt: "2022-05-08-20-30",
+        createdBy: "Zezin",
+        updatedAt: "2023-01-01-19-03",
+        updatedBy: "Ricardin",
+        filedAt: "",
+        filedBy: "",
+        cursos: [courses[0], courses[2]],
+      },
+      {
+        id: "103",
+        action: "Atualizado",
+        user: "usuario8",
+        name: "Trilha3",
+        createdAt: "2022-05-08-20-30",
+        createdBy: "Zezin",
+        updatedAt: "2023-01-01-19-03",
+        updatedBy: "Ricardin",
+        filedAt: "",
+        filedBy: "",
+        cursos: [courses[1], courses[2]],
+      },
+    ];
+
+    actions.setCountLastCourses(courses.length);
+    actions.setCountLastTrails(courses.length);
+
+    setTimeout(() => {
+      actions.setLastCoursesChanges(courses);
+      actions.setLastTrailsChanges(trails);
+      actions.setLoadingLastChanges(false);
+    }, 2000);
+  }),
+
+  setLastCoursesChanges: action((state, payload) => {
+    state.lastCoursesChanges = payload;
+  }),
+  setLastTrailsChanges: action((state, payload) => {
+    state.lastTrailsChanges = payload;
+  }),
+
+  setCountLastCourses: action((state, payload) => {
+    state.countLastCourses = payload;
+  }),
+
+  setCountLastTrails: action((state, payload) => {
+    state.countLastTrails = payload;
+  }),
+
+  setLoadingLastChanges: action((state, payload) => {
+    state.loadingLastChanges = payload;
+  }),
+
   myProfile: computed(() => services.loginService.getProfile()),
   allDataProfile: {},
 
