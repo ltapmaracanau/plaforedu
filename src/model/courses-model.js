@@ -283,28 +283,30 @@ const coursesModel = {
     }
   }),
 
-  setArchivedCourse: thunk(async (actions, payload) => {
-    const { filed, id } = payload;
+  unarchiveCourse: thunk(async (actions, payload) => {
+    const { courseId } = payload;
     actions.setArchiving(true);
-    if (filed) {
-      await services.courseService
-        .archiveCourse({ id })
-        .catch((error) => {
-          throw new Error(error);
-        })
-        .finally(() => {
-          actions.setArchiving(false);
-        });
-    } else {
-      await services.courseService
-        .unarchiveCourse({ id })
-        .catch((error) => {
-          throw new Error(error);
-        })
-        .finally(() => {
-          actions.setArchiving(false);
-        });
-    }
+    await services.courseService
+      .unarchiveCourse({ id: courseId })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setArchiving(false);
+      });
+  }),
+
+  archiveCourse: thunk(async (actions, payload) => {
+    const { coursesIds = [] } = payload;
+    actions.setArchiving(true);
+    await services.courseService
+      .archiveCourse({ coursesIds })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setArchiving(false);
+      });
   }),
 
   setLoading: action((state, payload) => {

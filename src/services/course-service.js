@@ -41,7 +41,10 @@ export default {
       link: payload.link,
     }),
 
-  archiveCourse: (payload) => AuthAxios.patch(`/courses/${payload.id}/archive`),
+  archiveCourse: ({ coursesIds = [] }) =>
+    AuthAxios.patch(`/courses/archive`, {
+      courses: coursesIds,
+    }),
 
   unarchiveCourse: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/unarchive`),

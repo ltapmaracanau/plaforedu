@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerCourseSchema } from "../../schemas/registers/registersSchema";
@@ -16,10 +16,8 @@ import {
   Card,
   Form,
   Input,
-  Layout,
   notification,
   Select,
-  Skeleton,
   Descriptions,
   Space,
   Typography,
@@ -27,16 +25,13 @@ import {
   Tag,
   Switch,
   Table,
-  List,
   Popconfirm,
   Modal,
-  Checkbox,
   Upload,
 } from "antd";
 import TableSelectCourses from "../filter-components/TableSelectCourses";
 
-const { Text, Title } = Typography;
-const { Content } = Layout;
+const { Title } = Typography;
 
 export default function CourseRegister(props) {
   const { curso, actionVisible, title } = props;
@@ -61,8 +56,11 @@ export default function CourseRegister(props) {
   const updateCourse = useStoreActions(
     (actions) => actions.courses.updateCourse
   );
-  const setArchivedCourse = useStoreActions(
-    (actions) => actions.courses.setArchivedCourse
+  const archiveCourse = useStoreActions(
+    (actions) => actions.courses.archiveCourse
+  );
+  const unarchiveCourse = useStoreActions(
+    (actions) => actions.courses.unarchiveCourse
   );
 
   const registering = useStoreState((state) => state.courses.registering);
@@ -113,7 +111,7 @@ export default function CourseRegister(props) {
   const [form] = Form.useForm();
 
   const propsUpload = {
-    onRemove: (file) => {
+    onRemove: (_file) => {
       // Remover arquivos setec
       // Se houvesse arquivo no servidor, não removeria
       // Apenas atualiza
@@ -137,7 +135,11 @@ export default function CourseRegister(props) {
 
   const handleArchive = async (value) => {
     try {
-      await setArchivedCourse({ id: curso.id, filed: value });
+      if (value) {
+        await archiveCourse({ coursesIds: [curso.id] });
+      } else {
+        await unarchiveCourse({ courseId: curso.id });
+      }
       notification.success({
         message: "Operação realizada com sucesso!",
       });
@@ -232,8 +234,8 @@ export default function CourseRegister(props) {
       editable,
       dataIndex,
       record = { count: 0 },
-      action = false,
-      handleSave,
+      //action = false,
+      //handleSave,
       ...restProps
     } = props;
     let childNode = children;
