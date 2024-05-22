@@ -3,7 +3,7 @@ import AuthAxios from "./auth-axios";
 export default {
   getCursos: (payload) =>
     AuthAxios.post(
-      `/courses/all?page=${payload.page}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}&orderByCreated=${payload.sortByCreatedAt}&orderByUpdated=${payload.sortByUpdatedAt}`,
+      `/courses/all?page=${payload.page}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}&orderByCreated=${payload.sortByCreatedAt}&orderByUpdated=${payload.sortByUpdatedAt}&onlyPending=${payload.onlyPending}`,
       {
         search: payload.search,
         hours: payload.hours,

@@ -43,6 +43,7 @@ import ForgotPassword from "../pages/ForgotPassword.jsx";
 import SystemLog from "../components/user-settings/SystemLog.jsx";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
+import EvaluateChanges from "../components/user-settings/EvaluateChanges.jsx";
 
 const Layout = () => {
   const [cookies, setCookie] = useCookies(["cookieConsent"]);
@@ -271,6 +272,10 @@ const CustomRoutes = () => {
                 {
                   path: "/settings/users",
                   element: isAdm ? <UsersList /> : <Navigate to="/denied" />,
+                },
+                {
+                  path: "/settings/pendings",
+                  element: <EvaluateChanges />,
                 },
                 {
                   element:

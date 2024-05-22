@@ -122,6 +122,7 @@ const coursesModel = {
           subThemes: subtemas,
           sortByCreatedAt: !!sort.createdAt,
           sortByUpdatedAt: !!sort.updatedAt,
+          onlyPending: false,
         })
         .then(({ data }) => {
           if (secondary) {
@@ -144,6 +145,33 @@ const coursesModel = {
         });
     }
   ),
+
+  getPendingCourses: thunk(async (actions, payload) => {
+    const { page = 0 } = payload;
+    return await services.courseService
+      .getCursos({
+        includeFiled: false,
+        registerLog: false,
+        page: page,
+        search: "",
+        hours: [],
+        institutions: [],
+        itineraries: [],
+        accessibilities: [],
+        competencies: [],
+        taxonomies: [],
+        subThemes: [],
+        sortByCreatedAt: false,
+        sortByUpdatedAt: false,
+        onlyPending: true,
+      })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }),
 
   getTaxonomias: thunk(async (actions) => {
     actions.setLoading(true);

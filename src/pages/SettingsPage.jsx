@@ -13,7 +13,8 @@ import {
   BankOutlined,
   ScheduleOutlined,
   FileSearchOutlined,
-  LineChartOutlined
+  LineChartOutlined,
+  ToolOutlined,
 } from "@ant-design/icons";
 
 import { Layout, Menu } from "antd";
@@ -63,6 +64,11 @@ export default function SettingsPage() {
           label: "Cursos",
         },
         {
+          key: "/settings/pendings",
+          icon: <ToolOutlined />,
+          label: "Cursos Sob Análise",
+        },
+        {
           key: "/settings/institutions",
           icon: <BankOutlined />,
           label: "Instituições",
@@ -70,7 +76,7 @@ export default function SettingsPage() {
         {
           key: "/settings/categ-comp",
           icon: <DatabaseOutlined />,
-          label: "Categorias de competências",
+          label: "Categorias De Competências",
         },
         {
           key: "/settings/competences",
@@ -92,7 +98,6 @@ export default function SettingsPage() {
           icon: <NodeIndexOutlined />,
           label: "Trilhas Formativas",
         },
-        
       ],
     },
     {
@@ -104,7 +109,7 @@ export default function SettingsPage() {
         {
           key: "/settings/logs",
           icon: <FileSearchOutlined />,
-          label: "Relatório de buscas",
+          label: "Relatório De Buscas",
           disabled: !isActive || !(isAdm || isCoord || isAnalDados),
         },
         {
@@ -113,7 +118,7 @@ export default function SettingsPage() {
           label: "Log do Sistema",
           disabled: !(isAdm || isCoord),
         },
-      ]
+      ],
     },
   ];
 
