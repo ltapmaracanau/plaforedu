@@ -1,55 +1,79 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Card, Space, Table, Select, Modal, Descriptions, Button } from "antd";
 import { FileSyncOutlined } from "@ant-design/icons";
 import HistoricoItens from "./HistoricoItens";
+import services from "../../services";
 
 export default function SystemLog() {
   const getLastCoursesTrailsChanges = useStoreActions(
     (actions) => actions.adm.getLastCoursesTrailsChanges
   );
-  const lastCoursesChanges = useStoreState(
-    (state) => state.adm.lastCoursesChanges
-  );
-  const lastTrailsChanges = useStoreState(
-    (state) => state.adm.lastTrailsChanges
+  const lastDataChanges = useStoreState(
+    (state) => state.adm.lastDataChanges
   );
   const loadingLastChanges = useStoreState(
     (state) => state.adm.loadingLastChanges
   );
 
-  const countLastCourses = useStoreState((state) => state.adm.countLastCourses);
-  const countLastTrails = useStoreState((state) => state.adm.countLastTrails);
-
   const categoriaOptions = useMemo(() => {
     return [
-      { value: "cursos", label: "Cursos" },
-      { value: "trilhas_formativas", label: "Trilhas Formativas" },
+      { value: "COURSES", label: "Cursos" },
+      { value: "FORMATIVE_TRAILS", label: "Trilhas Formativas" },
     ];
   }, []);
 
-  const statusOptions = [
+  const usuarioOptions = [
     {
-      value: "criado",
-      label: "Criado",
+      value: "a",
+      label: "Usuário a",
     },
     {
-      value: "atualizado",
-      label: "Atualizado",
+      value: "b",
+      label: "Usuário b",
     },
     {
-      value: "arquivado",
-      label: "Arquivado",
+      value: "c",
+      label: "Usuário c",
     },
-  ];
+  ]
+
+  const statusOptions = useMemo(() => {
+    return [
+      {
+        value: "CREATION",
+        label: "Criado",
+      },
+      {
+        value: "UPDATE",
+        label: "Atualizado",
+      },
+      {
+        value: "FILING",
+        label: "Arquivado",
+      },
+      {
+        value: "ACTIVATION",
+        label: "Ativado",
+      },
+      {
+        value: "DELETION",
+        label: "Deletado",
+      },
+      {
+        value: "TURN_PENDING",
+        label: "Tornado Pendente",
+      },
+    ];
+  }, [])
 
   const [pageNumber, setPageNumber] = useState(1);
   const [categoria, setCategoria] = useState(categoriaOptions[0].value);
   const [status, setStatus] = useState(statusOptions[0].value);
   const [usuario, setUsuario] = useState();
-  const [selectedItem, setSelectedItem] = useState();
+  const [selectedItem, setSelectedItem] = useState(null);
   const [activeClickRow, setActiveClickRow] = useState(true);
-  const [itemHistorico, setItemHistorico] = useState("");
+  const [itemHistorico, setItemHistorico] = useState(null);
 
   const columnsTable = [
     {
@@ -64,12 +88,12 @@ export default function SystemLog() {
     },
     {
       title: "Data da ação",
-      dataIndex: "updatedAt",
+      dataIndex: "date",
       key: "actionDateColumn",
     },
     {
       title: "Usuário",
-      dataIndex: "user",
+      dataIndex: "userName",
       key: "userColumn",
     },
     {
@@ -85,7 +109,7 @@ export default function SystemLog() {
               setActiveClickRow(true);
             }}
             onClick={() => {
-              setItemHistorico(text.id);
+              setItemHistorico(text);
             }}
             icon={<FileSyncOutlined />}
           >
@@ -100,168 +124,86 @@ export default function SystemLog() {
     getLastCoursesTrailsChanges();
   }, [getLastCoursesTrailsChanges]);
 
-  // memos que retornam o que deve aparecer com relação à mudança de categoria
-  // ou seja, se for cursos aparece uma opção, se for trilha, outra
-  const dataSource = useMemo(() => {
-    if (!loadingLastChanges) {
-      return categoria === categoriaOptions[0].value
-        ? lastCoursesChanges
-        : lastTrailsChanges;
+  const labelAction = useMemo(() => {
+    return {
+      CREATION: "Criado",
+      ACTIVATION: "Ativado",
+      UPDATE: "Atualizado",
+      FILING: "Arquivado",
+      DELETION: "Deletado",
+      TURN_PENDING: "Tornado Pendente"
     }
-  }, [
-    loadingLastChanges,
-    categoria,
-    lastCoursesChanges,
-    lastTrailsChanges,
-    categoriaOptions,
-  ]);
+  }, [])
 
-  const usuarioOptions = useMemo(() => {
-    let usersList = [];
-    if (dataSource) {
-      dataSource.map((item) => {
-        usersList.push({
-          label: item.user,
-          value: item.user,
-        });
-      });
-    }
-    return usersList;
-  }, [dataSource]);
+  const dataFormatada = (data) => {
+    const date = new Date(data);
+    const formattedDate = date.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
 
-  const pagesCount = useMemo(() => {
-    if (!loadingLastChanges) {
-      return categoria === categoriaOptions[0].value
-        ? countLastCourses
-        : countLastTrails;
+    return formattedDate;
+  }
+
+  const lastDataChangesFiltered = useMemo(() => {
+    const data = []
+
+    if (lastDataChanges.data != null) {
+      lastDataChanges.data.map((item) => {
+        data.push({
+          id: item.id,
+          name: item.course.name,
+          action: labelAction[item.action],
+          date: dataFormatada(item.date),
+          userName: item.user.name,
+          itemId: item.course != null ? item.courseId : item.trailId
+        })
+      })
     }
-  }, [
-    loadingLastChanges,
-    categoria,
-    countLastCourses,
-    countLastTrails,
-    categoriaOptions,
-  ]);
+    return data;
+  }, [labelAction, lastDataChanges.data])
 
   const modalTitle = useMemo(() => {
     if (!loadingLastChanges) {
-      return categoria === categoriaOptions[0].value
-        ? "Detalhes do curso"
-        : "Detalhes da trilha";
+      return "Detalhes do curso"
     }
-  }, [loadingLastChanges, categoria, categoriaOptions]);
-
-  const coursesSelectedItems = useCallback(() => {
-    return selectedItem.cursos.map((curso) => curso.name).join(", ");
-  }, [selectedItem]);
+  }, [loadingLastChanges]);
 
   const descriptionItems = useMemo(() => {
     if (!loadingLastChanges && selectedItem) {
-      return categoria === categoriaOptions[0].value
-        ? [
-            {
-              key: "descriptionItemsName",
-              label: "Nome",
-              children: selectedItem.name,
-            },
-            {
-              key: "descriptionItemsCreatedBy",
-              label: "Criado em",
-              children: selectedItem.createdAt,
-            },
-            {
-              key: "descriptionItemsUpdatedBy",
-              label: "Criado por",
-              children: selectedItem.createdBy,
-            },
-            {
-              key: "descriptionItemsUpdatedAt",
-              label: "Atualizado em",
-              children: selectedItem.updatedAt,
-            },
-            {
-              key: "descriptionItemsUpdatedBy",
-              label: "Atualizado por",
-              children: selectedItem.updatedBy,
-            },
-            {
-              key: "descriptionItemsFilledAt",
-              label: "Arquivado em",
-              children: selectedItem.filledAt,
-            },
-            {
-              key: "descriptionItemsFilledBy",
-              label: "Arquivado por",
-              children: selectedItem.filedBy,
-            },
-            {
-              key: "descriptionItemsPublishedAt",
-              label: "Publicado em",
-              children: selectedItem.publishedAt,
-            },
-            {
-              key: "descriptionItemsPublishedBy",
-              label: "Publicado por",
-              children: selectedItem.publishedBy,
-            },
-          ]
-        : [
-            {
-              key: "descriptionItemsName",
-              label: "Nome",
-              children: selectedItem.name,
-            },
-            {
-              key: "descriptionItemsCourses",
-              label: "Cursos",
-              children: coursesSelectedItems(),
-            },
-            {
-              key: "descriptionItemsCreatedAt",
-              label: "Criado em",
-              children: selectedItem.createdAt,
-            },
-            {
-              key: "descriptionItemsCreatedBy",
-              label: "Criado por",
-              children: selectedItem.createdBy,
-            },
-            {
-              key: "descriptionItemsUpdatedat",
-              label: "Atualizado em",
-              children: selectedItem.updatedat,
-            },
-            {
-              key: "descriptionItemsUpdatedby",
-              label: "Atualizado por",
-              children: selectedItem.updatedBy,
-            },
-            {
-              key: "descriptionItemsFilledAt",
-              label: "Arquivado em",
-              children: selectedItem.filledAt,
-            },
-            {
-              key: "descriptionItemsFilledBy",
-              label: "Arquivado por",
-              children: selectedItem.filedBy,
-            },
-          ];
+      return [
+        {
+          key: "name",
+          label: "Nome",
+          children: selectedItem.name,
+        },
+        {
+          key: "description",
+          label: "Descrição",
+          children: selectedItem.description,
+        },
+        {
+          key: "hours",
+          label: "Horas",
+          children: selectedItem.hours,
+        },
+        {
+          key: "status",
+          label: "Status",
+          children: selectedItem.status,
+        },
+      ]
     }
-  }, [
-    loadingLastChanges,
-    categoria,
-    selectedItem,
-    categoriaOptions,
-    coursesSelectedItems,
-  ]);
+  }, [loadingLastChanges, selectedItem]);
 
-  return itemHistorico != "" ? (
+  return itemHistorico != null ? (
     <HistoricoItens
       itemHistorico={itemHistorico}
       back={() => {
         setActiveClickRow(true);
-        setItemHistorico("");
+        setItemHistorico(null);
+        getLastCoursesTrailsChanges({page: pageNumber, type: categoria});
       }}
     />
   ) : (
@@ -300,16 +242,23 @@ export default function SystemLog() {
                   options={categoriaOptions}
                   defaultValue={categoriaOptions[0].value}
                   value={categoria}
-                  onChange={(value) => setCategoria(value)}
+                  onChange={(value) => {
+                    setCategoria(value)
+                    getLastCoursesTrailsChanges({page: pageNumber, type: value})
+                  }}
                   placeholder="Categoria"
                   allowClear={true}
                 />
                 <Select
-                  style={{ width: "8em" }}
+                  style={{ width: "11em" }}
                   options={statusOptions}
                   defaultValue={statusOptions[0].value}
                   value={status}
-                  onChange={(value) => setStatus(value)}
+                  onChange={
+                    (value) => {
+                      setStatus(value)
+                      getLastCoursesTrailsChanges({page: pageNumber, type: categoria})
+                    }}
                   placeholder="Status"
                   allowClear={true}
                 />
@@ -329,23 +278,32 @@ export default function SystemLog() {
               loading={loadingLastChanges}
               pagination={{
                 pageSize: 30,
-                total: pagesCount,
+                total: lastDataChanges.count,
                 showSizeChanger: false,
                 current: pageNumber,
                 defaultCurrent: 1,
                 hideOnSinglePage: true,
-                onChange: (page) => setPageNumber(page),
+                onChange: (page) => {
+                  setPageNumber(page)
+                  getLastCoursesTrailsChanges({ page: page, type: categoria })
+                },
               }}
               columns={columnsTable}
-              dataSource={dataSource}
+              dataSource={lastDataChangesFiltered}
               rowKey={(record) => {
                 return record.id;
               }}
               onRow={(record) => {
                 return {
-                  onClick: () => {
+                  onClick: async () => {
                     if (activeClickRow) {
-                      setSelectedItem(record);
+                      let item;
+                      if (record.courseId != null) {
+                        item = await services.courseService.getUniqueCourse({id: record.courseId})
+                      } else {
+                        item = await services.courseService.getUniqueCourse({id: record.trailId})
+                      }
+                      setSelectedItem(item);
                     }
                   },
                   style: { cursor: "pointer" },

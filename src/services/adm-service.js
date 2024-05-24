@@ -40,4 +40,10 @@ export const admService = {
     }),
 
   downloadListLogs: () => AuthAxios.get("/logs/course-search-export-csv"),
+
+  getCousesTrailsMovements: (payload) =>
+    AuthAxios.post(
+      `/logs/courses-trails-movements?page=${payload.page}&type=${payload.type}`,
+      payload.id
+  )
 };
