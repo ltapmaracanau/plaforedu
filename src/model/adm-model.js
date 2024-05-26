@@ -22,7 +22,6 @@ const admModel = {
   loadingLastChanges: false,
 
   getLastCoursesTrailsChanges: thunk(async (actions, payload = {page: 1, type: "COURSES"}) => {
-    
     actions.setLoadingLastChanges(true);
 
     return await services.admService

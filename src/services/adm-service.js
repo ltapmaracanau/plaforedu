@@ -44,6 +44,8 @@ export const admService = {
   getCousesTrailsMovements: (payload) =>
     AuthAxios.post(
       `/logs/courses-trails-movements?page=${payload.page}&type=${payload.type}`,
-      payload.id
-  )
+      {
+        id: payload.id,
+      }
+    )
 };

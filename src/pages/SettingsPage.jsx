@@ -111,7 +111,7 @@ export default function SettingsPage() {
           key: "/settings/log-courses-trails",
           icon: <FileSearchOutlined />,
           label: "Log do Sistema",
-          disabled: !(isAdm || isCoord),
+          disabled: !isAdm,
         },
       ]
     },

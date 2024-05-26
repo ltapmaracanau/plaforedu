@@ -1,10 +1,10 @@
 import { RollbackOutlined } from "@ant-design/icons";
-import { Button, Table } from "antd";
+import { Button, Card, Space, Table } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useEffect, useMemo, useState } from "react";
 
 export default function HistoricoItens(props) {
-  const { itemHistorico, back } = props;
+  const { itemHistorico, back, categoria, categoriaOptions } = props;
 
   const getLastCoursesTrailsChanges = useStoreActions(
     (actions) => actions.adm.getLastCoursesTrailsChanges
@@ -17,13 +17,13 @@ export default function HistoricoItens(props) {
   );
 
   const [pageNumber, setPageNumber] = useState(1);
-
+  
   const type = useMemo(() => {
     return itemHistorico.course ? "COURSE" : "FORMATIVE_TRAILS";
   }, [itemHistorico])
 
   useEffect(() => {
-    getLastCoursesTrailsChanges({page: 1, type: type, id: itemHistorico})
+    getLastCoursesTrailsChanges({page: 1, type: type, id: itemHistorico.itemId})
   }, [getLastCoursesTrailsChanges, itemHistorico, type])
 
   const columns = [
@@ -46,11 +46,11 @@ export default function HistoricoItens(props) {
 
   const labelAction = useMemo(() => {
     return {
-      CREATION: "Criado",
-      ACTIVATION: "Ativado",
-      UPDATE: "Atualizado",
-      FILING: "Arquivado",
-      DELETION: "Deletado",
+      CREATION: "Criação",
+      ACTIVATION: "Ativação",
+      UPDATE: "Atualização",
+      FILING: "Arquivação",
+      DELETION: "Remoção",
       TURN_PENDING: "Tornado Pendente"
     }
   }, [])
@@ -92,31 +92,56 @@ export default function HistoricoItens(props) {
       <Button icon={<RollbackOutlined />} onClick={() => back()}>
         Voltar
       </Button>
-      <Table 
-        columns={columns}
-        dataSource={lastDataChangesFiltered}
-        loading={loadingLastChanges}
-        pagination={{
-          pageSize: 30,
-          total: lastDataChanges.count,
-          showSizeChanger: false,
-          current: pageNumber,
-          defaultCurrent: 1,
-          hideOnSinglePage: true,
-          onChange: (page) => {
-            setPageNumber(page)
-            getLastCoursesTrailsChanges({ page: page, type: type })
+
+      <Card
+        title={itemHistorico.name}
+        styles={{
+          header: {
+            fontSize: 20,
+            padding: "10px",
+          },
+          body: {
+            padding: "0px",
           },
         }}
-        rowKey={(record) => {
-          return record.id;
-        }}
-        onRow={() => {
-          return {
-            
-          };
-        }}
-      />
+        extra={
+          <Space
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+          </Space>
+        }
+        >
+          <Table
+            columns={columns}
+            dataSource={lastDataChangesFiltered}
+            loading={loadingLastChanges}
+            pagination={{
+              pageSize: 30,
+              total: lastDataChanges.count,
+              showSizeChanger: false,
+              current: pageNumber,
+              defaultCurrent: 1,
+              hideOnSinglePage: true,
+              onChange: (page) => {
+                setPageNumber(page)
+                getLastCoursesTrailsChanges({ page: page, type: type })
+              },
+            }}
+            rowKey={(record) => {
+              return record.id;
+            }}
+            onRow={() => {
+              return {
+                
+              };
+            }}
+          />
+      </Card>
     </div>
   );
 }

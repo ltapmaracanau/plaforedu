@@ -1,11 +1,19 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { Card, Space, Table, Select, Modal, Descriptions, Button } from "antd";
+import { Card, Space, Table, Select, Modal, Descriptions, Button, List, DatePicker, ConfigProvider } from "antd";
 import { FileSyncOutlined } from "@ant-design/icons";
 import HistoricoItens from "./HistoricoItens";
 import services from "../../services";
 
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
+import locale from 'antd/locale/pt_BR';
+
+dayjs.locale('pt-br');
+
 export default function SystemLog() {
+  const { RangePicker } = DatePicker;
+
   const getLastCoursesTrailsChanges = useStoreActions(
     (actions) => actions.adm.getLastCoursesTrailsChanges
   );
@@ -16,12 +24,10 @@ export default function SystemLog() {
     (state) => state.adm.loadingLastChanges
   );
 
-  const categoriaOptions = useMemo(() => {
-    return [
-      { value: "COURSES", label: "Cursos" },
-      { value: "FORMATIVE_TRAILS", label: "Trilhas Formativas" },
-    ];
-  }, []);
+  const categoriaOptions = [
+    { value: "COURSES", label: "Cursos" },
+    { value: "FORMATIVE_TRAILS", label: "Trilhas Formativas" },
+  ];
 
   const usuarioOptions = [
     {
@@ -38,27 +44,35 @@ export default function SystemLog() {
     },
   ]
 
-  const statusOptions = useMemo(() => {
+  const itinerarioOptions = [
+    { value: "Aposentadoria", label: "Aposentadoria" },
+    { value: "docente", label: "Docente" },
+    { value: "TAES", label: "TAES" },
+    { value: "gestao", label: "Gestão" },
+    { value: "iniciacao_ao_servico_publico", label: "Iniciação ao Serviço Público" },
+  ]
+
+  const actionOptions = useMemo(() => {
     return [
       {
         value: "CREATION",
-        label: "Criado",
+        label: "Criação",
       },
       {
         value: "UPDATE",
-        label: "Atualizado",
+        label: "Atualização",
       },
       {
         value: "FILING",
-        label: "Arquivado",
+        label: "Arquivamento",
       },
       {
         value: "ACTIVATION",
-        label: "Ativado",
+        label: "Ativação",
       },
       {
         value: "DELETION",
-        label: "Deletado",
+        label: "Remoção",
       },
       {
         value: "TURN_PENDING",
@@ -69,12 +83,14 @@ export default function SystemLog() {
 
   const [pageNumber, setPageNumber] = useState(1);
   const [categoria, setCategoria] = useState(categoriaOptions[0].value);
-  const [status, setStatus] = useState(statusOptions[0].value);
+  const [action, setAction] = useState(actionOptions[0].value);
   const [usuario, setUsuario] = useState();
+  const [itinerario, setItinerario] = useState();
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeClickRow, setActiveClickRow] = useState(true);
   const [itemHistorico, setItemHistorico] = useState(null);
-
+  const [date, setDate] = useState();
+  
   const columnsTable = [
     {
       title: "Nome",
@@ -126,24 +142,27 @@ export default function SystemLog() {
 
   const labelAction = useMemo(() => {
     return {
-      CREATION: "Criado",
-      ACTIVATION: "Ativado",
-      UPDATE: "Atualizado",
-      FILING: "Arquivado",
-      DELETION: "Deletado",
+      CREATION: "Criação",
+      ACTIVATION: "Ativação",
+      UPDATE: "Atualização",
+      FILING: "Arquivamento",
+      DELETION: "Remoção",
       TURN_PENDING: "Tornado Pendente"
     }
   }, [])
 
   const dataFormatada = (data) => {
-    const date = new Date(data);
-    const formattedDate = date.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
-
-    return formattedDate;
+    if (data != null) {
+      const date = new Date(data);
+      const formattedDate = date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      });
+  
+      return formattedDate;
+    }
+    return null
   }
 
   const lastDataChangesFiltered = useMemo(() => {
@@ -153,26 +172,24 @@ export default function SystemLog() {
       lastDataChanges.data.map((item) => {
         data.push({
           id: item.id,
-          name: item.course.name,
+          name: item.courseId != null ? item.course.name : item.trail.name,
           action: labelAction[item.action],
           date: dataFormatada(item.date),
           userName: item.user.name,
-          itemId: item.course != null ? item.courseId : item.trailId
+          itemId: item.courseId != null ? item.courseId : item.trailId
         })
       })
     }
     return data;
   }, [labelAction, lastDataChanges.data])
 
-  const modalTitle = useMemo(() => {
-    if (!loadingLastChanges) {
-      return "Detalhes do curso"
-    }
-  }, [loadingLastChanges]);
+  const coursesSelectedItems = useCallback(() => {
+    return selectedItem.cursos.map((curso) => curso.name).join(", ");
+  }, [selectedItem]);
 
   const descriptionItems = useMemo(() => {
     if (!loadingLastChanges && selectedItem) {
-      return [
+      return categoria === categoriaOptions[0].value ? [
         {
           key: "name",
           label: "Nome",
@@ -182,24 +199,129 @@ export default function SystemLog() {
           key: "description",
           label: "Descrição",
           children: selectedItem.description,
+
         },
         {
-          key: "hours",
-          label: "Horas",
+          key: "",
+          label: "Carga horária",
           children: selectedItem.hours,
         },
         {
-          key: "status",
-          label: "Status",
-          children: selectedItem.status,
+          key: "instituitions",
+          label: "Instituições Certificadoras",
+          children: selectedItem.institutions?.map((inst) => (
+                <Card key={inst.institutionId} bordered>
+                  {inst.name}
+                  <br />
+                  <strong>Link: </strong>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    key={`link${inst.id}`}
+                    href={inst.link}
+                  >
+                    {inst.link}
+                  </a>
+                </Card>
+          ))
         },
-      ]
+        {
+          key: "equivalentCourses",
+          label: "Cursos equivalentes",
+          children: <List
+                locale={{
+                  emptyText: <>Sem equivalentes</>,
+                }}
+                bordered
+                dataSource={selectedItem.equivalents?.filter(
+                  (course) => !course.filedAt
+                )}
+                renderItem={(item) => (
+                  <List.Item
+                    actions={[
+                      <Button
+                        key={item.id}
+                        onClick={() => {
+                          getUniqueCourse({ id: item.id });
+                        }}
+                      >
+                        Visualizar
+                      </Button>,
+                    ]}
+                    key={item.id}
+                  >
+                    {item.name}
+                  </List.Item>
+                )}
+              />,
+        },
+        {
+          key: "accessibilities",
+          label: "Acessibilidades",
+          children: selectedItem.accessibilities?.map((ac) => ac.name).join(" | ")
+        },
+        {
+          key: "taxonomy",
+          label: "Taxonomia revisada de Bloom",
+          children: selectedItem.taxonomies?.map((tx) => tx.name).join(" | "),
+        },
+        {
+          key: "subthemes",
+          label: "Subtemas",
+          children: selectedItem.subThemes?.filter((sub) => !sub.filedAt)
+                .map((sub) => sub.name)
+                .join(" | "),
+        },
+      ] : [
+        {
+          key: "name",
+          label: "Nome",
+          children: selectedItem.name,
+        },
+        {
+          key: "courses",
+          label: "Cursos",
+          children: coursesSelectedItems(),
+        },
+        {
+          key: "createdAt",
+          label: "Criado em",
+          children: dataFormatada(selectedItem.createdAt),
+        },
+        {
+          key: "createdBy",
+          label: "Criado por",
+          children: selectedItem.user.name,
+        },
+        {
+          key: "updatedAt",
+          label: "Atualizado em",
+          children: selectedItem.updatedAt,
+        },
+        {
+          key: "updatedBy",
+          label: "Atualizado por",
+          children: selectedItem.updatedBy,
+        },
+        {
+          key: "filledAt",
+          label: "Arquivado em",
+          children: dataFormatada(selectedItem.filledAt),
+        },
+        {
+          key: "filledBy",
+          label: "Arquivado por",
+          children: selectedItem.filedBy,
+        },
+      ];
     }
   }, [loadingLastChanges, selectedItem]);
 
   return itemHistorico != null ? (
     <HistoricoItens
       itemHistorico={itemHistorico}
+      categoria={categoria}
+      categoriaOptions={categoriaOptions}
       back={() => {
         setActiveClickRow(true);
         setItemHistorico(null);
@@ -251,12 +373,12 @@ export default function SystemLog() {
                 />
                 <Select
                   style={{ width: "11em" }}
-                  options={statusOptions}
-                  defaultValue={statusOptions[0].value}
-                  value={status}
+                  options={actionOptions}
+                  defaultValue={actionOptions[0].value}
+                  value={action}
                   onChange={
                     (value) => {
-                      setStatus(value)
+                      setAction(value)
                       getLastCoursesTrailsChanges({page: pageNumber, type: categoria})
                     }}
                   placeholder="Status"
@@ -270,7 +392,29 @@ export default function SystemLog() {
                   showSearch={true}
                   placeholder={"Usuário"}
                   allowClear={true}
+                  mode="multiple"
                 />
+                <Select
+                  style={{ width: "15em" }}
+                  options={itinerarioOptions}
+                  value={itinerario}
+                  onChange={(value) => setItinerario(value)}
+                  showSearch={false}
+                  placeholder={"Itinerário"}
+                  allowClear={true}
+                  mode="multiple"
+                  disabled={categoria !== categoriaOptions[0].value}
+                />
+
+                <ConfigProvider locale={locale}>
+                  <RangePicker
+                    placeholder={["Início", "Fim"]}
+                    onChange={(value, option) => {
+                      console.log(value);
+                      console.log(option);
+                    }}
+                  />
+                </ConfigProvider>
               </Space>
             }
           >
@@ -298,12 +442,12 @@ export default function SystemLog() {
                   onClick: async () => {
                     if (activeClickRow) {
                       let item;
-                      if (record.courseId != null) {
-                        item = await services.courseService.getUniqueCourse({id: record.courseId})
+                      if (categoria === categoriaOptions[0].value) {
+                        item = await services.courseService.getUniqueCourse({id: record.itemId})
                       } else {
-                        item = await services.courseService.getUniqueCourse({id: record.trailId})
+                        
                       }
-                      setSelectedItem(item);
+                      setSelectedItem(item.data);
                     }
                   },
                   style: { cursor: "pointer" },
@@ -315,16 +459,31 @@ export default function SystemLog() {
       </div>
 
       <Modal
-        title={modalTitle}
+        title={categoria === categoriaOptions[0].value ? "Detalhes do curso" : "Detalhes da Trilha"}
         open={!!selectedItem && activeClickRow}
+        onOk={() => {
+          setSelectedItem(null);
+        }}
         onCancel={() => setSelectedItem(null)}
-        footer={null}
+        key={`modalDescriptionItem`}
+        destroyOnClose={true}
+        footer={[
+          <Button
+            type="primary"
+            key={"buttonOk"}
+            onClick={() => {
+              setSelectedItem(null);
+            }}
+          >
+            Ok
+          </Button>,
+        ]}
       >
         {selectedItem && activeClickRow && (
           <Descriptions
             column={1}
             bordered={true}
-            layout="horizontal"
+            layout="vertical"
             items={descriptionItems}
           />
         )}

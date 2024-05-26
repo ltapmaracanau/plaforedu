@@ -257,7 +257,7 @@ const CustomRoutes = () => {
                   />
                   <Route
                     path="/settings/log-courses-trails"
-                    element={isAdm || isCoord ? <SystemLog /> : <Navigate to="/denied" />}
+                    element={isAdm ? <SystemLog /> : <Navigate to="/denied" />}
                   />
                   <Route path="/settings/logs" element={<ListSearchLogs />} />
                 </Route>
