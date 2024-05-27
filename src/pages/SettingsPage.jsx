@@ -27,7 +27,7 @@ export default function SettingsPage() {
   const isAdm = useStoreState((state) => state.adm.isAdm);
   const isCoord = useStoreState((state) => state.adm.isCoord);
   const isActive = useStoreState((state) => state.adm.isActive);
-  const isAnalDados = useStoreState((state) => state.adm.isAnalDados);
+  const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
 
   const items = [
     {
@@ -49,7 +49,7 @@ export default function SettingsPage() {
     {
       label: "Cadastros",
       key: "registers",
-      disabled: !isActive || !(isAdm || isCoord || isAnalDados),
+      disabled: !isActive || !(isAdm || isCoord || isAnalistaDados),
       icon: <DiffOutlined />,
       children: [
         {
@@ -103,14 +103,14 @@ export default function SettingsPage() {
     {
       key: "logs",
       icon: <LineChartOutlined />,
-      disabled: !isActive || !(isAdm || isCoord || isAnalDados),
+      disabled: !isActive || !(isAdm || isCoord || isAnalistaDados),
       label: "Relatórios",
       children: [
         {
           key: "/settings/logs",
           icon: <FileSearchOutlined />,
           label: "Relatório De Buscas",
-          disabled: !isActive || !(isAdm || isCoord || isAnalDados),
+          disabled: !isActive || !(isAdm || isCoord || isAnalistaDados),
         },
         {
           key: "/settings/log-courses-trails",

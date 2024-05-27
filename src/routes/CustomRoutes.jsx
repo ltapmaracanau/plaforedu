@@ -188,7 +188,7 @@ const CustomRoutes = () => {
   const authenticated = useStoreState((state) => state.adm.isAuthenticated);
   const isAdm = useStoreState((state) => state.adm.isAdm);
   const isCoord = useStoreState((state) => state.adm.isCoord);
-  const isAnalDados = useStoreState((state) => state.adm.isAnalDados);
+  const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
   //const isCoordAVA = useStoreState((state) => state.adm.isCoordAVA);
   const isActive = useStoreState((state) => state.adm.isActive);
 
@@ -279,7 +279,7 @@ const CustomRoutes = () => {
                 },
                 {
                   element:
-                    isAdm || isAnalDados || isCoord ? (
+                    isAdm || isAnalistaDados || isCoord ? (
                       <Outlet />
                     ) : (
                       <Navigate to="/denied" />
