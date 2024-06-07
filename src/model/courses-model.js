@@ -122,6 +122,7 @@ const coursesModel = {
           subThemes: subtemas,
           sortByCreatedAt: !!sort.createdAt,
           sortByUpdatedAt: !!sort.updatedAt,
+          onlyPending: false,
         })
         .then(({ data }) => {
           if (secondary) {
@@ -144,6 +145,33 @@ const coursesModel = {
         });
     }
   ),
+
+  getPendingCourses: thunk(async (actions, payload) => {
+    const { page = 0 } = payload;
+    return await services.courseService
+      .getCursos({
+        includeFiled: false,
+        registerLog: false,
+        page: page,
+        search: "",
+        hours: [],
+        institutions: [],
+        itineraries: [],
+        accessibilities: [],
+        competencies: [],
+        taxonomies: [],
+        subThemes: [],
+        sortByCreatedAt: false,
+        sortByUpdatedAt: false,
+        onlyPending: true,
+      })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }),
 
   getTaxonomias: thunk(async (actions) => {
     actions.setLoading(true);
@@ -283,28 +311,39 @@ const coursesModel = {
     }
   }),
 
-  setArchivedCourse: thunk(async (actions, payload) => {
-    const { filed, id } = payload;
+  unarchiveCourse: thunk(async (actions, payload) => {
+    const { courseId } = payload;
     actions.setArchiving(true);
-    if (filed) {
-      await services.courseService
-        .archiveCourse({ id })
-        .catch((error) => {
-          throw new Error(error);
-        })
-        .finally(() => {
-          actions.setArchiving(false);
-        });
-    } else {
-      await services.courseService
-        .unarchiveCourse({ id })
-        .catch((error) => {
-          throw new Error(error);
-        })
-        .finally(() => {
-          actions.setArchiving(false);
-        });
-    }
+    await services.courseService
+      .unarchiveCourse({ id: courseId })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setArchiving(false);
+      });
+  }),
+
+  archiveCourse: thunk(async (actions, payload) => {
+    const { coursesIds = [] } = payload;
+    actions.setArchiving(true);
+    await services.courseService
+      .archiveCourse({ coursesIds })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        actions.setArchiving(false);
+      });
+  }),
+
+  activePendingCourses: thunk(async (actions, payload) => {
+    const { courses = [] } = payload;
+    await services.courseService
+      .activePendingCourse({ courses: courses })
+      .catch((error) => {
+        throw new Error(error);
+      });
   }),
 
   setLoading: action((state, payload) => {

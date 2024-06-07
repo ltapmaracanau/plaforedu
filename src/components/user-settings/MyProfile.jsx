@@ -5,15 +5,13 @@ import { Avatar, Card, Descriptions, Skeleton, Space, Tag } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 export default function MyProfile() {
-  const getAllDataProfile = useStoreActions(
-    (actions) => actions.adm.getAllDataProfile
-  );
-  const allDataProfile = useStoreState((state) => state.adm.allDataProfile);
+  const getMyProfile = useStoreActions((actions) => actions.adm.getMyProfile);
+  const myProfile = useStoreState((state) => state.adm.myProfile);
   const loading = useStoreState((state) => state.adm.loading);
 
   useEffect(() => {
-    getAllDataProfile();
-  }, [getAllDataProfile]);
+    getMyProfile();
+  }, [getMyProfile]);
 
   const colorStatus = (status) => {
     switch (status) {
@@ -64,14 +62,14 @@ export default function MyProfile() {
                     }}
                   />
                 }
-                title={allDataProfile.name}
+                title={myProfile.name}
                 description={
                   <Space direction="vertical">
-                    <Tag color={colorStatus(allDataProfile.status)}>
-                      {allDataProfile.status}
+                    <Tag color={colorStatus(myProfile.status)}>
+                      {myProfile.status}
                     </Tag>
                     <div>
-                      {allDataProfile?.UsersRoles?.map((element) => (
+                      {myProfile?.UsersRoles?.map((element) => (
                         <Tag
                           color={colorStatus(element.role.name)}
                           key={element.role.id}
@@ -88,19 +86,19 @@ export default function MyProfile() {
                       items={[
                         {
                           label: "Email",
-                          children: allDataProfile.email,
+                          children: myProfile.email,
                         },
                         {
                           label: "CPF",
-                          children: allDataProfile.cpf,
+                          children: myProfile.cpf,
                         },
                         {
                           label: "Celular",
-                          children: allDataProfile.phone,
+                          children: myProfile.phone,
                         },
                         {
                           label: "Instituição",
-                          children: allDataProfile.institution,
+                          children: myProfile.institution,
                         },
                       ]}
                     />
