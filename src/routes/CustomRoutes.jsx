@@ -189,6 +189,8 @@ const CustomRoutes = () => {
   const isAdm = useStoreState((state) => state.adm.isAdm);
   const isCoord = useStoreState((state) => state.adm.isCoord);
   const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
+  const isConsultor = useStoreState((state) => state.adm.isConsultor);
+  const isServidor = useStoreState((state) => state.adm.isServidor);
   //const isCoordAVA = useStoreState((state) => state.adm.isCoordAVA);
   const isActive = useStoreState((state) => state.adm.isActive);
 
@@ -255,19 +257,39 @@ const CustomRoutes = () => {
               children: [
                 {
                   path: "/settings/study-plans",
-                  element: <StudyPlans />,
+                  element:
+                    isAdm || isCoord || isServidor ? (
+                      <StudyPlans />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
                 },
                 {
                   path: "/settings/study-plans/:id",
-                  element: <StudyPlanView />,
+                  element:
+                    isAdm || isCoord || isServidor ? (
+                      <StudyPlanView />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
                 },
                 {
                   path: "/settings/study-plans/edit/:planId",
-                  element: <StudyPlanRegister />,
+                  element:
+                    isAdm || isCoord || isServidor ? (
+                      <StudyPlanRegister />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
                 },
                 {
                   path: "/settings/study-plans/new",
-                  element: <StudyPlanRegister />,
+                  element:
+                    isAdm || isCoord || isServidor ? (
+                      <StudyPlanRegister />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
                 },
                 {
                   path: "/settings/users",
@@ -275,64 +297,87 @@ const CustomRoutes = () => {
                 },
                 {
                   path: "/settings/pendings",
-                  element: <EvaluateChanges />,
-                },
-                {
                   element:
-                    isAdm || isAnalistaDados || isCoord ? (
-                      <Outlet />
+                    isAdm || isCoord || isConsultor ? (
+                      <EvaluateChanges />
                     ) : (
                       <Navigate to="/denied" />
                     ),
-                  children: [
-                    {
-                      path: "/settings/courses",
-                      element: <CoursesList />,
-                    },
-                    {
-                      path: "/settings/institutions",
-                      element: <InstitutionList />,
-                    },
-                    {
-                      path: "/settings/categ-comp",
-                      element: <CategCompList />,
-                    },
-                    {
-                      path: "/settings/competences",
-                      element: <CompList />,
-                    },
-                    {
-                      path: "/settings/themes",
-                      element: <TemasList />,
-                    },
-                    {
-                      path: "/settings/subthemes",
-                      element: <SubtemasList />,
-                    },
-                    {
-                      path: "/settings/formative-trails",
-                      element: <FormativeTrailsList />,
-                    },
-
-                    {
-                      path: "/settings/logs",
-                      element: <ListSearchLogs />,
-                    },
-                  ],
                 },
                 {
+                  path: "/settings/courses",
                   element:
-                    isAdm || isCoord ? <Outlet /> : <Navigate to="/denied" />,
-                  children: [
-                    {
-                      path: "/settings/logs",
-                      element: <ListSearchLogs />,
-                    },
-                    {
-                      path: "/settings/log-courses-trails",
-                      element: <SystemLog />,
-                    },
-                  ],
+                    isAdm || isCoord || isConsultor || isAnalistaDados ? (
+                      <CoursesList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/institutions",
+                  element:
+                    isAdm || isCoord || isAnalistaDados ? (
+                      <InstitutionList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/categ-comp",
+                  element:
+                    isAdm || isCoord || isAnalistaDados ? (
+                      <CategCompList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/competences",
+                  element:
+                    isAdm || isCoord || isAnalistaDados ? (
+                      <CompList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/themes",
+                  element:
+                    isAdm || isCoord || isAnalistaDados ? (
+                      <TemasList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/subthemes",
+                  element:
+                    isAdm || isCoord || isAnalistaDados ? (
+                      <SubtemasList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/formative-trails",
+                  element:
+                    isAdm || isCoord || isAnalistaDados ? (
+                      <FormativeTrailsList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/logs",
+                  element: isAdm ? (
+                    <ListSearchLogs />
+                  ) : (
+                    <Navigate to="/denied" />
+                  ),
+                },
+                {
+                  path: "/settings/log-courses-trails",
+                  element: isAdm ? <SystemLog /> : <Navigate to="/denied" />,
                 },
               ],
             },

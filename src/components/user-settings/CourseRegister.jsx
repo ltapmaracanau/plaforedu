@@ -67,6 +67,7 @@ export default function CourseRegister(props) {
   const archiving = useStoreState((state) => state.courses.archiving);
   const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
   const taxonomies = useStoreState((state) => state.courses.taxonomies);
+  const isConsultor = useStoreState((state) => state.adm.isConsultor);
   const acessibilidades = useStoreState(
     (state) => state.accessibilities.acessibilidades
   );
@@ -454,6 +455,9 @@ export default function CourseRegister(props) {
           await registerNewCourse({ ...newValues });
           notification.success({
             message: "Curso cadastrado com sucesso!",
+            description: isConsultor
+              ? "Seu curso está pendente para análise"
+              : "",
           });
           register.reset();
           actionVisible();

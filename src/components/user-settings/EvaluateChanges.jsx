@@ -2,46 +2,58 @@ import {
   Button,
   Card,
   Popconfirm,
-  Select,
   Space,
   Table,
   Tag,
   notification,
 } from "antd";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import colorCourseStatus from "../../helpers/colorCourseStatus";
 import CourseModalVisualization from "../CourseModalVisualization";
 import { useState } from "react";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 export default function EvaluateChanges() {
   const [loading, setLoading] = useState(false);
+  const [activing, setActiving] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [pagesCount, setPagesCount] = useState(1);
   const [page, setPage] = useState(1);
   const [modalViewCourseVisible, setModalViewCourseVisible] = useState(false);
   const [viewCourseId, setViewCourseId] = useState(null);
   const [coursesSelectedIds, setCoursesSelectedIds] = useState([]);
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const getPendingCourses = useStoreActions(
     (actions) => actions.courses.getPendingCourses
   );
+  const activePendingCourses = useStoreActions(
+    (actions) => actions.courses.activePendingCourses
+  );
+  const archiveCourse = useStoreActions(
+    (actions) => actions.courses.archiveCourse
+  );
+  const archiving = useStoreState((state) => state.courses.archiving);
 
-  const getDataSource = async ({ page = 0 }) => {
-    setLoading(true);
-    try {
-      const courses = await getPendingCourses({ page });
-      setDataSource(courses.data);
-      setPagesCount(courses.pagesCount);
-    } catch (error) {
-      notification.error({
-        message: "Erro ao buscar cursos pendentes",
-        description: error.message,
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  const getDataSource = useCallback(
+    async ({ page = 0 }) => {
+      setLoading(true);
+      try {
+        const courses = await getPendingCourses({ page });
+        setDataSource(courses.data);
+        setPagesCount(courses.pagesCount);
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar cursos pendentes",
+          description: error.message,
+        });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [getPendingCourses]
+  );
 
   useEffect(() => {
     const init = async () => {
@@ -62,6 +74,67 @@ export default function EvaluateChanges() {
 
     init();
   }, [getPendingCourses, page]);
+
+  const onActiveCourses = async () => {
+    setActiving(true);
+    try {
+      console.log(coursesSelectedIds);
+      await activePendingCourses({ courses: coursesSelectedIds });
+      await getDataSource({ page });
+    } catch (error) {
+      notification.error({
+        message: "Erro ao ativar cursos",
+        description: error.message,
+      });
+    } finally {
+      setActiving(false);
+    }
+  };
+
+  const onActiveCourse = useCallback(
+    async (courseId) => {
+      setActiving(true);
+      try {
+        await activePendingCourses({ courses: [courseId] });
+        await getDataSource({ page });
+      } catch (error) {
+        notification.error({
+          message: "Erro ao ativar cursos",
+          description: error.message,
+        });
+      } finally {
+        setActiving(false);
+      }
+    },
+    [activePendingCourses, getDataSource, page]
+  );
+
+  const onArchiveCourse = useCallback(
+    async (courseId) => {
+      try {
+        await archiveCourse({ coursesIds: [courseId] });
+        await getDataSource({ page });
+      } catch (error) {
+        notification.error({
+          message: "Erro ao arquivar curso",
+          description: error.message,
+        });
+      }
+    },
+    [archiveCourse, getDataSource, page]
+  );
+
+  const onArchiveCourses = async () => {
+    try {
+      await archiveCourse({ coursesIds: coursesSelectedIds });
+      await getDataSource({ page });
+    } catch (error) {
+      notification.error({
+        message: "Erro ao arquivar cursos",
+        description: error.message,
+      });
+    }
+  };
 
   const columnsTable = useMemo(() => {
     return [
@@ -119,41 +192,46 @@ export default function EvaluateChanges() {
         render: (text, record) => {
           return (
             <Space size="small" direction="vertical" align="center">
-              <Space size="small">
-                <Popconfirm
-                  title="Deseja realmente aprovar este curso?"
-                  onConfirm={() => {
-                    console.log("approve");
-                  }}
-                  okText="Sim"
-                  cancelText="Não"
-                >
-                  <Button
-                    size="small"
-                    style={{
-                      backgroundColor: "#52c41a",
-                      color: "#fff",
+              {(isAdm || isCoord) && (
+                <Space size="small">
+                  <Popconfirm
+                    title="Deseja realmente aprovar este curso?"
+                    onConfirm={() => {
+                      onActiveCourse(record.id);
                     }}
+                    okButtonProps={{
+                      loading: activing,
+                    }}
+                    okText="Sim"
+                    cancelText="Não"
                   >
-                    Aprovar
-                  </Button>
-                </Popconfirm>
-                <Popconfirm
-                  title="Deseja realmente rejeitar este curso?"
-                  onConfirm={() => {
-                    console.log("reject");
-                  }}
-                  okText="Sim"
-                  cancelText="Não"
-                >
-                  <Button
-                    size="small"
-                    style={{ backgroundColor: "#f5222d", color: "#fff" }}
+                    <Button
+                      size="small"
+                      style={{
+                        backgroundColor: "#52c41a",
+                        color: "#fff",
+                      }}
+                    >
+                      Aprovar
+                    </Button>
+                  </Popconfirm>
+                  <Popconfirm
+                    title="Deseja realmente arquivar este curso?"
+                    onConfirm={() => {
+                      onArchiveCourse(record.id);
+                    }}
+                    okButtonProps={{
+                      loading: archiving,
+                    }}
+                    okText="Sim"
+                    cancelText="Não"
                   >
-                    Rejeitar
-                  </Button>
-                </Popconfirm>
-              </Space>
+                    <Button size="small" type="primary">
+                      Arquivar
+                    </Button>
+                  </Popconfirm>
+                </Space>
+              )}
               <Button
                 onClick={() => {
                   setViewCourseId(record.id);
@@ -168,7 +246,7 @@ export default function EvaluateChanges() {
         },
       },
     ];
-  }, []);
+  }, [activing, archiving, isAdm, isCoord, onActiveCourse, onArchiveCourse]);
 
   return (
     <div
@@ -197,7 +275,10 @@ export default function EvaluateChanges() {
                 <Popconfirm
                   title="Deseja realmente aprovar os cursos selecionados?"
                   onConfirm={() => {
-                    console.log("approve");
+                    onActiveCourses();
+                  }}
+                  okButtonProps={{
+                    loading: activing,
                   }}
                   okText="Sim"
                   cancelText="Não"
@@ -214,7 +295,10 @@ export default function EvaluateChanges() {
                 <Popconfirm
                   title="Deseja realmente arquivar os cursos selecionados?"
                   onConfirm={() => {
-                    console.log("reject");
+                    onArchiveCourses();
+                  }}
+                  okButtonProps={{
+                    loading: archiving,
                   }}
                   okText="Sim"
                   cancelText="Não"
@@ -245,13 +329,17 @@ export default function EvaluateChanges() {
             rowKey={(record) => {
               return record.id;
             }}
-            rowSelection={{
-              type: "checkbox",
-              selectedRowKeys: coursesSelectedIds,
-              onChange: (_selectedRowKeys, selectedRows) => {
-                setCoursesSelectedIds(selectedRows.map((course) => course.id));
-              },
-            }}
+            rowSelection={
+              (isAdm || isCoord) && {
+                type: "checkbox",
+                selectedRowKeys: coursesSelectedIds,
+                onChange: (_selectedRowKeys, selectedRows) => {
+                  setCoursesSelectedIds(
+                    selectedRows.map((course) => course.id)
+                  );
+                },
+              }
+            }
           />
         </Card>
         <CourseModalVisualization

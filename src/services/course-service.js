@@ -49,6 +49,11 @@ export default {
   unarchiveCourse: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/unarchive`),
 
+  activePendingCourse: (payload) =>
+    AuthAxios.patch(`/courses/active`, {
+      courses: payload.courses,
+    }),
+
   updateCourseInstitutions: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/update-institutions`, {
       institutions: payload.institutions,

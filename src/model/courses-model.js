@@ -337,6 +337,15 @@ const coursesModel = {
       });
   }),
 
+  activePendingCourses: thunk(async (actions, payload) => {
+    const { courses = [] } = payload;
+    await services.courseService
+      .activePendingCourse({ courses: courses })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }),
+
   setLoading: action((state, payload) => {
     state.loading = payload;
   }),

@@ -145,6 +145,10 @@ const admModel = {
 
   isActive: computed((state) => state.myProfile?.status === "ACTIVE"),
 
+  isServidor: computed((state) =>
+    state.myProfile?.UsersRoles?.some((item) => item.role.name === "SERVIDOR")
+  ),
+
   isAdm: computed((state) =>
     state.myProfile?.UsersRoles?.some(
       (item) => item.role.name === "ADMINISTRADOR"
