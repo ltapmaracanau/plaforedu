@@ -217,7 +217,7 @@ const CustomRoutes = () => {
           element: <HistoryPlaforPage />,
         },
         {
-          path: "/faleconosco",
+          path: "/suporte",
           element: <FaleConosco />,
         },
         {

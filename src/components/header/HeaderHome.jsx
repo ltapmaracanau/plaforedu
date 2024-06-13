@@ -121,7 +121,7 @@ export default function HeaderHome() {
     },
     {
       label: "FALE CONOSCO",
-      key: "/faleconosco",
+      key: "/suporte",
     },
     {
       label: "FAQ",
