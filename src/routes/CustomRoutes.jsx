@@ -44,6 +44,7 @@ import SystemLog from "../components/user-settings/SystemLog.jsx";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import EvaluateChanges from "../components/user-settings/EvaluateChanges.jsx";
+import ScrollToTop from "../components/ScrollToTop.jsx";
 
 const Layout = () => {
   const [cookies, setCookie] = useCookies(["cookieConsent"]);
@@ -169,6 +170,7 @@ const Layout = () => {
       <ConfigProvider locale={dayjs}>
         <HeaderGov />
         <HeaderHome />
+        <ScrollToTop />
         <div
           style={{
             flexGrow: 1,

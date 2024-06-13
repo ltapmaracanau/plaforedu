@@ -27,6 +27,10 @@ export default function CourseModalVisualization(props) {
   );
 
   useEffect(() => {
+    console.log(uniqueCourse);
+  }, [uniqueCourse]);
+
+  useEffect(() => {
     async function init() {
       if (id) {
         setLoadingUniqueCourse(true);
@@ -113,8 +117,11 @@ export default function CourseModalVisualization(props) {
                     actions={[
                       <Button
                         key={item.id}
-                        onClick={() => {
-                          getUniqueCourse({ id: item.id });
+                        onClick={async () => {
+                          const newSearch = await getUniqueCourse({
+                            id: item.id,
+                          });
+                          setUniqueCourse(newSearch);
                         }}
                       >
                         Visualizar

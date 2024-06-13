@@ -1,9 +1,19 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { Button, Card, Input, Tooltip, Switch, Space, Table } from "antd";
+import {
+  Button,
+  Card,
+  Input,
+  Tooltip,
+  Switch,
+  Space,
+  Table,
+  Typography,
+  Tag,
+} from "antd";
 import CourseRegister from "./CourseRegister";
 //import { CSVLink } from "react-csv";
 
@@ -63,39 +73,39 @@ export default function CoursesList() {
     init();
   }, [init]);
 
-  const csvCursosHeaders = [
-    { label: "Título", key: "title" },
-    { label: "Carga horária", key: "cargaHoraria" },
-    { label: "Instituições Certificadoras", key: "instCert" },
-    { label: "Acessibilidades", key: "acessibilidades" },
-    { label: "Link", key: "link" },
-    { label: "Itinerários", key: "itineraries" },
-    { label: "Competências", key: "competencias" },
-    { label: "Subtemas", key: "subtemas" },
-    { label: "Taxonomia revisada de Bloom", key: "taxonomias" },
-    { label: "Cursos equivalentes", key: "equivalents" },
-    { label: "Descrição", key: "descricao" },
-  ];
+  // const csvCursosHeaders = [
+  //   { label: "Título", key: "title" },
+  //   { label: "Carga horária", key: "cargaHoraria" },
+  //   { label: "Instituições Certificadoras", key: "instCert" },
+  //   { label: "Acessibilidades", key: "acessibilidades" },
+  //   { label: "Link", key: "link" },
+  //   { label: "Itinerários", key: "itineraries" },
+  //   { label: "Competências", key: "competencias" },
+  //   { label: "Subtemas", key: "subtemas" },
+  //   { label: "Taxonomia revisada de Bloom", key: "taxonomias" },
+  //   { label: "Cursos equivalentes", key: "equivalents" },
+  //   { label: "Descrição", key: "descricao" },
+  // ];
 
-  const data = useMemo(() => {
-    return cursos.map((course) => {
-      return {
-        title: course.name,
-        cargaHoraria: `${course.hours}H`,
-        instCert: course.institutions.map((inst) => inst.name).join(" | "),
-        acessibilidades: course.accessibilities
-          .map((ac) => ac.name)
-          .join(" | "),
-        link: course.institutions.map((inst) => inst.link).join(" | "),
-        itineraries: course.itineraries.map((it) => it.name).join(" | "),
-        competencias: course.competencies.map((comp) => comp.name).join(" | "),
-        subtemas: course.subThemes.map((sub) => sub.name).join(" | "),
-        taxonomias: course.taxonomies.map((tx) => tx.name).join(" | "),
-        equivalents: course.equivalents.map((eq) => eq.name).join(" | "),
-        descricao: course.description,
-      };
-    });
-  }, [cursos]);
+  // const data = useMemo(() => {
+  //   return cursos.map((course) => {
+  //     return {
+  //       title: course.name,
+  //       cargaHoraria: `${course.hours}H`,
+  //       instCert: course.institutions.map((inst) => inst.name).join(" | "),
+  //       acessibilidades: course.accessibilities
+  //         .map((ac) => ac.name)
+  //         .join(" | "),
+  //       link: course.institutions.map((inst) => inst.link).join(" | "),
+  //       itineraries: course.itineraries.map((it) => it.name).join(" | "),
+  //       competencias: course.competencies.map((comp) => comp.name).join(" | "),
+  //       subtemas: course.subThemes.map((sub) => sub.name).join(" | "),
+  //       taxonomias: course.taxonomies.map((tx) => tx.name).join(" | "),
+  //       equivalents: course.equivalents.map((eq) => eq.name).join(" | "),
+  //       descricao: course.description,
+  //     };
+  //   });
+  // }, [cursos]);
 
   const [sort, setSort] = useState({
     createdAt: null,
@@ -133,10 +143,6 @@ export default function CoursesList() {
         });
       }
       setPageNumber(pagination.current);
-      console.log({
-        sortByCreatedAt,
-        sortByUpdatedAt,
-      });
       getCursos({
         page: pagination.current,
         query: textSearch,
@@ -286,6 +292,23 @@ export default function CoursesList() {
                     title: "Título",
                     dataIndex: "name",
                     key: "name",
+                    render: (titulo, record) => {
+                      return (
+                        <Typography.Text>
+                          {titulo}
+                          {record.filedAt && (
+                            <Tag
+                              style={{
+                                marginLeft: "10px",
+                              }}
+                              color="blue"
+                            >
+                              ARQUIVADO
+                            </Tag>
+                          )}
+                        </Typography.Text>
+                      );
+                    },
                   },
                   {
                     title: "Equivalências",

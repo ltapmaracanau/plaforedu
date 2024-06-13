@@ -586,7 +586,7 @@ export default function CourseRegister(props) {
                       help={error ? error.message : ""}
                       hasFeedback
                     >
-                      <InputNumber min={0} {...field} />
+                      <InputNumber min={0} max={9999} {...field} />
                     </Form.Item>
                   );
                 }}
