@@ -161,6 +161,7 @@ export default function SettingsPage() {
       <div
         style={{
           width: "100%",
+          padding: "20px",
         }}
       >
         <Outlet />

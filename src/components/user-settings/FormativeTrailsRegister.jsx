@@ -405,18 +405,17 @@ export default function FormativeTrailsRegister(props) {
                             {...field}
                             filterOption={(input, option) => {
                               return (
-                                option.children
+                                option.label
+                                  .toString()
                                   .toLowerCase()
                                   .indexOf(input.toLowerCase()) >= 0
                               );
                             }}
-                          >
-                            {allItinerarios.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
+                            options={allItinerarios.map((item) => ({
+                              label: item.name,
+                              value: item.id,
+                            }))}
+                          />
                         </Form.Item>
                       );
                     }}
@@ -435,24 +434,44 @@ export default function FormativeTrailsRegister(props) {
                           hasFeedback
                         >
                           <Select
-                            mode="multiple"
                             showSearch
                             placeholder="Competências"
                             {...field}
                             filterOption={(input, option) => {
                               return (
-                                option.children
+                                option.label
+                                  .toString()
                                   .toLowerCase()
                                   .indexOf(input.toLowerCase()) >= 0
                               );
                             }}
-                          >
-                            {allCompetencias.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
+                            labelRender={({ value }) => {
+                              const item = allCompetencias.find(
+                                (comp) => comp.id === value
+                              );
+                              return (
+                                <>
+                                  {item.name}
+                                  {item.filedAt && (
+                                    <Tag
+                                      style={{
+                                        margin: "3px",
+                                      }}
+                                      color={"orange"}
+                                    >
+                                      ARQUIVADO
+                                    </Tag>
+                                  )}
+                                </>
+                              );
+                            }}
+                            options={allCompetencias
+                              .filter((comp) => !comp.filedAt)
+                              .map((item) => ({
+                                label: item.name,
+                                value: item.id,
+                              }))}
+                          />
                         </Form.Item>
                       );
                     }}

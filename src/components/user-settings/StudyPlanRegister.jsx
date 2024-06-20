@@ -179,7 +179,7 @@ export default function StudyPlanRegister() {
           })),
         });
         notification.success({
-          message: "Trilha alterada com sucesso!",
+          message: "Plano de estudo alterado com sucesso!",
         });
         navigate("/settings/study-plans");
       } catch (error) {
@@ -210,7 +210,7 @@ export default function StudyPlanRegister() {
           })),
         });
         notification.success({
-          message: "Trilha cadastrada com sucesso!",
+          message: "Plano de estudo cadastrado com sucesso!",
         });
         register.reset();
         navigate("/settings/study-plans");
@@ -236,7 +236,7 @@ export default function StudyPlanRegister() {
     ]);
   };
 
-  // Table add courses to trail
+  // Table add courses to plan
 
   const onSelectChange = (courseChanged, selected) => {
     if (selected) {
@@ -273,7 +273,7 @@ export default function StudyPlanRegister() {
       dataIndex: "name",
       className: "drag-visible",
       render: (text, record) => {
-        return record.filedAt ? (
+        return record.status === "FILED" ? (
           <>
             {text} <Tag color={"orange"}>ARQUIVADO</Tag>
           </>

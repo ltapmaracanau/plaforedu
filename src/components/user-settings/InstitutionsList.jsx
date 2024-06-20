@@ -45,7 +45,6 @@ export default function InstitutionList() {
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-start",
-          padding: "20px",
         }}
       >
         <div style={{ width: "100%" }}>
@@ -136,6 +135,7 @@ export default function InstitutionList() {
                       description={
                         <Space direction="vertical">
                           {item.name}
+                          {item.filedAt && <Tag color="orange">ARQUIVADO</Tag>}
                           {item.uf && (
                             <Tooltip title={"Estado da instituição"}>
                               <Tag
@@ -171,7 +171,6 @@ export default function InstitutionList() {
               });
               setRegisterVisible(false);
             }}
-            styles={{ body: { backgroundColor: "#f8f8f8" } }}
             footer={[
               <Button
                 type="primary"

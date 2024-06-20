@@ -47,6 +47,7 @@ export default function CourseRegister(props) {
     competencies: curso ? curso.competencies.map((item) => item.id) : [],
     subThemes: curso ? curso.subThemes.map((item) => item.id) : [],
     filedAt: curso !== null && curso.filedAt !== null,
+    status: curso ? curso.status : null,
     setecTerm: curso ? curso.setecTerm : null,
   };
 
@@ -79,7 +80,9 @@ export default function CourseRegister(props) {
   );
   const subthemes = useStoreState((state) => state.themes.subthemes);
 
-  const [filed, setFiled] = useState(cursoDefault.filedAt);
+  const [filed, setFiled] = useState(
+    cursoDefault.filedAt || cursoDefault.status === "FILED"
+  );
   const [instituicoesAtuais, setInstituicoesAtuais] = useState(
     cursoDefault.institutions.map((item, index) => ({ ...item, count: index }))
   );
@@ -280,6 +283,24 @@ export default function CourseRegister(props) {
                   0
               );
             }}
+            labelRender={({ value }) => {
+              const item = instituicoes.find((comp) => comp.id === value);
+              return (
+                <>
+                  {item.abbreviation}
+                  {item.filedAt && (
+                    <Tag
+                      style={{
+                        margin: "3px",
+                      }}
+                      color={"orange"}
+                    >
+                      ARQUIVADO
+                    </Tag>
+                  )}
+                </>
+              );
+            }}
           >
             {instituicoes.map((inst) => (
               <Select.Option
@@ -311,6 +332,23 @@ export default function CourseRegister(props) {
       text: false,
       editable: true,
       width: "40%",
+      render: (text, record) => {
+        return (
+          <Typography.Text>
+            {text}
+            {record.filedAt && (
+              <Tag
+                style={{
+                  marginLeft: "10px",
+                }}
+                color="blue"
+              >
+                ARQUIVADO
+              </Tag>
+            )}
+          </Typography.Text>
+        );
+      },
     },
     {
       title: "Link",
@@ -610,19 +648,18 @@ export default function CourseRegister(props) {
                         placeholder="Acessibilidades"
                         filterOption={(input, option) => {
                           return (
-                            option.children
+                            option.label
+                              .toString()
                               .toLowerCase()
                               .indexOf(input.toLowerCase()) >= 0
                           );
                         }}
+                        options={acessibilidades.map((item) => ({
+                          label: item.name,
+                          value: item.id,
+                        }))}
                         {...field}
-                      >
-                        {acessibilidades.map((item) => (
-                          <Select.Option key={item.id} value={item.id}>
-                            {item.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                      />
                     </Form.Item>
                   );
                 }}
@@ -647,18 +684,17 @@ export default function CourseRegister(props) {
                         showSearch
                         filterOption={(input, option) => {
                           return (
-                            option.children
+                            option.label
+                              .toString()
                               .toLowerCase()
                               .indexOf(input.toLowerCase()) >= 0
                           );
                         }}
-                      >
-                        {itinerarios.map((item) => (
-                          <Select.Option key={item.id} value={item.id}>
-                            {item.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                        options={itinerarios.map((item) => ({
+                          label: item.name,
+                          value: item.id,
+                        }))}
+                      />
                     </Form.Item>
                   );
                 }}
@@ -683,18 +719,47 @@ export default function CourseRegister(props) {
                         {...field}
                         filterOption={(input, option) => {
                           return (
-                            option.children
+                            option.label
+                              .toString()
                               .toLowerCase()
                               .indexOf(input.toLowerCase()) >= 0
                           );
                         }}
-                      >
-                        {competencies.map((item) => (
-                          <Select.Option key={item.id} value={item.id}>
-                            {item.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                        tagRender={(props) => {
+                          const { value, closable, onClose } = props;
+                          const item = competencies.find(
+                            (comp) => comp.id === value
+                          );
+                          return (
+                            <Tag
+                              closable={closable}
+                              onClose={onClose}
+                              style={{
+                                marginRight: 3,
+                                fontSize: 14,
+                              }}
+                            >
+                              {item.name}
+                              {item.filedAt && (
+                                <Tag
+                                  style={{
+                                    margin: "3px",
+                                  }}
+                                  color={"orange"}
+                                >
+                                  ARQUIVADO
+                                </Tag>
+                              )}
+                            </Tag>
+                          );
+                        }}
+                        options={competencies
+                          .filter((comp) => !comp.filedAt)
+                          .map((item) => ({
+                            label: item.name,
+                            value: item.id,
+                          }))}
+                      />
                     </Form.Item>
                   );
                 }}
@@ -719,18 +784,17 @@ export default function CourseRegister(props) {
                         {...field}
                         filterOption={(input, option) => {
                           return (
-                            option.children
+                            option.label
+                              .toString()
                               .toLowerCase()
                               .indexOf(input.toLowerCase()) >= 0
                           );
                         }}
-                      >
-                        {taxonomies.map((item) => (
-                          <Select.Option key={item.id} value={item.id}>
-                            {item.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                        options={taxonomies.map((item) => ({
+                          label: item.name,
+                          value: item.id,
+                        }))}
+                      />
                     </Form.Item>
                   );
                 }}
@@ -755,18 +819,47 @@ export default function CourseRegister(props) {
                         {...field}
                         filterOption={(input, option) => {
                           return (
-                            option.children
+                            option.label
+                              .toString()
                               .toLowerCase()
                               .indexOf(input.toLowerCase()) >= 0
                           );
                         }}
-                      >
-                        {subthemes.map((item) => (
-                          <Select.Option key={item.id} value={item.id}>
-                            {item.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                        tagRender={(props) => {
+                          const { value, closable, onClose } = props;
+                          const item = subthemes.find(
+                            (subtheme) => subtheme.id === value
+                          );
+                          return (
+                            <Tag
+                              closable={closable}
+                              onClose={onClose}
+                              style={{
+                                marginRight: 3,
+                                fontSize: 14,
+                              }}
+                            >
+                              {item.name}
+                              {item.filedAt && (
+                                <Tag
+                                  style={{
+                                    margin: "3px",
+                                  }}
+                                  color={"orange"}
+                                >
+                                  ARQUIVADO
+                                </Tag>
+                              )}
+                            </Tag>
+                          );
+                        }}
+                        options={subthemes
+                          .filter((subtheme) => !subtheme.filedAt)
+                          .map((item) => ({
+                            label: item.name,
+                            value: item.id,
+                          }))}
+                      />
                     </Form.Item>
                   );
                 }}
@@ -820,7 +913,6 @@ export default function CourseRegister(props) {
             pagination={false}
             components={components}
             rowKey={"count"}
-            bordered
             dataSource={instituicoesAtuais}
             columns={columns}
           />

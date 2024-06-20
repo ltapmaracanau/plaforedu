@@ -110,7 +110,8 @@ export default function CourseModalVisualization(props) {
                 }}
                 bordered
                 dataSource={uniqueCourse?.equivalents?.filter(
-                  (course) => !course.filedAt
+                  (course) =>
+                    course.status !== "FILED" && course.status !== "PENDING"
                 )}
                 renderItem={(item) => (
                   <List.Item
