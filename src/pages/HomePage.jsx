@@ -16,15 +16,15 @@ import icon1 from "../assets/HomepageIcon1.svg";
 import icon2 from "../assets/HomepageIcon2.svg";
 import icon3 from "../assets/HomepageIcon3.svg";
 
+import rightBlue from "../assets/RightBlue.svg"
+import rightWhite from "../assets/RightWhite.svg"
+
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Link, useNavigate } from "react-router-dom";
-import infografico from "../assets/about/PLAFOR_Categorias-Competencias_Infografico_v7.png";
-import infografico_fundo_branco from "../assets/about/mandala_fundo_branco.png";
 
 import {
-  ArrowRightOutlined,
   DownOutlined,
-  RightOutlined,
+  UpOutlined,
 } from "@ant-design/icons";
 
 import {
@@ -33,14 +33,6 @@ import {
   Typography,
   Grid,
   Button,
-  Space,
-  Card,
-  List,
-  Image,
-  Modal,
-  Skeleton,
-  Descriptions,
-  notification,
   Divider,
 } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
@@ -137,16 +129,16 @@ export default function HomePage() {
         />
       </Row>
 
-      <Row
+      <div
         style={{
-          margin: `${!screens.xs ? "120px 0" : "60px 0"}`,
+          margin: "0 auto",
+          display: "flex",
+          justifyContent: "center",
           padding: "60px 20px",
           background: "var(--bg-menos-claro)",
         }}
       >
-        <Row
-          className="divTrilhasRecomendadas"
-        >
+        <Row className="divTrilhasRecomendadas">
 
           <Col
             style={{
@@ -170,20 +162,40 @@ export default function HomePage() {
           <Col
             style={{
               marginLeft: "115px",
+              width: "362px",
+              height: "459px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around"
             }}
           >
-            <Card
-            >
-              <Meta
-                title={"Criação e modificação"}
-                description={
-                  <>Ver cursos <DownOutlined /> </>
-                }
-              />
-            </Card>
+            <div className="containerCardTrilhasRecomendadas">
+              <div className="cardTrilhasRecomendadas">
+                <p>Criação e modificação</p>
+                <p
+                  id="verCursos"
+                  onClick={() => setArrowClicked(!arrowClicked)}
+                >Ver cursos {arrowClicked ? <UpOutlined /> : <DownOutlined />}</p>
+              </div>
+
+              <Button
+                style={{
+                  backgroundColor: "#e2fcff",
+                  defaultHoverBg: "#2c55a1",
+                  width: "70px",
+                  height: "117px",
+                  borderRadius: "0px 10px 10px 0px",
+                  boxShadow: "1px 2px rgba(90, 90, 90, 0.226)",
+                }}>
+
+                <img src={rightBlue} alt="Seta para a direita" />
+              </Button>
+
+            </div>
+
           </Col>
         </Row>
-      </Row>
+      </div>
 
       <div
         style={{
@@ -231,9 +243,7 @@ export default function HomePage() {
             src={icon2}
             alt="Ícone Perfil"
           />
-          <p
-
-          >
+          <p>
             Organizados para melhor atender seu perfil profissional
           </p>
         </div>
@@ -251,6 +261,14 @@ export default function HomePage() {
             Certificado emitido pela instituição de ensino ofertante
           </p>
         </div>
+      </div>
+
+      <div
+        className="divQuantCursos"
+      >
+        <p><span>240</span> <br />Cursos</p>
+        <p id="ofertados">ofertados por</p>
+        <p><span>30</span> <br />Instituições</p>
       </div>
 
       <div
