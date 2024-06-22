@@ -1,29 +1,36 @@
 import { RollbackOutlined } from "@ant-design/icons";
-import { Button, Table } from "antd";
+import { Button, Card, Space, Table } from "antd";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import { useEffect, useMemo, useState } from "react";
 
 export default function HistoricoItens(props) {
-  const { itemHistorico, back } = props;
+  const { itemHistorico, back, categoria, categoriaOptions } = props;
 
-  const dataSource = [
-    {
-      key: "1",
-      user: "Senhor da lua",
-      action: "arquivar",
-      actionDate: "2020-10-11",
-    },
-    {
-      key: "2",
-      user: "Senhor do sol",
-      action: "atualizar",
-      actionDate: "2022-12-11",
-    },
-  ];
+  const getLastCoursesTrailsChanges = useStoreActions(
+    (actions) => actions.adm.getLastCoursesTrailsChanges
+  );
+  const lastDataChanges = useStoreState(
+    (state) => state.adm.lastDataChanges
+  );
+  const loadingLastChanges = useStoreState(
+    (state) => state.adm.loadingLastChanges
+  );
+
+  const [pageNumber, setPageNumber] = useState(1);
+  
+  const type = useMemo(() => {
+    return itemHistorico.course ? "COURSE" : "FORMATIVE_TRAILS";
+  }, [itemHistorico])
+
+  useEffect(() => {
+    getLastCoursesTrailsChanges({page: 1, type: type, id: itemHistorico.itemId})
+  }, [getLastCoursesTrailsChanges, itemHistorico, type])
 
   const columns = [
     {
       title: "Usuario",
-      dataIndex: "user",
-      key: "user",
+      dataIndex: "userName",
+      key: "userName",
     },
     {
       title: "Ação de modificação",
@@ -32,10 +39,49 @@ export default function HistoricoItens(props) {
     },
     {
       title: "Data de modificação",
-      dataIndex: "actionDate",
-      key: "actionDate",
+      dataIndex: "date",
+      key: "date",
     },
   ];
+
+  const labelAction = useMemo(() => {
+    return {
+      CREATION: "Criação",
+      ACTIVATION: "Ativação",
+      UPDATE: "Atualização",
+      FILING: "Arquivação",
+      DELETION: "Remoção",
+      TURN_PENDING: "Tornado Pendente"
+    }
+  }, [])
+
+  const dataFormatada = (data) => {
+    const date = new Date(data);
+    const formattedDate = date.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+
+    return formattedDate;
+  }
+
+  const lastDataChangesFiltered = useMemo(() => {
+    const data = []
+    if (lastDataChanges.data != null) {
+      lastDataChanges.data.map((item) => {
+        data.push({
+          id: item.id,
+          name: item.course.name,
+          action: labelAction[item.action],
+          date: dataFormatada(item.date),
+          userName: item.user.name
+        })
+      })
+    }
+    
+    return data;
+  }, [labelAction, lastDataChanges])
 
   return (
     <div
@@ -46,7 +92,56 @@ export default function HistoricoItens(props) {
       <Button icon={<RollbackOutlined />} onClick={() => back()}>
         Voltar
       </Button>
-      <Table columns={columns} dataSource={dataSource} />
+
+      <Card
+        title={itemHistorico.name}
+        styles={{
+          header: {
+            fontSize: 20,
+            padding: "10px",
+          },
+          body: {
+            padding: "0px",
+          },
+        }}
+        extra={
+          <Space
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+          </Space>
+        }
+        >
+          <Table
+            columns={columns}
+            dataSource={lastDataChangesFiltered}
+            loading={loadingLastChanges}
+            pagination={{
+              pageSize: 30,
+              total: lastDataChanges.count,
+              showSizeChanger: false,
+              current: pageNumber,
+              defaultCurrent: 1,
+              hideOnSinglePage: true,
+              onChange: (page) => {
+                setPageNumber(page)
+                getLastCoursesTrailsChanges({ page: page, type: type })
+              },
+            }}
+            rowKey={(record) => {
+              return record.id;
+            }}
+            onRow={() => {
+              return {
+                
+              };
+            }}
+          />
+      </Card>
     </div>
   );
 }
