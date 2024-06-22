@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerCompSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Form, Input, notification, Select, Switch } from "antd";
+import { Button, Form, Input, notification, Select, Switch, Tag } from "antd";
 
 export default function CompRegister(props) {
   const { comp = null, actionVisible } = props;
@@ -16,9 +16,6 @@ export default function CompRegister(props) {
     description: comp?.description || "",
   };
 
-  const getCatComp = useStoreActions(
-    (actions) => actions.competencies.getCatComp
-  );
   const registerComp = useStoreActions(
     (actions) => actions.competencies.registerComp
   );
@@ -91,10 +88,6 @@ export default function CompRegister(props) {
     }
   };
 
-  useEffect(() => {
-    getCatComp({ showFiled: true });
-  }, [getCatComp]);
-
   return (
     <div
       style={{
@@ -107,7 +100,6 @@ export default function CompRegister(props) {
         style={{
           width: "350px",
           margin: "30px 0px",
-          backgroundColor: "#f8f8f8",
           fontFamily: "Roboto",
         }}
       >
@@ -166,18 +158,45 @@ export default function CompRegister(props) {
                     mode={"multiple"}
                     filterOption={(input, option) => {
                       return (
-                        option.children
+                        option.label
+                          .toString()
                           .toLowerCase()
                           .indexOf(input.toLowerCase()) >= 0
                       );
                     }}
-                  >
-                    {catComp.map((element) => (
-                      <Select.Option key={element.id} value={element.id}>
-                        {element.name}
-                      </Select.Option>
-                    ))}
-                  </Select>
+                    tagRender={(props) => {
+                      const { value, closable, onClose } = props;
+                      const item = catComp.find((cat) => cat.id === value);
+                      return (
+                        <Tag
+                          closable={closable}
+                          onClose={onClose}
+                          style={{
+                            marginRight: 3,
+                            fontSize: 14,
+                          }}
+                        >
+                          {item.name}
+                          {item.filedAt && (
+                            <Tag
+                              style={{
+                                margin: "3px",
+                              }}
+                              color={"orange"}
+                            >
+                              ARQUIVADO
+                            </Tag>
+                          )}
+                        </Tag>
+                      );
+                    }}
+                    options={catComp
+                      .filter((element) => !element.filedAt)
+                      .map((element) => ({
+                        label: element.name,
+                        value: element.id,
+                      }))}
+                  />
                 </Form.Item>
               );
             }}

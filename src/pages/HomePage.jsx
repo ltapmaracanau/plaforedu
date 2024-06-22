@@ -690,7 +690,7 @@ export default function HomePage() {
             Gostaria de entrar em contato com a gente?
           </h1>
           <Link
-            to="/faleconosco"
+            to="/suporte"
             className="texto"
             style={{ textDecoration: "underline", color: "#FDFDFD" }}
           >

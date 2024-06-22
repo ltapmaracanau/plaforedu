@@ -302,7 +302,7 @@ export default function TableAddTrailStudyPlan(props) {
       },
     },
     {
-      title: "Competências",
+      title: "Competência",
       width: "25%",
       key: "competencies",
       dataIndex: "competencies",
@@ -327,7 +327,7 @@ export default function TableAddTrailStudyPlan(props) {
       },
     },
     {
-      title: "Itinerários",
+      title: "Itinerário",
       width: "25%",
       key: "itineraries",
       dataIndex: "itineraries",

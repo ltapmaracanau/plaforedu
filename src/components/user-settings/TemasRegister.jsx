@@ -77,7 +77,6 @@ export default function TemasRegister(props) {
         style={{
           width: "350px",
           margin: "30px 0px",
-          backgroundColor: "#f8f8f8",
           fontFamily: "Roboto",
         }}
       >

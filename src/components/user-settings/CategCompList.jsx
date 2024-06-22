@@ -3,7 +3,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, List, Modal, Input, Tooltip, Switch } from "antd";
+import { Button, Card, List, Modal, Input, Tooltip, Switch, Tag } from "antd";
 import CatCompRegister from "./CatCompRegister";
 
 const { Search } = Input;
@@ -34,7 +34,6 @@ export default function CategCompList() {
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
-        padding: "20px",
       }}
     >
       <div style={{ width: "100%" }}>
@@ -124,7 +123,21 @@ export default function CategCompList() {
                   <List.Item.Meta
                     style={{ fontFamily: "Roboto" }}
                     title={item.name}
-                    description={item.description}
+                    description={
+                      <span>
+                        {item.filedAt && (
+                          <Tag
+                            style={{
+                              margin: "3px",
+                            }}
+                            color={"orange"}
+                          >
+                            ARQUIVADO
+                          </Tag>
+                        )}
+                        {item.description}
+                      </span>
+                    }
                   />
                 </List.Item>
               );
@@ -143,11 +156,6 @@ export default function CategCompList() {
             setEditandoCatComp(null);
             setModalText("Cadastrar Categoria");
             setRegisterVisible(false);
-          }}
-          styles={{
-            body: {
-              backgroundColor: "#f8f8f8",
-            },
           }}
           footer={[
             <Button

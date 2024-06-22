@@ -11,7 +11,7 @@ import {
   Tooltip,
   Typography,
 } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { SearchOutlined } from "@ant-design/icons";
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -359,21 +359,12 @@ export default function TableSelectCourses(props) {
     });
   };
 
-  const columnsAddCoursesTrail = [
+  const columns = [
     {
       title: "Título",
       key: "name",
       dataIndex: "name",
       ...getColumnSearchProps("query", "título"),
-      render: (text, record, _index) => {
-        return record.filedAt ? (
-          <>
-            {text} <Tag color={"orange"}>ARQUIVADO</Tag>
-          </>
-        ) : (
-          <>{text}</>
-        );
-      },
     },
     {
       title: "CH",
@@ -477,7 +468,7 @@ export default function TableSelectCourses(props) {
         defaultCurrent: 1,
         hideOnSinglePage: false,
       }}
-      columns={columnsAddCoursesTrail}
+      columns={columns}
       locale={{
         emptyText: (
           <Card>

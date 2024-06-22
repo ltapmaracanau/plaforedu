@@ -170,7 +170,7 @@ export default function FAQ() {
           Dúvidas Frequentes
         </h1>
         <h2 className="subTitulo">Ainda precisa de ajuda?</h2>
-        <Link className="linkContato" to={"/faleconosco"}>
+        <Link className="linkContato" to={"/suporte"}>
           Entrar em contato
         </Link>
       </div>

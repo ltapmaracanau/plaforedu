@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerSubthemeSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Form, Input, notification, Select, Switch } from "antd";
+import { Button, Form, Input, notification, Select, Switch, Tag } from "antd";
 
 export default function SubtemaRegister(props) {
   const { subtheme = null, actionVisible } = props;
@@ -14,7 +14,6 @@ export default function SubtemaRegister(props) {
     themeIds: subtheme?.themes?.map((item) => item.id) || [],
   };
 
-  const getThemes = useStoreActions((actions) => actions.themes.getThemes);
   const registerSubtheme = useStoreActions(
     (actions) => actions.themes.registerSubtheme
   );
@@ -47,11 +46,13 @@ export default function SubtemaRegister(props) {
           await updateSubtheme({
             id: subtheme.id,
             name: values.name,
+            themeIds: values.themeIds,
             filed: filed,
           });
         } else {
           await updateSubtheme({
             id: subtheme.id,
+            themeIds: values.themeIds,
             name: values.name,
           });
         }
@@ -82,117 +83,135 @@ export default function SubtemaRegister(props) {
     }
   };
 
-  useEffect(() => {
-    (async () => {
-      await getThemes();
-    })();
-  }, [getThemes]);
-
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          width: "350px",
+          margin: "30px 0px",
+          fontFamily: "Roboto",
         }}
       >
-        <div
-          style={{
-            width: "350px",
-            margin: "30px 0px",
-            backgroundColor: "#f8f8f8",
-            fontFamily: "Roboto",
-          }}
-        >
-          <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
-            <Controller
-              name="name"
-              control={register.control}
-              render={({ field, fieldState: { error } }) => {
-                return (
-                  <Form.Item
-                    label={"Nome do subtema"}
-                    style={{ marginBottom: "20px" }}
-                    validateStatus={error ? "error" : ""}
-                    help={error ? error.message : ""}
-                    hasFeedback
-                  >
-                    <Input placeholder="Nome" {...field} />
-                  </Form.Item>
-                );
-              }}
-            />
-            <Controller
-              name="themeIds"
-              control={register.control}
-              render={({ field, fieldState: { error } }) => {
-                return (
-                  <Form.Item
-                    label={"Temas do subtema"}
-                    style={{ marginBottom: "20px" }}
-                    validateStatus={error ? "error" : ""}
-                    help={error ? error.message : ""}
-                    hasFeedback
-                  >
-                    <Select
-                      placeholder="Temas"
-                      {...field}
-                      loading={loadingThemes}
-                      showSearch
-                      mode={"multiple"}
-                      filterOption={(input, option) => {
-                        return (
-                          option.children
-                            .toLowerCase()
-                            .indexOf(input.toLowerCase()) >= 0
-                        );
-                      }}
-                    >
-                      {themes.map((element) => (
-                        <Select.Option key={element.id} value={element.id}>
-                          {element.name}
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                );
-              }}
-            />
-            {subtheme && (
-              <Form.Item
-                label={"Sub-tema arquivado"}
-                style={{ marginBottom: "20px" }}
-              >
-                <Switch
-                  checked={filed}
-                  defaultChecked={subtheme.filedAt}
-                  onChange={(value) => {
-                    setFiled(value);
-                  }}
-                />
-              </Form.Item>
-            )}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "15px 0px",
-              }}
+        <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
+          <Controller
+            name="name"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Nome do subtema"}
+                  style={{ marginBottom: "20px" }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Input placeholder="Nome" {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <Controller
+            name="themeIds"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Temas do subtema"}
+                  style={{ marginBottom: "20px" }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Select
+                    placeholder="Temas"
+                    {...field}
+                    loading={loadingThemes}
+                    showSearch
+                    mode={"multiple"}
+                    filterOption={(input, option) => {
+                      return (
+                        option.label
+                          .toString()
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      );
+                    }}
+                    tagRender={(props) => {
+                      const { value, closable, onClose } = props;
+                      const item = themes.find((theme) => theme.id === value);
+                      return (
+                        <Tag
+                          closable={closable}
+                          onClose={onClose}
+                          style={{
+                            marginRight: 3,
+                            fontSize: 14,
+                          }}
+                        >
+                          {item.name}
+                          {item.filedAt && (
+                            <Tag
+                              style={{
+                                margin: "3px",
+                              }}
+                              color={"orange"}
+                            >
+                              ARQUIVADO
+                            </Tag>
+                          )}
+                        </Tag>
+                      );
+                    }}
+                    options={themes
+                      .filter((element) => !element.filedAt)
+                      .map((element) => ({
+                        label: element.name,
+                        value: element.id,
+                      }))}
+                  />
+                </Form.Item>
+              );
+            }}
+          />
+          {subtheme && (
+            <Form.Item
+              label={"Sub-tema arquivado"}
+              style={{ marginBottom: "20px" }}
             >
-              <Button
-                loading={registering || loadingThemes}
-                disabled={!register.formState.isValid}
-                type="primary"
-                shape="round"
-                htmlType="submit"
-              >
-                {subtheme?.id ? <>Alterar</> : <>Cadastrar</>}
-              </Button>
-            </div>
-          </Form>
-        </div>
+              <Switch
+                checked={filed}
+                defaultChecked={subtheme.filedAt}
+                onChange={(value) => {
+                  setFiled(value);
+                }}
+              />
+            </Form.Item>
+          )}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "15px 0px",
+            }}
+          >
+            <Button
+              loading={registering || loadingThemes}
+              disabled={!register.formState.isValid}
+              type="primary"
+              shape="round"
+              htmlType="submit"
+            >
+              {subtheme?.id ? <>Alterar</> : <>Cadastrar</>}
+            </Button>
+          </div>
+        </Form>
       </div>
-    </>
+    </div>
   );
 }
