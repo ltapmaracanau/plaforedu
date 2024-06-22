@@ -13,7 +13,8 @@ import {
   BankOutlined,
   ScheduleOutlined,
   FileSearchOutlined,
-  LineChartOutlined
+  LineChartOutlined,
+  ToolOutlined,
 } from "@ant-design/icons";
 
 import { Layout, Menu } from "antd";
@@ -25,8 +26,10 @@ export default function SettingsPage() {
   const navigate = useNavigate();
   const isAdm = useStoreState((state) => state.adm.isAdm);
   const isCoord = useStoreState((state) => state.adm.isCoord);
+  const isConsultor = useStoreState((state) => state.adm.isConsultor);
   const isActive = useStoreState((state) => state.adm.isActive);
-  const isAnalDados = useStoreState((state) => state.adm.isAnalDados);
+  const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
+  const isServidor = useStoreState((state) => state.adm.isServidor);
 
   const items = [
     {
@@ -43,12 +46,13 @@ export default function SettingsPage() {
       label: "Planos de Estudo",
       key: "/settings/study-plans",
       icon: <NodeIndexOutlined />,
-      disabled: !isActive,
+      disabled: !isActive || !(isAdm || isCoord || isServidor),
     },
     {
       label: "Cadastros",
       key: "registers",
-      disabled: !isActive || !(isAdm || isCoord || isAnalDados),
+      disabled:
+        !isActive || !(isAdm || isCoord || isAnalistaDados || isConsultor),
       icon: <DiffOutlined />,
       children: [
         {
@@ -61,51 +65,63 @@ export default function SettingsPage() {
           key: "/settings/courses",
           icon: <BuildOutlined />,
           label: "Cursos",
+          disabled: !(isAdm || isCoord || isConsultor || isAnalistaDados),
+        },
+        {
+          key: "/settings/pendings",
+          icon: <ToolOutlined />,
+          label: "Cursos Sob Análise",
+          disabled: !(isAdm || isCoord || isConsultor),
         },
         {
           key: "/settings/institutions",
           icon: <BankOutlined />,
           label: "Instituições",
+          disabled: !(isAdm || isCoord || isAnalistaDados),
         },
         {
           key: "/settings/categ-comp",
           icon: <DatabaseOutlined />,
-          label: "Categorias de competências",
+          label: "Categorias De Competências",
+          disabled: !(isAdm || isCoord || isAnalistaDados),
         },
         {
           key: "/settings/competences",
           icon: <FlagOutlined />,
           label: "Competências",
+          disabled: !(isAdm || isCoord || isAnalistaDados),
         },
         {
           key: "/settings/themes",
           icon: <ReadOutlined />,
           label: "Temas",
+          disabled: !(isAdm || isCoord || isAnalistaDados),
         },
         {
           key: "/settings/subthemes",
           icon: <ScheduleOutlined />,
           label: "Subtemas",
+          disabled: !(isAdm || isCoord || isAnalistaDados),
         },
         {
           key: "/settings/formative-trails",
           icon: <NodeIndexOutlined />,
           label: "Trilhas Formativas",
+          disabled: !(isAdm || isCoord || isAnalistaDados),
         },
-        
       ],
     },
     {
       key: "logs",
       icon: <LineChartOutlined />,
-      disabled: !isActive || !(isAdm || isCoord || isAnalDados),
+      disabled: !isActive || !(isAdm || isCoord),
       label: "Relatórios",
       children: [
         {
           key: "/settings/logs",
           icon: <FileSearchOutlined />,
-          label: "Relatório de buscas",
-          disabled: !isActive || !(isAdm || isCoord || isAnalDados),
+          label: "Relatório De Buscas",
+          disabled: !isAdm,
         },
         {
           key: "/settings/log-courses-trails",
@@ -113,7 +129,7 @@ export default function SettingsPage() {
           label: "Log do Sistema",
           disabled: !isAdm,
         },
-      ]
+      ],
     },
   ];
 
