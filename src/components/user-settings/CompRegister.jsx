@@ -11,8 +11,7 @@ export default function CompRegister(props) {
 
   const compRefactored = {
     name: comp?.name || "",
-    competenciesCategoryIds:
-      comp?.categoriesCompetencies?.map((item) => item.id) || [],
+    competenciesCategoryIds: comp?.categories?.map((item) => item.id) || [],
     description: comp?.description || "",
   };
 

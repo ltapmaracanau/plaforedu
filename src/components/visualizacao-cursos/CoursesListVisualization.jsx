@@ -64,7 +64,7 @@ export default function CoursesListVisualization() {
       const competencieData = listCompetencias.find(
         (comp) => comp.id === element.id
       );
-      competencieData?.categoriesCompetencies?.forEach((categoria) => {
+      competencieData?.categories?.forEach((categoria) => {
         nomesCategorias.push(categoria.name);
       });
     });
@@ -449,7 +449,7 @@ export default function CoursesListVisualization() {
                         (comp) => comp.id === competencie.id
                       );
                       if (compData) {
-                        return compData.categoriesCompetencies.some(
+                        return compData.categories.some(
                           (categorie) => !categorie.filedAt
                         );
                       } else {

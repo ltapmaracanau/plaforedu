@@ -144,7 +144,7 @@ export default function CompList() {
                         {item.filedAt && <Tag color="orange">ARQUIVADO</Tag>}
                         {item.description}
                         <span>
-                          {item.categoriesCompetencies.map((categoria) => (
+                          {item.categories.map((categoria) => (
                             <Tag color="blue" key={categoria.id}>
                               {categoria.name}
                             </Tag>
