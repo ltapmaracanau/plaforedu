@@ -6,6 +6,7 @@ import {
   List,
   Progress,
   Skeleton,
+  Space,
   Tag,
   Typography,
   notification,
@@ -189,23 +190,41 @@ export default function StudyPlanView() {
               hoverable
             >
               <Card.Meta
-                title={item.name}
+                title={
+                  <Space>
+                    {item.name}
+                    {item.status === "FILED" && (
+                      <Tag color="orange">ARQUIVADO</Tag>
+                    )}
+                  </Space>
+                }
                 description={
-                  <div>
-                    <Typography.Paragraph type="secondary">
-                      Descrição Mock
+                  <Space direction="vertical">
+                    <Typography.Paragraph
+                      style={{
+                        marginBottom: 0,
+                      }}
+                      type="secondary"
+                    >
+                      {item.description}
                     </Typography.Paragraph>
-                    {/* <div>
+                    <Space
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                      }}
+                    >
                       {item.institutions.map((institution) => (
                         <Tag key={institution.id} color="green">
                           {institution.name}
                         </Tag>
                       ))}
-                    </div> */}
+                    </Space>
                     <div>
                       <Tag color="blue">Carga Horária: {item.hours} h</Tag>
                     </div>
-                  </div>
+                  </Space>
                 }
               />
             </Card>

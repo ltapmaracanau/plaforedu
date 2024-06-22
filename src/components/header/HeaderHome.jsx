@@ -10,6 +10,7 @@ import {
   LogoutOutlined,
   LoginOutlined,
   SettingOutlined,
+  NodeIndexOutlined,
 } from "@ant-design/icons";
 
 import {
@@ -32,6 +33,7 @@ export default function HeaderHome() {
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
   const isAuthenticated = useStoreState((state) => state.adm.isAuthenticated);
+  const isActive = useStoreState((state) => state.adm.isActive);
   const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
   const logout = useStoreActions((actions) => actions.adm.logout);
 
@@ -121,7 +123,7 @@ export default function HeaderHome() {
     },
     {
       label: "FALE CONOSCO",
-      key: "/faleconosco",
+      key: "/suporte",
     },
     {
       label: "FAQ",
@@ -145,6 +147,12 @@ export default function HeaderHome() {
               key: "/settings",
               label: "Configurações",
               icon: <SettingOutlined />,
+            },
+            {
+              key: "/settings/study-plans",
+              label: "Planos de Estudo",
+              icon: <NodeIndexOutlined />,
+              disabled: !isActive,
             },
             {
               key: "logout",

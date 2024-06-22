@@ -113,7 +113,6 @@ export default function InstitutionRegister(props) {
         style={{
           width: "350px",
           margin: "30px 0px",
-          backgroundColor: "#f8f8f8",
           fontFamily: "Roboto",
         }}
       >
@@ -171,18 +170,17 @@ export default function InstitutionRegister(props) {
                     showSearch
                     filterOption={(input, option) => {
                       return (
-                        option.children
+                        option.label
+                          .toString()
                           .toLowerCase()
                           .indexOf(input.toLowerCase()) >= 0
                       );
                     }}
-                  >
-                    {estados.map((element) => (
-                      <Select.Option key={element.sigla} value={element.sigla}>
-                        {element.nome}
-                      </Select.Option>
-                    ))}
-                  </Select>
+                    options={estados.map((element) => ({
+                      value: element.sigla,
+                      label: element.nome,
+                    }))}
+                  />
                 </Form.Item>
               );
             }}

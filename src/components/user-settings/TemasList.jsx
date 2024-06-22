@@ -3,7 +3,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, List, Modal, Input, Tooltip, Switch } from "antd";
+import { Button, Card, List, Modal, Input, Tooltip, Switch, Tag } from "antd";
 import TemasRegister from "./TemasRegister";
 
 const { Search } = Input;
@@ -25,154 +25,153 @@ export default function TemasList() {
   }, [getThemes]);
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          padding: "20px",
-        }}
-      >
-        <div style={{ width: "100%" }}>
-          <Card
-            title={"Temas"}
-            styles={{
-              header: {
-                fontSize: 20,
-              }
-            }}
-            extra={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "450px",
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+      }}
+    >
+      <div style={{ width: "100%" }}>
+        <Card
+          title={"Temas"}
+          styles={{
+            header: {
+              fontSize: 20,
+            },
+          }}
+          extra={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "450px",
+              }}
+            >
+              <Search
+                allowClear
+                defaultValue={textSearch}
+                onSearch={(e) => {
+                  setTextSearch(e);
+                  getThemes({
+                    query: e,
+                    showFiled: showFiled,
+                  });
                 }}
-              >
-                <Search
-                  allowClear
-                  defaultValue={textSearch}
-                  onSearch={(e) => {
-                    setTextSearch(e);
-                    getThemes({
-                      query: e,
-                      showFiled: showFiled,
-                    });
-                  }}
+                style={{
+                  marginRight: "10px",
+                }}
+                placeholder={"Buscar temas"}
+              />
+              <Tooltip title={"Exibir Arquivados"}>
+                <Switch
+                  defaultChecked={showFiled}
+                  checked={showFiled}
                   style={{
                     marginRight: "10px",
                   }}
-                  placeholder={"Buscar temas"}
-                />
-                <Tooltip title={"Exibir Arquivados"}>
-                  <Switch
-                    defaultChecked={showFiled}
-                    checked={showFiled}
-                    style={{
-                      marginRight: "10px",
-                    }}
-                    onClick={(checked) => {
-                      setShowFiled(checked);
-                      getThemes({
-                        query: textSearch,
-                        showFiled: checked,
-                      });
-                    }}
-                  />
-                </Tooltip>
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={() => {
-                    setEditandoTema(null);
-                    setModalText("Cadastrar Tema");
-                    setRegisterVisible(true);
+                  onClick={(checked) => {
+                    setShowFiled(checked);
+                    getThemes({
+                      query: textSearch,
+                      showFiled: checked,
+                    });
                   }}
-                >
-                  Adicionar
-                </Button>
-              </div>
-            }
-          >
-            <List
-              loading={loadingThemes}
-              dataSource={themes}
-              style={{ width: "100%" }}
-              renderItem={(item) => {
-                return (
-                  <List.Item
-                    key={item.id}
-                    actions={[
-                      <Button
-                        onClick={() => {
-                          setEditandoTema(item);
-                          setModalText("Editar Tema");
-                          setRegisterVisible(true);
-                        }}
-                        key={item.id}
-                        icon={<EditOutlined />}
-                      >
-                        Editar
-                      </Button>,
-                    ]}
-                  >
-                    <List.Item.Meta
-                      style={{ fontFamily: "Roboto" }}
-                      title={item.name}
-                    />
-                  </List.Item>
-                );
-              }}
-            />
-          </Card>
-          <Modal
-            title={modalText}
-            open={registerVisible}
-            destroyOnClose={true}
-            onCancel={() => {
-              getThemes({
-                query: textSearch,
-                showFiled: showFiled,
-              });
-              setEditandoTema(null);
-              setModalText("Cadastrar Tema");
-              setRegisterVisible(false);
-            }}
-            styles={{ body: { backgroundColor: "#f8f8f8" } }}
-            footer={[
+                />
+              </Tooltip>
               <Button
                 type="primary"
-                key={"back"}
+                icon={<PlusOutlined />}
                 onClick={() => {
-                  getThemes({
-                    query: textSearch,
-                    showFiled: showFiled,
-                  });
                   setEditandoTema(null);
                   setModalText("Cadastrar Tema");
-                  setRegisterVisible(false);
+                  setRegisterVisible(true);
                 }}
               >
-                Cancelar
-              </Button>,
-            ]}
-          >
-            <TemasRegister
-              theme={editandoTema}
-              actionVisible={() => {
-                setRegisterVisible(false);
+                Adicionar
+              </Button>
+            </div>
+          }
+        >
+          <List
+            loading={loadingThemes}
+            dataSource={themes}
+            style={{ width: "100%" }}
+            renderItem={(item) => {
+              return (
+                <List.Item
+                  key={item.id}
+                  actions={[
+                    <Button
+                      onClick={() => {
+                        setEditandoTema(item);
+                        setModalText("Editar Tema");
+                        setRegisterVisible(true);
+                      }}
+                      key={item.id}
+                      icon={<EditOutlined />}
+                    >
+                      Editar
+                    </Button>,
+                  ]}
+                >
+                  <List.Item.Meta
+                    style={{ fontFamily: "Roboto" }}
+                    title={item.name}
+                    description={
+                      item.filedAt && <Tag color="orange">ARQUIVADO</Tag>
+                    }
+                  />
+                </List.Item>
+              );
+            }}
+          />
+        </Card>
+        <Modal
+          title={modalText}
+          open={registerVisible}
+          destroyOnClose={true}
+          onCancel={() => {
+            getThemes({
+              query: textSearch,
+              showFiled: showFiled,
+            });
+            setEditandoTema(null);
+            setModalText("Cadastrar Tema");
+            setRegisterVisible(false);
+          }}
+          footer={[
+            <Button
+              type="primary"
+              key={"back"}
+              onClick={() => {
                 getThemes({
                   query: textSearch,
                   showFiled: showFiled,
                 });
                 setEditandoTema(null);
+                setModalText("Cadastrar Tema");
+                setRegisterVisible(false);
               }}
-            />
-          </Modal>
-        </div>
+            >
+              Cancelar
+            </Button>,
+          ]}
+        >
+          <TemasRegister
+            theme={editandoTema}
+            actionVisible={() => {
+              setRegisterVisible(false);
+              getThemes({
+                query: textSearch,
+                showFiled: showFiled,
+              });
+              setEditandoTema(null);
+            }}
+          />
+        </Modal>
       </div>
-    </>
+    </div>
   );
 }

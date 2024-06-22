@@ -20,6 +20,9 @@ const { Search } = Input;
 
 export default function CompList() {
   const getComp = useStoreActions((actions) => actions.competencies.getComp);
+  const getCatComp = useStoreActions(
+    (actions) => actions.competencies.getCatComp
+  );
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Competência");
@@ -36,168 +39,168 @@ export default function CompList() {
 
   useEffect(() => {
     getComp();
-  }, [getComp]);
+    getCatComp({
+      showFiled: true,
+    });
+  }, [getComp, getCatComp]);
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          padding: "20px",
-        }}
-      >
-        <div style={{ width: "100%" }}>
-          <Card
-            title={"Competências"}
-            styles={{
-              header: {
-                fontSize: 20,
-              },
-            }}
-            extra={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "450px",
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+      }}
+    >
+      <div style={{ width: "100%" }}>
+        <Card
+          title={"Competências"}
+          styles={{
+            header: {
+              fontSize: 20,
+            },
+          }}
+          extra={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "450px",
+              }}
+            >
+              <Search
+                allowClear
+                defaultValue={textSearch}
+                onSearch={(e) => {
+                  setTextSearch(e);
+                  getComp({
+                    query: e,
+                    showFiled: showFiled,
+                  });
                 }}
-              >
-                <Search
-                  allowClear
-                  defaultValue={textSearch}
-                  onSearch={(e) => {
-                    setTextSearch(e);
-                    getComp({
-                      query: e,
-                      showFiled: showFiled,
-                    });
-                  }}
+                style={{
+                  marginRight: "10px",
+                }}
+                placeholder={"Buscar competências"}
+              />
+              <Tooltip title={"Exibir Arquivados"}>
+                <Switch
+                  defaultChecked={showFiled}
+                  checked={showFiled}
                   style={{
                     marginRight: "10px",
                   }}
-                  placeholder={"Buscar competências"}
-                />
-                <Tooltip title={"Exibir Arquivados"}>
-                  <Switch
-                    defaultChecked={showFiled}
-                    checked={showFiled}
-                    style={{
-                      marginRight: "10px",
-                    }}
-                    onClick={(checked) => {
-                      setShowFiled(checked);
-                      getComp({
-                        query: textSearch,
-                        showFiled: checked,
-                      });
-                    }}
-                  />
-                </Tooltip>
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={() => {
-                    setEditandoComp(null);
-                    setModalText("Cadastrar Competência");
-                    setRegisterVisible(true);
+                  onClick={(checked) => {
+                    setShowFiled(checked);
+                    getComp({
+                      query: textSearch,
+                      showFiled: checked,
+                    });
                   }}
-                >
-                  Adicionar
-                </Button>
-              </div>
-            }
-          >
-            <List
-              loading={loadingCompetencies}
-              dataSource={competencias}
-              style={{ width: "100%" }}
-              renderItem={(item) => {
-                return (
-                  <List.Item
-                    key={item.id}
-                    actions={[
-                      <Button
-                        key={item.id}
-                        onClick={() => {
-                          setEditandoComp(item);
-                          setModalText("Editar Competência");
-                          setRegisterVisible(true);
-                        }}
-                        icon={<EditOutlined />}
-                      >
-                        Editar
-                      </Button>,
-                    ]}
-                  >
-                    <List.Item.Meta
-                      style={{ fontFamily: "Roboto" }}
-                      title={item.name}
-                      description={
-                        <Space direction="vertical">
-                          {item.description}
-                          <span>
-                            {item.categoriesCompetencies.map((categoria) => (
-                              <Tag color="blue" key={categoria.id}>
-                                {categoria.name}
-                              </Tag>
-                            ))}
-                          </span>
-                        </Space>
-                      }
-                    />
-                  </List.Item>
-                );
-              }}
-            />
-          </Card>
-          <Modal
-            title={modalText}
-            open={registerVisible}
-            destroyOnClose={true}
-            onCancel={() => {
-              getComp({
-                query: textSearch,
-                showFiled: showFiled,
-              });
-              setEditandoComp(null);
-              setModalText("Cadastrar Competência");
-              setRegisterVisible(false);
-            }}
-            styles={{ body: { backgroundColor: "#f8f8f8" } }}
-            footer={[
+                />
+              </Tooltip>
               <Button
                 type="primary"
-                key={"back"}
+                icon={<PlusOutlined />}
                 onClick={() => {
-                  getComp({
-                    query: textSearch,
-                    showFiled: showFiled,
-                  });
                   setEditandoComp(null);
                   setModalText("Cadastrar Competência");
-                  setRegisterVisible(false);
+                  setRegisterVisible(true);
                 }}
               >
-                Cancelar
-              </Button>,
-            ]}
-          >
-            <CompRegister
-              comp={editandoComp}
-              actionVisible={() => {
-                setRegisterVisible(false);
+                Adicionar
+              </Button>
+            </div>
+          }
+        >
+          <List
+            loading={loadingCompetencies}
+            dataSource={competencias}
+            style={{ width: "100%" }}
+            renderItem={(item) => {
+              return (
+                <List.Item
+                  key={item.id}
+                  actions={[
+                    <Button
+                      key={item.id}
+                      onClick={() => {
+                        setEditandoComp(item);
+                        setModalText("Editar Competência");
+                        setRegisterVisible(true);
+                      }}
+                      icon={<EditOutlined />}
+                    >
+                      Editar
+                    </Button>,
+                  ]}
+                >
+                  <List.Item.Meta
+                    style={{ fontFamily: "Roboto" }}
+                    title={item.name}
+                    description={
+                      <Space direction="vertical">
+                        {item.filedAt && <Tag color="orange">ARQUIVADO</Tag>}
+                        {item.description}
+                        <span>
+                          {item.categories.map((categoria) => (
+                            <Tag color="blue" key={categoria.id}>
+                              {categoria.name}
+                            </Tag>
+                          ))}
+                        </span>
+                      </Space>
+                    }
+                  />
+                </List.Item>
+              );
+            }}
+          />
+        </Card>
+        <Modal
+          title={modalText}
+          open={registerVisible}
+          destroyOnClose={true}
+          onCancel={() => {
+            getComp({
+              query: textSearch,
+              showFiled: showFiled,
+            });
+            setEditandoComp(null);
+            setModalText("Cadastrar Competência");
+            setRegisterVisible(false);
+          }}
+          footer={[
+            <Button
+              type="primary"
+              key={"back"}
+              onClick={() => {
                 getComp({
                   query: textSearch,
                   showFiled: showFiled,
                 });
+                setEditandoComp(null);
+                setModalText("Cadastrar Competência");
+                setRegisterVisible(false);
               }}
-            />
-          </Modal>
-        </div>
+            >
+              Cancelar
+            </Button>,
+          ]}
+        >
+          <CompRegister
+            comp={editandoComp}
+            actionVisible={() => {
+              setRegisterVisible(false);
+              getComp({
+                query: textSearch,
+                showFiled: showFiled,
+              });
+            }}
+          />
+        </Modal>
       </div>
-    </>
+    </div>
   );
 }
