@@ -119,28 +119,28 @@
 .divTrilhasRecomendadas {
   padding: 50px 202px;
   padding-bottom: 0px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .divTrilhasRecomendadas h1 {
   font-size: 2.8em;
-  color: #303030;
+  color: var(--titulos);
 }
 
 .divTrilhasRecomendadas h2 {
   font-size: 1.8em;
-  color: #303030;
+  color: var(--titulos);
 }
 
 .divTrilhasRecomendadas p {
   font-size: 1.2em;
+  color: var(--texto-corpo);
 }
 
 .containerCardTrilhasRecomendadas {
   width: 362px;
   display: flex;
   flex-direction: row;
-  color: #303030;
 }
 
 .cardTrilhasRecomendadas {
@@ -190,5 +190,5 @@
 }
 
 #ofertados {
-  color: #A8A8A8;
+  color: var(--texto-baixo-contraste);
 }

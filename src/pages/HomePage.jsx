@@ -34,6 +34,7 @@ import {
   Grid,
   Button,
   Divider,
+  Dropdown,
 } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
 import services from "../services";
@@ -81,6 +82,27 @@ export default function HomePage() {
     getCursos();
     getInstituicoes();
   }, [])
+
+  const items = [
+    {
+      label: "1st menu item",
+      key: '0',
+    },
+    {
+      type: "divider"
+    },
+    {
+      label: "2nd menu item",
+      key: '1',
+    },
+    {
+      type: "divider"
+    },
+    {
+      label: '3rd menu item',
+      key: '2',
+    },
+  ]
 
   console.log(randomTrails);
 
@@ -150,7 +172,7 @@ export default function HomePage() {
           margin: "0 auto",
           display: "flex",
           justifyContent: "center",
-          padding: "0px 20px 50px 20px",
+          paddingBottom: "50px",
           background: "var(--bg-menos-claro)",
         }}
       >
@@ -190,21 +212,28 @@ export default function HomePage() {
                 <div className="containerCardTrilhasRecomendadas" key={trilha.id}>
                   <div className="cardTrilhasRecomendadas">
                     <p>{trilha.name}</p>
-                    <p
-                      id="verCursos"
-                      onClick={() => {
-                        if (selectedTrailId && selectedTrailId === trilha.id) {
-                          setSelectedTrailId(null);
-                          return;
-                        }
-                        setSelectedTrailId(trilha.id);
-                      }}
-                    >Ver cursos {selectedTrailId === trilha.id ? <UpOutlined /> : <DownOutlined />}</p>
+                      <Dropdown
+                        menu={{
+                          items,
+                        }}
+                        trigger={['click']}
+                      >
+                        <p
+                          id="verCursos"
+                          onClick={() => {
+                            if (selectedTrailId && selectedTrailId === trilha.id) {
+                              setSelectedTrailId(null);
+                              return;
+                            }
+                            setSelectedTrailId(trilha.id);
+                          }}
+                          >Ver cursos {selectedTrailId === trilha.id ? <UpOutlined /> : <DownOutlined />}</p>
+                      </Dropdown>
                   </div>
 
                   <Button
                     style={{
-                      backgroundColor: "#e2fcff",
+                      backgroundColor: "var(--azul-super-claro)",
                       width: "70px",
                       height: "117px",
                       borderRadius: "0px 10px 10px 0px",
@@ -215,15 +244,15 @@ export default function HomePage() {
                       setPositionedTrailId(trilha.id);
                     }}
                     onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = "#e2fcff";
+                      e.target.style.backgroundColor = "var(--azul-super-claro)";
                       setPositionedTrailId(null);
-                    }}>
-                      {
+                    }}
+                    icon={
                       positionedTrailId && positionedTrailId === trilha.id ?
                         <img src={rightWhite} alt="Seta azul para a direita" /> :
                         <img src={rightBlue} alt="Seta branca para a direita" />
-                      }
-                  </Button>
+                    }
+                    />
                 </div>)
             })}
           </Col>
