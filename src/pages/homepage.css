@@ -124,10 +124,12 @@
 
 .divTrilhasRecomendadas h1 {
   font-size: 2.8em;
+  color: #303030;
 }
 
 .divTrilhasRecomendadas h2 {
   font-size: 1.8em;
+  color: #303030;
 }
 
 .divTrilhasRecomendadas p {
@@ -138,6 +140,7 @@
   width: 362px;
   display: flex;
   flex-direction: row;
+  color: #303030;
 }
 
 .cardTrilhasRecomendadas {
@@ -146,19 +149,24 @@
   background-color: var(--bg-site);
   padding: 27px 32px 32px 27px;
   border-radius: 10px 0px 0px 10px;
-  box-shadow: 1px 2px rgba(90, 90, 90, 0.226);
+  box-shadow: 1px 5px 5px rgba(90, 90, 90, 0.226);
   display: flex;
   flex-direction: column;
+  user-select: none;
 }
 
 .cardTrilhasRecomendadas>p {
   padding: 6px 0px;
+  font-weight: 600;
 }
 
 .cardTrilhasRecomendadas #verCursos {
   padding-bottom: 0px;
   text-decoration: underline;
   cursor: pointer;
+  font-weight: normal;
+  color: #4B4B4B;
+  font-weight: 500;
 }
 
 .divQuantCursos {

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./homepage.css";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -19,7 +19,7 @@ import icon3 from "../assets/HomepageIcon3.svg";
 import rightBlue from "../assets/RightBlue.svg"
 import rightWhite from "../assets/RightWhite.svg"
 
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStore, useStoreActions, useStoreState } from "easy-peasy";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -67,6 +67,22 @@ export default function HomePage() {
   const getUniqueCourse = useStoreActions(
     (actions) => actions.courses.getUniqueCourse
   );
+
+  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
+  const getInstituicoes = useStoreActions((actions) => actions.institutions.getInstituicoes);
+  
+  const cursosCount = useStoreState((state) => state.courses.count);
+  const instituicoes = useStoreState((state) => state.institutions.instituicoes);
+
+  const [selectedTrailId, setSelectedTrailId] = useState(null);
+  const [positionedTrailId, setPositionedTrailId] = useState(null);
+
+  useEffect(() => {
+    getCursos();
+    getInstituicoes();
+  }, [])
+
+  console.log(randomTrails);
 
   return (
     <>
@@ -134,7 +150,7 @@ export default function HomePage() {
           margin: "0 auto",
           display: "flex",
           justifyContent: "center",
-          padding: "60px 20px",
+          padding: "0px 20px 50px 20px",
           background: "var(--bg-menos-claro)",
         }}
       >
@@ -169,30 +185,47 @@ export default function HomePage() {
               justifyContent: "space-around"
             }}
           >
-            <div className="containerCardTrilhasRecomendadas">
-              <div className="cardTrilhasRecomendadas">
-                <p>Criação e modificação</p>
-                <p
-                  id="verCursos"
-                  onClick={() => setArrowClicked(!arrowClicked)}
-                >Ver cursos {arrowClicked ? <UpOutlined /> : <DownOutlined />}</p>
-              </div>
+            {randomTrails.map(trilha => {
+              return (
+                <div className="containerCardTrilhasRecomendadas" key={trilha.id}>
+                  <div className="cardTrilhasRecomendadas">
+                    <p>{trilha.name}</p>
+                    <p
+                      id="verCursos"
+                      onClick={() => {
+                        if (selectedTrailId && selectedTrailId === trilha.id) {
+                          setSelectedTrailId(null);
+                          return;
+                        }
+                        setSelectedTrailId(trilha.id);
+                      }}
+                    >Ver cursos {selectedTrailId === trilha.id ? <UpOutlined /> : <DownOutlined />}</p>
+                  </div>
 
-              <Button
-                style={{
-                  backgroundColor: "#e2fcff",
-                  defaultHoverBg: "#2c55a1",
-                  width: "70px",
-                  height: "117px",
-                  borderRadius: "0px 10px 10px 0px",
-                  boxShadow: "1px 2px rgba(90, 90, 90, 0.226)",
-                }}>
-
-                <img src={rightBlue} alt="Seta para a direita" />
-              </Button>
-
-            </div>
-
+                  <Button
+                    style={{
+                      backgroundColor: "#e2fcff",
+                      width: "70px",
+                      height: "117px",
+                      borderRadius: "0px 10px 10px 0px",
+                      boxShadow: "1px 7px 7px rgba(90, 90, 90, 0.226)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#2c55a1";
+                      setPositionedTrailId(trilha.id);
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "#e2fcff";
+                      setPositionedTrailId(null);
+                    }}>
+                      {
+                      positionedTrailId && positionedTrailId === trilha.id ?
+                        <img src={rightWhite} alt="Seta azul para a direita" /> :
+                        <img src={rightBlue} alt="Seta branca para a direita" />
+                      }
+                  </Button>
+                </div>)
+            })}
           </Col>
         </Row>
       </div>
@@ -263,12 +296,10 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div
-        className="divQuantCursos"
-      >
-        <p><span>240</span> <br />Cursos</p>
+      <div className="divQuantCursos">
+        <p><span>{cursosCount}</span> <br />Cursos</p>
         <p id="ofertados">ofertados por</p>
-        <p><span>30</span> <br />Instituições</p>
+        <p><span>{instituicoes.length}</span> <br />Instituições</p>
       </div>
 
       <div
@@ -289,7 +320,7 @@ export default function HomePage() {
             Gostaria de entrar em contato com a gente?
           </h1>
           <Link
-            to="/suporte"
+            to="/faleconosco"
             className="texto"
             style={{ textDecoration: "underline", color: "#FDFDFD" }}
           >
