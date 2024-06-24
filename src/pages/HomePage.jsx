@@ -69,19 +69,8 @@ export default function HomePage() {
     (actions) => actions.courses.getUniqueCourse
   );
 
-  const getCursos = useStoreActions((actions) => actions.courses.getCursos);
-  const getInstituicoes = useStoreActions((actions) => actions.institutions.getInstituicoes);
-  
-  const cursosCount = useStoreState((state) => state.courses.count);
-  const instituicoes = useStoreState((state) => state.institutions.instituicoes);
-
   const [selectedTrailId, setSelectedTrailId] = useState(null);
   const [positionedTrailId, setPositionedTrailId] = useState(null);
-
-  useEffect(() => {
-    getCursos();
-    getInstituicoes();
-  }, [])
 
   const items = [
     {
@@ -103,8 +92,6 @@ export default function HomePage() {
       key: '2',
     },
   ]
-
-  console.log(randomTrails);
 
   return (
     <>
@@ -326,9 +313,9 @@ export default function HomePage() {
       </div>
 
       <div className="divQuantCursos">
-        <p><span>{cursosCount}</span> <br />Cursos</p>
+        <p><span>{statistics.courses}</span> <br />Cursos</p>
         <p id="ofertados">ofertados por</p>
-        <p><span>{instituicoes.length}</span> <br />Instituições</p>
+        <p><span>{statistics.institutions}</span> <br />Instituições</p>
       </div>
 
       <div
