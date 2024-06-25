@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import "./homepage.css";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -16,61 +16,38 @@ import icon1 from "../assets/HomepageIcon1.svg";
 import icon2 from "../assets/HomepageIcon2.svg";
 import icon3 from "../assets/HomepageIcon3.svg";
 
-import rightBlue from "../assets/RightBlue.svg"
-import rightWhite from "../assets/RightWhite.svg"
+import rightBlue from "../assets/RightBlue.svg";
+import rightWhite from "../assets/RightWhite.svg";
 
-import { useStore, useStoreActions, useStoreState } from "easy-peasy";
-import { Link, useNavigate } from "react-router-dom";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import { Link } from "react-router-dom";
 
-import {
-  DownOutlined,
-  UpOutlined,
-} from "@ant-design/icons";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
-import {
-  Row,
-  Col,
-  Typography,
-  Grid,
-  Button,
-  Divider,
-  Dropdown,
-} from "antd";
-import HomepageItineario from "../components/HomepageItineario";
 import services from "../services";
+import { Row, Col, Grid, Button, Divider, Dropdown } from "antd";
+import HomepageItineario from "../components/HomepageItineario";
 import Finder from "../components/Finder";
-import Meta from "antd/es/card/Meta";
 
 const { useBreakpoint } = Grid;
-const { Title, Text } = Typography;
 
 export default function HomePage() {
   const screens = useBreakpoint();
-  let navigate = useNavigate();
+
+  const statistics = useStoreState((state) => state.adm.statistics);
+  const randomTrails = useStoreState((state) => state.adm.randomTrails);
+
+  const [selectedTrailId, setSelectedTrailId] = useState(null);
+  const [positionedTrailId, setPositionedTrailId] = useState(null);
+
+  const getUniqueCourse = useStoreActions(
+    (actions) => actions.courses.getUniqueCourse
+  );
 
   const recentCourses = useMemo(
     async () => await services.admService.getLastViewedCourses(),
     []
   );
-
-  const [modalVisible, setModalVisible] = useState(false);
-  const [arrowClicked, setArrowClicked] = useState(false);
-
-  const statistics = useStoreState((state) => state.adm.statistics);
-  //const loadingStatistics = useStoreState((state) => state.adm.loadingStatistics);
-  const randomTrails = useStoreState((state) => state.adm.randomTrails);
-  const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
-  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
-  const filterDefault = useStoreState((state) => state.courses.filterDefault);
-  const loadingUniqueCourse = useStoreState(
-    (state) => state.courses.loadingUniqueCourse
-  );
-  const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
-  );
-
-  const [selectedTrailId, setSelectedTrailId] = useState(null);
-  const [positionedTrailId, setPositionedTrailId] = useState(null);
 
   return (
     <>
@@ -142,11 +119,14 @@ export default function HomePage() {
           background: "var(--bg-menos-claro)",
         }}
       >
-        <Row className="divTrilhasRecomendadas">
-
+        <Row
+          className="divTrilhasRecomendadas"
+          align={"middle"}
+          justify={"center"}
+        >
           <Col
             style={{
-              margin: "113px 0px",
+              // margin: "113px 0px",
               width: "560px",
             }}
           >
@@ -156,50 +136,68 @@ export default function HomePage() {
               através das nossas trilhas
             </h2>
             <p>
-              Plataforma digital de Formação onde os servidores
-              podem encontrar capacitações com a filnalidade de potencializar
-              sua atuação na Educação Profissional e Tecnológica, no âmbito
-              da Rede Federal de Educação Profissional, Científica e Tecnológica.
+              Plataforma digital de Formação onde os servidores podem encontrar
+              capacitações com a filnalidade de potencializar sua atuação na
+              Educação Profissional e Tecnológica, no âmbito da Rede Federal de
+              Educação Profissional, Científica e Tecnológica.
             </p>
           </Col>
 
           <Col
             style={{
-              marginLeft: "115px",
-              width: "362px",
-              height: "459px",
+              // marginLeft: "115px",
+              // width: "362px",
+              // height: "459px",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-around"
+              justifyContent: "space-around",
             }}
           >
-            {randomTrails.map(trilha => {
+            {randomTrails.map((trilha) => {
               return (
-                <div className="containerCardTrilhasRecomendadas" key={trilha.id}>
+                <div
+                  className="containerCardTrilhasRecomendadas"
+                  key={trilha.id}
+                >
                   <div className="cardTrilhasRecomendadas">
                     <p>{trilha.name}</p>
-                      <Dropdown
-                        menu={{
-                          items: trilha.courses.map((course) => {
-                            return {
-                              key: course.id,
-                              label: course.name
-                            }
-                          })
+                    <Dropdown
+                      menu={{
+                        items: trilha.courses.map((course) => {
+                          return {
+                            key: course.id,
+                            label: course.name,
+                          };
+                        }),
+                      }}
+                      trigger={["click"]}
+                      onOpenChange={(open) => {
+                        if (!open) {
+                          setSelectedTrailId(null);
+                        }
+                      }}
+                    >
+                      <p
+                        id="verCursos"
+                        onClick={() => {
+                          if (
+                            selectedTrailId &&
+                            selectedTrailId === trilha.id
+                          ) {
+                            setSelectedTrailId(null);
+                            return;
+                          }
+                          setSelectedTrailId(trilha.id);
                         }}
-                        trigger={['click']}
                       >
-                        <p
-                          id="verCursos"
-                          onClick={() => {
-                            if (selectedTrailId && selectedTrailId === trilha.id) {
-                              setSelectedTrailId(null);
-                              return;
-                            }
-                            setSelectedTrailId(trilha.id);
-                          }}
-                          >Ver cursos {selectedTrailId === trilha.id ? <UpOutlined /> : <DownOutlined />}</p>
-                      </Dropdown>
+                        Ver cursos{" "}
+                        {selectedTrailId === trilha.id ? (
+                          <UpOutlined />
+                        ) : (
+                          <DownOutlined />
+                        )}
+                      </p>
+                    </Dropdown>
                   </div>
 
                   <Button
@@ -215,16 +213,20 @@ export default function HomePage() {
                       setPositionedTrailId(trilha.id);
                     }}
                     onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = "var(--azul-super-claro)";
+                      e.target.style.backgroundColor =
+                        "var(--azul-super-claro)";
                       setPositionedTrailId(null);
                     }}
                     icon={
-                      positionedTrailId && positionedTrailId === trilha.id ?
-                        <img src={rightWhite} alt="Seta azul para a direita" /> :
+                      positionedTrailId && positionedTrailId === trilha.id ? (
+                        <img src={rightWhite} alt="Seta azul para a direita" />
+                      ) : (
                         <img src={rightBlue} alt="Seta branca para a direita" />
+                      )
                     }
-                    />
-                </div>)
+                  />
+                </div>
+              );
             })}
           </Col>
         </Row>
@@ -234,7 +236,7 @@ export default function HomePage() {
         style={{
           display: "flex",
           maxWidth: "1129px",
-          margin: screens.xl ? "50px auto" : "0 20px",
+          margin: screens.xl ? "50px auto" : "50px 50px",
           flexWrap: screens.md ? "nowrap" : "wrap",
           justifyContent: "center",
           textAlign: "center",
@@ -256,9 +258,7 @@ export default function HomePage() {
             src={icon1}
             alt="Ícone preço"
           />
-          <p>
-            Todos os cursos na PlaforEDU são gratuitos
-          </p>
+          <p>Todos os cursos na PlaforEDU são gratuitos</p>
         </div>
         <div
           style={{
@@ -276,9 +276,7 @@ export default function HomePage() {
             src={icon2}
             alt="Ícone Perfil"
           />
-          <p>
-            Organizados para melhor atender seu perfil profissional
-          </p>
+          <p>Organizados para melhor atender seu perfil profissional</p>
         </div>
         <div style={{ maxWidth: "300px", width: "100%" }}>
           <img
@@ -290,16 +288,25 @@ export default function HomePage() {
             src={icon3}
             alt="Ícone certificado"
           />
-          <p>
-            Certificado emitido pela instituição de ensino ofertante
-          </p>
+          <p>Certificado emitido pela instituição de ensino ofertante</p>
         </div>
       </div>
 
-      <div className="divQuantCursos">
-        <p><span>{statistics.courses}</span> <br />Cursos</p>
+      <div
+        className="divQuantCursos"
+        style={{
+          flexDirection: screens.xs ? "column" : "row",
+        }}
+      >
+        <p>
+          <span>{statistics.courses}</span> <br />
+          Cursos
+        </p>
         <p id="ofertados">ofertados por</p>
-        <p><span>{statistics.institutions}</span> <br />Instituições</p>
+        <p>
+          <span>{statistics.institutions}</span> <br />
+          Instituições
+        </p>
       </div>
 
       <div
@@ -328,7 +335,6 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
-
     </>
   );
 }
