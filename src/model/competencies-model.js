@@ -73,12 +73,14 @@ const competenciasModel = {
 
   registerComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const { name, description, competenciesCategoryIds } = payload;
+    const { name, description, competenciesCategoryIds, itinerariesIds } =
+      payload;
     return await services.compService
       .registerComp({
         name: name.trim(),
         description,
         competenciesCategoryIds,
+        itinerariesIds,
       })
       .catch((error) => {
         throw new Error(error);
@@ -90,13 +92,21 @@ const competenciasModel = {
 
   updateComp: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const { id, name, description, competenciesCategoryIds, filed } = payload;
+    const {
+      id,
+      name,
+      description,
+      competenciesCategoryIds,
+      filed,
+      itinerariesIds,
+    } = payload;
     return await services.compService
       .updateComp({
         id,
         name: name.trim(),
         description,
         competenciesCategoryIds,
+        itinerariesIds,
       })
       .then(async () => {
         if (filed !== undefined) {

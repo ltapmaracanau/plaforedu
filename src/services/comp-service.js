@@ -11,6 +11,7 @@ export default {
     AuthAxios.post("/competencies/new", {
       name: payload.name,
       description: payload.description,
+      itinerariesIds: payload.itinerariesIds,
       competenciesCategoryIds: payload.competenciesCategoryIds,
     }),
 
@@ -23,7 +24,8 @@ export default {
   updateComp: (payload) =>
     AuthAxios.put(`/competencies/${payload.id}/update`, {
       name: payload.name,
-      competenciesCategory: payload.competenciesCategoryIds,
+      competenciesCategoryIds: payload.competenciesCategoryIds,
+      itinerariesIds: payload.itinerariesIds,
       description: payload.description,
     }),
 

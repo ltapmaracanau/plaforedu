@@ -12,6 +12,7 @@ export default function CompRegister(props) {
   const compRefactored = {
     name: comp?.name || "",
     competenciesCategoryIds: comp?.categories?.map((item) => item.id) || [],
+    itinerariesIds: comp?.itineraries?.map((item) => item.id) || [],
     description: comp?.description || "",
   };
 
@@ -23,6 +24,7 @@ export default function CompRegister(props) {
     (actions) => actions.competencies.updateComp
   );
   const catComp = useStoreState((state) => state.competencies.catComp);
+  const itineraries = useStoreState((state) => state.itineraries.itinerarios);
   const registering = useStoreState((state) => state.competencies.registering);
   const loadingCategCompetencies = useStoreState(
     (state) => state.competencies.loadingCategCompetencies
@@ -31,12 +33,12 @@ export default function CompRegister(props) {
   const [filed, setFiled] = useState(!!comp?.filedAt);
 
   const register = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange",
+    mode: "onTouched",
+    reValidateMode: "onBlur",
     defaultValues: compRefactored,
     resolver: yupResolver(registerCompSchema),
     context: undefined,
-    criteriaMode: "firstError",
+    criteriaMode: "all",
     shouldFocusError: true,
     shouldUnregister: false,
     shouldUseNativeValidation: false,
@@ -52,12 +54,14 @@ export default function CompRegister(props) {
             id: comp.id,
             filed: filed,
             competenciesCategoryIds: values.competenciesCategoryIds,
+            itinerariesIds: values.itinerariesIds,
           });
         } else {
           await updateComp({
             name: values.name,
             id: comp.id,
             competenciesCategoryIds: values.competenciesCategoryIds,
+            itinerariesIds: values.itinerariesIds,
           });
         }
         notification.success({
@@ -133,6 +137,40 @@ export default function CompRegister(props) {
                   hasFeedback
                 >
                   <Input.TextArea placeholder="Descrição" {...field} />
+                </Form.Item>
+              );
+            }}
+          />
+          <Controller
+            name="itinerariesIds"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Itinerários da competência"}
+                  style={{ marginBottom: "20px" }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Select
+                    placeholder="Itinerários"
+                    {...field}
+                    showSearch
+                    mode={"multiple"}
+                    filterOption={(input, option) => {
+                      return (
+                        option.label
+                          .toString()
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      );
+                    }}
+                    options={itineraries.map((element) => ({
+                      label: element.name,
+                      value: element.id,
+                    }))}
+                  />
                 </Form.Item>
               );
             }}

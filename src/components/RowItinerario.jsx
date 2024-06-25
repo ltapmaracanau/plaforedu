@@ -271,9 +271,8 @@ export default function RowItinerario() {
   // };
 
   const onClick2 = (area) => {
-    const stringClicado = idsItinerarios[area.currentTarget.getAttribute("name")];
-    console.log(area.currentTarget.getAttribute("name"));
-    console.log(stringClicado);
+    const stringClicado =
+      idsItinerarios[area.currentTarget.getAttribute("name")];
 
     setFilter({
       ...filter,

@@ -275,7 +275,6 @@ export default function FormativeTrailsRegister(props) {
   const onDragEnd = ({ active, over }) => {
     if (active.id !== over?.id) {
       setCursosTrilha((prev) => {
-        console.log(prev);
         const activeIndex = prev.findIndex((i) => i.id === active.id);
         const overIndex = prev.findIndex((i) => i.id === over?.id);
         return arrayMove(prev, activeIndex, overIndex);
