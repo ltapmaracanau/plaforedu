@@ -72,27 +72,6 @@ export default function HomePage() {
   const [selectedTrailId, setSelectedTrailId] = useState(null);
   const [positionedTrailId, setPositionedTrailId] = useState(null);
 
-  const items = [
-    {
-      label: "1st menu item",
-      key: '0',
-    },
-    {
-      type: "divider"
-    },
-    {
-      label: "2nd menu item",
-      key: '1',
-    },
-    {
-      type: "divider"
-    },
-    {
-      label: '3rd menu item',
-      key: '2',
-    },
-  ]
-
   return (
     <>
       <Finder />
@@ -201,7 +180,12 @@ export default function HomePage() {
                     <p>{trilha.name}</p>
                       <Dropdown
                         menu={{
-                          items,
+                          items: trilha.courses.map((course) => {
+                            return {
+                              key: course.id,
+                              label: course.name
+                            }
+                          })
                         }}
                         trigger={['click']}
                       >
