@@ -164,7 +164,7 @@ const Layout = () => {
       style={{
         minHeight: "100vh",
         display: "flex",
-        flexFlow: "column",
+        flexDirection: "column",
       }}
     >
       <ConfigProvider locale={dayjs}>
@@ -173,7 +173,8 @@ const Layout = () => {
         <ScrollToTop />
         <div
           style={{
-            flexGrow: 1,
+            flex: "1",
+            display: "contents",
           }}
         >
           <Outlet />
