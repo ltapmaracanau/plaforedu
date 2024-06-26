@@ -27,10 +27,6 @@ export default function CourseModalVisualization(props) {
   );
 
   useEffect(() => {
-    console.log(uniqueCourse);
-  }, [uniqueCourse]);
-
-  useEffect(() => {
     async function init() {
       if (id) {
         setLoadingUniqueCourse(true);

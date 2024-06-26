@@ -78,7 +78,6 @@ export default function EvaluateChanges() {
   const onActiveCourses = async () => {
     setActiving(true);
     try {
-      console.log(coursesSelectedIds);
       await activePendingCourses({ courses: coursesSelectedIds });
       await getDataSource({ page });
     } catch (error) {

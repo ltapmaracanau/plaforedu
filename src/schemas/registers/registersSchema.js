@@ -25,10 +25,8 @@ export const registerCompSchema = yup.object().shape({
     .required("Obrigatório!")
     .max(256, "256 caracteres no máximo!"),
   description: yup.string().required("Obrigatório!"),
-  competenciesCategoryIds: yup
-    .array()
-    .of(yup.string())
-    .required("Obrigatório!"),
+  competenciesCategoryIds: yup.array().of(yup.string()).min(1, "Obrigatório!"),
+  itinerariesIds: yup.array().of(yup.string()).required("Obrigatório!"),
 });
 
 export const registerCatCompSchema = yup.object().shape({
@@ -112,8 +110,8 @@ export const registerTrilhaSchema = yup.object().shape({
     .required("Obrigatório!")
     .max(256, "256 caracteres no máximo!"),
   description: yup.string().required("Obrigatório!"),
-  itineraries: yup.array().of(yup.string()).required("Obrigatório!"),
-  competencies: yup.array().of(yup.string()).required("Obrigatório!"),
+  itineraries: yup.string().required("Obrigatório!"),
+  competencies: yup.string().required("Obrigatório!"),
 });
 
 // PLANOS DE ESTUDO

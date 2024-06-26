@@ -10,7 +10,7 @@ import { useCookies } from "react-cookie";
 export default function Login() {
   const login = useStoreActions((actions) => actions.adm.login);
   const loading = useStoreState((state) => state.adm.loading);
-  const [cookies, setCookie] = useCookies(["cookieConsent"]);
+  const [cookies, _setCookie] = useCookies(["cookieConsent"]);
 
   const setVisible = useStoreActions(
     (actions) => actions.adm.setCookieConsentModalVisible
@@ -54,8 +54,8 @@ export default function Login() {
   return (
     <div
       style={{
+        flex: 1,
         height: "100%",
-        flexGrow: 1,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

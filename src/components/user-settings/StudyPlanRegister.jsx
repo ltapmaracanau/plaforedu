@@ -193,14 +193,6 @@ export default function StudyPlanRegister() {
         if (coursesPlanIds.length === 0) {
           throw new Error("A lista de cursos não pode estar vazia!");
         }
-        console.log({
-          name: values.name,
-          description: values.description,
-          courses: coursesPlanIds.map((courseId, index) => ({
-            courseId: courseId,
-            sequence: index + 1,
-          })),
-        });
         await createStudyPlan({
           name: values.name,
           description: values.description,
