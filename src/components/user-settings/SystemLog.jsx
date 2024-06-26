@@ -26,7 +26,7 @@ export default function SystemLog() {
 
   const categoriaOptions = [
     { value: "COURSES", label: "Cursos" },
-    { value: "FORMATIVE_TRAILS", label: "Trilhas Formativas" },
+    { value: "FORMATIVE_TRAILS", label: "Trilhas" },
   ];
 
   const usuarioOptions = [
@@ -49,7 +49,7 @@ export default function SystemLog() {
     { value: "docente", label: "Docente" },
     { value: "TAES", label: "TAES" },
     { value: "gestao", label: "Gestão" },
-    { value: "iniciacao_ao_servico_publico", label: "Iniciação ao Serviço Público" },
+    { value: "iniciacao_ao_servico_publico", label: "Inic. Serviço Públ." },
   ]
 
   const actionOptions = useMemo(() => {
@@ -76,7 +76,7 @@ export default function SystemLog() {
       },
       {
         value: "TURN_PENDING",
-        label: "Tornado Pendente",
+        label: "Torn. Pendente",
       },
     ];
   }, [])
@@ -360,7 +360,7 @@ export default function SystemLog() {
                 }}
               >
                 <Select
-                  style={{ width: "12em" }}
+                  style={{ width: "7em" }}
                   options={categoriaOptions}
                   defaultValue={categoriaOptions[0].value}
                   value={categoria}
@@ -372,7 +372,7 @@ export default function SystemLog() {
                   allowClear={true}
                 />
                 <Select
-                  style={{ width: "11em" }}
+                  style={{ width: "10em" }}
                   options={actionOptions}
                   defaultValue={actionOptions[0].value}
                   value={action}
@@ -385,7 +385,7 @@ export default function SystemLog() {
                   allowClear={true}
                 />
                 <Select
-                  style={{ width: "15em" }}
+                  style={{ width: "10em" }}
                   options={usuarioOptions}
                   value={usuario}
                   onChange={(value) => setUsuario(value)}
@@ -395,7 +395,7 @@ export default function SystemLog() {
                   mode="multiple"
                 />
                 <Select
-                  style={{ width: "15em" }}
+                  style={{ width: "10em" }}
                   options={itinerarioOptions}
                   value={itinerario}
                   onChange={(value) => setItinerario(value)}
@@ -409,6 +409,7 @@ export default function SystemLog() {
                 <ConfigProvider locale={locale}>
                   <RangePicker
                     placeholder={["Início", "Fim"]}
+                    size={"small"}
                     onChange={(value, option) => {
                       console.log(value);
                       console.log(option);
@@ -420,6 +421,7 @@ export default function SystemLog() {
           >
             <Table
               loading={loadingLastChanges}
+              size={"large"}
               pagination={{
                 pageSize: 30,
                 total: lastDataChanges.count,
