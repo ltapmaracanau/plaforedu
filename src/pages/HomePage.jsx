@@ -143,6 +143,7 @@ export default function HomePage() {
             style={{
               display: "flex",
               flexDirection: "column",
+              gap: "20px",
               justifyContent: "space-around",
             }}
           >
