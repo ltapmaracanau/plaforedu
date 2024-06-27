@@ -112,22 +112,18 @@ export default function HomePage() {
 
       <div
         style={{
-          margin: "0 auto",
           display: "flex",
           justifyContent: "center",
           paddingBottom: "50px",
           background: "var(--bg-menos-claro)",
         }}
+        className="divTrilhasRecomendadas"
       >
-        <Row
-          className="divTrilhasRecomendadas"
-          align={"middle"}
-          justify={"center"}
-        >
+        <Row align={"middle"} justify={"center"} gutter={[50, 30]}>
           <Col
             style={{
               // margin: "113px 0px",
-              width: "560px",
+              maxWidth: "700px",
             }}
           >
             <h1>Trilhas recomendadas</h1>
@@ -145,9 +141,6 @@ export default function HomePage() {
 
           <Col
             style={{
-              // marginLeft: "115px",
-              // width: "362px",
-              // height: "459px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-around",
