@@ -11,14 +11,42 @@ import docenteIcon from "../assets/itinerarios/iconEducacao.svg";
 import administrativoIcon from "../assets/itinerarios/iconAdministrativo.svg";
 import gerencialIcon from "../assets/itinerarios/iconGerencial.svg";
 
-import HomepageItineario from "../components/HomepageItineario";
+import icon1 from "../assets/HomepageIcon1.svg";
+import icon2 from "../assets/HomepageIcon2.svg";
+import icon3 from "../assets/HomepageIcon3.svg";
 
-import { Row, Divider, Grid } from "antd";
+import rightBlue from "../assets/RightBlue.svg";
+import rightWhite from "../assets/RightWhite.svg";
+
+import { useStoreActions, useStoreState } from "easy-peasy";
+import { Link } from "react-router-dom";
+
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
+
+import services from "../services";
+import { Row, Col, Grid, Button, Divider, Dropdown } from "antd";
+import HomepageItineario from "../components/HomepageItineario";
+import { useMemo, useState } from "react";
 
 const { useBreakpoint } = Grid;
 
 export default function HomePage() {
   const screens = useBreakpoint();
+
+  const statistics = useStoreState((state) => state.adm.statistics);
+  const randomTrails = useStoreState((state) => state.adm.randomTrails);
+
+  const [selectedTrailId, setSelectedTrailId] = useState(null);
+  const [positionedTrailId, setPositionedTrailId] = useState(null);
+
+  const getUniqueCourse = useStoreActions(
+    (actions) => actions.courses.getUniqueCourse
+  );
+
+  const recentCourses = useMemo(
+    async () => await services.admService.getLastViewedCourses(),
+    []
+  );
 
   return (
     <>
@@ -80,6 +108,226 @@ export default function HomePage() {
           tabindex="5"
         />
       </Row>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          paddingBottom: "50px",
+          background: "var(--bg-menos-claro)",
+        }}
+        className="divTrilhasRecomendadas"
+      >
+        <Row align={"middle"} justify={"center"} gutter={[50, 30]}>
+          <Col
+            style={{
+              // margin: "113px 0px",
+              maxWidth: "700px",
+            }}
+          >
+            <h1>Trilhas recomendadas</h1>
+            <h2>
+              Aprenda uma nova competência<br></br>
+              através das nossas trilhas
+            </h2>
+            <p>
+              Plataforma digital de Formação onde os servidores podem encontrar
+              capacitações com a filnalidade de potencializar sua atuação na
+              Educação Profissional e Tecnológica, no âmbito da Rede Federal de
+              Educação Profissional, Científica e Tecnológica.
+            </p>
+          </Col>
+
+          <Col
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              justifyContent: "space-around",
+            }}
+          >
+            {randomTrails.map((trilha) => {
+              return (
+                <div
+                  className="containerCardTrilhasRecomendadas"
+                  key={trilha.id}
+                >
+                  <div className="cardTrilhasRecomendadas">
+                    <p>{trilha.name}</p>
+                    <Dropdown
+                      menu={{
+                        items: trilha.courses.map((course) => {
+                          return {
+                            key: course.id,
+                            label: course.name,
+                          };
+                        }),
+                      }}
+                      trigger={["click"]}
+                      onOpenChange={(open) => {
+                        if (!open) {
+                          setSelectedTrailId(null);
+                        }
+                      }}
+                    >
+                      <p
+                        id="verCursos"
+                        onClick={() => {
+                          if (
+                            selectedTrailId &&
+                            selectedTrailId === trilha.id
+                          ) {
+                            setSelectedTrailId(null);
+                            return;
+                          }
+                          setSelectedTrailId(trilha.id);
+                        }}
+                      >
+                        Ver cursos{" "}
+                        {selectedTrailId === trilha.id ? (
+                          <UpOutlined />
+                        ) : (
+                          <DownOutlined />
+                        )}
+                      </p>
+                    </Dropdown>
+                  </div>
+
+                  <Button
+                    style={{
+                      backgroundColor: "var(--azul-super-claro)",
+                      width: "70px",
+                      height: "117px",
+                      borderRadius: "0px 10px 10px 0px",
+                      boxShadow: "1px 7px 7px rgba(90, 90, 90, 0.226)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#2c55a1";
+                      setPositionedTrailId(trilha.id);
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor =
+                        "var(--azul-super-claro)";
+                      setPositionedTrailId(null);
+                    }}
+                    icon={
+                      positionedTrailId && positionedTrailId === trilha.id ? (
+                        <img src={rightWhite} alt="Seta azul para a direita" />
+                      ) : (
+                        <img src={rightBlue} alt="Seta branca para a direita" />
+                      )
+                    }
+                  />
+                </div>
+              );
+            })}
+          </Col>
+        </Row>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          maxWidth: "1129px",
+          margin: screens.xl ? "50px auto" : "50px 50px",
+          flexWrap: screens.md ? "nowrap" : "wrap",
+          justifyContent: "center",
+          textAlign: "center",
+          gap: "150px",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "300px",
+          }}
+        >
+          <img
+            style={{
+              display: "block",
+              margin: "0 auto",
+              paddingBottom: screens.xs ? "12px" : "32px",
+            }}
+            src={icon1}
+            alt="Ícone preço"
+          />
+          <p>Todos os cursos na PlaforEDU são gratuitos</p>
+        </div>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "300px",
+          }}
+          direction="vertical"
+        >
+          <img
+            style={{
+              display: "block",
+              margin: "0 auto",
+              paddingBottom: screens.xs ? "12px" : "32px",
+            }}
+            src={icon2}
+            alt="Ícone Perfil"
+          />
+          <p>Organizados para melhor atender seu perfil profissional</p>
+        </div>
+        <div style={{ maxWidth: "300px", width: "100%" }}>
+          <img
+            style={{
+              display: "block",
+              margin: "0 auto",
+              paddingBottom: screens.xs ? "12px" : "32px",
+            }}
+            src={icon3}
+            alt="Ícone certificado"
+          />
+          <p>Certificado emitido pela instituição de ensino ofertante</p>
+        </div>
+      </div>
+
+      <div
+        className="divQuantCursos"
+        style={{
+          flexDirection: screens.xs ? "column" : "row",
+        }}
+      >
+        <p>
+          <span>{statistics.courses}</span> <br />
+          Cursos
+        </p>
+        <p id="ofertados">ofertados por</p>
+        <p>
+          <span>{statistics.institutions}</span> <br />
+          Instituições
+        </p>
+      </div>
+
+      <div
+        style={{
+          boxSizing: "border-box",
+          padding: "60px 20px",
+          backgroundColor: "var(--bg-azul)",
+        }}
+      >
+        <div style={{ maxWidth: "1160px", margin: "0 auto" }}>
+          <h1
+            className="subTitulo"
+            style={{
+              marginBottom: "20px",
+              color: "var(--azul-claro)",
+            }}
+          >
+            Gostaria de entrar em contato com a gente?
+          </h1>
+          <Link
+            to="/faleconosco"
+            className="texto"
+            style={{ textDecoration: "underline", color: "#FDFDFD" }}
+          >
+            Preencher formulário de contato
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

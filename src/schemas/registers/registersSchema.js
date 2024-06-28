@@ -25,10 +25,8 @@ export const registerCompSchema = yup.object().shape({
     .required("Obrigatório!")
     .max(256, "256 caracteres no máximo!"),
   description: yup.string().required("Obrigatório!"),
-  competenciesCategoryIds: yup
-    .array()
-    .of(yup.string())
-    .required("Obrigatório!"),
+  competenciesCategoryIds: yup.array().of(yup.string()).min(1, "Obrigatório!"),
+  itinerariesIds: yup.array().of(yup.string()).required("Obrigatório!"),
 });
 
 export const registerCatCompSchema = yup.object().shape({
@@ -93,8 +91,11 @@ export const registerCourseSchema = yup.object().shape({
   description: yup.string().required("Obrigatório!"),
   hours: yup
     .number()
+    .transform((value) => (Number.isNaN(value) ? null : value))
+    .nullable()
     .required("Obrigatório!")
-    .min(0, "Obrigatório números positivos!"),
+    .min(0, "Obrigatório números positivos!")
+    .max(9999, "9999 horas no máximo!"),
   //accessibilities: yup.array(yup.string()).min(1, "Obrigatório!"),
   itineraries: yup.array(yup.string()).min(1, "Obrigatório!"),
   competencies: yup.array(yup.string()).min(1, "Obrigatório!"),
@@ -109,8 +110,8 @@ export const registerTrilhaSchema = yup.object().shape({
     .required("Obrigatório!")
     .max(256, "256 caracteres no máximo!"),
   description: yup.string().required("Obrigatório!"),
-  itineraries: yup.array().of(yup.string()).required("Obrigatório!"),
-  competencies: yup.array().of(yup.string()).required("Obrigatório!"),
+  itineraries: yup.string().required("Obrigatório!"),
+  competencies: yup.string().required("Obrigatório!"),
 });
 
 // PLANOS DE ESTUDO

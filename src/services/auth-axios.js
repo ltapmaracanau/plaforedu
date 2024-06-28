@@ -19,12 +19,10 @@ const AuthAxios = import.meta.env.PROD
       withCredentials: true,
     });
 
-// Catch of 401 errors
-AuthAxios.interceptors.response.use(
+const AuthAxiosInterceptors = [
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem("profile");
       notification.error({
         message: "Atenção!",
         description:
@@ -39,7 +37,8 @@ AuthAxios.interceptors.response.use(
     return Promise.reject(
       error.response?.data?.message || error.message || "Erro Desconhecido"
     );
-  }
-);
+  },
+];
 
+export { AuthAxiosInterceptors };
 export default AuthAxios;

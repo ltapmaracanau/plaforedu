@@ -106,15 +106,19 @@ export default function CourseModalVisualization(props) {
                 }}
                 bordered
                 dataSource={uniqueCourse?.equivalents?.filter(
-                  (course) => !course.filedAt
+                  (course) =>
+                    course.status !== "FILED" && course.status !== "PENDING"
                 )}
                 renderItem={(item) => (
                   <List.Item
                     actions={[
                       <Button
                         key={item.id}
-                        onClick={() => {
-                          getUniqueCourse({ id: item.id });
+                        onClick={async () => {
+                          const newSearch = await getUniqueCourse({
+                            id: item.id,
+                          });
+                          setUniqueCourse(newSearch);
                         }}
                       >
                         Visualizar

@@ -271,9 +271,8 @@ export default function RowItinerario() {
   // };
 
   const onClick2 = (area) => {
-    const stringClicado = idsItinerarios[area.target.name];
-    console.log(area.target.name);
-    console.log(stringClicado);
+    const stringClicado =
+      idsItinerarios[area.currentTarget.getAttribute("name")];
 
     setFilter({
       ...filter,
@@ -433,6 +432,7 @@ export default function RowItinerario() {
             borderBottomLeftRadius: "10px",
             height: "100%",
           }}
+          name="4"
         >
           <img
             style={{
@@ -446,7 +446,7 @@ export default function RowItinerario() {
             alt=""
           />
         </div>
-        <div onClick={onClick2} style={{ background: "#9999FF" }}>
+        <div onClick={onClick2} style={{ background: "#9999FF" }} name="5">
           <img
             style={{
               width: "60%",
@@ -459,7 +459,7 @@ export default function RowItinerario() {
             alt=""
           />
         </div>
-        <div onClick={onClick2} style={{ background: "#0099CC" }}>
+        <div onClick={onClick2} style={{ background: "#0099CC" }} name="1">
           <img
             style={{
               width: "50%",
@@ -472,7 +472,7 @@ export default function RowItinerario() {
             alt=""
           />
         </div>
-        <div onClick={onClick2} style={{ background: "#FF9900" }}>
+        <div onClick={onClick2} style={{ background: "#FF9900" }} name="2">
           <img
             style={{
               width: "70%",
@@ -493,6 +493,7 @@ export default function RowItinerario() {
             alignItems: "center",
             borderBottomRightRadius: "10px",
           }}
+          name="3"
         >
           <img
             style={{

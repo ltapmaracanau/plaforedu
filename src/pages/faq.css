@@ -47,14 +47,14 @@ h1, h2, h3, p, ul, li {
   overflow: hidden;
   padding-left: 20px;
   padding-right: 20px;
-  transition: max-height 0.5s cubic-bezier(0,1,0,1);
+  visibility: hidden;
+  transition: max-height 0.5s cubic-bezier(0,1,0,1), padding 0.5s ease;
 }
 
 .ativo {
   padding-bottom: 12px;
+  visibility: visible;
   height: auto;
   max-height: 9999px;
-  transition: max-height 0.5s cubic-bezier(1,0,1,0);
+  transition: max-height 0.5s cubic-bezier(1,0,1,0), padding 0.5s ease;
 }
-
-/* falta colocar a imagem da interrogação, trocar + por -, linha embaixo de 'entrar em contato' */

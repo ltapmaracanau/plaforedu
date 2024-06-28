@@ -114,7 +114,7 @@ export default function (
         (comp) => comp.id === trilha.competencies[0].id
       );
       const colorCategoria =
-        competenceData?.categoriesCompetencies[0]?.color || colorDefault;
+        competenceData?.categories[0]?.color || colorDefault;
       elementos.push({
         group: "nodes",
         data: {
@@ -133,7 +133,7 @@ export default function (
       let idCursoAnterior = null;
       let maxEquiv = 0;
 
-      trilha.courses.forEach((cursoNaTrilha, index) => {
+      trilha.courses.forEach((cursoNaTrilha, _index) => {
         // Se o curso estiver arquivado eu não mostro ele
         if (cursoNaTrilha.filedAt) {
           return;
@@ -264,9 +264,7 @@ export default function (
             (comp) => comp.id === competencie.id
           );
           if (compData) {
-            return compData.categoriesCompetencies.some(
-              (categorie) => !categorie.filedAt
-            );
+            return compData.categories.some((categorie) => !categorie.filedAt);
           } else {
             return false;
           }
@@ -283,7 +281,7 @@ export default function (
       if (filtro.competencies.length !== 0) {
         filtro.competencies.some((compId) => {
           const compData = competencies.find((comp) => comp.id === compId);
-          return compData.categoriesCompetencies.some((cat) => {
+          return compData.categories.some((cat) => {
             if (cat.color) {
               colorCategoria = cat.color;
               return true;
@@ -295,7 +293,7 @@ export default function (
           const compData = competencies.find(
             (comp) => comp.id === competencia.id
           );
-          return compData?.categoriesCompetencies?.some((cat) => {
+          return compData?.categories?.some((cat) => {
             if (cat.color) {
               colorCategoria = cat.color;
               return true;
@@ -365,7 +363,7 @@ export default function (
           });
           competenciasAdicionadas.push(competencia);
           // Adicionando a categoria da competência se não existir
-          competenceData.categoriesCompetencies.forEach((categoria) => {
+          competenceData.categories.forEach((categoria) => {
             if (!categoriasAdicionadas.some((cat) => cat.id === categoria.id)) {
               if (categoria.filedAt) {
                 return;

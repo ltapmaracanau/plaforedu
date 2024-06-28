@@ -275,7 +275,7 @@ export default function Finder() {
             boxShadow: "0px 11px 15px 0px rgba(0,0,0,0.38)",
           }}
           prefix={<SearchOutlined style={{ margin: "0 16px" }} />}
-          variant={false}
+          variant={"borderless"}
           placeholder={"Busque aqui"}
           onPressEnter={(e) => {
             onSearch(e.target.value);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
 
 import teamSVG from "../assets/ITteam.jpg";
 
@@ -12,6 +13,7 @@ import { SendOutlined, WarningOutlined } from "@ant-design/icons";
 
 import {
   Form,
+  Space,
   Input,
   Button,
   Select,
@@ -209,6 +211,9 @@ export default function FaleConosco() {
                             <Select.Option value={"Reclamação"}>
                               Reclamação
                             </Select.Option>
+                            <Select.Option value={"Dúvida"}>
+                              Dúvida
+                            </Select.Option>
                           </Select>
                         </Form.Item>
                       );
@@ -235,21 +240,34 @@ export default function FaleConosco() {
                       );
                     }}
                   />
-                  <Button
-                    disabled={!register.formState.isValid}
-                    loading={register.formState.isValidating || isSending}
-                    htmlType="submit"
-                    type="primary"
-                    icon={
-                      register.formState.isValid ? (
-                        <SendOutlined />
-                      ) : (
-                        <WarningOutlined />
-                      )
-                    }
-                  >
-                    Enviar
-                  </Button>
+                  <Space>
+                    <Button
+                      disabled={!register.formState.isValid}
+                      loading={register.formState.isValidating || isSending}
+                      htmlType="submit"
+                      type="primary"
+                      icon={
+                        register.formState.isValid ? (
+                          <SendOutlined />
+                        ) : (
+                          <WarningOutlined />
+                        )
+                      }
+                    >
+                      Enviar
+                    </Button>
+                    <Link
+                      style={{
+                        color: "#4B4B4B",
+                        fontFamily: "Roboto",
+                        fontSize: "12px",
+                        textDecoration: "underline",
+                      }}
+                      to={"/faq"}
+                    >
+                      Dúvidas Frequentes
+                    </Link>
+                  </Space>
                 </Card>
               </Col>
             </Row>

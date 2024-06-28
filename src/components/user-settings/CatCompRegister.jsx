@@ -39,12 +39,14 @@ export default function CatCompRegister(props) {
         if (!!catComp.filedAt !== filed) {
           await updateCatComp({
             name: values.name,
+            description: values.description,
             id: catComp.id,
             filed: filed,
           });
         } else {
           await updateCatComp({
             name: values.name,
+            description: values.description,
             id: catComp.id,
           });
         }
@@ -87,7 +89,6 @@ export default function CatCompRegister(props) {
         style={{
           width: "350px",
           margin: "30px 0px",
-          backgroundColor: "#f8f8f8",
           fontFamily: "Roboto",
         }}
       >

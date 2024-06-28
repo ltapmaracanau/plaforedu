@@ -3,7 +3,7 @@ import AuthAxios from "./auth-axios";
 export default {
   getCursos: (payload) =>
     AuthAxios.post(
-      `/courses/all?page=${payload.page}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}&orderByCreated=${payload.sortByCreatedAt}&orderByUpdated=${payload.sortByUpdatedAt}`,
+      `/courses/all?page=${payload.page}&includeFiled=${payload.includeFiled}&registerLog=${payload.registerLog}&orderByCreated=${payload.sortByCreatedAt}&orderByUpdated=${payload.sortByUpdatedAt}&onlyPending=${payload.onlyPending}`,
       {
         search: payload.search,
         hours: payload.hours,
@@ -41,10 +41,18 @@ export default {
       link: payload.link,
     }),
 
-  archiveCourse: (payload) => AuthAxios.patch(`/courses/${payload.id}/archive`),
+  archiveCourse: ({ coursesIds = [] }) =>
+    AuthAxios.patch(`/courses/archive`, {
+      courses: coursesIds,
+    }),
 
   unarchiveCourse: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/unarchive`),
+
+  activePendingCourse: (payload) =>
+    AuthAxios.patch(`/courses/active`, {
+      courses: payload.courses,
+    }),
 
   updateCourseInstitutions: (payload) =>
     AuthAxios.patch(`/courses/${payload.id}/update-institutions`, {

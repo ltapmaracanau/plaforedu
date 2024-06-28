@@ -1,11 +1,6 @@
 import AuthAxios from "./auth-axios";
 
 export default {
-  getProfile: () => {
-    if (!localStorage.getItem("profile")) return null;
-    return JSON.parse(localStorage.getItem("profile"));
-  },
-
   login: (payload = { username: "", password: "" }) =>
     AuthAxios.post("/sessions", {
       email: payload.username,
@@ -31,5 +26,5 @@ export default {
       newPassword: payload.newPassword,
     }),
 
-  getAllDataProfile: () => AuthAxios.get("/profile/me"),
+  getMyProfile: () => AuthAxios.get("/profile/me"),
 };

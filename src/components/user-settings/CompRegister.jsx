@@ -1,24 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerCompSchema } from "../../schemas/registers/registersSchema";
 
-import { Button, Form, Input, notification, Select, Switch } from "antd";
+import { Button, Form, Input, notification, Select, Switch, Tag } from "antd";
 
 export default function CompRegister(props) {
   const { comp = null, actionVisible } = props;
 
   const compRefactored = {
     name: comp?.name || "",
-    competenciesCategoryIds:
-      comp?.categoriesCompetencies?.map((item) => item.id) || [],
+    competenciesCategoryIds: comp?.categories?.map((item) => item.id) || [],
+    itinerariesIds: comp?.itineraries?.map((item) => item.id) || [],
     description: comp?.description || "",
   };
 
-  const getCatComp = useStoreActions(
-    (actions) => actions.competencies.getCatComp
-  );
   const registerComp = useStoreActions(
     (actions) => actions.competencies.registerComp
   );
@@ -27,6 +24,7 @@ export default function CompRegister(props) {
     (actions) => actions.competencies.updateComp
   );
   const catComp = useStoreState((state) => state.competencies.catComp);
+  const itineraries = useStoreState((state) => state.itineraries.itinerarios);
   const registering = useStoreState((state) => state.competencies.registering);
   const loadingCategCompetencies = useStoreState(
     (state) => state.competencies.loadingCategCompetencies
@@ -35,12 +33,12 @@ export default function CompRegister(props) {
   const [filed, setFiled] = useState(!!comp?.filedAt);
 
   const register = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange",
+    mode: "onTouched",
+    reValidateMode: "onBlur",
     defaultValues: compRefactored,
     resolver: yupResolver(registerCompSchema),
     context: undefined,
-    criteriaMode: "firstError",
+    criteriaMode: "all",
     shouldFocusError: true,
     shouldUnregister: false,
     shouldUseNativeValidation: false,
@@ -56,12 +54,14 @@ export default function CompRegister(props) {
             id: comp.id,
             filed: filed,
             competenciesCategoryIds: values.competenciesCategoryIds,
+            itinerariesIds: values.itinerariesIds,
           });
         } else {
           await updateComp({
             name: values.name,
             id: comp.id,
             competenciesCategoryIds: values.competenciesCategoryIds,
+            itinerariesIds: values.itinerariesIds,
           });
         }
         notification.success({
@@ -91,10 +91,6 @@ export default function CompRegister(props) {
     }
   };
 
-  useEffect(() => {
-    getCatComp({ showFiled: true });
-  }, [getCatComp]);
-
   return (
     <div
       style={{
@@ -107,7 +103,6 @@ export default function CompRegister(props) {
         style={{
           width: "350px",
           margin: "30px 0px",
-          backgroundColor: "#f8f8f8",
           fontFamily: "Roboto",
         }}
       >
@@ -147,6 +142,40 @@ export default function CompRegister(props) {
             }}
           />
           <Controller
+            name="itinerariesIds"
+            control={register.control}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <Form.Item
+                  label={"Itinerários da competência"}
+                  style={{ marginBottom: "20px" }}
+                  validateStatus={error ? "error" : ""}
+                  help={error ? error.message : ""}
+                  hasFeedback
+                >
+                  <Select
+                    placeholder="Itinerários"
+                    {...field}
+                    showSearch
+                    mode={"multiple"}
+                    filterOption={(input, option) => {
+                      return (
+                        option.label
+                          .toString()
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      );
+                    }}
+                    options={itineraries.map((element) => ({
+                      label: element.name,
+                      value: element.id,
+                    }))}
+                  />
+                </Form.Item>
+              );
+            }}
+          />
+          <Controller
             name="competenciesCategoryIds"
             control={register.control}
             render={({ field, fieldState: { error } }) => {
@@ -166,18 +195,45 @@ export default function CompRegister(props) {
                     mode={"multiple"}
                     filterOption={(input, option) => {
                       return (
-                        option.children
+                        option.label
+                          .toString()
                           .toLowerCase()
                           .indexOf(input.toLowerCase()) >= 0
                       );
                     }}
-                  >
-                    {catComp.map((element) => (
-                      <Select.Option key={element.id} value={element.id}>
-                        {element.name}
-                      </Select.Option>
-                    ))}
-                  </Select>
+                    tagRender={(props) => {
+                      const { value, closable, onClose } = props;
+                      const item = catComp.find((cat) => cat.id === value);
+                      return (
+                        <Tag
+                          closable={closable}
+                          onClose={onClose}
+                          style={{
+                            marginRight: 3,
+                            fontSize: 14,
+                          }}
+                        >
+                          {item.name}
+                          {item.filedAt && (
+                            <Tag
+                              style={{
+                                margin: "3px",
+                              }}
+                              color={"orange"}
+                            >
+                              ARQUIVADO
+                            </Tag>
+                          )}
+                        </Tag>
+                      );
+                    }}
+                    options={catComp
+                      .filter((element) => !element.filedAt)
+                      .map((element) => ({
+                        label: element.name,
+                        value: element.id,
+                      }))}
+                  />
                 </Form.Item>
               );
             }}

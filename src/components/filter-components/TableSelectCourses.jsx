@@ -11,7 +11,7 @@ import {
   Tooltip,
   Typography,
 } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { SearchOutlined } from "@ant-design/icons";
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -25,7 +25,12 @@ const filterCoursesDefault = {
 };
 
 export default function TableSelectCourses(props) {
-  const { onSelectChange, cursosDefaultSelected, courseToHideId = "" } = props;
+  const {
+    onSelectChange,
+    cursosDefaultSelected,
+    courseToHideId = "",
+    filterDefault,
+  } = props;
 
   const loadingCursosSecondary = useStoreState(
     (state) => state.courses.loadingCursosSecondary
@@ -47,36 +52,47 @@ export default function TableSelectCourses(props) {
 
   const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
-  const [filterAddingCourses, setFilterAddingCourses] = useState({
-    query: "",
-    cargaHoraria: [0, 1000],
-    institutions: [],
-    competencies: [],
-    itineraries: [],
+  const [filterAddingCoursesValues, setFilterAddingCoursesValues] = useState({
+    query: filterDefault.query || filterCoursesDefault.query,
+    cargaHoraria:
+      filterDefault.cargaHoraria || filterCoursesDefault.cargaHoraria,
+    institutions:
+      filterDefault.institutions || filterCoursesDefault.institutions,
+    competencies:
+      filterDefault.competencies || filterCoursesDefault.competencies,
+    itineraries: filterDefault.itineraries || filterCoursesDefault.itineraries,
   });
 
   const [activeColumsFilter, setActiveColumsFilter] = useState({
-    query: false,
-    cargaHoraria: false,
-    institutions: false,
-    competencies: false,
-    itineraries: false,
+    query: !!filterDefault.query,
+    cargaHoraria: filterDefault.cargaHoraria?.length > 0,
+    institutions: filterDefault.institutions?.length > 0,
+    competencies: filterDefault.competencies?.length > 0,
+    itineraries: filterDefault.itineries?.length > 0,
   });
 
   const [stringSearchMemo, setStringSearchMemo] = useState({
-    query: "",
-    cargaHoraria: [0, 1000],
-    institutions: [],
-    competencies: [],
-    itineraries: [],
+    query: filterDefault.query || filterCoursesDefault.query,
+    cargaHoraria:
+      filterDefault.cargaHoraria || filterCoursesDefault.cargaHoraria,
+    institutions:
+      filterDefault.institutions || filterCoursesDefault.institutions,
+    competencies:
+      filterDefault.competencies || filterCoursesDefault.competencies,
+    itineraries: filterDefault.itineraries || filterCoursesDefault.itineraries,
   });
 
   useEffect(() => {
     async function init() {
-      await getCursos({ secondary: true, page: pageNumber, showFiled: false });
+      await getCursos({
+        ...stringSearchMemo,
+        secondary: true,
+        page: pageNumber,
+        showFiled: false,
+      });
     }
     init();
-  }, [getCursos, pageNumber]);
+  }, [getCursos, pageNumber, stringSearchMemo]);
 
   // Table adding courses to Trail
 
@@ -90,9 +106,9 @@ export default function TableSelectCourses(props) {
       >
         <Input
           placeholder={`Buscar ${name}`}
-          value={filterAddingCourses[`${dataIndex}`]}
+          value={filterAddingCoursesValues[`${dataIndex}`]}
           onChange={(e) => {
-            setFilterAddingCourses((antig) => ({
+            setFilterAddingCoursesValues((antig) => ({
               ...antig,
               [`${dataIndex}`]: e.target.value,
             }));
@@ -189,9 +205,9 @@ export default function TableSelectCourses(props) {
       >
         <Select
           placeholder={`Buscar ${name}`}
-          value={filterAddingCourses[`${dataIndex}`]}
+          value={filterAddingCoursesValues[`${dataIndex}`]}
           onChange={(values) => {
-            setFilterAddingCourses((antig) => ({
+            setFilterAddingCoursesValues((antig) => ({
               ...antig,
               [`${dataIndex}`]: values,
             }));
@@ -275,11 +291,11 @@ export default function TableSelectCourses(props) {
             0: "0h",
             500: "500h",
           }}
-          value={filterAddingCourses[`${dataIndex}`]}
+          value={filterAddingCoursesValues[`${dataIndex}`]}
           step={10}
           max={500}
           onChange={(value) => {
-            setFilterAddingCourses((antig) => ({
+            setFilterAddingCoursesValues((antig) => ({
               ...antig,
               [`${dataIndex}`]: value,
             }));
@@ -329,7 +345,7 @@ export default function TableSelectCourses(props) {
     }));
     const newSearch = {
       ...stringSearchMemo,
-      [`${dataIndex}`]: filterAddingCourses[`${dataIndex}`],
+      [`${dataIndex}`]: filterAddingCoursesValues[`${dataIndex}`],
     };
     setStringSearchMemo(newSearch);
     await getCursos({
@@ -346,11 +362,11 @@ export default function TableSelectCourses(props) {
       [`${dataIndex}`]: false,
     }));
     const newSearch = {
-      ...filterAddingCourses,
+      ...filterAddingCoursesValues,
       [`${dataIndex}`]: filterCoursesDefault[`${dataIndex}`],
     };
     setStringSearchMemo(newSearch);
-    setFilterAddingCourses(newSearch);
+    setFilterAddingCoursesValues(newSearch);
     await getCursos({
       ...newSearch,
       secondary: true,
@@ -359,21 +375,12 @@ export default function TableSelectCourses(props) {
     });
   };
 
-  const columnsAddCoursesTrail = [
+  const columns = [
     {
       title: "Título",
       key: "name",
       dataIndex: "name",
       ...getColumnSearchProps("query", "título"),
-      render: (text, record, _index) => {
-        return record.filedAt ? (
-          <>
-            {text} <Tag color={"orange"}>ARQUIVADO</Tag>
-          </>
-        ) : (
-          <>{text}</>
-        );
-      },
     },
     {
       title: "CH",
@@ -477,7 +484,7 @@ export default function TableSelectCourses(props) {
         defaultCurrent: 1,
         hideOnSinglePage: false,
       }}
-      columns={columnsAddCoursesTrail}
+      columns={columns}
       locale={{
         emptyText: (
           <Card>

@@ -86,8 +86,8 @@ export default function FormativeTrailsRegister(props) {
   const trilhaDefault = {
     name: trilha ? trilha.name : "",
     description: trilha ? trilha.description : "",
-    competencies: trilha ? trilha.competencies.map((item) => item.id) : [],
-    itineraries: trilha ? trilha.itineraries.map((item) => item.id) : [],
+    competencies: trilha ? trilha.competencies[0]?.id : "",
+    itineraries: trilha ? trilha.itineraries[0]?.id : "",
     courses: trilha ? trilha.courses.map((item) => item.id) : [],
     filedAt: trilha !== null && trilha.filedAt !== null,
   };
@@ -116,13 +116,23 @@ export default function FormativeTrailsRegister(props) {
   const [filed, setFiled] = useState(trilhaDefault.filedAt);
   const [addCourseVisible, setAddCourseVisible] = useState(false);
 
+  const [itinerarieSelected, setItinerarieSelected] = useState(
+    trilhaDefault.itineraries
+  );
   const [cursosTrilha, setCursosTrilha] = useState(
     trilha ? trilha.courses.sort((a, b) => a.sequence - b.sequence) : []
   );
+  const competenciesFiltred = useMemo(() => {
+    return allCompetencias.filter((competencie) =>
+      competencie.itineraries.find(
+        (itinerarie) => itinerarie.id === itinerarieSelected
+      )
+    );
+  }, [allCompetencias, itinerarieSelected]);
 
   const register = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange",
+    mode: "onBlur",
+    reValidateMode: "onBlur",
     defaultValues: trilhaDefault,
     resolver: yupResolver(registerTrilhaSchema),
     context: undefined,
@@ -192,6 +202,14 @@ export default function FormativeTrailsRegister(props) {
         message: "Erro ao fazer operação!",
         description: "Por favor, tente novamente.",
       });
+    }
+  };
+
+  const setDescriptionIfEmpty = (value) => {
+    if (register.getValues("description") === "") {
+      const competencie = allCompetencias.find((comp) => comp.id === value);
+      register.setValue("description", competencie.description);
+      register.trigger("description");
     }
   };
 
@@ -275,7 +293,6 @@ export default function FormativeTrailsRegister(props) {
   const onDragEnd = ({ active, over }) => {
     if (active.id !== over?.id) {
       setCursosTrilha((prev) => {
-        console.log(prev);
         const activeIndex = prev.findIndex((i) => i.id === active.id);
         const overIndex = prev.findIndex((i) => i.id === over?.id);
         return arrayMove(prev, activeIndex, overIndex);
@@ -386,7 +403,7 @@ export default function FormativeTrailsRegister(props) {
                     }}
                   />
                 </Descriptions.Item>
-                <Descriptions.Item label={"Itinerários"}>
+                <Descriptions.Item label={"Itinerário"}>
                   <Controller
                     key={"itineraries"}
                     name="itineraries"
@@ -399,24 +416,26 @@ export default function FormativeTrailsRegister(props) {
                           hasFeedback
                         >
                           <Select
-                            mode="multiple"
                             showSearch
                             placeholder="Itinerários"
                             {...field}
+                            onChange={(value) => {
+                              setItinerarieSelected(value);
+                              field.onChange(value);
+                            }}
                             filterOption={(input, option) => {
                               return (
-                                option.children
+                                option.label
+                                  .toString()
                                   .toLowerCase()
                                   .indexOf(input.toLowerCase()) >= 0
                               );
                             }}
-                          >
-                            {allItinerarios.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
+                            options={allItinerarios.map((item) => ({
+                              label: item.name,
+                              value: item.id,
+                            }))}
+                          />
                         </Form.Item>
                       );
                     }}
@@ -434,25 +453,57 @@ export default function FormativeTrailsRegister(props) {
                           help={error ? error.message : ""}
                           hasFeedback
                         >
-                          <Select
-                            mode="multiple"
-                            showSearch
-                            placeholder="Competências"
-                            {...field}
-                            filterOption={(input, option) => {
-                              return (
-                                option.children
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                              );
-                            }}
+                          <Tooltip
+                            title={
+                              itinerarieSelected.length === 0 &&
+                              "Selecione um itinerário"
+                            }
                           >
-                            {allCompetencias.map((item) => (
-                              <Select.Option key={item.id} value={item.id}>
-                                {item.name}
-                              </Select.Option>
-                            ))}
-                          </Select>
+                            <Select
+                              showSearch
+                              disabled={itinerarieSelected.length === 0}
+                              placeholder="Competências"
+                              {...field}
+                              filterOption={(input, option) => {
+                                return (
+                                  option.label
+                                    .toString()
+                                    .toLowerCase()
+                                    .indexOf(input.toLowerCase()) >= 0
+                                );
+                              }}
+                              onChange={(value) => {
+                                setDescriptionIfEmpty(value);
+                                field.onChange(value);
+                              }}
+                              labelRender={({ value }) => {
+                                const item = allCompetencias.find(
+                                  (comp) => comp.id === value
+                                );
+                                return (
+                                  <>
+                                    {item?.name}
+                                    {item?.filedAt && (
+                                      <Tag
+                                        style={{
+                                          margin: "3px",
+                                        }}
+                                        color={"orange"}
+                                      >
+                                        ARQUIVADO
+                                      </Tag>
+                                    )}
+                                  </>
+                                );
+                              }}
+                              options={competenciesFiltred
+                                .filter((comp) => !comp.filedAt)
+                                .map((item) => ({
+                                  label: item.name,
+                                  value: item.id,
+                                }))}
+                            />
+                          </Tooltip>
                         </Form.Item>
                       );
                     }}
@@ -501,6 +552,7 @@ export default function FormativeTrailsRegister(props) {
                 </SortableContext>
               </DndContext>
               <Modal
+                zIndex={10000}
                 open={addCourseVisible}
                 onCancel={() => {
                   setAddCourseVisible(false);
@@ -513,6 +565,11 @@ export default function FormativeTrailsRegister(props) {
                 <TableSelectCourses
                   onSelectChange={onSelectChange}
                   cursosDefaultSelected={cursosTrilhaIds}
+                  filterDefault={{
+                    competencies: register.getValues("competencies")
+                      ? [register.getValues("competencies")]
+                      : [],
+                  }}
                 />
               </Modal>
             </Card>
