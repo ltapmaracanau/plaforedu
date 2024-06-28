@@ -62,11 +62,13 @@ const coursesModel = {
     (actions) => actions.setFilter,
     // handler:
     async (actions, target) => {
-      await actions.getCursos({
-        ...target.payload,
-        registerLog:
-          target.payload.query && target.payload.query !== "" ? true : false,
-      });
+      if (!target.payload.tipoClassificacao) {
+        await actions.getCursos({
+          ...target.payload,
+          registerLog:
+            target.payload.query && target.payload.query !== "" ? true : false,
+        });
+      }
     }
   ),
 

@@ -25,7 +25,16 @@ import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
 import services from "../services";
-import { Row, Col, Grid, Button, Divider, Dropdown, Descriptions, Modal } from "antd";
+import {
+  Row,
+  Col,
+  Grid,
+  Button,
+  Divider,
+  Dropdown,
+  Descriptions,
+  Modal,
+} from "antd";
 import HomepageItineario from "../components/HomepageItineario";
 import Finder from "../components/Finder";
 import CourseModalVisualization from "../components/CourseModalVisualization";
@@ -43,7 +52,8 @@ export default function HomePage() {
   const [modalTrail, setModalTrail] = useState(null);
 
   const [idSelectedCourse, setIdSelectedCourse] = useState(null);
-  const [modalSelectedCourseVisible, setModalSelectedCouseVisible] = useState(false);
+  const [modalSelectedCourseVisible, setModalSelectedCouseVisible] =
+    useState(false);
 
   const getUniqueCourse = useStoreActions(
     (actions) => actions.courses.getUniqueCourse
@@ -56,7 +66,8 @@ export default function HomePage() {
 
   const coursesSelectedTrail = useCallback(() => {
     return modalTrail.courses.map((curso) => {
-      if (curso.status === "ACTIVE") return <li key={curso.name}>{curso.name}</li>
+      if (curso.status === "ACTIVE")
+        return <li key={curso.name}>{curso.name}</li>;
     });
   }, [modalTrail]);
 
@@ -80,8 +91,8 @@ export default function HomePage() {
         },
       ];
     }
-    return null
-  }, [modalTrail])
+    return null;
+  }, [modalTrail]);
 
   return (
     <>
@@ -200,7 +211,7 @@ export default function HomePage() {
                         onClick: (e) => {
                           setIdSelectedCourse(e.key);
                           setModalSelectedCouseVisible(true);
-                        }
+                        },
                       }}
                       trigger={["click"]}
                       onOpenChange={(open) => {
@@ -257,7 +268,7 @@ export default function HomePage() {
                       )
                     }
                     onClick={() => {
-                      setModalTrail(trilha)
+                      setModalTrail(trilha);
                     }}
                   />
                 </div>
