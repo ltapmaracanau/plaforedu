@@ -159,6 +159,8 @@ export default function FormativeTrailsRegister(props) {
         }
         await updateTrilha({
           ...values,
+          itineraries: [values.itineraries],
+          competencies: [values.competencies],
           id: trilha.id,
         });
         notification.success({
@@ -176,7 +178,11 @@ export default function FormativeTrailsRegister(props) {
         if (cursosTrilhaIds.length === 0) {
           throw new Error("A lista de cursos não pode estar vazia!");
         }
-        await registerTrilha({ ...values });
+        await registerTrilha({
+          ...values,
+          itineraries: [values.itineraries],
+          competencies: [values.competencies],
+        });
         notification.success({
           message: "Trilha cadastrada com sucesso!",
         });
@@ -455,13 +461,13 @@ export default function FormativeTrailsRegister(props) {
                         >
                           <Tooltip
                             title={
-                              itinerarieSelected.length === 0 &&
+                              itinerarieSelected?.length === 0 &&
                               "Selecione um itinerário"
                             }
                           >
                             <Select
                               showSearch
-                              disabled={itinerarieSelected.length === 0}
+                              disabled={itinerarieSelected?.length === 0}
                               placeholder="Competências"
                               {...field}
                               filterOption={(input, option) => {
