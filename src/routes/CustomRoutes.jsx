@@ -26,7 +26,7 @@ import Denied from "../pages/Denied.jsx";
 import HeaderHome from "../components/header/HeaderHome.jsx";
 import FooterGov from "../components/footer/FooterGov.jsx";
 import HeaderGov from "../components/header/HeaderGov.jsx";
-import { Button, ConfigProvider, Space, Typography } from "antd";
+import { Button, ConfigProvider, Modal, Space, Typography } from "antd";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import NotFound from "../pages/NotFound.jsx";
@@ -42,9 +42,11 @@ import StudyPlanRegister from "../components/user-settings/StudyPlanRegister.jsx
 import ForgotPassword from "../pages/ForgotPassword.jsx";
 import SystemLog from "../components/user-settings/SystemLog.jsx";
 import { useCookies } from "react-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import EvaluateChanges from "../components/user-settings/EvaluateChanges.jsx";
 import ScrollToTop from "../components/ScrollToTop.jsx";
+import TermCookiesModal from "../components/privacyTerms/TermCookiesModal.jsx";
+import TermPrivacyModal from "../components/privacyTerms/TermPrivacyModal.jsx";
 
 const Layout = () => {
   const [cookies, setCookie] = useCookies(["cookieConsent"]);
@@ -78,6 +80,9 @@ const Layout = () => {
     const setVisible = useStoreActions(
       (actions) => actions.adm.setCookieConsentModalVisible
     );
+
+    const [termVisible, setTermVisible] = useState(false);
+    const [termPrivacyVisible, setTermPrivacyVisible] = useState(false);
 
     useEffect(() => {
       setVisible(!cookies.cookieConsent);
@@ -118,7 +123,22 @@ const Layout = () => {
           Este site utiliza cookies para melhorar a experiência do usuário.
           Diga-nos se concorda com o uso de Cookies.
         </Typography.Paragraph>
-        <Typography.Link>Política de privacidade</Typography.Link>
+        <Space direction="vertical">
+          <Typography.Link
+            onClick={() => {
+              setTermVisible(true);
+            }}
+          >
+            Política de Cookies
+          </Typography.Link>
+          <Typography.Link
+            onClick={() => {
+              setTermPrivacyVisible(true);
+            }}
+          >
+            Política de Privacidade
+          </Typography.Link>
+        </Space>
         <Space
           size={10}
           direction="horizontal"
@@ -155,6 +175,15 @@ const Layout = () => {
             Recusar
           </Button>
         </Space>
+        <TermCookiesModal
+          termVisible={termVisible}
+          setTermVisible={setTermVisible}
+        />
+        <TermPrivacyModal
+          termPrivacyVisible={termPrivacyVisible}
+          setTermPrivacyVisible={setTermPrivacyVisible}
+          setTermVisible={setTermVisible}
+        />
       </div>
     ) : null;
   };
