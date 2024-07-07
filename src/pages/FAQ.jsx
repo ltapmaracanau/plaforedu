@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Children } from "react";
 import questionVector from "../assets/icon/questions.svg";
 import "./faq.css";
 
 import { Link } from "react-router-dom";
 
-import { Grid } from "antd";
+import { Col, Grid, Input, Menu, Row } from "antd";
+import { DownOutlined, SearchOutlined, UpOutlined } from "@ant-design/icons";
 
 const { useBreakpoint } = Grid;
 
@@ -139,64 +140,222 @@ export default function FAQ() {
   };
 
   return (
-    <div
-      className="container"
-      style={{
-        display: "grid",
-        gridTemplateColumns: screens.md ? "1fr 1fr" : null,
-        marginTop: "80px",
-        marginBottom: "80px",
-      }}
-    >
-      <div>
-        <img
-          style={{
-            display: screens.md ? "block" : "none",
-            marginBottom: "28px",
-          }}
-          src={questionVector}
-          alt=""
-        />
-        <span>FAQ</span>
-        <h1
-          style={{
-            fontSize: "57px",
-            fontWeight: "500",
-            color: "var(--titulos)",
-            lineHeight: "1.12",
-            letterSpacing: "-0.25px",
-          }}
-        >
-          Dúvidas Frequentes
-        </h1>
-        <h2 className="subTitulo">Ainda precisa de ajuda?</h2>
-        <Link className="linkContato" to={"/suporte"}>
-          Entrar em contato
-        </Link>
-      </div>
-
-      <div
+    <>
+      <Row
         style={{
           display: "grid",
-          gap: "20px",
-          background: "none",
-          border: "none",
+          gridTemplateColumns: screens.md ? "1fr 1fr" : null,
+          margin: "0px auto 0px auto",
+          width: "100%",
+          boxSizing: "border-box",
+          padding: screens.sm ? "80px 140px 44px 140px" : "40px",
+          backgroundColor: "var(--bg-menos-claro)",
         }}
       >
-        {perguntas.map((pergunta, i) => (
-          <div className="cardDuvida" key={pergunta.titulo}>
-            <div className="pergunta" onClick={() => toggleAccordion(i)}>
-              <h3 style={{ marginBottom: 0 }} className="subtitulo">
-                {pergunta.titulo}
-              </h3>
-              <span>{selected === i ? "—" : "+"}</span>
-            </div>
-            <div className={selected === i ? "conteudo ativo" : "conteudo"}>
-              <p className="texto">{pergunta.texto}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+        <Col>
+          <img
+            style={{
+              display: screens.md ? "block" : "none",
+              marginBottom: "28px",
+            }}
+            src={questionVector}
+            alt="Imagem de uma interrogação"
+          />
+          <span>FAQ</span>
+          <h1
+            style={{
+              fontSize: "57px",
+              fontWeight: "500",
+              color: "var(--titulos)",
+              lineHeight: "1.12",
+              letterSpacing: "-0.25px",
+            }}
+          >
+            Dúvidas Frequentes
+          </h1>
+          <h2 className="subTitulo">Ainda precisa de ajuda?</h2>
+          <Link className="linkContato" to={"/suporte"}>
+            Entrar em contato
+          </Link>
+        </Col>
+
+        <Col>
+          <p
+            className="textoBusca"
+            style={{
+              marginTop: screens.md ? "173px" : "20px",
+            }}
+          >
+            Pesquise sua dúvida em nosso FAQ
+          </p>
+          <Input
+            prefix={
+              <SearchOutlined
+                style={{
+                  color: "#ADADAD",
+                }}
+              />
+            }
+            placeholder="Buscar"
+            style={{
+              maxWidth: "559px",
+              height: "35px",
+              borderRadius: "8px",
+              boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.2)",
+            }}
+          />
+        </Col>
+      </Row>
+
+      <Row
+        style={{
+          padding: screens.lg ? "54px 140px" : "54px 20px",
+          margin: "auto",
+          justifyContent: "center",
+        }}
+      >
+        <Col>
+          {perguntas.map((pergunta, i) => {
+            if (i < perguntas.length / 2)
+              return (
+                <div
+                  className="cardDuvida"
+                  key={pergunta.titulo}
+                  style={{
+                    margin: screens.sm
+                      ? "0px 20px 20px 0px"
+                      : "0px 0px 20px 0px",
+                  }}
+                >
+                  <div className="pergunta" onClick={() => toggleAccordion(i)}>
+                    <h3 style={{ marginBottom: 0 }} className="subTitulo">
+                      {pergunta.titulo}
+                    </h3>
+                    <span>
+                      {selected === i ? (
+                        <UpOutlined
+                          style={{
+                            fontSize: "1.3em",
+                            color: "#2C56A2",
+                          }}
+                        />
+                      ) : (
+                        <DownOutlined
+                          style={{
+                            fontSize: "1.3em",
+                            color: "#2C56A2",
+                          }}
+                        />
+                      )}
+                    </span>
+                  </div>
+                  <div
+                    className={selected === i ? "conteudo ativo" : "conteudo"}
+                  >
+                    <p className="texto">{pergunta.texto}</p>
+                  </div>
+                </div>
+              );
+          })}
+        </Col>
+
+        <Col>
+          {perguntas.map((pergunta, i) => {
+            if (i >= perguntas.length / 2)
+              return (
+                <div className="cardDuvida" key={pergunta.titulo}>
+                  <div className="pergunta" onClick={() => toggleAccordion(i)}>
+                    <h3 style={{ marginBottom: 0 }} className="subTitulo">
+                      {pergunta.titulo}
+                    </h3>
+                    <span>
+                      {selected === i ? (
+                        <UpOutlined
+                          style={{
+                            fontSize: "1.3em",
+                            color: "#2C56A2",
+                          }}
+                        />
+                      ) : (
+                        <DownOutlined
+                          style={{
+                            fontSize: "1.3em",
+                            color: "#2C56A2",
+                          }}
+                        />
+                      )}
+                    </span>
+                  </div>
+                  <div
+                    className={selected === i ? "conteudo ativo" : "conteudo"}
+                  >
+                    <p className="texto">{pergunta.texto}</p>
+                  </div>
+                </div>
+              );
+          })}
+        </Col>
+      </Row>
+    </>
+
+    // <div
+    //   className="container"
+    //   style={{
+    //     display: "grid",
+    //     gridTemplateColumns: screens.md ? "1fr 1fr" : null,
+    //     marginTop: "80px",
+    //     marginBottom: "80px",
+    //   }}
+    // >
+    //   <div>
+    //     <img
+    //       style={{
+    //         display: screens.md ? "block" : "none",
+    //         marginBottom: "28px",
+    //       }}
+    //       src={questionVector}
+    //       alt=""
+    //     />
+    //     <span>FAQ</span>
+    //     <h1
+    //       style={{
+    //         fontSize: "57px",
+    //         fontWeight: "500",
+    //         color: "var(--titulos)",
+    //         lineHeight: "1.12",
+    //         letterSpacing: "-0.25px",
+    //       }}
+    //     >
+    //       Dúvidas Frequentes
+    //     </h1>
+    //     <h2 className="subTitulo">Ainda precisa de ajuda?</h2>
+    //     <Link className="linkContato" to={"/suporte"}>
+    //       Entrar em contato
+    //     </Link>
+    //   </div>
+
+    //   <div
+    //     style={{
+    //       display: "grid",
+    //       gap: "20px",
+    //       background: "none",
+    //       border: "none",
+    //     }}
+    //   >
+    //     {perguntas.map((pergunta, i) => (
+    //       <div className="cardDuvida" key={pergunta.titulo}>
+    //         <div className="pergunta" onClick={() => toggleAccordion(i)}>
+    //           <h3 style={{ marginBottom: 0 }} className="subtitulo">
+    //             {pergunta.titulo}
+    //           </h3>
+    //           <span>{selected === i ? "—" : "+"}</span>
+    //         </div>
+    //         <div className={selected === i ? "conteudo ativo" : "conteudo"}>
+    //           <p className="texto">{pergunta.texto}</p>
+    //         </div>
+    //       </div>
+    //     ))}
+    //   </div>
+    // </div>
   );
 }
