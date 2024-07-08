@@ -7,6 +7,7 @@ import studyPlans from "./study-plans-service";
 import { admService } from "./adm-service";
 import loginService from "./login-service";
 import usersService from "./users-service";
+import documentsService from "./documents-service";
 
 const services = {
   admService: admService,
@@ -18,6 +19,7 @@ const services = {
   themesService: themesService,
   trailsService: trailsService,
   studyPlansService: studyPlans,
+  documentsService: documentsService,
 };
 
 export default services;

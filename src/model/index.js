@@ -2,6 +2,7 @@ import accessibilitiesModel from "./accessibilities-model";
 import admModel from "./adm-model";
 import competenciesModel from "./competencies-model";
 import coursesModel from "./courses-model";
+import documentsModel from "./documents-model";
 import instituicoesModel from "./institutions-model";
 import itinerariosModel from "./itineraries-model";
 import rolesModel from "./roles-model";
@@ -22,6 +23,7 @@ const storeModel = {
   users: usuariosModel,
   trilhas: trilhasModel,
   studyPlans: studyPlansModel,
+  documents: documentsModel,
 };
 
 export default storeModel;
