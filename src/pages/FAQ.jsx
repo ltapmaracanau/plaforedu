@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import { useState } from "react";
 import questionVector from "../assets/icon/questions.svg";
 import "./faq.css";
 
@@ -130,13 +130,31 @@ export default function FAQ() {
     },
   ];
 
-  const [selected, setSelected] = React.useState(null);
+  const [selected, setSelected] = useState(null);
+  const [perguntasAMostrar, setPerguntasAMostrar] = useState(perguntas);
 
   const toggleAccordion = (i) => {
     if (selected == i) {
       return setSelected(null);
     }
     setSelected(i);
+  };
+
+  const mudarTextoAMostrar = (textoBusca) => {
+    if (textoBusca === "") return;
+
+    let novasPerguntas = [];
+
+    perguntas.map((pergunta) => {
+      if (
+        pergunta.titulo
+          .toLowerCase()
+          .search(textoBusca.toLowerCase().trim()) !== -1
+      ) {
+        novasPerguntas.push(pergunta);
+      }
+    });
+    setPerguntasAMostrar(novasPerguntas);
   };
 
   return (
@@ -203,6 +221,9 @@ export default function FAQ() {
               borderRadius: "8px",
               boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.2)",
             }}
+            onChange={(e) => {
+              mudarTextoAMostrar(e.target.value);
+            }}
           />
         </Col>
       </Row>
@@ -210,13 +231,15 @@ export default function FAQ() {
       <Row
         style={{
           padding: screens.lg ? "54px 140px" : "54px 20px",
-          margin: "auto",
           justifyContent: "center",
         }}
       >
         <Col>
-          {perguntas.map((pergunta, i) => {
-            if (i < perguntas.length / 2)
+          {perguntasAMostrar.map((pergunta, i) => {
+            if (
+              perguntasAMostrar.length !== 0 &&
+              i < perguntasAMostrar.length / 2
+            )
               return (
                 <div
                   className="cardDuvida"
@@ -260,10 +283,21 @@ export default function FAQ() {
         </Col>
 
         <Col>
-          {perguntas.map((pergunta, i) => {
-            if (i >= perguntas.length / 2)
+          {perguntasAMostrar.map((pergunta, i) => {
+            if (
+              perguntasAMostrar.length !== 0 &&
+              i >= perguntasAMostrar.length / 2
+            )
               return (
-                <div className="cardDuvida" key={pergunta.titulo}>
+                <div
+                  className="cardDuvida"
+                  key={pergunta.titulo}
+                  style={{
+                    margin: screens.sm
+                      ? "0px 20px 20px 0px"
+                      : "0px 0px 20px 0px",
+                  }}
+                >
                   <div className="pergunta" onClick={() => toggleAccordion(i)}>
                     <h3 style={{ marginBottom: 0 }} className="subTitulo">
                       {pergunta.titulo}
