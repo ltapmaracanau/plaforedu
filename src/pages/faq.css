@@ -35,7 +35,6 @@ li {
   background: #ffffff;
   border-radius: 5px 5px 0px 0px;
   border-style: none;
-  margin: 0px 40px 20px 0px;
   max-width: 600px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1))
     drop-shadow(0px 5px 8px rgba(44, 86, 162, 0.05));
@@ -51,7 +50,6 @@ li {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  height: 75px;
   padding: 12px 20px;
   user-select: none;
 }
