@@ -4,7 +4,7 @@ import "./faq.css";
 
 import { Link } from "react-router-dom";
 
-import { Col, Flex, Grid, Input, List, Row } from "antd";
+import { Col, Grid, Input, Row } from "antd";
 import { DownOutlined, SearchOutlined, UpOutlined } from "@ant-design/icons";
 
 const { useBreakpoint } = Grid;
@@ -248,15 +248,23 @@ export default function FAQ() {
           padding: screens.lg ? "54px 140px" : "54px 20px",
         }}
       >
-        <List
-          rowKey={(pergunta) => {
-            pergunta.id;
-          }}
-          dataSource={perguntasAMostrar}
-          grid={{ column: 2, gutter: 40, xs: 1, sm: 1 }}
-          renderItem={(pergunta) => {
+        <Row align={"stretch"} justify={"center"} gutter={[16, 16]}>
+          {perguntasAMostrar.map((pergunta) => {
             return (
-              <List.Item style={{}}>
+              <Col
+                xs={24}
+                sm={24}
+                md={12}
+                lg={12}
+                xl={12}
+                xxl={8}
+                key={pergunta.id}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <div className="cardDuvida">
                   <div
                     className="pergunta"
@@ -297,10 +305,10 @@ export default function FAQ() {
                     <p className="texto">{pergunta.texto}</p>
                   </div>
                 </div>
-              </List.Item>
+              </Col>
             );
-          }}
-        />
+          })}
+        </Row>
       </div>
     </>
   );
