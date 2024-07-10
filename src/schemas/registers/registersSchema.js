@@ -123,3 +123,24 @@ export const registerStudyPlanSchema = yup.object().shape({
     .max(256, "256 caracteres no máximo!"),
   description: yup.string().required("Obrigatório!"),
 });
+
+// DOCUMENTOS
+
+export const registerDocumentSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Obrigatório!")
+    .max(256, "256 caracteres no máximo!"),
+  description: yup.string().required("Obrigatório!"),
+  link: yup.string().required("Obrigatório!"),
+  publicationDate: yup
+    .string()
+    .required("Obrigatório!")
+    .matches(/^\d{4}-\d{2}-\d{2}$/, "Data inválida!"),
+  documentTypeId: yup.string().required("Obrigatório!"),
+  documentSubTypeId: yup.string().required("Obrigatório!"),
+  authors: yup
+    .array()
+    .of(yup.string().max(256, "256 caracteres no máximo!"))
+    .min(1, "Obrigatório!"),
+});
