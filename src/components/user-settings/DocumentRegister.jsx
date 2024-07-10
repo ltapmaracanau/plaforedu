@@ -69,6 +69,7 @@ export default function DocumentRegister() {
     authors: [],
   });
   const [loading, setLoading] = useState(true);
+  const [loadingSaving, setLoadingSaving] = useState(false);
   const [archiving, setArchiving] = useState(false);
 
   const getDocumentSubTypesByType = useCallback(
@@ -141,7 +142,7 @@ export default function DocumentRegister() {
   });
 
   const onSubmit = async (data) => {
-    setLoading(true);
+    setLoadingSaving(true);
     try {
       const documentToSave = {
         name: data.name,
@@ -167,7 +168,7 @@ export default function DocumentRegister() {
         description: error.message,
       });
     } finally {
-      setLoading(false);
+      setLoadingSaving(false);
     }
   };
 
@@ -204,7 +205,6 @@ export default function DocumentRegister() {
     <div
       style={{
         width: "100%",
-        padding: "1rem",
       }}
     >
       <Button
@@ -245,8 +245,8 @@ export default function DocumentRegister() {
                 />
               )}
               <Button
-                loading={loading}
-                //disabled={!register.formState.isValid}
+                loading={loadingSaving || loading}
+                disabled={!register.formState.isValid}
                 type="primary"
                 shape="round"
                 htmlType="submit"
