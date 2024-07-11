@@ -42,15 +42,12 @@ export const admService = {
   downloadListLogs: () => AuthAxios.get("/logs/course-search-export-csv"),
 
   getCousesTrailsMovements: (payload) =>
-    AuthAxios.post(
-      `/logs/entities-movements?page=${payload.page}`,
-      {
-        entityId: payload.id,
-        type: payload.type,
-        action: payload.action,
-        users: payload.users,
-        initialDate: payload.initialDate,
-        finalDate: payload.finalDate
-      }
-    )
+    AuthAxios.post(`/logs/entities-movements?page=${payload.page}`, {
+      entityId: payload.id,
+      type: payload.type,
+      action: payload.action,
+      users: payload.users,
+      initialDate: payload.initialDate,
+      finalDate: payload.finalDate,
+    }),
 };

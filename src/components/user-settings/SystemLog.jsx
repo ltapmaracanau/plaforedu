@@ -1,15 +1,26 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { Card, Space, Table, Select, Modal, Descriptions, Button, List, DatePicker, ConfigProvider } from "antd";
+import {
+  Card,
+  Space,
+  Table,
+  Select,
+  Modal,
+  Descriptions,
+  Button,
+  List,
+  DatePicker,
+  ConfigProvider,
+} from "antd";
 import { FileSyncOutlined } from "@ant-design/icons";
 import HistoricoItens from "./HistoricoItens";
 import services from "../../services";
 
-import dayjs from 'dayjs';
-import 'dayjs/locale/pt-br';
-import locale from 'antd/locale/pt_BR';
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
+import locale from "antd/locale/pt_BR";
 
-dayjs.locale('pt-br');
+dayjs.locale("pt-br");
 
 export default function SystemLog() {
   const { RangePicker } = DatePicker;
@@ -17,9 +28,7 @@ export default function SystemLog() {
   const getLastCoursesTrailsChanges = useStoreActions(
     (actions) => actions.adm.getLastCoursesTrailsChanges
   );
-  const lastDataChanges = useStoreState(
-    (state) => state.adm.lastDataChanges
-  );
+  const lastDataChanges = useStoreState((state) => state.adm.lastDataChanges);
   const loadingLastChanges = useStoreState(
     (state) => state.adm.loadingLastChanges
   );
@@ -27,6 +36,7 @@ export default function SystemLog() {
   const categoriaOptions = [
     { value: "COURSE", label: "Cursos" },
     { value: "FORMATIVE_TRAIL", label: "Trilhas" },
+    { value: "DOCUMENTS", label: "Documentos" },
   ];
 
   const usuarioOptions = [
@@ -42,15 +52,7 @@ export default function SystemLog() {
       value: "c",
       label: "Usuário c",
     },
-  ]
-
-  const itinerarioOptions = [
-    { value: "aposentadoria", label: "Aposentadoria" },
-    { value: "docente", label: "Docente" },
-    { value: "TAES", label: "TAES" },
-    { value: "gestao", label: "Gestão" },
-    { value: "iniciacao_ao_servico_publico", label: "Inic. Serviço Públ." },
-  ]
+  ];
 
   const actionOptions = useMemo(() => {
     return [
@@ -79,7 +81,7 @@ export default function SystemLog() {
         label: "Torn. Pendente",
       },
     ];
-  }, [])
+  }, []);
 
   const labelAction = useMemo(() => {
     return {
@@ -88,15 +90,14 @@ export default function SystemLog() {
       UPDATE: "Atualização",
       FILING: "Arquivamento",
       DELETION: "Remoção",
-      TURN_PENDING: "Tornado Pendente"
-    }
-  }, [])
+      TURN_PENDING: "Tornado Pendente",
+    };
+  }, []);
 
   const [pageNumber, setPageNumber] = useState(1);
   const [categoria, setCategoria] = useState(categoriaOptions[0].value);
   const [action, setAction] = useState(actionOptions[0].value);
   const [usuario, setUsuario] = useState();
-  const [itinerario, setItinerario] = useState();
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeClickRow, setActiveClickRow] = useState(true);
   const [itemHistorico, setItemHistorico] = useState(null);
@@ -148,6 +149,7 @@ export default function SystemLog() {
     },
   ];
 
+  console.log(lastDataChanges);
   useEffect(() => {
     getLastCoursesTrailsChanges();
   }, [getLastCoursesTrailsChanges]);
@@ -155,21 +157,21 @@ export default function SystemLog() {
   const dataFormatada = (data) => {
     if (data != null) {
       const date = new Date(data);
-      const formattedDate = date.toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
+      const formattedDate = date.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
       });
 
       return formattedDate;
     }
-    return null
-  }
+    return null;
+  };
 
   const lastDataChangesFiltered = useMemo(() => {
-    const data = []
+    const data = [];
 
-    if (lastDataChanges.data != null) {
+    if (lastDataChanges.data !== null) {
       lastDataChanges.data.map((item) => {
         data.push({
           id: item.id,
@@ -177,149 +179,155 @@ export default function SystemLog() {
           action: labelAction[item.action],
           date: dataFormatada(item.date),
           userName: item.user.name,
-          itemId: item.courseId != null ? item.courseId : item.trailId
-        })
-      })
+          itemId: item.courseId != null ? item.courseId : item.trailId,
+        });
+      });
     }
     return data;
-  }, [labelAction, lastDataChanges.data])
+  }, [labelAction, lastDataChanges.data]);
 
   const coursesSelectedItems = useCallback(() => {
     return selectedItem.cursos.map((curso) => {
       if (curso.status === "ACTIVE")
         return <li key={curso.name}>{curso.name}</li>;
     });
-
-    // return selectedItem.cursos.map((curso) => curso.name).join(", ");
   }, [selectedItem]);
 
   const descriptionItems = useMemo(() => {
     if (!loadingLastChanges && selectedItem) {
-      return categoria === categoriaOptions[0].value ? [
-        {
-          key: "name",
-          label: "Nome",
-          children: selectedItem.name,
-        },
-        {
-          key: "description",
-          label: "Descrição",
-          children: selectedItem.description,
-
-        },
-        {
-          key: "",
-          label: "Carga horária",
-          children: selectedItem.hours,
-        },
-        {
-          key: "instituitions",
-          label: "Instituições Certificadoras",
-          children: selectedItem.institutions?.map((inst) => (
-            <Card key={inst.institutionId} bordered>
-              {inst.name}
-              <br />
-              <strong>Link: </strong>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                key={`link${inst.id}`}
-                href={inst.link}
-              >
-                {inst.link}
-              </a>
-            </Card>
-          ))
-        },
-        {
-          key: "equivalentCourses",
-          label: "Cursos equivalentes",
-          children: <List
-            locale={{
-              emptyText: <>Sem equivalentes</>,
-            }}
-            bordered
-            dataSource={selectedItem.equivalents?.filter(
-              (course) => !course.filedAt
-            )}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <Button
-                    key={item.id}
-                    onClick={() => {
-                      getUniqueCourse({ id: item.id });
-                    }}
+      return categoria === categoriaOptions[0].value
+        ? [
+            {
+              key: "name",
+              label: "Nome",
+              children: selectedItem.name,
+            },
+            {
+              key: "description",
+              label: "Descrição",
+              children: selectedItem.description,
+            },
+            {
+              key: "",
+              label: "Carga horária",
+              children: selectedItem.hours,
+            },
+            {
+              key: "instituitions",
+              label: "Instituições Certificadoras",
+              children: selectedItem.institutions?.map((inst) => (
+                <Card key={inst.institutionId} bordered>
+                  {inst.name}
+                  <br />
+                  <strong>Link: </strong>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    key={`link${inst.id}`}
+                    href={inst.link}
                   >
-                    Visualizar
-                  </Button>,
-                ]}
-                key={item.id}
-              >
-                {item.name}
-              </List.Item>
-            )}
-          />,
-        },
-        {
-          key: "accessibilities",
-          label: "Acessibilidades",
-          children: selectedItem.accessibilities?.map((ac) => ac.name).join(" | ")
-        },
-        {
-          key: "taxonomy",
-          label: "Taxonomia revisada de Bloom",
-          children: selectedItem.taxonomies?.map((tx) => tx.name).join(" | "),
-        },
-        {
-          key: "subthemes",
-          label: "Subtemas",
-          children: selectedItem.subThemes?.filter((sub) => !sub.filedAt)
-            .map((sub) => sub.name)
-            .join(" | "),
-        },
-      ] : [
-        {
-          key: "name",
-          label: "Nome",
-          children: selectedItem.name,
-        },
-        {
-          key: "courses",
-          label: "Cursos",
-          children: coursesSelectedItems(),
-        },
-        {
-          key: "createdAt",
-          label: "Criado em",
-          children: dataFormatada(selectedItem.createdAt),
-        },
-        {
-          key: "createdBy",
-          label: "Criado por",
-          children: selectedItem.user.name,
-        },
-        {
-          key: "updatedAt",
-          label: "Atualizado em",
-          children: selectedItem.updatedAt,
-        },
-        {
-          key: "updatedBy",
-          label: "Atualizado por",
-          children: selectedItem.updatedBy,
-        },
-        {
-          key: "filledAt",
-          label: "Arquivado em",
-          children: dataFormatada(selectedItem.filledAt),
-        },
-        {
-          key: "filledBy",
-          label: "Arquivado por",
-          children: selectedItem.filedBy,
-        },
-      ];
+                    {inst.link}
+                  </a>
+                </Card>
+              )),
+            },
+            {
+              key: "equivalentCourses",
+              label: "Cursos equivalentes",
+              children: (
+                <List
+                  locale={{
+                    emptyText: <>Sem equivalentes</>,
+                  }}
+                  bordered
+                  dataSource={selectedItem.equivalents?.filter(
+                    (course) => !course.filedAt
+                  )}
+                  renderItem={(item) => (
+                    <List.Item
+                      actions={[
+                        <Button
+                          key={item.id}
+                          onClick={() => {
+                            getUniqueCourse({ id: item.id });
+                          }}
+                        >
+                          Visualizar
+                        </Button>,
+                      ]}
+                      key={item.id}
+                    >
+                      {item.name}
+                    </List.Item>
+                  )}
+                />
+              ),
+            },
+            {
+              key: "accessibilities",
+              label: "Acessibilidades",
+              children: selectedItem.accessibilities
+                ?.map((ac) => ac.name)
+                .join(" | "),
+            },
+            {
+              key: "taxonomy",
+              label: "Taxonomia revisada de Bloom",
+              children: selectedItem.taxonomies
+                ?.map((tx) => tx.name)
+                .join(" | "),
+            },
+            {
+              key: "subthemes",
+              label: "Subtemas",
+              children: selectedItem.subThemes
+                ?.filter((sub) => !sub.filedAt)
+                .map((sub) => sub.name)
+                .join(" | "),
+            },
+          ]
+        : [
+            {
+              key: "name",
+              label: "Nome",
+              children: selectedItem.name,
+            },
+            {
+              key: "courses",
+              label: "Cursos",
+              children: coursesSelectedItems(),
+            },
+            {
+              key: "createdAt",
+              label: "Criado em",
+              children: dataFormatada(selectedItem.createdAt),
+            },
+            {
+              key: "createdBy",
+              label: "Criado por",
+              children: selectedItem.user.name,
+            },
+            {
+              key: "updatedAt",
+              label: "Atualizado em",
+              children: selectedItem.updatedAt,
+            },
+            {
+              key: "updatedBy",
+              label: "Atualizado por",
+              children: selectedItem.updatedBy,
+            },
+            {
+              key: "filledAt",
+              label: "Arquivado em",
+              children: dataFormatada(selectedItem.filledAt),
+            },
+            {
+              key: "filledBy",
+              label: "Arquivado por",
+              children: selectedItem.filedBy,
+            },
+          ];
     }
   }, [loadingLastChanges, selectedItem]);
 
@@ -371,8 +379,11 @@ export default function SystemLog() {
                   defaultValue={categoriaOptions[0].value}
                   value={categoria}
                   onChange={(value) => {
-                    setCategoria(value)
-                    getLastCoursesTrailsChanges({ page: pageNumber, type: value })
+                    setCategoria(value);
+                    getLastCoursesTrailsChanges({
+                      page: pageNumber,
+                      type: value,
+                    });
                   }}
                   placeholder="Categoria"
                   allowClear={true}
@@ -382,11 +393,13 @@ export default function SystemLog() {
                   options={actionOptions}
                   defaultValue={actionOptions[0].value}
                   value={action}
-                  onChange={
-                    (value) => {
-                      setAction(value)
-                      getLastCoursesTrailsChanges({ page: pageNumber, type: categoria })
-                    }}
+                  onChange={(value) => {
+                    setAction(value);
+                    getLastCoursesTrailsChanges({
+                      page: pageNumber,
+                      type: categoria,
+                    });
+                  }}
                   placeholder="Status"
                   allowClear={true}
                 />
@@ -400,18 +413,6 @@ export default function SystemLog() {
                   allowClear={true}
                   mode="multiple"
                 />
-                <Select
-                  style={{ width: "10em" }}
-                  options={itinerarioOptions}
-                  value={itinerario}
-                  onChange={(value) => setItinerario(value)}
-                  showSearch={false}
-                  placeholder={"Itinerário"}
-                  allowClear={true}
-                  mode="multiple"
-                  disabled={categoria !== categoriaOptions[0].value}
-                />
-
                 <ConfigProvider locale={locale}>
                   <RangePicker
                     placeholder={["Início", "Fim"]}
@@ -436,8 +437,8 @@ export default function SystemLog() {
                 defaultCurrent: 1,
                 hideOnSinglePage: true,
                 onChange: (page) => {
-                  setPageNumber(page)
-                  getLastCoursesTrailsChanges({ page: page, type: categoria })
+                  setPageNumber(page);
+                  getLastCoursesTrailsChanges({ page: page, type: categoria });
                 },
               }}
               columns={columnsTable}
@@ -451,9 +452,10 @@ export default function SystemLog() {
                     if (activeClickRow) {
                       let item;
                       if (categoria === categoriaOptions[0].value) {
-                        item = await services.courseService.getUniqueCourse({ id: record.itemId })
+                        item = await services.courseService.getUniqueCourse({
+                          id: record.itemId,
+                        });
                       } else {
-
                       }
                       setSelectedItem(item.data);
                     }
@@ -467,7 +469,11 @@ export default function SystemLog() {
       </div>
 
       <Modal
-        title={categoria === categoriaOptions[0].value ? "Detalhes do curso" : "Detalhes da Trilha"}
+        title={
+          categoria === categoriaOptions[0].value
+            ? "Detalhes do curso"
+            : "Detalhes da Trilha"
+        }
         open={!!selectedItem && activeClickRow}
         onOk={() => {
           setSelectedItem(null);
