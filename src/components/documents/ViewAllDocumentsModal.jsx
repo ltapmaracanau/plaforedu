@@ -1,15 +1,18 @@
 import { useMemo, useState } from "react";
 import {
+  Button,
   Card,
   DatePicker,
   Empty,
   Input,
   List,
   Modal,
+  Space,
   Tag,
   Typography,
 } from "antd";
 import { FileTextFilled } from "@ant-design/icons";
+import dayjs from "dayjs";
 
 const { Text } = Typography;
 
@@ -42,8 +45,12 @@ export default function ViewAllDocumentsModal({
       title="Todos os documentos"
       width={"90%"}
       open={visible}
-      onOk={() => setVisible(false)}
       onCancel={() => setVisible(false)}
+      footer={
+        <Button type="primary" onClick={() => setVisible(false)}>
+          Fechar
+        </Button>
+      }
       destroyOnClose
     >
       <div
@@ -143,14 +150,27 @@ export default function ViewAllDocumentsModal({
                     title={document.name}
                     description={document.description}
                   />
-                  <Tag
+                  <Space
+                    direction="vertical"
                     style={{
-                      marginTop: "10px",
+                      width: "100%",
                     }}
-                    color="blue"
                   >
-                    {document.documentSubType.name}
-                  </Tag>
+                    <Tag
+                      style={{
+                        marginTop: "10px",
+                      }}
+                      color="blue"
+                    >
+                      {document.documentSubType.name}
+                    </Tag>
+                    <Text type="secondary">
+                      Data de publicação:{" "}
+                      {dayjs(document.publicationDate.split("T")[0]).format(
+                        "DD/MM/YYYY"
+                      )}
+                    </Text>
+                  </Space>
                 </Card>
               )}
             </List.Item>

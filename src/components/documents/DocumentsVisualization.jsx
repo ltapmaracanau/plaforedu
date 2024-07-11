@@ -1,9 +1,10 @@
-import { Card, Empty, List, notification, Tag, Typography } from "antd";
+import { Card, Empty, List, notification, Space, Tag, Typography } from "antd";
 import { useStoreActions } from "easy-peasy";
 import { useEffect, useMemo, useState } from "react";
 
 import { FileTextFilled, RightOutlined } from "@ant-design/icons";
 import ViewAllDocumentsModal from "./ViewAllDocumentsModal";
+import dayjs from "dayjs";
 
 const { Title, Link, Text } = Typography;
 
@@ -180,14 +181,27 @@ export default function DocumentsVisualization() {
                 title={document.name}
                 description={document.description}
               />
-              <Tag
+              <Space
+                direction="vertical"
                 style={{
-                  marginTop: "10px",
+                  width: "100%",
                 }}
-                color="blue"
               >
-                {document.documentSubType.name}
-              </Tag>
+                <Tag
+                  style={{
+                    marginTop: "10px",
+                  }}
+                  color="blue"
+                >
+                  {document.documentSubType.name}
+                </Tag>
+                <Text type="secondary">
+                  Data de publicação:{" "}
+                  {dayjs(document.publicationDate.split("T")[0]).format(
+                    "DD/MM/YYYY"
+                  )}
+                </Text>
+              </Space>
             </Card>
           </List.Item>
         )}
@@ -239,14 +253,27 @@ export default function DocumentsVisualization() {
                 title={document.name}
                 description={document.description}
               />
-              <Tag
+              <Space
+                direction="vertical"
                 style={{
-                  marginTop: "10px",
+                  width: "100%",
                 }}
-                color="blue"
               >
-                {document.documentSubType.name}
-              </Tag>
+                <Tag
+                  style={{
+                    marginTop: "10px",
+                  }}
+                  color="blue"
+                >
+                  {document.documentSubType.name}
+                </Tag>
+                <Text type="secondary">
+                  Data de publicação:{" "}
+                  {dayjs(document.publicationDate.split("T")[0]).format(
+                    "DD/MM/YYYY"
+                  )}
+                </Text>
+              </Space>
             </Card>
           </List.Item>
         )}
