@@ -82,12 +82,12 @@ export default function SystemLog() {
   const [pageNumber, setPageNumber] = useState(1);
   const [categoria, setCategoria] = useState(categoriaOptions[0].value);
   const [action, setAction] = useState(actionOptions[0].value);
-  const [usuario, setUsuario] = useState();
+  const [users, setUsers] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeClickRow, setActiveClickRow] = useState(true);
   const [itemHistorico, setItemHistorico] = useState(null);
-  const [initialDate, setInitialDate] = useState(null);
-  const [finalDate, setFinalDate] = useState(null);
+  const [initialDate, setInitialDate] = useState("");
+  const [finalDate, setFinalDate] = useState("");
 
   const columnsTable = [
     {
@@ -347,6 +347,9 @@ export default function SystemLog() {
           page: pageNumber,
           type: categoria,
           action: action,
+          users: users,
+          initialDate: initialDate,
+          finalDate: finalDate,
         });
       }}
     />
@@ -392,6 +395,9 @@ export default function SystemLog() {
                       page: pageNumber,
                       type: value,
                       action: action,
+                      users: users,
+                      initialDate: initialDate,
+                      finalDate: finalDate,
                     });
                   }}
                   placeholder="Categoria"
@@ -408,6 +414,9 @@ export default function SystemLog() {
                       page: pageNumber,
                       type: categoria,
                       action: value,
+                      users: users,
+                      initialDate: initialDate,
+                      finalDate: finalDate,
                     });
                   }}
                   placeholder="Status"
@@ -416,8 +425,18 @@ export default function SystemLog() {
                 <Select
                   style={{ width: "10em" }}
                   options={usuarioOptions}
-                  value={usuario}
-                  onChange={(value) => setUsuario(value)}
+                  value={users}
+                  onChange={(value) => {
+                    setUsers(value);
+                    getLastCoursesTrailsChanges({
+                      page: pageNumber,
+                      type: categoria,
+                      action: action,
+                      users: value,
+                      initialDate: initialDate,
+                      finalDate: finalDate,
+                    });
+                  }}
                   showSearch={true}
                   placeholder={"Usuário"}
                   allowClear={true}
@@ -428,8 +447,16 @@ export default function SystemLog() {
                     placeholder={["Início", "Fim"]}
                     size={"small"}
                     onChange={(value, option) => {
-                      console.log(value);
-                      console.log(option);
+                      setInitialDate(option[0]);
+                      setFinalDate(option[1]);
+                      getLastCoursesTrailsChanges({
+                        page: pageNumber,
+                        type: categoria,
+                        action: action,
+                        users: users,
+                        initialDate: option[0],
+                        finalDate: option[1],
+                      });
                     }}
                   />
                 </ConfigProvider>
@@ -448,7 +475,14 @@ export default function SystemLog() {
                 hideOnSinglePage: true,
                 onChange: (page) => {
                   setPageNumber(page);
-                  getLastCoursesTrailsChanges({ page: page, type: categoria });
+                  getLastCoursesTrailsChanges({
+                    page: page,
+                    type: categoria,
+                    action: action,
+                    users: users,
+                    initialDate: initialDate,
+                    finalDate: finalDate,
+                  });
                 },
               }}
               columns={columnsTable}

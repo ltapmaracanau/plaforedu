@@ -6,8 +6,6 @@ import { useEffect, useMemo, useState } from "react";
 export default function HistoricoItens(props) {
   const { itemHistorico, back, categoria, categoriaOptions, type } = props;
 
-  console.log(itemHistorico);
-
   const getLastCoursesTrailsChanges = useStoreActions(
     (actions) => actions.adm.getLastCoursesTrailsChanges
   );
