@@ -147,17 +147,13 @@
   width: 292px;
   height: 117px;
   background-color: var(--bg-site);
-  padding: 27px 32px 32px 27px;
+  padding: 15px 20px 15px 20px;
   border-radius: 10px 0px 0px 10px;
   box-shadow: 1px 5px 5px rgba(90, 90, 90, 0.226);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   user-select: none;
-}
-
-.cardTrilhasRecomendadas>p {
-  padding: 6px 0px;
-  font-weight: 600;
 }
 
 .cardTrilhasRecomendadas #verCursos {

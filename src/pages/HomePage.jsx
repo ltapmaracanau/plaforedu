@@ -34,11 +34,13 @@ import {
   Dropdown,
   Descriptions,
   Modal,
+  Typography,
 } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
 import Finder from "../components/Finder";
 import CourseModalVisualization from "../components/CourseModalVisualization";
 
+const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function HomePage() {
@@ -199,7 +201,19 @@ export default function HomePage() {
                   key={trilha.id}
                 >
                   <div className="cardTrilhasRecomendadas">
-                    <p>{trilha.name}</p>
+                    <Title
+                      style={{
+                        marginBottom: "15px",
+                      }}
+                      level={4}
+                      ellipsis={{
+                        rows: 1,
+                        expandable: false,
+                        tooltip: true,
+                      }}
+                    >
+                      {trilha.name}
+                    </Title>
                     <Dropdown
                       menu={{
                         items: trilha.courses.map((course) => {
