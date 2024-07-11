@@ -64,8 +64,8 @@ export default function DocumentRegister() {
     description: "",
     link: "",
     publicationDate: "",
-    documentTypeId: undefined,
-    documentSubTypeId: undefined,
+    documentTypeId: null,
+    documentSubTypeId: null,
     authors: [],
   });
   const [loading, setLoading] = useState(true);
@@ -376,7 +376,11 @@ export default function DocumentRegister() {
                         }))}
                         onChange={(value) => {
                           field.onChange(value);
-                          register.setValue("documentSubTypeId", undefined);
+                          setDocumentEditing({
+                            ...documentEditing,
+                            documentSubTypeId: null,
+                          });
+                          register.setValue("documentSubTypeId", null);
                           getDocumentSubTypesByType(value);
                         }}
                       />
@@ -412,7 +416,7 @@ export default function DocumentRegister() {
                           }}
                           placeholder="Subtipo do documento"
                           disabled={!register.getValues("documentTypeId")}
-                          options={(documentSubTypes || []).map((subtype) => ({
+                          options={documentSubTypes.map((subtype) => ({
                             label: subtype.name,
                             value: subtype.id,
                           }))}
