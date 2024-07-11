@@ -100,6 +100,7 @@ export default function DocumentRegister() {
             documentTypeId: responseDocument.documentType.id,
             documentSubTypeId: responseDocument.documentSubType.id,
             authors: responseDocument.authors.map((author) => author.name),
+            filedAt: responseDocument.filedAt,
           });
           await getDocumentSubTypesByType(responseDocument.documentType.id);
         }
