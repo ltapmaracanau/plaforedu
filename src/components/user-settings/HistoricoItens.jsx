@@ -4,27 +4,26 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { useEffect, useMemo, useState } from "react";
 
 export default function HistoricoItens(props) {
-  const { itemHistorico, back, categoria, categoriaOptions } = props;
+  const { itemHistorico, back, categoria, categoriaOptions, type } = props;
+
+  console.log(itemHistorico);
 
   const getLastCoursesTrailsChanges = useStoreActions(
     (actions) => actions.adm.getLastCoursesTrailsChanges
   );
-  const lastDataChanges = useStoreState(
-    (state) => state.adm.lastDataChanges
-  );
+  const lastDataChanges = useStoreState((state) => state.adm.lastDataChanges);
   const loadingLastChanges = useStoreState(
     (state) => state.adm.loadingLastChanges
   );
 
   const [pageNumber, setPageNumber] = useState(1);
-  
-  const type = useMemo(() => {
-    return itemHistorico.course ? "COURSE" : "FORMATIVE_TRAILS";
-  }, [itemHistorico])
 
   useEffect(() => {
-    getLastCoursesTrailsChanges({page: 1, type: type, id: itemHistorico.itemId})
-  }, [getLastCoursesTrailsChanges, itemHistorico, type])
+    getLastCoursesTrailsChanges({
+      page: 1,
+      id: itemHistorico.itemId,
+    });
+  }, [getLastCoursesTrailsChanges, itemHistorico, type]);
 
   const columns = [
     {
@@ -51,37 +50,39 @@ export default function HistoricoItens(props) {
       UPDATE: "Atualização",
       FILING: "Arquivação",
       DELETION: "Remoção",
-      TURN_PENDING: "Tornado Pendente"
-    }
-  }, [])
+      TURN_PENDING: "Tornado Pendente",
+    };
+  }, []);
 
   const dataFormatada = (data) => {
-    const date = new Date(data);
-    const formattedDate = date.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
+    if (data != null) {
+      const date = new Date(data);
+      const formattedDate = date.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
 
-    return formattedDate;
-  }
+      return formattedDate;
+    }
+    return null;
+  };
 
   const lastDataChangesFiltered = useMemo(() => {
-    const data = []
+    const data = [];
+
     if (lastDataChanges.data != null) {
       lastDataChanges.data.map((item) => {
         data.push({
           id: item.id,
-          name: item.course.name,
           action: labelAction[item.action],
           date: dataFormatada(item.date),
-          userName: item.user.name
-        })
-      })
+          userName: item.user.name,
+        });
+      });
     }
-    
     return data;
-  }, [labelAction, lastDataChanges])
+  }, [labelAction, lastDataChanges.data]);
 
   return (
     <div
@@ -112,35 +113,32 @@ export default function HistoricoItens(props) {
               alignItems: "center",
               gap: "10px",
             }}
-          >
-          </Space>
+          ></Space>
         }
-        >
-          <Table
-            columns={columns}
-            dataSource={lastDataChangesFiltered}
-            loading={loadingLastChanges}
-            pagination={{
-              pageSize: 30,
-              total: lastDataChanges.count,
-              showSizeChanger: false,
-              current: pageNumber,
-              defaultCurrent: 1,
-              hideOnSinglePage: true,
-              onChange: (page) => {
-                setPageNumber(page)
-                getLastCoursesTrailsChanges({ page: page, type: type })
-              },
-            }}
-            rowKey={(record) => {
-              return record.id;
-            }}
-            onRow={() => {
-              return {
-                
-              };
-            }}
-          />
+      >
+        <Table
+          columns={columns}
+          dataSource={lastDataChangesFiltered}
+          loading={loadingLastChanges}
+          pagination={{
+            pageSize: 30,
+            total: lastDataChanges.count,
+            showSizeChanger: false,
+            current: pageNumber,
+            defaultCurrent: 1,
+            hideOnSinglePage: true,
+            onChange: (page) => {
+              setPageNumber(page);
+              getLastCoursesTrailsChanges({ page: page, type: type });
+            },
+          }}
+          rowKey={(record) => {
+            return record.id;
+          }}
+          onRow={() => {
+            return {};
+          }}
+        />
       </Card>
     </div>
   );

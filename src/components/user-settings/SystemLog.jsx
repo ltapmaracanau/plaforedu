@@ -39,21 +39,6 @@ export default function SystemLog() {
     { value: "DOCUMENTS", label: "Documentos" },
   ];
 
-  const usuarioOptions = [
-    {
-      value: "a",
-      label: "Usuário a",
-    },
-    {
-      value: "b",
-      label: "Usuário b",
-    },
-    {
-      value: "c",
-      label: "Usuário c",
-    },
-  ];
-
   const actionOptions = useMemo(() => {
     return [
       {
@@ -149,7 +134,6 @@ export default function SystemLog() {
     },
   ];
 
-  console.log(lastDataChanges);
   useEffect(() => {
     getLastCoursesTrailsChanges();
   }, [getLastCoursesTrailsChanges]);
@@ -171,20 +155,40 @@ export default function SystemLog() {
   const lastDataChangesFiltered = useMemo(() => {
     const data = [];
 
-    if (lastDataChanges.data !== null) {
+    if (lastDataChanges.data != null) {
       lastDataChanges.data.map((item) => {
         data.push({
           id: item.id,
-          name: item.courseId != null ? item.course.name : item.trail.name,
+          name: item.entity.name,
           action: labelAction[item.action],
           date: dataFormatada(item.date),
           userName: item.user.name,
-          itemId: item.courseId != null ? item.courseId : item.trailId,
+          itemId: item.entity.id,
         });
       });
     }
     return data;
   }, [labelAction, lastDataChanges.data]);
+
+  const usuarioOptions = useMemo(() => {
+    const usuarios = [];
+    const usOptions = [];
+
+    lastDataChangesFiltered.map((entity) => {
+      if (!usuarios.includes(entity.userName)) {
+        usuarios.push(entity.userName);
+      }
+    });
+
+    usuarios.map((usuario) => {
+      usOptions.push({
+        label: usuario,
+        value: usuario,
+      });
+    });
+
+    return usOptions;
+  }, [lastDataChangesFiltered]);
 
   const coursesSelectedItems = useCallback(() => {
     return selectedItem.cursos.map((curso) => {
@@ -339,7 +343,11 @@ export default function SystemLog() {
       back={() => {
         setActiveClickRow(true);
         setItemHistorico(null);
-        getLastCoursesTrailsChanges({ page: pageNumber, type: categoria });
+        getLastCoursesTrailsChanges({
+          page: pageNumber,
+          type: categoria,
+          action: action,
+        });
       }}
     />
   ) : (
@@ -383,6 +391,7 @@ export default function SystemLog() {
                     getLastCoursesTrailsChanges({
                       page: pageNumber,
                       type: value,
+                      action: action,
                     });
                   }}
                   placeholder="Categoria"
@@ -398,6 +407,7 @@ export default function SystemLog() {
                     getLastCoursesTrailsChanges({
                       page: pageNumber,
                       type: categoria,
+                      action: value,
                     });
                   }}
                   placeholder="Status"
