@@ -53,33 +53,33 @@ export default function TableSelectCourses(props) {
   const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
   const [filterAddingCoursesValues, setFilterAddingCoursesValues] = useState({
-    query: filterDefault.query || filterCoursesDefault.query,
+    query: filterDefault?.query ?? filterCoursesDefault.query,
     cargaHoraria:
-      filterDefault.cargaHoraria || filterCoursesDefault.cargaHoraria,
+      filterDefault?.cargaHoraria ?? filterCoursesDefault.cargaHoraria,
     institutions:
-      filterDefault.institutions || filterCoursesDefault.institutions,
+      filterDefault?.institutions ?? filterCoursesDefault.institutions,
     competencies:
-      filterDefault.competencies || filterCoursesDefault.competencies,
-    itineraries: filterDefault.itineraries || filterCoursesDefault.itineraries,
+      filterDefault?.competencies ?? filterCoursesDefault.competencies,
+    itineraries: filterDefault?.itineraries ?? filterCoursesDefault.itineraries,
   });
 
   const [activeColumsFilter, setActiveColumsFilter] = useState({
-    query: !!filterDefault.query,
-    cargaHoraria: filterDefault.cargaHoraria?.length > 0,
-    institutions: filterDefault.institutions?.length > 0,
-    competencies: filterDefault.competencies?.length > 0,
-    itineraries: filterDefault.itineries?.length > 0,
+    query: !!filterDefault?.query,
+    cargaHoraria: filterDefault?.cargaHoraria?.length > 0,
+    institutions: filterDefault?.institutions?.length > 0,
+    competencies: filterDefault?.competencies?.length > 0,
+    itineraries: filterDefault?.itineries?.length > 0,
   });
 
   const [stringSearchMemo, setStringSearchMemo] = useState({
-    query: filterDefault.query || filterCoursesDefault.query,
+    query: filterDefault?.query || filterCoursesDefault.query,
     cargaHoraria:
-      filterDefault.cargaHoraria || filterCoursesDefault.cargaHoraria,
+      filterDefault?.cargaHoraria || filterCoursesDefault.cargaHoraria,
     institutions:
-      filterDefault.institutions || filterCoursesDefault.institutions,
+      filterDefault?.institutions || filterCoursesDefault.institutions,
     competencies:
-      filterDefault.competencies || filterCoursesDefault.competencies,
-    itineraries: filterDefault.itineraries || filterCoursesDefault.itineraries,
+      filterDefault?.competencies || filterCoursesDefault.competencies,
+    itineraries: filterDefault?.itineraries || filterCoursesDefault.itineraries,
   });
 
   useEffect(() => {
