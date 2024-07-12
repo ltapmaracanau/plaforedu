@@ -253,7 +253,6 @@ export default function EvaluateChanges() {
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
-        padding: "20px",
       }}
     >
       <div style={{ width: "100%" }}>
