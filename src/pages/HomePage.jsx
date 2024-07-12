@@ -214,47 +214,49 @@ export default function HomePage() {
                     >
                       {trilha.name}
                     </Title>
-                    <Dropdown
-                      menu={{
-                        items: trilha.courses.map((course) => {
-                          return {
-                            key: course.id,
-                            label: course.name,
-                          };
-                        }),
-                        onClick: (e) => {
-                          setIdSelectedCourse(e.key);
-                          setModalSelectedCouseVisible(true);
-                        },
-                      }}
-                      trigger={["click"]}
-                      onOpenChange={(open) => {
-                        if (!open) {
-                          setSelectedTrailId(null);
-                        }
-                      }}
-                    >
-                      <p
-                        id="verCursos"
-                        onClick={() => {
-                          if (
-                            selectedTrailId &&
-                            selectedTrailId === trilha.id
-                          ) {
+                    <div>
+                      <Dropdown
+                        menu={{
+                          items: trilha.courses.map((course) => {
+                            return {
+                              key: course.id,
+                              label: course.name,
+                            };
+                          }),
+                          onClick: (e) => {
+                            setIdSelectedCourse(e.key);
+                            setModalSelectedCouseVisible(true);
+                          },
+                        }}
+                        trigger={["click"]}
+                        onOpenChange={(open) => {
+                          if (!open) {
                             setSelectedTrailId(null);
-                            return;
                           }
-                          setSelectedTrailId(trilha.id);
                         }}
                       >
-                        Ver cursos{" "}
-                        {selectedTrailId === trilha.id ? (
-                          <UpOutlined />
-                        ) : (
-                          <DownOutlined />
-                        )}
-                      </p>
-                    </Dropdown>
+                        <p
+                          id="verCursos"
+                          onClick={() => {
+                            if (
+                              selectedTrailId &&
+                              selectedTrailId === trilha.id
+                            ) {
+                              setSelectedTrailId(null);
+                              return;
+                            }
+                            setSelectedTrailId(trilha.id);
+                          }}
+                        >
+                          Ver cursos{" "}
+                          {selectedTrailId === trilha.id ? (
+                            <UpOutlined />
+                          ) : (
+                            <DownOutlined />
+                          )}
+                        </p>
+                      </Dropdown>
+                    </div>
                   </div>
 
                   <Button
@@ -424,7 +426,7 @@ export default function HomePage() {
             Gostaria de entrar em contato com a gente?
           </h1>
           <Link
-            to="/faleconosco"
+            to="/suporte"
             className="texto"
             style={{ textDecoration: "underline", color: "#FDFDFD" }}
           >
