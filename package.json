@@ -18,7 +18,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^2.8.8",
     "@react-pdf/renderer": "^3.4.0",
-    "antd": "^5.15.3",
+    "antd": "^5.19.1",
     "array-move": "^4.0.0",
     "axios": "^1.6.8",
     "dayjs": "^1.11.7",

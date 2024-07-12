@@ -145,6 +145,9 @@ export default function SubtemaRegister(props) {
                     tagRender={(props) => {
                       const { value, closable, onClose } = props;
                       const item = themes.find((theme) => theme.id === value);
+
+                      if (!value) return
+
                       return (
                         <Tag
                           closable={closable}

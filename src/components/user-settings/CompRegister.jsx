@@ -204,6 +204,8 @@ export default function CompRegister(props) {
                     tagRender={(props) => {
                       const { value, closable, onClose } = props;
                       const item = catComp.find((cat) => cat.id === value);
+
+                      if (!value) return
                       return (
                         <Tag
                           closable={closable}
