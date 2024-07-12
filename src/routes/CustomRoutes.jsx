@@ -411,7 +411,7 @@ const CustomRoutes = () => {
                     ),
                 },
                 {
-                  path: "/settings/document/edit/:documentId?",
+                  path: "/settings/documents/edit/:documentId?",
                   element:
                     isAdm || isCoord || isJornalista ? (
                       <DocumentRegister />

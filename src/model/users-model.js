@@ -6,24 +6,26 @@ const usuariosModel = {
   registering: false,
   users: [],
 
-  getUsers: thunk(async (actions, payload = { query: "", showFiled: "" }) => {
-    const { query = "", showFiled = false } = payload;
-    actions.setLoading(true);
-    return await services.usersService
-      .getUsers({
-        query: query.trim(),
-        showFiled: showFiled,
-      })
-      .then((response) => {
-        actions.setUsers(response.data);
-      })
-      .catch((error) => {
-        throw new Error(error);
-      })
-      .finally(() => {
-        actions.setLoading(false);
-      });
-  }),
+  getUsers: thunk(
+    async (actions, payload = { query: "", showFiled: false }) => {
+      const { query = "", showFiled = false } = payload;
+      actions.setLoading(true);
+      return await services.usersService
+        .getUsers({
+          query: query.trim(),
+          showFiled: showFiled,
+        })
+        .then((response) => {
+          actions.setUsers(response.data);
+        })
+        .catch((error) => {
+          throw new Error(error);
+        })
+        .finally(() => {
+          actions.setLoading(false);
+        });
+    }
+  ),
 
   getUniqueUser: thunk(async (actions, payload = { id: "" }) => {
     return await services.usersService

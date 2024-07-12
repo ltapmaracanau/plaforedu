@@ -32,6 +32,7 @@ import {
   Tooltip,
   Space,
   Popconfirm,
+  ConfigProvider,
 } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Controller, useForm } from "react-hook-form";
@@ -364,112 +365,81 @@ export default function FormativeTrailsRegister(props) {
                 </Space>
               }
             >
-              <Descriptions
-                bordered
-                layout="horizontal"
-                size="small"
-                column={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }}
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Select: {
+                      zIndexPopup: 10000,
+                    },
+                  },
+                }}
               >
-                <Descriptions.Item label={"Título da Trilha"}>
-                  <Controller
-                    key={"name"}
-                    name="name"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Input placeholder="Título" {...field} />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Descrição da Trilha"}>
-                  <Controller
-                    key={"description"}
-                    name="description"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Input.TextArea
-                            placeholder="Digite aqui a descrição..."
-                            {...field}
-                          />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Itinerário"}>
-                  <Controller
-                    key={"itineraries"}
-                    name="itineraries"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Select
-                            showSearch
-                            placeholder="Itinerários"
-                            {...field}
-                            onChange={(value) => {
-                              setItinerarieSelected(value);
-                              field.onChange(value);
-                            }}
-                            filterOption={(input, option) => {
-                              return (
-                                option.label
-                                  .toString()
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                              );
-                            }}
-                            options={allItinerarios.map((item) => ({
-                              label: item.name,
-                              value: item.id,
-                            }))}
-                          />
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label={"Competências"}>
-                  <Controller
-                    key={"competencies"}
-                    name="competencies"
-                    control={register.control}
-                    render={({ field, fieldState: { error } }) => {
-                      return (
-                        <Form.Item
-                          validateStatus={error ? "error" : ""}
-                          help={error ? error.message : ""}
-                          hasFeedback
-                        >
-                          <Tooltip
-                            title={
-                              itinerarieSelected?.length === 0 &&
-                              "Selecione um itinerário"
-                            }
+                <Descriptions
+                  bordered
+                  layout="horizontal"
+                  size="small"
+                  column={{ xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }}
+                >
+                  <Descriptions.Item label={"Título da Trilha"}>
+                    <Controller
+                      key={"name"}
+                      name="name"
+                      control={register.control}
+                      render={({ field, fieldState: { error } }) => {
+                        return (
+                          <Form.Item
+                            validateStatus={error ? "error" : ""}
+                            help={error ? error.message : ""}
+                            hasFeedback
+                          >
+                            <Input placeholder="Título" {...field} />
+                          </Form.Item>
+                        );
+                      }}
+                    />
+                  </Descriptions.Item>
+                  <Descriptions.Item label={"Descrição da Trilha"}>
+                    <Controller
+                      key={"description"}
+                      name="description"
+                      control={register.control}
+                      render={({ field, fieldState: { error } }) => {
+                        return (
+                          <Form.Item
+                            validateStatus={error ? "error" : ""}
+                            help={error ? error.message : ""}
+                            hasFeedback
+                          >
+                            <Input.TextArea
+                              placeholder="Digite aqui a descrição..."
+                              {...field}
+                            />
+                          </Form.Item>
+                        );
+                      }}
+                    />
+                  </Descriptions.Item>
+                  <Descriptions.Item label={"Itinerário"}>
+                    <Controller
+                      key={"itineraries"}
+                      name="itineraries"
+                      control={register.control}
+                      render={({ field, fieldState: { error } }) => {
+                        return (
+                          <Form.Item
+                            validateStatus={error ? "error" : ""}
+                            help={error ? error.message : ""}
+                            hasFeedback
                           >
                             <Select
                               showSearch
-                              disabled={itinerarieSelected?.length === 0}
-                              placeholder="Competências"
+                              placeholder="Itinerários"
                               {...field}
+                              onChange={(value) => {
+                                setItinerarieSelected(value);
+                                field.onChange(value);
+                                register.setValue("competencies", undefined);
+                              }}
                               filterOption={(input, option) => {
                                 return (
                                   option.label
@@ -478,44 +448,86 @@ export default function FormativeTrailsRegister(props) {
                                     .indexOf(input.toLowerCase()) >= 0
                                 );
                               }}
-                              onChange={(value) => {
-                                setDescriptionIfEmpty(value);
-                                field.onChange(value);
-                              }}
-                              labelRender={({ value }) => {
-                                const item = allCompetencias.find(
-                                  (comp) => comp.id === value
-                                );
-                                return (
-                                  <>
-                                    {item?.name}
-                                    {item?.filedAt && (
-                                      <Tag
-                                        style={{
-                                          margin: "3px",
-                                        }}
-                                        color={"orange"}
-                                      >
-                                        ARQUIVADO
-                                      </Tag>
-                                    )}
-                                  </>
-                                );
-                              }}
-                              options={competenciesFiltred
-                                .filter((comp) => !comp.filedAt)
-                                .map((item) => ({
-                                  label: item.name,
-                                  value: item.id,
-                                }))}
+                              options={allItinerarios.map((item) => ({
+                                label: item.name,
+                                value: item.id,
+                              }))}
                             />
-                          </Tooltip>
-                        </Form.Item>
-                      );
-                    }}
-                  />
-                </Descriptions.Item>
-              </Descriptions>
+                          </Form.Item>
+                        );
+                      }}
+                    />
+                  </Descriptions.Item>
+                  <Descriptions.Item label={"Competências"}>
+                    <Controller
+                      key={"competencies"}
+                      name="competencies"
+                      control={register.control}
+                      render={({ field, fieldState: { error } }) => {
+                        return (
+                          <Form.Item
+                            validateStatus={error ? "error" : ""}
+                            help={error ? error.message : ""}
+                            hasFeedback
+                          >
+                            <Tooltip
+                              title={
+                                itinerarieSelected?.length === 0 &&
+                                "Selecione um itinerário"
+                              }
+                            >
+                              <Select
+                                showSearch
+                                disabled={itinerarieSelected?.length === 0}
+                                placeholder="Competências"
+                                {...field}
+                                filterOption={(input, option) => {
+                                  return (
+                                    option.label
+                                      .toString()
+                                      .toLowerCase()
+                                      .indexOf(input.toLowerCase()) >= 0
+                                  );
+                                }}
+                                onChange={(value) => {
+                                  setDescriptionIfEmpty(value);
+                                  field.onChange(value);
+                                }}
+                                labelRender={({ value }) => {
+                                  const item = allCompetencias.find(
+                                    (comp) => comp.id === value
+                                  );
+                                  return (
+                                    <>
+                                      {item?.name}
+                                      {item?.filedAt && (
+                                        <Tag
+                                          style={{
+                                            margin: "3px",
+                                          }}
+                                          color={"orange"}
+                                        >
+                                          ARQUIVADO
+                                        </Tag>
+                                      )}
+                                    </>
+                                  );
+                                }}
+                                options={competenciesFiltred
+                                  .filter((comp) => !comp.filedAt)
+                                  .map((item) => ({
+                                    label: item.name,
+                                    value: item.id,
+                                  }))}
+                              />
+                            </Tooltip>
+                          </Form.Item>
+                        );
+                      }}
+                    />
+                  </Descriptions.Item>
+                </Descriptions>
+              </ConfigProvider>
               <DndContext
                 sensors={sensors}
                 modifiers={[restrictToVerticalAxis]}
