@@ -47,5 +47,5 @@ export const admService = {
       {
         id: payload.id,
       }
-    )
+    ),
 };
