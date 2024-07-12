@@ -438,7 +438,7 @@ export default function FormativeTrailsRegister(props) {
                               onChange={(value) => {
                                 setItinerarieSelected(value);
                                 field.onChange(value);
-                                register.setValue("competencies", undefined);
+                                register.setValue("competencies", "");
                               }}
                               filterOption={(input, option) => {
                                 return (
