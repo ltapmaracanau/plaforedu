@@ -126,7 +126,7 @@ export default function DocumentsList() {
                 type="primary"
                 icon={<PlusOutlined />}
                 onClick={() => {
-                  navigate("/settings/document/edit");
+                  navigate("/settings/documents/edit");
                 }}
               >
                 Adicionar
@@ -246,7 +246,7 @@ export default function DocumentsList() {
                     <Button
                       key={`${record.id}-edit`}
                       onClick={() => {
-                        navigate(`/settings/document/edit/${record.id}`);
+                        navigate(`/settings/documents/edit/${record.id}`);
                       }}
                       icon={<EditOutlined />}
                     >

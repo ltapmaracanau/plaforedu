@@ -94,9 +94,8 @@ export default function UsersList() {
                 }}
                 placeholder={"Buscar usuários"}
               />
-              <Tooltip title={"Exibir Arquivados"}>
+              <Tooltip title={"Exibir arquivados"}>
                 <Switch
-                  defaultChecked={showFiled}
                   checked={showFiled}
                   style={{
                     marginRight: "10px",

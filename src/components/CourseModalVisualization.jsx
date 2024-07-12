@@ -44,7 +44,7 @@ export default function CourseModalVisualization(props) {
       }
     }
     init();
-  }, [getUniqueCourse, id]);
+  }, [getUniqueCourse, id, visible]);
 
   return (
     <div>
