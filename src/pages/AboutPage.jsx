@@ -43,44 +43,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <Row
-        align="middle"
-        wrap={!screens.lg}
-        style={
-          screens.lg
-            ? {
-                padding: "60px 50px 0px 50px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "20px",
-              }
-            : {
-                padding: "60px 10px 0px 10px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "12px",
-              }
-        }
-      >
-        <h1 className={styles.titulo}>O que é a PlaforEDU</h1>
-
-        <iframe
-          className={styles.videoItinerario}
-          height={!screens.xs ? "433px" : null}
-          style={{
-            maxWidth: "760px",
-            border: "5px solid #FFF",
-            filter:
-              "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 20px 30px rgba(44, 86, 162, 0.1))",
-          }}
-          title={"Apresentação SETEC"}
-          src={"https://www.youtube.com/embed/s4hchxxjuRo"}
-        />
-      </Row>
 
       <Row className={styles.linha}></Row>
 
