@@ -5,16 +5,12 @@ import {
   Space,
   Table,
   Select,
-  Modal,
-  Descriptions,
   Button,
-  List,
   DatePicker,
   ConfigProvider,
 } from "antd";
 import { FileSyncOutlined } from "@ant-design/icons";
 import HistoricoItens from "./HistoricoItens";
-import services from "../../services";
 
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
@@ -200,151 +196,6 @@ export default function SystemLog() {
     });
     return usOptions;
   }, [lastDataChangesFiltered]);
-
-  const coursesSelectedItems = useCallback(() => {
-    return selectedItem.cursos.map((curso) => {
-      if (curso.status === "ACTIVE")
-        return <li key={curso.name}>{curso.name}</li>;
-    });
-  }, [selectedItem]);
-
-  const descriptionItems = useMemo(() => {
-    if (!loadingLastChanges && selectedItem) {
-      return categoria === categoriaOptions[0].value
-        ? [
-            {
-              key: "name",
-              label: "Nome",
-              children: selectedItem.name,
-            },
-            {
-              key: "description",
-              label: "Descrição",
-              children: selectedItem.description,
-            },
-            {
-              key: "",
-              label: "Carga horária",
-              children: selectedItem.hours,
-            },
-            {
-              key: "instituitions",
-              label: "Instituições Certificadoras",
-              children: selectedItem.institutions?.map((inst) => (
-                <Card key={inst.institutionId} bordered>
-                  {inst.name}
-                  <br />
-                  <strong>Link: </strong>
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    key={`link${inst.id}`}
-                    href={inst.link}
-                  >
-                    {inst.link}
-                  </a>
-                </Card>
-              )),
-            },
-            {
-              key: "equivalentCourses",
-              label: "Cursos equivalentes",
-              children: (
-                <List
-                  locale={{
-                    emptyText: <>Sem equivalentes</>,
-                  }}
-                  bordered
-                  dataSource={selectedItem.equivalents?.filter(
-                    (course) => !course.filedAt
-                  )}
-                  renderItem={(item) => (
-                    <List.Item
-                      actions={[
-                        <Button
-                          key={item.id}
-                          onClick={() => {
-                            getUniqueCourse({ id: item.id });
-                          }}
-                        >
-                          Visualizar
-                        </Button>,
-                      ]}
-                      key={item.id}
-                    >
-                      {item.name}
-                    </List.Item>
-                  )}
-                />
-              ),
-            },
-            {
-              key: "accessibilities",
-              label: "Acessibilidades",
-              children: selectedItem.accessibilities
-                ?.map((ac) => ac.name)
-                .join(" | "),
-            },
-            {
-              key: "taxonomy",
-              label: "Taxonomia revisada de Bloom",
-              children: selectedItem.taxonomies
-                ?.map((tx) => tx.name)
-                .join(" | "),
-            },
-            {
-              key: "subthemes",
-              label: "Subtemas",
-              children: selectedItem.subThemes
-                ?.filter((sub) => !sub.filedAt)
-                .map((sub) => sub.name)
-                .join(" | "),
-            },
-          ]
-        : [
-            {
-              key: "name",
-              label: "Nome",
-              children: selectedItem.name,
-            },
-            {
-              key: "courses",
-              label: "Cursos",
-              children: coursesSelectedItems(),
-            },
-            {
-              key: "createdAt",
-              label: "Criado em",
-              children: dataFormatada(selectedItem.createdAt),
-            },
-            {
-              key: "createdBy",
-              label: "Criado por",
-              children: selectedItem.user.name,
-            },
-            {
-              key: "updatedAt",
-              label: "Atualizado em",
-              children: selectedItem.updatedAt,
-            },
-            {
-              key: "updatedBy",
-              label: "Atualizado por",
-              children: selectedItem.updatedBy,
-            },
-            {
-              key: "filledAt",
-              label: "Arquivado em",
-              children: dataFormatada(selectedItem.filledAt),
-            },
-            {
-              key: "filledBy",
-              label: "Arquivado por",
-              children: selectedItem.filedBy,
-            },
-          ];
-    }
-  }, [loadingLastChanges, selectedItem]);
 
   const closeCourseModal = useCallback(() => {
     setVisible(false);
