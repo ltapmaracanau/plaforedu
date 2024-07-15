@@ -181,14 +181,14 @@ export default function SystemLog() {
     const usuarios = [];
     const usOptions = [];
 
-    lastDataChangesFiltered.map((entity) => {
+    lastDataChangesFiltered.forEach((entity) => {
       if (!userIds.includes(entity.userId)) {
         usuarios.push(entity.userName);
         userIds.push(entity.userId);
       }
     });
 
-    userIds.map((userId, index) => {
+    userIds.forEach((userId, index) => {
       usOptions.push({
         label: usuarios[index],
         value: userId,
@@ -253,6 +253,7 @@ export default function SystemLog() {
                 <Select
                   style={{ width: "7em" }}
                   options={categoriaOptions}
+                  allowClear
                   defaultValue={categoriaOptions[0].value}
                   value={categoria}
                   onChange={(value) => {
@@ -267,7 +268,6 @@ export default function SystemLog() {
                     });
                   }}
                   placeholder="Categoria"
-                  allowClear={false}
                 />
                 <Select
                   style={{ width: "10em" }}
@@ -292,6 +292,11 @@ export default function SystemLog() {
                   style={{ width: "10em" }}
                   options={usuarioOptions}
                   value={users}
+                  filterOption={(value, option) => {
+                    return option.label
+                      .toLowerCase()
+                      .includes(value.toLowerCase());
+                  }}
                   onChange={(value) => {
                     setUsers(value);
                     getLastCoursesTrailsChanges({
