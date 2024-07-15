@@ -56,7 +56,7 @@ export default function ListSearchLogs() {
 
   const downloadSearchLogsTemp = async () => {
     try {
-      const { data } = await AuthAxios.get("/logs/export-csv", {
+      const { data } = await AuthAxios.get("/logs/course-search-export-csv", {
         responseType: "blob",
       });
 

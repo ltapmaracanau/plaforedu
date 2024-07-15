@@ -26,9 +26,8 @@ import Denied from "../pages/Denied.jsx";
 import HeaderHome from "../components/header/HeaderHome.jsx";
 import FooterGov from "../components/footer/FooterGov.jsx";
 import HeaderGov from "../components/header/HeaderGov.jsx";
-import { Button, ConfigProvider, Modal, Space, Typography } from "antd";
-import dayjs from "dayjs";
-import "dayjs/locale/pt-br";
+import { Button, ConfigProvider, Space, Typography } from "antd";
+import ptBR from "antd/locale/pt_BR";
 import NotFound from "../pages/NotFound.jsx";
 import InstitutionList from "../components/user-settings/InstitutionsList.jsx";
 import CategCompList from "../components/user-settings/CategCompList.jsx";
@@ -39,6 +38,7 @@ import ListSearchLogs from "../components/user-settings/ListSearchLogs.jsx";
 import StudyPlans from "../components/user-settings/StudyPlans.jsx";
 import StudyPlanView from "../components/user-settings/StudyPlanView.jsx";
 import StudyPlanRegister from "../components/user-settings/StudyPlanRegister.jsx";
+import DocumentRegister from "../components/user-settings/DocumentRegister.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
 import SystemLog from "../components/user-settings/SystemLog.jsx";
 import { useCookies } from "react-cookie";
@@ -47,6 +47,7 @@ import EvaluateChanges from "../components/user-settings/EvaluateChanges.jsx";
 import ScrollToTop from "../components/ScrollToTop.jsx";
 import TermCookiesModal from "../components/privacyTerms/TermCookiesModal.jsx";
 import TermPrivacyModal from "../components/privacyTerms/TermPrivacyModal.jsx";
+import DocumentsList from "../components/user-settings/DocumentsList.jsx";
 
 const Layout = () => {
   const [cookies, setCookie] = useCookies(["cookieConsent"]);
@@ -196,7 +197,7 @@ const Layout = () => {
         flexDirection: "column",
       }}
     >
-      <ConfigProvider locale={dayjs}>
+      <ConfigProvider locale={ptBR}>
         <HeaderGov />
         <HeaderHome />
         <ScrollToTop />
@@ -223,6 +224,7 @@ const CustomRoutes = () => {
   const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
   const isConsultor = useStoreState((state) => state.adm.isConsultor);
   const isServidor = useStoreState((state) => state.adm.isServidor);
+  const isJornalista = useStoreState((state) => state.adm.isJornalista);
   //const isCoordAVA = useStoreState((state) => state.adm.isCoordAVA);
   const isActive = useStoreState((state) => state.adm.isActive);
 
@@ -395,6 +397,24 @@ const CustomRoutes = () => {
                   element:
                     isAdm || isCoord || isAnalistaDados ? (
                       <FormativeTrailsList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/documents",
+                  element:
+                    isAdm || isCoord || isJornalista ? (
+                      <DocumentsList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/documents/edit/:documentId?",
+                  element:
+                    isAdm || isCoord || isJornalista ? (
+                      <DocumentRegister />
                     ) : (
                       <Navigate to="/denied" />
                     ),

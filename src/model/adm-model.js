@@ -91,6 +91,10 @@ const admModel = {
     state.myProfile?.UsersRoles?.some((item) => item.role.name === "CONSULTOR")
   ),
 
+  isJornalista: computed((state) =>
+    state.myProfile?.UsersRoles?.some((item) => item.role.name === "JORNALISTA")
+  ),
+
   init: thunk(async (actions, _, { getStoreActions }) => {
     const myProfile = await services.loginService
       .getMyProfile()

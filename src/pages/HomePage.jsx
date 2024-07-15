@@ -34,11 +34,13 @@ import {
   Dropdown,
   Descriptions,
   Modal,
+  Typography,
 } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
 import Finder from "../components/Finder";
 import CourseModalVisualization from "../components/CourseModalVisualization";
 
+const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function HomePage() {
@@ -199,48 +201,62 @@ export default function HomePage() {
                   key={trilha.id}
                 >
                   <div className="cardTrilhasRecomendadas">
-                    <p>{trilha.name}</p>
-                    <Dropdown
-                      menu={{
-                        items: trilha.courses.map((course) => {
-                          return {
-                            key: course.id,
-                            label: course.name,
-                          };
-                        }),
-                        onClick: (e) => {
-                          setIdSelectedCourse(e.key);
-                          setModalSelectedCouseVisible(true);
-                        },
+                    <Title
+                      style={{
+                        marginBottom: "15px",
                       }}
-                      trigger={["click"]}
-                      onOpenChange={(open) => {
-                        if (!open) {
-                          setSelectedTrailId(null);
-                        }
+                      level={4}
+                      ellipsis={{
+                        rows: 1,
+                        expandable: false,
+                        tooltip: true,
                       }}
                     >
-                      <p
-                        id="verCursos"
-                        onClick={() => {
-                          if (
-                            selectedTrailId &&
-                            selectedTrailId === trilha.id
-                          ) {
+                      {trilha.name}
+                    </Title>
+                    <div>
+                      <Dropdown
+                        menu={{
+                          items: trilha.courses.map((course) => {
+                            return {
+                              key: course.id,
+                              label: course.name,
+                            };
+                          }),
+                          onClick: (e) => {
+                            setIdSelectedCourse(e.key);
+                            setModalSelectedCouseVisible(true);
+                          },
+                        }}
+                        trigger={["click"]}
+                        onOpenChange={(open) => {
+                          if (!open) {
                             setSelectedTrailId(null);
-                            return;
                           }
-                          setSelectedTrailId(trilha.id);
                         }}
                       >
-                        Ver cursos{" "}
-                        {selectedTrailId === trilha.id ? (
-                          <UpOutlined />
-                        ) : (
-                          <DownOutlined />
-                        )}
-                      </p>
-                    </Dropdown>
+                        <p
+                          id="verCursos"
+                          onClick={() => {
+                            if (
+                              selectedTrailId &&
+                              selectedTrailId === trilha.id
+                            ) {
+                              setSelectedTrailId(null);
+                              return;
+                            }
+                            setSelectedTrailId(trilha.id);
+                          }}
+                        >
+                          Ver cursos{" "}
+                          {selectedTrailId === trilha.id ? (
+                            <UpOutlined />
+                          ) : (
+                            <DownOutlined />
+                          )}
+                        </p>
+                      </Dropdown>
+                    </div>
                   </div>
 
                   <Button
@@ -410,7 +426,7 @@ export default function HomePage() {
             Gostaria de entrar em contato com a gente?
           </h1>
           <Link
-            to="/faleconosco"
+            to="/suporte"
             className="texto"
             style={{ textDecoration: "underline", color: "#FDFDFD" }}
           >

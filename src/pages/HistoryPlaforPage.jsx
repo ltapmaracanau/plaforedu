@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button, Grid, Modal, Typography } from "antd";
+import DocumentsVisualization from "../components/documents/DocumentsVisualization";
 
-const { Text, Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 function Icon() {
   const { useBreakpoint } = Grid;
@@ -1014,7 +1015,6 @@ export default function HistoryPlaforPage() {
           Educação Profissional, Científica e Tecnológica
         </Title>
       </div>
-
       <div
         style={{
           display: "grid",
@@ -1022,7 +1022,7 @@ export default function HistoryPlaforPage() {
           margin: "5% 10% 0 10%",
         }}
       >
-        <Text
+        <Paragraph
           style={{
             fontFamily: "Roboto",
             fontSize: "20px",
@@ -1037,8 +1037,8 @@ export default function HistoryPlaforPage() {
           e mobilização para a formação continuada com a finalidade de
           potencializar a atuação da Educação Profissional no âmbito da Rede
           Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
-        </Text>
-        <Text
+        </Paragraph>
+        <Paragraph
           style={{
             fontFamily: "Roboto",
             fontSize: "20px",
@@ -1051,8 +1051,8 @@ export default function HistoryPlaforPage() {
           servidor público para atuar, promover e proporcionar o desenvolvimento
           de trabalhos com qualidade, atendendo às demandas e propiciando um
           diferencial no serviço prestado à sociedade no âmbito da RFEPCT.
-        </Text>
-        <Text
+        </Paragraph>
+        <Paragraph
           style={{
             fontFamily: "Roboto",
             fontSize: "20px",
@@ -1068,8 +1068,9 @@ export default function HistoryPlaforPage() {
           diversas áreas do conhecimento a fim de aprimorar o ensino, a
           pesquisa, a extensão e a inovação na educação profissional e a
           capacitação no exterior.
-        </Text>
+        </Paragraph>
       </div>
+      <DocumentsVisualization />
     </div>
   );
 }
