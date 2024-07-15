@@ -135,7 +135,14 @@ export default function SystemLog() {
   ];
 
   useEffect(() => {
-    getLastCoursesTrailsChanges();
+    getLastCoursesTrailsChanges({
+      page: pageNumber,
+      type: categoria,
+      action: action,
+      users: users,
+      initialDate: initialDate,
+      finalDate: finalDate,
+    });
   }, [getLastCoursesTrailsChanges]);
 
   const dataFormatada = (data) => {
@@ -163,6 +170,7 @@ export default function SystemLog() {
           action: labelAction[item.action],
           date: dataFormatada(item.date),
           userName: item.user.name,
+          userId: item.userId,
           itemId: item.entity.id,
         });
       });
@@ -171,22 +179,24 @@ export default function SystemLog() {
   }, [labelAction, lastDataChanges.data]);
 
   const usuarioOptions = useMemo(() => {
+    const userIds = [];
     const usuarios = [];
     const usOptions = [];
 
     lastDataChangesFiltered.map((entity) => {
-      if (!usuarios.includes(entity.userName)) {
+      if (!userIds.includes(entity.userId)) {
         usuarios.push(entity.userName);
+        userIds.push(entity.userId);
       }
     });
 
-    usuarios.map((usuario) => {
+    userIds.map((userId, index) => {
       usOptions.push({
-        label: usuario,
-        value: usuario,
+        label: usuarios[index],
+        value: userId,
       });
     });
-
+    console.log(usOptions);
     return usOptions;
   }, [lastDataChangesFiltered]);
 
