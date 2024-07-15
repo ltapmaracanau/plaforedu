@@ -196,7 +196,6 @@ export default function SystemLog() {
         value: userId,
       });
     });
-    console.log(usOptions);
     return usOptions;
   }, [lastDataChangesFiltered]);
 
@@ -375,7 +374,7 @@ export default function SystemLog() {
       >
         <div style={{ width: "100%" }}>
           <Card
-            title={"Log do sistema"}
+            title={"Log do Sistema"}
             styles={{
               header: {
                 fontSize: 20,
