@@ -19,6 +19,7 @@ import services from "../../services";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import locale from "antd/locale/pt_BR";
+import CourseModalVisualization from "../CourseModalVisualization";
 
 dayjs.locale("pt-br");
 
@@ -88,6 +89,7 @@ export default function SystemLog() {
   const [itemHistorico, setItemHistorico] = useState(null);
   const [initialDate, setInitialDate] = useState("");
   const [finalDate, setFinalDate] = useState("");
+  const [visible, setVisible] = useState(false);
 
   const columnsTable = [
     {
@@ -344,6 +346,10 @@ export default function SystemLog() {
     }
   }, [loadingLastChanges, selectedItem]);
 
+  const closeCourseModal = useCallback(() => {
+    setVisible(false);
+  }, []);
+
   return itemHistorico != null ? (
     <HistoricoItens
       itemHistorico={itemHistorico}
@@ -410,7 +416,7 @@ export default function SystemLog() {
                     });
                   }}
                   placeholder="Categoria"
-                  allowClear={true}
+                  allowClear={false}
                 />
                 <Select
                   style={{ width: "10em" }}
@@ -503,14 +509,8 @@ export default function SystemLog() {
                 return {
                   onClick: async () => {
                     if (activeClickRow) {
-                      let item;
-                      if (categoria === categoriaOptions[0].value) {
-                        item = await services.courseService.getUniqueCourse({
-                          id: record.itemId,
-                        });
-                      } else {
-                      }
-                      setSelectedItem(item.data);
+                      setSelectedItem(record);
+                      setVisible(true);
                     }
                   },
                   style: { cursor: "pointer" },
@@ -521,40 +521,11 @@ export default function SystemLog() {
         </div>
       </div>
 
-      <Modal
-        title={
-          categoria === categoriaOptions[0].value
-            ? "Detalhes do curso"
-            : "Detalhes da Trilha"
-        }
-        open={!!selectedItem && activeClickRow}
-        onOk={() => {
-          setSelectedItem(null);
-        }}
-        onCancel={() => setSelectedItem(null)}
-        key={`modalDescriptionItem`}
-        destroyOnClose={true}
-        footer={[
-          <Button
-            type="primary"
-            key={"buttonOk"}
-            onClick={() => {
-              setSelectedItem(null);
-            }}
-          >
-            Ok
-          </Button>,
-        ]}
-      >
-        {selectedItem && activeClickRow && (
-          <Descriptions
-            column={1}
-            bordered={true}
-            layout="vertical"
-            items={descriptionItems}
-          />
-        )}
-      </Modal>
+      <CourseModalVisualization
+        id={selectedItem?.itemId}
+        visible={visible}
+        setVisible={closeCourseModal}
+      />
     </>
   );
 }
