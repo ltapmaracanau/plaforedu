@@ -16,6 +16,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import locale from "antd/locale/pt_BR";
 import CourseModalVisualization from "../CourseModalVisualization";
+import TrailModalVisualization from "../TrailModalVisualization";
 
 dayjs.locale("pt-br");
 
@@ -199,7 +200,7 @@ export default function SystemLog() {
     return usOptions;
   }, [lastDataChangesFiltered]);
 
-  const closeCourseModal = useCallback(() => {
+  const closeEntityModal = useCallback(() => {
     setVisible(false);
   }, []);
 
@@ -378,12 +379,19 @@ export default function SystemLog() {
           </Card>
         </div>
       </div>
-
-      <CourseModalVisualization
-        id={selectedItem?.itemId}
-        visible={visible}
-        setVisible={closeCourseModal}
-      />
+      {categoria === categoriaOptions[0].value ? (
+        <CourseModalVisualization
+          id={selectedItem?.itemId}
+          visible={visible}
+          setVisible={closeEntityModal}
+        />
+      ) : (
+        <TrailModalVisualization
+          id={selectedItem?.itemId}
+          visible={visible}
+          setVisible={closeEntityModal}
+        />
+      )}
     </>
   );
 }
