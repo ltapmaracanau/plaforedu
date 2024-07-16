@@ -88,7 +88,11 @@ export default function HistoricoItens(props) {
         padding: "20px",
       }}
     >
-      <Button icon={<RollbackOutlined />} onClick={() => back()}>
+      <Button
+        icon={<RollbackOutlined />}
+        onClick={() => back()}
+        style={{ marginBottom: "10    px" }}
+      >
         Voltar
       </Button>
 

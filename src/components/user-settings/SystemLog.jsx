@@ -30,10 +30,12 @@ export default function SystemLog() {
     (state) => state.adm.loadingLastChanges
   );
 
+  const usersGlobais = useStoreState((state) => state.users.users);
+  const getUsers = useStoreActions((actions) => actions.users.getUsers);
+
   const categoriaOptions = [
     { value: "COURSE", label: "Cursos" },
     { value: "FORMATIVE_TRAIL", label: "Trilhas" },
-    { value: "DOCUMENTS", label: "Documentos" },
   ];
 
   const actionOptions = useMemo(() => {
@@ -131,8 +133,9 @@ export default function SystemLog() {
       ),
     },
   ];
-
+  console.log(action);
   useEffect(() => {
+    getUsers();
     getLastCoursesTrailsChanges({
       page: pageNumber,
       type: categoria,
@@ -181,10 +184,10 @@ export default function SystemLog() {
     const usuarios = [];
     const usOptions = [];
 
-    lastDataChangesFiltered.forEach((entity) => {
-      if (!userIds.includes(entity.userId)) {
-        usuarios.push(entity.userName);
-        userIds.push(entity.userId);
+    usersGlobais.forEach((user) => {
+      if (!userIds.includes(user.id)) {
+        usuarios.push(user.name);
+        userIds.push(user.id);
       }
     });
 
@@ -253,7 +256,7 @@ export default function SystemLog() {
                 <Select
                   style={{ width: "7em" }}
                   options={categoriaOptions}
-                  allowClear
+                  allowClear={true}
                   defaultValue={categoriaOptions[0].value}
                   value={categoria}
                   onChange={(value) => {
