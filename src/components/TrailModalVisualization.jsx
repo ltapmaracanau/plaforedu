@@ -1,11 +1,18 @@
-import { Button, Descriptions, Modal } from "antd";
-import { useStoreActions, useStoreState } from "easy-peasy";
-import { useEffect } from "react";
+import {
+  Button,
+  Descriptions,
+  Empty,
+  Modal,
+  notification,
+  Skeleton,
+} from "antd";
+import { useStoreActions } from "easy-peasy";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function TrailModalVisualization(props) {
   const {
-    id,
-    visible,
+    id = null,
+    visible = false,
     setVisible = () => {
       return;
     },
@@ -14,10 +21,12 @@ export default function TrailModalVisualization(props) {
   const getUniqueTrail = useStoreActions(
     (action) => action.trilhas.getUniqueTrail
   );
-  const uniqueTrail = useStoreState((state) => state.trilhas.uniqueTrail);
+
+  const [uniqueTrail, setUniqueTrail] = useState(null);
+  const [loadingUniqueTrail, setLoadingUniqueTrail] = useState(false);
 
   const coursesSelectedTrail = useCallback(() => {
-    return uniqueTrail.courses.map((curso) => {
+    return uniqueTrail.courses?.map((curso) => {
       return <li key={curso.id}>{curso.name}</li>;
     });
   }, [uniqueTrail]);
@@ -46,8 +55,24 @@ export default function TrailModalVisualization(props) {
   }, [uniqueTrail]);
 
   useEffect(() => {
-    getUniqueTrail({ id: id });
-  }, []);
+    async function init() {
+      if (id) {
+        setLoadingUniqueTrail(true);
+        try {
+          const trail = await getUniqueTrail({ id: id });
+          setUniqueTrail(trail);
+        } catch (error) {
+          notification.error({
+            message: "Erro ao buscar trilha",
+            description: error.message,
+          });
+        } finally {
+          setLoadingUniqueTrail(false);
+        }
+      }
+    }
+    init();
+  }, [getUniqueTrail, id, visible]);
 
   return (
     <>
@@ -57,6 +82,7 @@ export default function TrailModalVisualization(props) {
         onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
         destroyOnClose={true}
+        loading={loadingUniqueTrail}
         footer={[
           <Button
             type="primary"
@@ -69,13 +95,15 @@ export default function TrailModalVisualization(props) {
           </Button>,
         ]}
       >
-        {uniqueTrail && (
+        {uniqueTrail ? (
           <Descriptions
             column={1}
             bordered={true}
             layout="vertical"
             items={modalTrailItems}
           />
+        ) : (
+          <Empty description="Não foi possível encontrar a trilha" />
         )}
       </Modal>
     </>

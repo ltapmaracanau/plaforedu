@@ -133,7 +133,6 @@ export default function SystemLog() {
       ),
     },
   ];
-  console.log(action);
   useEffect(() => {
     getUsers();
     getLastCoursesTrailsChanges({
