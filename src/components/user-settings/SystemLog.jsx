@@ -80,8 +80,8 @@ export default function SystemLog() {
   }, []);
 
   const [pageNumber, setPageNumber] = useState(1);
-  const [categoria, setCategoria] = useState(categoriaOptions[0].value);
-  const [action, setAction] = useState(actionOptions[0].value);
+  const [categoria, setCategoria] = useState(undefined);
+  const [action, setAction] = useState(undefined);
   const [users, setUsers] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeClickRow, setActiveClickRow] = useState(true);
@@ -257,7 +257,6 @@ export default function SystemLog() {
                   style={{ width: "7em" }}
                   options={categoriaOptions}
                   allowClear={true}
-                  defaultValue={categoriaOptions[0].value}
                   value={categoria}
                   onChange={(value) => {
                     setCategoria(value);
@@ -275,7 +274,6 @@ export default function SystemLog() {
                 <Select
                   style={{ width: "10em" }}
                   options={actionOptions}
-                  defaultValue={actionOptions[0].value}
                   value={action}
                   onChange={(value) => {
                     setAction(value);
