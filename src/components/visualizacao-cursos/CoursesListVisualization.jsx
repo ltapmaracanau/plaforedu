@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
+import CourseModalVisualization from "../CourseModalVisualization";
+
 import {
   List,
   Card,
@@ -32,9 +34,6 @@ export default function CoursesListVisualization() {
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
-  const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
-  );
 
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
   const cursos = useStoreState((state) => state.courses.cursos);
@@ -46,17 +45,10 @@ export default function CoursesListVisualization() {
   const filter = useStoreState((state) => state.courses.filter);
   const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
 
-  const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
-  const loadingUniqueCourse = useStoreState(
-    (state) => state.courses.loadingUniqueCourse
-  );
   const loading = useStoreState((state) => state.courses.loading);
   const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
   const [modalVisible, setModalVisible] = useState(false);
-
-  const handleOk = () => {
-    setModalVisible(false);
-  };
+  const [idCourseView, setIdCourseView] = useState(undefined);
 
   const getCategoriasCompetencia = (competencies) => {
     let nomesCategorias = [];
@@ -278,7 +270,7 @@ export default function CoursesListVisualization() {
                                           hoverable
                                           bordered={false}
                                           onClick={() => {
-                                            getUniqueCourse({ id: curso.id });
+                                            setIdCourseView(curso.id);
                                             setModalVisible(true);
                                           }}
                                         >
@@ -470,7 +462,7 @@ export default function CoursesListVisualization() {
                         hoverable
                         bordered={false}
                         onClick={() => {
-                          getUniqueCourse({ id: curso.id });
+                          setIdCourseView(curso.id);
                           setModalVisible(true);
                         }}
                       >
@@ -549,91 +541,11 @@ export default function CoursesListVisualization() {
               />
             )}
           </Card>
-          <Modal
-            open={modalVisible}
-            onOk={handleOk}
-            key={`modalCurso`}
-            onCancel={handleOk}
-            title={uniqueCourse?.name}
-            centered={true}
-            footer={[
-              <Button type="primary" key={"buttonOk"} onClick={handleOk}>
-                Ok
-              </Button>,
-            ]}
-          >
-            {loadingUniqueCourse ? (
-              <Skeleton active />
-            ) : (
-              <Descriptions column={1} bordered layout="vertical">
-                <Descriptions.Item label="Descrição">
-                  {uniqueCourse?.description}
-                </Descriptions.Item>
-                <Descriptions.Item label="Carga Horária">
-                  {uniqueCourse?.hours}
-                </Descriptions.Item>
-                <Descriptions.Item label="Instituições Certificadoras">
-                  {uniqueCourse?.institutions?.map((inst) => (
-                    <Card key={inst.institutionId} bordered>
-                      {inst.name}
-                      <br />
-                      <strong>Link: </strong>
-                      <a
-                        target="_blank"
-                        rel="noreferrer"
-                        key={`link${inst.id}`}
-                        href={inst.link}
-                      >
-                        {inst.link}
-                      </a>
-                    </Card>
-                  ))}
-                </Descriptions.Item>
-                <Descriptions.Item label="Cursos equivalentes">
-                  <List
-                    locale={{
-                      emptyText: <>Sem equivalentes</>,
-                    }}
-                    bordered
-                    dataSource={uniqueCourse?.equivalents?.filter(
-                      (course) => !course.filedAt
-                    )}
-                    renderItem={(item) => (
-                      <List.Item
-                        actions={[
-                          <Button
-                            key={item.id}
-                            onClick={() => {
-                              getUniqueCourse({ id: item.id });
-                            }}
-                          >
-                            Visualizar
-                          </Button>,
-                        ]}
-                        key={item.id}
-                      >
-                        {item.name}
-                      </List.Item>
-                    )}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label="Acessibilidades">
-                  {uniqueCourse?.accessibilities
-                    ?.map((ac) => ac.name)
-                    .join(" | ")}
-                </Descriptions.Item>
-                <Descriptions.Item label="Taxonomia revisada de Bloom">
-                  {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
-                </Descriptions.Item>
-                <Descriptions.Item label="Subtemas">
-                  {uniqueCourse?.subThemes
-                    ?.filter((sub) => !sub.filedAt)
-                    .map((sub) => sub.name)
-                    .join(" | ")}
-                </Descriptions.Item>
-              </Descriptions>
-            )}
-          </Modal>
+          <CourseModalVisualization
+            id={idCourseView}
+            visible={modalVisible}
+            setVisible={setModalVisible}
+          />
         </Col>
       </Row>
     </Col>

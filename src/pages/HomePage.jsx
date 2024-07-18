@@ -57,10 +57,6 @@ export default function HomePage() {
   const [modalSelectedCourseVisible, setModalSelectedCouseVisible] =
     useState(false);
 
-  const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
-  );
-
   const recentCourses = useMemo(
     async () => await services.admService.getLastViewedCourses(),
     []

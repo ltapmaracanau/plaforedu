@@ -101,6 +101,14 @@ export const registerCourseSchema = yup.object().shape({
   competencies: yup.array(yup.string()).min(1, "Obrigatório!"),
   //taxonomies: yup.array(yup.string()).min(1, "Obrigatório!"),
   subThemes: yup.array(yup.string()).min(1, "Obrigatório!"),
+  institutions: yup
+    .array(
+      yup.object({
+        institutionId: yup.string().required("Obrigatório!"),
+        link: yup.string().required("Obrigatório!"),
+      })
+    )
+    .min(1, "Obrigatório!"),
 });
 // TRILHAS
 

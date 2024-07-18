@@ -10,23 +10,23 @@ const trilhasModel = {
   trilhas: [],
   count: 0,
 
-  elements: computed(
-    [
-      (state) => state.trilhas,
-      (_state, storeState) => storeState.courses.filter,
-      (_state, storeState) => storeState.itineraries.itinerarios,
-      (_state, storeState) => storeState.competencies.competencias,
-    ],
-    (trilhas, filter, itinerarios, competencias) => {
-      return reformuladorDeElementosCytoscape(
-        trilhas,
-        filter,
-        competencias,
-        itinerarios,
-        true
-      );
-    }
-  ),
+  // elements: computed(
+  //   [
+  //     (state) => state.trilhas,
+  //     (_state, storeState) => storeState.courses.filter,
+  //     (_state, storeState) => storeState.itineraries.itinerarios,
+  //     (_state, storeState) => storeState.competencies.competencias,
+  //   ],
+  //   (trilhas, filter, itinerarios, competencias) => {
+  //     return reformuladorDeElementosCytoscape(
+  //       trilhas,
+  //       filter,
+  //       competencias,
+  //       itinerarios,
+  //       true
+  //     );
+  //   }
+  // ),
 
   onSetFilter: thunkOn(
     // targetResolver:
@@ -84,6 +84,7 @@ const trilhasModel = {
         .then((response) => {
           actions.setCount(response.data.count);
           actions.setTrilhas(response.data.data);
+          return response.data;
         })
         .catch((error) => {
           throw new Error(error);
@@ -93,6 +94,18 @@ const trilhasModel = {
         });
     }
   ),
+
+  getUniqueTrail: thunk(async (_actions, payload) => {
+    const { id } = payload;
+    return await services.trailsService
+      .getUniqueTrail({ id })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }),
 
   updateTrilha: thunk(async (actions, payload) => {
     const { id, name, description, itineraries, competencies, courses } =

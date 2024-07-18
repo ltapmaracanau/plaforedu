@@ -55,13 +55,14 @@ const instituicoesModel = {
   }),
 
   getInstituicoes: thunk(
-    async (actions, payload = { query: "", showFiled: false }) => {
+    async (actions, payload = { query: "", showFiled: false, page: 1 }) => {
       actions.setLoading(true);
-      const { query = "", showFiled = false } = payload;
+      const { query = "", showFiled = false, page = 1 } = payload;
       return await services.institutionService
         .getInstituicoes({
           query: query.trim(),
           showFiled,
+          page,
         })
         .then((response) => {
           actions.setInstituicoes(response.data);

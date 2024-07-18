@@ -25,16 +25,18 @@ const competenciasModel = {
   }),
 
   getCatComp: thunk(
-    async (actions, payload = { query: "", showFiled: false }) => {
+    async (actions, payload = { query: "", showFiled: false, page: 1 }) => {
       actions.setLoadingCategCompetencies(true);
-      const { query = "", showFiled = false } = payload;
+      const { query = "", showFiled = false, page = 1 } = payload;
       return await services.compService
         .getCatComp({
           query: query.trim(),
           showFiled: showFiled,
+          page,
         })
         .then((response) => {
           actions.setCatComp(response.data);
+          return response.data;
         })
         .catch((error) => {
           throw new Error(error);
@@ -125,24 +127,37 @@ const competenciasModel = {
       });
   }),
 
-  getComp: thunk(async (actions, payload = { query: "", showFiled: false }) => {
-    actions.setLoadingCompetencies(true);
-    const { query = "", showFiled = false } = payload;
-    return await services.compService
-      .getCompetencias({
-        query: query.trim(),
-        showFiled: showFiled,
-      })
-      .then((response) => {
-        actions.setCompetencias(response.data);
-      })
-      .catch((error) => {
-        throw new Error(error);
-      })
-      .finally(() => {
-        actions.setLoadingCompetencies(false);
-      });
-  }),
+  getComp: thunk(
+    async (
+      actions,
+      payload = { query: "", showFiled: false, page: 1, itineraryId: "" }
+    ) => {
+      actions.setLoadingCompetencies(true);
+      const {
+        query = "",
+        showFiled = false,
+        page = 1,
+        itineraryId = "",
+      } = payload;
+      return await services.compService
+        .getCompetencias({
+          query: query.trim(),
+          showFiled: showFiled,
+          page,
+          itineraryId,
+        })
+        .then((response) => {
+          actions.setCompetencias(response.data);
+          return response.data;
+        })
+        .catch((error) => {
+          throw new Error(error);
+        })
+        .finally(() => {
+          actions.setLoadingCompetencies(false);
+        });
+    }
+  ),
 
   setLoadingCompetencies: action((state, payload) => {
     state.loadingCompetencies = payload;

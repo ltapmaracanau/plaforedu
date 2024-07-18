@@ -80,7 +80,7 @@ export default function (
 
       if (
         !trilha.competencies.some((competencie) => {
-          const competenceData = competencies.find(
+          const competenceData = competencies.data.find(
             (comp) => comp.id === competencie.id
           );
           if (competenceData) {
@@ -110,7 +110,7 @@ export default function (
       let counterRowCourse = 1;
 
       // Adiciondo node topo da trilha
-      const competenceData = competencies.find(
+      const competenceData = competencies.data.find(
         (comp) => comp.id === trilha.competencies[0].id
       );
       const colorCategoria =
@@ -260,7 +260,7 @@ export default function (
       }
       if (
         !curso.competencies.some((competencie) => {
-          let compData = competencies.find(
+          let compData = competencies.data.find(
             (comp) => comp.id === competencie.id
           );
           if (compData) {
@@ -280,7 +280,7 @@ export default function (
       // Aqui eu defino qual a cor das imagens por categoria de competência
       if (filtro.competencies.length !== 0) {
         filtro.competencies.some((compId) => {
-          const compData = competencies.find((comp) => comp.id === compId);
+          const compData = competencies.data.find((comp) => comp.id === compId);
           return compData.categories.some((cat) => {
             if (cat.color) {
               colorCategoria = cat.color;
@@ -290,7 +290,7 @@ export default function (
         });
       } else {
         curso.competencies.some((competencia) => {
-          const compData = competencies.find(
+          const compData = competencies.data.find(
             (comp) => comp.id === competencia.id
           );
           return compData?.categories?.some((cat) => {
@@ -335,7 +335,7 @@ export default function (
       // Adicionando Competencia
       curso.competencies.forEach((competencia) => {
         // Verificação se a competência está arquivada
-        const competenceData = competencies.find(
+        const competenceData = competencies.data.find(
           (comp) => comp.id === competencia.id
         );
         if (competenceData.filedAt) {

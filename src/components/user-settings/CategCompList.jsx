@@ -1,15 +1,25 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, List, Modal, Input, Tooltip, Switch, Tag } from "antd";
+import {
+  Button,
+  Card,
+  List,
+  Modal,
+  Input,
+  Tooltip,
+  Switch,
+  Tag,
+  notification,
+} from "antd";
 import CatCompRegister from "./CatCompRegister";
 
 const { Search } = Input;
 
 export default function CategCompList() {
-  const getCatComp = useStoreActions(
+  const getCatCompAction = useStoreActions(
     (actions) => actions.competencies.getCatComp
   );
 
@@ -18,14 +28,41 @@ export default function CategCompList() {
   const [editandoCatComp, setEditandoCatComp] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+  const [catComp, setCatComp] = useState([]);
+  const [loadingCategCompetencies, setLoadingCategCompetencies] =
+    useState(true);
 
-  const loadingCategCompetencies = useStoreState(
-    (state) => state.competencies.loadingCategCompetencies
+  const getCatComp = useCallback(
+    async ({ query, page, showFiled }) => {
+      setLoadingCategCompetencies(true);
+      try {
+        const { data, count } = await getCatCompAction({
+          query,
+          showFiled,
+          page,
+        });
+        setCatComp(data);
+        setCount(count);
+      } catch (error) {
+        notification.error({
+          message: "Erro ao carregar categorias de competências",
+          description: error.message,
+        });
+      } finally {
+        setLoadingCategCompetencies(false);
+      }
+    },
+    [getCatCompAction]
   );
-  const catComp = useStoreState((state) => state.competencies.catComp);
 
   useEffect(() => {
-    getCatComp();
+    getCatComp({
+      query: "",
+      page: 1,
+      showFiled: false,
+    });
   }, [getCatComp]);
 
   return (
@@ -38,6 +75,7 @@ export default function CategCompList() {
     >
       <div style={{ width: "100%" }}>
         <Card
+          loading={loadingCategCompetencies}
           styles={{
             header: {
               fontSize: 20,
@@ -61,6 +99,7 @@ export default function CategCompList() {
                   getCatComp({
                     query: e,
                     showFiled: showFiled,
+                    page: 1,
                   });
                 }}
                 style={{
@@ -80,6 +119,7 @@ export default function CategCompList() {
                     getCatComp({
                       query: textSearch,
                       showFiled: checked,
+                      page: 1,
                     });
                   }}
                 />
@@ -101,6 +141,20 @@ export default function CategCompList() {
           <List
             loading={loadingCategCompetencies}
             dataSource={catComp}
+            pagination={{
+              pageSize: 30,
+              current: page,
+              total: count,
+              defaultCurrent: 1,
+              onChange: (page) => {
+                setPage(page);
+                getCatComp({
+                  query: textSearch,
+                  showFiled: showFiled,
+                  page: page,
+                });
+              },
+            }}
             style={{ width: "100%" }}
             renderItem={(item) => {
               return (
@@ -165,6 +219,7 @@ export default function CategCompList() {
                 getCatComp({
                   query: textSearch,
                   showFiled: showFiled,
+                  page: page,
                 });
                 setEditandoCatComp(null);
                 setRegisterVisible(false);
@@ -181,6 +236,7 @@ export default function CategCompList() {
               getCatComp({
                 query: textSearch,
                 showFiled: showFiled,
+                page: page,
               });
             }}
           />

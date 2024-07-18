@@ -8,6 +8,8 @@ import fundoLegenda from "../../assets/icon/PLAFOREDU_Icones-Legenda.png";
 
 // import { Template } from "../pdf-document";
 
+import ModalCourseVisualization from "../CourseModalVisualization";
+
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -60,17 +62,10 @@ export default function CytoscapeVisualization() {
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
-  const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
-  );
 
   const [zoom, setZoom] = useState(1);
   const [competenceOnModal, setCompetenceOnModal] = useState(undefined);
-
-  const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
-  const loadingUniqueCourse = useStoreState(
-    (state) => state.courses.loadingUniqueCourse
-  );
+  const [idCourseView, setIdCourseView] = useState(undefined);
 
   const [modalCourseVisible, setModalCourseVisible] = useState(false);
   const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
@@ -306,11 +301,11 @@ export default function CytoscapeVisualization() {
               !element.id.includes("container") &&
               !element.id.includes("equivalent")
             ) {
-              getUniqueCourse({ id: element.id.split("curso")[1] });
+              setIdCourseView(element.id.split("curso")[1]);
               setModalCourseVisible(true);
             }
             if (element.id.includes("equivalent")) {
-              getUniqueCourse({ id: element.id.split("equivalent")[1] });
+              setIdCourseView(element.id.split("equivalent")[1]);
               setModalCourseVisible(true);
             }
             if (
@@ -451,103 +446,11 @@ export default function CytoscapeVisualization() {
         }}
         draggable={false}
       />
-      <Modal
-        open={modalCourseVisible}
-        key={`modalCurso`}
-        destroyOnClose={true}
-        centered={true}
-        onCancel={handleOk}
-        onOk={handleOk}
-        title={"Sobre o curso"}
-        footer={
-          <Button onClick={handleOk} type={"primary"}>
-            Ok
-          </Button>
-        }
-      >
-        {loadingUniqueCourse ? (
-          <Skeleton active />
-        ) : (
-          <Card>
-            <Descriptions
-              column={1}
-              bordered
-              layout={"vertical"}
-              style={{ backgroundColor: "white" }}
-            >
-              <Descriptions.Item label="Título">
-                {uniqueCourse?.name}
-              </Descriptions.Item>
-              <Descriptions.Item label="Descrição">
-                {uniqueCourse?.description}
-              </Descriptions.Item>
-              <Descriptions.Item label="Carga Horária">
-                {uniqueCourse?.hours}
-              </Descriptions.Item>
-              <Descriptions.Item label="Instituições Certificadoras">
-                {uniqueCourse?.institutions?.map((inst) => (
-                  <Space key={inst.institutionId} direction={"vertical"}>
-                    <Text>{inst.name}</Text>
-                    <div>
-                      <span>Link: </span>
-                      <a
-                        target="_blank"
-                        rel="noreferrer"
-                        key={`link${inst.id}`}
-                        href={inst.link}
-                      >
-                        {inst.link}
-                      </a>
-                    </div>
-                  </Space>
-                ))}
-              </Descriptions.Item>
-              <Descriptions.Item label="Cursos equivalentes">
-                <List
-                  locale={{
-                    emptyText: <>Sem equivalentes</>,
-                  }}
-                  bordered
-                  dataSource={uniqueCourse?.equivalents?.filter(
-                    (course) => !course.filedAt
-                  )}
-                  renderItem={(item) => (
-                    <List.Item
-                      actions={[
-                        <Button
-                          key={item.id}
-                          onClick={() => {
-                            getUniqueCourse({ id: item.id });
-                          }}
-                        >
-                          Visualizar
-                        </Button>,
-                      ]}
-                      key={item.id}
-                    >
-                      {item.name}
-                    </List.Item>
-                  )}
-                />
-              </Descriptions.Item>
-              <Descriptions.Item label="Acessibilidades">
-                {uniqueCourse?.accessibilities
-                  ?.map((ac) => ac.name)
-                  .join(" | ")}
-              </Descriptions.Item>
-              <Descriptions.Item label="Taxonomia revisada de Bloom">
-                {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
-              </Descriptions.Item>
-              <Descriptions.Item label="Subtemas">
-                {uniqueCourse?.subThemes
-                  ?.filter((sub) => !sub.filedAt)
-                  .map((sub) => sub.name)
-                  .join(" | ")}
-              </Descriptions.Item>
-            </Descriptions>
-          </Card>
-        )}
-      </Modal>
+      <ModalCourseVisualization
+        id={idCourseView}
+        visible={modalCourseVisible}
+        setVisible={setModalCourseVisible}
+      />
       <Modal // Modal de Competência
         open={modalCompetenciaVisible}
         onOk={handleOk}

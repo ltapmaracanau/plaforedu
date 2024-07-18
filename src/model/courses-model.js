@@ -31,23 +31,23 @@ const coursesModel = {
   countSecondary: 0,
   loadingCursosSecondary: false,
 
-  elements: computed(
-    [
-      (state) => state.cursos,
-      (state) => state.filter,
-      (_state, storeState) => storeState.itineraries.itinerarios,
-      (_state, storeState) => storeState.competencies.competencias,
-    ],
-    (cursos, filter, itineraries, competencias) => {
-      return reformuladorDeElementosCytoscape(
-        cursos,
-        filter,
-        competencias,
-        itineraries,
-        false
-      );
-    }
-  ),
+  // elements: computed(
+  //   [
+  //     (state) => state.cursos,
+  //     (state) => state.filter,
+  //     (_state, storeState) => storeState.itineraries.itinerarios,
+  //     (_state, storeState) => storeState.competencies.competencias,
+  //   ],
+  //   (cursos, filter, itineraries, competencias) => {
+  //     return reformuladorDeElementosCytoscape(
+  //       cursos,
+  //       filter,
+  //       competencias,
+  //       itineraries,
+  //       false
+  //     );
+  //   }
+  // ),
 
   filterDefault: initialFilterDefault,
 
@@ -177,10 +177,11 @@ const coursesModel = {
 
   getTaxonomias: thunk(async (actions) => {
     actions.setLoading(true);
-    services.courseService
+    return await services.courseService
       .getTaxonomias()
       .then(({ data }) => {
         actions.setTaxonomias(data);
+        return data;
       })
       .catch((error) => {
         throw new Error(error);
@@ -192,18 +193,20 @@ const coursesModel = {
 
   getUniqueCourse: thunk(async (actions, payload) => {
     actions.setLoadingUniqueCourse(true);
-    const { id = "" } = payload;
+    const { id = "", saveViewed = false } = payload;
     return await services.courseService
       .getUniqueCourse({ id: id })
       .then(({ data }) => {
         actions.setUniqueCourse(data);
-        services.admService.setLastViewedCourses({
-          titulo: data.name,
-          id: data.id,
-          institution: data.institutions
-            .map((institution) => institution.abbreviation)
-            .join(", "),
-        });
+        if (saveViewed) {
+          services.admService.setLastViewedCourses({
+            titulo: data.name,
+            id: data.id,
+            institution: data.institutions
+              .map((institution) => institution.abbreviation)
+              .join(", "),
+          });
+        }
         return data;
       })
       .catch((error) => {
