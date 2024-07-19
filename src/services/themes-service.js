@@ -1,15 +1,23 @@
 import AuthAxios from "./auth-axios";
 
 export default {
-  getThemes: (payload = { query: "", showFiled: false }) =>
-    AuthAxios.get(
-      `/themes/list?search=${payload.query}&includeFiled=${payload.showFiled}`
-    ),
+  getThemes: (payload = { query: "", showFiled: false, page: 1 }) =>
+    AuthAxios.get(`/themes/list`, {
+      params: {
+        page: payload.page,
+        search: payload.query,
+        includeFiled: payload.showFiled,
+      },
+    }),
 
-  getSubthemes: (payload = { query: "", showFiled: false }) =>
-    AuthAxios.get(
-      `/sub-themes/list?search=${payload.query}&includeFiled=${payload.showFiled}`
-    ),
+  getSubthemes: (payload = { query: "", showFiled: false, page: true }) =>
+    AuthAxios.get(`/sub-themes/list`, {
+      params: {
+        page: payload.page,
+        search: payload.query,
+        includeFiled: payload.showFiled,
+      },
+    }),
 
   registerTheme: (payload) =>
     AuthAxios.post("/themes/new", {

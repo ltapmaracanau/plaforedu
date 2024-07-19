@@ -9,13 +9,14 @@ const temasModel = {
   subthemes: [],
 
   getThemes: thunk(
-    async (actions, payload = { query: "", showFiled: false }) => {
+    async (actions, payload = { query: "", showFiled: false, page: 1 }) => {
       actions.setLoadingThemes(true);
-      const { query = "", showFiled = false } = payload;
+      const { query = "", showFiled = false, page = 1 } = payload;
       return await services.themesService
         .getThemes({
           query: query.trim(),
           showFiled: showFiled,
+          page,
         })
         .then((response) => {
           actions.setThemes(response.data);
@@ -100,13 +101,14 @@ const temasModel = {
   }),
 
   getSubthemes: thunk(
-    async (actions, payload = { query: "", showFiled: false }) => {
+    async (actions, payload = { query: "", showFiled: false, page: 1 }) => {
       actions.setLoadingSubthemes(true);
-      const { query = "", showFiled = false } = payload;
+      const { query = "", showFiled = false, page = 1 } = payload;
       return await services.themesService
         .getSubthemes({
           query: query.trim(),
           showFiled: showFiled,
+          page,
         })
         .then((response) => {
           actions.setSubthemes(response.data);

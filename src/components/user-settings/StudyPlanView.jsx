@@ -193,7 +193,7 @@ export default function StudyPlanView() {
                 title={
                   <Space>
                     {item.name}
-                    {item.status === "FILED" && (
+                    {item.courseStatus === "FILED" && (
                       <Tag color="orange">ARQUIVADO</Tag>
                     )}
                   </Space>

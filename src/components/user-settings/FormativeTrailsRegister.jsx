@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import {
   DndContext,
@@ -33,12 +33,15 @@ import {
   Space,
   Popconfirm,
   ConfigProvider,
+  Empty,
 } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { Controller, useForm } from "react-hook-form";
 import { registerTrilhaSchema } from "../../schemas/registers/registersSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TableSelectCourses from "../filter-components/TableSelectCourses";
+import DebounceSelect from "../fields/DebounceSelect";
+import { useNavigate, useParams } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -81,17 +84,9 @@ const Row = (props) => {
   );
 };
 
-export default function FormativeTrailsRegister(props) {
-  const { trilha, title, actionVisible } = props;
-
-  const trilhaDefault = {
-    name: trilha ? trilha.name : "",
-    description: trilha ? trilha.description : "",
-    competencies: trilha ? trilha.competencies[0]?.id : "",
-    itineraries: trilha ? trilha.itineraries[0]?.id : "",
-    courses: trilha ? trilha.courses.map((item) => item.id) : [],
-    filedAt: trilha !== null && trilha.filedAt !== null,
-  };
+export default function FormativeTrailsRegister() {
+  const { trailId } = useParams();
+  const navigate = useNavigate();
 
   const updateTrilha = useStoreActions(
     (actions) => actions.trilhas.updateTrilha
@@ -102,6 +97,12 @@ export default function FormativeTrailsRegister(props) {
   const registerTrilha = useStoreActions(
     (actions) => actions.trilhas.registerTrilha
   );
+  const getTrailAction = useStoreActions(
+    (actions) => actions.trilhas.getUniqueTrail
+  );
+  const getCompetenciesAction = useStoreActions(
+    (actions) => actions.competencies.getComp
+  );
 
   const registering = useStoreState((state) => state.trilhas.registering);
   const archiving = useStoreState((state) => state.trilhas.archiving);
@@ -110,31 +111,50 @@ export default function FormativeTrailsRegister(props) {
     (state) => state.itineraries.itinerarios
   );
 
-  const allCompetencias = useStoreState(
-    (state) => state.competencies.competencias
-  );
-
-  const [filed, setFiled] = useState(trilhaDefault.filedAt);
+  const [filed, setFiled] = useState(false);
   const [addCourseVisible, setAddCourseVisible] = useState(false);
+  const [trail, setTrail] = useState(undefined);
+  const [trailDefaultValues, setTrailDefaultValues] = useState({
+    name: "",
+    description: "",
+    competencies: "",
+    itineraries: "",
+    courses: [],
+    filedAt: false,
+  });
 
-  const [itinerarieSelected, setItinerarieSelected] = useState(
-    trilhaDefault.itineraries
+  const [competencieSelected, setCompetencieSelected] = useState(undefined);
+  const [itinerarieSelected, setItinerarieSelected] = useState(undefined);
+  const [cursosTrilha, setCursosTrilha] = useState([]);
+
+  const getCompetencies = useCallback(
+    async ({ query, page }) => {
+      try {
+        const { data } = await getCompetenciesAction({
+          query,
+          page,
+          itineraryId: itinerarieSelected,
+          showFiled: false,
+        });
+        return data.map((item) => ({
+          label: item.name,
+          value: item.id,
+          filedAt: item.filedAt,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar competências!",
+          description: error.message,
+        });
+      }
+    },
+    [getCompetenciesAction, itinerarieSelected]
   );
-  const [cursosTrilha, setCursosTrilha] = useState(
-    trilha ? trilha.courses.sort((a, b) => a.sequence - b.sequence) : []
-  );
-  const competenciesFiltred = useMemo(() => {
-    return allCompetencias.filter((competencie) =>
-      competencie.itineraries.find(
-        (itinerarie) => itinerarie.id === itinerarieSelected
-      )
-    );
-  }, [allCompetencias, itinerarieSelected]);
 
   const register = useForm({
     mode: "onBlur",
     reValidateMode: "onBlur",
-    defaultValues: trilhaDefault,
+    values: trailDefaultValues,
     resolver: yupResolver(registerTrilhaSchema),
     context: undefined,
     criteriaMode: "firstError",
@@ -152,8 +172,46 @@ export default function FormativeTrailsRegister(props) {
     return cursosTrilha.map((course) => course.id);
   }, [cursosTrilha, register]);
 
+  useEffect(() => {
+    const init = async () => {
+      if (trailId) {
+        try {
+          const trail = await getTrailAction({ id: trailId });
+          setTrail(trail);
+          setTrailDefaultValues({
+            name: trail.name,
+            description: trail.description,
+            competencies: trail.competencies[0]?.id,
+            itineraries: trail.itineraries[0]?.id,
+            courses: trail.courses.map((item) => item.id),
+            filedAt: trail.filedAt,
+          });
+          setCompetencieSelected(
+            trail.competencies[0]
+              ? {
+                  label: trail.competencies[0].name,
+                  value: trail.competencies[0].id,
+                }
+              : undefined
+          );
+          setFiled(trail.filedAt);
+          setCursosTrilha(
+            trail.courses.sort((a, b) => a.sequence - b.sequence)
+          );
+          setItinerarieSelected(trail.itineraries[0]?.id);
+        } catch (error) {
+          notification.error({
+            message: "Erro!",
+            description: "Erro ao buscar trilha!",
+          });
+        }
+      }
+    };
+    init();
+  }, [getTrailAction, trailId, getCompetenciesAction]);
+
   const onSubmit = async (values) => {
-    if (trilha) {
+    if (trailId) {
       try {
         if (cursosTrilhaIds.length === 0) {
           throw new Error("A lista de cursos não pode estar vazia!");
@@ -162,15 +220,15 @@ export default function FormativeTrailsRegister(props) {
           ...values,
           itineraries: [values.itineraries],
           competencies: [values.competencies],
-          id: trilha.id,
+          id: trailId,
         });
         notification.success({
           message: "Trilha alterada com sucesso!",
         });
-        actionVisible();
+        navigate("/settings/formative-trails");
       } catch (error) {
         notification.error({
-          message: "Erro!",
+          message: "Erro ao alterar trilha!",
           description: error.message,
         });
       }
@@ -188,10 +246,10 @@ export default function FormativeTrailsRegister(props) {
           message: "Trilha cadastrada com sucesso!",
         });
         register.reset();
-        actionVisible();
+        navigate("/settings/formative-trails");
       } catch (error) {
         notification.error({
-          message: "Algo deu errado!",
+          message: "Erro ao cadastrar trilha!",
           description: error.message,
         });
       }
@@ -200,7 +258,7 @@ export default function FormativeTrailsRegister(props) {
 
   const handleArchive = async (value) => {
     try {
-      await setArchivedTrilha({ id: trilha.id, filed: value });
+      await setArchivedTrilha({ id: trailId, filed: value });
       notification.success({
         message: "Operação realizada com sucesso!",
       });
@@ -212,13 +270,13 @@ export default function FormativeTrailsRegister(props) {
     }
   };
 
-  const setDescriptionIfEmpty = (value) => {
-    if (register.getValues("description") === "") {
-      const competencie = allCompetencias.find((comp) => comp.id === value);
-      register.setValue("description", competencie.description);
-      register.trigger("description");
-    }
-  };
+  // const setDescriptionIfEmpty = (value) => {
+  //   if (register.getValues("description") === "") {
+  //     const competencie = competencies.find((comp) => comp.id === value);
+  //     register.setValue("description", competencie.description);
+  //     register.trigger("description");
+  //   }
+  // };
 
   // Table add courses to trail
 
@@ -317,7 +375,7 @@ export default function FormativeTrailsRegister(props) {
         >
           <Button
             onClick={() => {
-              actionVisible();
+              navigate("/settings/formative-trails");
             }}
             style={{
               marginBottom: "10px",
@@ -333,11 +391,11 @@ export default function FormativeTrailsRegister(props) {
                   fontFamily: "Roboto",
                 },
               }}
-              title={title}
+              title={trail?.id ? "Editar Trilha" : "Cadastrar Trilha"}
               bordered={false}
               extra={
                 <Space direction="horizontal">
-                  {trilha && (
+                  {trailId && (
                     <Tooltip title={"Trilha arquivada"}>
                       <Switch
                         checked={filed}
@@ -345,7 +403,6 @@ export default function FormativeTrailsRegister(props) {
                         style={{
                           marginRight: "15px",
                         }}
-                        defaultChecked={trilhaDefault.filedAt}
                         onChange={(value) => {
                           setFiled(value);
                           handleArchive(value);
@@ -360,7 +417,7 @@ export default function FormativeTrailsRegister(props) {
                     shape="round"
                     htmlType="submit"
                   >
-                    {trilha?.id ? <>Salvar</> : <>Cadastrar</>}
+                    {trailId ? <>Salvar</> : <>Cadastrar</>}
                   </Button>
                 </Space>
               }
@@ -467,60 +524,57 @@ export default function FormativeTrailsRegister(props) {
                         return (
                           <Form.Item
                             validateStatus={error ? "error" : ""}
-                            help={error ? error.message : ""}
+                            help={
+                              error
+                                ? error.message
+                                : !itinerarieSelected
+                                ? "Selecione um itinerário"
+                                : ""
+                            }
                             hasFeedback
                           >
-                            <Tooltip
-                              title={
-                                itinerarieSelected?.length === 0 &&
-                                "Selecione um itinerário"
-                              }
-                            >
-                              <Select
-                                showSearch
-                                disabled={itinerarieSelected?.length === 0}
-                                placeholder="Competências"
-                                {...field}
-                                filterOption={(input, option) => {
-                                  return (
-                                    option.label
-                                      .toString()
-                                      .toLowerCase()
-                                      .indexOf(input.toLowerCase()) >= 0
-                                  );
-                                }}
-                                onChange={(value) => {
-                                  setDescriptionIfEmpty(value);
-                                  field.onChange(value);
-                                }}
-                                labelRender={({ value }) => {
-                                  const item = allCompetencias.find(
-                                    (comp) => comp.id === value
-                                  );
-                                  return (
-                                    <>
-                                      {item?.name}
-                                      {item?.filedAt && (
-                                        <Tag
-                                          style={{
-                                            margin: "3px",
-                                          }}
-                                          color={"orange"}
-                                        >
-                                          ARQUIVADO
-                                        </Tag>
-                                      )}
-                                    </>
-                                  );
-                                }}
-                                options={competenciesFiltred
-                                  .filter((comp) => !comp.filedAt)
+                            <DebounceSelect
+                              {...field}
+                              disabled={!itinerarieSelected}
+                              placeholder="Competências"
+                              optionsToInclude={
+                                trail?.competencies
+                                  .filter((_, i) => i === 0)
                                   .map((item) => ({
                                     label: item.name,
                                     value: item.id,
-                                  }))}
-                              />
-                            </Tooltip>
+                                    filedAt: true,
+                                  })) || []
+                              }
+                              fetchOptions={getCompetencies}
+                              onChange={(value, selected) => {
+                                //setDescriptionIfEmpty(value);
+                                field.onChange(value);
+                                setCompetencieSelected(selected);
+                                console.log(selected);
+                              }}
+                              labelRender={(props) => {
+                                const { value, label } = props;
+                                const itemFiled = trail?.competencies.find(
+                                  (comp) => comp.id === value
+                                )?.filedAt;
+                                return (
+                                  <Space direction="horizontal">
+                                    {label}
+                                    {itemFiled && (
+                                      <Tag
+                                        style={{
+                                          margin: "3px",
+                                        }}
+                                        color={"orange"}
+                                      >
+                                        ARQUIVADO
+                                      </Tag>
+                                    )}
+                                  </Space>
+                                );
+                              }}
+                            />
                           </Form.Item>
                         );
                       }}
@@ -545,6 +599,9 @@ export default function FormativeTrailsRegister(props) {
                       },
                     }}
                     columns={columns}
+                    locale={{
+                      emptyText: <Empty description={"Sem cursos na trilha"} />,
+                    }}
                     dataSource={cursosTrilha}
                     pagination={false}
                     rowKey={"id"}
@@ -584,8 +641,13 @@ export default function FormativeTrailsRegister(props) {
                   onSelectChange={onSelectChange}
                   cursosDefaultSelected={cursosTrilhaIds}
                   filterDefault={{
-                    competencies: register.getValues("competencies")
-                      ? [register.getValues("competencies")]
+                    competencies: competencieSelected
+                      ? [
+                          {
+                            label: competencieSelected.label,
+                            value: competencieSelected.value,
+                          },
+                        ]
                       : [],
                   }}
                 />

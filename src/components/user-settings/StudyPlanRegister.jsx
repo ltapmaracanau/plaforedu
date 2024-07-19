@@ -226,6 +226,9 @@ export default function StudyPlanRegister() {
         name: course.name,
       })),
     ]);
+    notification.success({
+      message: "Trilha adicionada com sucesso!",
+    });
   };
 
   // Table add courses to plan

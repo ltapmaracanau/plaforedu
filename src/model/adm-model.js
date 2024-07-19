@@ -115,6 +115,7 @@ const admModel = {
       await getStoreActions().itineraries.getItinerarios();
       await actions.getRandomTrails();
       await actions.getStatistics();
+      getStoreActions().adm.setTipoVisualizacao(true);
     } catch (error) {
       notification.error({
         message: "Erro!",

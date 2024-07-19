@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerSubthemeSchema } from "../../schemas/registers/registersSchema";
+import DebounceSelect from "../fields/DebounceSelect";
 
-import { Button, Form, Input, notification, Select, Switch, Tag } from "antd";
+import { Button, Form, Input, notification, Switch, Tag } from "antd";
 
 export default function SubtemaRegister(props) {
   const { subtheme = null, actionVisible } = props;
@@ -20,11 +21,13 @@ export default function SubtemaRegister(props) {
   const updateSubtheme = useStoreActions(
     (actions) => actions.themes.updateSubtheme
   );
-  const themes = useStoreState((state) => state.themes.themes);
+  const getThemesAction = useStoreActions(
+    (actions) => actions.themes.getThemes
+  );
   const registering = useStoreState((state) => state.themes.registering);
-  const loadingThemes = useStoreState((state) => state.themes.loadingThemes);
 
   const [filed, setFiled] = useState(!!subtheme?.filedAt);
+  const [loadingThemes, setLoadingThemes] = useState(false);
 
   const register = useForm({
     mode: "onChange",
@@ -38,6 +41,32 @@ export default function SubtemaRegister(props) {
     shouldUseNativeValidation: false,
     delayError: undefined,
   });
+
+  const getThemes = useCallback(
+    async ({ query, page }) => {
+      try {
+        setLoadingThemes(true);
+        const { data } = await getThemesAction({
+          query,
+          showFiled: false,
+          page,
+        });
+        return data.map((item) => ({
+          ...item,
+          label: item.name,
+          value: item.id,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar temas!",
+          description: error.message,
+        });
+      } finally {
+        setLoadingThemes(false);
+      }
+    },
+    [getThemesAction]
+  );
 
   const onSubmit = async (values) => {
     if (subtheme) {
@@ -128,26 +157,27 @@ export default function SubtemaRegister(props) {
                   help={error ? error.message : ""}
                   hasFeedback
                 >
-                  <Select
-                    placeholder="Temas"
+                  <DebounceSelect
+                    mode="multiple"
+                    placeholder="Temas relacionados"
+                    fetchOptions={getThemes}
+                    optionsToInclude={
+                      subtheme
+                        ? subtheme.themes.map((comp) => ({
+                            label: comp.name,
+                            value: comp.id,
+                            filedAt: comp.filedAt,
+                          }))
+                        : []
+                    }
                     {...field}
-                    loading={loadingThemes}
-                    showSearch
-                    mode={"multiple"}
-                    filterOption={(input, option) => {
-                      return (
-                        option.label
-                          .toString()
-                          .toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      );
-                    }}
                     tagRender={(props) => {
-                      const { value, closable, onClose } = props;
-                      const item = themes.find((theme) => theme.id === value);
+                      const { label, value, closable, onClose } = props;
+                      const itemFiled = subtheme?.themes.find(
+                        (theme) => theme.id === value
+                      )?.filedAt;
 
                       if (!value) return;
-
                       return (
                         <Tag
                           closable={closable}
@@ -157,8 +187,8 @@ export default function SubtemaRegister(props) {
                             fontSize: 14,
                           }}
                         >
-                          {item.name}
-                          {item.filedAt && (
+                          {label}
+                          {itemFiled && (
                             <Tag
                               style={{
                                 margin: "3px",
@@ -171,12 +201,6 @@ export default function SubtemaRegister(props) {
                         </Tag>
                       );
                     }}
-                    options={themes
-                      .filter((element) => !element.filedAt)
-                      .map((element) => ({
-                        label: element.name,
-                        value: element.id,
-                      }))}
                   />
                 </Form.Item>
               );

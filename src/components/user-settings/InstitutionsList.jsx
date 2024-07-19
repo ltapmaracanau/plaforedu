@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useCallback, useEffect, useState } from "react";
+import { useStoreActions } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -9,6 +9,7 @@ import {
   Input,
   List,
   Modal,
+  notification,
   Space,
   Switch,
   Tag,
@@ -19,24 +20,50 @@ import InstitutionRegister from "./InstitutionRegister";
 const { Search } = Input;
 
 export default function InstitutionList() {
-  const getInstituicoes = useStoreActions(
+  const getInstituicoesAction = useStoreActions(
     (actions) => actions.institutions.getInstituicoes
   );
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
-  const loading = useStoreState((state) => state.institutions.loading);
-  const instituicoes = useStoreState(
-    (state) => state.institutions.instituicoes
-  );
-
   const [editandoInstituicao, setEditandoInstituicao] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
+  const [institutions, setInstitutions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+
+  const getInstitutions = useCallback(
+    async ({ query, showFiled, page }) => {
+      setLoading(true);
+      try {
+        const response = await getInstituicoesAction({
+          query,
+          showFiled,
+          page,
+        });
+        setInstitutions(response.data);
+        setCount(response.count);
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar instituições",
+          description: error.message,
+        });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [getInstituicoesAction]
+  );
 
   useEffect(() => {
-    getInstituicoes();
-  }, [getInstituicoes]);
+    getInstitutions({
+      query: textSearch,
+      showFiled: showFiled,
+      page,
+    });
+  }, [getInstitutions, textSearch, showFiled, page]);
 
   return (
     <>
@@ -69,7 +96,7 @@ export default function InstitutionList() {
                   defaultValue={textSearch}
                   onSearch={(e) => {
                     setTextSearch(e);
-                    getInstituicoes({
+                    getInstitutions({
                       query: e,
                       showFiled: showFiled,
                     });
@@ -88,7 +115,7 @@ export default function InstitutionList() {
                     }}
                     onClick={(checked) => {
                       setShowFiled(checked);
-                      getInstituicoes({
+                      getInstitutions({
                         query: textSearch,
                         showFiled: checked,
                       });
@@ -110,8 +137,22 @@ export default function InstitutionList() {
           >
             <List
               loading={loading}
-              dataSource={instituicoes}
+              dataSource={institutions}
               style={{ width: "100%" }}
+              pagination={{
+                pageSize: 30,
+                current: page,
+                total: count,
+                defaultCurrent: 1,
+                onChange: (page) => {
+                  setPage(page);
+                  getInstitutions({
+                    query: textSearch,
+                    showFiled: showFiled,
+                    page,
+                  });
+                },
+              }}
               renderItem={(item) => {
                 return (
                   <List.Item
@@ -165,7 +206,7 @@ export default function InstitutionList() {
             open={registerVisible}
             destroyOnClose={true}
             onCancel={() => {
-              getInstituicoes({
+              getInstitutions({
                 query: textSearch,
                 showFiled: showFiled,
               });
@@ -176,7 +217,7 @@ export default function InstitutionList() {
                 type="primary"
                 key={"back"}
                 onClick={() => {
-                  getInstituicoes({
+                  getInstitutions({
                     query: textSearch,
                     showFiled: showFiled,
                   });
@@ -188,10 +229,10 @@ export default function InstitutionList() {
             ]}
           >
             <InstitutionRegister
-              instituicao={editandoInstituicao}
+              institution={editandoInstituicao}
               actionVisible={() => {
                 setRegisterVisible(false);
-                getInstituicoes({
+                getInstitutions({
                   query: textSearch,
                   showFiled: showFiled,
                 });

@@ -48,6 +48,8 @@ import ScrollToTop from "../components/ScrollToTop.jsx";
 import TermCookiesModal from "../components/privacyTerms/TermCookiesModal.jsx";
 import TermPrivacyModal from "../components/privacyTerms/TermPrivacyModal.jsx";
 import DocumentsList from "../components/user-settings/DocumentsList.jsx";
+import CourseRegister from "../components/user-settings/CourseRegister.jsx";
+import FormativeTrailsRegister from "../components/user-settings/FormativeTrailsRegister.jsx";
 
 const Layout = () => {
   const [cookies, setCookie] = useCookies(["cookieConsent"]);
@@ -348,6 +350,15 @@ const CustomRoutes = () => {
                     ),
                 },
                 {
+                  path: "/settings/courses/edit/:courseId?",
+                  element:
+                    isAdm || isCoord || isConsultor ? (
+                      <CourseRegister />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
                   path: "/settings/institutions",
                   element:
                     isAdm || isCoord || isAnalistaDados ? (
@@ -397,6 +408,15 @@ const CustomRoutes = () => {
                   element:
                     isAdm || isCoord || isAnalistaDados ? (
                       <FormativeTrailsList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/formative-trails/edit/:trailId?",
+                  element:
+                    isAdm || isCoord ? (
+                      <FormativeTrailsRegister />
                     ) : (
                       <Navigate to="/denied" />
                     ),

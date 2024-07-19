@@ -7,7 +7,7 @@ import { registerInstitutionSchema } from "../../schemas/registers/registersSche
 import { Button, Form, Input, notification, Select, Switch } from "antd";
 
 export default function InstitutionRegister(props) {
-  const { instituicao = null, actionVisible } = props;
+  const { institution = null, actionVisible } = props;
 
   const registerNewInstitution = useStoreActions(
     (actions) => actions.institutions.registerNewInstitution
@@ -22,12 +22,12 @@ export default function InstitutionRegister(props) {
   const [loadingStates, setLoadingStates] = useState(false);
   const [estados, setEstados] = useState([]);
 
-  const [filed, setFiled] = useState(!!instituicao?.filedAt);
+  const [filed, setFiled] = useState(!!institution?.filedAt);
 
   const register = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
-    defaultValues: instituicao,
+    defaultValues: institution,
     resolver: yupResolver(registerInstitutionSchema),
     context: undefined,
     criteriaMode: "firstError",
@@ -38,11 +38,11 @@ export default function InstitutionRegister(props) {
   });
 
   const onSubmit = async (values) => {
-    if (instituicao) {
+    if (institution) {
       try {
-        if (!!instituicao.filedAt !== filed) {
+        if (!!institution.filedAt !== filed) {
           await updateInstitution({
-            id: instituicao.id,
+            id: institution.id,
             name: values.name,
             abbreviation: values.abbreviation,
             uf: values.uf,
@@ -53,7 +53,7 @@ export default function InstitutionRegister(props) {
             name: values.name,
             abbreviation: values.abbreviation,
             uf: values.uf,
-            id: instituicao.id,
+            id: institution.id,
           });
         }
         notification.success({
@@ -185,14 +185,14 @@ export default function InstitutionRegister(props) {
               );
             }}
           />
-          {instituicao && (
+          {institution && (
             <Form.Item
               label={"Instituição arquivada"}
               style={{ marginBottom: "20px" }}
             >
               <Switch
                 checked={filed}
-                defaultChecked={instituicao.filedAt}
+                defaultChecked={institution.filedAt}
                 onChange={(value) => {
                   setFiled(value);
                 }}
@@ -213,7 +213,7 @@ export default function InstitutionRegister(props) {
               shape="round"
               htmlType="submit"
             >
-              {instituicao ? <>Alterar</> : <>Cadastrar</>}
+              {institution ? <>Alterar</> : <>Cadastrar</>}
             </Button>
           </div>
         </Form>

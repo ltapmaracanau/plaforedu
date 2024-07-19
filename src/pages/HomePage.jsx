@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import "./homepage.css";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -19,12 +19,11 @@ import icon3 from "../assets/HomepageIcon3.svg";
 import rightBlue from "../assets/RightBlue.svg";
 import rightWhite from "../assets/RightWhite.svg";
 
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import { Link } from "react-router-dom";
 
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
-import services from "../services";
 import { Row, Col, Grid, Button, Divider, Dropdown, Typography } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
 import Finder from "../components/Finder";
@@ -52,15 +51,6 @@ export default function HomePage() {
   const [idSelectedCourse, setIdSelectedCourse] = useState(null);
   const [modalSelectedCourseVisible, setModalSelectedCouseVisible] =
     useState(false);
-
-  const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
-  );
-
-  const recentCourses = useMemo(
-    async () => await services.admService.getLastViewedCourses(),
-    []
-  );
 
   return (
     <>

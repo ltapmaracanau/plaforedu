@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import CytoscapeComponent from "react-cytoscapejs";
 // import { CSVLink } from "react-csv";
@@ -7,6 +7,9 @@ import CytoscapeComponent from "react-cytoscapejs";
 import fundoLegenda from "../../assets/icon/PLAFOREDU_Icones-Legenda.png";
 
 // import { Template } from "../pdf-document";
+
+import ModalCourseVisualization from "../CourseModalVisualization";
+import reformuladorDeElementosCytoscape from "../../helpers/reformuladorDeElementosCytoscape";
 
 import {
   MenuUnfoldOutlined,
@@ -18,7 +21,6 @@ import {
 import {
   Col,
   Modal,
-  Typography,
   Descriptions,
   Button,
   Card,
@@ -26,29 +28,22 @@ import {
   Slider,
   Select,
   Form,
-  Skeleton,
-  Space,
-  List,
 } from "antd";
-
-const { Text } = Typography;
 
 export default function CytoscapeVisualization() {
   const cyRef = useRef(null);
 
   const filter = useStoreState((state) => state.courses.filter);
-  const elementsCourses = useStoreState((state) => state.courses.elements);
-  const elementsTrails = useStoreState((state) => state.trilhas.elements);
+  const courses = useStoreState((state) => state.courses.cursos);
+  const trails = useStoreState((state) => state.trilhas.trilhas);
   const colorSchemaDefault = useStoreState(
     (state) => state.courses.filterDefault.esquemaDeCores
   );
 
   const layouts = useStoreState((state) => state.itineraries.layouts);
   const layoutAtual = useStoreState((state) => state.itineraries.layoutAtual);
+  const itineraries = useStoreState((state) => state.itineraries.itinerarios);
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
-  const listCompetencias = useStoreState(
-    (state) => state.competencies.competencias
-  );
 
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const setUniqueCourse = useStoreActions(
@@ -60,40 +55,24 @@ export default function CytoscapeVisualization() {
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
-  const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
+  const getCompetencieAction = useStoreActions(
+    (actions) => actions.competencies.getUniqueComp
   );
 
   const [zoom, setZoom] = useState(1);
   const [competenceOnModal, setCompetenceOnModal] = useState(undefined);
-
-  const uniqueCourse = useStoreState((state) => state.courses.uniqueCourse);
-  const loadingUniqueCourse = useStoreState(
-    (state) => state.courses.loadingUniqueCourse
-  );
+  const [idCourseView, setIdCourseView] = useState(undefined);
 
   const [modalCourseVisible, setModalCourseVisible] = useState(false);
   const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
 
-  /* const csvCursosHeaders = [
-    { label: "Título", key: "titulo" },
-    { label: "Descrição", key: "descricao" },
-    { label: "Carga horária", key: "cargaHoraria" },
-    { label: "Instituição Certificadora", key: "instCert" },
-    { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
-    { label: "Link", key: "link" },
-  ];
-
-  const csvTrilhasHeaders = [
-    { label: "Trilha", key: "trilha" },
-    { label: "Descrição trilha", key: "descTrilha" },
-    { label: "Título", key: "titulo" },
-    { label: "Descrição", key: "descricao" },
-    { label: "Carga horária", key: "cargaHoraria" },
-    { label: "Instituição Certificadora", key: "instCert" },
-    { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
-    { label: "Link", key: "link" },
-  ]; */
+  const elements = useMemo(() => {
+    return reformuladorDeElementosCytoscape(
+      filter.tipoClassificacao ? trails : courses,
+      filter,
+      itineraries
+    );
+  }, [courses, filter, itineraries, trails]);
 
   const handleOk = () => {
     setCompetenceOnModal(undefined);
@@ -102,16 +81,29 @@ export default function CytoscapeVisualization() {
     setModalCompetenciaVisible(false);
   };
 
+  const getCompetencie = useCallback(
+    async (id) => {
+      try {
+        const comp = await getCompetencieAction({ id });
+        setCompetenceOnModal(comp);
+        setModalCompetenciaVisible(true);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [getCompetencieAction]
+  );
+
   useEffect(() => {
     if (filter.tipoClassificacao) {
-      cyRef.current.add(elementsTrails);
+      cyRef.current.add(elements);
       cyRef.current.layout(layouts["layoutGrid"]).run();
     } else {
-      cyRef.current.add(elementsCourses);
+      cyRef.current.add(elements);
       cyRef.current.layout(layouts[layoutAtual]).run();
     }
     setZoom(cyRef.current._private.zoom + 0.3);
-  }, [elementsCourses, elementsTrails, layoutAtual, filter, layouts]);
+  }, [elements, layoutAtual, filter, layouts]);
 
   return (
     <Col flex="auto">
@@ -252,46 +244,11 @@ export default function CytoscapeVisualization() {
               </Col>
             </>
           )}
-          {/* <Col style={{ margin: "5px" }}>
-            <Card style={{ width: "100%" }}>
-              <CSVLink
-                filename="plaforedu"
-                headers={
-                  filter.tipoClassificacao
-                    ? csvTrilhasHeaders
-                    : csvCursosHeaders
-                }
-                data={data}
-                target="_blank"
-              >
-                <Button onClick={() => {}} icon={<FileExcelOutlined />}>
-                  <Text style={{ fontFamily: "Roboto" }}>Exportar .csv</Text>
-                </Button>
-              </CSVLink>
-            </Card>
-          </Col> */}
-          {/* <Col
-              style={{ margin: '5px' }}
-          >
-              <Card style={{ width: '100%' }}>
-                  <PDFDownloadLink document={<Template sourceImage={() => cyRef?.current.jpg()} />} fileName="plaforedu.pdf">
-                      {({ loading, error }) => loading ? (
-                          <Button icon={<LoadingOutlined />}>
-                              <Text>{error?.message}</Text>
-                          </Button>
-                      ) : (
-                          <Button icon={<FilePdfOutlined />}>
-                              <Text style={{ fontFamily: 'Roboto' }}>Exportar .pdf</Text>
-                          </Button>
-                      )}
-                  </PDFDownloadLink>
-              </Card>
-          </Col> */}
         </Row>
       </Form>
       {/* Canvas Cytoscape */}
       <CytoscapeComponent
-        elements={filter.tipoClassificacao ? elementsTrails : elementsCourses}
+        elements={elements}
         minZoom={0.01}
         maxZoom={1.0}
         zoom={zoom}
@@ -306,11 +263,11 @@ export default function CytoscapeVisualization() {
               !element.id.includes("container") &&
               !element.id.includes("equivalent")
             ) {
-              getUniqueCourse({ id: element.id.split("curso")[1] });
+              setIdCourseView(element.id.split("curso")[1]);
               setModalCourseVisible(true);
             }
             if (element.id.includes("equivalent")) {
-              getUniqueCourse({ id: element.id.split("equivalent")[1] });
+              setIdCourseView(element.id.split("equivalent")[1]);
               setModalCourseVisible(true);
             }
             if (
@@ -319,13 +276,7 @@ export default function CytoscapeVisualization() {
               !element.id.includes("container") &&
               !element.id.includes("curso")
             ) {
-              setCompetenceOnModal(
-                listCompetencias.find(
-                  (competencia) =>
-                    competencia.id === element.id.replace(/competencia/gi, "")
-                )
-              );
-              setModalCompetenciaVisible(true);
+              getCompetencie(element.id.replace(/competencia/gi, ""));
             }
           });
         }}
@@ -451,103 +402,11 @@ export default function CytoscapeVisualization() {
         }}
         draggable={false}
       />
-      <Modal
-        open={modalCourseVisible}
-        key={`modalCurso`}
-        destroyOnClose={true}
-        centered={true}
-        onCancel={handleOk}
-        onOk={handleOk}
-        title={"Sobre o curso"}
-        footer={
-          <Button onClick={handleOk} type={"primary"}>
-            Ok
-          </Button>
-        }
-      >
-        {loadingUniqueCourse ? (
-          <Skeleton active />
-        ) : (
-          <Card>
-            <Descriptions
-              column={1}
-              bordered
-              layout={"vertical"}
-              style={{ backgroundColor: "white" }}
-            >
-              <Descriptions.Item label="Título">
-                {uniqueCourse?.name}
-              </Descriptions.Item>
-              <Descriptions.Item label="Descrição">
-                {uniqueCourse?.description}
-              </Descriptions.Item>
-              <Descriptions.Item label="Carga Horária">
-                {uniqueCourse?.hours}
-              </Descriptions.Item>
-              <Descriptions.Item label="Instituições Certificadoras">
-                {uniqueCourse?.institutions?.map((inst) => (
-                  <Space key={inst.institutionId} direction={"vertical"}>
-                    <Text>{inst.name}</Text>
-                    <div>
-                      <span>Link: </span>
-                      <a
-                        target="_blank"
-                        rel="noreferrer"
-                        key={`link${inst.id}`}
-                        href={inst.link}
-                      >
-                        {inst.link}
-                      </a>
-                    </div>
-                  </Space>
-                ))}
-              </Descriptions.Item>
-              <Descriptions.Item label="Cursos equivalentes">
-                <List
-                  locale={{
-                    emptyText: <>Sem equivalentes</>,
-                  }}
-                  bordered
-                  dataSource={uniqueCourse?.equivalents?.filter(
-                    (course) => !course.filedAt
-                  )}
-                  renderItem={(item) => (
-                    <List.Item
-                      actions={[
-                        <Button
-                          key={item.id}
-                          onClick={() => {
-                            getUniqueCourse({ id: item.id });
-                          }}
-                        >
-                          Visualizar
-                        </Button>,
-                      ]}
-                      key={item.id}
-                    >
-                      {item.name}
-                    </List.Item>
-                  )}
-                />
-              </Descriptions.Item>
-              <Descriptions.Item label="Acessibilidades">
-                {uniqueCourse?.accessibilities
-                  ?.map((ac) => ac.name)
-                  .join(" | ")}
-              </Descriptions.Item>
-              <Descriptions.Item label="Taxonomia revisada de Bloom">
-                {uniqueCourse?.taxonomies?.map((tx) => tx.name).join(" | ")}
-              </Descriptions.Item>
-              <Descriptions.Item label="Subtemas">
-                {uniqueCourse?.subThemes
-                  ?.filter((sub) => !sub.filedAt)
-                  .map((sub) => sub.name)
-                  .join(" | ")}
-              </Descriptions.Item>
-            </Descriptions>
-          </Card>
-        )}
-      </Modal>
+      <ModalCourseVisualization
+        id={idCourseView}
+        visible={modalCourseVisible}
+        setVisible={setModalCourseVisible}
+      />
       <Modal // Modal de Competência
         open={modalCompetenciaVisible}
         onOk={handleOk}

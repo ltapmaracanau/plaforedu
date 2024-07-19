@@ -5,16 +5,13 @@ const accessibilitiesModel = {
   loading: false,
   acessibilidades: [],
 
-  getAcessibilidades: thunk(async (actions, payload = { query: "" }) => {
+  getAcessibilidades: thunk(async (actions) => {
     actions.setLoading(true);
-    await services.admService
-      .getAcessibilidades({
-        query: payload.query.trim(),
-      })
+    return await services.admService
+      .getAcessibilidades()
       .then((response) => {
-        if (response.status === 200) {
-          actions.setAcessibilidades(response.data);
-        }
+        actions.setAcessibilidades(response.data);
+        return response.data;
       })
       .catch((error) => {
         throw new Error(
