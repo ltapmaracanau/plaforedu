@@ -8,6 +8,8 @@ import {
   Button,
   DatePicker,
   ConfigProvider,
+  Typography,
+  Tag,
 } from "antd";
 import { FileSyncOutlined } from "@ant-design/icons";
 import HistoricoItens from "./HistoricoItens";
@@ -79,6 +81,13 @@ export default function SystemLog() {
     };
   }, []);
 
+  const entityTypeLabel = useMemo(() => {
+    return {
+      COURSE: "Curso",
+      FORMATIVE_TRAIL: "Trilha",
+    }
+  }, [])
+
   const [pageNumber, setPageNumber] = useState(1);
   const [categoria, setCategoria] = useState(undefined);
   const [action, setAction] = useState(undefined);
@@ -95,6 +104,21 @@ export default function SystemLog() {
       title: "Nome",
       dataIndex: "name",
       key: "nameColumn",
+      render: (titulo, record) => {
+        return <Typography.Text>
+          {titulo}
+          {
+            <Tag
+              style={{
+                marginLeft: "10px",
+              }}
+              color="blue"
+            >
+              {entityTypeLabel[record.entityType]}
+            </Tag>
+          }
+        </Typography.Text>
+      }
     },
     {
       title: "Ação",
@@ -173,6 +197,7 @@ export default function SystemLog() {
           userName: item.user.name,
           userId: item.userId,
           itemId: item.entity.id,
+          entityType: item.entityType,
         });
       });
     }
@@ -377,7 +402,7 @@ export default function SystemLog() {
           </Card>
         </div>
       </div>
-      {categoria === categoriaOptions[0].value ? (
+      {selectedItem?.entityType === "COURSE" ? (
         <CourseModalVisualization
           id={selectedItem?.itemId}
           visible={visible}
