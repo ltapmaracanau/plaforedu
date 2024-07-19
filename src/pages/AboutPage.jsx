@@ -17,9 +17,11 @@ import setabaixo from "../assets/icon/setabaixo.svg";
 const { useBreakpoint } = Grid;
 
 import styles from "./AboutPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AboutPage() {
   const screens = useBreakpoint();
+  const navigate = useNavigate();
 
   const filterDefault = useStoreState((state) => state.courses.filterDefault);
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
@@ -34,6 +36,7 @@ export default function AboutPage() {
       itinerario: itinerarioClicado.id,
       esquemaDeCores: "categoria",
     });
+    navigate("/cursos");
   };
 
   useEffect(() => {
