@@ -1,9 +1,8 @@
-import { action, computed, thunk, thunkOn } from "easy-peasy";
+import { action, thunk, thunkOn } from "easy-peasy";
 import services from "../services";
 
-import reformuladorDeElementosCytoscape from "../helpers/reformuladorDeElementosCytoscape";
-
 const initialFilterDefault = {
+  page: 1,
   query: "",
   cargaHoraria: [0, 300],
   tipoClassificacao: true, // false: por cursos, true: por trilhas
@@ -31,24 +30,6 @@ const coursesModel = {
   countSecondary: 0,
   loadingCursosSecondary: false,
 
-  // elements: computed(
-  //   [
-  //     (state) => state.cursos,
-  //     (state) => state.filter,
-  //     (_state, storeState) => storeState.itineraries.itinerarios,
-  //     (_state, storeState) => storeState.competencies.competencias,
-  //   ],
-  //   (cursos, filter, itineraries, competencias) => {
-  //     return reformuladorDeElementosCytoscape(
-  //       cursos,
-  //       filter,
-  //       competencias,
-  //       itineraries,
-  //       false
-  //     );
-  //   }
-  // ),
-
   filterDefault: initialFilterDefault,
 
   filter: initialFilterDefault,
@@ -59,15 +40,37 @@ const coursesModel = {
 
   onSetFilter: thunkOn(
     // targetResolver:
-    (actions) => actions.setFilter,
+    (actions, storeActions) => [
+      actions.setFilter,
+      storeActions.adm.setTipoVisualizacao,
+    ],
     // handler:
-    async (actions, target) => {
-      if (!target.payload.tipoClassificacao) {
-        await actions.getCursos({
-          ...target.payload,
-          registerLog:
-            target.payload.query && target.payload.query !== "" ? true : false,
-        });
+    async (actions, target, { getStoreState, getState }) => {
+      if (!getState().filter.tipoClassificacao) {
+        await actions.getCursos(
+          target.type.includes("setFilter")
+            ? {
+                showFiled: false,
+                registerLog:
+                  target.payload.query && target.payload.query !== "",
+                page: getStoreState().adm.tipoVisualizacao
+                  ? target.payload.page
+                  : 0,
+                query: target.payload.query,
+                cargaHoraria: target.payload.cargaHoraria,
+                institutions: target.payload.institutions,
+                itineraries: target.payload.itinerario
+                  ? [target.payload.itinerario]
+                  : [],
+                accessibilities: target.payload.accessibilities,
+                competencies: target.payload.competencies,
+                subtemas: target.payload.subThemes,
+                taxonomies: target.payload.taxonomies,
+              }
+            : {
+                ...getStoreState().courses.filter,
+              }
+        );
       }
     }
   ),
@@ -81,11 +84,10 @@ const coursesModel = {
         secondary = false,
         showFiled = false,
         registerLog = false,
-        page = 0,
+        page = 1,
         query = "",
         cargaHoraria = [],
         institutions = [],
-        itinerario,
         itineraries = [],
         accessibilities = [],
         competencies = [],
@@ -101,14 +103,6 @@ const coursesModel = {
       } else {
         actions.setLoading(true);
       }
-      let newItineraries = [];
-      if (itineraries.length === 0) {
-        if (itinerario && itinerario != 0) {
-          newItineraries = [itinerario];
-        }
-      } else {
-        newItineraries = itineraries;
-      }
       return await services.courseService
         .getCursos({
           includeFiled: showFiled,
@@ -117,7 +111,7 @@ const coursesModel = {
           search: query.trim(),
           hours: cargaHoraria,
           institutions: institutions,
-          itineraries: newItineraries,
+          itineraries: itineraries,
           accessibilities: accessibilities,
           competencies: competencies,
           taxonomies: taxonomies,

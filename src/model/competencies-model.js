@@ -159,6 +159,17 @@ const competenciasModel = {
     }
   ),
 
+  getUniqueComp: thunk(async (actions, { id }) => {
+    return await services.compService
+      .getUniqueComp({ id })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }),
+
   setLoadingCompetencies: action((state, payload) => {
     state.loadingCompetencies = payload;
   }),

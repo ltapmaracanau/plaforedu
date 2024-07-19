@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { debounce } from "lodash";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useForm, FormProvider, Controller } from "react-hook-form";
@@ -15,30 +15,105 @@ import {
   Form,
   Card,
   Grid,
+  notification,
 } from "antd";
+import DebounceSelect from "./fields/DebounceSelect";
 const { useBreakpoint } = Grid;
 
 export default function SideFilter({ debounceTimeout = 800 }) {
   const screens = useBreakpoint();
 
-  const subtemas = useStoreState((state) => state.themes.subthemes);
-  const competencias = useStoreState(
-    (state) => state.competencies.competencias
-  );
-  const instituicoes = useStoreState(
-    (state) => state.institutions.instituicoes
-  );
-  const filterDefault = useStoreState((state) => state.courses.filterDefault);
-  const filter = useStoreState((state) => state.courses.filter);
-  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
-
-  const [filtroCompleto, setFiltroCompleto] = useState(false);
-
-  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const setTipoVisualizacao = useStoreActions(
     (actions) => actions.adm.setTipoVisualizacao
   );
+  const getCompetenciesAction = useStoreActions(
+    (actions) => actions.competencies.getComp
+  );
+  const getInstitutionsAction = useStoreActions(
+    (actions) => actions.institutions.getInstituicoes
+  );
+  const getSubthemesAction = useStoreActions(
+    (actions) => actions.themes.getSubthemes
+  );
+
+  const filterDefault = useStoreState((state) => state.courses.filterDefault);
+  const filter = useStoreState((state) => state.courses.filter);
+  const itinerarios = useStoreState((state) => state.itineraries.itinerarios);
+  const [filtroCompleto, setFiltroCompleto] = useState(
+    !filter.tipoClassificacao
+  );
+
+  const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const tipoVisualizacao = useStoreState((state) => state.adm.tipoVisualizacao);
+
+  const getCompetencies = useCallback(
+    async ({ query, page }) => {
+      try {
+        const { data } = await getCompetenciesAction({
+          query,
+          page,
+          showFiled: false,
+        });
+        return data.map((item) => ({
+          ...item,
+          value: item.id,
+          label: item.name,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar competências",
+          description: error.message,
+        });
+      }
+    },
+    [getCompetenciesAction]
+  );
+
+  const getInstitutions = useCallback(
+    async ({ query, page }) => {
+      try {
+        const { data } = await getInstitutionsAction({
+          query,
+          page,
+          showFiled: false,
+        });
+        return data.map((item) => ({
+          ...item,
+          value: item.id,
+          label: item.abbreviation,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar instituições",
+          description: error.message,
+        });
+      }
+    },
+    [getInstitutionsAction]
+  );
+
+  const getSubthemes = useCallback(
+    async ({ query, page }) => {
+      try {
+        const { data } = await getSubthemesAction({
+          query,
+          page,
+          showFiled: false,
+        });
+        return data.map((item) => ({
+          ...item,
+          value: item.id,
+          label: item.name,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar subtemas",
+          description: error.message,
+        });
+      }
+    },
+    [getSubthemesAction]
+  );
 
   const register = useRef(
     useForm({
@@ -56,14 +131,13 @@ export default function SideFilter({ debounceTimeout = 800 }) {
 
   const onSubmit = () => {
     let allValuesFields = register.current.getValues();
-    delete allValuesFields.tipoVisualizacao;
     if (allValuesFields.tipoClassificacao) {
       allValuesFields.cargaHoraria = filterDefault.cargaHoraria;
       allValuesFields.temas = [];
       allValuesFields.subtemas = [];
       allValuesFields.instCertificadora = [];
     }
-    setFilter(allValuesFields);
+    setFilter({ ...filter, ...allValuesFields });
   };
 
   const onReset = () => {
@@ -79,12 +153,11 @@ export default function SideFilter({ debounceTimeout = 800 }) {
   const onSubmitDebounce = useMemo(() => {
     const onSubmitDebounceFunction = () => {
       let allValuesFields = register.current.getValues();
-      delete allValuesFields.tipoVisualizacao;
-      setFilter(allValuesFields);
+      setFilter({ ...filter, ...allValuesFields });
     };
 
     return debounce(onSubmitDebounceFunction, debounceTimeout);
-  }, [debounceTimeout, setFilter]);
+  }, [debounceTimeout, setFilter, filter]);
 
   return (
     <Col style={{ padding: "8px 16px", overflowY: "scroll", height: "100%" }}>
@@ -136,27 +209,16 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                 },
               }}
             >
-              <Controller
-                control={register.current.control}
-                name="tipoVisualizacao"
-                render={() => {
-                  return (
-                    <Form.Item
-                      style={{ marginBottom: "0" }}
-                      label={"Visualizar em:"}
-                    >
-                      <Switch
-                        defaultChecked={tipoVisualizacao}
-                        checkedChildren="Lista"
-                        unCheckedChildren="Grafo"
-                        onChange={(value) => {
-                          setTipoVisualizacao(value);
-                        }}
-                      />
-                    </Form.Item>
-                  );
-                }}
-              />
+              <Form.Item style={{ marginBottom: "0" }} label={"Visualizar em:"}>
+                <Switch
+                  defaultChecked={tipoVisualizacao}
+                  checkedChildren="Lista"
+                  unCheckedChildren="Grafo"
+                  onChange={(value) => {
+                    setTipoVisualizacao(value);
+                  }}
+                />
+              </Form.Item>
             </Card>
           )}
           <Card
@@ -248,32 +310,19 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                   style={{ marginBottom: "0" }}
                   label={"Competências:"}
                 >
-                  <Select
-                    {...field}
+                  <DebounceSelect
                     mode="multiple"
-                    placeholder={"Todas as competências"}
+                    placeholder="Competências"
+                    style={{
+                      width: "100%",
+                    }}
+                    fetchOptions={getCompetencies}
+                    {...field}
                     onChange={(value) => {
                       field.onChange(value);
                       onSubmit();
                     }}
-                    style={{ width: "100%" }}
-                    filterOption={(input, option) => {
-                      return (
-                        option.children
-                          .toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      );
-                    }}
-                  >
-                    {competencias.map((competencia) => (
-                      <Select.Option
-                        key={competencia.id}
-                        value={competencia.id}
-                      >
-                        {competencia.name}
-                      </Select.Option>
-                    ))}
-                  </Select>
+                  />
                 </Form.Item>
               )}
             />
@@ -298,29 +347,19 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                       style={{ marginBottom: "0" }}
                       label={"Subtemas:"}
                     >
-                      <Select
-                        {...field}
-                        placeholder={"Todos os Subtemas"}
+                      <DebounceSelect
                         mode="multiple"
+                        placeholder="Subtemas"
+                        style={{
+                          width: "100%",
+                        }}
+                        fetchOptions={getSubthemes}
+                        {...field}
                         onChange={(value) => {
                           field.onChange(value);
                           onSubmit();
                         }}
-                        filterOption={(input, option) => {
-                          return (
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          );
-                        }}
-                        style={{ width: "100%" }}
-                      >
-                        {subtemas.map((subtema) => (
-                          <Select.Option key={subtema.id} value={subtema.id}>
-                            {subtema.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                      />
                     </Form.Item>
                   )}
                 />
@@ -344,7 +383,6 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                       label={"Carga Horária:"}
                     >
                       <Slider
-                        {...field}
                         range
                         marks={{
                           0: "0h",
@@ -352,6 +390,7 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                         }}
                         step={10}
                         max={300}
+                        {...field}
                         onChange={(value) => {
                           field.onChange(value);
                           onSubmitDebounce();
@@ -379,29 +418,19 @@ export default function SideFilter({ debounceTimeout = 800 }) {
                       style={{ marginBottom: "0" }}
                       label={"Instituição Certificadora:"}
                     >
-                      <Select
-                        {...field}
-                        placeholder={"Todas as Instituições"}
+                      <DebounceSelect
                         mode="multiple"
+                        placeholder="Instituições"
+                        style={{
+                          width: "100%",
+                        }}
+                        fetchOptions={getInstitutions}
+                        {...field}
                         onChange={(value) => {
                           field.onChange(value);
                           onSubmit();
                         }}
-                        style={{ width: "100%" }}
-                        filterOption={(input, option) => {
-                          return (
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          );
-                        }}
-                      >
-                        {instituicoes.map((inst) => (
-                          <Select.Option key={inst.id} value={inst.id}>
-                            {inst.name}
-                          </Select.Option>
-                        ))}
-                      </Select>
+                      />
                     </Form.Item>
                   )}
                 />

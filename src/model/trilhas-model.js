@@ -1,5 +1,4 @@
-import { action, computed, thunk, thunkOn } from "easy-peasy";
-import reformuladorDeElementosCytoscape from "../helpers/reformuladorDeElementosCytoscape";
+import { action, thunk, thunkOn } from "easy-peasy";
 import services from "../services";
 
 const trilhasModel = {
@@ -10,31 +9,33 @@ const trilhasModel = {
   trilhas: [],
   count: 0,
 
-  // elements: computed(
-  //   [
-  //     (state) => state.trilhas,
-  //     (_state, storeState) => storeState.courses.filter,
-  //     (_state, storeState) => storeState.itineraries.itinerarios,
-  //     (_state, storeState) => storeState.competencies.competencias,
-  //   ],
-  //   (trilhas, filter, itinerarios, competencias) => {
-  //     return reformuladorDeElementosCytoscape(
-  //       trilhas,
-  //       filter,
-  //       competencias,
-  //       itinerarios,
-  //       true
-  //     );
-  //   }
-  // ),
-
   onSetFilter: thunkOn(
     // targetResolver:
-    (_actions, storeActions) => storeActions.courses.setFilter,
+    (_actions, storeActions) => [
+      storeActions.courses.setFilter,
+      storeActions.adm.setTipoVisualizacao,
+    ],
     // handler:
-    async (actions, target) => {
-      if (target.payload.tipoClassificacao) {
-        await actions.getTrilhas(target.payload);
+    async (actions, target, { getStoreState, getState }) => {
+      if (getStoreState().courses.filter.tipoClassificacao) {
+        await actions.getTrilhas(
+          target.type.includes("setFilter")
+            ? {
+                query: target.payload.query,
+                page: getStoreState().adm.tipoVisualizacao
+                  ? target.payload.page
+                  : 0,
+                registerLog:
+                  target.payload.query && target.payload.query !== "",
+                itineraries: target.payload.itinerario
+                  ? [target.payload.itinerario]
+                  : [],
+                competencies: target.payload.competencies,
+              }
+            : {
+                ...getState().filter,
+              }
+        );
       }
     }
   ),
@@ -73,7 +74,7 @@ const trilhasModel = {
         includeFiled: showFiled,
         search: query.trim(),
         page: page,
-        registerLog: registerLog,
+        registerLog: import.meta.env.PROD ? registerLog : false,
         itineraries: itinerario ? [itinerario] : itineraries,
         competencies: competencies,
         sortByCreatedAt: !!sort.createdAt,

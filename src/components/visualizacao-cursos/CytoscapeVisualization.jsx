@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import CytoscapeComponent from "react-cytoscapejs";
 // import { CSVLink } from "react-csv";
@@ -9,6 +9,7 @@ import fundoLegenda from "../../assets/icon/PLAFOREDU_Icones-Legenda.png";
 // import { Template } from "../pdf-document";
 
 import ModalCourseVisualization from "../CourseModalVisualization";
+import reformuladorDeElementosCytoscape from "../../helpers/reformuladorDeElementosCytoscape";
 
 import {
   MenuUnfoldOutlined,
@@ -20,7 +21,6 @@ import {
 import {
   Col,
   Modal,
-  Typography,
   Descriptions,
   Button,
   Card,
@@ -28,29 +28,22 @@ import {
   Slider,
   Select,
   Form,
-  Skeleton,
-  Space,
-  List,
 } from "antd";
-
-const { Text } = Typography;
 
 export default function CytoscapeVisualization() {
   const cyRef = useRef(null);
 
   const filter = useStoreState((state) => state.courses.filter);
-  const elementsCourses = useStoreState((state) => state.courses.elements);
-  const elementsTrails = useStoreState((state) => state.trilhas.elements);
+  const courses = useStoreState((state) => state.courses.cursos);
+  const trails = useStoreState((state) => state.trilhas.trilhas);
   const colorSchemaDefault = useStoreState(
     (state) => state.courses.filterDefault.esquemaDeCores
   );
 
   const layouts = useStoreState((state) => state.itineraries.layouts);
   const layoutAtual = useStoreState((state) => state.itineraries.layoutAtual);
+  const itineraries = useStoreState((state) => state.itineraries.itinerarios);
   const filterCollapsed = useStoreState((state) => state.adm.filterCollapsed);
-  const listCompetencias = useStoreState(
-    (state) => state.competencies.competencias
-  );
 
   const setFilter = useStoreActions((actions) => actions.courses.setFilter);
   const setUniqueCourse = useStoreActions(
@@ -62,6 +55,9 @@ export default function CytoscapeVisualization() {
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
+  const getCompetencieAction = useStoreActions(
+    (actions) => actions.competencies.getUniqueComp
+  );
 
   const [zoom, setZoom] = useState(1);
   const [competenceOnModal, setCompetenceOnModal] = useState(undefined);
@@ -70,25 +66,13 @@ export default function CytoscapeVisualization() {
   const [modalCourseVisible, setModalCourseVisible] = useState(false);
   const [modalCompetenciaVisible, setModalCompetenciaVisible] = useState(false);
 
-  /* const csvCursosHeaders = [
-    { label: "Título", key: "titulo" },
-    { label: "Descrição", key: "descricao" },
-    { label: "Carga horária", key: "cargaHoraria" },
-    { label: "Instituição Certificadora", key: "instCert" },
-    { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
-    { label: "Link", key: "link" },
-  ];
-
-  const csvTrilhasHeaders = [
-    { label: "Trilha", key: "trilha" },
-    { label: "Descrição trilha", key: "descTrilha" },
-    { label: "Título", key: "titulo" },
-    { label: "Descrição", key: "descricao" },
-    { label: "Carga horária", key: "cargaHoraria" },
-    { label: "Instituição Certificadora", key: "instCert" },
-    { label: "Possui Acessibilidade", key: "possuiAcessibilidade" },
-    { label: "Link", key: "link" },
-  ]; */
+  const elements = useMemo(() => {
+    return reformuladorDeElementosCytoscape(
+      filter.tipoClassificacao ? trails : courses,
+      filter,
+      itineraries
+    );
+  }, [courses, filter, itineraries, trails]);
 
   const handleOk = () => {
     setCompetenceOnModal(undefined);
@@ -97,16 +81,29 @@ export default function CytoscapeVisualization() {
     setModalCompetenciaVisible(false);
   };
 
+  const getCompetencie = useCallback(
+    async (id) => {
+      try {
+        const comp = await getCompetencieAction({ id });
+        setCompetenceOnModal(comp);
+        setModalCompetenciaVisible(true);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [getCompetencieAction]
+  );
+
   useEffect(() => {
     if (filter.tipoClassificacao) {
-      cyRef.current.add(elementsTrails);
+      cyRef.current.add(elements);
       cyRef.current.layout(layouts["layoutGrid"]).run();
     } else {
-      cyRef.current.add(elementsCourses);
+      cyRef.current.add(elements);
       cyRef.current.layout(layouts[layoutAtual]).run();
     }
     setZoom(cyRef.current._private.zoom + 0.3);
-  }, [elementsCourses, elementsTrails, layoutAtual, filter, layouts]);
+  }, [elements, layoutAtual, filter, layouts]);
 
   return (
     <Col flex="auto">
@@ -247,46 +244,11 @@ export default function CytoscapeVisualization() {
               </Col>
             </>
           )}
-          {/* <Col style={{ margin: "5px" }}>
-            <Card style={{ width: "100%" }}>
-              <CSVLink
-                filename="plaforedu"
-                headers={
-                  filter.tipoClassificacao
-                    ? csvTrilhasHeaders
-                    : csvCursosHeaders
-                }
-                data={data}
-                target="_blank"
-              >
-                <Button onClick={() => {}} icon={<FileExcelOutlined />}>
-                  <Text style={{ fontFamily: "Roboto" }}>Exportar .csv</Text>
-                </Button>
-              </CSVLink>
-            </Card>
-          </Col> */}
-          {/* <Col
-              style={{ margin: '5px' }}
-          >
-              <Card style={{ width: '100%' }}>
-                  <PDFDownloadLink document={<Template sourceImage={() => cyRef?.current.jpg()} />} fileName="plaforedu.pdf">
-                      {({ loading, error }) => loading ? (
-                          <Button icon={<LoadingOutlined />}>
-                              <Text>{error?.message}</Text>
-                          </Button>
-                      ) : (
-                          <Button icon={<FilePdfOutlined />}>
-                              <Text style={{ fontFamily: 'Roboto' }}>Exportar .pdf</Text>
-                          </Button>
-                      )}
-                  </PDFDownloadLink>
-              </Card>
-          </Col> */}
         </Row>
       </Form>
       {/* Canvas Cytoscape */}
       <CytoscapeComponent
-        elements={filter.tipoClassificacao ? elementsTrails : elementsCourses}
+        elements={elements}
         minZoom={0.01}
         maxZoom={1.0}
         zoom={zoom}
@@ -314,13 +276,7 @@ export default function CytoscapeVisualization() {
               !element.id.includes("container") &&
               !element.id.includes("curso")
             ) {
-              setCompetenceOnModal(
-                listCompetencias.find(
-                  (competencia) =>
-                    competencia.id === element.id.replace(/competencia/gi, "")
-                )
-              );
-              setModalCompetenciaVisible(true);
+              getCompetencie(element.id.replace(/competencia/gi, ""));
             }
           });
         }}

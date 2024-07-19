@@ -55,6 +55,8 @@ export default {
       }
     ),
 
+  getUniqueComp: (payload) => AuthAxios.get(`/competencies/${payload.id}`),
+
   archiveCatComp: (payload) =>
     AuthAxios.patch(`/competencies-category/${payload.id}/archive`),
 

@@ -286,8 +286,6 @@ export default function CourseRegister() {
     register,
   ]);
 
-  const [form] = Form.useForm();
-
   const propsUpload = {
     onRemove: (_file) => {
       // Remover arquivos setec
@@ -572,48 +570,8 @@ export default function CourseRegister() {
   // Submeter alterações do curso
 
   const onSubmit = async (values) => {
-    let instituicoesValidadas = false;
-    let arrayInstituicoesDoForm = [];
-    // Object.entries(form.getFieldsValue()).forEach((item, _index, array) => {
-    //   if (item[0].includes("name")) {
-    //     let count = item[0].slice(4);
-    //     let link = array.find(
-    //       (element) =>
-    //         element[0].includes("link") && element[0].slice(4) === count
-    //     );
-    //     let relationObject = instituicoesAtuais.find((element) => {
-    //       return element.count == count && element.institutionId === item[1];
-    //     });
-    //     arrayInstituicoesDoForm.push({
-    //       relationId: relationObject ? relationObject.relationId : undefined,
-    //       institutionId: item[1],
-    //       link: link[1],
-    //     });
-    //   }
-    // });
-    // if (instituicoesAtuais.length !== 0) {
-    //   await form
-    //     .validateFields()
-    //     .then(() => {
-    //       instituicoesValidadas = true;
-    //     })
-    //     .catch(() => {
-    //       notification.error({
-    //         message: "Erro ao submeter!",
-    //         description: "Verifique as instituições certificadoras!",
-    //       });
-    //       form.submit();
-    //     });
-    // } else {
-    //   notification.error({
-    //     message: "Erro ao submeter!",
-    //     description:
-    //       "Adicione as instituições certificadoras do curso e seus respectivos links.",
-    //   });
-    // }
     const newValues = {
       ...values,
-      institutions: arrayInstituicoesDoForm,
       equivalents: cursosEquivalentesIds,
     };
     if (setecTerm.length > 0) {
@@ -621,37 +579,35 @@ export default function CourseRegister() {
       formData.append("term", setecTerm[0]);
       newValues.term = formData;
     }
-    if (instituicoesValidadas) {
-      if (courseId) {
-        try {
-          await updateCourse({ ...newValues, id: courseId });
-          notification.success({
-            message: "Curso alterado com sucesso!",
-          });
-          navigate("/settings/courses");
-        } catch (error) {
-          notification.error({
-            message: "Erro!",
-            description: error.message,
-          });
-        }
-      } else {
-        try {
-          await registerNewCourse({ ...newValues });
-          notification.success({
-            message: "Curso cadastrado com sucesso!",
-            description: isConsultor
-              ? "Seu curso está pendente para análise"
-              : "",
-          });
-          register.reset();
-          navigate("/settings/courses");
-        } catch (error) {
-          notification.error({
-            message: "Algo deu errado!",
-            description: error.message,
-          });
-        }
+    if (courseId) {
+      try {
+        await updateCourse({ ...newValues, id: courseId });
+        notification.success({
+          message: "Curso alterado com sucesso!",
+        });
+        navigate("/settings/courses");
+      } catch (error) {
+        notification.error({
+          message: "Erro!",
+          description: error.message,
+        });
+      }
+    } else {
+      try {
+        await registerNewCourse({ ...newValues });
+        notification.success({
+          message: "Curso cadastrado com sucesso!",
+          description: isConsultor
+            ? "Seu curso está pendente para análise"
+            : "",
+        });
+        register.reset();
+        navigate("/settings/courses");
+      } catch (error) {
+        notification.error({
+          message: "Algo deu errado!",
+          description: error.message,
+        });
       }
     }
   };
@@ -1014,9 +970,7 @@ export default function CourseRegister() {
             )}
           </Descriptions>
         </Card>
-      </Form>
-      <div>
-        <Form form={form}>
+        <div>
           <Table
             title={() => (
               <div
@@ -1057,8 +1011,8 @@ export default function CourseRegister() {
             dataSource={arrayInstitutionsRegister.fields}
             columns={columns}
           />
-        </Form>
-      </div>
+        </div>
+      </Form>
       <Table
         columns={columnsEquivalents}
         dataSource={cursosEquivalentes}
