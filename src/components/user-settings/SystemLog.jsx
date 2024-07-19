@@ -89,7 +89,7 @@ export default function SystemLog() {
   }, [])
 
   const [pageNumber, setPageNumber] = useState(1);
-  const [categoria, setCategoria] = useState(undefined);
+  const [categoria, setCategoria] = useState(categoriaOptions[0].value);
   const [action, setAction] = useState(undefined);
   const [users, setUsers] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -281,7 +281,6 @@ export default function SystemLog() {
                 <Select
                   style={{ width: "7em" }}
                   options={categoriaOptions}
-                  allowClear={true}
                   value={categoria}
                   onChange={(value) => {
                     setCategoria(value);
