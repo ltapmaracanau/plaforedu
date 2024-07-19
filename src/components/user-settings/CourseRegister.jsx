@@ -836,6 +836,8 @@ export default function CourseRegister() {
                           const itemFiled = course?.competencies.find(
                             (comp) => comp.id === value
                           )?.filedAt;
+
+                          if (!value) return;
                           return (
                             <Tag
                               closable={closable}
@@ -931,6 +933,8 @@ export default function CourseRegister() {
                           const itemFiled = course?.subThemes.find(
                             (sub) => sub.id === value
                           )?.filedAt;
+
+                          if (!value) return;
                           return (
                             <Tag
                               closable={closable}

@@ -176,6 +176,8 @@ export default function SubtemaRegister(props) {
                       const itemFiled = subtheme?.themes.find(
                         (theme) => theme.id === value
                       )?.filedAt;
+
+                      if (!value) return;
                       return (
                         <Tag
                           closable={closable}

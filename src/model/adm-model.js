@@ -24,13 +24,13 @@ const admModel = {
   loadingLastChanges: false,
 
   getLastCoursesTrailsChanges: thunk(
-    async (actions, payload = { page: 1, type: "COURSES" }) => {
+    async (actions, payload = { page: 1, type: "COURSE" }) => {
       actions.setLoadingLastChanges(true);
 
       return await services.admService
         .getCousesTrailsMovements(payload)
         .then((response) => {
-          actions.setLDataChanges(response.data);
+          actions.setDataChanges(response.data);
         })
         .catch((error) => {
           throw new Error(error);
@@ -41,11 +41,8 @@ const admModel = {
     }
   ),
 
-  setLDataChanges: action((state, payload) => {
+  setDataChanges: action((state, payload) => {
     state.lastDataChanges = payload;
-  }),
-  setLastTrailsChanges: action((state, payload) => {
-    state.lastTrailsChanges = payload;
   }),
 
   setCountLastCourses: action((state, payload) => {

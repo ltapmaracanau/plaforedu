@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import "./homepage.css";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -24,20 +24,11 @@ import { Link } from "react-router-dom";
 
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
-import {
-  Row,
-  Col,
-  Grid,
-  Button,
-  Divider,
-  Dropdown,
-  Descriptions,
-  Modal,
-  Typography,
-} from "antd";
+import { Row, Col, Grid, Button, Divider, Dropdown, Typography } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
 import Finder from "../components/Finder";
 import CourseModalVisualization from "../components/CourseModalVisualization";
+import TrailModalVisualization from "../components/TrailModalVisualization";
 
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
@@ -50,41 +41,16 @@ export default function HomePage() {
 
   const [selectedTrailId, setSelectedTrailId] = useState(null);
   const [positionedTrail, setPositionedTrail] = useState(null);
-  const [modalTrail, setModalTrail] = useState(null);
+  const [modalTrailId, setModalTrailId] = useState(null);
+  const [modalTrailVisible, setModalTrailVisible] = useState(false);
+  const closeModalTrail = useCallback(() => {
+    setModalTrailVisible(false);
+    setModalTrailId(null);
+  }, []);
 
   const [idSelectedCourse, setIdSelectedCourse] = useState(null);
   const [modalSelectedCourseVisible, setModalSelectedCouseVisible] =
     useState(false);
-
-  const coursesSelectedTrail = useCallback(() => {
-    return modalTrail.courses.map((curso) => {
-      if (curso.status === "ACTIVE")
-        return <li key={curso.name}>{curso.name}</li>;
-    });
-  }, [modalTrail]);
-
-  const modalTrailItems = useMemo(() => {
-    if (modalTrail !== null) {
-      return [
-        {
-          key: "name",
-          label: "Nome",
-          children: modalTrail.name,
-        },
-        {
-          key: "description",
-          label: "Descrição",
-          children: modalTrail.description,
-        },
-        {
-          key: "courses",
-          label: "Cursos",
-          children: <ul>{coursesSelectedTrail()}</ul>,
-        },
-      ];
-    }
-    return null;
-  }, [modalTrail, coursesSelectedTrail]);
 
   return (
     <>
@@ -274,7 +240,8 @@ export default function HomePage() {
                       )
                     }
                     onClick={() => {
-                      setModalTrail(trilha);
+                      setModalTrailId(trilha.id);
+                      setModalTrailVisible(true);
                     }}
                   />
                 </div>
@@ -284,36 +251,11 @@ export default function HomePage() {
         </Row>
       </div>
 
-      <Modal
-        title={"Detalhes da Trilha"}
-        open={!!modalTrail}
-        onOk={() => {
-          setModalTrail(null);
-        }}
-        onCancel={() => setModalTrail(null)}
-        key={`modalDescriptionItem`}
-        destroyOnClose={true}
-        footer={[
-          <Button
-            type="primary"
-            key={"buttonOk"}
-            onClick={() => {
-              setModalTrail(null);
-            }}
-          >
-            Ok
-          </Button>,
-        ]}
-      >
-        {modalTrail && (
-          <Descriptions
-            column={1}
-            bordered={true}
-            layout="vertical"
-            items={modalTrailItems}
-          />
-        )}
-      </Modal>
+      <TrailModalVisualization
+        id={modalTrailId}
+        visible={modalTrailVisible}
+        setVisible={closeModalTrail}
+      />
 
       <CourseModalVisualization
         id={idSelectedCourse}

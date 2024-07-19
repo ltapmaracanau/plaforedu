@@ -230,6 +230,8 @@ export default function CompRegister(props) {
                       const itemFiled = comp?.categories.find(
                         (comp) => comp.id === value
                       )?.filedAt;
+
+                      if (!value) return;
                       return (
                         <Tag
                           closable={closable}

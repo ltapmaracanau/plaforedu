@@ -3,10 +3,12 @@ import services from "../services";
 
 const trilhasModel = {
   loading: false,
+  loadingUniqueTrail: false,
   registering: false,
   archiving: false,
 
   trilhas: [],
+  uniqueTrail: {},
   count: 0,
 
   onSetFilter: thunkOn(
@@ -96,15 +98,20 @@ const trilhasModel = {
     }
   ),
 
-  getUniqueTrail: thunk(async (_actions, payload) => {
-    const { id } = payload;
+  getUniqueTrail: thunk(async (actions, payload) => {
+    actions.setLoadingUniqueTrail(true);
+    const { id = "" } = payload;
     return await services.trailsService
-      .getUniqueTrail({ id })
-      .then((response) => {
-        return response.data;
+      .getUniqueTrail({ id: id })
+      .then(({ data }) => {
+        actions.setUniqueTrail(data);
+        return data;
       })
       .catch((error) => {
         throw new Error(error);
+      })
+      .finally(() => {
+        actions.setLoadingUniqueTrail(false);
       });
   }),
 
@@ -185,6 +192,10 @@ const trilhasModel = {
     state.loading = payload;
   }),
 
+  setLoadingUniqueTrail: action((state, payload) => {
+    state.loadingUniqueTrail = payload;
+  }),
+
   setRegistering: action((state, payload) => {
     state.registering = payload;
   }),
@@ -195,6 +206,10 @@ const trilhasModel = {
 
   setTrilhas: action((state, payload) => {
     state.trilhas = payload;
+  }),
+
+  setUniqueTrail: action((state, payload) => {
+    state.uniqueTrail = payload;
   }),
 
   setCount: action((state, payload) => {
