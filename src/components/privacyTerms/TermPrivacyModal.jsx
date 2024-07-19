@@ -80,7 +80,6 @@ export default function TermPrivacyModal({
         <Typography.Link
           onClick={() => {
             setTermVisible(true);
-            setTermPrivacyVisible(false);
           }}
         >
           política de cookies
