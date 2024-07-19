@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { Row, Layout, Drawer, Grid } from "antd";
 
@@ -18,23 +17,6 @@ export default function CoursesPage() {
   const setFilterCollapsed = useStoreActions(
     (actions) => actions.adm.setFilterCollapsed
   );
-  const getComp = useStoreActions((actions) => actions.competencies.getComp);
-  const getInstituicoes = useStoreActions(
-    (actions) => actions.institutions.getInstituicoes
-  );
-  const getSubthemes = useStoreActions(
-    (actions) => actions.themes.getSubthemes
-  );
-
-  useEffect(() => {
-    async function init() {
-      await getComp();
-      await getInstituicoes();
-      await getSubthemes();
-    }
-    init();
-    window.scrollTo(0, 0);
-  }, [getComp, getInstituicoes, getSubthemes]);
 
   const screens = useBreakpoint();
 
@@ -75,9 +57,7 @@ export default function CoursesPage() {
           <Row>
             <RowItinerario />
           </Row>
-          <Row
-            style={screens.lg ? { maxHeight: 700, overflowY: "scroll" } : {}}
-          >
+          <Row style={screens.lg ? { overflowY: "scroll" } : {}}>
             {tipoVisualizacao === false && screens.lg ? (
               <CytoscapeVisualization />
             ) : (

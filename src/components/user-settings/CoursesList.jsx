@@ -15,11 +15,14 @@ import {
   Tag,
 } from "antd";
 import CourseRegister from "./CourseRegister";
+import { useNavigate } from "react-router-dom";
 //import { CSVLink } from "react-csv";
 
 const { Search } = Input;
 
 export default function CoursesList() {
+  const navigate = useNavigate();
+
   const getCursos = useStoreActions((actions) => actions.courses.getCursos);
   const getItinerarios = useStoreActions(
     (actions) => actions.itineraries.getItinerarios
@@ -38,8 +41,6 @@ export default function CoursesList() {
     (actions) => actions.themes.getSubthemes
   );
 
-  const [registerVisible, setRegisterVisible] = useState(false);
-
   const loading = useStoreState((state) => state.courses.loading);
   const cursos = useStoreState((state) => state.courses.cursos);
   const count = useStoreState((state) => state.courses.count);
@@ -47,8 +48,6 @@ export default function CoursesList() {
   const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
   const isCoord = useStoreState((state) => state.adm.isCoord);
 
-  const [editandoCurso, setEditandoCurso] = useState(null);
-  const [modalText, setModalText] = useState("Cadastrar Curso");
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
@@ -168,84 +167,66 @@ export default function CoursesList() {
       }}
     >
       <div style={{ width: "100%" }}>
-        {registerVisible ? (
-          <CourseRegister
-            curso={editandoCurso}
-            title={modalText}
-            actionVisible={() => {
-              setRegisterVisible(false);
-              getCursos({
-                query: textSearch,
-                showFiled: showFiled,
-                page: pageNumber,
-                sort: {
-                  createdAt: sort.createdAt,
-                  updatedAt: sort.updatedAt,
-                },
-              });
-            }}
-          />
-        ) : (
-          <Card
-            title={"Cursos"}
-            styles={{
-              header: {
-                fontSize: 20,
-                padding: "10px",
-              },
-              body: {
-                padding: "0px",
-              },
-            }}
-            extra={
-              <Space
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: "10px",
+        <Card
+          title={"Cursos"}
+          styles={{
+            header: {
+              fontSize: 20,
+              padding: "10px",
+            },
+            body: {
+              padding: "0px",
+            },
+          }}
+          extra={
+            <Space
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <Search
+                allowClear
+                defaultValue={textSearch}
+                onSearch={(e) => {
+                  setTextSearch(e);
+                  getCursos({
+                    query: e,
+                    showFiled: showFiled,
+                    sort: {
+                      createdAt: sort.createdAt,
+                      updatedAt: sort.updatedAt,
+                    },
+                  });
+                  setPageNumber(1);
                 }}
-              >
-                <Search
-                  allowClear
-                  defaultValue={textSearch}
-                  onSearch={(e) => {
-                    setTextSearch(e);
+                style={{
+                  marginRight: "30px",
+                }}
+                placeholder={"Buscar cursos"}
+              />
+              <Tooltip title={"Exibir Arquivados"}>
+                <Switch
+                  defaultChecked={showFiled}
+                  checked={showFiled}
+                  onClick={(checked) => {
+                    setShowFiled(checked);
+                    setPageNumber(1);
                     getCursos({
-                      query: e,
-                      showFiled: showFiled,
+                      query: textSearch,
+                      showFiled: checked,
+                      page: 1,
                       sort: {
                         createdAt: sort.createdAt,
                         updatedAt: sort.updatedAt,
                       },
                     });
-                    setPageNumber(1);
                   }}
-                  style={{
-                    marginRight: "30px",
-                  }}
-                  placeholder={"Buscar cursos"}
                 />
-                <Tooltip title={"Exibir Arquivados"}>
-                  <Switch
-                    defaultChecked={showFiled}
-                    checked={showFiled}
-                    onClick={(checked) => {
-                      setShowFiled(checked);
-                      setPageNumber(1);
-                      getCursos({
-                        query: textSearch,
-                        showFiled: checked,
-                        page: 1,
-                        sort: {
-                          createdAt: sort.createdAt,
-                          updatedAt: sort.updatedAt,
-                        },
-                      });
-                    }}
-                  />
-                </Tooltip>
-                {/* <CSVLink
+              </Tooltip>
+              {/* <CSVLink
                     filename="plaforedu"
                     headers={csvCursosHeaders}
                     data={data}
@@ -259,129 +240,124 @@ export default function CoursesList() {
                       />
                     </Tooltip>
                   </CSVLink> */}
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={() => {
-                    setEditandoCurso(null);
-                    setModalText("Cadastrar Curso");
-                    setRegisterVisible(true);
-                  }}
-                >
-                  Adicionar
-                </Button>
-              </Space>
-            }
-          >
-            <Table
-              loading={loading}
-              dataSource={cursos}
-              pagination={{
-                pageSize: 20,
-                total: count,
-                showSizeChanger: false,
-                current: pageNumber,
-                defaultCurrent: 1,
-                hideOnSinglePage: false,
-              }}
-              size="small"
-              style={{ width: "100%" }}
-              rowKey={(record) => record.id}
-              onChange={onChangeTable}
-              columns={[
-                {
-                  title: "Título",
-                  dataIndex: "name",
-                  key: "name",
-                  render: (titulo, record) => {
-                    return (
-                      <Typography.Text>
-                        {titulo}
-                        {record.filedAt && (
-                          <Tag
-                            style={{
-                              marginLeft: "10px",
-                            }}
-                            color="blue"
-                          >
-                            ARQUIVADO
-                          </Tag>
-                        )}
-                      </Typography.Text>
-                    );
-                  },
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={() => {
+                  navigate("edit");
+                }}
+              >
+                Adicionar
+              </Button>
+            </Space>
+          }
+        >
+          <Table
+            loading={loading}
+            dataSource={cursos}
+            pagination={{
+              pageSize: 20,
+              total: count,
+              showSizeChanger: false,
+              current: pageNumber,
+              defaultCurrent: 1,
+              hideOnSinglePage: false,
+            }}
+            size="small"
+            style={{ width: "100%" }}
+            rowKey={(record) => record.id}
+            onChange={onChangeTable}
+            columns={[
+              {
+                title: "Título",
+                dataIndex: "name",
+                key: "name",
+                render: (titulo, record) => {
+                  return (
+                    <Typography.Text>
+                      {titulo}
+                      {record.filedAt && (
+                        <Tag
+                          style={{
+                            marginLeft: "10px",
+                          }}
+                          color="blue"
+                        >
+                          ARQUIVADO
+                        </Tag>
+                      )}
+                    </Typography.Text>
+                  );
                 },
-                {
-                  title: "Equivalências",
-                  dataIndex: "equivalents",
-                  key: "equivalents",
-                  render: (equivalents) => {
-                    return equivalents.length;
-                  },
+              },
+              {
+                title: "Equivalências",
+                dataIndex: "equivalents",
+                key: "equivalents",
+                render: (equivalents) => {
+                  return equivalents.length;
                 },
-                {
-                  title: "Instituições",
-                  dataIndex: "institutions",
-                  key: "institutions",
-                  render: (institutions) => {
-                    return institutions
-                      .map((item) => item.abbreviation)
-                      .join(", ");
-                  },
+              },
+              {
+                title: "Instituições",
+                dataIndex: "institutions",
+                key: "institutions",
+                render: (institutions) => {
+                  return institutions
+                    .map((item) => item.abbreviation)
+                    .join(", ");
                 },
-                {
-                  title: "Criado em",
-                  dataIndex: "createdAt",
-                  key: "createdAt",
-                  render: (createdAt) => {
-                    return new Date(createdAt).toLocaleString("pt-BR", {
-                      timeZone: "UTC",
-                    });
-                  },
-                  sorter: {
-                    multiple: 1,
-                  },
-                  sortDirections: ["descend"],
-                  sortOrder: sort.createdAt,
+              },
+              {
+                title: "Criado em",
+                dataIndex: "createdAt",
+                key: "createdAt",
+                render: (createdAt) => {
+                  return new Date(createdAt).toLocaleString("pt-BR", {
+                    timeZone: "UTC",
+                  });
                 },
-                {
-                  title: "Atualizado em",
-                  dataIndex: "updatedAt",
-                  key: "updatedAt",
-                  render: (updatedAt) => {
-                    return new Date(updatedAt).toLocaleString("pt-BR", {
-                      timeZone: "UTC",
-                    });
-                  },
-                  sorter: {
-                    multiple: 2,
-                  },
-                  sortDirections: ["descend"],
-                  sortOrder: sort.updatedAt,
+                sorter: {
+                  multiple: 1,
                 },
-                {
-                  key: "action",
-                  render: (text, record) => (
-                    <Space size="middle">
-                      <Button
-                        key={record.id}
-                        disabled={!isAdm && !isAnalistaDados && !isCoord}
-                        onClick={() => {
-                          setEditandoCurso(record);
-                          setModalText("Editar Curso");
-                          setRegisterVisible(true);
-                        }}
-                        icon={<EditOutlined />}
-                      >
-                        Editar
-                      </Button>
-                    </Space>
-                  ),
+                sortDirections: ["descend"],
+                sortOrder: sort.createdAt,
+              },
+              {
+                title: "Atualizado em",
+                dataIndex: "updatedAt",
+                key: "updatedAt",
+                render: (updatedAt) => {
+                  return new Date(updatedAt).toLocaleString("pt-BR", {
+                    timeZone: "UTC",
+                  });
                 },
-              ]}
-            />
-          </Card>
-        )}
+                sorter: {
+                  multiple: 2,
+                },
+                sortDirections: ["descend"],
+                sortOrder: sort.updatedAt,
+              },
+              {
+                key: "action",
+                render: (text, record) => (
+                  <Space size="middle">
+                    <Button
+                      key={record.id}
+                      disabled={!isAdm && !isAnalistaDados && !isCoord}
+                      onClick={() => {
+                        navigate(`edit/${record.id}`);
+                      }}
+                      icon={<EditOutlined />}
+                    >
+                      Editar
+                    </Button>
+                  </Space>
+                ),
+              },
+            ]}
+          />
+        </Card>
       </div>
     </div>
   );

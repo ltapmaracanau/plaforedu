@@ -9,11 +9,12 @@ const instituicoesModel = {
 
   registerNewInstitution: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const { name, abbreviation } = payload;
+    const { name, abbreviation, uf } = payload;
     return await services.institutionService
       .registerInstitution({
         name: name.trim(),
         abbreviation: abbreviation.trim(),
+        uf,
       })
       .catch((error) => {
         throw new Error(error);
@@ -55,13 +56,14 @@ const instituicoesModel = {
   }),
 
   getInstituicoes: thunk(
-    async (actions, payload = { query: "", showFiled: false }) => {
+    async (actions, payload = { query: "", showFiled: false, page: 1 }) => {
       actions.setLoading(true);
-      const { query = "", showFiled = false } = payload;
+      const { query = "", showFiled = false, page = 1 } = payload;
       return await services.institutionService
         .getInstituicoes({
           query: query.trim(),
           showFiled,
+          page,
         })
         .then((response) => {
           actions.setInstituicoes(response.data);

@@ -19,12 +19,11 @@ import icon3 from "../assets/HomepageIcon3.svg";
 import rightBlue from "../assets/RightBlue.svg";
 import rightWhite from "../assets/RightWhite.svg";
 
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import { Link } from "react-router-dom";
 
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
-import services from "../services";
 import {
   Row,
   Col,
@@ -57,15 +56,6 @@ export default function HomePage() {
   const [modalSelectedCourseVisible, setModalSelectedCouseVisible] =
     useState(false);
 
-  const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
-  );
-
-  const recentCourses = useMemo(
-    async () => await services.admService.getLastViewedCourses(),
-    []
-  );
-
   const coursesSelectedTrail = useCallback(() => {
     return modalTrail.courses.map((curso) => {
       if (curso.status === "ACTIVE")
@@ -94,7 +84,7 @@ export default function HomePage() {
       ];
     }
     return null;
-  }, [modalTrail]);
+  }, [modalTrail, coursesSelectedTrail]);
 
   return (
     <>
