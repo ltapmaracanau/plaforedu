@@ -8,11 +8,12 @@ import {
   Skeleton,
   Space,
   Tag,
+  Tooltip,
   Typography,
   notification,
 } from "antd";
 import { useStoreActions } from "easy-peasy";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   EditOutlined,
@@ -41,6 +42,9 @@ export default function StudyPlanView() {
   const downloadStudyPlansCourses = useStoreActions(
     (actions) => actions.studyPlans.downloadStudyPlansCourses
   );
+  const initCourseAction = useStoreActions(
+    (actions) => actions.studyPlans.initStudyPlanCourse
+  );
 
   const onDownloadCSV = async ({ id }) => {
     setDownloading(true);
@@ -58,7 +62,8 @@ export default function StudyPlanView() {
   };
 
   useEffect(() => {
-    async function init() {
+    const init = async () => {
+      setLoading(true);
       try {
         const plan = await getUniqueStudyPlan({ id });
         setStudyPlan(plan);
@@ -70,9 +75,32 @@ export default function StudyPlanView() {
       } finally {
         setLoading(false);
       }
-    }
+    };
     init();
-  }, [getUniqueStudyPlan, id]);
+  }, [id, getUniqueStudyPlan]);
+
+  const setStatus = useCallback(
+    async ({ courseId, status }) => {
+      try {
+        await initCourseAction({
+          planId: id,
+          courseId: courseId,
+          status: status,
+        });
+        notification.success({
+          message: "Status definido com sucesso!",
+        });
+        const plan = await getUniqueStudyPlan({ id });
+        setStudyPlan(plan);
+      } catch (error) {
+        notification.error({
+          message: "Erro ao iniciar curso",
+          description: error.message,
+        });
+      }
+    },
+    [initCourseAction, getUniqueStudyPlan, id]
+  );
 
   if (loading) {
     return (
@@ -158,7 +186,11 @@ export default function StudyPlanView() {
                   navigate("/settings/study-plans");
                 }}
               />
-              <Progress type={"circle"} size={"small"} percent={0} />
+              <Progress
+                type={"circle"}
+                size={"small"}
+                percent={studyPlan.percentage.toFixed(0)}
+              />
             </div>
           }
           description={
@@ -182,22 +214,85 @@ export default function StudyPlanView() {
                 width: "100%",
                 marginBottom: "1rem",
               }}
-              onClick={() => {
-                setCourseModalVisualizationId(item.courseId);
-                setCourseModalVisualizationVisible(true);
-              }}
               key={item.courseId}
-              hoverable
+              title={
+                <Space>
+                  <Button
+                    type="text"
+                    onClick={() => {
+                      setCourseModalVisualizationId(item.courseId);
+                      setCourseModalVisualizationVisible(true);
+                    }}
+                  >
+                    <Typography.Title
+                      style={{
+                        margin: 0,
+                        maxWidth: "300px",
+                      }}
+                      ellipsis={{ tooltip: true }}
+                      level={5}
+                    >
+                      {item.name}
+                    </Typography.Title>
+                  </Button>
+                  {item.status === "FILED" && (
+                    <Tag color="orange">ARQUIVADO</Tag>
+                  )}
+                  {item.status === "IN_PROGRESS" ? (
+                    <Tag color="green">EM ANDAMENTO</Tag>
+                  ) : item.status === "CONCLUDED" ? (
+                    <Tag color="blue">CONCLUÍDO</Tag>
+                  ) : (
+                    <Tag color="red">PENDENTE</Tag>
+                  )}
+                </Space>
+              }
+              extra={
+                <Space>
+                  <Tooltip
+                    title={
+                      item.status === "CONCLUDED" ||
+                      item.status === "IN_PROGRESS"
+                        ? "Indisponível"
+                        : ""
+                    }
+                  >
+                    <Button
+                      disabled={
+                        item.status === "IN_PROGRESS" ||
+                        item.status === "CONCLUDED"
+                      }
+                      type="primary"
+                      onClick={() => {
+                        setStatus({
+                          courseId: item.courseId,
+                          status: "IN_PROGRESS",
+                        });
+                      }}
+                    >
+                      Iniciar
+                    </Button>
+                  </Tooltip>
+                  <Tooltip
+                    title={item.status === "CONCLUDED" ? "Indisponível" : ""}
+                  >
+                    <Button
+                      disabled={item.status === "CONCLUDED"}
+                      type="primary"
+                      onClick={() => {
+                        setStatus({
+                          courseId: item.courseId,
+                          status: "CONCLUDED",
+                        });
+                      }}
+                    >
+                      Concluir
+                    </Button>
+                  </Tooltip>
+                </Space>
+              }
             >
               <Card.Meta
-                title={
-                  <Space>
-                    {item.name}
-                    {item.courseStatus === "FILED" && (
-                      <Tag color="orange">ARQUIVADO</Tag>
-                    )}
-                  </Space>
-                }
                 description={
                   <Space direction="vertical">
                     <Typography.Paragraph
