@@ -7,12 +7,12 @@ import infografico_fundo_branco from "../assets/about/mandala_fundo_branco.png";
 import { Row, Col, Image, Grid, Collapse, Typography } from "antd";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import iniciacao from "../assets/itinerarios/iconIniciacao.svg";
-import aposentadoria from "../assets/itinerarios/iconAposentadoria.svg";
-import educacao from "../assets/itinerarios/iconEducacao.svg";
-import administrativo from "../assets/itinerarios/iconAdministrativo.svg";
-import gerencial from "../assets/itinerarios/iconGerencial.svg";
-import setabaixo from "../assets/icon/setabaixo.svg";
+// import iniciacao from "../assets/itinerarios/iconIniciacao.svg";
+// import aposentadoria from "../assets/itinerarios/iconAposentadoria.svg";
+// import educacao from "../assets/itinerarios/iconEducacao.svg";
+// import administrativo from "../assets/itinerarios/iconAdministrativo.svg";
+// import gerencial from "../assets/itinerarios/iconGerencial.svg";
+// import setabaixo from "../assets/icon/setabaixo.svg";
 
 const { useBreakpoint } = Grid;
 
@@ -87,7 +87,7 @@ export default function AboutPage() {
         </Row>
       </div>
 
-      <Row
+      {/* <Row
         style={{
           margin: `${!screens.xs ? "120px 0" : "60px 0"}`,
           padding: "60px 20px",
@@ -108,57 +108,64 @@ export default function AboutPage() {
           âmbito da Rede Federal de Educação Profissional, Científica e
           Tecnológica (RFEPCT).
         </p>
-      </Row>
-
-      {/* Como tudo é organizado */}
-      <Row
-        align="middle"
-        wrap={!screens.lg}
-        style={
-          screens.lg
-            ? {
-                backgroundColor: "#fff",
-                maxWidth: "1160px",
-                display: "grid",
-                gridTemplateColumns: "2fr 1fr",
-                margin: "0 auto",
-                justifyContent: "space-between",
-                gap: "40px",
-              }
-            : {
-                gap: "20px",
-                justifyContent: "center",
-              }
-        }
-      >
-        <Col
-          style={screens.lg ? { padding: "40px" } : { padding: "0 20px" }}
-          id="apresentacao"
-        >
-          <h1 className={styles.titulo} style={{ marginBottom: "20px" }}>
-            Como tudo é organizado
-          </h1>
-          <p className={styles.texto}>
-            A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
-            ofertados por diversas instituições de ensino, entre outras, da
-            RFEPCT, que dão suporte ao desenvolvimento das competências
-            recomendadas para um setor público de alto desempenho por meio de
-            Itinerários Formativos. Na PlaforEDU você pode buscar as
-            competências associadas ao seu perfil profissional, a partir de uma
-            busca simples, e ter acesso a todos os cursos relacionados àquelas
-            competências.
-          </p>
-        </Col>
-        <Col>
-          <Image
-            src={mandala}
-            preview={false}
-            width={!screens.xs ? 375 : 250}
-          />
-        </Col>
-      </Row>
+      </Row> */}
 
       <div
+        style={{
+          background: "var(--bg-menos-claro)",
+          padding: "60px 0px",
+          width: "100%",
+          marginTop: `${!screens.xs ? "120px" : "60px"}`,
+        }}
+      >
+        <Row
+          align="middle"
+          wrap={!screens.lg}
+          style={
+            screens.lg
+              ? {
+                  maxWidth: "1160px",
+                  display: "grid",
+                  gridTemplateColumns: "2fr 1fr",
+                  margin: "0 auto",
+                  justifyContent: "space-between",
+                  gap: "40px",
+                }
+              : {
+                  gap: "20px",
+                  justifyContent: "center",
+                }
+          }
+        >
+          <Col
+            style={screens.lg ? { padding: "40px" } : { padding: "0 20px" }}
+            id="apresentacao"
+          >
+            <h1 className={styles.titulo} style={{ marginBottom: "20px" }}>
+              Como tudo é organizado
+            </h1>
+            <p className={styles.texto}>
+              A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
+              ofertados por diversas instituições de ensino, entre outras, da
+              RFEPCT, que dão suporte ao desenvolvimento das competências
+              recomendadas para um setor público de alto desempenho por meio de
+              Itinerários Formativos. Na PlaforEDU você pode buscar as
+              competências associadas ao seu perfil profissional, a partir de
+              uma busca simples, e ter acesso a todos os cursos relacionados
+              àquelas competências.
+            </p>
+          </Col>
+          <Col>
+            <Image
+              src={mandala}
+              preview={false}
+              width={!screens.xs ? 375 : 250}
+            />
+          </Col>
+        </Row>
+      </div>
+
+      {/* <div
         style={{
           background: "var(--bg-azul)",
           padding: "60px 0",
@@ -292,15 +299,18 @@ export default function AboutPage() {
             <img src={setabaixo} style={{ color: "#fff", marginTop: "24px" }} />
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div>
+      <div
+        style={{
+          marginTop: `${!screens.xs ? "120px" : "60px"}`,
+        }}
+      >
         <Row
           align="middle"
           wrap={!screens.lg}
           id="iniciacao"
           className={styles.itinerarioContainer}
-          style={{ flexDirection: "row-reverse" }}
         >
           <div
             style={
@@ -352,7 +362,6 @@ export default function AboutPage() {
           wrap={!screens.lg}
           id="tae"
           className={styles.itinerarioContainer}
-          style={{}}
         >
           <div
             style={
@@ -408,7 +417,6 @@ export default function AboutPage() {
           wrap={!screens.lg}
           id="docente"
           className={styles.itinerarioContainer}
-          style={{ flexDirection: "row-reverse" }}
         >
           <div
             style={
@@ -461,7 +469,6 @@ export default function AboutPage() {
           wrap={!screens.lg}
           id="gerencial"
           className={styles.itinerarioContainer}
-          style={{}}
         >
           <div
             style={
@@ -513,7 +520,6 @@ export default function AboutPage() {
           wrap={!screens.lg}
           id="aposentadoria"
           className={styles.itinerarioContainer}
-          style={{ flexDirection: "row-reverse" }}
         >
           <div
             style={
@@ -568,42 +574,6 @@ export default function AboutPage() {
                 },
               ]}
             />
-            {/* <Panel
-                className={`${styles.panel} ${styles.texto}`}
-                style={{}}
-                header="Formação no contexto psicológico"
-                key="1"
-              >
-                <p className={styles.texto}>
-                  Preparando-se para esta nova realidade, em que as demandas de
-                  trabalho e rotina anteriores não existirão mais.
-                </p>
-              </Panel>
-              <Panel
-                className={`${styles.panel} ${styles.texto}`}
-                header="Atividades futuras"
-                key="2"
-              >
-                <p className={styles.texto}>
-                  O aposentado deve pensar no seu perfil, fazer análise de suas
-                  características pessoais, habilidades e preferências para
-                  descobrir o que irá fazer depois. Pode se associar a ONGs,
-                  empreender etc.
-                </p>
-              </Panel>
-              <Panel
-                className={`${styles.panel} ${styles.texto}`}
-                header="Financeiro"
-                key="3"
-              >
-                <p className={styles.texto}>
-                  Se este aspecto não estiver bem equacionado, dificilmente o
-                  aposentado conseguirá realizar as outras coisas. É fundamental
-                  o planejamento financeiro, saber o quanto vai gastar do
-                  momento do desligamento para frente e fazer uma análise de
-                  expectativa de vida.
-                </p>
-              </Panel> */}
             <div>
               <button
                 style={{
@@ -630,7 +600,7 @@ export default function AboutPage() {
       <Row
         align="middle"
         style={{
-          backgroundColor: "var(--bg-azul)",
+          background: "var(--bg-menos-claro)",
           height: `${screens.md ? "420px" : "auto"}`,
           padding: "60px 20px",
           margin: `${!screens.xs ? "120px 0" : "60px 0"}`,
@@ -644,6 +614,7 @@ export default function AboutPage() {
                   backgroundImage: `url(${trilhaIlustracao})`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
+                  backgroundPosition: "right",
                 }
               : null
           }
@@ -652,13 +623,12 @@ export default function AboutPage() {
             <h1
               className={styles.titulo}
               style={{
-                color: "white",
                 marginBottom: "28px",
               }}
             >
               Trilhas Formativas
             </h1>
-            <p className={styles.texto} style={{ color: "white" }}>
+            <p className={styles.texto}>
               São percursos formativos propostos a partir do encadeamento de
               cursos ordenados, com o objetivo de desenvolver competências por
               meio da capacitação e qualificação profissional.
