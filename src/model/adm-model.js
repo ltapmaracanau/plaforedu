@@ -128,27 +128,10 @@ const admModel = {
 
   login: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    return await services.loginService
-      .login({
-        username: payload.username,
-        password: payload.password,
-      })
-      .then((response) => {
-        if (response.data?.status === "PENDING") {
-          notification.warning({
-            message: "Aviso!",
-            description:
-              "Antes do acesso total ao sistema você precisa alterar sua senha!",
-          });
-        }
-        actions.getMyProfile();
-      })
-      .catch((error) => {
-        throw new Error(error);
-      })
-      .finally(() => {
-        actions.setLoading(false);
-      });
+    return services.loginService.login({
+      username: payload.username,
+      password: payload.password,
+    });
   }),
 
   logout: thunk(async (actions) => {
@@ -227,7 +210,7 @@ const admModel = {
 
   getMyProfile: thunk(async (actions) => {
     actions.setLoading(true);
-    await services.loginService
+    return await services.loginService
       .getMyProfile()
       .then((response) => {
         actions.setMyProfile(response.data);
@@ -239,6 +222,14 @@ const admModel = {
       .finally(() => {
         actions.setLoading(false);
       });
+  }),
+
+  signTerm: thunk(async ({ userId }) => {
+    try {
+      return services.usersService.signTerm({ userId });
+    } catch (error) {
+      throw new Error(error);
+    }
   }),
 
   getSearchLogs: thunk(async (actions, payload = {}) => {

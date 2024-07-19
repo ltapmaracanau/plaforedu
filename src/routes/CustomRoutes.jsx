@@ -262,7 +262,7 @@ const CustomRoutes = () => {
         },
         {
           path: "/login",
-          element: <Login />,
+          element: authenticated ? <Navigate to="/" /> : <Login />,
         },
         {
           path: "/forget",
