@@ -229,7 +229,7 @@ export default function InstitutionList() {
             ]}
           >
             <InstitutionRegister
-              instituicao={editandoInstituicao}
+              institution={editandoInstituicao}
               actionVisible={() => {
                 setRegisterVisible(false);
                 getInstitutions({

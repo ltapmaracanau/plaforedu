@@ -9,11 +9,12 @@ const instituicoesModel = {
 
   registerNewInstitution: thunk(async (actions, payload) => {
     actions.setRegistering(true);
-    const { name, abbreviation } = payload;
+    const { name, abbreviation, uf } = payload;
     return await services.institutionService
       .registerInstitution({
         name: name.trim(),
         abbreviation: abbreviation.trim(),
+        uf,
       })
       .catch((error) => {
         throw new Error(error);

@@ -14,7 +14,6 @@ import administrativo from "../assets/itinerarios/iconAdministrativo.svg";
 import gerencial from "../assets/itinerarios/iconGerencial.svg";
 import setabaixo from "../assets/icon/setabaixo.svg";
 
-const { Panel } = Collapse;
 const { useBreakpoint } = Grid;
 
 import styles from "./AboutPage.module.css";
@@ -43,38 +42,47 @@ export default function AboutPage() {
 
   return (
     <>
-  
       <Row className={styles.linha}></Row>
 
-      <Row
-        align="middle"
-        wrap={!screens.lg}
-        className={styles.itinerarioContainer}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "24px",
-            maxWidth: "460px",
-          }}
+      <div>
+        <Row
+          align="middle"
+          wrap={!screens.lg}
+          className={styles.itinerarioContainer}
         >
-          <h2 className={styles.titulo} /*Classname em portugues*/>
-            Cursos voltados para o seu perfil profissional
-          </h2>
-          <Typography.Text className={styles.texto} /*Classname em portugues*/>
-            A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
-            ofertados por diversas instituições de ensino.
-          </Typography.Text>
-        </div>
+          <div
+            style={
+              !screens.lg
+                ? {
+                    display: "grid",
+                    gap: "12px",
+                    maxWidth: "560px",
+                  }
+                : {
+                    display: "grid",
+                    gap: "24px",
+                    maxWidth: "560px",
+                  }
+            }
+          >
+            <h2 className={styles.titulo} /*Classname em portugues*/>
+              Cursos voltados para o seu perfil profissional
+            </h2>
+            <Typography.Text
+              className={styles.texto} /*Classname em portugues*/
+            >
+              A PlaforEDU reúne diversos cursos online abertos (Cursos Mooc)
+              ofertados por diversas instituições de ensino.
+            </Typography.Text>
+          </div>
 
-        <iframe
-          className={styles.videoItinerario}
-          title="Apresentação PlaforEDU"
-          src="https://www.youtube.com/embed/XJS8nvbW754"
-        />
-      </Row>
+          <iframe
+            className={styles.videoItinerario}
+            title="Apresentação PlaforEDU"
+            src="https://www.youtube.com/embed/XJS8nvbW754"
+          />
+        </Row>
+      </div>
 
       <Row
         style={{
@@ -533,8 +541,31 @@ export default function AboutPage() {
                 border: "none",
               }}
               expandIconPosition="end"
-            >
-              <Panel
+              items={[
+                {
+                  key: "1",
+                  className: `${styles.panel} ${styles.texto}`,
+                  label: "Formação no contexto psicológico",
+                  children:
+                    "Preparando-se para esta nova realidade, em que as demandas de trabalho e rotina anteriores não existirão mais.",
+                },
+                {
+                  key: "2",
+                  className: `${styles.panel} ${styles.texto}`,
+                  label: "Atividades futuras",
+                  children:
+                    "O aposentado deve pensar no seu perfil, fazer análise de suas características pessoais, habilidades e preferências para descobrir o que irá fazer depois. Pode se associar a ONGs, empreender etc.",
+                },
+                {
+                  key: "3",
+                  className: `${styles.panel} ${styles.texto}`,
+                  label: "Financeiro",
+                  children:
+                    "Se este aspecto não estiver bem equacionado, dificilmente o aposentado conseguirá realizar as outras coisas. É fundamental o planejamento financeiro, saber o quanto vai gastar do momento do desligamento para frente e fazer uma análise de expectativa de vida.",
+                },
+              ]}
+            />
+            {/* <Panel
                 className={`${styles.panel} ${styles.texto}`}
                 style={{}}
                 header="Formação no contexto psicológico"
@@ -569,8 +600,7 @@ export default function AboutPage() {
                   momento do desligamento para frente e fazer uma análise de
                   expectativa de vida.
                 </p>
-              </Panel>
-            </Collapse>
+              </Panel> */}
             <div>
               <button
                 style={{
