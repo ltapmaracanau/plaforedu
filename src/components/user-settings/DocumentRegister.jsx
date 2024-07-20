@@ -359,7 +359,7 @@ export default function DocumentRegister() {
                 render={({ field, fieldState: { error } }) => {
                   return (
                     <Form.Item
-                      label="Tipo de documento"
+                      label="Categoria"
                       validateStatus={error ? "error" : ""}
                       help={error ? error.message : ""}
                       hasFeedback
@@ -489,6 +489,7 @@ export default function DocumentRegister() {
                               onChange: (value) => {
                                 field.onChange(value);
                               },
+                              tooltip: "Editar",
                             }}
                           >
                             {field.value}
