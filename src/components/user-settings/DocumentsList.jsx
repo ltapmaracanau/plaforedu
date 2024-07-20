@@ -95,7 +95,7 @@ export default function DocumentsList() {
     >
       <div style={{ width: "100%" }}>
         <Card
-          title={"Planos de Estudo"}
+          title={"Documentos"}
           styles={{
             header: {
               fontSize: 20,
