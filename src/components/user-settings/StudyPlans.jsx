@@ -3,7 +3,15 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-import { Button, Card, List, Input, notification, Popconfirm } from "antd";
+import {
+  Button,
+  Card,
+  List,
+  Input,
+  notification,
+  Popconfirm,
+  Progress,
+} from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { Search } = Input;
@@ -154,6 +162,13 @@ export default function StudyPlans() {
                   ]}
                 >
                   <List.Item.Meta
+                    avatar={
+                      <Progress
+                        type="circle"
+                        size={"small"}
+                        percent={item.percentage.toFixed(0)}
+                      />
+                    }
                     style={{ fontFamily: "Roboto" }}
                     title={
                       <Button

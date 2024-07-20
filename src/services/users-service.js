@@ -40,4 +40,9 @@ export default {
     ),
 
   getUniqueUser: (payload) => AuthAxios.get(`/profile/${payload.id}`),
+
+  signTerm: (payload) =>
+    AuthAxios.patch(`/users/sign-term`, {
+      userId: payload.userId,
+    }),
 };

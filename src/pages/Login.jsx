@@ -1,22 +1,28 @@
 import { loginSchema } from "../schemas/loginSchema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 
-import { Button, Card, Form, Input, Space, notification } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, Card, Form, Input, Modal, Space, notification } from "antd";
+import { Link, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useState } from "react";
+import TermConsentLogin from "../components/privacyTerms/TermConsentLogin";
 
 export default function Login() {
   const login = useStoreActions((actions) => actions.adm.login);
-  const loading = useStoreState((state) => state.adm.loading);
   const [cookies, _setCookie] = useCookies(["cookieConsent"]);
+  const [loading, setLoading] = useState(false);
+  const [modalSignTermVisible, setModalSignTermVisible] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
 
-  const setVisible = useStoreActions(
+  const setCookieConsentModalVisible = useStoreActions(
     (actions) => actions.adm.setCookieConsentModalVisible
   );
 
-  let navigate = useNavigate();
+  const getMyProfile = useStoreActions((actions) => actions.adm.getMyProfile);
+  const signTermAction = useStoreActions((actions) => actions.adm.signTerm);
+  const logout = useStoreActions((actions) => actions.adm.logout);
 
   const register = useForm({
     mode: "onChange",
@@ -31,25 +37,71 @@ export default function Login() {
     delayError: undefined,
   });
 
-  const onSubmit = async (values) => {
+  const verifyPending = ({ status }) => {
+    if (status === "PENDING") {
+      notification.warning({
+        message: "Aviso!",
+        description:
+          "Antes do acesso total ao sistema você precisa alterar sua senha!",
+      });
+    }
+  };
+
+  const onOkModal = async () => {
     try {
-      if (!cookies.cookieConsent) {
-        setVisible(true);
-        notification.warning({
-          message: "Aviso!",
-          description: "Você precisa aceitar os cookies para continuar!",
-        });
-        return;
-      }
-      await login(values);
-      navigate(`/`);
+      const response = await getMyProfile();
+      await signTermAction({ userId: response.id });
+      setModalSignTermVisible(false);
+      notification.success({
+        message: "Termo assinado com sucesso!",
+      });
+      verifyPending({ status: response.status });
+      setAuthenticated(true);
     } catch (error) {
       notification.error({
-        message: "Erro!",
+        message: "Erro ao assinar termo!",
         description: error.message,
       });
     }
   };
+
+  const onSubmit = async (values) => {
+    setLoading(true);
+    if (!cookies.cookieConsent) {
+      setCookieConsentModalVisible(true);
+      notification.warning({
+        message: "Aviso!",
+        description: "Você precisa aceitar os cookies para continuar!",
+      });
+      return;
+    }
+    try {
+      const { data } = await login(values);
+      if (!data.hasSignedTerm) {
+        notification.warning({
+          message: "Aviso!",
+          description:
+            "Antes de acessar o sistema você precisa assinar o termo de consentimento!",
+        });
+        setModalSignTermVisible(true);
+        return;
+      }
+      verifyPending({ status: data.status });
+      getMyProfile();
+      setAuthenticated(true);
+    } catch (error) {
+      notification.error({
+        message: "Erro ao fazer login!",
+        description: error,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (authenticated) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div
@@ -136,6 +188,19 @@ export default function Login() {
           </div>
         </Form>
       </Card>
+      <Modal
+        width={"70%"}
+        title="TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS PESSOAIS"
+        open={modalSignTermVisible}
+        onOk={onOkModal}
+        okText="Assinar"
+        onCancel={() => {
+          setModalSignTermVisible(false);
+          logout();
+        }}
+      >
+        <TermConsentLogin />
+      </Modal>
     </div>
   );
 }
