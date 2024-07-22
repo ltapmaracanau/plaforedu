@@ -69,7 +69,7 @@ export default function StudyPlanView() {
         setStudyPlan(plan);
       } catch (error) {
         notification.error({
-          message: "Erro ao buscar plano de estudo",
+          message: "Erro ao buscar plano de desenvolvimento",
           description: error.message,
         });
       } finally {
@@ -115,7 +115,7 @@ export default function StudyPlanView() {
   }
 
   if (!studyPlan) {
-    return <Empty description="Plano de estudo não encontrado" />;
+    return <Empty description="plano de desenvolvimento não encontrado" />;
   }
 
   return (

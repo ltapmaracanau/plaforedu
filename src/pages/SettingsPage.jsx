@@ -44,7 +44,7 @@ export default function SettingsPage() {
       icon: <KeyOutlined />,
     },
     {
-      label: "Planos de Estudo",
+      label: "Planos de Desenvolvimento",
       key: "/settings/study-plans",
       icon: <NodeIndexOutlined />,
       disabled: !isActive || !(isAdm || isCoord || isServidor),
