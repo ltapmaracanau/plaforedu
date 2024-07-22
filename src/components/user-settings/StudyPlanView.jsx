@@ -189,7 +189,7 @@ export default function StudyPlanView() {
               <Progress
                 type={"circle"}
                 size={"small"}
-                percent={studyPlan.percentage.toFixed(0)}
+                percent={studyPlan.percentage?.toFixed(0) || 0}
               />
             </div>
           }
