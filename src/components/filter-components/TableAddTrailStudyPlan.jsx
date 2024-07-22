@@ -385,7 +385,7 @@ export default function TableAddTrailStudyPlan(props) {
       render: (text, record) => {
         return (
           <>
-            <Tooltip title="Adicionar todos os cursos da trilha ao plano de estudo">
+            <Tooltip title="Adicionar todos os cursos da trilha ao plano de desenvolvimento">
               <Button
                 type="primary"
                 onClick={() => {

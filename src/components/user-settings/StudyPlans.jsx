@@ -41,7 +41,7 @@ export default function StudyPlans() {
         });
       } catch (error) {
         notification.error({
-          message: "Erro ao buscar planos de estudo",
+          message: "Erro ao buscar planos de desenvolvimento",
           description: error.message,
         });
       }
@@ -58,7 +58,7 @@ export default function StudyPlans() {
       });
     } catch (error) {
       notification.error({
-        message: "Erro ao deletar plano de estudo",
+        message: "Erro ao deletar plano de desenvolvimento",
         description: error.message,
       });
     }
@@ -74,7 +74,7 @@ export default function StudyPlans() {
     >
       <div style={{ width: "100%" }}>
         <Card
-          title={"Planos de Estudo"}
+          title={"Planos de Desenvolvimento"}
           styles={{
             header: {
               fontSize: 20,
@@ -102,7 +102,7 @@ export default function StudyPlans() {
                 style={{
                   marginRight: "10px",
                 }}
-                placeholder={"Buscar planos de estudo..."}
+                placeholder={"Buscar planos de desenvolvimento..."}
               />
               <Button
                 type="primary"

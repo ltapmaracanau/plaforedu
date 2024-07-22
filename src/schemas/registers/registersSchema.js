@@ -122,7 +122,7 @@ export const registerTrilhaSchema = yup.object().shape({
   competencies: yup.string().required("Obrigatório!"),
 });
 
-// PLANOS DE ESTUDO
+// PLANOS DE DESENVOLVIMENTO
 
 export const registerStudyPlanSchema = yup.object().shape({
   name: yup
