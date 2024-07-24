@@ -1,4 +1,19 @@
+import { useStoreActions } from "easy-peasy";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import downloadBlob from "../../helpers/downloadBlob";
+import CourseModalVisualization from "../CourseModalVisualization";
+
 import {
+  EditOutlined,
+  ArrowLeftOutlined,
+  DownloadOutlined,
+  CheckCircleFilled,
+  PlayCircleFilled,
+} from "@ant-design/icons";
+import {
+  Badge,
   Button,
   Card,
   Divider,
@@ -12,16 +27,6 @@ import {
   Typography,
   notification,
 } from "antd";
-import { useStoreActions } from "easy-peasy";
-import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  EditOutlined,
-  ArrowLeftOutlined,
-  DownloadOutlined,
-} from "@ant-design/icons";
-import CourseModalVisualization from "../CourseModalVisualization";
-import downloadBlob from "../../helpers/downloadBlob";
 
 export default function StudyPlanView() {
   const { id } = useParams();
@@ -207,7 +212,39 @@ export default function StudyPlanView() {
         />
         <Divider>Cursos do Plano</Divider>
         <List
-          dataSource={studyPlan?.courses || []}
+          dataSource={
+            studyPlan?.courses.sort((a, b) => {
+              // PRIMEIRO OS INICIADOS
+              // DEPOIS OS PENDENTES
+              // DEPOIS OS CONCLUÍDOS
+              if (a.status === "IN_PROGRESS" && b.status !== "IN_PROGRESS") {
+                return -1;
+              }
+              if (a.status !== "IN_PROGRESS" && b.status === "IN_PROGRESS") {
+                return 1;
+              }
+              if (
+                a.status === "UNINITIALIZED" &&
+                b.status !== "UNINITIALIZED"
+              ) {
+                return -1;
+              }
+              if (
+                a.status !== "UNINITIALIZED" &&
+                b.status === "UNINITIALIZED"
+              ) {
+                return 1;
+              }
+              if (a.status === "CONCLUDED" && b.status !== "CONCLUDED") {
+                return 1;
+              }
+              if (a.status !== "CONCLUDED" && b.status === "CONCLUDED") {
+                return -1;
+              }
+
+              return 0;
+            }) || []
+          }
           renderItem={(item) => (
             <Card
               style={{
@@ -253,41 +290,87 @@ export default function StudyPlanView() {
                     title={
                       item.status === "CONCLUDED" ||
                       item.status === "IN_PROGRESS"
-                        ? "Indisponível"
-                        : ""
+                        ? "Curso iniciado"
+                        : "Iniciar Curso"
                     }
                   >
-                    <Button
-                      disabled={
-                        item.status === "IN_PROGRESS" ||
-                        item.status === "CONCLUDED"
+                    <Badge
+                      count={
+                        item.status !== "UNINITIALIZED" ? (
+                          <CheckCircleFilled
+                            style={{
+                              fontSize: 16,
+                              color: "green",
+                            }}
+                          />
+                        ) : null
                       }
-                      type="primary"
-                      onClick={() => {
-                        setStatus({
-                          courseId: item.courseId,
-                          status: "IN_PROGRESS",
-                        });
-                      }}
                     >
-                      Iniciar
-                    </Button>
+                      <Button
+                        type="primary"
+                        size="middle"
+                        disabled={item.status !== "UNINITIALIZED"}
+                        shape="circle"
+                        icon={
+                          <PlayCircleFilled
+                            style={{
+                              fontSize: 30,
+                            }}
+                          />
+                        }
+                        onClick={() => {
+                          setStatus({
+                            courseId: item.courseId,
+                            status: "IN_PROGRESS",
+                          });
+                        }}
+                      />
+                    </Badge>
                   </Tooltip>
                   <Tooltip
-                    title={item.status === "CONCLUDED" ? "Indisponível" : ""}
+                    title={
+                      item.status === "CONCLUDED"
+                        ? "Curso já concluído!"
+                        : item.status === "UNINITIALIZED"
+                        ? "Necessário iniciar o curso!"
+                        : "Concluir Curso"
+                    }
                   >
-                    <Button
-                      disabled={item.status === "CONCLUDED"}
-                      type="primary"
-                      onClick={() => {
-                        setStatus({
-                          courseId: item.courseId,
-                          status: "CONCLUDED",
-                        });
-                      }}
+                    <Badge
+                      count={
+                        item.status === "CONCLUDED" ? (
+                          <CheckCircleFilled
+                            style={{
+                              fontSize: 16,
+                              color: "green",
+                            }}
+                          />
+                        ) : null
+                      }
                     >
-                      Concluir
-                    </Button>
+                      <Button
+                        type="primary"
+                        size="middle"
+                        shape="circle"
+                        icon={
+                          <CheckCircleFilled
+                            style={{
+                              fontSize: 30,
+                            }}
+                          />
+                        }
+                        disabled={
+                          item.status === "UNINITIALIZED" ||
+                          item.status === "CONCLUDED"
+                        }
+                        onClick={() => {
+                          setStatus({
+                            courseId: item.courseId,
+                            status: "CONCLUDED",
+                          });
+                        }}
+                      />
+                    </Badge>
                   </Tooltip>
                 </Space>
               }
