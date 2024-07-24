@@ -551,7 +551,6 @@ export default function FormativeTrailsRegister() {
                                 //setDescriptionIfEmpty(value);
                                 field.onChange(value);
                                 setCompetencieSelected(selected);
-                                console.log(selected);
                               }}
                               labelRender={(props) => {
                                 const { value, label } = props;
