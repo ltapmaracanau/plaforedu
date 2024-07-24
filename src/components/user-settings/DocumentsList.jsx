@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined, SearchOutlined } from "@ant-design/icons";
 
@@ -14,6 +14,7 @@ import {
   Switch,
   Table,
   Popconfirm,
+  Tooltip,
 } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -32,6 +33,10 @@ export default function DocumentsList() {
   const unarchiveDocumentAction = useStoreActions(
     (actions) => actions.documents.unarchiveDocument
   );
+
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
+  const isJornalista = useStoreState((state) => state.adm.isJornalista);
 
   const [documents, setDocuments] = useState([]);
   const [documentsTypes, setDocumentsTypes] = useState([]);
@@ -122,15 +127,24 @@ export default function DocumentsList() {
                   });
                 }}
               />
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  navigate("/settings/documents/edit");
-                }}
+              <Tooltip
+                title={
+                  !isAdm && !isCoord && !isJornalista
+                    ? "Usuário sem permissão"
+                    : null
+                }
               >
-                Adicionar
-              </Button>
+                <Button
+                  disabled={!isAdm && !isCoord && !isJornalista}
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    navigate("/settings/documents/edit");
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </Space>
           }
         >
@@ -235,23 +249,41 @@ export default function DocumentsList() {
                         archiveDocument(!record.filedAt, record.id);
                       }}
                     >
-                      <Button
-                        loading={archivingDocument === record.id}
-                        key={`${record.id}-file`}
-                        type="dashed"
+                      <Tooltip
+                        title={
+                          !isAdm && !isCoord && !isJornalista
+                            ? "Usuário sem permissão"
+                            : null
+                        }
                       >
-                        {!record.filedAt ? "Arquivar" : "Desarquivar"}
-                      </Button>
+                        <Button
+                          disabled={!isAdm && !isCoord && !isJornalista}
+                          loading={archivingDocument === record.id}
+                          key={`${record.id}-file`}
+                          type="dashed"
+                        >
+                          {!record.filedAt ? "Arquivar" : "Desarquivar"}
+                        </Button>
+                      </Tooltip>
                     </Popconfirm>
-                    <Button
-                      key={`${record.id}-edit`}
-                      onClick={() => {
-                        navigate(`/settings/documents/edit/${record.id}`);
-                      }}
-                      icon={<EditOutlined />}
+                    <Tooltip
+                      title={
+                        !isAdm && !isCoord && !isJornalista
+                          ? "Usuário sem permissão"
+                          : null
+                      }
                     >
-                      Editar
-                    </Button>
+                      <Button
+                        disabled={!isAdm && !isCoord && !isJornalista}
+                        key={`${record.id}-edit`}
+                        onClick={() => {
+                          navigate(`/settings/documents/edit/${record.id}`);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>
                   </Space>
                 ),
               },

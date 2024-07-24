@@ -14,7 +14,11 @@ export default function Denied() {
         status="403"
         title="403"
         subTitle="Desculpe, você não tem acesso a esta página."
-        extra={<Button type="primary">Ir para Home</Button>}
+        extra={
+          <Button href="/" type="primary">
+            Ir para Home
+          </Button>
+        }
       />
     </div>
   );

@@ -14,6 +14,9 @@ export default function FormativeTrailsList() {
     (actions) => actions.trilhas.getTrilhas
   );
 
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
+
   const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
   const loadingCursos = useStoreState((state) => state.courses.loading);
 
@@ -170,15 +173,20 @@ export default function FormativeTrailsList() {
                 }}
               />
             </Tooltip>
-            <Button
-              type="primary"
-              icon={<PlusOutlined />}
-              onClick={() => {
-                navigate("edit");
-              }}
+            <Tooltip
+              title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
             >
-              Adicionar
-            </Button>
+              <Button
+                disabled={!isAdm && !isCoord}
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={() => {
+                  navigate("edit");
+                }}
+              >
+                Adicionar
+              </Button>
+            </Tooltip>
           </div>
         }
       >
@@ -265,15 +273,22 @@ export default function FormativeTrailsList() {
               render: (text, record) => {
                 return (
                   <Space direction="horizontal">
-                    <Button
-                      key={record.id}
-                      onClick={() => {
-                        navigate(`edit/${record.id}`);
-                      }}
-                      icon={<EditOutlined />}
+                    <Tooltip
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
                     >
-                      Editar
-                    </Button>
+                      <Button
+                        disabled={!isAdm && !isCoord}
+                        key={record.id}
+                        onClick={() => {
+                          navigate(`edit/${record.id}`);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>
                   </Space>
                 );
               },

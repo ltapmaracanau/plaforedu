@@ -424,7 +424,7 @@ const CustomRoutes = () => {
                 {
                   path: "/settings/documents",
                   element:
-                    isAdm || isCoord || isJornalista ? (
+                    isAdm || isCoord || isJornalista || isAnalistaDados ? (
                       <DocumentsList />
                     ) : (
                       <Navigate to="/denied" />
@@ -441,11 +441,12 @@ const CustomRoutes = () => {
                 },
                 {
                   path: "/settings/logs",
-                  element: isAdm ? (
-                    <ListSearchLogs />
-                  ) : (
-                    <Navigate to="/denied" />
-                  ),
+                  element:
+                    isAdm || isCoord || isAnalistaDados ? (
+                      <ListSearchLogs />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
                 },
                 {
                   path: "/settings/log-courses-trails",

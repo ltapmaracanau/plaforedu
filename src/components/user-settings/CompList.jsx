@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
@@ -23,6 +23,8 @@ export default function CompList() {
   const getCompAction = useStoreActions(
     (actions) => actions.competencies.getComp
   );
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Competência");
@@ -122,17 +124,22 @@ export default function CompList() {
                   }}
                 />
               </Tooltip>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  setEditingComp(null);
-                  setModalText("Cadastrar Competência");
-                  setRegisterVisible(true);
-                }}
+              <Tooltip
+                title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
               >
-                Adicionar
-              </Button>
+                <Button
+                  disabled={!(isAdm || isCoord)}
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setEditingComp(null);
+                    setModalText("Cadastrar Competência");
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </div>
           }
         >
@@ -160,17 +167,24 @@ export default function CompList() {
                 <List.Item
                   key={item.id}
                   actions={[
-                    <Button
+                    <Tooltip
                       key={item.id}
-                      onClick={() => {
-                        setEditingComp(item);
-                        setModalText("Editar Competência");
-                        setRegisterVisible(true);
-                      }}
-                      icon={<EditOutlined />}
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
                     >
-                      Editar
-                    </Button>,
+                      <Button
+                        disabled={!(isAdm || isCoord)}
+                        onClick={() => {
+                          setEditingComp(item);
+                          setModalText("Editar Competência");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>,
                   ]}
                 >
                   <List.Item.Meta

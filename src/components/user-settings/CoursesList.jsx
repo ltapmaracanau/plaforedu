@@ -14,7 +14,6 @@ import {
   Typography,
   Tag,
 } from "antd";
-import CourseRegister from "./CourseRegister";
 import { useNavigate } from "react-router-dom";
 //import { CSVLink } from "react-csv";
 
@@ -34,9 +33,6 @@ export default function CoursesList() {
     (actions) => actions.institutions.getInstituicoes
   );
   const getComp = useStoreActions((actions) => actions.competencies.getComp);
-  const getTaxonomias = useStoreActions(
-    (actions) => actions.courses.getTaxonomias
-  );
   const getSubthemes = useStoreActions(
     (actions) => actions.themes.getSubthemes
   );
@@ -45,8 +41,8 @@ export default function CoursesList() {
   const cursos = useStoreState((state) => state.courses.cursos);
   const count = useStoreState((state) => state.courses.count);
   const isAdm = useStoreState((state) => state.adm.isAdm);
-  const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
   const isCoord = useStoreState((state) => state.adm.isCoord);
+  const isConsultor = useStoreState((state) => state.adm.isConsultor);
 
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
@@ -59,7 +55,6 @@ export default function CoursesList() {
     await getInstituicoes({ showFiled: true });
     await getComp({ showFiled: true });
     await getSubthemes({ showFiled: true });
-    await getTaxonomias();
   }, [
     getAcessibilidades,
     getComp,
@@ -67,7 +62,6 @@ export default function CoursesList() {
     getInstituicoes,
     getItinerarios,
     getSubthemes,
-    getTaxonomias,
     pageNumber,
   ]);
 
@@ -240,15 +234,24 @@ export default function CoursesList() {
                       />
                     </Tooltip>
                   </CSVLink> */}
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  navigate("edit");
-                }}
+              <Tooltip
+                title={
+                  !isAdm && !isCoord && !isConsultor
+                    ? "Usuário sem permissão"
+                    : ""
+                }
               >
-                Adicionar
-              </Button>
+                <Button
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  disabled={!isAdm && !isCoord && !isConsultor}
+                  onClick={() => {
+                    navigate("edit");
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </Space>
           }
         >
@@ -342,16 +345,20 @@ export default function CoursesList() {
                 key: "action",
                 render: (text, record) => (
                   <Space size="middle">
-                    <Button
-                      key={record.id}
-                      disabled={!isAdm && !isAnalistaDados && !isCoord}
-                      onClick={() => {
-                        navigate(`edit/${record.id}`);
-                      }}
-                      icon={<EditOutlined />}
+                    <Tooltip
+                      title={!isAdm && !isCoord ? "Usuário sem permissão" : ""}
                     >
-                      Editar
-                    </Button>
+                      <Button
+                        key={record.id}
+                        disabled={!isAdm && !isCoord}
+                        onClick={() => {
+                          navigate(`edit/${record.id}`);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>
                   </Space>
                 ),
               },

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -23,6 +23,9 @@ export default function InstitutionList() {
   const getInstituicoesAction = useStoreActions(
     (actions) => actions.institutions.getInstituicoes
   );
+
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const [registerVisible, setRegisterVisible] = useState(false);
 
@@ -122,16 +125,21 @@ export default function InstitutionList() {
                     }}
                   />
                 </Tooltip>
-                <Button
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={() => {
-                    setEditandoInstituicao(null);
-                    setRegisterVisible(true);
-                  }}
+                <Tooltip
+                  title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
                 >
-                  Adicionar
-                </Button>
+                  <Button
+                    disabled={!(isAdm || isCoord)}
+                    type="primary"
+                    icon={<PlusOutlined />}
+                    onClick={() => {
+                      setEditandoInstituicao(null);
+                      setRegisterVisible(true);
+                    }}
+                  >
+                    Adicionar
+                  </Button>
+                </Tooltip>
               </div>
             }
           >
@@ -157,16 +165,23 @@ export default function InstitutionList() {
                 return (
                   <List.Item
                     actions={[
-                      <Button
+                      <Tooltip
                         key={item.id}
-                        onClick={() => {
-                          setEditandoInstituicao(item);
-                          setRegisterVisible(true);
-                        }}
-                        icon={<EditOutlined />}
+                        title={
+                          !isAdm && !isCoord ? "Usuário sem permissão" : null
+                        }
                       >
-                        Editar
-                      </Button>,
+                        <Button
+                          disabled={!(isAdm || isCoord)}
+                          onClick={() => {
+                            setEditandoInstituicao(item);
+                            setRegisterVisible(true);
+                          }}
+                          icon={<EditOutlined />}
+                        >
+                          Editar
+                        </Button>
+                      </Tooltip>,
                     ]}
                     key={item.id}
                   >
