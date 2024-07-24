@@ -27,8 +27,7 @@ import HeaderHome from "../components/header/HeaderHome.jsx";
 import FooterGov from "../components/footer/FooterGov.jsx";
 import HeaderGov from "../components/header/HeaderGov.jsx";
 import { Button, ConfigProvider, Space, Typography } from "antd";
-import dayjs from "dayjs";
-import "dayjs/locale/pt-br";
+import ptBR from "antd/locale/pt_BR";
 import NotFound from "../pages/NotFound.jsx";
 import InstitutionList from "../components/user-settings/InstitutionsList.jsx";
 import CategCompList from "../components/user-settings/CategCompList.jsx";
@@ -39,12 +38,18 @@ import ListSearchLogs from "../components/user-settings/ListSearchLogs.jsx";
 import StudyPlans from "../components/user-settings/StudyPlans.jsx";
 import StudyPlanView from "../components/user-settings/StudyPlanView.jsx";
 import StudyPlanRegister from "../components/user-settings/StudyPlanRegister.jsx";
+import DocumentRegister from "../components/user-settings/DocumentRegister.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
 import SystemLog from "../components/user-settings/SystemLog.jsx";
 import { useCookies } from "react-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import EvaluateChanges from "../components/user-settings/EvaluateChanges.jsx";
 import ScrollToTop from "../components/ScrollToTop.jsx";
+import TermCookiesModal from "../components/privacyTerms/TermCookiesModal.jsx";
+import TermPrivacyModal from "../components/privacyTerms/TermPrivacyModal.jsx";
+import DocumentsList from "../components/user-settings/DocumentsList.jsx";
+import CourseRegister from "../components/user-settings/CourseRegister.jsx";
+import FormativeTrailsRegister from "../components/user-settings/FormativeTrailsRegister.jsx";
 
 const Layout = () => {
   const [cookies, setCookie] = useCookies(["cookieConsent"]);
@@ -78,6 +83,9 @@ const Layout = () => {
     const setVisible = useStoreActions(
       (actions) => actions.adm.setCookieConsentModalVisible
     );
+
+    const [termVisible, setTermVisible] = useState(false);
+    const [termPrivacyVisible, setTermPrivacyVisible] = useState(false);
 
     useEffect(() => {
       setVisible(!cookies.cookieConsent);
@@ -118,7 +126,22 @@ const Layout = () => {
           Este site utiliza cookies para melhorar a experiência do usuário.
           Diga-nos se concorda com o uso de Cookies.
         </Typography.Paragraph>
-        <Typography.Link>Política de privacidade</Typography.Link>
+        <Space direction="vertical">
+          <Typography.Link
+            onClick={() => {
+              setTermVisible(true);
+            }}
+          >
+            Política de Cookies
+          </Typography.Link>
+          <Typography.Link
+            onClick={() => {
+              setTermPrivacyVisible(true);
+            }}
+          >
+            Política de Privacidade
+          </Typography.Link>
+        </Space>
         <Space
           size={10}
           direction="horizontal"
@@ -155,6 +178,15 @@ const Layout = () => {
             Recusar
           </Button>
         </Space>
+        <TermCookiesModal
+          termVisible={termVisible}
+          setTermVisible={setTermVisible}
+        />
+        <TermPrivacyModal
+          termPrivacyVisible={termPrivacyVisible}
+          setTermPrivacyVisible={setTermPrivacyVisible}
+          setTermVisible={setTermVisible}
+        />
       </div>
     ) : null;
   };
@@ -167,7 +199,7 @@ const Layout = () => {
         flexDirection: "column",
       }}
     >
-      <ConfigProvider locale={dayjs}>
+      <ConfigProvider locale={ptBR}>
         <HeaderGov />
         <HeaderHome />
         <ScrollToTop />
@@ -194,6 +226,7 @@ const CustomRoutes = () => {
   const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
   const isConsultor = useStoreState((state) => state.adm.isConsultor);
   const isServidor = useStoreState((state) => state.adm.isServidor);
+  const isJornalista = useStoreState((state) => state.adm.isJornalista);
   //const isCoordAVA = useStoreState((state) => state.adm.isCoordAVA);
   const isActive = useStoreState((state) => state.adm.isActive);
 
@@ -229,7 +262,7 @@ const CustomRoutes = () => {
         },
         {
           path: "/login",
-          element: <Login />,
+          element: authenticated ? <Navigate to="/" /> : <Login />,
         },
         {
           path: "/forget",
@@ -317,6 +350,15 @@ const CustomRoutes = () => {
                     ),
                 },
                 {
+                  path: "/settings/courses/edit/:courseId?",
+                  element:
+                    isAdm || isCoord || isConsultor ? (
+                      <CourseRegister />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
                   path: "/settings/institutions",
                   element:
                     isAdm || isCoord || isAnalistaDados ? (
@@ -371,12 +413,40 @@ const CustomRoutes = () => {
                     ),
                 },
                 {
+                  path: "/settings/formative-trails/edit/:trailId?",
+                  element:
+                    isAdm || isCoord ? (
+                      <FormativeTrailsRegister />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/documents",
+                  element:
+                    isAdm || isCoord || isJornalista || isAnalistaDados ? (
+                      <DocumentsList />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
+                  path: "/settings/documents/edit/:documentId?",
+                  element:
+                    isAdm || isCoord || isJornalista ? (
+                      <DocumentRegister />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
+                },
+                {
                   path: "/settings/logs",
-                  element: isAdm ? (
-                    <ListSearchLogs />
-                  ) : (
-                    <Navigate to="/denied" />
-                  ),
+                  element:
+                    isAdm || isCoord || isAnalistaDados ? (
+                      <ListSearchLogs />
+                    ) : (
+                      <Navigate to="/denied" />
+                    ),
                 },
                 {
                   path: "/settings/log-courses-trails",

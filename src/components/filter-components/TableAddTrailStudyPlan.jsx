@@ -5,16 +5,19 @@ import {
   Empty,
   Input,
   List,
+  notification,
   Select,
   Space,
   Table,
   Tag,
   Tooltip,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { SearchOutlined } from "@ant-design/icons";
 import { useStoreActions, useStoreState } from "easy-peasy";
+
+import DebounceSelect from "../fields/DebounceSelect";
 
 const filterCoursesDefault = {
   query: "",
@@ -30,15 +33,11 @@ export default function TableAddTrailStudyPlan(props) {
   const loading = useStoreState((state) => state.trilhas.loading);
   const count = useStoreState((state) => state.trilhas.count);
 
-  const getItinerarios = useStoreActions(
-    (actions) => actions.itineraries.getItinerarios
+  const getCompetenciesAction = useStoreActions(
+    (actions) => actions.competencies.getComp
   );
-  const getComp = useStoreActions((actions) => actions.competencies.getComp);
   const allItinerarios = useStoreState(
     (state) => state.itineraries.itinerarios
-  );
-  const allCompetencias = useStoreState(
-    (state) => state.competencies.competencias
   );
 
   const getTrails = useStoreActions((actions) => actions.trilhas.getTrilhas);
@@ -61,19 +60,39 @@ export default function TableAddTrailStudyPlan(props) {
     competencies: [],
   });
 
+  const getCompetencies = useCallback(
+    async ({ query, page }) => {
+      try {
+        const { data } = await getCompetenciesAction({
+          query,
+          page,
+        });
+        return data.map((competencie) => ({
+          ...competencie,
+          label: competencie.name,
+          value: competencie.id,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar competências",
+          description: error.message,
+        });
+      }
+    },
+    [getCompetenciesAction]
+  );
+
   useEffect(() => {
     async function init() {
-      getItinerarios();
-      getComp();
       await getTrails({
         query: "",
         showFiled: false,
-        page: pageNumber,
+        page: 1,
         registerLog: false,
       });
     }
     init();
-  }, [getTrails, pageNumber, getItinerarios, getComp]);
+  }, [getTrails]);
 
   // Table adding trail to Plan
 
@@ -136,40 +155,29 @@ export default function TableAddTrailStudyPlan(props) {
     ),
   });
 
-  const getSelectOptions = (dataIndex) => {
+  const getSelectOptions = (dataIndex, name) => {
     if (dataIndex === "competencies") {
       return (
-        <>
-          {allCompetencias.map((competencie) => (
-            <Select.Option key={competencie.id} value={competencie.id}>
-              {competencie.name}
-            </Select.Option>
-          ))}
-        </>
+        <DebounceSelect
+          placeholder={`Buscar ${name}`}
+          value={filterAddingTrail[`${dataIndex}`]}
+          onChange={(values) => {
+            setFilterAddingTrail((antig) => ({
+              ...antig,
+              [`${dataIndex}`]: values,
+            }));
+          }}
+          fetchOptions={getCompetencies}
+          mode={"multiple"}
+          style={{
+            marginBottom: 8,
+            width: 300,
+            display: "block",
+          }}
+        />
       );
     } else if (dataIndex === "itineraries") {
       return (
-        <>
-          {allItinerarios.map((itinerario) => (
-            <Select.Option key={itinerario.id} value={itinerario.id}>
-              {itinerario.name}
-            </Select.Option>
-          ))}
-        </>
-      );
-    } else {
-      return <></>;
-    }
-  };
-
-  const getColumnSelectSearchProps = (dataIndex, name) => ({
-    filterDropdown: () => (
-      <div
-        style={{
-          padding: 8,
-        }}
-        onKeyDown={(e) => e.stopPropagation()}
-      >
         <Select
           placeholder={`Buscar ${name}`}
           value={filterAddingTrail[`${dataIndex}`]}
@@ -191,8 +199,27 @@ export default function TableAddTrailStudyPlan(props) {
             );
           }}
         >
-          {getSelectOptions(dataIndex)}
+          {allItinerarios.map((itinerario) => (
+            <Select.Option key={itinerario.id} value={itinerario.id}>
+              {itinerario.name}
+            </Select.Option>
+          ))}
         </Select>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
+  const getColumnSelectSearchProps = (dataIndex, name) => ({
+    filterDropdown: () => (
+      <div
+        style={{
+          padding: 8,
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        {getSelectOptions(dataIndex, name)}
         <Space>
           <Button
             type="primary"
@@ -358,7 +385,7 @@ export default function TableAddTrailStudyPlan(props) {
       render: (text, record) => {
         return (
           <>
-            <Tooltip title="Adicionar todos os cursos da trilha ao plano de estudo">
+            <Tooltip title="Adicionar todos os cursos da trilha ao plano de desenvolvimento">
               <Button
                 type="primary"
                 onClick={() => {

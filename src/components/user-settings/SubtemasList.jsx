@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
@@ -13,34 +13,59 @@ import {
   Tooltip,
   Switch,
   Space,
+  notification,
 } from "antd";
 import SubtemaRegister from "./SubtemaRegister";
 
 const { Search } = Input;
 
 export default function SubtemasList() {
-  const getSubthemes = useStoreActions(
+  const getSubthemesAction = useStoreActions(
     (actions) => actions.themes.getSubthemes
   );
-  const getThemes = useStoreActions((actions) => actions.themes.getThemes);
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Subtema");
-  const [editandoSubtema, setEditandoSubtema] = useState(null);
+  const [editingSubtheme, setEditingSubtheme] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
+  const [subthemes, setSubthemes] = useState([]);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
   const [textSearch, setTextSearch] = useState("");
 
   const loadingSubthemes = useStoreState(
     (state) => state.themes.loadingSubthemes
   );
-  const subthemes = useStoreState((state) => state.themes.subthemes);
+
+  const getSubthemes = useCallback(
+    async ({ query, showFiled, page }) => {
+      try {
+        const { data, count } = await getSubthemesAction({
+          query,
+          showFiled,
+          page,
+        });
+        setSubthemes(data);
+        setCount(count);
+      } catch (error) {
+        notification.error({
+          message: "Erro",
+          description: error.message,
+        });
+      }
+    },
+    [getSubthemesAction]
+  );
 
   useEffect(() => {
-    getSubthemes();
-    getThemes({
-      showFiled: true,
+    getSubthemes({
+      query: "",
+      showFiled: false,
+      page: 1,
     });
-  }, [getSubthemes, getThemes]);
+  }, [getSubthemes]);
 
   return (
     <div
@@ -75,6 +100,7 @@ export default function SubtemasList() {
                   getSubthemes({
                     query: e,
                     showFiled: showFiled,
+                    page: 1,
                   });
                 }}
                 style={{
@@ -94,26 +120,46 @@ export default function SubtemasList() {
                     getSubthemes({
                       query: textSearch,
                       showFiled: checked,
+                      page: 1,
                     });
                   }}
                 />
               </Tooltip>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  setEditandoSubtema(null);
-                  setModalText("Cadastrar Subtema");
-                  setRegisterVisible(true);
-                }}
+              <Tooltip
+                title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
               >
-                Adicionar
-              </Button>
+                <Button
+                  disabled={!isAdm && !isCoord}
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setEditingSubtheme(null);
+                    setModalText("Cadastrar Subtema");
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </div>
           }
         >
           <List
             loading={loadingSubthemes}
+            pagination={{
+              pageSize: 30,
+              current: page,
+              total: count,
+              showSizeChanger: false,
+              onChange: (value) => {
+                setPage(value);
+                getSubthemes({
+                  query: textSearch,
+                  showFiled: showFiled,
+                  page: value,
+                });
+              },
+            }}
             dataSource={subthemes}
             style={{ width: "100%" }}
             renderItem={(item) => {
@@ -121,17 +167,24 @@ export default function SubtemasList() {
                 <List.Item
                   key={item.id}
                   actions={[
-                    <Button
+                    <Tooltip
                       key={item.id}
-                      onClick={() => {
-                        setEditandoSubtema(item);
-                        setModalText("Editar Subtema");
-                        setRegisterVisible(true);
-                      }}
-                      icon={<EditOutlined />}
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
                     >
-                      Editar
-                    </Button>,
+                      <Button
+                        disabled={!isAdm && !isCoord}
+                        onClick={() => {
+                          setEditingSubtheme(item);
+                          setModalText("Editar Subtema");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>,
                   ]}
                 >
                   <List.Item.Meta
@@ -163,8 +216,9 @@ export default function SubtemasList() {
             getSubthemes({
               query: textSearch,
               showFiled: showFiled,
+              page: page,
             });
-            setEditandoSubtema(null);
+            setEditingSubtheme(null);
             setModalText("Cadastrar Subtema");
             setRegisterVisible(false);
           }}
@@ -176,8 +230,9 @@ export default function SubtemasList() {
                 getSubthemes({
                   query: textSearch,
                   showFiled: showFiled,
+                  page: page,
                 });
-                setEditandoSubtema(null);
+                setEditingSubtheme(null);
                 setModalText("Cadastrar Subtema");
                 setRegisterVisible(false);
               }}
@@ -187,13 +242,14 @@ export default function SubtemasList() {
           ]}
         >
           <SubtemaRegister
-            subtheme={editandoSubtema}
+            subtheme={editingSubtheme}
             actionVisible={() => {
               setRegisterVisible(false);
-              setEditandoSubtema(null);
+              setEditingSubtheme(null);
               getSubthemes({
                 query: textSearch,
                 showFiled: showFiled,
+                page: page,
               });
             }}
           />

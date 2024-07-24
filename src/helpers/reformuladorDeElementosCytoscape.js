@@ -59,130 +59,78 @@ function getImageBackground(type, color) {
 
 const colorDefault = "#000";
 
-export default function (
-  dados,
-  filtro,
-  competencies,
-  itinerarios = [],
-  tipoClassificacao
-) {
+export default function (dados, filtro, itinerarios) {
   let elementos = [];
-  if (tipoClassificacao) {
+
+  if (filtro.tipoClassificacao) {
     // False: por competências   True: por trilhas
 
     // Contadores para montar grafo da trilha >>
     let counterCol = 1;
-    dados.forEach((trilha) => {
-      // Verificações se devo mostrar a trilha ou não
-
-      // Se todas as competências estiverem arqivadas
-      // Se alguma não estiver arquivada eu não entro na condicional
-
-      if (
-        !trilha.competencies.some((competencie) => {
-          const competenceData = competencies.find(
-            (comp) => comp.id === competencie.id
-          );
-          if (competenceData) {
-            return !competenceData?.filedAt;
-          } else {
-            return false;
-          }
-        }) &&
-        trilha.competencies.length !== 0
-      ) {
-        return;
-      }
-      // Se a trilha estiver com a lista de cursos vazia
-      if (trilha.courses.length === 0) {
-        return;
-      }
-      // Se todos os cursos estiverem arquivados eu não exibo a trilha
-      if (
-        !trilha.courses.some((curso) => {
-          return !curso?.filedAt;
-        }) &&
-        trilha.courses.length !== 0
-      ) {
-        return;
-      }
-
-      let counterRowCourse = 1;
-
-      // Adiciondo node topo da trilha
-      const competenceData = competencies.find(
-        (comp) => comp.id === trilha.competencies[0].id
-      );
-      const colorCategoria =
-        competenceData?.categories[0]?.color || colorDefault;
-      elementos.push({
-        group: "nodes",
-        data: {
-          id: "trilha" + trilha.id,
-          label: trilha.name,
-          color: colorCategoria,
-          image: getImageBackground("categoria", colorCategoria),
-          col: counterCol,
-          row: 0,
-        },
-        grabbable: true,
-        classes: ["categoria"],
-      });
-      // Adicionando os cursos da trilha na sequência correta
-
-      let idCursoAnterior = null;
-      let maxEquiv = 0;
-
-      trilha.courses.forEach((cursoNaTrilha, _index) => {
-        // Se o curso estiver arquivado eu não mostro ele
-        if (cursoNaTrilha.filedAt) {
-          return;
+    dados
+      .filter((trilha) => {
+        if (
+          !trilha.competencies.some((competencie) => {
+            return !competencie?.filedAt;
+          }) &&
+          filtro.competencies.length !== 0
+        ) {
+          return false;
         }
-        let todosEquivArquiv =
-          !cursoNaTrilha.equivalents.some((curso) => {
+        // Se a trilha estiver com a lista de cursos vazia
+        if (trilha.courses.length === 0) {
+          return false;
+        }
+        // Se todos os cursos estiverem arquivados eu não exibo a trilha
+        if (
+          !trilha.courses.some((curso) => {
             return !curso?.filedAt;
-          }) && cursoNaTrilha.equivalents.length !== 0;
-        let qtdEquiv = 0;
-
-        if (cursoNaTrilha.equivalents.length !== 0) {
-          elementos.push({
-            group: "nodes",
-            data: {
-              id:
-                "trilha" + trilha.id + "curso" + cursoNaTrilha.id + "container",
-              label: "Cursos Equivalentes",
-              color: colorCategoria,
-              col: counterCol,
-              row: counterRowCourse,
-            },
-            grabbable: true,
-          });
+          })
+        ) {
+          return false;
         }
+        return true;
+      })
+      .forEach((trilha) => {
+        // Verificações se devo mostrar a trilha ou não
 
-        // Fim do teste
+        // Se todas as competências estiverem arqivadas
+        // Se alguma não estiver arquivada eu não entro na condicional
+
+        let counterRowCourse = 1;
+
+        // Adiciondo node topo da trilha
+        const colorCategoria = colorDefault;
         elementos.push({
           group: "nodes",
           data: {
-            id: "trilha" + trilha.id + "curso" + cursoNaTrilha.id,
-            label: cursoNaTrilha.name,
-            image: getImageBackground("curso", colorCategoria),
-            parent: !todosEquivArquiv
-              ? "trilha" + trilha.id + "curso" + cursoNaTrilha.id + "container"
-              : undefined,
+            id: "trilha" + trilha.id,
+            label: trilha.name,
             color: colorCategoria,
+            image: getImageBackground("categoria", colorCategoria),
             col: counterCol,
-            row: counterRowCourse,
+            row: 0,
           },
           grabbable: true,
-          classes: ["curso"],
+          classes: ["categoria"],
         });
+        // Adicionando os cursos da trilha na sequência correta
 
-        if (!todosEquivArquiv) {
-          cursoNaTrilha.equivalents.forEach((equivalent) => {
-            if (equivalent.filedAt) {
-              return;
-            }
-            qtdEquiv++;
+        let idCursoAnterior = null;
+        let maxEquiv = 0;
+
+        trilha.courses.forEach((cursoNaTrilha, _index) => {
+          // Se o curso estiver arquivado eu não mostro ele
+          if (cursoNaTrilha.filedAt) {
+            return;
+          }
+          let todosEquivArquiv =
+            !cursoNaTrilha.equivalents.some((curso) => {
+              return !curso?.filedAt;
+            }) && cursoNaTrilha.equivalents.length !== 0;
+          let qtdEquiv = 0;
+
+          if (cursoNaTrilha.equivalents.length !== 0) {
             elementos.push({
               group: "nodes",
               data: {
@@ -191,229 +139,266 @@ export default function (
                   trilha.id +
                   "curso" +
                   cursoNaTrilha.id +
-                  "equivalent" +
-                  equivalent.id,
-                label: equivalent.name,
-                image: getImageBackground("curso", colorCategoria),
-                parent:
-                  "trilha" +
-                  trilha.id +
-                  "curso" +
-                  cursoNaTrilha.id +
                   "container",
+                label: "Cursos Equivalentes",
                 color: colorCategoria,
-                col: counterCol + qtdEquiv,
+                col: counterCol,
                 row: counterRowCourse,
               },
               grabbable: true,
-              classes: ["curso"],
             });
-          });
-        }
+          }
 
-        // Adicionando a edge deste curso com o curso anterior na sequência
-        let idEdgeCursoAtual = qtdEquiv
-          ? "trilha" + trilha.id + "curso" + cursoNaTrilha.id + "container"
-          : `trilha${trilha.id}curso${cursoNaTrilha.id}`;
-        if (idCursoAnterior) {
+          // Fim do teste
           elementos.push({
-            group: "edges",
+            group: "nodes",
             data: {
-              id: `edge${idCursoAnterior}to${cursoNaTrilha.id}`,
-              source: idCursoAnterior,
-              target: idEdgeCursoAtual,
+              id: "trilha" + trilha.id + "curso" + cursoNaTrilha.id,
+              label: cursoNaTrilha.name,
+              image: getImageBackground("curso", colorCategoria),
+              parent: !todosEquivArquiv
+                ? "trilha" +
+                  trilha.id +
+                  "curso" +
+                  cursoNaTrilha.id +
+                  "container"
+                : undefined,
+              color: colorCategoria,
+              col: counterCol,
+              row: counterRowCourse,
             },
+            grabbable: true,
+            classes: ["curso"],
           });
-        } else {
-          elementos.push({
-            group: "edges",
-            data: {
-              id: `edge${trilha.id}to${cursoNaTrilha.id}`,
-              source: "trilha" + trilha.id,
-              target: idEdgeCursoAtual,
-            },
-          });
-        }
-        maxEquiv = qtdEquiv > maxEquiv ? qtdEquiv : maxEquiv;
-        idCursoAnterior = idEdgeCursoAtual;
-        counterRowCourse++;
+
+          if (!todosEquivArquiv) {
+            cursoNaTrilha.equivalents.forEach((equivalent) => {
+              if (equivalent.filedAt) {
+                return;
+              }
+              qtdEquiv++;
+              elementos.push({
+                group: "nodes",
+                data: {
+                  id:
+                    "trilha" +
+                    trilha.id +
+                    "curso" +
+                    cursoNaTrilha.id +
+                    "equivalent" +
+                    equivalent.id,
+                  label: equivalent.name,
+                  image: getImageBackground("curso", colorCategoria),
+                  parent:
+                    "trilha" +
+                    trilha.id +
+                    "curso" +
+                    cursoNaTrilha.id +
+                    "container",
+                  color: colorCategoria,
+                  col: counterCol + qtdEquiv,
+                  row: counterRowCourse,
+                },
+                grabbable: true,
+                classes: ["curso"],
+              });
+            });
+          }
+
+          // Adicionando a edge deste curso com o curso anterior na sequência
+          let idEdgeCursoAtual = qtdEquiv
+            ? "trilha" + trilha.id + "curso" + cursoNaTrilha.id + "container"
+            : `trilha${trilha.id}curso${cursoNaTrilha.id}`;
+          if (idCursoAnterior) {
+            elementos.push({
+              group: "edges",
+              data: {
+                id: `edge${idCursoAnterior}to${cursoNaTrilha.id}`,
+                source: idCursoAnterior,
+                target: idEdgeCursoAtual,
+              },
+            });
+          } else {
+            elementos.push({
+              group: "edges",
+              data: {
+                id: `edge${trilha.id}to${cursoNaTrilha.id}`,
+                source: "trilha" + trilha.id,
+                target: idEdgeCursoAtual,
+              },
+            });
+          }
+          maxEquiv = qtdEquiv > maxEquiv ? qtdEquiv : maxEquiv;
+          idCursoAnterior = idEdgeCursoAtual;
+          counterRowCourse++;
+        });
+        counterCol = counterCol + maxEquiv + 1;
       });
-      counterCol = counterCol + maxEquiv + 1;
-    });
   } else {
     let competenciasAdicionadas = [];
     let categoriasAdicionadas = [];
 
-    dados.forEach((curso) => {
-      // Aqui eu decido se vou mostrar o curso no grafo de acordo com os dados arquivados
-      if (
-        !curso.competencies.some((competencie) => !competencie?.filedAt) &&
-        curso.competencies.length !== 0
-      ) {
-        return;
-      }
-      if (
-        !curso.institutions.some((institution) => !institution?.filedAt) &&
-        curso.institutions.length !== 0
-      ) {
-        return;
-      }
-      if (
-        !curso.competencies.some((competencie) => {
-          let compData = competencies.find(
-            (comp) => comp.id === competencie.id
-          );
-          if (compData) {
-            return compData.categories.some((categorie) => !categorie.filedAt);
-          } else {
-            return false;
-          }
-        }) &&
-        curso.competencies.length !== 0
-      ) {
-        return;
-      }
-
-      let colorCategoria = colorDefault;
-      let colorItinerario = colorDefault;
-
-      // Aqui eu defino qual a cor das imagens por categoria de competência
-      if (filtro.competencies.length !== 0) {
-        filtro.competencies.some((compId) => {
-          const compData = competencies.find((comp) => comp.id === compId);
-          return compData.categories.some((cat) => {
-            if (cat.color) {
-              colorCategoria = cat.color;
-              return true;
-            }
-          });
-        });
-      } else {
-        curso.competencies.some((competencia) => {
-          const compData = competencies.find(
-            (comp) => comp.id === competencia.id
-          );
-          return compData?.categories?.some((cat) => {
-            if (cat.color) {
-              colorCategoria = cat.color;
-              return true;
-            }
-          });
-        });
-      }
-
-      // Aqui eu defino qual a cor das imagens por itinerário
-      if (filtro.itinerario) {
-        let itinerarioData = itinerarios.find(
-          (iti) => iti.id === filtro.itinerario
-        );
-        colorItinerario = itinerarioData ? itinerarioData.color : colorDefault;
-      } else {
-        colorItinerario =
-          curso.itineraries.length !== 0
-            ? curso.itineraries[0].color
-            : colorDefault;
-      }
-      // Adicionando node do curso no grafo
-      elementos.push({
-        group: "nodes",
-        data: {
-          id: "curso" + curso.id,
-          label: curso.name,
-          image:
-            filtro.esquemaDeCores === "categoria"
-              ? getImageBackground("curso", colorCategoria)
-              : getImageBackground("curso", colorItinerario),
-          color:
-            filtro.esquemaDeCores === "categoria"
-              ? colorCategoria
-              : colorItinerario,
-        },
-        grabbable: true,
-        classes: ["curso"],
-      });
-      // Adicionando Competencia
-      curso.competencies.forEach((competencia) => {
-        // Verificação se a competência está arquivada
-        const competenceData = competencies.find(
-          (comp) => comp.id === competencia.id
-        );
-        if (competenceData.filedAt) {
-          return;
+    dados
+      .filter((course) => {
+        if (
+          !course.competencies.some((competencie) => !competencie?.filedAt) &&
+          course.competencies.length !== 0
+        ) {
+          return false;
         }
         if (
-          !competenciasAdicionadas.some((comp) => comp.id === competencia.id)
+          !course.institutions.some((institution) => !institution?.filedAt) &&
+          course.institutions.length !== 0
         ) {
-          elementos.push({
-            group: "nodes",
-            data: {
-              id: "competencia" + competencia.id,
-              label: competencia.name,
-              color:
-                filtro.esquemaDeCores === "categoria"
-                  ? colorCategoria
-                  : colorItinerario,
-              image:
-                filtro.esquemaDeCores === "categoria"
-                  ? getImageBackground("competencia", colorCategoria)
-                  : getImageBackground("competencia", colorItinerario),
-            },
-            grabbable: true,
-            classes: ["competencia"],
-          });
-          competenciasAdicionadas.push(competencia);
-          // Adicionando a categoria da competência se não existir
-          competenceData.categories.forEach((categoria) => {
-            if (!categoriasAdicionadas.some((cat) => cat.id === categoria.id)) {
-              if (categoria.filedAt) {
-                return;
+          return false;
+        }
+        return true;
+      })
+      .forEach((curso) => {
+        let colorCategory = colorDefault;
+
+        // Aqui eu defino qual a cor das imagens por categoria de competência
+        if (filtro.competencies.length !== 0) {
+          filtro.competencies.some((compId) => {
+            return curso.competencies?.some((comp) => {
+              if (comp.id === compId) {
+                return comp.categories?.some((cat) => {
+                  if (cat.color) {
+                    colorCategory = cat.color;
+                    return true;
+                  }
+                });
               }
+            });
+          });
+        } else {
+          curso.competencies.some((comp) => {
+            return comp?.categories?.some((cat) => {
+              if (cat.color) {
+                colorCategory = cat.color;
+                return true;
+              }
+            });
+          });
+        }
+
+        // Aqui eu defino qual a cor das imagens por itinerário
+        let colorItinerario = colorDefault;
+
+        if (filtro.itinerario) {
+          let itinerarioData = itinerarios.find(
+            (iti) => iti.id === filtro.itinerario
+          );
+          colorItinerario = itinerarioData
+            ? itinerarioData.color
+            : colorDefault;
+        } else {
+          colorItinerario = curso.itineraries[0]?.color ?? colorDefault;
+        }
+
+        // Adicionando node do curso no grafo
+        elementos.push({
+          group: "nodes",
+          data: {
+            id: "curso" + curso.id,
+            label: curso.name,
+            image:
+              filtro.esquemaDeCores === "categoria"
+                ? getImageBackground("curso", colorCategory)
+                : getImageBackground("curso", colorItinerario),
+            color:
+              filtro.esquemaDeCores === "categoria"
+                ? colorCategory
+                : colorItinerario,
+          },
+          grabbable: true,
+          classes: ["curso"],
+        });
+
+        // Adicionando Competencia
+        curso.competencies
+          .filter((comp) => {
+            return !comp.filedAt;
+          })
+          .forEach((competencie) => {
+            if (
+              !competenciasAdicionadas.some(
+                (comp) => comp.id === competencie.id
+              )
+            ) {
               elementos.push({
                 group: "nodes",
                 data: {
-                  id: "categoria" + categoria.id,
-                  label: categoria.name,
+                  id: "competencia" + competencie.id,
+                  label: competencie.name,
                   color:
                     filtro.esquemaDeCores === "categoria"
-                      ? colorCategoria
+                      ? colorCategory
                       : colorItinerario,
                   image:
                     filtro.esquemaDeCores === "categoria"
-                      ? getImageBackground("categoria", colorCategoria)
-                      : getImageBackground("categoria", colorItinerario),
+                      ? getImageBackground("competencia", colorCategory)
+                      : getImageBackground("competencia", colorItinerario),
                 },
                 grabbable: true,
-                classes: ["categoria"],
+                classes: ["competencia"],
               });
-              categoriasAdicionadas.push(categoria);
+              competenciasAdicionadas.push(competencie);
+              // Adicionando a categoria da competência se não existir
+              competencie.categories.forEach((categoria) => {
+                if (
+                  !categoriasAdicionadas.some((cat) => cat.id === categoria.id)
+                ) {
+                  if (categoria.filedAt) {
+                    return;
+                  }
+                  elementos.push({
+                    group: "nodes",
+                    data: {
+                      id: "categoria" + categoria.id,
+                      label: categoria.name,
+                      color:
+                        filtro.esquemaDeCores === "categoria"
+                          ? colorCategory
+                          : colorItinerario,
+                      image:
+                        filtro.esquemaDeCores === "categoria"
+                          ? getImageBackground("categoria", colorCategory)
+                          : getImageBackground("categoria", colorItinerario),
+                    },
+                    grabbable: true,
+                    classes: ["categoria"],
+                  });
+                  categoriasAdicionadas.push(categoria);
 
-              // Adicionando a edge entre a categoria e a competência
-              elementos.push({
-                group: "edges",
-                data: {
-                  id:
-                    "edgecategoria" +
-                    categoria.id +
-                    "competencia" +
-                    competencia.id,
-                  source: "categoria" + categoria.id,
-                  target: "competencia" + competencia.id,
-                },
+                  // Adicionando a edge entre a categoria e a competência
+                  elementos.push({
+                    group: "edges",
+                    data: {
+                      id:
+                        "edgecategoria" +
+                        categoria.id +
+                        "competencia" +
+                        competencie.id,
+                      source: "categoria" + categoria.id,
+                      target: "competencia" + competencie.id,
+                    },
+                  });
+                }
               });
             }
+            // Edge entre competência e curso
+            elementos.push({
+              group: "edges",
+              data: {
+                id: "edgecurso" + curso.id + "competencia" + competencie.id,
+                source: "competencia" + competencie.id,
+                target: "curso" + curso.id,
+              },
+            });
           });
-        }
-        // Edge entre competência e curso
-        elementos.push({
-          group: "edges",
-          data: {
-            id: "edgecurso" + curso.id + "competencia" + competencia.id,
-            source: "competencia" + competencia.id,
-            target: "curso" + curso.id,
-          },
-        });
       });
-    });
   }
+
   return elementos;
 }

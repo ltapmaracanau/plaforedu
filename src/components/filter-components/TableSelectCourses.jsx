@@ -3,6 +3,7 @@ import {
   Card,
   Empty,
   Input,
+  notification,
   Select,
   Slider,
   Space,
@@ -11,10 +12,12 @@ import {
   Tooltip,
   Typography,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { SearchOutlined } from "@ant-design/icons";
 import { useStoreActions, useStoreState } from "easy-peasy";
+
+import DebounceSelect from "../fields/DebounceSelect";
 
 const filterCoursesDefault = {
   query: "",
@@ -32,11 +35,15 @@ export default function TableSelectCourses(props) {
     filterDefault,
   } = props;
 
+  const getCompetenciesAction = useStoreActions(
+    (actions) => actions.competencies.getComp
+  );
+  const getInstitutionsAction = useStoreActions(
+    (actions) => actions.institutions.getInstituicoes
+  );
+
   const loadingCursosSecondary = useStoreState(
     (state) => state.courses.loadingCursosSecondary
-  );
-  const allInstitutions = useStoreState(
-    (state) => state.institutions.instituicoes
   );
   const cursosSecondary = useStoreState(
     (state) => state.courses.cursosSecondary
@@ -45,42 +52,83 @@ export default function TableSelectCourses(props) {
   const allItinerarios = useStoreState(
     (state) => state.itineraries.itinerarios
   );
-  const allCompetencias = useStoreState(
-    (state) => state.competencies.competencias
-  );
   const [pageNumber, setPageNumber] = useState(1);
 
   const getCursos = useStoreActions((actions) => actions.courses.getCursos);
 
   const [filterAddingCoursesValues, setFilterAddingCoursesValues] = useState({
-    query: filterDefault.query || filterCoursesDefault.query,
+    query: filterDefault?.query ?? filterCoursesDefault.query,
     cargaHoraria:
-      filterDefault.cargaHoraria || filterCoursesDefault.cargaHoraria,
+      filterDefault?.cargaHoraria ?? filterCoursesDefault.cargaHoraria,
     institutions:
-      filterDefault.institutions || filterCoursesDefault.institutions,
+      filterDefault?.institutions?.map((item) => item.value) ??
+      filterCoursesDefault.institutions,
     competencies:
-      filterDefault.competencies || filterCoursesDefault.competencies,
-    itineraries: filterDefault.itineraries || filterCoursesDefault.itineraries,
+      filterDefault?.competencies?.map((item) => item.value) ??
+      filterCoursesDefault.competencies,
+    itineraries:
+      filterDefault?.itineraries?.map((item) => item.value) ??
+      filterCoursesDefault.itineraries,
   });
 
   const [activeColumsFilter, setActiveColumsFilter] = useState({
-    query: !!filterDefault.query,
-    cargaHoraria: filterDefault.cargaHoraria?.length > 0,
-    institutions: filterDefault.institutions?.length > 0,
-    competencies: filterDefault.competencies?.length > 0,
-    itineraries: filterDefault.itineries?.length > 0,
+    query: !!filterDefault?.query,
+    cargaHoraria: filterDefault?.cargaHoraria?.length > 0,
+    institutions: filterDefault?.institutions?.length > 0,
+    competencies: filterDefault?.competencies?.length > 0,
+    itineraries: filterDefault?.itineries?.length > 0,
   });
 
   const [stringSearchMemo, setStringSearchMemo] = useState({
-    query: filterDefault.query || filterCoursesDefault.query,
+    query: filterDefault?.query || filterCoursesDefault.query,
     cargaHoraria:
-      filterDefault.cargaHoraria || filterCoursesDefault.cargaHoraria,
+      filterDefault?.cargaHoraria || filterCoursesDefault.cargaHoraria,
     institutions:
-      filterDefault.institutions || filterCoursesDefault.institutions,
+      filterDefault?.institutions?.map((item) => item.value) ||
+      filterCoursesDefault.institutions,
     competencies:
-      filterDefault.competencies || filterCoursesDefault.competencies,
-    itineraries: filterDefault.itineraries || filterCoursesDefault.itineraries,
+      filterDefault?.competencies?.map((item) => item.value) ||
+      filterCoursesDefault.competencies,
+    itineraries:
+      filterDefault?.itineraries?.map((item) => item.value) ||
+      filterCoursesDefault.itineraries,
   });
+
+  const getCompetencies = useCallback(
+    async ({ query = "", page = 1 }) => {
+      try {
+        const { data } = await getCompetenciesAction({ query, page });
+        return data.map((competencia) => ({
+          value: competencia.id,
+          label: competencia.name,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar competências!",
+          description: error.message,
+        });
+      }
+    },
+    [getCompetenciesAction]
+  );
+
+  const getInstitutions = useCallback(
+    async ({ query = "", page = 1 }) => {
+      try {
+        const { data } = await getInstitutionsAction({ query, page });
+        return data.map((instituicao) => ({
+          value: instituicao.id,
+          label: instituicao.abbreviation,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar instituições!",
+          description: error.message,
+        });
+      }
+    },
+    [getInstitutionsAction]
+  );
 
   useEffect(() => {
     async function init() {
@@ -155,54 +203,30 @@ export default function TableSelectCourses(props) {
     ),
   });
 
-  const getSelectOptions = (dataIndex) => {
+  const getSelect = (dataIndex, name) => {
     if (dataIndex === "competencies") {
       return (
-        <>
-          {allCompetencias.map((competencie) => (
-            <Select.Option key={competencie.id} value={competencie.id}>
-              {competencie.name}
-            </Select.Option>
-          ))}
-        </>
+        <DebounceSelect
+          placeholder={`Buscar ${name}`}
+          value={filterAddingCoursesValues[`${dataIndex}`]}
+          fetchOptions={getCompetencies}
+          optionsToInclude={filterDefault?.competencies ?? []}
+          onChange={(values) => {
+            setFilterAddingCoursesValues((antig) => ({
+              ...antig,
+              [`${dataIndex}`]: values,
+            }));
+          }}
+          mode={"multiple"}
+          style={{
+            marginBottom: 8,
+            width: 300,
+            display: "block",
+          }}
+        />
       );
     } else if (dataIndex === "itineraries") {
       return (
-        <>
-          {allItinerarios.map((itinerario) => (
-            <Select.Option key={itinerario.id} value={itinerario.id}>
-              {itinerario.name}
-            </Select.Option>
-          ))}
-        </>
-      );
-    } else {
-      return (
-        <>
-          {allInstitutions.map((inst) => (
-            <Select.Option
-              key={inst.id}
-              value={inst.id}
-              label={inst.abbreviation}
-            >
-              {inst.abbreviation}
-              <br />
-              {inst.name}
-            </Select.Option>
-          ))}
-        </>
-      );
-    }
-  };
-
-  const getColumnSelectSearchProps = (dataIndex, name) => ({
-    filterDropdown: () => (
-      <div
-        style={{
-          padding: 8,
-        }}
-        onKeyDown={(e) => e.stopPropagation()}
-      >
         <Select
           placeholder={`Buscar ${name}`}
           value={filterAddingCoursesValues[`${dataIndex}`]}
@@ -219,22 +243,50 @@ export default function TableSelectCourses(props) {
             display: "block",
           }}
           filterOption={(input, option) => {
-            if (dataIndex === "institutions") {
-              return (
-                option.children[2].toLowerCase().indexOf(input.toLowerCase()) >=
-                  0 ||
-                option.children[0].toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-              );
-            } else {
-              return (
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              );
-            }
+            return (
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            );
           }}
         >
-          {getSelectOptions(dataIndex)}
+          {allItinerarios.map((itinerario) => (
+            <Select.Option key={itinerario.id} value={itinerario.id}>
+              {itinerario.name}
+            </Select.Option>
+          ))}
         </Select>
+      );
+    } else {
+      return (
+        <DebounceSelect
+          placeholder={`Buscar ${name}`}
+          value={filterAddingCoursesValues[`${dataIndex}`]}
+          fetchOptions={getInstitutions}
+          onChange={(values) => {
+            setFilterAddingCoursesValues((antig) => ({
+              ...antig,
+              [`${dataIndex}`]: values,
+            }));
+          }}
+          mode={"multiple"}
+          style={{
+            marginBottom: 8,
+            width: 300,
+            display: "block",
+          }}
+        />
+      );
+    }
+  };
+
+  const getColumnSelectSearchProps = (dataIndex, name) => ({
+    filterDropdown: () => (
+      <div
+        style={{
+          padding: 8,
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        {getSelect(dataIndex, name)}
         <Space>
           <Button
             type="primary"

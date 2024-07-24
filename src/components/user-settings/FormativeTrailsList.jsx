@@ -4,40 +4,60 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 
 import { Button, Card, Input, Tooltip, Switch, Space, Tag, Table } from "antd";
-import FormativeTrailsRegister from "./FormativeTrailsRegister";
+import { useNavigate } from "react-router-dom";
 
 const { Search } = Input;
 export default function FormativeTrailsList() {
-  const getTrilhas = useStoreActions((actions) => actions.trilhas.getTrilhas);
-  const getCompetencies = useStoreActions(
-    (actions) => actions.competencies.getComp
+  const navigate = useNavigate();
+
+  const getTrailsAction = useStoreActions(
+    (actions) => actions.trilhas.getTrilhas
   );
-  const getInstitutions = useStoreActions(
-    (actions) => actions.institutions.getInstituicoes
-  );
-  const [registerVisible, setRegisterVisible] = useState(false);
+
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const loadingTrilhas = useStoreState((state) => state.trilhas.loading);
   const loadingCursos = useStoreState((state) => state.courses.loading);
-  const trilhas = useStoreState((state) => state.trilhas.trilhas);
-  const count = useStoreState((state) => state.trilhas.count);
 
-  const [editandoTrilha, setEditandoTrilha] = useState(null);
-  const [modalText, setModalText] = useState("Cadastrar Trilha");
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
-  const [pageNumber, setPageNumber] = useState(1);
-
-  useEffect(() => {
-    getTrilhas({ page: pageNumber });
-    getCompetencies({ showFiled: true });
-    getInstitutions({ showFiled: true });
-  }, [getCompetencies, getInstitutions, getTrilhas, pageNumber]);
-
+  const [page, setPage] = useState(1);
+  const [trilhas, setTrilhas] = useState([]);
+  const [count, setCount] = useState(0);
   const [sort, setSort] = useState({
     createdAt: null,
     updatedAt: null,
   });
+
+  const getTrilhas = useCallback(
+    async ({ query, page, showFiled, sort: { createdAt, updatedAt } }) => {
+      const { data, count } = await getTrailsAction({
+        query,
+        page,
+        showFiled,
+        sort: {
+          createdAt,
+          updatedAt,
+        },
+      });
+      setTrilhas(data);
+      setCount(count);
+    },
+    [getTrailsAction]
+  );
+
+  useEffect(() => {
+    getTrilhas({
+      page: 1,
+      showFiled: false,
+      query: "",
+      sort: {
+        createdAt: false,
+        updatedAt: false,
+      },
+    });
+  }, [getTrilhas]);
 
   const onChangeTable = useCallback(
     (pagination, _filters, sorter) => {
@@ -69,7 +89,7 @@ export default function FormativeTrailsList() {
           updatedAt: sortByUpdatedAt,
         });
       }
-      setPageNumber(pagination.current);
+      setPage(pagination.current);
       getTrilhas({
         page: pagination.current,
         query: textSearch,
@@ -85,58 +105,65 @@ export default function FormativeTrailsList() {
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      {registerVisible ? (
-        <FormativeTrailsRegister
-          trilha={editandoTrilha}
-          title={modalText}
-          actionVisible={() => {
-            setRegisterVisible(false);
-            getTrilhas({
-              query: textSearch,
-              showFiled: showFiled,
-              page: pageNumber,
-              sort: {
-                createdAt: sort.createdAt,
-                updatedAt: sort.updatedAt,
-              },
-            });
-          }}
-        />
-      ) : (
-        <Card
-          title={"Trilhas Formativas"}
-          styles={{
-            header: {
-              fontSize: 20,
-              padding: "10px",
-            },
-            body: {
-              padding: "0px",
-              height: "100%",
-            },
-          }}
-          style={{
-            width: "100%",
+      <Card
+        title={"Trilhas Formativas"}
+        styles={{
+          header: {
+            fontSize: 20,
+            padding: "10px",
+          },
+          body: {
+            padding: "0px",
             height: "100%",
-          }}
-          extra={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "450px",
+          },
+        }}
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+        extra={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "450px",
+            }}
+          >
+            <Search
+              allowClear
+              defaultValue={textSearch}
+              onSearch={(e) => {
+                setTextSearch(e);
+                setPage(1);
+                getTrilhas({
+                  query: e,
+                  showFiled: showFiled,
+                  page: 1,
+                  sort: {
+                    createdAt: sort.createdAt,
+                    updatedAt: sort.updatedAt,
+                  },
+                });
               }}
-            >
-              <Search
-                allowClear
-                defaultValue={textSearch}
-                onSearch={(e) => {
-                  setTextSearch(e);
-                  setPageNumber(1);
+              style={{
+                marginRight: "30px",
+              }}
+              placeholder={"Buscar trilhas"}
+            />
+            <Tooltip title={"Exibir Arquivados"}>
+              <Switch
+                defaultChecked={showFiled}
+                checked={showFiled}
+                style={{
+                  marginRight: "10px",
+                }}
+                onClick={(checked) => {
+                  setShowFiled(checked);
+                  setPage(1);
                   getTrilhas({
-                    query: e,
-                    showFiled: showFiled,
+                    query: textSearch,
+                    showFiled: checked,
                     page: 1,
                     sort: {
                       createdAt: sort.createdAt,
@@ -144,138 +171,131 @@ export default function FormativeTrailsList() {
                     },
                   });
                 }}
-                style={{
-                  marginRight: "30px",
-                }}
-                placeholder={"Buscar trilhas"}
               />
-              <Tooltip title={"Exibir Arquivados"}>
-                <Switch
-                  defaultChecked={showFiled}
-                  checked={showFiled}
-                  style={{
-                    marginRight: "10px",
-                  }}
-                  onClick={(checked) => {
-                    setShowFiled(checked);
-                    setPageNumber(1);
-                    getTrilhas({
-                      query: textSearch,
-                      showFiled: checked,
-                      page: 1,
-                      sort: {
-                        createdAt: sort.createdAt,
-                        updatedAt: sort.updatedAt,
-                      },
-                    });
-                  }}
-                />
-              </Tooltip>
+            </Tooltip>
+            <Tooltip
+              title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
+            >
               <Button
+                disabled={!isAdm && !isCoord}
                 type="primary"
                 icon={<PlusOutlined />}
                 onClick={() => {
-                  setEditandoTrilha(null);
-                  setModalText("Cadastrar Trilha");
-                  setRegisterVisible(true);
+                  navigate("edit");
                 }}
               >
                 Adicionar
               </Button>
-            </div>
-          }
-        >
-          <Table
-            loading={loadingTrilhas || loadingCursos}
-            dataSource={trilhas}
-            style={{ width: "100%", height: "100%" }}
-            pagination={{
-              pageSize: 20,
-              total: count,
-              showSizeChanger: false,
-              current: pageNumber,
-              defaultCurrent: 1,
-              hideOnSinglePage: false,
-            }}
-            size="small"
-            rowKey="id"
-            onChange={onChangeTable}
-            columns={[
-              {
-                title: "Nome",
-                dataIndex: "name",
-                key: "name",
-                render: (name, record) => (
-                  <div>
-                    {name}
-                    {record.filedAt && (
-                      <Tag color="blue" style={{ marginLeft: "10px" }}>
-                        Arquivado
-                      </Tag>
-                    )}
-                  </div>
-                ),
-              },
-              {
-                title: "Descrição",
-                dataIndex: "description",
-                key: "description",
-              },
-              {
-                title: "Criado em",
-                dataIndex: "createdAt",
-                key: "createdAt",
-                render: (createdAt) => {
-                  return new Date(createdAt).toLocaleString("pt-BR", {
-                    timeZone: "UTC",
-                  });
+            </Tooltip>
+          </div>
+        }
+      >
+        <Table
+          loading={loadingTrilhas || loadingCursos}
+          dataSource={trilhas}
+          style={{ width: "100%", height: "100%" }}
+          pagination={{
+            pageSize: 20,
+            total: count,
+            showSizeChanger: false,
+            current: page,
+            defaultCurrent: 1,
+            onChange: (page) => {
+              setPage(page);
+              getTrilhas({
+                page: page,
+                query: textSearch,
+                showFiled: showFiled,
+                sort: {
+                  createdAt: sort.createdAt,
+                  updatedAt: sort.updatedAt,
                 },
-                sorter: {
-                  multiple: 1,
-                },
-                sortDirections: ["descend"],
-                sortOrder: sort.createdAt,
+              });
+            },
+          }}
+          size="small"
+          rowKey="id"
+          onChange={onChangeTable}
+          columns={[
+            {
+              title: "Nome",
+              dataIndex: "name",
+              key: "name",
+              render: (name, record) => (
+                <div>
+                  {name}
+                  {record.filedAt && (
+                    <Tag color="blue" style={{ marginLeft: "10px" }}>
+                      Arquivado
+                    </Tag>
+                  )}
+                </div>
+              ),
+            },
+            {
+              title: "Descrição",
+              dataIndex: "description",
+              key: "description",
+            },
+            {
+              title: "Criado em",
+              dataIndex: "createdAt",
+              key: "createdAt",
+              render: (createdAt) => {
+                return new Date(createdAt).toLocaleString("pt-BR", {
+                  timeZone: "UTC",
+                });
               },
-              {
-                title: "Atualizado em",
-                dataIndex: "updatedAt",
-                key: "updatedAt",
-                render: (updatedAt) => {
-                  return new Date(updatedAt).toLocaleString("pt-BR", {
-                    timeZone: "UTC",
-                  });
-                },
-                sorter: {
-                  multiple: 2,
-                },
-                sortDirections: ["descend"],
-                sortOrder: sort.updatedAt,
+              sorter: {
+                multiple: 1,
               },
-              {
-                dataIndex: "actions",
-                key: "actions",
-                render: (text, record) => {
-                  return (
-                    <Space direction="horizontal">
+              sortDirections: ["descend"],
+              sortOrder: sort.createdAt,
+            },
+            {
+              title: "Atualizado em",
+              dataIndex: "updatedAt",
+              key: "updatedAt",
+              render: (updatedAt) => {
+                return new Date(updatedAt).toLocaleString("pt-BR", {
+                  timeZone: "UTC",
+                });
+              },
+              sorter: {
+                multiple: 2,
+              },
+              sortDirections: ["descend"],
+              sortOrder: sort.updatedAt,
+            },
+            {
+              dataIndex: "actions",
+              key: "actions",
+              render: (text, record) => {
+                return (
+                  <Space direction="horizontal">
+                    <Tooltip
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
+                    >
                       <Button
+                        disabled={!isAdm && !isCoord}
                         key={record.id}
                         onClick={() => {
-                          setEditandoTrilha(record);
-                          setModalText("Editar Trilha");
-                          setRegisterVisible(true);
+                          navigate(`edit/${record.id}`);
                         }}
                         icon={<EditOutlined />}
                       >
                         Editar
                       </Button>
-                    </Space>
-                  );
-                },
+                    </Tooltip>
+                  </Space>
+                );
               },
-            ]}
-          />
-        </Card>
-      )}
+            },
+          ]}
+        />
+      </Card>
     </div>
   );
 }

@@ -33,7 +33,7 @@ export default function Finder() {
       tipoClassificacao: false,
     });
     if (filterCollapsed) {
-      setFilterCollapsed();
+      setFilterCollapsed(false);
     }
     setTipoVisualizacao(true);
     navigate(`/cursos`);

@@ -29,15 +29,33 @@ export default {
       description: payload.description,
     }),
 
-  getCatComp: (payload = { query: "", showFiled: false }) =>
-    AuthAxios.get(
-      `/competencies-category/list?search=${payload.query}&includeFiled=${payload.showFiled}`
+  getCatComp: (payload = { query: "", showFiled: false, page: 1 }) =>
+    AuthAxios.get(`/competencies-category/list`, {
+      params: {
+        page: payload.page,
+        search: payload.query,
+        includeFiled: payload.showFiled,
+      },
+    }),
+
+  getCompetencias: (
+    payload = { query: "", showFiled: false, page: 1, itineraryId: "" }
+  ) =>
+    AuthAxios.post(
+      `/competencies/list`,
+      {
+        itineraryId: payload.itineraryId,
+      },
+      {
+        params: {
+          page: payload.page,
+          search: payload.query,
+          includeFiled: payload.showFiled,
+        },
+      }
     ),
 
-  getCompetencias: (payload = { query: "", showFiled: false }) =>
-    AuthAxios.get(
-      `/competencies/list?search=${payload.query}&includeFiled=${payload.showFiled}`
-    ),
+  getUniqueComp: (payload) => AuthAxios.get(`/competencies/${payload.id}`),
 
   archiveCatComp: (payload) =>
     AuthAxios.patch(`/competencies-category/${payload.id}/archive`),

@@ -1,14 +1,20 @@
-import React from "react";
+import { useState } from "react";
 
 import ministerio from "../../assets/LOGO_2023_COM_MINISTERIO.png";
 
 import { Typography, Row, Col, Grid, Image } from "antd";
+import TermCookiesModal from "../privacyTerms/TermCookiesModal";
+import TermPrivacyModal from "../privacyTerms/TermPrivacyModal";
 
-const { Text } = Typography;
+const { Link, Text } = Typography;
+
 const { useBreakpoint } = Grid;
 
 export default function FooterGov() {
   const screens = useBreakpoint();
+
+  const [termVisible, setTermVisible] = useState(false);
+  const [termPrivacyVisible, setTermPrivacyVisible] = useState(false);
 
   return (
     <footer
@@ -41,7 +47,19 @@ export default function FooterGov() {
           <Text
             style={{ color: "white", fontSize: "16px", textAlign: "center" }}
           >
-            Copyright © 2024 PlaforEDU. Todos os direitos reservados.
+            Copyright © 2024 PlaforEDU. Todos os direitos reservados. | Conheça
+            nossa{" "}
+            <Link
+              onClick={() => {
+                setTermPrivacyVisible(true);
+              }}
+              style={{
+                color: "white",
+                textDecoration: "underline",
+              }}
+            >
+              Política de Privacidade
+            </Link>
           </Text>
         </Col>
         <Col
@@ -61,6 +79,15 @@ export default function FooterGov() {
           />
         </Col>
       </Row>
+      <TermCookiesModal
+        termVisible={termVisible}
+        setTermVisible={setTermVisible}
+      />
+      <TermPrivacyModal
+        termPrivacyVisible={termPrivacyVisible}
+        setTermPrivacyVisible={setTermPrivacyVisible}
+        setTermVisible={setTermVisible}
+      />
     </footer>
   );
 }

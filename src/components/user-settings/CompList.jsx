@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
@@ -13,36 +13,59 @@ import {
   Space,
   Tooltip,
   Switch,
+  notification,
 } from "antd";
 import CompRegister from "./CompRegister";
 
 const { Search } = Input;
 
 export default function CompList() {
-  const getComp = useStoreActions((actions) => actions.competencies.getComp);
-  const getCatComp = useStoreActions(
-    (actions) => actions.competencies.getCatComp
+  const getCompAction = useStoreActions(
+    (actions) => actions.competencies.getComp
   );
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Competência");
-  const [editandoComp, setEditandoComp] = useState(null);
+  const [editingComp, setEditingComp] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
+  const [loadingCompetencies, setLoadingCompetencies] = useState(true);
+  const [competencies, setCompetencies] = useState([]);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
 
-  const loadingCompetencies = useStoreState(
-    (state) => state.competencies.loadingCompetencies
-  );
-  const competencias = useStoreState(
-    (state) => state.competencies.competencias
+  const getComp = useCallback(
+    async ({ query, showFiled, page }) => {
+      setLoadingCompetencies(true);
+      try {
+        const { data, count } = await getCompAction({
+          query,
+          showFiled,
+          page,
+        });
+        setCompetencies(data);
+        setCount(count);
+      } catch (error) {
+        notification.error({
+          message: "Erro ao carregar competências",
+          description: error.message,
+        });
+      } finally {
+        setLoadingCompetencies(false);
+      }
+    },
+    [getCompAction]
   );
 
   useEffect(() => {
-    getComp();
-    getCatComp({
-      showFiled: true,
+    getComp({
+      query: "",
+      showFiled: false,
+      page: 1,
     });
-  }, [getComp, getCatComp]);
+  }, [getComp]);
 
   return (
     <div
@@ -96,44 +119,72 @@ export default function CompList() {
                     getComp({
                       query: textSearch,
                       showFiled: checked,
+                      page: 1,
                     });
                   }}
                 />
               </Tooltip>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  setEditandoComp(null);
-                  setModalText("Cadastrar Competência");
-                  setRegisterVisible(true);
-                }}
+              <Tooltip
+                title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
               >
-                Adicionar
-              </Button>
+                <Button
+                  disabled={!(isAdm || isCoord)}
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setEditingComp(null);
+                    setModalText("Cadastrar Competência");
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </div>
           }
         >
           <List
             loading={loadingCompetencies}
-            dataSource={competencias}
+            dataSource={competencies}
+            pagination={{
+              pageSize: 30,
+              showSizeChanger: false,
+              current: page,
+              total: count,
+              defaultCurrent: 1,
+              onChange: (page) => {
+                setPage(page);
+                getComp({
+                  query: textSearch,
+                  showFiled: showFiled,
+                  page: page,
+                });
+              },
+            }}
             style={{ width: "100%" }}
             renderItem={(item) => {
               return (
                 <List.Item
                   key={item.id}
                   actions={[
-                    <Button
+                    <Tooltip
                       key={item.id}
-                      onClick={() => {
-                        setEditandoComp(item);
-                        setModalText("Editar Competência");
-                        setRegisterVisible(true);
-                      }}
-                      icon={<EditOutlined />}
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
                     >
-                      Editar
-                    </Button>,
+                      <Button
+                        disabled={!(isAdm || isCoord)}
+                        onClick={() => {
+                          setEditingComp(item);
+                          setModalText("Editar Competência");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>,
                   ]}
                 >
                   <List.Item.Meta
@@ -167,7 +218,7 @@ export default function CompList() {
               query: textSearch,
               showFiled: showFiled,
             });
-            setEditandoComp(null);
+            setEditingComp(null);
             setModalText("Cadastrar Competência");
             setRegisterVisible(false);
           }}
@@ -179,8 +230,9 @@ export default function CompList() {
                 getComp({
                   query: textSearch,
                   showFiled: showFiled,
+                  page: page,
                 });
-                setEditandoComp(null);
+                setEditingComp(null);
                 setModalText("Cadastrar Competência");
                 setRegisterVisible(false);
               }}
@@ -190,12 +242,13 @@ export default function CompList() {
           ]}
         >
           <CompRegister
-            comp={editandoComp}
+            comp={editingComp}
             actionVisible={() => {
               setRegisterVisible(false);
               getComp({
                 query: textSearch,
                 showFiled: showFiled,
+                page: page,
               });
             }}
           />

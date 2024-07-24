@@ -30,6 +30,7 @@ export default function SettingsPage() {
   const isActive = useStoreState((state) => state.adm.isActive);
   const isAnalistaDados = useStoreState((state) => state.adm.isAnalistaDados);
   const isServidor = useStoreState((state) => state.adm.isServidor);
+  const isJornalista = useStoreState((state) => state.adm.isJornalista);
 
   const items = [
     {
@@ -43,7 +44,7 @@ export default function SettingsPage() {
       icon: <KeyOutlined />,
     },
     {
-      label: "Planos de Estudo",
+      label: "Planos de Desenvolvimento",
       key: "/settings/study-plans",
       icon: <NodeIndexOutlined />,
       disabled: !isActive || !(isAdm || isCoord || isServidor),
@@ -52,7 +53,8 @@ export default function SettingsPage() {
       label: "Cadastros",
       key: "registers",
       disabled:
-        !isActive || !(isAdm || isCoord || isAnalistaDados || isConsultor),
+        !isActive ||
+        !(isAdm || isCoord || isAnalistaDados || isConsultor || isJornalista),
       icon: <DiffOutlined />,
       children: [
         {
@@ -109,19 +111,25 @@ export default function SettingsPage() {
           label: "Trilhas Formativas",
           disabled: !(isAdm || isCoord || isAnalistaDados),
         },
+        {
+          key: "/settings/documents",
+          icon: <FileSearchOutlined />,
+          label: "Documentos",
+          disabled: !(isAdm || isCoord || isAnalistaDados || isJornalista),
+        },
       ],
     },
     {
       key: "logs",
       icon: <LineChartOutlined />,
-      disabled: !isActive || !(isAdm || isCoord),
+      disabled: !isActive || !(isAdm || isCoord || isAnalistaDados),
       label: "Relatórios",
       children: [
         {
           key: "/settings/logs",
           icon: <FileSearchOutlined />,
           label: "Relatório De Buscas",
-          disabled: !isAdm,
+          disabled: !isAdm && !isCoord && !isAnalistaDados,
         },
         {
           key: "/settings/log-courses-trails",

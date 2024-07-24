@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { registerCompSchema } from "../../schemas/registers/registersSchema";
 
 import { Button, Form, Input, notification, Select, Switch, Tag } from "antd";
+import DebounceSelect from "../fields/DebounceSelect";
 
 export default function CompRegister(props) {
   const { comp = null, actionVisible } = props;
@@ -16,6 +17,10 @@ export default function CompRegister(props) {
     description: comp?.description || "",
   };
 
+  const getCatCompAction = useStoreActions(
+    (actions) => actions.competencies.getCatComp
+  );
+
   const registerComp = useStoreActions(
     (actions) => actions.competencies.registerComp
   );
@@ -23,12 +28,8 @@ export default function CompRegister(props) {
   const updateComp = useStoreActions(
     (actions) => actions.competencies.updateComp
   );
-  const catComp = useStoreState((state) => state.competencies.catComp);
   const itineraries = useStoreState((state) => state.itineraries.itinerarios);
   const registering = useStoreState((state) => state.competencies.registering);
-  const loadingCategCompetencies = useStoreState(
-    (state) => state.competencies.loadingCategCompetencies
-  );
 
   const [filed, setFiled] = useState(!!comp?.filedAt);
 
@@ -44,6 +45,29 @@ export default function CompRegister(props) {
     shouldUseNativeValidation: false,
     delayError: undefined,
   });
+
+  const getCatComp = useCallback(
+    async ({ query, page }) => {
+      try {
+        const { data } = await getCatCompAction({
+          query,
+          page,
+          showFiled: false,
+        });
+        return data.map((item) => ({
+          ...item,
+          label: item.name,
+          value: item.id,
+        }));
+      } catch (error) {
+        notification.error({
+          message: "Erro ao carregar categorias de competências",
+          description: error.message,
+        });
+      }
+    },
+    [getCatCompAction]
+  );
 
   const onSubmit = async (values) => {
     if (comp) {
@@ -187,23 +211,27 @@ export default function CompRegister(props) {
                   help={error ? error.message : ""}
                   hasFeedback
                 >
-                  <Select
-                    placeholder="Categorias"
+                  <DebounceSelect
+                    mode="multiple"
+                    placeholder="Categorias da competência"
+                    fetchOptions={getCatComp}
+                    optionsToInclude={
+                      comp
+                        ? comp.categories.map((comp) => ({
+                            label: comp.name,
+                            value: comp.id,
+                            filedAt: comp.filedAt,
+                          }))
+                        : []
+                    }
                     {...field}
-                    loading={loadingCategCompetencies}
-                    showSearch
-                    mode={"multiple"}
-                    filterOption={(input, option) => {
-                      return (
-                        option.label
-                          .toString()
-                          .toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      );
-                    }}
                     tagRender={(props) => {
-                      const { value, closable, onClose } = props;
-                      const item = catComp.find((cat) => cat.id === value);
+                      const { label, value, closable, onClose } = props;
+                      const itemFiled = comp?.categories.find(
+                        (comp) => comp.id === value
+                      )?.filedAt;
+
+                      if (!value) return;
                       return (
                         <Tag
                           closable={closable}
@@ -213,8 +241,8 @@ export default function CompRegister(props) {
                             fontSize: 14,
                           }}
                         >
-                          {item.name}
-                          {item.filedAt && (
+                          {label}
+                          {itemFiled && (
                             <Tag
                               style={{
                                 margin: "3px",
@@ -227,12 +255,6 @@ export default function CompRegister(props) {
                         </Tag>
                       );
                     }}
-                    options={catComp
-                      .filter((element) => !element.filedAt)
-                      .map((element) => ({
-                        label: element.name,
-                        value: element.id,
-                      }))}
                   />
                 </Form.Item>
               );

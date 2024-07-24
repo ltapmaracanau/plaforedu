@@ -1,27 +1,69 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
-import { Button, Card, List, Modal, Input, Tooltip, Switch, Tag } from "antd";
+import {
+  Button,
+  Card,
+  List,
+  Modal,
+  Input,
+  Tooltip,
+  Switch,
+  Tag,
+  notification,
+} from "antd";
 import TemasRegister from "./TemasRegister";
 
 const { Search } = Input;
 
 export default function TemasList() {
-  const getThemes = useStoreActions((actions) => actions.themes.getThemes);
+  const getThemesAction = useStoreActions(
+    (actions) => actions.themes.getThemes
+  );
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Tema");
   const [editandoTema, setEditandoTema] = useState(null);
   const [showFiled, setShowFiled] = useState(false);
   const [textSearch, setTextSearch] = useState("");
+  const [themes, setThemes] = useState([]);
+  const [count, setCount] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-  const loadingThemes = useStoreState((state) => state.themes.loadingThemes);
-  const themes = useStoreState((state) => state.themes.themes);
+  const getThemes = useCallback(
+    async ({ query = "", page = 1, showFiled = false }) => {
+      setLoading(true);
+      try {
+        const { data, count } = await getThemesAction({
+          query,
+          page,
+          showFiled,
+        });
+        setCount(count);
+        setThemes(data);
+      } catch (error) {
+        notification.error({
+          message: "Erro ao buscar temas",
+          description: error.message,
+        });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [getThemesAction]
+  );
 
   useEffect(() => {
-    getThemes();
+    getThemes({
+      query: "",
+      page: 1,
+      showFiled: false,
+    });
   }, [getThemes]);
 
   return (
@@ -57,6 +99,7 @@ export default function TemasList() {
                   getThemes({
                     query: e,
                     showFiled: showFiled,
+                    page: 1,
                   });
                 }}
                 style={{
@@ -76,44 +119,72 @@ export default function TemasList() {
                     getThemes({
                       query: textSearch,
                       showFiled: checked,
+                      page: 1,
                     });
                   }}
                 />
               </Tooltip>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  setEditandoTema(null);
-                  setModalText("Cadastrar Tema");
-                  setRegisterVisible(true);
-                }}
+              <Tooltip
+                title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
               >
-                Adicionar
-              </Button>
+                <Button
+                  disabled={!isAdm && !isCoord}
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setEditandoTema(null);
+                    setModalText("Cadastrar Tema");
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </div>
           }
         >
           <List
-            loading={loadingThemes}
+            loading={loading}
             dataSource={themes}
+            pagination={{
+              pageSize: 30,
+              current: page,
+              total: count,
+              defaultCurrent: 1,
+              showSizeChanger: false,
+              onChange: (value) => {
+                setPage(value);
+                getThemes({
+                  query: textSearch,
+                  showFiled: showFiled,
+                  page: value,
+                });
+              },
+            }}
             style={{ width: "100%" }}
             renderItem={(item) => {
               return (
                 <List.Item
                   key={item.id}
                   actions={[
-                    <Button
-                      onClick={() => {
-                        setEditandoTema(item);
-                        setModalText("Editar Tema");
-                        setRegisterVisible(true);
-                      }}
+                    <Tooltip
                       key={item.id}
-                      icon={<EditOutlined />}
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
                     >
-                      Editar
-                    </Button>,
+                      <Button
+                        disabled={!isAdm && !isCoord}
+                        onClick={() => {
+                          setEditandoTema(item);
+                          setModalText("Editar Tema");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>,
                   ]}
                 >
                   <List.Item.Meta
@@ -136,6 +207,7 @@ export default function TemasList() {
             getThemes({
               query: textSearch,
               showFiled: showFiled,
+              page: page,
             });
             setEditandoTema(null);
             setModalText("Cadastrar Tema");
@@ -149,6 +221,7 @@ export default function TemasList() {
                 getThemes({
                   query: textSearch,
                   showFiled: showFiled,
+                  page: page,
                 });
                 setEditandoTema(null);
                 setModalText("Cadastrar Tema");
@@ -166,6 +239,7 @@ export default function TemasList() {
               getThemes({
                 query: textSearch,
                 showFiled: showFiled,
+                page: page,
               });
               setEditandoTema(null);
             }}

@@ -3,7 +3,15 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-import { Button, Card, List, Input, notification, Popconfirm } from "antd";
+import {
+  Button,
+  Card,
+  List,
+  Input,
+  notification,
+  Popconfirm,
+  Progress,
+} from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { Search } = Input;
@@ -33,7 +41,7 @@ export default function StudyPlans() {
         });
       } catch (error) {
         notification.error({
-          message: "Erro ao buscar planos de estudo",
+          message: "Erro ao buscar planos de desenvolvimento",
           description: error.message,
         });
       }
@@ -50,7 +58,7 @@ export default function StudyPlans() {
       });
     } catch (error) {
       notification.error({
-        message: "Erro ao deletar plano de estudo",
+        message: "Erro ao deletar plano de desenvolvimento",
         description: error.message,
       });
     }
@@ -62,12 +70,11 @@ export default function StudyPlans() {
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
-        padding: "20px",
       }}
     >
       <div style={{ width: "100%" }}>
         <Card
-          title={"Planos de Estudo"}
+          title={"Planos de Desenvolvimento"}
           styles={{
             header: {
               fontSize: 20,
@@ -95,7 +102,7 @@ export default function StudyPlans() {
                 style={{
                   marginRight: "10px",
                 }}
-                placeholder={"Buscar planos de estudo..."}
+                placeholder={"Buscar planos de desenvolvimento..."}
               />
               <Button
                 type="primary"
@@ -155,6 +162,13 @@ export default function StudyPlans() {
                   ]}
                 >
                   <List.Item.Meta
+                    avatar={
+                      <Progress
+                        type="circle"
+                        size={"small"}
+                        percent={item.percentage?.toFixed(0) || 0}
+                      />
+                    }
                     style={{ fontFamily: "Roboto" }}
                     title={
                       <Button

@@ -16,10 +16,14 @@ export default {
       uf: payload.uf,
     }),
 
-  getInstituicoes: (payload = { query: "", showFiled: false }) =>
-    AuthAxios.get(
-      `/institutions/all?search=${payload.query}&includeFiled=${payload.showFiled}`
-    ),
+  getInstituicoes: (payload = { query: "", showFiled: false, page: 1 }) =>
+    AuthAxios.get(`/institutions/all`, {
+      params: {
+        search: payload.query,
+        includeFiled: payload.showFiled,
+        page: payload.page,
+      },
+    }),
 
   getStates: () =>
     axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados`),

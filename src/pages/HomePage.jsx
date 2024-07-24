@@ -1,4 +1,4 @@
-import Finder from "../components/Finder";
+import { useCallback, useState } from "react";
 import "./homepage.css";
 import Int1 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_Docente.png";
 import Int2 from "../assets/itinerarios/PLAFOREDU_Itinerarios-Home_v5_InicServPublico.png";
@@ -19,16 +19,18 @@ import icon3 from "../assets/HomepageIcon3.svg";
 import rightBlue from "../assets/RightBlue.svg";
 import rightWhite from "../assets/RightWhite.svg";
 
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import { Link } from "react-router-dom";
 
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
-import services from "../services";
-import { Row, Col, Grid, Button, Divider, Dropdown } from "antd";
+import { Row, Col, Grid, Button, Divider, Dropdown, Typography } from "antd";
 import HomepageItineario from "../components/HomepageItineario";
-import { useMemo, useState } from "react";
+import Finder from "../components/Finder";
+import CourseModalVisualization from "../components/CourseModalVisualization";
+import TrailModalVisualization from "../components/TrailModalVisualization";
 
+const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 export default function HomePage() {
@@ -38,16 +40,17 @@ export default function HomePage() {
   const randomTrails = useStoreState((state) => state.adm.randomTrails);
 
   const [selectedTrailId, setSelectedTrailId] = useState(null);
-  const [positionedTrailId, setPositionedTrailId] = useState(null);
+  const [positionedTrail, setPositionedTrail] = useState(null);
+  const [modalTrailId, setModalTrailId] = useState(null);
+  const [modalTrailVisible, setModalTrailVisible] = useState(false);
+  const closeModalTrail = useCallback(() => {
+    setModalTrailVisible(false);
+    setModalTrailId(null);
+  }, []);
 
-  const getUniqueCourse = useStoreActions(
-    (actions) => actions.courses.getUniqueCourse
-  );
-
-  const recentCourses = useMemo(
-    async () => await services.admService.getLastViewedCourses(),
-    []
-  );
+  const [idSelectedCourse, setIdSelectedCourse] = useState(null);
+  const [modalSelectedCourseVisible, setModalSelectedCouseVisible] =
+    useState(false);
 
   return (
     <>
@@ -154,44 +157,62 @@ export default function HomePage() {
                   key={trilha.id}
                 >
                   <div className="cardTrilhasRecomendadas">
-                    <p>{trilha.name}</p>
-                    <Dropdown
-                      menu={{
-                        items: trilha.courses.map((course) => {
-                          return {
-                            key: course.id,
-                            label: course.name,
-                          };
-                        }),
+                    <Title
+                      style={{
+                        marginBottom: "15px",
                       }}
-                      trigger={["click"]}
-                      onOpenChange={(open) => {
-                        if (!open) {
-                          setSelectedTrailId(null);
-                        }
+                      level={4}
+                      ellipsis={{
+                        rows: 1,
+                        expandable: false,
+                        tooltip: true,
                       }}
                     >
-                      <p
-                        id="verCursos"
-                        onClick={() => {
-                          if (
-                            selectedTrailId &&
-                            selectedTrailId === trilha.id
-                          ) {
+                      {trilha.name}
+                    </Title>
+                    <div>
+                      <Dropdown
+                        menu={{
+                          items: trilha.courses.map((course) => {
+                            return {
+                              key: course.id,
+                              label: course.name,
+                            };
+                          }),
+                          onClick: (e) => {
+                            setIdSelectedCourse(e.key);
+                            setModalSelectedCouseVisible(true);
+                          },
+                        }}
+                        trigger={["click"]}
+                        onOpenChange={(open) => {
+                          if (!open) {
                             setSelectedTrailId(null);
-                            return;
                           }
-                          setSelectedTrailId(trilha.id);
                         }}
                       >
-                        Ver cursos{" "}
-                        {selectedTrailId === trilha.id ? (
-                          <UpOutlined />
-                        ) : (
-                          <DownOutlined />
-                        )}
-                      </p>
-                    </Dropdown>
+                        <p
+                          id="verCursos"
+                          onClick={() => {
+                            if (
+                              selectedTrailId &&
+                              selectedTrailId === trilha.id
+                            ) {
+                              setSelectedTrailId(null);
+                              return;
+                            }
+                            setSelectedTrailId(trilha.id);
+                          }}
+                        >
+                          Ver cursos{" "}
+                          {selectedTrailId === trilha.id ? (
+                            <UpOutlined />
+                          ) : (
+                            <DownOutlined />
+                          )}
+                        </p>
+                      </Dropdown>
+                    </div>
                   </div>
 
                   <Button
@@ -204,20 +225,24 @@ export default function HomePage() {
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.backgroundColor = "#2c55a1";
-                      setPositionedTrailId(trilha.id);
+                      setPositionedTrail(trilha);
                     }}
                     onMouseLeave={(e) => {
                       e.target.style.backgroundColor =
                         "var(--azul-super-claro)";
-                      setPositionedTrailId(null);
+                      setPositionedTrail(null);
                     }}
                     icon={
-                      positionedTrailId && positionedTrailId === trilha.id ? (
+                      positionedTrail && positionedTrail.id === trilha.id ? (
                         <img src={rightWhite} alt="Seta azul para a direita" />
                       ) : (
                         <img src={rightBlue} alt="Seta branca para a direita" />
                       )
                     }
+                    onClick={() => {
+                      setModalTrailId(trilha.id);
+                      setModalTrailVisible(true);
+                    }}
                   />
                 </div>
               );
@@ -225,6 +250,18 @@ export default function HomePage() {
           </Col>
         </Row>
       </div>
+
+      <TrailModalVisualization
+        id={modalTrailId}
+        visible={modalTrailVisible}
+        setVisible={closeModalTrail}
+      />
+
+      <CourseModalVisualization
+        id={idSelectedCourse}
+        visible={modalSelectedCourseVisible}
+        setVisible={setModalSelectedCouseVisible}
+      />
 
       <div
         style={{
@@ -321,7 +358,7 @@ export default function HomePage() {
             Gostaria de entrar em contato com a gente?
           </h1>
           <Link
-            to="/faleconosco"
+            to="/suporte"
             className="texto"
             style={{ textDecoration: "underline", color: "#FDFDFD" }}
           >

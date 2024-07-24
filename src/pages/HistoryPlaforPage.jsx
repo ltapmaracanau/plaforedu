@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button, Grid, Modal, Typography } from "antd";
+import DocumentsVisualization from "../components/documents/DocumentsVisualization";
 
-const { Text, Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 function Icon() {
   const { useBreakpoint } = Grid;
@@ -128,6 +129,9 @@ function Icon() {
 
       {/*modal 1*/}
       <Modal
+        onCancel={() => {
+          setModalCriacaoIsVisible(false);
+        }}
         open={modalCriacao}
         destroyOnClose={true}
         closable={false}
@@ -344,6 +348,9 @@ function Icon() {
 
       {/*modal 2*/}
       <Modal
+        onCancel={() => {
+          setModalForgepIsVisible(false);
+        }}
         open={modalForgep}
         destroyOnClose={true}
         closable={false}
@@ -578,6 +585,9 @@ function Icon() {
 
       {/*modal 3*/}
       <Modal
+        onCancel={() => {
+          setModalGTIsVisible(false);
+        }}
         open={modalGT}
         destroyOnClose={true}
         closable={false}
@@ -732,15 +742,18 @@ function Icon() {
           fontSize="14"
           fontWeight="700"
           transform="translate(586.471 124)"
+          x="-68.97"
+          y="-1.38"
         >
           Maio de 2016
         </text>
-
         <text
           fontFamily="Roboto,Roboto_MSFontService,sans-serif"
           fontSize="12"
           fontWeight="400"
           transform="translate(575.224 142)"
+          x="-68.97"
+          y="-1.38"
         >
           Instituição do Plafor
         </text>
@@ -749,44 +762,34 @@ function Icon() {
           fontSize="12"
           fontWeight="400"
           transform="translate(569.971 157)"
+          x="-68.97"
+          y="-1.38"
         >
           Total de 644 unidades
         </text>
-
-        {/* base 4*/}
         <path
-          onClick={() => {
-            setModalPlaforIsVisible(true);
-          }}
-          style={{ cursor: "pointer" }}
+          d="m551.89,167.85c-13.03,0 -23.99,10.56 -23.99,23.97c0,13.01 10.96,24.01 23.99,24.01c13.43,0 24.01,-11 24.01,-24.01c0,-13.41 -10.58,-23.97 -24.01,-23.97z"
           fill="#9AE167"
-          fillRule="evenodd"
-          d="M628.989 178.023c-13.03 0-23.989 10.554-23.989 23.966C605 214.996 615.959 226 628.989 226 642.423 226 653 214.996 653 201.989c0-13.412-10.577-23.966-24.011-23.966z"
-        ></path>
-
-        {/* icon 4*/}
+          id="svg_31"
+        />
         <path
-          onClick={() => {
-            setModalPlaforIsVisible(true);
-          }}
-          style={{ cursor: "pointer" }}
+          d="m562.39,184.19l0,3.44l-1.01,-1.33l-5.06,5.53l-5.8,-4.48l-9.36,6.84l0,-1.83l9.36,-6.84l5.55,4.21l4.3,-4.49l-1.02,-1.05l3.04,0zm-18.2,9.47l0,6.58l-3.03,0l0,-4.47l3.03,-2.11zm5.56,-4.2l0,10.78l-4.28,0l0,-7.63l4.28,-3.15zm1.51,0.27l4.31,3.15l0,7.36l-4.31,0l0,-10.51zm9.87,-1.05l0,11.56l-4.31,0l0,-7.1l4.31,-4.46zm-21.22,-11.85l0,24.99l23.99,0l0,-1.58l-1.51,0l0,-10.78l1.51,1.57l0,-8.42l-8.09,0l2.52,2.63l-2.26,2.64l-5.55,-4.22l-9.36,6.85l0,-13.68l-1.25,0z"
           fill="#FFF"
-          fillRule="evenodd"
-          d="M639.485 194.36v3.436l-1.01-1.324-5.06 5.53-5.799-4.478-9.353 6.834v-1.83l9.353-6.834 5.555 4.205 4.294-4.488-1.011-1.051zm-18.192 9.472v6.581h-3.03v-4.478l3.03-2.103zm5.556-4.205v10.786h-4.284v-7.632l4.284-3.154zm1.515.272l4.302 3.154v7.36h-4.302v-10.514zm9.868-1.051v11.565h-4.312v-7.107l4.312-4.458zM617.009 187v24.99H641v-1.577h-1.515v-10.786l1.515 1.577v-8.421h-8.09l2.525 2.628-2.264 2.638-5.555-4.215-9.353 6.844V187z"
-        ></path>
-
-        {/* haste 4*/}
+          id="svg_32"
+        />
         <path
+          d="m553.4,251.31l0,-34.96l0,34.96z"
           fill="none"
+          id="svg_33"
           stroke="#4A696C"
-          strokeLinejoin="round"
-          strokeMiterlimit="10"
-          d="M630.5 261.482v-34.964z"
-        ></path>
+        />
       </g>
 
       {/*modal 4*/}
       <Modal
+        onCancel={() => {
+          setModalPlaforIsVisible(false);
+        }}
         open={modalPlafor}
         destroyOnClose={true}
         closable={false}
@@ -852,77 +855,78 @@ function Icon() {
           setModalPlaforeduIsVisible(true);
         }}
         style={{ cursor: "pointer" }}
+        transform="matrix(1 0 0 1 0 0)"
       >
         <text
           fontFamily="Roboto,Roboto_MSFontService,sans-serif"
           fontSize="14"
           fontWeight="700"
           transform="translate(758.902 288)"
+          x="-93.29"
+          y="-130.28"
         >
           Abril de 2022
         </text>
-
         <text
           fontFamily="Roboto,Roboto_MSFontService,sans-serif"
           fontSize="12"
           fontWeight="400"
           transform="translate(760.356 306)"
+          x="-93.29"
+          y="-130.28"
         >
           Lançamento do
         </text>
-
         <text
           fontFamily="Roboto,Roboto_MSFontService,sans-serif"
           fontSize="12"
           fontWeight="400"
           transform="translate(774.856 321)"
+          x="-93.29"
+          y="-130.28"
         >
           PlaforEDU
         </text>
-
-        {/* base 5*/}
         <path
           onClick={() => {
             setModalPlaforeduIsVisible(true);
           }}
           style={{ cursor: "pointer" }}
+          d="m708.72,196.74c-13.01,0 -24.01,10.57 -24.01,23.96c0,13.43 11,24 24.01,24c13.41,0 23.99,-10.57 23.99,-24c0,-13.39 -10.58,-23.96 -23.99,-23.96z"
           fill="#8585FF"
-          fillRule="evenodd"
-          d="M802.011 327.022c-13.007 0-24.011 10.572-24.011 23.956 0 13.428 11.004 24 24.011 24 13.412 0 23.989-10.572 23.989-24 0-13.384-10.577-23.956-23.989-23.956z"
-        ></path>
-
-        {/* icon 5 */}
+          id="svg_37"
+        />
         <path
           onClick={() => {
             setModalPlaforeduIsVisible(true);
           }}
           style={{ cursor: "pointer" }}
+          d="m713.56,213.04l0.89,1.31l1.75,0.23l-1.17,1.04l0.28,1.54l-1.75,-0.76l-1.45,0.76l0.28,-1.54l-1.17,-1.04l1.75,-0.23l0.59,-1.31zm0,-3.32l-1.75,3.32l-4.09,0.52l2.92,2.57l-0.58,3.59l3.5,-1.79l3.8,1.79l-0.58,-3.59l2.92,-2.57l-4.09,-0.52l-2.05,-3.32z"
           fill="#FFF"
-          fillRule="evenodd"
-          d="M806.849 343.324l.886 1.301 1.752.237-1.168 1.035.281 1.539-1.751-.76-1.449.76.281-1.539-1.168-1.035 1.752-.237.584-1.301zm0-3.324l-1.752 3.324-4.086.513 2.919 2.573-.584 3.59 3.503-1.785 3.805 1.785-.584-3.59 2.919-2.573-4.086-.513-2.054-3.324z"
-        ></path>
+          id="svg_38"
+        />
         <path
           onClick={() => {
             setModalPlaforeduIsVisible(true);
           }}
           style={{ cursor: "pointer" }}
+          d="m699.81,211.56l0,5.15l-0.86,0a2.54,2.54 0 0 1 -2.53,-2.56c0,-1.44 1.13,-2.59 2.53,-2.59l0.86,0zm18.66,0c1.4,0 2.53,1.15 2.53,2.59a2.54,2.54 0 0 1 -2.53,2.56l-0.86,0l0,-5.15l0.86,0zm-2.56,-3.13l0,7.44c0,3.99 -3.09,7.42 -7.35,7.42c-3.95,0 -7.35,-3.43 -7.35,-7.42l0,-7.44l14.7,0zm-6.49,16.28l0,3.42l-1.42,0l0,-3.42l1.42,0zm3.67,5.14l1.13,3.15l-11.02,0l1.13,-3.15l8.76,0zm-14.98,-23.13l0,1.71l1.7,0l0,1.72l-0.86,0c-2.26,0 -4.23,1.71 -4.23,4c0,2.29 1.97,4 4.23,4l1.13,0c0.86,3.13 3.12,5.41 6.22,6.28l0,3.7l-3.1,0l-1.69,4.87l-1.7,0l0,1.71l17.8,0l0,-1.71l-1.7,0l-1.69,-4.87l-3.1,0l0,-3.7c3.1,-0.87 5.36,-3.15 6.22,-6.28l1.13,0c2.27,0 4.24,-1.71 4.24,-4c0,-2.29 -1.97,-4 -4.24,-4l-0.86,0l0,-1.72l1.7,0l0,-1.71l-21.2,0z"
           fill="#FFF"
-          fillRule="evenodd"
-          d="M793.099 341.843v5.149h-.858a2.542 2.542 0 01-2.534-2.558c0-1.449 1.131-2.591 2.534-2.591zm18.66 0c1.403 0 2.534 1.142 2.534 2.591a2.542 2.542 0 01-2.534 2.558h-.858v-5.149zm-2.555-3.13v7.434c0 3.996-3.099 7.422-7.351 7.422-3.958 0-7.35-3.426-7.35-7.422v-7.434zm-6.492 16.273v3.426h-1.424v-3.426zm3.665 5.139l1.131 3.151h-11.016l1.131-3.151zM791.403 337v1.713h1.696v1.713h-.858c-2.262 0-4.231 1.713-4.231 4.008 0 2.284 1.969 3.997 4.231 3.997h1.131c.858 3.129 3.12 5.413 6.22 6.28v3.701h-3.1l-1.696 4.864h-1.697v1.713h17.802v-1.713h-1.697l-1.696-4.864h-3.1v-3.701c3.1-.867 5.362-3.151 6.22-6.28h1.131c2.272 0 4.241-1.713 4.241-3.997 0-2.295-1.969-4.008-4.241-4.008h-.858v-1.713h1.696V337z"
-        ></path>
-
-        {/* haste 5 */}
+          id="svg_39"
+        />
         <path
+          d="m709.21,299.2l0,-53.98l0,53.98z"
           fill="none"
+          id="svg_40"
           stroke="#4A696C"
-          strokeLinejoin="round"
-          strokeMiterlimit="10"
-          d="M802.5 429.482V375.5z"
-        ></path>
+        />
       </g>
 
       {/*modal 5*/}
       <Modal
+        onCancel={() => {
+          setModalPlaforeduIsVisible(false);
+        }}
         open={modalPlaforedu}
         destroyOnClose={true}
         closable={false}
@@ -958,6 +962,7 @@ function Icon() {
           professora Patrícia de Albuquerque Maia, do Campus Lajes do IFRN. O
           desenvolvimento da plataforma digital foi realizado pelo IFRN, com a
           coordenação do professor Thiago Medeiros, do Campus Natal-Zona Leste,
+          pelo IFCE, com a coordenação do professor Otávio Alcântara de Lima Jr.
           e pelo IFSul, com a coordenação do professor Raymundo Carlos Machado.
         </p>
         <p
@@ -977,6 +982,55 @@ function Icon() {
           Docente; Gerencial; e Preparação para Aposentadoria.
         </p>
       </Modal>
+
+      <g>
+        <text
+          fontFamily="Roboto,Roboto_MSFontService,sans-serif"
+          fontSize="14"
+          fontWeight="700"
+          x="750.13"
+          y="282.2"
+        >
+          Novembro de 2022
+        </text>
+        <text
+          fontFamily="Roboto,Roboto_MSFontService,sans-serif"
+          fontSize="12"
+          fontWeight="400"
+          x="748.59"
+          y="300.2"
+        >
+          Portaria N° 633 de 7 de
+        </text>
+        <text
+          fontFamily="Roboto,Roboto_MSFontService,sans-serif"
+          fontSize="12"
+          fontWeight="400"
+          x="759.09"
+          y="315.2"
+        >
+          novembro de 2022
+        </text>
+        <path
+          d="m800.55,320.19c-13.01,0 -24.01,10.57 -24.01,23.96c0,13.43 11,24 24.01,24c13.41,0 23.99,-10.57 23.99,-24c0,-13.39 -10.58,-23.96 -23.99,-23.96z"
+          fill="#8585FF"
+          id="svg_45"
+          transform="matrix(1 0 0 1 0 0)"
+        />
+        <path
+          d="m800.64,424.41l0,-53.98l0,53.98z"
+          fill="none"
+          id="svg_48"
+          stroke="#4A696C"
+        />
+        <path
+          d="m810,355.18l-18.38,0l0,-22.97l12.25,0l0,6.13l6.13,0l0,16.85l0,0zm-4.59,-22.66l4.28,4.28l-4.28,0l0,-4.28zm5.45,3.29l-4.46,-4.46c-0.43,-0.43 -1.01,-0.67 -1.63,-0.67l-14.68,0l0,26.04l21.44,0l0,-19.28c0,-0.61 -0.24,-1.19 -0.67,-1.62l0,0zm-16.18,11.71l10.72,0l0,-1.53l-10.72,0l0,1.53zm0,-6.13l12.25,0l0,-1.53l-12.25,0l0,1.53zm0,9.19l6.13,0l0,-1.53l-6.13,0l0,1.53zm0,-6.13l9.19,0l0,-1.53l-9.19,0l0,1.53zm0,-6.13l6.13,0l0,-1.53l-6.13,0l0,1.53z"
+          fill="#ffffff"
+          fillRule="evenodd"
+          id="svg_46"
+          transform="matrix(1 0 0 1 0 0)"
+        />
+      </g>
     </svg>
   );
 }
@@ -1014,7 +1068,6 @@ export default function HistoryPlaforPage() {
           Educação Profissional, Científica e Tecnológica
         </Title>
       </div>
-
       <div
         style={{
           display: "grid",
@@ -1022,7 +1075,7 @@ export default function HistoryPlaforPage() {
           margin: "5% 10% 0 10%",
         }}
       >
-        <Text
+        <Paragraph
           style={{
             fontFamily: "Roboto",
             fontSize: "20px",
@@ -1037,8 +1090,8 @@ export default function HistoryPlaforPage() {
           e mobilização para a formação continuada com a finalidade de
           potencializar a atuação da Educação Profissional no âmbito da Rede
           Federal de Educação Profissional, Científica e Tecnológica (RFEPCT).
-        </Text>
-        <Text
+        </Paragraph>
+        <Paragraph
           style={{
             fontFamily: "Roboto",
             fontSize: "20px",
@@ -1051,8 +1104,8 @@ export default function HistoryPlaforPage() {
           servidor público para atuar, promover e proporcionar o desenvolvimento
           de trabalhos com qualidade, atendendo às demandas e propiciando um
           diferencial no serviço prestado à sociedade no âmbito da RFEPCT.
-        </Text>
-        <Text
+        </Paragraph>
+        <Paragraph
           style={{
             fontFamily: "Roboto",
             fontSize: "20px",
@@ -1068,8 +1121,9 @@ export default function HistoryPlaforPage() {
           diversas áreas do conhecimento a fim de aprimorar o ensino, a
           pesquisa, a extensão e a inovação na educação profissional e a
           capacitação no exterior.
-        </Text>
+        </Paragraph>
       </div>
+      <DocumentsVisualization />
     </div>
   );
 }

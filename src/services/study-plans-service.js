@@ -26,6 +26,12 @@ export default {
       courses: payload.courses,
     }),
 
+  initStudyPlanCourse: (payload) =>
+    AuthAxios.patch(`/study-plans/${payload.planId}/update-course-status`, {
+      courseId: payload.courseId,
+      status: payload.status,
+    }),
+
   deleteStudyPlan: (payload) => AuthAxios.delete(`/study-plans/${payload.id}`),
 
   downloadStudyPlansCourses: (payload) =>

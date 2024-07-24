@@ -121,6 +121,22 @@ const studyPlansModel = {
       });
   }),
 
+  initStudyPlanCourse: thunk(async (_actions, payload) => {
+    const { planId, courseId, status } = payload;
+    return await services.studyPlansService
+      .initStudyPlanCourse({
+        planId,
+        courseId,
+        status,
+      })
+      .then(() => {
+        return;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }),
+
   downloadStudyPlansCourses: thunk(async (actions, payload) => {
     const { id } = payload;
     return await services.studyPlansService

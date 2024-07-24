@@ -1,9 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
-
-import teamSVG from "../assets/ITteam.jpg";
 
 import { faleConoscoSchema } from "../schemas/faleConoscoSchema";
 
@@ -17,31 +14,28 @@ import {
   Input,
   Button,
   Select,
-  Card,
   Row,
   Modal,
   Result,
   Col,
-  Image,
-  Grid,
   ConfigProvider,
+  Typography,
 } from "antd";
 
-const { useBreakpoint } = Grid;
+const { Text, Title, Paragraph, Link } = Typography;
 
 export default function FaleConosco() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const [resultado, setResultado] = useState(null);
   const [isSending, setIsSending] = useState(false);
-
-  const screens = useBreakpoint();
+  const [itSend, setItSend] = useState(false);
 
   const register = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
       from_name: "",
-      type_message: "Elogio",
+      type_message: "",
       from_email: "",
       message: "",
     },
@@ -53,6 +47,10 @@ export default function FaleConosco() {
     shouldUseNativeValidation: false,
     delayError: undefined,
   });
+
+  const sendAnotherMessage = useCallback(() => {
+    setItSend(false);
+  }, []);
 
   const onSubmit = async (values) => {
     const valuesToSend = {
@@ -68,6 +66,7 @@ export default function FaleConosco() {
     // Procesamento do resultado
     if (result.status === 200) {
       register.reset();
+      setItSend(true);
       setResultado(
         <Result
           status="success"
@@ -110,7 +109,11 @@ export default function FaleConosco() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        flex: 1,
+      }}
+    >
       <ConfigProvider
         theme={{
           token: {},
@@ -125,35 +128,110 @@ export default function FaleConosco() {
         <div style={{ backgroundColor: "#fff" }}>
           <Form layout="vertical" onFinish={register.handleSubmit(onSubmit)}>
             <Row style={{ margin: "40px 0px" }}>
-              {screens.xl ? (
-                <Col
-                  flex={12}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Image preview={false} src={teamSVG} width={600} />
-                </Col>
-              ) : null}
               <Col
-                flex={12}
+                span={12}
+                xs={24}
+                sm={24}
+                md={12}
+                lg={12}
+                xl={12}
+                xxl={12}
                 style={{
                   display: "flex",
+                  flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
                 }}
               >
-                <Card
-                  styles={{
-                    header: {
-                      textAlign: "center",
-                    },
+                <div
+                  style={{
+                    width: "80%",
+                    padding: "20px",
+                    maxWidth: "800px",
                   }}
-                  type="inner"
-                  style={{ width: "500px" }}
-                  title={"Fale Conosco"}
+                >
+                  <Title>
+                    Entre em contato caso tenha um elogio, dúvida, sugestão ou
+                    queira registrar uma reclamação
+                  </Title>
+                  <Paragraph>
+                    Também temos um FAQ que abrange as perguntas mais comuns que
+                    nossos usuários costumam ter. Antes de entrar em contato
+                    conosco, recomendamos dar uma olhada em nossa seção de
+                    Perguntas Frequentes.
+                  </Paragraph>
+                  <Button
+                    style={{
+                      backgroundColor: "#E2FCFF",
+                      color: "#2F4C84",
+                      fontWeight: "600",
+                      borderRadius: "10px",
+                      padding: "5px",
+                      marginBottom: "10px",
+                    }}
+                    type="link"
+                    href="/faq"
+                  >
+                    PERGUNTAS FREQUENTES
+                  </Button>
+                  <div
+                    style={{
+                      backgroundColor: "#f5f5f5",
+                      borderRadius: "10px",
+                      padding: "5px",
+                    }}
+                  >
+                    <Paragraph>
+                      Obs.: Para quaisquer dúvidas referentes aos conteúdos
+                      programáticos dos cursos, deve-se consultar as
+                      instituições ofertantes.
+                    </Paragraph>
+                  </div>
+                </div>
+              </Col>
+              <Col
+                span={12}
+                xs={24}
+                sm={24}
+                md={12}
+                lg={12}
+                xl={12}
+                xxl={12}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "80%",
+                    padding: "20px",
+                    maxWidth: "800px",
+                    display: itSend ? "block" : "none",
+                  }}
+                >
+                  <Title>Obrigado por entrar em contato!</Title>
+                  <Title level={4}>Entraremos em contato em breve.</Title>
+                  <Link
+                    style={{
+                      textDecoration: "underline",
+                    }}
+                    onClick={() => {
+                      sendAnotherMessage();
+                    }}
+                  >
+                    Enviar outra mensagem
+                  </Link>
+                </div>
+                <div
+                  style={{
+                    width: "80%",
+                    padding: "20px",
+                    maxWidth: "800px",
+                    display: itSend ? "none" : "block",
+                  }}
                 >
                   <Controller
                     control={register.control}
@@ -165,7 +243,7 @@ export default function FaleConosco() {
                           validateStatus={error ? "error" : ""}
                           help={error ? error.message : ""}
                           hasFeedback
-                          label={"Nome"}
+                          label={<Text strong>Nome</Text>}
                         >
                           <Input placeholder="Seu nome" {...field} />
                         </Form.Item>
@@ -182,7 +260,7 @@ export default function FaleConosco() {
                           validateStatus={error ? "error" : ""}
                           help={error ? error.message : ""}
                           hasFeedback
-                          label={"Email"}
+                          label={<Text strong>Email</Text>}
                         >
                           <Input placeholder="email@exemplo.com" {...field} />
                         </Form.Item>
@@ -199,7 +277,9 @@ export default function FaleConosco() {
                           validateStatus={error ? "error" : ""}
                           help={error ? error.message : ""}
                           hasFeedback
-                          label={"A que se refere sua mensagem"}
+                          label={
+                            <Text strong>A que se refere sua mensagem</Text>
+                          }
                         >
                           <Select {...field}>
                             <Select.Option value={"Elogio"}>
@@ -229,7 +309,7 @@ export default function FaleConosco() {
                           validateStatus={error ? "error" : ""}
                           help={error ? error.message : ""}
                           hasFeedback
-                          label={"Sua mensagem"}
+                          label={<Text strong>Mensagem</Text>}
                         >
                           <Input.TextArea
                             autoSize={{ minRows: 4, maxRows: 10 }}
@@ -256,23 +336,18 @@ export default function FaleConosco() {
                     >
                       Enviar
                     </Button>
-                    <Link
-                      style={{
-                        color: "#4B4B4B",
-                        fontFamily: "Roboto",
-                        fontSize: "12px",
-                        textDecoration: "underline",
-                      }}
-                      to={"/faq"}
-                    >
-                      Dúvidas Frequentes
-                    </Link>
                   </Space>
-                </Card>
+                </div>
               </Col>
             </Row>
           </Form>
-          <Modal open={modalIsVisible} footer={null}>
+          <Modal
+            open={modalIsVisible}
+            onCancel={() => {
+              setModalIsVisible(false);
+            }}
+            footer={null}
+          >
             {resultado}
           </Modal>
         </div>

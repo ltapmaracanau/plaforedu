@@ -101,6 +101,14 @@ export const registerCourseSchema = yup.object().shape({
   competencies: yup.array(yup.string()).min(1, "Obrigatório!"),
   //taxonomies: yup.array(yup.string()).min(1, "Obrigatório!"),
   subThemes: yup.array(yup.string()).min(1, "Obrigatório!"),
+  institutions: yup
+    .array(
+      yup.object({
+        institutionId: yup.string().required("Obrigatório!"),
+        link: yup.string().required("Obrigatório!"),
+      })
+    )
+    .min(1, "Obrigatório!"),
 });
 // TRILHAS
 
@@ -114,7 +122,7 @@ export const registerTrilhaSchema = yup.object().shape({
   competencies: yup.string().required("Obrigatório!"),
 });
 
-// PLANOS DE ESTUDO
+// PLANOS DE DESENVOLVIMENTO
 
 export const registerStudyPlanSchema = yup.object().shape({
   name: yup
@@ -122,4 +130,25 @@ export const registerStudyPlanSchema = yup.object().shape({
     .required("Obrigatório!")
     .max(256, "256 caracteres no máximo!"),
   description: yup.string().required("Obrigatório!"),
+});
+
+// DOCUMENTOS
+
+export const registerDocumentSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Obrigatório!")
+    .max(256, "256 caracteres no máximo!"),
+  description: yup.string().required("Obrigatório!"),
+  link: yup.string().required("Obrigatório!"),
+  publicationDate: yup
+    .string()
+    .required("Obrigatório!")
+    .matches(/^\d{4}-\d{2}-\d{2}$/, "Data inválida!"),
+  documentTypeId: yup.string().required("Obrigatório!"),
+  documentSubTypeId: yup.string().required("Obrigatório!"),
+  authors: yup
+    .array()
+    .of(yup.string().max(256, "256 caracteres no máximo!"))
+    .min(1, "Obrigatório!"),
 });

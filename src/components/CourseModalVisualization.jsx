@@ -31,7 +31,7 @@ export default function CourseModalVisualization(props) {
       if (id) {
         setLoadingUniqueCourse(true);
         try {
-          const course = await getUniqueCourse({ id });
+          const course = await getUniqueCourse({ id, saveViewed: true });
           setUniqueCourse(course);
         } catch (error) {
           notification.error({
@@ -44,7 +44,7 @@ export default function CourseModalVisualization(props) {
       }
     }
     init();
-  }, [getUniqueCourse, id]);
+  }, [getUniqueCourse, id, visible]);
 
   return (
     <div>

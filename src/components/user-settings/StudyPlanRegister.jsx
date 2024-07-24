@@ -154,7 +154,7 @@ export default function StudyPlanRegister() {
           setCoursesPlan(plan.courses.sort((a, b) => a.sequence - b.sequence));
         } catch (error) {
           notification.error({
-            message: "Erro ao buscar plano de estudo",
+            message: "Erro ao buscar plano de desenvolvimento",
             description: error.message,
           });
         }
@@ -179,7 +179,7 @@ export default function StudyPlanRegister() {
           })),
         });
         notification.success({
-          message: "Plano de estudo alterado com sucesso!",
+          message: "Plano de desenvolvimento alterado com sucesso!",
         });
         navigate("/settings/study-plans");
       } catch (error) {
@@ -202,7 +202,7 @@ export default function StudyPlanRegister() {
           })),
         });
         notification.success({
-          message: "Plano de estudo cadastrado com sucesso!",
+          message: "Plano de desenvolvimento cadastrado com sucesso!",
         });
         register.reset();
         navigate("/settings/study-plans");
@@ -226,6 +226,9 @@ export default function StudyPlanRegister() {
         name: course.name,
       })),
     ]);
+    notification.success({
+      message: "Trilha adicionada com sucesso!",
+    });
   };
 
   // Table add courses to plan
@@ -327,7 +330,7 @@ export default function StudyPlanRegister() {
             },
           }}
           title={
-            planId ? <>Editar Plano de Estudo</> : <>Criar Plano de Estudo</>
+            planId ? <>Editar Plano de Desenvolvimento</> : <>Criar Plano de Desenvolvimento</>
           }
           bordered={false}
           extra={
@@ -410,7 +413,7 @@ export default function StudyPlanRegister() {
                     <Empty
                       description={
                         <span>
-                          Não há cursos adicionados ao plano de estudo
+                          Não há cursos adicionados ao plano de desenvolvimento
                         </span>
                       }
                     />

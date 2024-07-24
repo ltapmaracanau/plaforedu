@@ -7,7 +7,11 @@ export default function NotFound() {
         status="404"
         title="404"
         subTitle="Desculpe, a página que você visitou não existe."
-        extra={<Button type="primary">Ir para Home</Button>}
+        extra={
+          <Button href="/" type="primary">
+            Ir para Home
+          </Button>
+        }
       />
     </div>
   );

@@ -20,6 +20,8 @@ export default {
       }
     ),
 
+  getUniqueTrail: (payload) => AuthAxios.get(`/formative-trails/${payload.id}`),
+
   updateTrilha: (payload) =>
     AuthAxios.put(`/formative-trails/${payload.id}/update`, {
       name: payload.name,

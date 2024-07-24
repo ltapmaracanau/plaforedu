@@ -24,13 +24,13 @@ const admModel = {
   loadingLastChanges: false,
 
   getLastCoursesTrailsChanges: thunk(
-    async (actions, payload = { page: 1, type: "COURSES" }) => {
+    async (actions, payload = { page: 1, type: "COURSE" }) => {
       actions.setLoadingLastChanges(true);
 
       return await services.admService
         .getCousesTrailsMovements(payload)
         .then((response) => {
-          actions.setLDataChanges(response.data);
+          actions.setDataChanges(response.data);
         })
         .catch((error) => {
           throw new Error(error);
@@ -41,11 +41,8 @@ const admModel = {
     }
   ),
 
-  setLDataChanges: action((state, payload) => {
+  setDataChanges: action((state, payload) => {
     state.lastDataChanges = payload;
-  }),
-  setLastTrailsChanges: action((state, payload) => {
-    state.lastTrailsChanges = payload;
   }),
 
   setCountLastCourses: action((state, payload) => {
@@ -94,6 +91,10 @@ const admModel = {
     state.myProfile?.UsersRoles?.some((item) => item.role.name === "CONSULTOR")
   ),
 
+  isJornalista: computed((state) =>
+    state.myProfile?.UsersRoles?.some((item) => item.role.name === "JORNALISTA")
+  ),
+
   init: thunk(async (actions, _, { getStoreActions }) => {
     const myProfile = await services.loginService
       .getMyProfile()
@@ -114,6 +115,7 @@ const admModel = {
       await getStoreActions().itineraries.getItinerarios();
       await actions.getRandomTrails();
       await actions.getStatistics();
+      getStoreActions().adm.setTipoVisualizacao(true);
     } catch (error) {
       notification.error({
         message: "Erro!",
@@ -126,27 +128,10 @@ const admModel = {
 
   login: thunk(async (actions, payload) => {
     actions.setLoading(true);
-    return await services.loginService
-      .login({
-        username: payload.username,
-        password: payload.password,
-      })
-      .then((response) => {
-        if (response.data?.status === "PENDING") {
-          notification.warning({
-            message: "Aviso!",
-            description:
-              "Antes do acesso total ao sistema você precisa alterar sua senha!",
-          });
-        }
-        actions.getMyProfile();
-      })
-      .catch((error) => {
-        throw new Error(error);
-      })
-      .finally(() => {
-        actions.setLoading(false);
-      });
+    return services.loginService.login({
+      username: payload.username,
+      password: payload.password,
+    });
   }),
 
   logout: thunk(async (actions) => {
@@ -225,7 +210,7 @@ const admModel = {
 
   getMyProfile: thunk(async (actions) => {
     actions.setLoading(true);
-    await services.loginService
+    return await services.loginService
       .getMyProfile()
       .then((response) => {
         actions.setMyProfile(response.data);
@@ -237,6 +222,14 @@ const admModel = {
       .finally(() => {
         actions.setLoading(false);
       });
+  }),
+
+  signTerm: thunk(async ({ userId }) => {
+    try {
+      return services.usersService.signTerm({ userId });
+    } catch (error) {
+      throw new Error(error);
+    }
   }),
 
   getSearchLogs: thunk(async (actions, payload = {}) => {

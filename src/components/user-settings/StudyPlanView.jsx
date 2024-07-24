@@ -1,26 +1,33 @@
+import { useStoreActions } from "easy-peasy";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import downloadBlob from "../../helpers/downloadBlob";
+import CourseModalVisualization from "../CourseModalVisualization";
+
 import {
+  EditOutlined,
+  ArrowLeftOutlined,
+  DownloadOutlined,
+  CheckCircleFilled,
+  PlayCircleFilled,
+} from "@ant-design/icons";
+import {
+  Badge,
   Button,
   Card,
   Divider,
   Empty,
+  Input,
   List,
   Progress,
   Skeleton,
   Space,
   Tag,
+  Tooltip,
   Typography,
   notification,
 } from "antd";
-import { useStoreActions } from "easy-peasy";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  EditOutlined,
-  ArrowLeftOutlined,
-  DownloadOutlined,
-} from "@ant-design/icons";
-import CourseModalVisualization from "../CourseModalVisualization";
-import downloadBlob from "../../helpers/downloadBlob";
 
 export default function StudyPlanView() {
   const { id } = useParams();
@@ -30,6 +37,7 @@ export default function StudyPlanView() {
   const [studyPlan, setStudyPlan] = useState(null);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
+  const [searchCourse, setSearchCourse] = useState("");
   const [courseModalVisualizationVisible, setCourseModalVisualizationVisible] =
     useState(false);
   const [courseModalVisualizationId, setCourseModalVisualizationId] =
@@ -40,6 +48,9 @@ export default function StudyPlanView() {
   );
   const downloadStudyPlansCourses = useStoreActions(
     (actions) => actions.studyPlans.downloadStudyPlansCourses
+  );
+  const initCourseAction = useStoreActions(
+    (actions) => actions.studyPlans.initStudyPlanCourse
   );
 
   const onDownloadCSV = async ({ id }) => {
@@ -58,21 +69,77 @@ export default function StudyPlanView() {
   };
 
   useEffect(() => {
-    async function init() {
+    const init = async () => {
+      setLoading(true);
       try {
         const plan = await getUniqueStudyPlan({ id });
         setStudyPlan(plan);
       } catch (error) {
         notification.error({
-          message: "Erro ao buscar plano de estudo",
+          message: "Erro ao buscar plano de desenvolvimento",
           description: error.message,
         });
       } finally {
         setLoading(false);
       }
-    }
+    };
     init();
-  }, [getUniqueStudyPlan, id]);
+  }, [id, getUniqueStudyPlan]);
+
+  const setStatus = useCallback(
+    async ({ courseId, status }) => {
+      try {
+        await initCourseAction({
+          planId: id,
+          courseId: courseId,
+          status: status,
+        });
+        notification.success({
+          message: "Status definido com sucesso!",
+        });
+        const plan = await getUniqueStudyPlan({ id });
+        setStudyPlan(plan);
+      } catch (error) {
+        notification.error({
+          message: "Erro ao iniciar curso",
+          description: error.message,
+        });
+      }
+    },
+    [initCourseAction, getUniqueStudyPlan, id]
+  );
+
+  const filtredCourses = useMemo(() => {
+    return studyPlan?.courses
+      .filter((course) => {
+        return course.name.toLowerCase().includes(searchCourse.toLowerCase());
+      })
+      .sort((a, b) => {
+        // PRIMEIRO OS INICIADOS
+        // DEPOIS OS PENDENTES
+        // DEPOIS OS CONCLUÍDOS
+        if (a.status === "IN_PROGRESS" && b.status !== "IN_PROGRESS") {
+          return -1;
+        }
+        if (a.status !== "IN_PROGRESS" && b.status === "IN_PROGRESS") {
+          return 1;
+        }
+        if (a.status === "UNINITIALIZED" && b.status !== "UNINITIALIZED") {
+          return -1;
+        }
+        if (a.status !== "UNINITIALIZED" && b.status === "UNINITIALIZED") {
+          return 1;
+        }
+        if (a.status === "CONCLUDED" && b.status !== "CONCLUDED") {
+          return 1;
+        }
+        if (a.status !== "CONCLUDED" && b.status === "CONCLUDED") {
+          return -1;
+        }
+
+        return 0;
+      });
+  }, [studyPlan, searchCourse]);
 
   if (loading) {
     return (
@@ -87,7 +154,7 @@ export default function StudyPlanView() {
   }
 
   if (!studyPlan) {
-    return <Empty description="Plano de estudo não encontrado" />;
+    return <Empty description="plano de desenvolvimento não encontrado" />;
   }
 
   return (
@@ -158,7 +225,11 @@ export default function StudyPlanView() {
                   navigate("/settings/study-plans");
                 }}
               />
-              <Progress type={"circle"} size={"small"} percent={0} />
+              <Progress
+                type={"circle"}
+                size={"small"}
+                percent={studyPlan.percentage?.toFixed(0) || 0}
+              />
             </div>
           }
           description={
@@ -175,29 +246,152 @@ export default function StudyPlanView() {
         />
         <Divider>Cursos do Plano</Divider>
         <List
-          dataSource={studyPlan?.courses || []}
+          header={
+            <Space>
+              <Input.Search
+                value={searchCourse}
+                onChange={(e) => setSearchCourse(e.target.value)}
+                onSearch={(value) => setSearchCourse(value)}
+                placeholder="Buscar curso"
+                style={{ width: "300px" }}
+              />
+            </Space>
+          }
+          locale={{
+            emptyText: <Empty description="Nenhum curso encontrado" />,
+          }}
+          dataSource={filtredCourses}
           renderItem={(item) => (
             <Card
               style={{
                 width: "100%",
                 marginBottom: "1rem",
               }}
-              onClick={() => {
-                setCourseModalVisualizationId(item.courseId);
-                setCourseModalVisualizationVisible(true);
-              }}
               key={item.courseId}
-              hoverable
+              title={
+                <Space>
+                  <Button
+                    type="text"
+                    onClick={() => {
+                      setCourseModalVisualizationId(item.courseId);
+                      setCourseModalVisualizationVisible(true);
+                    }}
+                  >
+                    <Typography.Title
+                      style={{
+                        margin: 0,
+                        maxWidth: "300px",
+                      }}
+                      ellipsis={{ tooltip: true }}
+                      level={5}
+                    >
+                      {item.name}
+                    </Typography.Title>
+                  </Button>
+                  {item.status === "FILED" && (
+                    <Tag color="orange">ARQUIVADO</Tag>
+                  )}
+                  {item.status === "IN_PROGRESS" ? (
+                    <Tag color="green">EM ANDAMENTO</Tag>
+                  ) : item.status === "CONCLUDED" ? (
+                    <Tag color="blue">CONCLUÍDO</Tag>
+                  ) : (
+                    <Tag color="red">PENDENTE</Tag>
+                  )}
+                </Space>
+              }
+              extra={
+                <Space>
+                  <Tooltip
+                    title={
+                      item.status === "CONCLUDED" ||
+                      item.status === "IN_PROGRESS"
+                        ? "Curso iniciado"
+                        : "Iniciar Curso"
+                    }
+                  >
+                    <Badge
+                      count={
+                        item.status !== "UNINITIALIZED" ? (
+                          <CheckCircleFilled
+                            style={{
+                              fontSize: 16,
+                              color: "green",
+                            }}
+                          />
+                        ) : null
+                      }
+                    >
+                      <Button
+                        type="primary"
+                        size="middle"
+                        disabled={item.status !== "UNINITIALIZED"}
+                        shape="circle"
+                        icon={
+                          <PlayCircleFilled
+                            style={{
+                              fontSize: 30,
+                            }}
+                          />
+                        }
+                        onClick={() => {
+                          setStatus({
+                            courseId: item.courseId,
+                            status: "IN_PROGRESS",
+                          });
+                        }}
+                      />
+                    </Badge>
+                  </Tooltip>
+                  <Tooltip
+                    title={
+                      item.status === "CONCLUDED"
+                        ? "Curso já concluído!"
+                        : item.status === "UNINITIALIZED"
+                        ? "Necessário iniciar o curso!"
+                        : "Concluir Curso"
+                    }
+                  >
+                    <Badge
+                      count={
+                        item.status === "CONCLUDED" ? (
+                          <CheckCircleFilled
+                            style={{
+                              fontSize: 16,
+                              color: "green",
+                            }}
+                          />
+                        ) : null
+                      }
+                    >
+                      <Button
+                        type="primary"
+                        size="middle"
+                        shape="circle"
+                        icon={
+                          <CheckCircleFilled
+                            style={{
+                              fontSize: 30,
+                            }}
+                          />
+                        }
+                        disabled={
+                          item.status === "UNINITIALIZED" ||
+                          item.status === "CONCLUDED"
+                        }
+                        onClick={() => {
+                          setStatus({
+                            courseId: item.courseId,
+                            status: "CONCLUDED",
+                          });
+                        }}
+                      />
+                    </Badge>
+                  </Tooltip>
+                </Space>
+              }
             >
               <Card.Meta
-                title={
-                  <Space>
-                    {item.name}
-                    {item.status === "FILED" && (
-                      <Tag color="orange">ARQUIVADO</Tag>
-                    )}
-                  </Space>
-                }
                 description={
                   <Space direction="vertical">
                     <Typography.Paragraph

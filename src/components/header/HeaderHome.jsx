@@ -150,7 +150,7 @@ export default function HeaderHome() {
             },
             {
               key: "/settings/study-plans",
-              label: "Planos de Estudo",
+              label: "Planos de Desenvolvimento",
               icon: <NodeIndexOutlined />,
               disabled: !isActive,
             },
