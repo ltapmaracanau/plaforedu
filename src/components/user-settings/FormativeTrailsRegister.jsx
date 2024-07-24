@@ -103,6 +103,9 @@ export default function FormativeTrailsRegister() {
   const getCompetenciesAction = useStoreActions(
     (actions) => actions.competencies.getComp
   );
+  const getUniqueCompAction = useStoreActions(
+    (actions) => actions.competencies.getUniqueComp
+  );
 
   const registering = useStoreState((state) => state.trilhas.registering);
   const archiving = useStoreState((state) => state.trilhas.archiving);
@@ -270,13 +273,13 @@ export default function FormativeTrailsRegister() {
     }
   };
 
-  // const setDescriptionIfEmpty = (value) => {
-  //   if (register.getValues("description") === "") {
-  //     const competencie = competencies.find((comp) => comp.id === value);
-  //     register.setValue("description", competencie.description);
-  //     register.trigger("description");
-  //   }
-  // };
+  const setDescriptionIfEmpty = async (value) => {
+    if (register.getValues("description") === "") {
+      const competencie = await getUniqueCompAction({ id: value });
+      register.setValue("description", competencie.description);
+      register.trigger("description");
+    }
+  };
 
   // Table add courses to trail
 
@@ -548,10 +551,9 @@ export default function FormativeTrailsRegister() {
                               }
                               fetchOptions={getCompetencies}
                               onChange={(value, selected) => {
-                                //setDescriptionIfEmpty(value);
+                                setDescriptionIfEmpty(value);
                                 field.onChange(value);
                                 setCompetencieSelected(selected);
-                                console.log(selected);
                               }}
                               labelRender={(props) => {
                                 const { value, label } = props;

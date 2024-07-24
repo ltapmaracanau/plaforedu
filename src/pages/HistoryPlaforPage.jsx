@@ -962,6 +962,7 @@ function Icon() {
           professora Patrícia de Albuquerque Maia, do Campus Lajes do IFRN. O
           desenvolvimento da plataforma digital foi realizado pelo IFRN, com a
           coordenação do professor Thiago Medeiros, do Campus Natal-Zona Leste,
+          pelo IFCE, com a coordenação do professor Otávio Alcântara de Lima Jr.
           e pelo IFSul, com a coordenação do professor Raymundo Carlos Machado.
         </p>
         <p

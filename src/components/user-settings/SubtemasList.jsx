@@ -23,6 +23,9 @@ export default function SubtemasList() {
   const getSubthemesAction = useStoreActions(
     (actions) => actions.themes.getSubthemes
   );
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
+
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Subtema");
   const [editingSubtheme, setEditingSubtheme] = useState(null);
@@ -122,17 +125,22 @@ export default function SubtemasList() {
                   }}
                 />
               </Tooltip>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  setEditingSubtheme(null);
-                  setModalText("Cadastrar Subtema");
-                  setRegisterVisible(true);
-                }}
+              <Tooltip
+                title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
               >
-                Adicionar
-              </Button>
+                <Button
+                  disabled={!isAdm && !isCoord}
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setEditingSubtheme(null);
+                    setModalText("Cadastrar Subtema");
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </div>
           }
         >
@@ -159,17 +167,24 @@ export default function SubtemasList() {
                 <List.Item
                   key={item.id}
                   actions={[
-                    <Button
+                    <Tooltip
                       key={item.id}
-                      onClick={() => {
-                        setEditingSubtheme(item);
-                        setModalText("Editar Subtema");
-                        setRegisterVisible(true);
-                      }}
-                      icon={<EditOutlined />}
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
                     >
-                      Editar
-                    </Button>,
+                      <Button
+                        disabled={!isAdm && !isCoord}
+                        onClick={() => {
+                          setEditingSubtheme(item);
+                          setModalText("Editar Subtema");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>,
                   ]}
                 >
                   <List.Item.Meta

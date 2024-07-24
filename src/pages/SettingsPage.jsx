@@ -122,14 +122,14 @@ export default function SettingsPage() {
     {
       key: "logs",
       icon: <LineChartOutlined />,
-      disabled: !isActive || !(isAdm || isCoord),
+      disabled: !isActive || !(isAdm || isCoord || isAnalistaDados),
       label: "Relatórios",
       children: [
         {
           key: "/settings/logs",
           icon: <FileSearchOutlined />,
           label: "Relatório De Buscas",
-          disabled: !isAdm,
+          disabled: !isAdm && !isCoord && !isAnalistaDados,
         },
         {
           key: "/settings/log-courses-trails",

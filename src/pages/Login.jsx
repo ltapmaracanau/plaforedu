@@ -66,7 +66,6 @@ export default function Login() {
   };
 
   const onSubmit = async (values) => {
-    setLoading(true);
     if (!cookies.cookieConsent) {
       setCookieConsentModalVisible(true);
       notification.warning({
@@ -75,6 +74,7 @@ export default function Login() {
       });
       return;
     }
+    setLoading(true);
     try {
       const { data } = await login(values);
       if (!data.hasSignedTerm) {

@@ -166,7 +166,7 @@ export default function StudyPlans() {
                       <Progress
                         type="circle"
                         size={"small"}
-                        percent={item.percentage.toFixed(0)}
+                        percent={item.percentage?.toFixed(0) || 0}
                       />
                     }
                     style={{ fontFamily: "Roboto" }}

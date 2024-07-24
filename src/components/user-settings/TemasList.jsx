@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 
@@ -22,6 +22,8 @@ export default function TemasList() {
   const getThemesAction = useStoreActions(
     (actions) => actions.themes.getThemes
   );
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
 
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Tema");
@@ -122,17 +124,22 @@ export default function TemasList() {
                   }}
                 />
               </Tooltip>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  setEditandoTema(null);
-                  setModalText("Cadastrar Tema");
-                  setRegisterVisible(true);
-                }}
+              <Tooltip
+                title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
               >
-                Adicionar
-              </Button>
+                <Button
+                  disabled={!isAdm && !isCoord}
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setEditandoTema(null);
+                    setModalText("Cadastrar Tema");
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </div>
           }
         >
@@ -160,17 +167,24 @@ export default function TemasList() {
                 <List.Item
                   key={item.id}
                   actions={[
-                    <Button
-                      onClick={() => {
-                        setEditandoTema(item);
-                        setModalText("Editar Tema");
-                        setRegisterVisible(true);
-                      }}
+                    <Tooltip
                       key={item.id}
-                      icon={<EditOutlined />}
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
                     >
-                      Editar
-                    </Button>,
+                      <Button
+                        disabled={!isAdm && !isCoord}
+                        onClick={() => {
+                          setEditandoTema(item);
+                          setModalText("Editar Tema");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>,
                   ]}
                 >
                   <List.Item.Meta

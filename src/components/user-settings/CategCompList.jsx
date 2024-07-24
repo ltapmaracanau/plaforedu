@@ -23,6 +23,9 @@ export default function CategCompList() {
     (actions) => actions.competencies.getCatComp
   );
 
+  const isAdm = useStoreState((state) => state.adm.isAdm);
+  const isCoord = useStoreState((state) => state.adm.isCoord);
+
   const [registerVisible, setRegisterVisible] = useState(false);
   const [modalText, setModalText] = useState("Cadastrar Categoria");
   const [editandoCatComp, setEditandoCatComp] = useState(null);
@@ -124,17 +127,22 @@ export default function CategCompList() {
                   }}
                 />
               </Tooltip>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => {
-                  setEditandoCatComp(null);
-                  setModalText("Cadastrar Categoria");
-                  setRegisterVisible(true);
-                }}
+              <Tooltip
+                title={!isAdm && !isCoord ? "Usuário sem permissão" : null}
               >
-                Adicionar
-              </Button>
+                <Button
+                  disabled={!isAdm && !isCoord}
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => {
+                    setEditandoCatComp(null);
+                    setModalText("Cadastrar Categoria");
+                    setRegisterVisible(true);
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </Tooltip>
             </div>
           }
         >
@@ -161,17 +169,24 @@ export default function CategCompList() {
                 <List.Item
                   key={item.id}
                   actions={[
-                    <Button
+                    <Tooltip
                       key={item.id}
-                      onClick={() => {
-                        setEditandoCatComp(item);
-                        setModalText("Editar Categoria");
-                        setRegisterVisible(true);
-                      }}
-                      icon={<EditOutlined />}
+                      title={
+                        !isAdm && !isCoord ? "Usuário sem permissão" : null
+                      }
                     >
-                      Editar
-                    </Button>,
+                      <Button
+                        disabled={!isAdm && !isCoord}
+                        onClick={() => {
+                          setEditandoCatComp(item);
+                          setModalText("Editar Categoria");
+                          setRegisterVisible(true);
+                        }}
+                        icon={<EditOutlined />}
+                      >
+                        Editar
+                      </Button>
+                    </Tooltip>,
                   ]}
                 >
                   <List.Item.Meta
