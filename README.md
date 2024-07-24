@@ -1,11 +1,3 @@
-<div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="New Plafor" />
-
-  &#xa0;
-
-  <!-- <a href="https://newplafor.netlify.app">Demo</a> -->
-</div>
-
 <h1 align="center">PlaforEDU</h1>
 
 <p align="center">
@@ -13,7 +5,7 @@
 
   <img alt="Quantidade de linguagens utilizadas" src="https://img.shields.io/github/languages/count/ltapmaracanau/plaforedu?color=56BEB8">
 
-  <img alt="Tamanho do repositório" src="https://img.shields.io/github/repo-size/ltapmaracanau/plaforedu?color=56BEB8">
+  <!-- <img alt="Tamanho do repositório" src="https://img.shields.io/github/repo-size/ltapmaracanau/plaforedu?color=56BEB8"> -->
 
   <img alt="Licença" src="https://img.shields.io/github/license/ltapmaracanau/plaforedu?color=56BEB8">
 
@@ -27,72 +19,70 @@
 <!-- Status -->
 
 <!-- <h4 align="center"> 
-	🚧  New Plafor 🚀 Under construction...  🚧
+	🚧  New Plafor 🚀 Em construção...  🚧
 </h4> 
 
 <hr> -->
 
 <p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
-  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
+  <a href="#dart-about">Sobre</a> &#xa0; | &#xa0; 
+  <a href="#sparkles-features">Recursos</a> &#xa0; | &#xa0;
+  <a href="#rocket-technologies">Tecnologias</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requisitos</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Iniciando</a> &#xa0; | &#xa0;
+  <a href="#memo-license">Licença</a> &#xa0; | &#xa0;
+  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Autor</a>
 </p>
 
 <br>
 
-## :dart: About ##
+## :dart: Sobre ##
 
-Describe your project
+É uma plataforma que reúne cursos para servidores da rede federal de ensino. Esses cursos estão disponíveis nos moodles das universidades e nosso site os agrega para facilitar sua localização.
 
-## :sparkles: Features ##
+## :sparkles: Recursos ##
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+:heavy_check_mark: Acesso a cursos de várias instituições de ensino do país;\
+:heavy_check_mark: Trilhas formativas construídas por profissionais capacitados;\
 
-## :rocket: Technologies ##
+## :rocket: Tecnologias ##
 
-The following tools were used in this project:
+As seguintes ferramentas foram utilizadas neste projeto:
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
 - [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [Easy Peasy](https://easy-peasy.vercel.app/)
+- [Vite](https://vitejs.dev/)
 
-## :white_check_mark: Requirements ##
+## :white_check_mark: Requisitos ##
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+Antes de começar :checkered_flag:, você precisa ter o [Git](https://git-scm.com) e o [Node](https://nodejs.org/en/) instalados.
 
-## :checkered_flag: Starting ##
+## :checkered_flag: Iniciando ##
 
 ```bash
 # Clone este repositório
 $ git clone https://github.com/ltapmaracanau/plaforedu
 
-# Access
-$ cd new-plafor
+# Acesse
+$ cd plaforedu
 
-# Install dependencies
+# Instale as dependências
 $ yarn
 
-# Run the project
-$ yarn start
+# Execute o projeto
+$ yarn dev
 
-# The server will initialize in the <http://localhost:3000>
+# O servidor iniciará em <http://localhost:3000>
 ```
 
-## :memo: License ##
+<!-- 
+## :memo: Licença ##
 
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+Este projeto está sob licença MIT. Para mais detalhes, veja o arquivo [LICENSE](LICENSE.md).
 
 
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+Feito com :heart: por <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+ -->
+ 
 
-&#xa0;
-
-<a href="#top">Back to top</a>
+<a href="#top">Voltar ao topo</a>
