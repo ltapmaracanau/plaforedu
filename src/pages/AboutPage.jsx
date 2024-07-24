@@ -46,7 +46,6 @@ export default function AboutPage() {
   return (
     <>
       <Row className={styles.linha}></Row>
-
       <div>
         <Row
           align="middle"
