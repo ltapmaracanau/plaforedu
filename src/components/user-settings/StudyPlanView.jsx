@@ -1,5 +1,5 @@
 import { useStoreActions } from "easy-peasy";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import downloadBlob from "../../helpers/downloadBlob";
@@ -18,6 +18,7 @@ import {
   Card,
   Divider,
   Empty,
+  Input,
   List,
   Progress,
   Skeleton,
@@ -36,6 +37,7 @@ export default function StudyPlanView() {
   const [studyPlan, setStudyPlan] = useState(null);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
+  const [searchCourse, setSearchCourse] = useState("");
   const [courseModalVisualizationVisible, setCourseModalVisualizationVisible] =
     useState(false);
   const [courseModalVisualizationId, setCourseModalVisualizationId] =
@@ -106,6 +108,38 @@ export default function StudyPlanView() {
     },
     [initCourseAction, getUniqueStudyPlan, id]
   );
+
+  const filtredCourses = useMemo(() => {
+    return studyPlan?.courses
+      .filter((course) => {
+        return course.name.toLowerCase().includes(searchCourse.toLowerCase());
+      })
+      .sort((a, b) => {
+        // PRIMEIRO OS INICIADOS
+        // DEPOIS OS PENDENTES
+        // DEPOIS OS CONCLUÍDOS
+        if (a.status === "IN_PROGRESS" && b.status !== "IN_PROGRESS") {
+          return -1;
+        }
+        if (a.status !== "IN_PROGRESS" && b.status === "IN_PROGRESS") {
+          return 1;
+        }
+        if (a.status === "UNINITIALIZED" && b.status !== "UNINITIALIZED") {
+          return -1;
+        }
+        if (a.status !== "UNINITIALIZED" && b.status === "UNINITIALIZED") {
+          return 1;
+        }
+        if (a.status === "CONCLUDED" && b.status !== "CONCLUDED") {
+          return 1;
+        }
+        if (a.status !== "CONCLUDED" && b.status === "CONCLUDED") {
+          return -1;
+        }
+
+        return 0;
+      });
+  }, [studyPlan, searchCourse]);
 
   if (loading) {
     return (
@@ -212,39 +246,21 @@ export default function StudyPlanView() {
         />
         <Divider>Cursos do Plano</Divider>
         <List
-          dataSource={
-            studyPlan?.courses.sort((a, b) => {
-              // PRIMEIRO OS INICIADOS
-              // DEPOIS OS PENDENTES
-              // DEPOIS OS CONCLUÍDOS
-              if (a.status === "IN_PROGRESS" && b.status !== "IN_PROGRESS") {
-                return -1;
-              }
-              if (a.status !== "IN_PROGRESS" && b.status === "IN_PROGRESS") {
-                return 1;
-              }
-              if (
-                a.status === "UNINITIALIZED" &&
-                b.status !== "UNINITIALIZED"
-              ) {
-                return -1;
-              }
-              if (
-                a.status !== "UNINITIALIZED" &&
-                b.status === "UNINITIALIZED"
-              ) {
-                return 1;
-              }
-              if (a.status === "CONCLUDED" && b.status !== "CONCLUDED") {
-                return 1;
-              }
-              if (a.status !== "CONCLUDED" && b.status === "CONCLUDED") {
-                return -1;
-              }
-
-              return 0;
-            }) || []
+          header={
+            <Space>
+              <Input.Search
+                value={searchCourse}
+                onChange={(e) => setSearchCourse(e.target.value)}
+                onSearch={(value) => setSearchCourse(value)}
+                placeholder="Buscar curso"
+                style={{ width: "300px" }}
+              />
+            </Space>
           }
+          locale={{
+            emptyText: <Empty description="Nenhum curso encontrado" />,
+          }}
+          dataSource={filtredCourses}
           renderItem={(item) => (
             <Card
               style={{
